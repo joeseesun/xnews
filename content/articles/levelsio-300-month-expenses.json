@@ -1,0 +1,20 @@
+{
+  "id": "levelsio-300-month-expenses",
+  "date": "2026-11-03",
+  "published_at": "2026-11-03T19:03:50+00:00",
+  "source": {
+    "type": "x_post",
+    "url": "https://x.com/levelsio/status/2117694259558293692",
+    "author": "Pieter Levels",
+    "handle": "levelsio",
+    "title_en": "Biz expenses down to ~$300/mo"
+  },
+  "title": "Levelsio：全站开销砍到约 $300/月，Claude 帮他一年省下近三万刀月费",
+  "dek": "2 万付费用户、2.52 亿访客、2.4PB 流量。AI 最擅长的，可能是帮你找到自己看不见的浪费。",
+  "tags": [
+    "indie",
+    "cost",
+    "Claude"
+  ],
+  "body_md": "Pieter Levels 又晒了一张成本表。\n\n他所有网站加在一起，服务着大约 **2 万付费用户、2.52 亿访客、24 亿请求、2.4PB 带宽**。常规业务开销现在只剩大约 **$300/月**。如果把 Photo AI 的 GPU（约 $7000/月）和 R2（约 $800/月）算进去，大概 $8000/月。\n\n更刺眼的是降幅。他列了 Claude Code 帮他抠出来的账，合计接近 **$34,000/月**：\n\n- 视频模型换更便宜的、部分任务走 Google Cloud Credits 和市价转售，GPU 从 $36k 降到 $7k\n- 服务器合并，取消 DigitalOcean / Linode，迁到 Hetzner，约省 $3k\n- Backblaze 无限版本改成 30 天生命周期，备份费从 $1200 降到 $26\n- R2 加生命周期，90 天后进低频，从 $1200 降到 $800\n- Cloudflare 域名清掉不用的，尤其是越来越贵的 `.io`\n- 连 Claude 自己的 Max 20x 订阅也被降到 $100，因为他根本用不满\n\n连 Photo AI 算上，总成本比去年砍了大约九成，接近他十年前刚创业时的量级。\n\n他自己也说了一句很冷的话：短期看，AI 擅长找成本节约，对经济未必友好；长期看，它会削掉脂肪，把钱腾给更好的投资。\n\n独立开发者常年面对的「成本慢慢爬上去，你却没感觉」，终于有了一个很具体的对手方。不是再订一份监控 SaaS，是直接让模型读你的账单。\n"
+}

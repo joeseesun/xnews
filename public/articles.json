@@ -1,0 +1,106 @@
+[
+  {
+    "id": "deepseek-super-agent-harness",
+    "date": "2026-11-05",
+    "title": "DeepSeek Super Agent：真正值得看的，是「一切皆插件」的 Harness",
+    "dek": "同模型换九套编码 Agent，成本能差出一个数量级。Instacart 和 Box 的 CTO 都把票投给了 harness。",
+    "url": "/a/deepseek-super-agent-harness",
+    "source_url": "https://www.youtube.com/watch?v=OrcsMi2-IcM",
+    "tags": [
+      "DeepSeek",
+      "harness",
+      "agent"
+    ]
+  },
+  {
+    "id": "sarah-guo-personal-software",
+    "date": "2026-11-04",
+    "title": "Sarah Guo：非工程师也想改自己的软件，我之前判断错了",
+    "dek": "从「我好有掌控感」到「没人会给我做这个工作流」，欲望光谱比想象中宽。",
+    "url": "/a/sarah-guo-personal-software",
+    "source_url": "https://x.com/saranormous/status/2118052772637704376",
+    "tags": [
+      "product",
+      "personal software",
+      "AI"
+    ]
+  },
+  {
+    "id": "rauchg-vercel-security-review",
+    "date": "2026-11-03",
+    "title": "Rauch：Vercel 内部那个「惊人有效」的安全 Agent，终于对外开放了",
+    "dek": "每行代码自动审计。他的判断很直白：你不能指望工程师记得装技能，或掷骰子赌第一版就安全。",
+    "url": "/a/rauchg-vercel-security-review",
+    "source_url": "https://x.com/rauchg/status/2117734833824948373",
+    "tags": [
+      "security",
+      "agent",
+      "Vercel"
+    ]
+  },
+  {
+    "id": "victor-slash-supersmb",
+    "date": "2026-11-03",
+    "title": "25 岁做到 5 亿年化收入：Slash 怎么靠「超级小生意」打穿金融",
+    "dek": "不到 100 人，年化收入过 $500m。Victor 把方法写得很清楚：找 SuperSMB，卖给他们，为他们做产品。",
+    "url": "/a/victor-slash-supersmb",
+    "source_url": "https://x.com/victorcardenas/status/2117729738160496778",
+    "tags": [
+      "fintech",
+      "startup",
+      "AI native"
+    ]
+  },
+  {
+    "id": "levelsio-300-month-expenses",
+    "date": "2026-11-03",
+    "title": "Levelsio：全站开销砍到约 $300/月，Claude 帮他一年省下近三万刀月费",
+    "dek": "2 万付费用户、2.52 亿访客、2.4PB 流量。AI 最擅长的，可能是帮你找到自己看不见的浪费。",
+    "url": "/a/levelsio-300-month-expenses",
+    "source_url": "https://x.com/levelsio/status/2117694259558293692",
+    "tags": [
+      "indie",
+      "cost",
+      "Claude"
+    ]
+  },
+  {
+    "id": "amasad-managed-cloud-agents",
+    "date": "2026-11-03",
+    "title": "Amjad：员工电脑上的 AI Agent，正在变成企业系统风险",
+    "dek": "有人靠禁 Claude Code 止血。Replit 的建议更硬：托管、隔离、凭证外置，让云端受管环境成为默认。",
+    "url": "/a/amasad-managed-cloud-agents",
+    "source_url": "https://x.com/amasad/status/2117504072416890937",
+    "tags": [
+      "security",
+      "enterprise",
+      "Replit"
+    ]
+  },
+  {
+    "id": "levelsio-bf1942-web",
+    "date": "2026-11-02",
+    "title": "Levelsio × Claude：把《战地 1942》反编译后塞进浏览器联机",
+    "dek": "没有开源引擎可借，从 x86 机器码翻到 C，再编成 WebAssembly。他说自己大多时候只是在旁边看。",
+    "url": "/a/levelsio-bf1942-web",
+    "source_url": "https://x.com/levelsio/status/2117374984192512391",
+    "tags": [
+      "Claude",
+      "game",
+      "WebAssembly"
+    ]
+  },
+  {
+    "id": "karpathy-hackertube",
+    "date": "2026-11-01",
+    "title": "Karpathy 周末两小时：用 Claude 从 4300 万条 HN 评论里筛出 6454 个值得看的视频",
+    "dek": "受够了 YouTube 推荐，他把二十年 Hacker News 评论扔给 Opus 5.5，做了个不登录也好用的 HackerTube。",
+    "url": "/a/karpathy-hackertube",
+    "source_url": "https://x.com/karpathy/status/2116957135661945283",
+    "tags": [
+      "AI coding",
+      "product",
+      "HN"
+    ]
+  }
+]

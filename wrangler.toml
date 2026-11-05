@@ -1,0 +1,14 @@
+# xnews — English discovery news → 乔木中文改写
+# Worker「xnews」· https://xnews.qiaomu.ai
+# 纯 assets，无电台 KV/R2/Queue/cron。域名已在 CF 绑定，不写 routes。
+name = "xnews"
+main = "src/worker.js"
+compatibility_date = "2026-09-01"
+workers_dev = true
+preview_urls = false
+
+[assets]
+directory = "public"
+binding = "ASSETS"
+not_found_handling = "404-page"
+html_handling = "auto-trailing-slash"

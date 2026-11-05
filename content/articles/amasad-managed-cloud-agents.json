@@ -1,0 +1,20 @@
+{
+  "id": "amasad-managed-cloud-agents",
+  "date": "2026-11-03",
+  "published_at": "2026-11-03T06:28:06+00:00",
+  "source": {
+    "type": "x_article",
+    "url": "https://x.com/amasad/status/2117504072416890937",
+    "author": "Amjad Masad",
+    "handle": "amasad",
+    "title_en": "Security advisory: Make managed cloud environments the default for AI agents"
+  },
+  "title": "Amjad：员工电脑上的 AI Agent，正在变成企业系统风险",
+  "dek": "有人靠禁 Claude Code 止血。Replit 的建议更硬：托管、隔离、凭证外置，让云端受管环境成为默认。",
+  "tags": [
+    "security",
+    "enterprise",
+    "Replit"
+  ],
+  "body_md": "Amjad Masad 发了一份安全咨询，标题几乎不绕弯：\n\n**让受管云环境，成为 AI Agent 的默认运行方式。**\n\n背景是这几个月一串真实事件叠在一起：个人 Claude 账号被接到敏感防务环境的报道、Cursor 市场上被篡改的 Claude Code 扩展、Nx 供应链攻击里恶意包征用已装好的 AI CLI 去翻密钥、GitHub MCP 演示里一条恶意 Issue 就能诱导 Agent 把私有仓信息写进公开 PR……路径不同，失败模式很像：不可信内容被当成指令，执行环境权限过大，控制面还在 Agent 自己手里。\n\n企业侧已经开始反应。有的直接限制 Claude Code 一类工具，高盛据称就是这么做的。Amjad 的判断是，禁用不解决长期问题。更干净的路是：\n\n> Agent 应该跑在组织可控、任务级隔离的环境里，只拿完成任务所需的最小资源。\n\n咨询里列的控制项很工程化：验证过的执行隔离、经纪式凭证（credential broker）、逐步提权审批、任务作用域权限、网络与数据流限制、生产写入外置、供应链治理、以及 Agent 改不了的独立审计与熔断。\n\n一句话概括他的立场：云托管本身不等于安全，但「受管云 + 可验证边界」比「员工笔记本 + 个人 Agent」更适合当默认值。\n\n如果你正在给公司推 Coding Agent，这篇值得转给安全同事。争论焦点已经从「要不要用」换成「默认跑在谁的环境里」。\n"
+}

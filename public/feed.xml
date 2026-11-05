@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>X News</title>
+    <link>https://xnews.qiaomu.ai/</link>
+    <description>海外创始人长文 · AI 视频 · 乔木中文改写</description>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 05 Nov 2026 16:42:14 +0000</lastBuildDate>
+    <atom:link href="https://xnews.qiaomu.ai/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>DeepSeek Super Agent：真正值得看的，是「一切皆插件」的 Harness</title>
+      <link>https://xnews.qiaomu.ai/a/deepseek-super-agent-harness</link>
+      <guid isPermaLink="true">https://xnews.qiaomu.ai/a/deepseek-super-agent-harness</guid>
+      <pubDate>Thu, 05 Nov 2026 12:00:00 +0000</pubDate>
+      <description>同模型换九套编码 Agent，成本能差出一个数量级。Instacart 和 Box 的 CTO 都把票投给了 harness。</description>
+      <author>AI news / DeepSeek Super Agent explainer</author>
+    </item>
+    <item>
+      <title>Sarah Guo：非工程师也想改自己的软件，我之前判断错了</title>
+      <link>https://xnews.qiaomu.ai/a/sarah-guo-personal-software</link>
+      <guid isPermaLink="true">https://xnews.qiaomu.ai/a/sarah-guo-personal-software</guid>
+      <pubDate>Wed, 04 Nov 2026 18:48:27 +0000</pubDate>
+      <description>从「我好有掌控感」到「没人会给我做这个工作流」，欲望光谱比想象中宽。</description>
+      <author>Sarah Guo</author>
+    </item>
+    <item>
+      <title>Rauch：Vercel 内部那个「惊人有效」的安全 Agent，终于对外开放了</title>
+      <link>https://xnews.qiaomu.ai/a/rauchg-vercel-security-review</link>
+      <guid isPermaLink="true">https://xnews.qiaomu.ai/a/rauchg-vercel-security-review</guid>
+      <pubDate>Tue, 03 Nov 2026 21:45:04 +0000</pubDate>
+      <description>每行代码自动审计。他的判断很直白：你不能指望工程师记得装技能，或掷骰子赌第一版就安全。</description>
+      <author>Guillermo Rauch</author>
+    </item>
+    <item>
+      <title>25 岁做到 5 亿年化收入：Slash 怎么靠「超级小生意」打穿金融</title>
+      <link>https://xnews.qiaomu.ai/a/victor-slash-supersmb</link>
+      <guid isPermaLink="true">https://xnews.qiaomu.ai/a/victor-slash-supersmb</guid>
+      <pubDate>Tue, 03 Nov 2026 21:24:49 +0000</pubDate>
+      <description>不到 100 人，年化收入过 $500m。Victor 把方法写得很清楚：找 SuperSMB，卖给他们，为他们做产品。</description>
+      <author>Victor Cardenas</author>
+    </item>
+    <item>
+      <title>Levelsio：全站开销砍到约 $300/月，Claude 帮他一年省下近三万刀月费</title>
+      <link>https://xnews.qiaomu.ai/a/levelsio-300-month-expenses</link>
+      <guid isPermaLink="true">https://xnews.qiaomu.ai/a/levelsio-300-month-expenses</guid>
+      <pubDate>Tue, 03 Nov 2026 19:03:50 +0000</pubDate>
+      <description>2 万付费用户、2.52 亿访客、2.4PB 流量。AI 最擅长的，可能是帮你找到自己看不见的浪费。</description>
+      <author>Pieter Levels</author>
+    </item>
+    <item>
+      <title>Amjad：员工电脑上的 AI Agent，正在变成企业系统风险</title>
+      <link>https://xnews.qiaomu.ai/a/amasad-managed-cloud-agents</link>
+      <guid isPermaLink="true">https://xnews.qiaomu.ai/a/amasad-managed-cloud-agents</guid>
+      <pubDate>Tue, 03 Nov 2026 06:28:06 +0000</pubDate>
+      <description>有人靠禁 Claude Code 止血。Replit 的建议更硬：托管、隔离、凭证外置，让云端受管环境成为默认。</description>
+      <author>Amjad Masad</author>
+    </item>
+    <item>
+      <title>Levelsio × Claude：把《战地 1942》反编译后塞进浏览器联机</title>
+      <link>https://xnews.qiaomu.ai/a/levelsio-bf1942-web</link>
+      <guid isPermaLink="true">https://xnews.qiaomu.ai/a/levelsio-bf1942-web</guid>
+      <pubDate>Mon, 02 Nov 2026 21:55:09 +0000</pubDate>
+      <description>没有开源引擎可借，从 x86 机器码翻到 C，再编成 WebAssembly。他说自己大多时候只是在旁边看。</description>
+      <author>Pieter Levels</author>
+    </item>
+    <item>
+      <title>Karpathy 周末两小时：用 Claude 从 4300 万条 HN 评论里筛出 6454 个值得看的视频</title>
+      <link>https://xnews.qiaomu.ai/a/karpathy-hackertube</link>
+      <guid isPermaLink="true">https://xnews.qiaomu.ai/a/karpathy-hackertube</guid>
+      <pubDate>Sun, 01 Nov 2026 18:14:46 +0000</pubDate>
+      <description>受够了 YouTube 推荐，他把二十年 Hacker News 评论扔给 Opus 5.5，做了个不登录也好用的 HackerTube。</description>
+      <author>Andrej Karpathy</author>
+    </item>
+  </channel>
+</rss>

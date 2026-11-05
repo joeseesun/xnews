@@ -1,0 +1,11 @@
+{
+  "name": "xnews",
+  "private": true,
+  "version": "1.0.0",
+  "description": "X News — overseas founder posts & AI videos, rewritten in Qiaomu Chinese",
+  "scripts": {
+    "build": "python3 scripts/build.py",
+    "deploy": "npm run build && wrangler deploy"
+  },
+  "license": "MIT"
+}

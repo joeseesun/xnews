@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Levelsio × Claude：把《战地 1942》反编译后塞进浏览器联机 · X News</title>
+<meta name="description" content="没有开源引擎可借，从 x86 机器码翻到 C，再编成 WebAssembly。他说自己大多时候只是在旁边看。">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="X News">
+<meta property="og:title" content="Levelsio × Claude：把《战地 1942》反编译后塞进浏览器联机 · X News">
+<meta property="og:description" content="没有开源引擎可借，从 x86 机器码翻到 C，再编成 WebAssembly。他说自己大多时候只是在旁边看。">
+<meta property="og:url" content="https://xnews.qiaomu.ai/a/levelsio-bf1942-web">
+<link rel="canonical" href="https://xnews.qiaomu.ai/a/levelsio-bf1942-web">
+<link rel="alternate" type="application/rss+xml" title="X News" href="/feed.xml">
+<meta name="theme-color" content="#121212">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23121212'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-size='14' fill='%23fff' font-family='serif'%3EX%3C/text%3E%3C/svg%3E">
+<script>try{var t=localStorage.getItem('xn.theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="stylesheet" href="/app.css">
+</head>
+<body>
+<a class="skip" href="#main">跳到正文</a>
+<header class="topbar">
+  <button id="menu-btn" class="icon-btn" aria-label="切换导航栏" aria-controls="sidebar" aria-expanded="false">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+  </button>
+  <a class="logo" href="/" aria-label="X News 首页">
+    <span class="logo-text">X News</span>
+    <span class="logo-sub">海外发现</span>
+  </a>
+  <div class="top-spacer"></div>
+  <a class="icon-btn" href="/feed.xml" aria-label="RSS" title="RSS">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
+  </a>
+  <button id="theme-btn" class="icon-btn" aria-label="切换明暗主题" title="切换主题">
+    <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+    <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+  </button>
+</header>
+<div class="scrim" id="scrim"></div>
+<div class="layout">
+  <nav id="sidebar" class="sidebar" aria-label="主导航">
+    <ul class="nav">
+      <li><a href="/" class="" data-route="home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>今日精选</a></li>
+      <li><a href="/archive" class="active" data-route="archive"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 22h16"/><path d="M16 4H8a2 2 0 0 0-2 2v14h12V6a2 2 0 0 0-2-2Z"/><path d="M10 10h4M10 14h4"/></svg>全部文章</a></li>
+      <li><a href="/feed.xml"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>RSS</a></li>
+      <li><a href="/about" class=""><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>关于</a></li>
+    </ul>
+    <div class="nav-h">说明</div>
+    <p style="margin:0;color:var(--muted);font-size:13px;line-height:1.55">英文长帖 / X Article / 海外 AI 视频 → 乔木中文改写，并附原文链接。</p>
+  </nav>
+  <main id="main" class="main">
+
+<article class="article">
+  <div class="kicker">X · @levelsio</div>
+  <h1>Levelsio × Claude：把《战地 1942》反编译后塞进浏览器联机</h1>
+  <p class="dek">没有开源引擎可借，从 x86 机器码翻到 C，再编成 WebAssembly。他说自己大多时候只是在旁边看。</p>
+  <div class="meta">
+    <span>2026年11月2日 · 周一</span>
+    <span>Pieter Levels</span>
+    <span>Claude · game · WebAssembly</span>
+  </div>
+  <div class="prose">
+<p>Pieter Levels 把可能是他最爱的游戏，《Battlefield 1942》，搬进了浏览器，还带多人联机。</p>
+<p>地址：<a href="https://bf1942.pieter.com" target="_blank" rel="noopener noreferrer">bf1942.pieter.com</a>（免费试玩版）。</p>
+<p>这事比他以前移植 Quake、DOOM 难一截。后两者早有开源项目垫底；BF1942 几乎没有任何现成底座，厂商也没开源引擎。半年前他试过，基本放弃。今天又拿 Opus 5.5 问了一句：「能不能把这个文件夹里的 BF1942 demo 移植到网页」。</p>
+<p>然后他和 Claude Code（他承认主要是 Claude）干了一堆听起来离谱的事：</p>
+<ul>
+<li>反汇编 x86，找出约 57,000 个函数</li>
+<li>把每个函数翻成 C（<code>mov eax, [esi+0x110]</code> 变成 <code>eax = READ32(esi + 0x110)</code>）</li>
+<li>吐出大约 10 万行 C</li>
+<li>用 Emscripten 编成 WebAssembly</li>
+<li>重写约 300 个 Windows / Direct3D 调用，接到 WebGL 2 / OpenGL</li>
+<li>自建网络栈，经 WebSocket 连多人服务器</li>
+</ul>
+<p>他自己的原话很诚实：「我不知道它怎么做到的，但它做到了，而且好像能玩。」</p>
+<p>这不是怀旧彩蛋那么简单。它在演示一件更锋利的事：当模型能在「无文档、无开源、只有二进制」的场景里硬凿出可运行系统，软件考古和废弃游戏保存，会突然变得可规模化。</p>
+  </div>
+  <div class="source-box">
+    <span class="lbl">原文链接</span>
+    <a href="https://x.com/levelsio/status/2117374984192512391" target="_blank" rel="noopener noreferrer">https://x.com/levelsio/status/2117374984192512391</a> · <a href="https://bf1942.pieter.com" target="_blank" rel="noopener noreferrer">相关链接</a>
+  </div>
+  <a class="back" href="/">← 返回今日精选</a>
+</article>
+
+  </main>
+</div>
+<footer class="footer">
+  <div class="foot-cols">
+    <div class="foot-about">
+      <div class="foot-brand">X News</div>
+      <p style="margin-top:8px">海外创始人长文 · AI 视频 · 乔木中文改写</p>
+      <p>内容来自公开 X 帖文、X Articles 与 YouTube；中文为向阳乔木风格改写，非机器直译。</p>
+    </div>
+    <div class="foot-links">
+      <a href="/feed.xml">RSS /feed.xml</a>
+      <a href="https://github.com/joeseesun/xnews" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://hackerbooks.qiaomu.ai/" target="_blank" rel="noopener">黑客书架</a>
+      <a href="https://xnews.qiaomu.ai/">xnews.qiaomu.ai</a>
+    </div>
+  </div>
+</footer>
+<script src="/app.js"></script>
+</body>
+</html>

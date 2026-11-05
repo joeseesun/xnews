@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rauch：Vercel 内部那个「惊人有效」的安全 Agent，终于对外开放了 · X News</title>
+<meta name="description" content="每行代码自动审计。他的判断很直白：你不能指望工程师记得装技能，或掷骰子赌第一版就安全。">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="X News">
+<meta property="og:title" content="Rauch：Vercel 内部那个「惊人有效」的安全 Agent，终于对外开放了 · X News">
+<meta property="og:description" content="每行代码自动审计。他的判断很直白：你不能指望工程师记得装技能，或掷骰子赌第一版就安全。">
+<meta property="og:url" content="https://xnews.qiaomu.ai/a/rauchg-vercel-security-review">
+<link rel="canonical" href="https://xnews.qiaomu.ai/a/rauchg-vercel-security-review">
+<link rel="alternate" type="application/rss+xml" title="X News" href="/feed.xml">
+<meta name="theme-color" content="#121212">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23121212'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-size='14' fill='%23fff' font-family='serif'%3EX%3C/text%3E%3C/svg%3E">
+<script>try{var t=localStorage.getItem('xn.theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="stylesheet" href="/app.css">
+</head>
+<body>
+<a class="skip" href="#main">跳到正文</a>
+<header class="topbar">
+  <button id="menu-btn" class="icon-btn" aria-label="切换导航栏" aria-controls="sidebar" aria-expanded="false">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+  </button>
+  <a class="logo" href="/" aria-label="X News 首页">
+    <span class="logo-text">X News</span>
+    <span class="logo-sub">海外发现</span>
+  </a>
+  <div class="top-spacer"></div>
+  <a class="icon-btn" href="/feed.xml" aria-label="RSS" title="RSS">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
+  </a>
+  <button id="theme-btn" class="icon-btn" aria-label="切换明暗主题" title="切换主题">
+    <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+    <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+  </button>
+</header>
+<div class="scrim" id="scrim"></div>
+<div class="layout">
+  <nav id="sidebar" class="sidebar" aria-label="主导航">
+    <ul class="nav">
+      <li><a href="/" class="" data-route="home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>今日精选</a></li>
+      <li><a href="/archive" class="active" data-route="archive"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 22h16"/><path d="M16 4H8a2 2 0 0 0-2 2v14h12V6a2 2 0 0 0-2-2Z"/><path d="M10 10h4M10 14h4"/></svg>全部文章</a></li>
+      <li><a href="/feed.xml"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>RSS</a></li>
+      <li><a href="/about" class=""><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>关于</a></li>
+    </ul>
+    <div class="nav-h">说明</div>
+    <p style="margin:0;color:var(--muted);font-size:13px;line-height:1.55">英文长帖 / X Article / 海外 AI 视频 → 乔木中文改写，并附原文链接。</p>
+  </nav>
+  <main id="main" class="main">
+
+<article class="article">
+  <div class="kicker">X · @rauchg</div>
+  <h1>Rauch：Vercel 内部那个「惊人有效」的安全 Agent，终于对外开放了</h1>
+  <p class="dek">每行代码自动审计。他的判断很直白：你不能指望工程师记得装技能，或掷骰子赌第一版就安全。</p>
+  <div class="meta">
+    <span>2026年11月3日 · 周二</span>
+    <span>Guillermo Rauch</span>
+    <span>security · agent · Vercel</span>
+  </div>
+  <div class="prose">
+<p>Guillermo Rauch 等这一天很久了。</p>
+<p>Vercel 内部有个安全 Agent，昵称叫 <strong>@hacker</strong>。Rauch 的原话是「astonishingly effective」：每一行代码都会被自动审计。现在，同样的能力对外开放了。打开之后，不管你的项目是不是部署在 Vercel 上，都可以挂到仓库上跑。</p>
+<p>他为什么这么急着推？因为边界条件已经变了。</p>
+<p>你不能只靠工程师「记得装一个安全技能」，也不能只靠 prompt 里写一句「请写得安全一点」，更不能赌模型第一次就吐出靠谱代码。安全要变成默认流水线，而不是人品考验。</p>
+<p>配套产品是 <strong>Vercel Security Review</strong>（公测）。按官方说明，它挂在每次 GitHub push 上：扫变更、在 PR 留评论、进 Security 面板，也可以让 Vercel Agent 验证并直接提修复。扫描的是 diff，所以通常几秒结束，预览和生产部署都能跑。</p>
+<p>Rauch 还特意点了一句：这套东西是安全团队自己做出来的。很多公司正忙着招人补安全编制；如果你想「把一个安全团队下载成软件」，这大概是今天最接近的形态。</p>
+<p>我读完更在意的是分工。写代码的 Agent 越来越多，审代码的 Agent 如果不跟上，中间那截空档会变成默认攻击面。Rauch 这篇文章，其实是在说：安全也该产品化，而且要产品到「每 push 必审」。</p>
+  </div>
+  <div class="source-box">
+    <span class="lbl">原文链接</span>
+    <a href="https://x.com/rauchg/status/2117734833824948373" target="_blank" rel="noopener noreferrer">https://x.com/rauchg/status/2117734833824948373</a> · <a href="https://vercel.com/blog/vercel-security-review" target="_blank" rel="noopener noreferrer">相关链接</a>
+  </div>
+  <a class="back" href="/">← 返回今日精选</a>
+</article>
+
+  </main>
+</div>
+<footer class="footer">
+  <div class="foot-cols">
+    <div class="foot-about">
+      <div class="foot-brand">X News</div>
+      <p style="margin-top:8px">海外创始人长文 · AI 视频 · 乔木中文改写</p>
+      <p>内容来自公开 X 帖文、X Articles 与 YouTube；中文为向阳乔木风格改写，非机器直译。</p>
+    </div>
+    <div class="foot-links">
+      <a href="/feed.xml">RSS /feed.xml</a>
+      <a href="https://github.com/joeseesun/xnews" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://hackerbooks.qiaomu.ai/" target="_blank" rel="noopener">黑客书架</a>
+      <a href="https://xnews.qiaomu.ai/">xnews.qiaomu.ai</a>
+    </div>
+  </div>
+</footer>
+<script src="/app.js"></script>
+</body>
+</html>

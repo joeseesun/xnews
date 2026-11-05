@@ -1,0 +1,21 @@
+{
+  "id": "levelsio-bf1942-web",
+  "date": "2026-11-02",
+  "published_at": "2026-11-02T21:55:09+00:00",
+  "source": {
+    "type": "x_post",
+    "url": "https://x.com/levelsio/status/2117374984192512391",
+    "author": "Pieter Levels",
+    "handle": "levelsio",
+    "title_en": "Battlefield 1942 decompiled to the browser",
+    "related_url": "https://bf1942.pieter.com"
+  },
+  "title": "Levelsio × Claude：把《战地 1942》反编译后塞进浏览器联机",
+  "dek": "没有开源引擎可借，从 x86 机器码翻到 C，再编成 WebAssembly。他说自己大多时候只是在旁边看。",
+  "tags": [
+    "Claude",
+    "game",
+    "WebAssembly"
+  ],
+  "body_md": "Pieter Levels 把可能是他最爱的游戏，《Battlefield 1942》，搬进了浏览器，还带多人联机。\n\n地址：[bf1942.pieter.com](https://bf1942.pieter.com)（免费试玩版）。\n\n这事比他以前移植 Quake、DOOM 难一截。后两者早有开源项目垫底；BF1942 几乎没有任何现成底座，厂商也没开源引擎。半年前他试过，基本放弃。今天又拿 Opus 5.5 问了一句：「能不能把这个文件夹里的 BF1942 demo 移植到网页」。\n\n然后他和 Claude Code（他承认主要是 Claude）干了一堆听起来离谱的事：\n\n- 反汇编 x86，找出约 57,000 个函数\n- 把每个函数翻成 C（`mov eax, [esi+0x110]` 变成 `eax = READ32(esi + 0x110)`）\n- 吐出大约 10 万行 C\n- 用 Emscripten 编成 WebAssembly\n- 重写约 300 个 Windows / Direct3D 调用，接到 WebGL 2 / OpenGL\n- 自建网络栈，经 WebSocket 连多人服务器\n\n他自己的原话很诚实：「我不知道它怎么做到的，但它做到了，而且好像能玩。」\n\n这不是怀旧彩蛋那么简单。它在演示一件更锋利的事：当模型能在「无文档、无开源、只有二进制」的场景里硬凿出可运行系统，软件考古和废弃游戏保存，会突然变得可规模化。\n"
+}
