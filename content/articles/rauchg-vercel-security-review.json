@@ -17,5 +17,11 @@
     "agent",
     "Vercel"
   ],
+  "original": {
+    "lang": "en",
+    "title": "Vercel internal security agent @hacker now available",
+    "text_md": "I've been looking forward to this day, because Vercel has an internal security agent that is **astonishingly effective** (lovingly called @𝚑𝚊𝚌𝚔𝚎𝚛). Every single line of code gets audited, automatically.\n\nYou can now get the same power. Just enable it on all your repos (this product works whether you host on Vercel or not) and your peace of mind will increase tremendously. You'll see it catch things that every other agent misses.\n\nWhy: you cannot just bank on your engineers having a skill installed, prompting \"please make secure\", or rolling the weights' dice that the code is good out of the gate.\n\nThe other cool thing about this is that this was entirely developed by our security team. A lot of companies out there are probably in a mad rush right now trying to staff up. If you wanted to 'download a security team' as software, this is the closest you get today.",
+    "media": []
+  },
   "body_md": "Guillermo Rauch 等这一天很久了。\n\nVercel 内部有个安全 Agent，昵称叫 **@hacker**。Rauch 的原话是「astonishingly effective」：每一行代码都会被自动审计。现在，同样的能力对外开放了。打开之后，不管你的项目是不是部署在 Vercel 上，都可以挂到仓库上跑。\n\n他为什么这么急着推？因为边界条件已经变了。\n\n你不能只靠工程师「记得装一个安全技能」，也不能只靠 prompt 里写一句「请写得安全一点」，更不能赌模型第一次就吐出靠谱代码。安全要变成默认流水线，而不是人品考验。\n\n配套产品是 **Vercel Security Review**（公测）。按官方说明，它挂在每次 GitHub push 上：扫变更、在 PR 留评论、进 Security 面板，也可以让 Vercel Agent 验证并直接提修复。扫描的是 diff，所以通常几秒结束，预览和生产部署都能跑。\n\nRauch 还特意点了一句：这套东西是安全团队自己做出来的。很多公司正忙着招人补安全编制；如果你想「把一个安全团队下载成软件」，这大概是今天最接近的形态。\n\n我读完更在意的是分工。写代码的 Agent 越来越多，审代码的 Agent 如果不跟上，中间那截空档会变成默认攻击面。Rauch 这篇文章，其实是在说：安全也该产品化，而且要产品到「每 push 必审」。\n"
 }

@@ -5,7 +5,7 @@
     <link>https://xnews.qiaomu.ai/</link>
     <description>海外创始人长文 · AI 视频 · 乔木中文改写</description>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 05 Nov 2026 17:19:39 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 05 Nov 2026 17:21:52 +0000</lastBuildDate>
     <atom:link href="https://xnews.qiaomu.ai/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title>DeepSeek Super Agent：真正值得看的，是「一切皆插件」的 Harness</title>
@@ -14,6 +14,7 @@
       <pubDate>Thu, 05 Nov 2026 12:00:00 +0000</pubDate>
       <author>AI news / DeepSeek Super Agent explainer</author>
       <description><![CDATA[<p><em>同模型换九套编码 Agent，成本能差出一个数量级。Instacart 和 Box 的 CTO 都把票投给了 harness。</em></p>
+<h2>乔木改写</h2>
 <p>很多人把 DeepSeek 新开源的东西叫「Claude Code 的回答」。视频作者觉得，更值得盯的是它怎么被做出来的。</p>
 <p><strong>Super Agent</strong> 不是又一个聊天窗口。它听团队已经在用的地方：GitHub Issue / PR，以及飞书。有权限的人提需求后，它开 work item，在独立目录里干活，再带着 PR 回来。DeepSeek 自己说，这是研究原型，很多工程甚至是编码 Agent 写的。</p>
 <p>底座是八月发布的 <strong>DeepSeek Harness（DSH）</strong>。口号很绝：一切皆插件。路由、工具注册、会话日志，连 Agent loop 本身都是插件，底下是叫 Cordis 的组合框架。两个关键能力：</p>
@@ -25,8 +26,26 @@
 <p>Super Agent 的架构也很有意思：上层一个长驻 router 负责人和分发，下层 worker 各自隔离会话。外部触发先过确定性门禁（在不在白名单、有没有真正 @ Agent），过了才进模型。Worker 认领 ticket 后直接订阅那条对话，评论不再绕 router，他们测过，关掉这层后 router 决策量大约多 30%。压力测试里触发从每分钟 1 次拉到 40 次，批量处理后单次决策时间反而下降。结论有点反直觉：router 往往更适合轻模型，重模型留给 worker。</p>
 <p>作者访谈过 Instacart 和 Box 的 CTO，两边都认为现阶段 harness 比模型更重要。视频收尾也留了清醒提醒：这是原型，安全问题（提示注入、凭据泄漏、跨设备权限）他们自己也承认没完全解决。</p>
 <p>如果你只记住一句：别再只评模型。同一模型至少丢进两三个 harness 再下判断，不然你骂的可能是壳，不是芯。</p>
+<h2>原文</h2>
+<p><em>DeepSeek Super Agent and why the harness matters</em></p>
+<p><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/OrcsMi2-IcM" frameborder="0" allowfullscreen></iframe></p><p><a href="https://www.youtube.com/watch?v=OrcsMi2-IcM">https://www.youtube.com/watch?v=OrcsMi2-IcM</a></p>
+<p>DeepSeek Super Agent and why the harness matters</p>
+<p>Source: YouTube https://www.youtube.com/watch?v=OrcsMi2-IcM</p>
+<p>Okay, so this past weekend, DeepSeek released something that a lot of people out there are calling the answer to Claude Code. It&#x27;s an agent that sits on a GitHub repo. It watches the issues and pull requests, and when someone on your team asks it to do something, It then goes off into its own session, does the work, and comes back with a PR Now, while that&#x27;s cool in itself, that&#x27;s not really the part that I want to talk about here. The part that I find really interesting is how they built it. The whole thing is just a set of plugins dropped into their agent harness.</p>
+<p>When the DeepSeek Harness came out back in August, the plugin architecture is really cool. The new thing DeepSeek launched is called Super Agent. Along with the repo, they&#x27;ve written an article on X called Exploring Super Agent Design: Towards a More Autonomous Agent System. They&#x27;re upfront that this is a research prototype, not an official DeepSeek product. Ideas and engineering were often written by coding agents themselves.</p>
+<p>Basic idea: instead of you opening a session and talking to an agent, the agent listens to where your team already works — GitHub, and Feishu. When someone allowed asks it for something, it opens a work item, spins up its own session, does the work, replies back usually with a PR.</p>
+<p>On the VentureBeat podcast Beyond the Pilot, CTOs of Instacart and Box both said the harness matters more than the model right now.</p>
+<p>Frontier Harness Eval: same model (Kimi K3) through nine coding agent harnesses. Codex 66.7% pass rate; DeepSeek Harness creator config and Claude Code both 63.3%. DeepSeek ~$3.28 per successful task vs Claude Code ~$18.34. Gap cheapest to most expensive ~17.5x. Harness changes cost, caching, speed, and success rate even with model held constant.</p>
+<p>DeepSeek Harness (DSH) MIT licensed, web UI, not locked to DeepSeek models. Tagline: everything is a plugin — router, tool registry, session log, even the agent loop. Built on Cordis (spatiotemporal composability): temporal (unload reverses everything) and spatial (dependencies activate/deactivate).</p>
+<p>Modes: standard, PTC, minimal, creator — different plugin sets. Creator: describe a plugin in chat and agent writes/installs it.</p>
+<p>Super Agent integrates via cordis.patch: core Super Agent plugin, GitHub watcher, Feishu watcher. Workers: stripped preset, no questions/plan/web fetch/sub-agents; long shell jobs backgrounded. Architecture: long-running router session + isolated worker sessions. Triggers go through a deterministic gate (allow-list) before the model. Tickets carry a mandate. Workers subscribe to conversation so PR comments skip the router (30% fewer router decisions when on).</p>
+<p>Under load (1→40 triggers/min), batching made time per decision drop 6.4s→1.6s. Router can use a cheap/fast model; stronger models for workers.</p>
+<p>Philosophy: take as little human attention as possible and give as much value as possible.</p>
+<p>Caveats: prototype; published code ≠ internal; narrow (GitHub/Feishu); synthetic benchmarks; security (prompt injection, credentials) not fully solved.</p>
+<p>Bigger point: harnesses evolving fast via composable plugins without forking the core.</p>
 <p><strong>原文链接：</strong><a href="https://www.youtube.com/watch?v=OrcsMi2-IcM">https://www.youtube.com/watch?v=OrcsMi2-IcM</a></p>]]></description>
       <content:encoded><![CDATA[<p><em>同模型换九套编码 Agent，成本能差出一个数量级。Instacart 和 Box 的 CTO 都把票投给了 harness。</em></p>
+<h2>乔木改写</h2>
 <p>很多人把 DeepSeek 新开源的东西叫「Claude Code 的回答」。视频作者觉得，更值得盯的是它怎么被做出来的。</p>
 <p><strong>Super Agent</strong> 不是又一个聊天窗口。它听团队已经在用的地方：GitHub Issue / PR，以及飞书。有权限的人提需求后，它开 work item，在独立目录里干活，再带着 PR 回来。DeepSeek 自己说，这是研究原型，很多工程甚至是编码 Agent 写的。</p>
 <p>底座是八月发布的 <strong>DeepSeek Harness（DSH）</strong>。口号很绝：一切皆插件。路由、工具注册、会话日志，连 Agent loop 本身都是插件，底下是叫 Cordis 的组合框架。两个关键能力：</p>
@@ -38,6 +57,23 @@
 <p>Super Agent 的架构也很有意思：上层一个长驻 router 负责人和分发，下层 worker 各自隔离会话。外部触发先过确定性门禁（在不在白名单、有没有真正 @ Agent），过了才进模型。Worker 认领 ticket 后直接订阅那条对话，评论不再绕 router，他们测过，关掉这层后 router 决策量大约多 30%。压力测试里触发从每分钟 1 次拉到 40 次，批量处理后单次决策时间反而下降。结论有点反直觉：router 往往更适合轻模型，重模型留给 worker。</p>
 <p>作者访谈过 Instacart 和 Box 的 CTO，两边都认为现阶段 harness 比模型更重要。视频收尾也留了清醒提醒：这是原型，安全问题（提示注入、凭据泄漏、跨设备权限）他们自己也承认没完全解决。</p>
 <p>如果你只记住一句：别再只评模型。同一模型至少丢进两三个 harness 再下判断，不然你骂的可能是壳，不是芯。</p>
+<h2>原文</h2>
+<p><em>DeepSeek Super Agent and why the harness matters</em></p>
+<p><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/OrcsMi2-IcM" frameborder="0" allowfullscreen></iframe></p><p><a href="https://www.youtube.com/watch?v=OrcsMi2-IcM">https://www.youtube.com/watch?v=OrcsMi2-IcM</a></p>
+<p>DeepSeek Super Agent and why the harness matters</p>
+<p>Source: YouTube https://www.youtube.com/watch?v=OrcsMi2-IcM</p>
+<p>Okay, so this past weekend, DeepSeek released something that a lot of people out there are calling the answer to Claude Code. It&#x27;s an agent that sits on a GitHub repo. It watches the issues and pull requests, and when someone on your team asks it to do something, It then goes off into its own session, does the work, and comes back with a PR Now, while that&#x27;s cool in itself, that&#x27;s not really the part that I want to talk about here. The part that I find really interesting is how they built it. The whole thing is just a set of plugins dropped into their agent harness.</p>
+<p>When the DeepSeek Harness came out back in August, the plugin architecture is really cool. The new thing DeepSeek launched is called Super Agent. Along with the repo, they&#x27;ve written an article on X called Exploring Super Agent Design: Towards a More Autonomous Agent System. They&#x27;re upfront that this is a research prototype, not an official DeepSeek product. Ideas and engineering were often written by coding agents themselves.</p>
+<p>Basic idea: instead of you opening a session and talking to an agent, the agent listens to where your team already works — GitHub, and Feishu. When someone allowed asks it for something, it opens a work item, spins up its own session, does the work, replies back usually with a PR.</p>
+<p>On the VentureBeat podcast Beyond the Pilot, CTOs of Instacart and Box both said the harness matters more than the model right now.</p>
+<p>Frontier Harness Eval: same model (Kimi K3) through nine coding agent harnesses. Codex 66.7% pass rate; DeepSeek Harness creator config and Claude Code both 63.3%. DeepSeek ~$3.28 per successful task vs Claude Code ~$18.34. Gap cheapest to most expensive ~17.5x. Harness changes cost, caching, speed, and success rate even with model held constant.</p>
+<p>DeepSeek Harness (DSH) MIT licensed, web UI, not locked to DeepSeek models. Tagline: everything is a plugin — router, tool registry, session log, even the agent loop. Built on Cordis (spatiotemporal composability): temporal (unload reverses everything) and spatial (dependencies activate/deactivate).</p>
+<p>Modes: standard, PTC, minimal, creator — different plugin sets. Creator: describe a plugin in chat and agent writes/installs it.</p>
+<p>Super Agent integrates via cordis.patch: core Super Agent plugin, GitHub watcher, Feishu watcher. Workers: stripped preset, no questions/plan/web fetch/sub-agents; long shell jobs backgrounded. Architecture: long-running router session + isolated worker sessions. Triggers go through a deterministic gate (allow-list) before the model. Tickets carry a mandate. Workers subscribe to conversation so PR comments skip the router (30% fewer router decisions when on).</p>
+<p>Under load (1→40 triggers/min), batching made time per decision drop 6.4s→1.6s. Router can use a cheap/fast model; stronger models for workers.</p>
+<p>Philosophy: take as little human attention as possible and give as much value as possible.</p>
+<p>Caveats: prototype; published code ≠ internal; narrow (GitHub/Feishu); synthetic benchmarks; security (prompt injection, credentials) not fully solved.</p>
+<p>Bigger point: harnesses evolving fast via composable plugins without forking the core.</p>
 <p><strong>原文链接：</strong><a href="https://www.youtube.com/watch?v=OrcsMi2-IcM">https://www.youtube.com/watch?v=OrcsMi2-IcM</a></p>]]></content:encoded>
     </item>
     <item>
@@ -47,6 +83,7 @@
       <pubDate>Wed, 04 Nov 2026 18:48:27 +0000</pubDate>
       <author>Sarah Guo</author>
       <description><![CDATA[<p><em>从「我好有掌控感」到「没人会给我做这个工作流」，欲望光谱比想象中宽。</em></p>
+<h2>乔木改写</h2>
 <p>Sarah Guo 写得很短，但足以改一条产品假设。</p>
 <p>几年前，她不太相信大量非工程师真的想自己做、或改个人软件。现在她认错了。她看到的欲望大概分几档：</p>
 <ul>
@@ -57,8 +94,18 @@
 <p>事后看几乎是常识：<strong>只要「省力 / 能力」比值够好，人就会动手做自己的软件。</strong></p>
 <p>这和「人人都该学编程」不是一回事。更接近：当 Agent 把实现成本压下去之后，个人软件会从极客玩具，变成普通人处理生活摩擦的默认选项。</p>
 <p>对做工具的人来说，下一步产品问题大概是：你是继续做一个封闭的成品，还是留出足够安全的口子，让用户能把自己的流程焊进去。</p>
+<h2>原文</h2>
+<p><em>Non-engineers do want to make personal software</em></p>
+<p>a few years ago, I started out skeptical that many non-engineers really wanted to make/mod their own personal software -- but I&#x27;ve come around, think I was wrong. range of desires from:</p>
+<ul>
+<li>I feel so powerful</li>
+<li>no one will make me the workflow/personalization I need</li>
+<li>can I just PM the product for a few weeks and fix this thing that is driving me crazy</li>
+</ul>
+<p>obvious in retrospect, but if the ease:power ratio is good enough, of course people will make their own software</p>
 <p><strong>原文链接：</strong><a href="https://x.com/saranormous/status/2118052772637704376">https://x.com/saranormous/status/2118052772637704376</a></p>]]></description>
       <content:encoded><![CDATA[<p><em>从「我好有掌控感」到「没人会给我做这个工作流」，欲望光谱比想象中宽。</em></p>
+<h2>乔木改写</h2>
 <p>Sarah Guo 写得很短，但足以改一条产品假设。</p>
 <p>几年前，她不太相信大量非工程师真的想自己做、或改个人软件。现在她认错了。她看到的欲望大概分几档：</p>
 <ul>
@@ -69,6 +116,15 @@
 <p>事后看几乎是常识：<strong>只要「省力 / 能力」比值够好，人就会动手做自己的软件。</strong></p>
 <p>这和「人人都该学编程」不是一回事。更接近：当 Agent 把实现成本压下去之后，个人软件会从极客玩具，变成普通人处理生活摩擦的默认选项。</p>
 <p>对做工具的人来说，下一步产品问题大概是：你是继续做一个封闭的成品，还是留出足够安全的口子，让用户能把自己的流程焊进去。</p>
+<h2>原文</h2>
+<p><em>Non-engineers do want to make personal software</em></p>
+<p>a few years ago, I started out skeptical that many non-engineers really wanted to make/mod their own personal software -- but I&#x27;ve come around, think I was wrong. range of desires from:</p>
+<ul>
+<li>I feel so powerful</li>
+<li>no one will make me the workflow/personalization I need</li>
+<li>can I just PM the product for a few weeks and fix this thing that is driving me crazy</li>
+</ul>
+<p>obvious in retrospect, but if the ease:power ratio is good enough, of course people will make their own software</p>
 <p><strong>原文链接：</strong><a href="https://x.com/saranormous/status/2118052772637704376">https://x.com/saranormous/status/2118052772637704376</a></p>]]></content:encoded>
     </item>
     <item>
@@ -78,6 +134,7 @@
       <pubDate>Tue, 03 Nov 2026 21:45:04 +0000</pubDate>
       <author>Guillermo Rauch</author>
       <description><![CDATA[<p><em>每行代码自动审计。他的判断很直白：你不能指望工程师记得装技能，或掷骰子赌第一版就安全。</em></p>
+<h2>乔木改写</h2>
 <p>Guillermo Rauch 等这一天很久了。</p>
 <p>Vercel 内部有个安全 Agent，昵称叫 <strong>@hacker</strong>。Rauch 的原话是「astonishingly effective」：每一行代码都会被自动审计。现在，同样的能力对外开放了。打开之后，不管你的项目是不是部署在 Vercel 上，都可以挂到仓库上跑。</p>
 <p>他为什么这么急着推？因为边界条件已经变了。</p>
@@ -85,9 +142,16 @@
 <p>配套产品是 <strong>Vercel Security Review</strong>（公测）。按官方说明，它挂在每次 GitHub push 上：扫变更、在 PR 留评论、进 Security 面板，也可以让 Vercel Agent 验证并直接提修复。扫描的是 diff，所以通常几秒结束，预览和生产部署都能跑。</p>
 <p>Rauch 还特意点了一句：这套东西是安全团队自己做出来的。很多公司正忙着招人补安全编制；如果你想「把一个安全团队下载成软件」，这大概是今天最接近的形态。</p>
 <p>我读完更在意的是分工。写代码的 Agent 越来越多，审代码的 Agent 如果不跟上，中间那截空档会变成默认攻击面。Rauch 这篇文章，其实是在说：安全也该产品化，而且要产品到「每 push 必审」。</p>
+<h2>原文</h2>
+<p><em>Vercel internal security agent @hacker now available</em></p>
+<p>I&#x27;ve been looking forward to this day, because Vercel has an internal security agent that is <strong>astonishingly effective</strong> (lovingly called @𝚑𝚊𝚌𝚔𝚎𝚛). Every single line of code gets audited, automatically.</p>
+<p>You can now get the same power. Just enable it on all your repos (this product works whether you host on Vercel or not) and your peace of mind will increase tremendously. You&#x27;ll see it catch things that every other agent misses.</p>
+<p>Why: you cannot just bank on your engineers having a skill installed, prompting &quot;please make secure&quot;, or rolling the weights&#x27; dice that the code is good out of the gate.</p>
+<p>The other cool thing about this is that this was entirely developed by our security team. A lot of companies out there are probably in a mad rush right now trying to staff up. If you wanted to &#x27;download a security team&#x27; as software, this is the closest you get today.</p>
 <p><strong>原文链接：</strong><a href="https://x.com/rauchg/status/2117734833824948373">https://x.com/rauchg/status/2117734833824948373</a></p>
 <p><strong>相关链接：</strong><a href="https://vercel.com/blog/vercel-security-review">https://vercel.com/blog/vercel-security-review</a></p>]]></description>
       <content:encoded><![CDATA[<p><em>每行代码自动审计。他的判断很直白：你不能指望工程师记得装技能，或掷骰子赌第一版就安全。</em></p>
+<h2>乔木改写</h2>
 <p>Guillermo Rauch 等这一天很久了。</p>
 <p>Vercel 内部有个安全 Agent，昵称叫 <strong>@hacker</strong>。Rauch 的原话是「astonishingly effective」：每一行代码都会被自动审计。现在，同样的能力对外开放了。打开之后，不管你的项目是不是部署在 Vercel 上，都可以挂到仓库上跑。</p>
 <p>他为什么这么急着推？因为边界条件已经变了。</p>
@@ -95,6 +159,12 @@
 <p>配套产品是 <strong>Vercel Security Review</strong>（公测）。按官方说明，它挂在每次 GitHub push 上：扫变更、在 PR 留评论、进 Security 面板，也可以让 Vercel Agent 验证并直接提修复。扫描的是 diff，所以通常几秒结束，预览和生产部署都能跑。</p>
 <p>Rauch 还特意点了一句：这套东西是安全团队自己做出来的。很多公司正忙着招人补安全编制；如果你想「把一个安全团队下载成软件」，这大概是今天最接近的形态。</p>
 <p>我读完更在意的是分工。写代码的 Agent 越来越多，审代码的 Agent 如果不跟上，中间那截空档会变成默认攻击面。Rauch 这篇文章，其实是在说：安全也该产品化，而且要产品到「每 push 必审」。</p>
+<h2>原文</h2>
+<p><em>Vercel internal security agent @hacker now available</em></p>
+<p>I&#x27;ve been looking forward to this day, because Vercel has an internal security agent that is <strong>astonishingly effective</strong> (lovingly called @𝚑𝚊𝚌𝚔𝚎𝚛). Every single line of code gets audited, automatically.</p>
+<p>You can now get the same power. Just enable it on all your repos (this product works whether you host on Vercel or not) and your peace of mind will increase tremendously. You&#x27;ll see it catch things that every other agent misses.</p>
+<p>Why: you cannot just bank on your engineers having a skill installed, prompting &quot;please make secure&quot;, or rolling the weights&#x27; dice that the code is good out of the gate.</p>
+<p>The other cool thing about this is that this was entirely developed by our security team. A lot of companies out there are probably in a mad rush right now trying to staff up. If you wanted to &#x27;download a security team&#x27; as software, this is the closest you get today.</p>
 <p><strong>原文链接：</strong><a href="https://x.com/rauchg/status/2117734833824948373">https://x.com/rauchg/status/2117734833824948373</a></p>
 <p><strong>相关链接：</strong><a href="https://vercel.com/blog/vercel-security-review">https://vercel.com/blog/vercel-security-review</a></p>]]></content:encoded>
     </item>
@@ -105,6 +175,7 @@
       <pubDate>Tue, 03 Nov 2026 21:24:49 +0000</pubDate>
       <author>Victor Cardenas</author>
       <description><![CDATA[<p><em>不到 100 人，年化收入过 $500m。Victor 把方法写得很清楚：找 SuperSMB，卖给他们，为他们做产品。</em></p>
+<h2>乔木改写</h2>
 <p>Victor Cardenas 宣布，Slash 年化收入刚越过 <strong>$500m</strong>。去年大约 $150m，再上一年 $50m。团队不到 100 人。他 25 岁。</p>
 <p>长文的核心概念叫 <strong>SuperSMB</strong>：人很少、收入很高、决策极快的公司。AI 让这类创业者密度暴涨。Victor 给的数据里，平台上 88% 的资产来自 35 岁以下创始人的公司，65% 的月支出流来自近三年成立的公司。</p>
 <p>他对销售的判断几乎是反常识的：</p>
@@ -112,8 +183,21 @@
 <p>怎么找到他们？Slash 不用 Clay / ZoomInfo，也不靠冷邮件。三条硬要求：靠产品赢得转介、人必须在场（群、论坛、会议）、第一天就给人而不是把高级支持锁在员工数门槛后面。他说，一个销售一年带进超过 $1 亿收入，在他们团队是真实发生过的。</p>
 <p>产品侧同样围绕这群人：<strong>全球可用、Agent-ready（仪表盘能做的，API / MCP 也能做）、懂行业工作流、尽量 all-in-one、定价激进</strong>。他的原话是，靠砍自己的内部成本赚钱，别靠抬客户价格。</p>
 <p>读完最大的感觉是：AI native 创业者已经大到值得单独开一条银行产品线。谁还按「传统 SMB vs 企业」做分组，谁就会把最快的那批客人让出去。</p>
+<h2>原文</h2>
+<p><em>Slash hit 500m annual revenue with 88 people. We invented a new playbook:</em></p>
+<p>Last month, we crossed $500m in annualized gross revenue, up from roughly $150m last year and $50m the year before. Our business is getting larger, and our growth is accelerating. Slash is one of the fastest growing fintech companies of all time, and we have a team of under 100 people.</p>
+<p>Our growth can be almost entirely attributed to the fact that we are 100x better at building for and selling to truly AI native entrepreneurs than our competitors. In this article I’m going to talk about three things that helped me build a half a billion dollar revenue business by 25: The rise of the “SuperSMB”, very lean companies with tons of revenue. How to find and sell to the “SuperSMB”. How to build product for the “SuperSMB”. Bookmark this, my promise is that this will be the MOST valuable read of your week.</p>
+<p>THE RISE OF THE SUPER-SMB AI is causing a Cambrian explosion of entrepreneurs. In the last three years: U.S. business applications reached roughly 5.6 million in 2025, up about 60% from 3.5 million in 2019. Every 26 seconds, a Shopify store makes its first sale. The median Stripe Atlas startup generated 39% more revenue in its first six months in 2025 than its 2024 counterpart. The “fastest from $0 -&gt; $XXm” isn’t a phenomenon that’s restricted to tech companies. Businesses are growing faster in every sector of the economy. These entrepreneurs are young. Slash customers spend billions of dollars every month, and hold billions of dollars on platform: Over 88% of the assets on the Slash platform belong to businesses with founders under the age of 35. 72% of the spend on Slash is done by businesses with founders under the age of 35. These entrepreneurs start many businesses. 40% of the companies on Slash are owned by an entrepreneur that has at least more than one more business on the platform. Their businesses grow incredibly fast. 65% of the billions of dollars in spend that flow through the Slash platform every month come from businesses that were started in the last 3 years (post ChatGPT!), and 25% come from businesses that were started in the last 12 months. They don’t employ that many people. The median Slash customer spends hundreds of thousands a month on their card, but only has a few employees. And they’re from all over the world. AI and the internet have made it possible for business owners all over the world to sell to the US consumer and business. Entrepreneurs worldwide are increasingly doing business in dollars, and Slash is powering all of them. We believe they are going to be running the world in 10 years I predict that by 2035, over half of all the business deposits held in US banks will come from businesses incorporated post the launch of ChatGPT. The most popular products of today – including banks – were not built for, and cannot keep up with the AI native entrepreneur. You have a massive opportunity to build a product tailored to this ultra fast growing sector of the economy.</p>
+<p>HOW TO SELL TO SUPER-SMBs Selling to SuperSMBs is a cheat code if you want your business to grow quickly. They are businesses that can both make you a lot of money (because they are big) and are fast to close (because they are not bureaucratic at all). This is unprecedented in the history of business. Typically, B2B companies had to trade off between sales cycle and ACV: Enterprises = take long to close, but make you a lot of cash. SMBs = faster to close, but don’t make you that much money. You do not have to make that tradeoff if you sell to SuperSMBs.</p>
+<p>However, it is not that easy to find them. Slash does not use Clay or Zoominfo. Slash does not do any cold calling or cold emailing. Without giving away all of our secret sauce, you have to at least do these three things: Earn your customers’ trust so you can unlock referrals. You are going to have a brutal time trying to find which 2-10 person teams are doing multiple 8 figures in revenue by checking LinkedIn. Your customers need to be your best sales people. You need to be on the ground. Join every big group chat, stay on top of every important forum, and go to every conference. There are some industries with many more SuperSMBs than others. If you are not an industry expert, you will be left behind. Put a human in front of your customers. You cannot gate premium support to businesses with a certain amount of employees. You must roll out the red carpet for these entrepreneurs on day 0. It is physically possible for one salesperson to bring in &gt; $100m in revenue in a year. @nickbruhman and others on our team are living, breathing examples of that:</p>
+<p>HOW TO BUILD FOR SUPER-SMBs Every part of the Slash product was engineered with SuperSMBs in mind. Build a global product from day 0 Entrepreneurs globally can use Cursor to create amazing software, Shopify/Amazon to sell physical goods to the US consumer, and Meta to advertise to them. So why can’t they easily access the dollar? Slash makes its American-caliber product available to internet entrepreneurs all over the world, and has active customers in over 40 countries. SuperSMBs are everywhere. Be global from day 1. Be agent ready Every action a user can perform via the Slash dashboard they can perform via our API or MCP. Nobody wants to log into your UI. SuperSMBs are API and MCP power users. Make your product available to them agentically. Be industry aware Marketing agencies, med spas, data labeling companies, and wholesalers all have different financial workflows, and different working capital needs. Slash builds bespoke, complementary tooling for all the niches it has a presence in, saving our customers much more time and money than our horizontal competitors. Making software is trivial now. Products with no industry differentiation will never make it. SuperSMBs expect you to deliver differentiated value for their niche. Be an all-in-one Business owners want to spend all of their time making their products better and getting more customers. They do not want to spend any time thinking about their back office. Slash eliminates the need for that by offering: 4 accounting products (invoicing, bill pay, expense management, accounting automation) Processing, banking*, stablecoin payments, FX, and issuing via one platform A delightful multi-entity experience. As a result, we’ve gone from being the primary banking partner for less than 20% of our customers to over 80% of them in the last 24 months. SuperSMBs want to consume less tools not more. They have a bias towards building, and so won’t consider your solution unless it solves a lot of their problems. In our case, they solve all of finance for them. Price aggressively SuperSMBs are often bootstrapped and care about profitability. Don’t be arrogant and think you can charge more than your competitors. Slash has some of the best rates out there, and we&#x27;re able to price so aggressively because we are a very lean company ourselves. Grow your profit by cutting your internal costs, not jacking up prices for your end user.</p>
+<p>WHAT’S NEXT FOR SLASH We have a straightforward, but extremely difficult mission of becoming the most popular business banking platform in the world. If you’re ambitious, incredibly hard working, and want to help us build the world’s next great financial services business, we’re hiring. Email me at victor @ slash . com if interested.</p>
+<ul>
+<li>Slash is a financial technology company, not a bank. Banking services provided by Column N.A., Member FDIC.</li>
+</ul>
 <p><strong>原文链接：</strong><a href="https://x.com/victorcardenas/status/2117729738160496778">https://x.com/victorcardenas/status/2117729738160496778</a></p>]]></description>
       <content:encoded><![CDATA[<p><em>不到 100 人，年化收入过 $500m。Victor 把方法写得很清楚：找 SuperSMB，卖给他们，为他们做产品。</em></p>
+<h2>乔木改写</h2>
 <p>Victor Cardenas 宣布，Slash 年化收入刚越过 <strong>$500m</strong>。去年大约 $150m，再上一年 $50m。团队不到 100 人。他 25 岁。</p>
 <p>长文的核心概念叫 <strong>SuperSMB</strong>：人很少、收入很高、决策极快的公司。AI 让这类创业者密度暴涨。Victor 给的数据里，平台上 88% 的资产来自 35 岁以下创始人的公司，65% 的月支出流来自近三年成立的公司。</p>
 <p>他对销售的判断几乎是反常识的：</p>
@@ -121,6 +205,18 @@
 <p>怎么找到他们？Slash 不用 Clay / ZoomInfo，也不靠冷邮件。三条硬要求：靠产品赢得转介、人必须在场（群、论坛、会议）、第一天就给人而不是把高级支持锁在员工数门槛后面。他说，一个销售一年带进超过 $1 亿收入，在他们团队是真实发生过的。</p>
 <p>产品侧同样围绕这群人：<strong>全球可用、Agent-ready（仪表盘能做的，API / MCP 也能做）、懂行业工作流、尽量 all-in-one、定价激进</strong>。他的原话是，靠砍自己的内部成本赚钱，别靠抬客户价格。</p>
 <p>读完最大的感觉是：AI native 创业者已经大到值得单独开一条银行产品线。谁还按「传统 SMB vs 企业」做分组，谁就会把最快的那批客人让出去。</p>
+<h2>原文</h2>
+<p><em>Slash hit 500m annual revenue with 88 people. We invented a new playbook:</em></p>
+<p>Last month, we crossed $500m in annualized gross revenue, up from roughly $150m last year and $50m the year before. Our business is getting larger, and our growth is accelerating. Slash is one of the fastest growing fintech companies of all time, and we have a team of under 100 people.</p>
+<p>Our growth can be almost entirely attributed to the fact that we are 100x better at building for and selling to truly AI native entrepreneurs than our competitors. In this article I’m going to talk about three things that helped me build a half a billion dollar revenue business by 25: The rise of the “SuperSMB”, very lean companies with tons of revenue. How to find and sell to the “SuperSMB”. How to build product for the “SuperSMB”. Bookmark this, my promise is that this will be the MOST valuable read of your week.</p>
+<p>THE RISE OF THE SUPER-SMB AI is causing a Cambrian explosion of entrepreneurs. In the last three years: U.S. business applications reached roughly 5.6 million in 2025, up about 60% from 3.5 million in 2019. Every 26 seconds, a Shopify store makes its first sale. The median Stripe Atlas startup generated 39% more revenue in its first six months in 2025 than its 2024 counterpart. The “fastest from $0 -&gt; $XXm” isn’t a phenomenon that’s restricted to tech companies. Businesses are growing faster in every sector of the economy. These entrepreneurs are young. Slash customers spend billions of dollars every month, and hold billions of dollars on platform: Over 88% of the assets on the Slash platform belong to businesses with founders under the age of 35. 72% of the spend on Slash is done by businesses with founders under the age of 35. These entrepreneurs start many businesses. 40% of the companies on Slash are owned by an entrepreneur that has at least more than one more business on the platform. Their businesses grow incredibly fast. 65% of the billions of dollars in spend that flow through the Slash platform every month come from businesses that were started in the last 3 years (post ChatGPT!), and 25% come from businesses that were started in the last 12 months. They don’t employ that many people. The median Slash customer spends hundreds of thousands a month on their card, but only has a few employees. And they’re from all over the world. AI and the internet have made it possible for business owners all over the world to sell to the US consumer and business. Entrepreneurs worldwide are increasingly doing business in dollars, and Slash is powering all of them. We believe they are going to be running the world in 10 years I predict that by 2035, over half of all the business deposits held in US banks will come from businesses incorporated post the launch of ChatGPT. The most popular products of today – including banks – were not built for, and cannot keep up with the AI native entrepreneur. You have a massive opportunity to build a product tailored to this ultra fast growing sector of the economy.</p>
+<p>HOW TO SELL TO SUPER-SMBs Selling to SuperSMBs is a cheat code if you want your business to grow quickly. They are businesses that can both make you a lot of money (because they are big) and are fast to close (because they are not bureaucratic at all). This is unprecedented in the history of business. Typically, B2B companies had to trade off between sales cycle and ACV: Enterprises = take long to close, but make you a lot of cash. SMBs = faster to close, but don’t make you that much money. You do not have to make that tradeoff if you sell to SuperSMBs.</p>
+<p>However, it is not that easy to find them. Slash does not use Clay or Zoominfo. Slash does not do any cold calling or cold emailing. Without giving away all of our secret sauce, you have to at least do these three things: Earn your customers’ trust so you can unlock referrals. You are going to have a brutal time trying to find which 2-10 person teams are doing multiple 8 figures in revenue by checking LinkedIn. Your customers need to be your best sales people. You need to be on the ground. Join every big group chat, stay on top of every important forum, and go to every conference. There are some industries with many more SuperSMBs than others. If you are not an industry expert, you will be left behind. Put a human in front of your customers. You cannot gate premium support to businesses with a certain amount of employees. You must roll out the red carpet for these entrepreneurs on day 0. It is physically possible for one salesperson to bring in &gt; $100m in revenue in a year. @nickbruhman and others on our team are living, breathing examples of that:</p>
+<p>HOW TO BUILD FOR SUPER-SMBs Every part of the Slash product was engineered with SuperSMBs in mind. Build a global product from day 0 Entrepreneurs globally can use Cursor to create amazing software, Shopify/Amazon to sell physical goods to the US consumer, and Meta to advertise to them. So why can’t they easily access the dollar? Slash makes its American-caliber product available to internet entrepreneurs all over the world, and has active customers in over 40 countries. SuperSMBs are everywhere. Be global from day 1. Be agent ready Every action a user can perform via the Slash dashboard they can perform via our API or MCP. Nobody wants to log into your UI. SuperSMBs are API and MCP power users. Make your product available to them agentically. Be industry aware Marketing agencies, med spas, data labeling companies, and wholesalers all have different financial workflows, and different working capital needs. Slash builds bespoke, complementary tooling for all the niches it has a presence in, saving our customers much more time and money than our horizontal competitors. Making software is trivial now. Products with no industry differentiation will never make it. SuperSMBs expect you to deliver differentiated value for their niche. Be an all-in-one Business owners want to spend all of their time making their products better and getting more customers. They do not want to spend any time thinking about their back office. Slash eliminates the need for that by offering: 4 accounting products (invoicing, bill pay, expense management, accounting automation) Processing, banking*, stablecoin payments, FX, and issuing via one platform A delightful multi-entity experience. As a result, we’ve gone from being the primary banking partner for less than 20% of our customers to over 80% of them in the last 24 months. SuperSMBs want to consume less tools not more. They have a bias towards building, and so won’t consider your solution unless it solves a lot of their problems. In our case, they solve all of finance for them. Price aggressively SuperSMBs are often bootstrapped and care about profitability. Don’t be arrogant and think you can charge more than your competitors. Slash has some of the best rates out there, and we&#x27;re able to price so aggressively because we are a very lean company ourselves. Grow your profit by cutting your internal costs, not jacking up prices for your end user.</p>
+<p>WHAT’S NEXT FOR SLASH We have a straightforward, but extremely difficult mission of becoming the most popular business banking platform in the world. If you’re ambitious, incredibly hard working, and want to help us build the world’s next great financial services business, we’re hiring. Email me at victor @ slash . com if interested.</p>
+<ul>
+<li>Slash is a financial technology company, not a bank. Banking services provided by Column N.A., Member FDIC.</li>
+</ul>
 <p><strong>原文链接：</strong><a href="https://x.com/victorcardenas/status/2117729738160496778">https://x.com/victorcardenas/status/2117729738160496778</a></p>]]></content:encoded>
     </item>
     <item>
@@ -130,6 +226,7 @@
       <pubDate>Tue, 03 Nov 2026 19:03:50 +0000</pubDate>
       <author>Pieter Levels</author>
       <description><![CDATA[<p><em>2 万付费用户、2.52 亿访客、2.4PB 流量。AI 最擅长的，可能是帮你找到自己看不见的浪费。</em></p>
+<h2>乔木改写</h2>
 <p>Pieter Levels 又晒了一张成本表。</p>
 <p>他所有网站加在一起，服务着大约 <strong>2 万付费用户、2.52 亿访客、24 亿请求、2.4PB 带宽</strong>。常规业务开销现在只剩大约 <strong>$300/月</strong>。如果把 Photo AI 的 GPU（约 $7000/月）和 R2（约 $800/月）算进去，大概 $8000/月。</p>
 <p>更刺眼的是降幅。他列了 Claude Code 帮他抠出来的账，合计接近 <strong>$34,000/月</strong>：</p>
@@ -144,8 +241,43 @@
 <p>连 Photo AI 算上，总成本比去年砍了大约九成，接近他十年前刚创业时的量级。</p>
 <p>他自己也说了一句很冷的话：短期看，AI 擅长找成本节约，对经济未必友好；长期看，它会削掉脂肪，把钱腾给更好的投资。</p>
 <p>独立开发者常年面对的「成本慢慢爬上去，你却没感觉」，终于有了一个很具体的对手方。不是再订一份监控 SaaS，是直接让模型读你的账单。</p>
+<h2>原文</h2>
+<p><em>Biz expenses down to ~$300/mo</em></p>
+<p><img src="https://pbs.twimg.com/media/HWOOvq5WoAAMsfw.jpg" alt=""></p>
+<p>💸 Update: My total biz expenses have now dropped to just ~$300/mo!</p>
+<p>This is to run all my websites/apps serving per year:</p>
+<ul>
+<li>20,000 paying customers</li>
+<li>252 million visitors</li>
+<li>2.4 billion requests</li>
+<li>2.4 petabyte (PB) in bandwidth</li>
+</ul>
+<p>(~$8,000/mo if you add the $7,000/mo GPU bill and $800/mo R2 storage I pay for Photo AI, I exclude it above because it&#x27;s one project that&#x27;s so much more expensive in size than all the other sites together, but included in the chart below)</p>
+<p>Claude Code helped me to find smart ways to save more money, AI is just really really really good at finding cost savings by itself, which is not so great for the economy short-term, but long term it trims all the fat and opens up spending for better investments I think</p>
+<p>Anyway here&#x27;s what it saved me in money, almost $34,000/mo:</p>
+<ul>
+<li>$29,000/mo - switched to better and cheaper video models on Photo AI, video was very expensive and since I didn&#x27;t update it ever it stayed expensive, also routed some image jobs to Google Cloud where I have some Google Cloud Credits, and also routed some jobs to Sume which sells AI models at market cost, very cool! This made my GPU bill go from $36,000/mo to $7,000/mo</li>
+</ul>
+<ul>
+<li>$3,000/mo - consolidated my servers, cancelled Digital Ocean and Linode and moved everything to Hetzner saving about $3,000/mo</li>
+</ul>
+<ul>
+<li>$1100/mo - analyzed my Backblaze B2 server backups, I had infinite versioning and lifecycle policies, that&#x27;s reduced now to 30 days, this literally pushed the bill from $1,200/mo to $26/mo, about 50x cheaper! I had essentially versions of files for all my servers for over a decade, crazy!</li>
+</ul>
+<ul>
+<li>$400/mo - similarly added Lifecycle Policies to my Cloudflare R2 bucket for Photo AI, pics are automatically put in cheaper Infrequent Access after 90 days, there was years of photos in there so this reduced the R2 bill from $1,200/mo to $800/mo</li>
+</ul>
+<ul>
+<li>$118/mo - Claude analyzed all my Cloudflare Domain registrations, lots of domains I didn&#x27;t use and didn&#x27;t make sense to keep paying for, lots of things that also don&#x27;t really make sense anymore in a post-AGI world, renewals for .io TLD are now $50/year which adds up fast!</li>
+</ul>
+<ul>
+<li>$100/mo - Claude also analyzed my Claude subscription (yes!) and discovered I don&#x27;t even use the Max 20x plan limits, so I downgraded from $200/mo to $100/mo</li>
+</ul>
+<p>Even including Photo AI, I have now cut my costs by 90% from last year, getting me close to my biz expenses amount from a decade ago when I started building things</p>
+<p>Costs slowly creep up over the years and you don&#x27;t realize all the things you&#x27;re spending on but AI is nice to help you figure all that out (also in your personal life!)</p>
 <p><strong>原文链接：</strong><a href="https://x.com/levelsio/status/2117694259558293692">https://x.com/levelsio/status/2117694259558293692</a></p>]]></description>
       <content:encoded><![CDATA[<p><em>2 万付费用户、2.52 亿访客、2.4PB 流量。AI 最擅长的，可能是帮你找到自己看不见的浪费。</em></p>
+<h2>乔木改写</h2>
 <p>Pieter Levels 又晒了一张成本表。</p>
 <p>他所有网站加在一起，服务着大约 <strong>2 万付费用户、2.52 亿访客、24 亿请求、2.4PB 带宽</strong>。常规业务开销现在只剩大约 <strong>$300/月</strong>。如果把 Photo AI 的 GPU（约 $7000/月）和 R2（约 $800/月）算进去，大概 $8000/月。</p>
 <p>更刺眼的是降幅。他列了 Claude Code 帮他抠出来的账，合计接近 <strong>$34,000/月</strong>：</p>
@@ -160,6 +292,40 @@
 <p>连 Photo AI 算上，总成本比去年砍了大约九成，接近他十年前刚创业时的量级。</p>
 <p>他自己也说了一句很冷的话：短期看，AI 擅长找成本节约，对经济未必友好；长期看，它会削掉脂肪，把钱腾给更好的投资。</p>
 <p>独立开发者常年面对的「成本慢慢爬上去，你却没感觉」，终于有了一个很具体的对手方。不是再订一份监控 SaaS，是直接让模型读你的账单。</p>
+<h2>原文</h2>
+<p><em>Biz expenses down to ~$300/mo</em></p>
+<p><img src="https://pbs.twimg.com/media/HWOOvq5WoAAMsfw.jpg" alt=""></p>
+<p>💸 Update: My total biz expenses have now dropped to just ~$300/mo!</p>
+<p>This is to run all my websites/apps serving per year:</p>
+<ul>
+<li>20,000 paying customers</li>
+<li>252 million visitors</li>
+<li>2.4 billion requests</li>
+<li>2.4 petabyte (PB) in bandwidth</li>
+</ul>
+<p>(~$8,000/mo if you add the $7,000/mo GPU bill and $800/mo R2 storage I pay for Photo AI, I exclude it above because it&#x27;s one project that&#x27;s so much more expensive in size than all the other sites together, but included in the chart below)</p>
+<p>Claude Code helped me to find smart ways to save more money, AI is just really really really good at finding cost savings by itself, which is not so great for the economy short-term, but long term it trims all the fat and opens up spending for better investments I think</p>
+<p>Anyway here&#x27;s what it saved me in money, almost $34,000/mo:</p>
+<ul>
+<li>$29,000/mo - switched to better and cheaper video models on Photo AI, video was very expensive and since I didn&#x27;t update it ever it stayed expensive, also routed some image jobs to Google Cloud where I have some Google Cloud Credits, and also routed some jobs to Sume which sells AI models at market cost, very cool! This made my GPU bill go from $36,000/mo to $7,000/mo</li>
+</ul>
+<ul>
+<li>$3,000/mo - consolidated my servers, cancelled Digital Ocean and Linode and moved everything to Hetzner saving about $3,000/mo</li>
+</ul>
+<ul>
+<li>$1100/mo - analyzed my Backblaze B2 server backups, I had infinite versioning and lifecycle policies, that&#x27;s reduced now to 30 days, this literally pushed the bill from $1,200/mo to $26/mo, about 50x cheaper! I had essentially versions of files for all my servers for over a decade, crazy!</li>
+</ul>
+<ul>
+<li>$400/mo - similarly added Lifecycle Policies to my Cloudflare R2 bucket for Photo AI, pics are automatically put in cheaper Infrequent Access after 90 days, there was years of photos in there so this reduced the R2 bill from $1,200/mo to $800/mo</li>
+</ul>
+<ul>
+<li>$118/mo - Claude analyzed all my Cloudflare Domain registrations, lots of domains I didn&#x27;t use and didn&#x27;t make sense to keep paying for, lots of things that also don&#x27;t really make sense anymore in a post-AGI world, renewals for .io TLD are now $50/year which adds up fast!</li>
+</ul>
+<ul>
+<li>$100/mo - Claude also analyzed my Claude subscription (yes!) and discovered I don&#x27;t even use the Max 20x plan limits, so I downgraded from $200/mo to $100/mo</li>
+</ul>
+<p>Even including Photo AI, I have now cut my costs by 90% from last year, getting me close to my biz expenses amount from a decade ago when I started building things</p>
+<p>Costs slowly creep up over the years and you don&#x27;t realize all the things you&#x27;re spending on but AI is nice to help you figure all that out (also in your personal life!)</p>
 <p><strong>原文链接：</strong><a href="https://x.com/levelsio/status/2117694259558293692">https://x.com/levelsio/status/2117694259558293692</a></p>]]></content:encoded>
     </item>
     <item>
@@ -169,6 +335,7 @@
       <pubDate>Tue, 03 Nov 2026 06:28:06 +0000</pubDate>
       <author>Amjad Masad</author>
       <description><![CDATA[<p><em>有人靠禁 Claude Code 止血。Replit 的建议更硬：托管、隔离、凭证外置，让云端受管环境成为默认。</em></p>
+<h2>乔木改写</h2>
 <p>Amjad Masad 发了一份安全咨询，标题几乎不绕弯：</p>
 <p><strong>让受管云环境，成为 AI Agent 的默认运行方式。</strong></p>
 <p>背景是这几个月一串真实事件叠在一起：个人 Claude 账号被接到敏感防务环境的报道、Cursor 市场上被篡改的 Claude Code 扩展、Nx 供应链攻击里恶意包征用已装好的 AI CLI 去翻密钥、GitHub MCP 演示里一条恶意 Issue 就能诱导 Agent 把私有仓信息写进公开 PR……路径不同，失败模式很像：不可信内容被当成指令，执行环境权限过大，控制面还在 Agent 自己手里。</p>
@@ -177,8 +344,18 @@
 <p>咨询里列的控制项很工程化：验证过的执行隔离、经纪式凭证（credential broker）、逐步提权审批、任务作用域权限、网络与数据流限制、生产写入外置、供应链治理、以及 Agent 改不了的独立审计与熔断。</p>
 <p>一句话概括他的立场：云托管本身不等于安全，但「受管云 + 可验证边界」比「员工笔记本 + 个人 Agent」更适合当默认值。</p>
 <p>如果你正在给公司推 Coding Agent，这篇值得转给安全同事。争论焦点已经从「要不要用」换成「默认跑在谁的环境里」。</p>
+<h2>原文</h2>
+<p><em>Security advisory: Make managed cloud environments the default for AI agents</em></p>
+<p>AI agents running on employee endpoints are becoming a systemic security risk for enterprises &amp; governments.</p>
+<p>Some are responding by restricting tools like Claude Code, as Goldman Sachs reportedly has.</p>
+<p>In this security advisory, we outline the risks and recommend a path forward.</p>
+<hr>
+<h1>Security advisory: Make managed cloud environments the default for AI agents</h1>
+<p>AI agents should operate in dedicated, organization-controlled environments with limited access to the resources each task requires. Recent security incidents [5], [6] and research demonstrate why this is a growing necessity. Supply-chain attacks have always been able to compromise developer machines and recruit installed AI tools to search for sensitive corporate information and data. Agent harnesses are typically given broad privileges and have a shrinking amount of human oversight. Combined, these two effects are making agents an increasingly interesting target for attackers. Even unattended automations are being targeted: instructions hidden in a GitHub issue or email can redirect an agent toward private data and unauthorized actions. The rise of personal agents increases the risk even more, since they are insufficiently managed by organizations, mostly controlled by individuals, run with an inconsistent set of guardrails, and are incentivized to be proactive above all else: they read every email, every calendar invite; Every interaction is an opportunity to get prompt-injected. There is a better way forward: Organizations can continue adopting agents by giving them execution environments designed for software that reads untrusted content, runs code, and acts on a user’s behalf. In a world where agents are becoming more prevalent, @Replit believes that organizations must make managed, isolated cloud agents the default for autonomous development, with credentials, permissions, network access, and production changes controlled outside the agent’s reach. Adoption is growing faster than control AI development tools are becoming standard. Stack Overflow reports that the share of respondents using or planning to use AI tools rose from 70% in 2023 to 76% in 2024 [1] and 84% in 2025 [2]. This establishes the scale of AI-tool adoption and intent across annual respondent samples. Autonomous-agent usage falls outside the specific scope of this measure. Agent infrastructure is also expanding. Salt Labs [3] detected MCP-related infrastructure in 16.7% of its customer environments in January 2026 and 21.6% in August: a 4.9-percentage-point increase. These observations are limited to the vendor’s customer environments. Their applicability to the wider industry and the consistency of the customer cohort remain unestablished. The more consequential finding is the gap between deployment and control. In Salt Security’s October 2026 survey [3], 86.4% of respondents reported at least one agent operating in their organization, but only 17.5% could automatically stop an agent behaving unexpectedly in production. Only 12.5% could consistently trace complete agent paths across all agents.</p>
+<p>A separate Cloud Security Alliance study reinforces the concern [4]: 47% of respondents reported an agent-related security incident in the preceding year, 54% reported between one and 100 unsanctioned agents, and only 31% reported formally adopted agent-governance policies. The study surveyed 445 IT and security professionals in September and November 2025 and was published in April 2026. Zenity financed the research and co-developed the questionnaire. These findings corroborate a governance problem; they should not be combined with Salt’s results into a single incident-rate trend. Different attacks, recurring boundary failures The evidence extends beyond any one model, vendor, or delivery mechanism. Sensitive-system access through a personal agent. WIRED reports that an Accenture contractor connected a personal Claude Code account to a sensitive Department of Defense environment and that credentials and system information appear to have reached a third-party service [5]. Accenture disputes the allegations, saying an independent investigation found them without merit. WIRED reports no indication that attackers accessed classified or top-secret systems. The risk illustrated is an uncontrolled connection between sensitive infrastructure and personal agent tooling. A malicious extension on developer machines. WIRED reports that a tampered Claude Code extension distributed through Cursor’s marketplace was downloaded by at most 5,000 users [6]. It was not an Anthropic-published release. Cursor describes host-information collection and attempts to install a persistent SSH backdoor [7]. Implementation errors limited the backdoor’s effectiveness on most affected macOS and Windows hosts, but uninstalling the extension alone may not remove its persistence mechanisms. We cannot rely on attacker mistakes in the future. Compromised packages recruiting AI tools to find secrets. In the August 2025 Nx “s1ngularity” campaign, malicious packages used previously-installed Claude, Gemini, and Q command-line tools to assist reconnaissance. Wiz [8] observed successful AI-assisted activity in hundreds of cases and more than 1,000 valid GitHub tokens exposed. A subsequent phase used leaked tokens to make over 5,500 private repositories public, affecting more than 400 users or organizations. Developer machines and some build pipelines were affected. Private data leaked through legitimate tools. Invariant [9] demonstrated that a malicious public GitHub issue could persuade an agent using GitHub MCP to retrieve private-repository information and publish it in a public pull request. The researchers demonstrated this attack using an uncompromised MCP server. The demonstration establishes a possible attack path; the source reports no mass breach. An approved tool and destination can still carry an unauthorized data transfer. A tool running outside its intended sandbox. CodeRabbit confirmed that researchers discovered RuboCop operating outside its sandbox in January 2025 [10]. The company says it deployed a comprehensive fix within 12 hours and found no evidence of customer-data access or malicious activity. The lesson is that isolation must extend from the primary agent runtime to every executable tool and subprocess. A cloud agent exposing connected-account credentials. Salt Labs demonstrated that malicious email content could induce code execution in Manus’s cloud sandbox, where connected-service tokens were accessible [11]. A security warning appeared after the payload was executed. Salt says the flaw has since been resolved. This research is an important counterexample to the idea that cloud hosting alone provides security. Compromised infrastructure misusing legitimate signing authority. Elliptic’s analysis of the October 29 Binance theft suggests attackers induced Binance’s own systems to sign unauthorized transactions. Binance initially reported a possible compromised DevOps laptop and later disclosed additional breach points; the full intrusion path remains unresolved. On Ethereum, signed EIP-7702 authorizations delegated a hot wallet’s behavior to an attacker-controlled contract, with delegation persisting beyond the initial transaction [12]. This is not evidence of an AI-agent attack. It illustrates a relevant control requirement: protecting credentials is insufficient if a compromised caller can use them to authorize harmful actions. Together, these cases illustrate three recurring problems: untrusted software executing with excessive access, untrusted content being treated as instructions, and controls that do not prevent the resulting action. Why managed cloud agents are the better default An employee workstation may contain browser sessions, SSH keys, cloud credentials, private repositories, internal-network access, and unrelated business data. That is far more access than most agent tasks require. A dedicated cloud environment makes it possible to separate agent execution from that workstation. The organization can provision only the necessary workspace, enforce access centrally, record actions independently, and stop or rebuild the environment without rebuilding the employee’s laptop. Realizing that benefit requires moving execution, policy enforcement, and observability into the controlled environment. A local extension that sends prompts to a cloud model still executes local code. Likewise, a remote agent with copied production credentials and unrestricted network access reproduces the same risks elsewhere. The objective is to contain a compromised agent or dependency within a limited workspace. Organizational policy must govern the agent’s access independently of the employee’s broader authority. 📷 Fig. 2. A conceptual security boundary for autonomous agents. The agent and its tools run in a dedicated, task-scoped sandbox within an organization-controlled environment, separate from the employee device’s broader authority. Independent controls broker credentials and govern permissions and data flows to approved resources. Audit records, approval gates, and containment are enforced outside the agent’s control. Cloud hosting requires verified controls to provide these protections. Required controls It is recommended to treat agent execution as untrusted and enforce boundaries independently of the agent’s cooperation. Organizations should require: Verified execution isolation. Keep agents, installation scripts, tools, and dependencies inside dedicated sandboxes. Place security enforcement outside their control. Do not inherit employee home directories, browser sessions, or unrestricted corporate-network access. Brokered credentials and distinct identities. Keep external-service credentials out of agent-readable memory, files, and environment variables. Authorize requests through a broker, bound to the agent, initiating principal, organization, and task. Step-up Authorization: Credential isolation must be paired with independent checks on the requested operation, target resource, destination, and any change in delegated authority. Require explicit approval for high-impact actions; possession of a valid identity or access to a signing service is not sufficient authorization. Task-scoped permissions. Give each run only the resources and operations it needs. Agents must not be able to raise their own permissions or alter the policy that governs them. Network and data-flow restrictions. Control DNS, direct-IP traffic, cloud-metadata access, and external requests. Distinguish permitted operations and data destinations within approved services; allowing GitHub must not imply allowing private data to be published anywhere on GitHub. A separate production boundary. Let agents propose changes without standing production-write authority. Apply consequential changes through trusted approval and deployment systems that display the actual action being authorized. Controlled software supply chains. Verify provenance, pin approved versions, and review tool and MCP configuration changes. Install dependencies without production credentials. Independent audit and containment. Record actions and enforcement decisions somewhere the agent cannot alter. Support automatic containment and revocation without depending on the agent’s cooperation. Containment must also revoke downstream delegations and permissions already granted, not just stop the initiating process or rotate its credentials. Recommended action Make approved, managed cloud-agent environments the standard path for autonomous development. Inventory existing local agents and extensions, remove unnecessary access, and prohibit personal agent accounts from connecting to sensitive production systems. Require vendors to demonstrate their boundaries: that an agent cannot read service credentials, bypass network controls, expand its permissions, modify audit records, or make unapproved production changes. Verify containment through practical tests, including whether the kill switch actually stops agent activity. For potentially affected Cursor installations, follow the vendor’s incident-response guidance now. Moving future work to the cloud does not remediate an already compromised endpoint [7]. For regulated and government workloads, use only environments authorized for the relevant data and systems. Assess model endpoints, logs, storage, and external tools against residency, retention, contractual, and accreditation requirements. The recommendation is cloud execution backed by verified security controls. The sources reviewed do not establish a comparative breach rate for local versus cloud agents. They establish why isolation, limited authority, credential separation, and independent enforcement matter. Agents’ access should be scoped to the requirements of each task. For a concrete framework to evaluate these controls, see Replit’s proposed Agent Habitat Architecture and its evidence-based maturity scale. It provides a reference architecture for independently enforced permissions, brokered credentials, controlled data flows, and out-of-band containment. Each cloud-agent product should be assessed separately to verify which controls it implements. References [1] Stack Overflow, “AI | 2024 Developer Survey”. Accessed: Nov. 1, 2026. [Online]. Available: https://survey.stackoverflow.co/2024/ai [2] Stack Overflow, “AI | 2025 Developer Survey”. Accessed: Nov. 1, 2026. [Online]. Available: https://survey.stackoverflow.co/2025/ai [3] Salt Security, “Nearly half of enterprises report an AI agent took an unauthorized action last year, Salt Security research finds,” Oct. 13, 2026. Accessed: Nov. 1, 2026. [Online]. Available: https://salt.security/press-releases/state-of-agentic-ai-and-api-security-2h-2026 [4] Cloud Security Alliance, “More than half of organizations experience AI agent scope violations, Cloud Security Alliance study finds,” Apr. 16, 2026. Accessed: Nov. 1, 2026. [Online]. Available: https://cloudsecurityalliance.org/press-releases/2026/04/16/more-than-half-of-organizations-experience-ai-agent-scope-violations-cloud-security-alliance-study-finds [5] V. Elliott, “A defense contractor gave their personal AI agent access to a secure Pentagon system | WIRED”. Accessed: Nov. 1, 2026. [Online]. Available: https://www.wired.com/story/a-defense-contractor-gave-their-personal-ai-agent-access-to-a-secure-pentagon-system/ [6] L. H. Newman, “A supply chain attack put malicious Anthropic Claude extensions on thousands of devices | WIRED”. Accessed: Nov. 1, 2026. [Online]. Available: https://www.wired.com/story/trojan-malware-targets-thousands-of-anthropic-claude-developer-systems/ [7] Cursor, “Claude Code extension security notice,” updated Oct. 30, 2026. Accessed: Nov. 1, 2026. [Online]. Available: https://cursor.com/blog/claude-code-extension-security-notice [8] M. Bar and R. McCarthy, “s1ngularity: Supply chain attack leaks secrets on GitHub: Everything you need to know | Wiz Blog,” Aug. 27, 2025, updated Aug. 29, 2025. Accessed: Nov. 1, 2026. [Online]. Available: https://www.wiz.io/blog/s1ngularity-supply-chain-attack [9] Invariant Labs, GitHub MCP vulnerability research. Accessed: Nov. 1, 2026. [Online]. Available: https://invariantlabs.ai/blog/mcp-github-vulnerability [10] H. Gill, “Our response to the January 2025 Kudelski Security vulnerability disclosure: Action and continuous improvement,” CodeRabbit, Aug. 19, 2025. Accessed: Nov. 1, 2026. [Online]. Available: https://www.coderabbit.ai/blog/our-response-to-the-january-2025-kudelski-security-vulnerability-disclosure-action-and-continuous-improvement [11] Salt Labs, “How we hijacked an AI agent with a single email,” Salt Security, Oct. 1, 2026. Accessed: Nov. 1, 2026. [Online]. Available: https://salt.security/blog/how-we-hijacked-an-ai-agent-with-a-single-email [12] T. Robinson, “The largest theft in history: North Korea behind the $6.4 billion Binance hack,” Elliptic, Oct. 30, 2026, updated Nov. 1, 2026. Accessed: Nov. 1, 2026. Available: https://www.elliptic.co/insights/binance-largest-hack-in-history/</p>
 <p><strong>原文链接：</strong><a href="https://x.com/amasad/status/2117504072416890937">https://x.com/amasad/status/2117504072416890937</a></p>]]></description>
       <content:encoded><![CDATA[<p><em>有人靠禁 Claude Code 止血。Replit 的建议更硬：托管、隔离、凭证外置，让云端受管环境成为默认。</em></p>
+<h2>乔木改写</h2>
 <p>Amjad Masad 发了一份安全咨询，标题几乎不绕弯：</p>
 <p><strong>让受管云环境，成为 AI Agent 的默认运行方式。</strong></p>
 <p>背景是这几个月一串真实事件叠在一起：个人 Claude 账号被接到敏感防务环境的报道、Cursor 市场上被篡改的 Claude Code 扩展、Nx 供应链攻击里恶意包征用已装好的 AI CLI 去翻密钥、GitHub MCP 演示里一条恶意 Issue 就能诱导 Agent 把私有仓信息写进公开 PR……路径不同，失败模式很像：不可信内容被当成指令，执行环境权限过大，控制面还在 Agent 自己手里。</p>
@@ -187,6 +364,15 @@
 <p>咨询里列的控制项很工程化：验证过的执行隔离、经纪式凭证（credential broker）、逐步提权审批、任务作用域权限、网络与数据流限制、生产写入外置、供应链治理、以及 Agent 改不了的独立审计与熔断。</p>
 <p>一句话概括他的立场：云托管本身不等于安全，但「受管云 + 可验证边界」比「员工笔记本 + 个人 Agent」更适合当默认值。</p>
 <p>如果你正在给公司推 Coding Agent，这篇值得转给安全同事。争论焦点已经从「要不要用」换成「默认跑在谁的环境里」。</p>
+<h2>原文</h2>
+<p><em>Security advisory: Make managed cloud environments the default for AI agents</em></p>
+<p>AI agents running on employee endpoints are becoming a systemic security risk for enterprises &amp; governments.</p>
+<p>Some are responding by restricting tools like Claude Code, as Goldman Sachs reportedly has.</p>
+<p>In this security advisory, we outline the risks and recommend a path forward.</p>
+<hr>
+<h1>Security advisory: Make managed cloud environments the default for AI agents</h1>
+<p>AI agents should operate in dedicated, organization-controlled environments with limited access to the resources each task requires. Recent security incidents [5], [6] and research demonstrate why this is a growing necessity. Supply-chain attacks have always been able to compromise developer machines and recruit installed AI tools to search for sensitive corporate information and data. Agent harnesses are typically given broad privileges and have a shrinking amount of human oversight. Combined, these two effects are making agents an increasingly interesting target for attackers. Even unattended automations are being targeted: instructions hidden in a GitHub issue or email can redirect an agent toward private data and unauthorized actions. The rise of personal agents increases the risk even more, since they are insufficiently managed by organizations, mostly controlled by individuals, run with an inconsistent set of guardrails, and are incentivized to be proactive above all else: they read every email, every calendar invite; Every interaction is an opportunity to get prompt-injected. There is a better way forward: Organizations can continue adopting agents by giving them execution environments designed for software that reads untrusted content, runs code, and acts on a user’s behalf. In a world where agents are becoming more prevalent, @Replit believes that organizations must make managed, isolated cloud agents the default for autonomous development, with credentials, permissions, network access, and production changes controlled outside the agent’s reach. Adoption is growing faster than control AI development tools are becoming standard. Stack Overflow reports that the share of respondents using or planning to use AI tools rose from 70% in 2023 to 76% in 2024 [1] and 84% in 2025 [2]. This establishes the scale of AI-tool adoption and intent across annual respondent samples. Autonomous-agent usage falls outside the specific scope of this measure. Agent infrastructure is also expanding. Salt Labs [3] detected MCP-related infrastructure in 16.7% of its customer environments in January 2026 and 21.6% in August: a 4.9-percentage-point increase. These observations are limited to the vendor’s customer environments. Their applicability to the wider industry and the consistency of the customer cohort remain unestablished. The more consequential finding is the gap between deployment and control. In Salt Security’s October 2026 survey [3], 86.4% of respondents reported at least one agent operating in their organization, but only 17.5% could automatically stop an agent behaving unexpectedly in production. Only 12.5% could consistently trace complete agent paths across all agents.</p>
+<p>A separate Cloud Security Alliance study reinforces the concern [4]: 47% of respondents reported an agent-related security incident in the preceding year, 54% reported between one and 100 unsanctioned agents, and only 31% reported formally adopted agent-governance policies. The study surveyed 445 IT and security professionals in September and November 2025 and was published in April 2026. Zenity financed the research and co-developed the questionnaire. These findings corroborate a governance problem; they should not be combined with Salt’s results into a single incident-rate trend. Different attacks, recurring boundary failures The evidence extends beyond any one model, vendor, or delivery mechanism. Sensitive-system access through a personal agent. WIRED reports that an Accenture contractor connected a personal Claude Code account to a sensitive Department of Defense environment and that credentials and system information appear to have reached a third-party service [5]. Accenture disputes the allegations, saying an independent investigation found them without merit. WIRED reports no indication that attackers accessed classified or top-secret systems. The risk illustrated is an uncontrolled connection between sensitive infrastructure and personal agent tooling. A malicious extension on developer machines. WIRED reports that a tampered Claude Code extension distributed through Cursor’s marketplace was downloaded by at most 5,000 users [6]. It was not an Anthropic-published release. Cursor describes host-information collection and attempts to install a persistent SSH backdoor [7]. Implementation errors limited the backdoor’s effectiveness on most affected macOS and Windows hosts, but uninstalling the extension alone may not remove its persistence mechanisms. We cannot rely on attacker mistakes in the future. Compromised packages recruiting AI tools to find secrets. In the August 2025 Nx “s1ngularity” campaign, malicious packages used previously-installed Claude, Gemini, and Q command-line tools to assist reconnaissance. Wiz [8] observed successful AI-assisted activity in hundreds of cases and more than 1,000 valid GitHub tokens exposed. A subsequent phase used leaked tokens to make over 5,500 private repositories public, affecting more than 400 users or organizations. Developer machines and some build pipelines were affected. Private data leaked through legitimate tools. Invariant [9] demonstrated that a malicious public GitHub issue could persuade an agent using GitHub MCP to retrieve private-repository information and publish it in a public pull request. The researchers demonstrated this attack using an uncompromised MCP server. The demonstration establishes a possible attack path; the source reports no mass breach. An approved tool and destination can still carry an unauthorized data transfer. A tool running outside its intended sandbox. CodeRabbit confirmed that researchers discovered RuboCop operating outside its sandbox in January 2025 [10]. The company says it deployed a comprehensive fix within 12 hours and found no evidence of customer-data access or malicious activity. The lesson is that isolation must extend from the primary agent runtime to every executable tool and subprocess. A cloud agent exposing connected-account credentials. Salt Labs demonstrated that malicious email content could induce code execution in Manus’s cloud sandbox, where connected-service tokens were accessible [11]. A security warning appeared after the payload was executed. Salt says the flaw has since been resolved. This research is an important counterexample to the idea that cloud hosting alone provides security. Compromised infrastructure misusing legitimate signing authority. Elliptic’s analysis of the October 29 Binance theft suggests attackers induced Binance’s own systems to sign unauthorized transactions. Binance initially reported a possible compromised DevOps laptop and later disclosed additional breach points; the full intrusion path remains unresolved. On Ethereum, signed EIP-7702 authorizations delegated a hot wallet’s behavior to an attacker-controlled contract, with delegation persisting beyond the initial transaction [12]. This is not evidence of an AI-agent attack. It illustrates a relevant control requirement: protecting credentials is insufficient if a compromised caller can use them to authorize harmful actions. Together, these cases illustrate three recurring problems: untrusted software executing with excessive access, untrusted content being treated as instructions, and controls that do not prevent the resulting action. Why managed cloud agents are the better default An employee workstation may contain browser sessions, SSH keys, cloud credentials, private repositories, internal-network access, and unrelated business data. That is far more access than most agent tasks require. A dedicated cloud environment makes it possible to separate agent execution from that workstation. The organization can provision only the necessary workspace, enforce access centrally, record actions independently, and stop or rebuild the environment without rebuilding the employee’s laptop. Realizing that benefit requires moving execution, policy enforcement, and observability into the controlled environment. A local extension that sends prompts to a cloud model still executes local code. Likewise, a remote agent with copied production credentials and unrestricted network access reproduces the same risks elsewhere. The objective is to contain a compromised agent or dependency within a limited workspace. Organizational policy must govern the agent’s access independently of the employee’s broader authority. 📷 Fig. 2. A conceptual security boundary for autonomous agents. The agent and its tools run in a dedicated, task-scoped sandbox within an organization-controlled environment, separate from the employee device’s broader authority. Independent controls broker credentials and govern permissions and data flows to approved resources. Audit records, approval gates, and containment are enforced outside the agent’s control. Cloud hosting requires verified controls to provide these protections. Required controls It is recommended to treat agent execution as untrusted and enforce boundaries independently of the agent’s cooperation. Organizations should require: Verified execution isolation. Keep agents, installation scripts, tools, and dependencies inside dedicated sandboxes. Place security enforcement outside their control. Do not inherit employee home directories, browser sessions, or unrestricted corporate-network access. Brokered credentials and distinct identities. Keep external-service credentials out of agent-readable memory, files, and environment variables. Authorize requests through a broker, bound to the agent, initiating principal, organization, and task. Step-up Authorization: Credential isolation must be paired with independent checks on the requested operation, target resource, destination, and any change in delegated authority. Require explicit approval for high-impact actions; possession of a valid identity or access to a signing service is not sufficient authorization. Task-scoped permissions. Give each run only the resources and operations it needs. Agents must not be able to raise their own permissions or alter the policy that governs them. Network and data-flow restrictions. Control DNS, direct-IP traffic, cloud-metadata access, and external requests. Distinguish permitted operations and data destinations within approved services; allowing GitHub must not imply allowing private data to be published anywhere on GitHub. A separate production boundary. Let agents propose changes without standing production-write authority. Apply consequential changes through trusted approval and deployment systems that display the actual action being authorized. Controlled software supply chains. Verify provenance, pin approved versions, and review tool and MCP configuration changes. Install dependencies without production credentials. Independent audit and containment. Record actions and enforcement decisions somewhere the agent cannot alter. Support automatic containment and revocation without depending on the agent’s cooperation. Containment must also revoke downstream delegations and permissions already granted, not just stop the initiating process or rotate its credentials. Recommended action Make approved, managed cloud-agent environments the standard path for autonomous development. Inventory existing local agents and extensions, remove unnecessary access, and prohibit personal agent accounts from connecting to sensitive production systems. Require vendors to demonstrate their boundaries: that an agent cannot read service credentials, bypass network controls, expand its permissions, modify audit records, or make unapproved production changes. Verify containment through practical tests, including whether the kill switch actually stops agent activity. For potentially affected Cursor installations, follow the vendor’s incident-response guidance now. Moving future work to the cloud does not remediate an already compromised endpoint [7]. For regulated and government workloads, use only environments authorized for the relevant data and systems. Assess model endpoints, logs, storage, and external tools against residency, retention, contractual, and accreditation requirements. The recommendation is cloud execution backed by verified security controls. The sources reviewed do not establish a comparative breach rate for local versus cloud agents. They establish why isolation, limited authority, credential separation, and independent enforcement matter. Agents’ access should be scoped to the requirements of each task. For a concrete framework to evaluate these controls, see Replit’s proposed Agent Habitat Architecture and its evidence-based maturity scale. It provides a reference architecture for independently enforced permissions, brokered credentials, controlled data flows, and out-of-band containment. Each cloud-agent product should be assessed separately to verify which controls it implements. References [1] Stack Overflow, “AI | 2024 Developer Survey”. Accessed: Nov. 1, 2026. [Online]. Available: https://survey.stackoverflow.co/2024/ai [2] Stack Overflow, “AI | 2025 Developer Survey”. Accessed: Nov. 1, 2026. [Online]. Available: https://survey.stackoverflow.co/2025/ai [3] Salt Security, “Nearly half of enterprises report an AI agent took an unauthorized action last year, Salt Security research finds,” Oct. 13, 2026. Accessed: Nov. 1, 2026. [Online]. Available: https://salt.security/press-releases/state-of-agentic-ai-and-api-security-2h-2026 [4] Cloud Security Alliance, “More than half of organizations experience AI agent scope violations, Cloud Security Alliance study finds,” Apr. 16, 2026. Accessed: Nov. 1, 2026. [Online]. Available: https://cloudsecurityalliance.org/press-releases/2026/04/16/more-than-half-of-organizations-experience-ai-agent-scope-violations-cloud-security-alliance-study-finds [5] V. Elliott, “A defense contractor gave their personal AI agent access to a secure Pentagon system | WIRED”. Accessed: Nov. 1, 2026. [Online]. Available: https://www.wired.com/story/a-defense-contractor-gave-their-personal-ai-agent-access-to-a-secure-pentagon-system/ [6] L. H. Newman, “A supply chain attack put malicious Anthropic Claude extensions on thousands of devices | WIRED”. Accessed: Nov. 1, 2026. [Online]. Available: https://www.wired.com/story/trojan-malware-targets-thousands-of-anthropic-claude-developer-systems/ [7] Cursor, “Claude Code extension security notice,” updated Oct. 30, 2026. Accessed: Nov. 1, 2026. [Online]. Available: https://cursor.com/blog/claude-code-extension-security-notice [8] M. Bar and R. McCarthy, “s1ngularity: Supply chain attack leaks secrets on GitHub: Everything you need to know | Wiz Blog,” Aug. 27, 2025, updated Aug. 29, 2025. Accessed: Nov. 1, 2026. [Online]. Available: https://www.wiz.io/blog/s1ngularity-supply-chain-attack [9] Invariant Labs, GitHub MCP vulnerability research. Accessed: Nov. 1, 2026. [Online]. Available: https://invariantlabs.ai/blog/mcp-github-vulnerability [10] H. Gill, “Our response to the January 2025 Kudelski Security vulnerability disclosure: Action and continuous improvement,” CodeRabbit, Aug. 19, 2025. Accessed: Nov. 1, 2026. [Online]. Available: https://www.coderabbit.ai/blog/our-response-to-the-january-2025-kudelski-security-vulnerability-disclosure-action-and-continuous-improvement [11] Salt Labs, “How we hijacked an AI agent with a single email,” Salt Security, Oct. 1, 2026. Accessed: Nov. 1, 2026. [Online]. Available: https://salt.security/blog/how-we-hijacked-an-ai-agent-with-a-single-email [12] T. Robinson, “The largest theft in history: North Korea behind the $6.4 billion Binance hack,” Elliptic, Oct. 30, 2026, updated Nov. 1, 2026. Accessed: Nov. 1, 2026. Available: https://www.elliptic.co/insights/binance-largest-hack-in-history/</p>
 <p><strong>原文链接：</strong><a href="https://x.com/amasad/status/2117504072416890937">https://x.com/amasad/status/2117504072416890937</a></p>]]></content:encoded>
     </item>
     <item>
@@ -196,6 +382,7 @@
       <pubDate>Mon, 02 Nov 2026 21:55:09 +0000</pubDate>
       <author>Pieter Levels</author>
       <description><![CDATA[<p><em>没有开源引擎可借，从 x86 机器码翻到 C，再编成 WebAssembly。他说自己大多时候只是在旁边看。</em></p>
+<h2>乔木改写</h2>
 <p>Pieter Levels 把可能是他最爱的游戏，《Battlefield 1942》，搬进了浏览器，还带多人联机。</p>
 <p>地址：<a href="https://bf1942.pieter.com" target="_blank" rel="noopener noreferrer">bf1942.pieter.com</a>（免费试玩版）。</p>
 <p>这事比他以前移植 Quake、DOOM 难一截。后两者早有开源项目垫底；BF1942 几乎没有任何现成底座，厂商也没开源引擎。半年前他试过，基本放弃。今天又拿 Opus 5.5 问了一句：「能不能把这个文件夹里的 BF1942 demo 移植到网页」。</p>
@@ -210,9 +397,30 @@
 </ul>
 <p>他自己的原话很诚实：「我不知道它怎么做到的，但它做到了，而且好像能玩。」</p>
 <p>这不是怀旧彩蛋那么简单。它在演示一件更锋利的事：当模型能在「无文档、无开源、只有二进制」的场景里硬凿出可运行系统，软件考古和废弃游戏保存，会突然变得可规模化。</p>
+<h2>原文</h2>
+<p><em>Battlefield 1942 decompiled to the browser</em></p>
+<p><video controls src="https://video.twimg.com/amplify_video/2117374770253565952/vid/avc1/1080x1920/qdwjPQkAwvtgGImY.mp4" poster="https://pbs.twimg.com/amplify_video_thumb/2117374770253565952/img/6WkHxBF81dMfyKCf.jpg"></video></p>
+<p>I decompiled probably my favorite game ever: Battlefield 1942 and I put it on the web with multiplayer for you to play here:</p>
+<p>👉 https://t.co/6C8H8KtSaU 👈</p>
+<p>(It&#x27;s the free shareware demo)</p>
+<p>It was way harder than the other ports like Quake and DOOM I did because they already had lots of open source projects and work behind them</p>
+<p>In case of Battlefield 1942 there was literally absolutely nothing to work on top of, nobody had ever ported it and there was no open source engine for it, nor did the makers ever open source it (like id Software did with Quake 3)</p>
+<p>I tried it 6 months ago and essentiay gave up but I tried it today again with Opus 5.5 asking &quot;can you try port the BF1942 demo in this folder to web&quot;</p>
+<p>So me and Claude Code (well let&#x27;s be honest mostly Claude Code) did crazy shit today:</p>
+<ul>
+<li>it disassembled the x86 raw machine code to find 57,000 x86 functions</li>
+<li>it translated each x86 function into a C function (mov eax, [esi+0x110] becomes eax = READ32(esi + 0x110), I have no idea what any of this means btw)</li>
+<li>it outputed 100,000 lines of C</li>
+<li>it then compiled that to WebAsswmbly with Emscripten</li>
+<li>there were 300x Windows and Direct3D functions used which we had to rewrite to WebGL 2 and OpenGL to work on the web</li>
+<li>then we had to build our own network stack so it could connect to our multiplayer server via WebSockets</li>
+</ul>
+<p>I have no idea how it did any of this but it did it and it seems to work! 😊</p>
+<p>Come play and report any bugs here!</p>
 <p><strong>原文链接：</strong><a href="https://x.com/levelsio/status/2117374984192512391">https://x.com/levelsio/status/2117374984192512391</a></p>
 <p><strong>相关链接：</strong><a href="https://bf1942.pieter.com">https://bf1942.pieter.com</a></p>]]></description>
       <content:encoded><![CDATA[<p><em>没有开源引擎可借，从 x86 机器码翻到 C，再编成 WebAssembly。他说自己大多时候只是在旁边看。</em></p>
+<h2>乔木改写</h2>
 <p>Pieter Levels 把可能是他最爱的游戏，《Battlefield 1942》，搬进了浏览器，还带多人联机。</p>
 <p>地址：<a href="https://bf1942.pieter.com" target="_blank" rel="noopener noreferrer">bf1942.pieter.com</a>（免费试玩版）。</p>
 <p>这事比他以前移植 Quake、DOOM 难一截。后两者早有开源项目垫底；BF1942 几乎没有任何现成底座，厂商也没开源引擎。半年前他试过，基本放弃。今天又拿 Opus 5.5 问了一句：「能不能把这个文件夹里的 BF1942 demo 移植到网页」。</p>
@@ -227,6 +435,26 @@
 </ul>
 <p>他自己的原话很诚实：「我不知道它怎么做到的，但它做到了，而且好像能玩。」</p>
 <p>这不是怀旧彩蛋那么简单。它在演示一件更锋利的事：当模型能在「无文档、无开源、只有二进制」的场景里硬凿出可运行系统，软件考古和废弃游戏保存，会突然变得可规模化。</p>
+<h2>原文</h2>
+<p><em>Battlefield 1942 decompiled to the browser</em></p>
+<p><video controls src="https://video.twimg.com/amplify_video/2117374770253565952/vid/avc1/1080x1920/qdwjPQkAwvtgGImY.mp4" poster="https://pbs.twimg.com/amplify_video_thumb/2117374770253565952/img/6WkHxBF81dMfyKCf.jpg"></video></p>
+<p>I decompiled probably my favorite game ever: Battlefield 1942 and I put it on the web with multiplayer for you to play here:</p>
+<p>👉 https://t.co/6C8H8KtSaU 👈</p>
+<p>(It&#x27;s the free shareware demo)</p>
+<p>It was way harder than the other ports like Quake and DOOM I did because they already had lots of open source projects and work behind them</p>
+<p>In case of Battlefield 1942 there was literally absolutely nothing to work on top of, nobody had ever ported it and there was no open source engine for it, nor did the makers ever open source it (like id Software did with Quake 3)</p>
+<p>I tried it 6 months ago and essentiay gave up but I tried it today again with Opus 5.5 asking &quot;can you try port the BF1942 demo in this folder to web&quot;</p>
+<p>So me and Claude Code (well let&#x27;s be honest mostly Claude Code) did crazy shit today:</p>
+<ul>
+<li>it disassembled the x86 raw machine code to find 57,000 x86 functions</li>
+<li>it translated each x86 function into a C function (mov eax, [esi+0x110] becomes eax = READ32(esi + 0x110), I have no idea what any of this means btw)</li>
+<li>it outputed 100,000 lines of C</li>
+<li>it then compiled that to WebAsswmbly with Emscripten</li>
+<li>there were 300x Windows and Direct3D functions used which we had to rewrite to WebGL 2 and OpenGL to work on the web</li>
+<li>then we had to build our own network stack so it could connect to our multiplayer server via WebSockets</li>
+</ul>
+<p>I have no idea how it did any of this but it did it and it seems to work! 😊</p>
+<p>Come play and report any bugs here!</p>
 <p><strong>原文链接：</strong><a href="https://x.com/levelsio/status/2117374984192512391">https://x.com/levelsio/status/2117374984192512391</a></p>
 <p><strong>相关链接：</strong><a href="https://bf1942.pieter.com">https://bf1942.pieter.com</a></p>]]></content:encoded>
     </item>
@@ -237,6 +465,7 @@
       <pubDate>Sun, 01 Nov 2026 18:14:46 +0000</pubDate>
       <author>Andrej Karpathy</author>
       <description><![CDATA[<p><em>受够了 YouTube 推荐，他把二十年 Hacker News 评论扔给 Opus 5.5，做了个不登录也好用的 HackerTube。</em></p>
+<h2>乔木改写</h2>
 <p>Andrej Karpathy 又交了一份周末作业。</p>
 <p>这次叫 <strong>HackerTube</strong>。起因很简单：他烦 YouTube 推荐。于是让 Claude 把 Hacker News 二十年、大约 <strong>4300 万条评论</strong>滤了一遍，留下会反复被推荐的 <strong>6454 个视频</strong>。他自己说，用 Opus 5.5 大概花了两小时，观感「显著更好」。</p>
 <p>站点在 <a href="https://hackertube.org/" target="_blank" rel="noopener noreferrer">hackertube.org</a>。几个设计选择挺对味：</p>
@@ -250,8 +479,21 @@
 <p>他收尾那句很轻，但分量不轻：</p>
 <blockquote><p>很多原本要花几周甚至几个月的项目，现在早饭前就能 few-shot 出来。我们还没想到的，还有多少？</p></blockquote>
 <p>这不是又一个「AI 写了个玩具」的故事。它更像在提醒：当你真正把「找信号」这件事外包给模型，产品形态会跟着变。HN 评论里本来就埋着高质量推荐，只是以前没人愿意花两小时把矿挖干净。</p>
+<h2>原文</h2>
+<p><em>Weekend hack: HackerTube</em></p>
+<p><img src="https://pbs.twimg.com/media/HWDnuuCaIAA__wa.jpg" alt=""></p>
+<p>Weekend hack: HackerTube. I was annoyed with YouTube&#x27;s recommendations so I had Claude filter down 43M comments over 20 years of HN to 6,454 videos that keep being recommended. <em>Significantly</em> better viewing experience, ~2 hours with Opus 5.5: https://t.co/JIhXN7OSh1</p>
+<ul>
+<li>Excellent recs without any logins (state is kept in local browser session)</li>
+<li>Thumbnail is a representative frame from middle of the video instead of the super duper A/B test hyper-optimized user uploads</li>
+<li>Underlying data from the comment analysis as one zip file, point your Claude at it and ask for your own version</li>
+<li>HackerTube Longs ✊</li>
+</ul>
+<p>A bit more on the process: I use Claude Code (desktop app for Mac), Opus 5.5 on Medium effort as my default. I only talk to Claude and have it do everything, the only &quot;manual work&quot; I helped with in tandem was in the browser (reminiscent of MenuGen): 1) I had to create some kind of API key from Google Cloud UI to query YouTube for video metadata, 2) I booted up a VPS box for serving and 3) I bought the domain name. Once the box was up I gave Claude the IP and told it update, secure, harden, deploy and optimize the code, and it did the whole thing.</p>
+<p>Many awesome projects that would have normally taken weeks/months even can now be few-shotted for breakfast. What else are we not thinking of.</p>
 <p><strong>原文链接：</strong><a href="https://x.com/karpathy/status/2116957135661945283">https://x.com/karpathy/status/2116957135661945283</a></p>]]></description>
       <content:encoded><![CDATA[<p><em>受够了 YouTube 推荐，他把二十年 Hacker News 评论扔给 Opus 5.5，做了个不登录也好用的 HackerTube。</em></p>
+<h2>乔木改写</h2>
 <p>Andrej Karpathy 又交了一份周末作业。</p>
 <p>这次叫 <strong>HackerTube</strong>。起因很简单：他烦 YouTube 推荐。于是让 Claude 把 Hacker News 二十年、大约 <strong>4300 万条评论</strong>滤了一遍，留下会反复被推荐的 <strong>6454 个视频</strong>。他自己说，用 Opus 5.5 大概花了两小时，观感「显著更好」。</p>
 <p>站点在 <a href="https://hackertube.org/" target="_blank" rel="noopener noreferrer">hackertube.org</a>。几个设计选择挺对味：</p>
@@ -265,6 +507,18 @@
 <p>他收尾那句很轻，但分量不轻：</p>
 <blockquote><p>很多原本要花几周甚至几个月的项目，现在早饭前就能 few-shot 出来。我们还没想到的，还有多少？</p></blockquote>
 <p>这不是又一个「AI 写了个玩具」的故事。它更像在提醒：当你真正把「找信号」这件事外包给模型，产品形态会跟着变。HN 评论里本来就埋着高质量推荐，只是以前没人愿意花两小时把矿挖干净。</p>
+<h2>原文</h2>
+<p><em>Weekend hack: HackerTube</em></p>
+<p><img src="https://pbs.twimg.com/media/HWDnuuCaIAA__wa.jpg" alt=""></p>
+<p>Weekend hack: HackerTube. I was annoyed with YouTube&#x27;s recommendations so I had Claude filter down 43M comments over 20 years of HN to 6,454 videos that keep being recommended. <em>Significantly</em> better viewing experience, ~2 hours with Opus 5.5: https://t.co/JIhXN7OSh1</p>
+<ul>
+<li>Excellent recs without any logins (state is kept in local browser session)</li>
+<li>Thumbnail is a representative frame from middle of the video instead of the super duper A/B test hyper-optimized user uploads</li>
+<li>Underlying data from the comment analysis as one zip file, point your Claude at it and ask for your own version</li>
+<li>HackerTube Longs ✊</li>
+</ul>
+<p>A bit more on the process: I use Claude Code (desktop app for Mac), Opus 5.5 on Medium effort as my default. I only talk to Claude and have it do everything, the only &quot;manual work&quot; I helped with in tandem was in the browser (reminiscent of MenuGen): 1) I had to create some kind of API key from Google Cloud UI to query YouTube for video metadata, 2) I booted up a VPS box for serving and 3) I bought the domain name. Once the box was up I gave Claude the IP and told it update, secure, harden, deploy and optimize the code, and it did the whole thing.</p>
+<p>Many awesome projects that would have normally taken weeks/months even can now be few-shotted for breakfast. What else are we not thinking of.</p>
 <p><strong>原文链接：</strong><a href="https://x.com/karpathy/status/2116957135661945283">https://x.com/karpathy/status/2116957135661945283</a></p>]]></content:encoded>
     </item>
   </channel>

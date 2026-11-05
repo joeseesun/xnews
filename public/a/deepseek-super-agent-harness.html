@@ -47,7 +47,7 @@
       <li><a href="/about" class=""><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>关于</a></li>
     </ul>
     <div class="nav-h">说明</div>
-    <p style="margin:0;color:var(--muted);font-size:13px;line-height:1.55">英文长帖 / X Article / 海外 AI 视频 → 乔木中文改写，并附原文链接。</p>
+    <p style="margin:0;color:var(--muted);font-size:13px;line-height:1.55">英文长帖 / X Article / 海外 AI 视频 → 乔木中文改写，并保留原文与媒体。</p>
   </nav>
   <main id="main" class="main">
 
@@ -73,6 +73,31 @@
 <p>作者访谈过 Instacart 和 Box 的 CTO，两边都认为现阶段 harness 比模型更重要。视频收尾也留了清醒提醒：这是原型，安全问题（提示注入、凭据泄漏、跨设备权限）他们自己也承认没完全解决。</p>
 <p>如果你只记住一句：别再只评模型。同一模型至少丢进两三个 harness 再下判断，不然你骂的可能是壳，不是芯。</p>
   </div>
+
+  <section class="original" aria-label="原文">
+    <h2>原文</h2>
+    <p class="orig-title">DeepSeek Super Agent and why the harness matters</p>
+    <div class="original-media">
+<div class="yt"><iframe src="https://www.youtube-nocookie.com/embed/OrcsMi2-IcM" title="YouTube" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+</div>
+    <div class="prose">
+<p>DeepSeek Super Agent and why the harness matters</p>
+<p>Source: YouTube https://www.youtube.com/watch?v=OrcsMi2-IcM</p>
+<p>Okay, so this past weekend, DeepSeek released something that a lot of people out there are calling the answer to Claude Code. It&#x27;s an agent that sits on a GitHub repo. It watches the issues and pull requests, and when someone on your team asks it to do something, It then goes off into its own session, does the work, and comes back with a PR Now, while that&#x27;s cool in itself, that&#x27;s not really the part that I want to talk about here. The part that I find really interesting is how they built it. The whole thing is just a set of plugins dropped into their agent harness.</p>
+<p>When the DeepSeek Harness came out back in August, the plugin architecture is really cool. The new thing DeepSeek launched is called Super Agent. Along with the repo, they&#x27;ve written an article on X called Exploring Super Agent Design: Towards a More Autonomous Agent System. They&#x27;re upfront that this is a research prototype, not an official DeepSeek product. Ideas and engineering were often written by coding agents themselves.</p>
+<p>Basic idea: instead of you opening a session and talking to an agent, the agent listens to where your team already works — GitHub, and Feishu. When someone allowed asks it for something, it opens a work item, spins up its own session, does the work, replies back usually with a PR.</p>
+<p>On the VentureBeat podcast Beyond the Pilot, CTOs of Instacart and Box both said the harness matters more than the model right now.</p>
+<p>Frontier Harness Eval: same model (Kimi K3) through nine coding agent harnesses. Codex 66.7% pass rate; DeepSeek Harness creator config and Claude Code both 63.3%. DeepSeek ~$3.28 per successful task vs Claude Code ~$18.34. Gap cheapest to most expensive ~17.5x. Harness changes cost, caching, speed, and success rate even with model held constant.</p>
+<p>DeepSeek Harness (DSH) MIT licensed, web UI, not locked to DeepSeek models. Tagline: everything is a plugin — router, tool registry, session log, even the agent loop. Built on Cordis (spatiotemporal composability): temporal (unload reverses everything) and spatial (dependencies activate/deactivate).</p>
+<p>Modes: standard, PTC, minimal, creator — different plugin sets. Creator: describe a plugin in chat and agent writes/installs it.</p>
+<p>Super Agent integrates via cordis.patch: core Super Agent plugin, GitHub watcher, Feishu watcher. Workers: stripped preset, no questions/plan/web fetch/sub-agents; long shell jobs backgrounded. Architecture: long-running router session + isolated worker sessions. Triggers go through a deterministic gate (allow-list) before the model. Tickets carry a mandate. Workers subscribe to conversation so PR comments skip the router (30% fewer router decisions when on).</p>
+<p>Under load (1→40 triggers/min), batching made time per decision drop 6.4s→1.6s. Router can use a cheap/fast model; stronger models for workers.</p>
+<p>Philosophy: take as little human attention as possible and give as much value as possible.</p>
+<p>Caveats: prototype; published code ≠ internal; narrow (GitHub/Feishu); synthetic benchmarks; security (prompt injection, credentials) not fully solved.</p>
+<p>Bigger point: harnesses evolving fast via composable plugins without forking the core.</p>
+    </div>
+  </section>
+
   <div class="source-box">
     <span class="lbl">原文链接</span>
     <a href="https://www.youtube.com/watch?v=OrcsMi2-IcM" target="_blank" rel="noopener noreferrer">https://www.youtube.com/watch?v=OrcsMi2-IcM</a>

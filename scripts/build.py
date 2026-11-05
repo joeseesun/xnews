@@ -165,6 +165,31 @@ a:hover { text-decoration: underline; text-underline-offset: 0.22em; text-decora
   font-weight: 600; text-decoration: underline; text-underline-offset: 0.22em;
 }
 .back { display: inline-block; margin-top: 28px; color: var(--text-2); font-size: 14px; }
+.original {
+  margin-top: 40px; padding-top: 28px; border-top: 1px solid var(--rule);
+}
+.original > h2 {
+  font: 700 20px/1.3 var(--serif); letter-spacing: 0.04em; margin: 0 0 6px;
+}
+.original .orig-title {
+  color: var(--muted); font-size: 13.5px; margin: 0 0 18px; font-family: var(--latin);
+}
+.original .prose p { font-size: 15.5px; line-height: 1.8; color: var(--text-2); }
+.original-media { margin: 18px 0 8px; display: flex; flex-direction: column; gap: 14px; }
+.original-media img,
+.original-media video {
+  display: block; max-width: 100%; height: auto; border: 1px solid var(--border);
+  border-radius: 2px; background: var(--surface-2);
+}
+.original-media audio { width: 100%; }
+.original-media .yt {
+  position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden;
+  border: 1px solid var(--border); border-radius: 2px; background: #000;
+}
+.original-media .yt iframe {
+  position: absolute; inset: 0; width: 100%; height: 100%; border: 0;
+}
+
 
 .footer { border-top: 1px solid var(--divider); padding: 26px 40px 56px; color: var(--muted); font-size: 13.5px; }
 .foot-cols { display: flex; flex-wrap: wrap; gap: 18px 56px; max-width: 1100px; }
@@ -384,7 +409,7 @@ def shell(title: str, body_main: str, *, description: str = "", active: str = "h
       <li><a href="/about" class="{"active" if active=="about" else ""}">{ICON_ABOUT}关于</a></li>
     </ul>
     <div class="nav-h">说明</div>
-    <p style="margin:0;color:var(--muted);font-size:13px;line-height:1.55">英文长帖 / X Article / 海外 AI 视频 → 乔木中文改写，并附原文链接。</p>
+    <p style="margin:0;color:var(--muted);font-size:13px;line-height:1.55">英文长帖 / X Article / 海外 AI 视频 → 乔木中文改写，并保留原文与媒体。</p>
   </nav>
   <main id="main" class="main">
 {body_main}
@@ -422,6 +447,112 @@ def source_label(src: dict) -> str:
     return src.get("author") or "原文"
 
 
+
+
+def youtube_id(url: str) -> str:
+    m = re.search(r"(?:v=|youtu\.be/|embed/)([A-Za-z0-9_-]{6,})", url or "")
+    return m.group(1) if m else ""
+
+
+def render_media_html(media: list) -> str:
+    if not media:
+        return ""
+    parts = ['<div class="original-media">']
+    for m in media:
+        t = (m or {}).get("type") or ""
+        url = (m or {}).get("url") or ""
+        if not url:
+            continue
+        alt = html.escape((m or {}).get("alt") or "")
+        poster = (m or {}).get("poster") or ""
+        if t == "image":
+            parts.append(
+                f'<img src="{html.escape(url)}" alt="{alt}" loading="lazy" decoding="async">'
+            )
+        elif t in ("video", "x_video"):
+            poster_attr = f' poster="{html.escape(poster)}"' if poster else ""
+            parts.append(
+                f'<video controls preload="metadata" src="{html.escape(url)}"{poster_attr}></video>'
+            )
+        elif t == "audio":
+            parts.append(f'<audio controls preload="metadata" src="{html.escape(url)}"></audio>')
+        elif t == "youtube":
+            vid = youtube_id(url)
+            if vid:
+                parts.append(
+                    f'<div class="yt"><iframe src="https://www.youtube-nocookie.com/embed/{html.escape(vid)}" '
+                    f'title="YouTube" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" '
+                    f'allowfullscreen loading="lazy"></iframe></div>'
+                )
+            else:
+                parts.append(
+                    f'<p><a href="{html.escape(url)}" target="_blank" rel="noopener noreferrer">{html.escape(url)}</a></p>'
+                )
+        else:
+            parts.append(
+                f'<p><a href="{html.escape(url)}" target="_blank" rel="noopener noreferrer">{html.escape(url)}</a></p>'
+            )
+    parts.append("</div>")
+    return "\n".join(parts) if len(parts) > 2 else ""
+
+
+def render_original_section(a: dict) -> str:
+    orig = a.get("original") or {}
+    text = (orig.get("text_md") or "").strip()
+    media = orig.get("media") or []
+    if not text and not media:
+        return ""
+    title = (orig.get("title") or "").strip()
+    title_html = f'<p class="orig-title">{html.escape(title)}</p>' if title else ""
+    body = md_to_html(text) if text else ""
+    media_html = render_media_html(media)
+    return f"""
+  <section class="original" aria-label="原文">
+    <h2>原文</h2>
+    {title_html}
+    {media_html}
+    <div class="prose">
+{body}
+    </div>
+  </section>
+"""
+
+
+def rss_media_html(media: list) -> str:
+    if not media:
+        return ""
+    parts = []
+    for m in media:
+        t = (m or {}).get("type") or ""
+        url = (m or {}).get("url") or ""
+        if not url:
+            continue
+        alt = html.escape((m or {}).get("alt") or "")
+        poster = (m or {}).get("poster") or ""
+        if t == "image":
+            parts.append(f'<p><img src="{html.escape(url)}" alt="{alt}"></p>')
+        elif t in ("video", "x_video"):
+            poster_attr = f' poster="{html.escape(poster)}"' if poster else ""
+            parts.append(
+                f'<p><video controls src="{html.escape(url)}"{poster_attr}></video></p>'
+            )
+        elif t == "audio":
+            parts.append(f'<p><audio controls src="{html.escape(url)}"></audio></p>')
+        elif t == "youtube":
+            vid = youtube_id(url)
+            if vid:
+                parts.append(
+                    f'<p><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/{html.escape(vid)}" '
+                    f'frameborder="0" allowfullscreen></iframe></p>'
+                    f'<p><a href="{html.escape(url)}">{html.escape(url)}</a></p>'
+                )
+            else:
+                parts.append(f'<p><a href="{html.escape(url)}">{html.escape(url)}</a></p>')
+        else:
+            parts.append(f'<p><a href="{html.escape(url)}">{html.escape(url)}</a></p>')
+    return "\n".join(parts)
+
+
 def build_feed_items(articles: list[dict]) -> str:
     rows = []
     for a in articles:
@@ -445,7 +576,21 @@ def rss_full_html(a: dict) -> str:
     dek = (a.get("dek") or "").strip()
     if dek:
         parts.append(f"<p><em>{html.escape(dek)}</em></p>")
+    parts.append("<h2>乔木改写</h2>")
     parts.append(body)
+    orig = a.get("original") or {}
+    otext = (orig.get("text_md") or "").strip()
+    omedia = orig.get("media") or []
+    if otext or omedia:
+        parts.append("<h2>原文</h2>")
+        otitle = (orig.get("title") or "").strip()
+        if otitle:
+            parts.append(f"<p><em>{html.escape(otitle)}</em></p>")
+        media_html = rss_media_html(omedia)
+        if media_html:
+            parts.append(media_html)
+        if otext:
+            parts.append(md_to_html(otext))
     parts.append(
         "<p><strong>原文链接：</strong>"
         f'<a href="{html.escape(src["url"])}">{html.escape(src["url"])}</a></p>'
@@ -525,7 +670,7 @@ def build() -> None:
     home = f"""
 <section class="page-h">
   <h1>今日精选</h1>
-  <p class="sub">挑海外创始人长帖、X Article 和爆款 AI 视频，改写成乔木中文，并附上原文链接。风格接近 Ben's Bites，阅读界面接近黑客书架。</p>
+  <p class="sub">挑海外创始人长帖、X Article 和爆款 AI 视频，改写成乔木中文；页面同时保留原文与图片/视频。风格接近 Ben's Bites，阅读界面接近黑客书架。</p>
   <div class="meta-line"><span>{len(articles)} 篇</span><span><a href="/feed.xml">订阅 RSS</a></span></div>
 </section>
 <ul class="feed">
@@ -540,7 +685,7 @@ def build() -> None:
     archive = f"""
 <section class="page-h">
   <h1>全部文章</h1>
-  <p class="sub">按发布时间倒序。每篇都有中文改写正文和原文链接。</p>
+  <p class="sub">按发布时间倒序。每篇都有乔木改写、原文，以及原文链接。</p>
 </section>
 <ul class="feed">
 {build_feed_items(articles)}
@@ -554,7 +699,7 @@ def build() -> None:
     about = f"""
 <article class="article prose">
   <h1>关于 {SITE_NAME}</h1>
-  <p>{SITE_NAME} 关注英文世界里值得读的创始人长帖、X Articles，以及海外传播开的 AI 视频。我们用已有的 X / WebFetch 能力取原文，再改写成向阳乔木风格的中文，并始终保留原文链接。</p>
+  <p>{SITE_NAME} 关注英文世界里值得读的创始人长帖、X Articles，以及海外传播开的 AI 视频。我们用已有的 X / WebFetch 能力取原文，再改写成向阳乔木风格的中文；页面同时展示原文文本与媒体，并保留原文链接。</p>
   <p>站点是静态生成：内容放在 <code>content/articles/*.json</code>，本地 <code>npm run build</code> 后用 Wrangler 部署到 Cloudflare Worker <code>xnews</code>（域名 xnews.qiaomu.ai）。</p>
   <p>每日更新由例行任务在 Asia/Shanghai 早上 8 点抓取与改写，然后提交 JSON 并重新 build + deploy。本仓库不包含爬虫。</p>
   <p><a href="/feed.xml">RSS</a> · <a href="https://github.com/joeseesun/xnews" target="_blank" rel="noopener">GitHub</a></p>
@@ -578,6 +723,7 @@ def build() -> None:
     for a in articles:
         src = a["source"]
         body = md_to_html(a["body_md"])
+        original_html = render_original_section(a)
         related = ""
         if src.get("related_url"):
             related = f' · <a href="{html.escape(src["related_url"])}" target="_blank" rel="noopener noreferrer">相关链接</a>'
@@ -594,6 +740,7 @@ def build() -> None:
   <div class="prose">
 {body}
   </div>
+{original_html}
   <div class="source-box">
     <span class="lbl">原文链接</span>
     <a href="{html.escape(src['url'])}" target="_blank" rel="noopener noreferrer">{html.escape(src['url'])}</a>{related}

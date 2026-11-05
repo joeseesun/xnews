@@ -16,5 +16,11 @@
     "personal software",
     "AI"
   ],
+  "original": {
+    "lang": "en",
+    "title": "Non-engineers do want to make personal software",
+    "text_md": "a few years ago, I started out skeptical that many non-engineers really wanted to make/mod their own personal software -- but I've come around, think I was wrong. range of desires from:\n- I feel so powerful\n- no one will make me the workflow/personalization I need\n- can I just PM the product for a few weeks and fix this thing that is driving me crazy\n\nobvious in retrospect, but if the ease:power ratio is good enough, of course people will make their own software",
+    "media": []
+  },
   "body_md": "Sarah Guo 写得很短，但足以改一条产品假设。\n\n几年前，她不太相信大量非工程师真的想自己做、或改个人软件。现在她认错了。她看到的欲望大概分几档：\n\n- 我感觉自己很有力量\n- 没人会给我做我要的工作流 / 个性化\n- 能不能让我当几周产品经理，把这个天天烦我的点修掉\n\n事后看几乎是常识：**只要「省力 / 能力」比值够好，人就会动手做自己的软件。**\n\n这和「人人都该学编程」不是一回事。更接近：当 Agent 把实现成本压下去之后，个人软件会从极客玩具，变成普通人处理生活摩擦的默认选项。\n\n对做工具的人来说，下一步产品问题大概是：你是继续做一个封闭的成品，还是留出足够安全的口子，让用户能把自己的流程焊进去。\n"
 }

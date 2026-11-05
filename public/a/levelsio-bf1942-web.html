@@ -47,7 +47,7 @@
       <li><a href="/about" class=""><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>关于</a></li>
     </ul>
     <div class="nav-h">说明</div>
-    <p style="margin:0;color:var(--muted);font-size:13px;line-height:1.55">英文长帖 / X Article / 海外 AI 视频 → 乔木中文改写，并附原文链接。</p>
+    <p style="margin:0;color:var(--muted);font-size:13px;line-height:1.55">英文长帖 / X Article / 海外 AI 视频 → 乔木中文改写，并保留原文与媒体。</p>
   </nav>
   <main id="main" class="main">
 
@@ -76,6 +76,34 @@
 <p>他自己的原话很诚实：「我不知道它怎么做到的，但它做到了，而且好像能玩。」</p>
 <p>这不是怀旧彩蛋那么简单。它在演示一件更锋利的事：当模型能在「无文档、无开源、只有二进制」的场景里硬凿出可运行系统，软件考古和废弃游戏保存，会突然变得可规模化。</p>
   </div>
+
+  <section class="original" aria-label="原文">
+    <h2>原文</h2>
+    <p class="orig-title">Battlefield 1942 decompiled to the browser</p>
+    <div class="original-media">
+<video controls preload="metadata" src="https://video.twimg.com/amplify_video/2117374770253565952/vid/avc1/1080x1920/qdwjPQkAwvtgGImY.mp4" poster="https://pbs.twimg.com/amplify_video_thumb/2117374770253565952/img/6WkHxBF81dMfyKCf.jpg"></video>
+</div>
+    <div class="prose">
+<p>I decompiled probably my favorite game ever: Battlefield 1942 and I put it on the web with multiplayer for you to play here:</p>
+<p>👉 https://t.co/6C8H8KtSaU 👈</p>
+<p>(It&#x27;s the free shareware demo)</p>
+<p>It was way harder than the other ports like Quake and DOOM I did because they already had lots of open source projects and work behind them</p>
+<p>In case of Battlefield 1942 there was literally absolutely nothing to work on top of, nobody had ever ported it and there was no open source engine for it, nor did the makers ever open source it (like id Software did with Quake 3)</p>
+<p>I tried it 6 months ago and essentiay gave up but I tried it today again with Opus 5.5 asking &quot;can you try port the BF1942 demo in this folder to web&quot;</p>
+<p>So me and Claude Code (well let&#x27;s be honest mostly Claude Code) did crazy shit today:</p>
+<ul>
+<li>it disassembled the x86 raw machine code to find 57,000 x86 functions</li>
+<li>it translated each x86 function into a C function (mov eax, [esi+0x110] becomes eax = READ32(esi + 0x110), I have no idea what any of this means btw)</li>
+<li>it outputed 100,000 lines of C</li>
+<li>it then compiled that to WebAsswmbly with Emscripten</li>
+<li>there were 300x Windows and Direct3D functions used which we had to rewrite to WebGL 2 and OpenGL to work on the web</li>
+<li>then we had to build our own network stack so it could connect to our multiplayer server via WebSockets</li>
+</ul>
+<p>I have no idea how it did any of this but it did it and it seems to work! 😊</p>
+<p>Come play and report any bugs here!</p>
+    </div>
+  </section>
+
   <div class="source-box">
     <span class="lbl">原文链接</span>
     <a href="https://x.com/levelsio/status/2117374984192512391" target="_blank" rel="noopener noreferrer">https://x.com/levelsio/status/2117374984192512391</a> · <a href="https://bf1942.pieter.com" target="_blank" rel="noopener noreferrer">相关链接</a>

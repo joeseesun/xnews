@@ -47,13 +47,13 @@
       <li><a href="/about" class="active"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>关于</a></li>
     </ul>
     <div class="nav-h">说明</div>
-    <p style="margin:0;color:var(--muted);font-size:13px;line-height:1.55">英文长帖 / X Article / 海外 AI 视频 → 乔木中文改写，并附原文链接。</p>
+    <p style="margin:0;color:var(--muted);font-size:13px;line-height:1.55">英文长帖 / X Article / 海外 AI 视频 → 乔木中文改写，并保留原文与媒体。</p>
   </nav>
   <main id="main" class="main">
 
 <article class="article prose">
   <h1>关于 X News</h1>
-  <p>X News 关注英文世界里值得读的创始人长帖、X Articles，以及海外传播开的 AI 视频。我们用已有的 X / WebFetch 能力取原文，再改写成向阳乔木风格的中文，并始终保留原文链接。</p>
+  <p>X News 关注英文世界里值得读的创始人长帖、X Articles，以及海外传播开的 AI 视频。我们用已有的 X / WebFetch 能力取原文，再改写成向阳乔木风格的中文；页面同时展示原文文本与媒体，并保留原文链接。</p>
   <p>站点是静态生成：内容放在 <code>content/articles/*.json</code>，本地 <code>npm run build</code> 后用 Wrangler 部署到 Cloudflare Worker <code>xnews</code>（域名 xnews.qiaomu.ai）。</p>
   <p>每日更新由例行任务在 Asia/Shanghai 早上 8 点抓取与改写，然后提交 JSON 并重新 build + deploy。本仓库不包含爬虫。</p>
   <p><a href="/feed.xml">RSS</a> · <a href="https://github.com/joeseesun/xnews" target="_blank" rel="noopener">GitHub</a></p>

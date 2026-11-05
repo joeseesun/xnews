@@ -47,7 +47,7 @@
       <li><a href="/about" class=""><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>关于</a></li>
     </ul>
     <div class="nav-h">说明</div>
-    <p style="margin:0;color:var(--muted);font-size:13px;line-height:1.55">英文长帖 / X Article / 海外 AI 视频 → 乔木中文改写，并附原文链接。</p>
+    <p style="margin:0;color:var(--muted);font-size:13px;line-height:1.55">英文长帖 / X Article / 海外 AI 视频 → 乔木中文改写，并保留原文与媒体。</p>
   </nav>
   <main id="main" class="main">
 
@@ -76,6 +76,48 @@
 <p>他自己也说了一句很冷的话：短期看，AI 擅长找成本节约，对经济未必友好；长期看，它会削掉脂肪，把钱腾给更好的投资。</p>
 <p>独立开发者常年面对的「成本慢慢爬上去，你却没感觉」，终于有了一个很具体的对手方。不是再订一份监控 SaaS，是直接让模型读你的账单。</p>
   </div>
+
+  <section class="original" aria-label="原文">
+    <h2>原文</h2>
+    <p class="orig-title">Biz expenses down to ~$300/mo</p>
+    <div class="original-media">
+<img src="https://pbs.twimg.com/media/HWOOvq5WoAAMsfw.jpg" alt="" loading="lazy" decoding="async">
+</div>
+    <div class="prose">
+<p>💸 Update: My total biz expenses have now dropped to just ~$300/mo!</p>
+<p>This is to run all my websites/apps serving per year:</p>
+<ul>
+<li>20,000 paying customers</li>
+<li>252 million visitors</li>
+<li>2.4 billion requests</li>
+<li>2.4 petabyte (PB) in bandwidth</li>
+</ul>
+<p>(~$8,000/mo if you add the $7,000/mo GPU bill and $800/mo R2 storage I pay for Photo AI, I exclude it above because it&#x27;s one project that&#x27;s so much more expensive in size than all the other sites together, but included in the chart below)</p>
+<p>Claude Code helped me to find smart ways to save more money, AI is just really really really good at finding cost savings by itself, which is not so great for the economy short-term, but long term it trims all the fat and opens up spending for better investments I think</p>
+<p>Anyway here&#x27;s what it saved me in money, almost $34,000/mo:</p>
+<ul>
+<li>$29,000/mo - switched to better and cheaper video models on Photo AI, video was very expensive and since I didn&#x27;t update it ever it stayed expensive, also routed some image jobs to Google Cloud where I have some Google Cloud Credits, and also routed some jobs to Sume which sells AI models at market cost, very cool! This made my GPU bill go from $36,000/mo to $7,000/mo</li>
+</ul>
+<ul>
+<li>$3,000/mo - consolidated my servers, cancelled Digital Ocean and Linode and moved everything to Hetzner saving about $3,000/mo</li>
+</ul>
+<ul>
+<li>$1100/mo - analyzed my Backblaze B2 server backups, I had infinite versioning and lifecycle policies, that&#x27;s reduced now to 30 days, this literally pushed the bill from $1,200/mo to $26/mo, about 50x cheaper! I had essentially versions of files for all my servers for over a decade, crazy!</li>
+</ul>
+<ul>
+<li>$400/mo - similarly added Lifecycle Policies to my Cloudflare R2 bucket for Photo AI, pics are automatically put in cheaper Infrequent Access after 90 days, there was years of photos in there so this reduced the R2 bill from $1,200/mo to $800/mo</li>
+</ul>
+<ul>
+<li>$118/mo - Claude analyzed all my Cloudflare Domain registrations, lots of domains I didn&#x27;t use and didn&#x27;t make sense to keep paying for, lots of things that also don&#x27;t really make sense anymore in a post-AGI world, renewals for .io TLD are now $50/year which adds up fast!</li>
+</ul>
+<ul>
+<li>$100/mo - Claude also analyzed my Claude subscription (yes!) and discovered I don&#x27;t even use the Max 20x plan limits, so I downgraded from $200/mo to $100/mo</li>
+</ul>
+<p>Even including Photo AI, I have now cut my costs by 90% from last year, getting me close to my biz expenses amount from a decade ago when I started building things</p>
+<p>Costs slowly creep up over the years and you don&#x27;t realize all the things you&#x27;re spending on but AI is nice to help you figure all that out (also in your personal life!)</p>
+    </div>
+  </section>
+
   <div class="source-box">
     <span class="lbl">原文链接</span>
     <a href="https://x.com/levelsio/status/2117694259558293692" target="_blank" rel="noopener noreferrer">https://x.com/levelsio/status/2117694259558293692</a>

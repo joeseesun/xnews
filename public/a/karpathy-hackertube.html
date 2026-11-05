@@ -47,7 +47,7 @@
       <li><a href="/about" class=""><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>关于</a></li>
     </ul>
     <div class="nav-h">说明</div>
-    <p style="margin:0;color:var(--muted);font-size:13px;line-height:1.55">英文长帖 / X Article / 海外 AI 视频 → 乔木中文改写，并附原文链接。</p>
+    <p style="margin:0;color:var(--muted);font-size:13px;line-height:1.55">英文长帖 / X Article / 海外 AI 视频 → 乔木中文改写，并保留原文与媒体。</p>
   </nav>
   <main id="main" class="main">
 
@@ -75,6 +75,26 @@
 <blockquote><p>很多原本要花几周甚至几个月的项目，现在早饭前就能 few-shot 出来。我们还没想到的，还有多少？</p></blockquote>
 <p>这不是又一个「AI 写了个玩具」的故事。它更像在提醒：当你真正把「找信号」这件事外包给模型，产品形态会跟着变。HN 评论里本来就埋着高质量推荐，只是以前没人愿意花两小时把矿挖干净。</p>
   </div>
+
+  <section class="original" aria-label="原文">
+    <h2>原文</h2>
+    <p class="orig-title">Weekend hack: HackerTube</p>
+    <div class="original-media">
+<img src="https://pbs.twimg.com/media/HWDnuuCaIAA__wa.jpg" alt="" loading="lazy" decoding="async">
+</div>
+    <div class="prose">
+<p>Weekend hack: HackerTube. I was annoyed with YouTube&#x27;s recommendations so I had Claude filter down 43M comments over 20 years of HN to 6,454 videos that keep being recommended. <em>Significantly</em> better viewing experience, ~2 hours with Opus 5.5: https://t.co/JIhXN7OSh1</p>
+<ul>
+<li>Excellent recs without any logins (state is kept in local browser session)</li>
+<li>Thumbnail is a representative frame from middle of the video instead of the super duper A/B test hyper-optimized user uploads</li>
+<li>Underlying data from the comment analysis as one zip file, point your Claude at it and ask for your own version</li>
+<li>HackerTube Longs ✊</li>
+</ul>
+<p>A bit more on the process: I use Claude Code (desktop app for Mac), Opus 5.5 on Medium effort as my default. I only talk to Claude and have it do everything, the only &quot;manual work&quot; I helped with in tandem was in the browser (reminiscent of MenuGen): 1) I had to create some kind of API key from Google Cloud UI to query YouTube for video metadata, 2) I booted up a VPS box for serving and 3) I bought the domain name. Once the box was up I gave Claude the IP and told it update, secure, harden, deploy and optimize the code, and it did the whole thing.</p>
+<p>Many awesome projects that would have normally taken weeks/months even can now be few-shotted for breakfast. What else are we not thinking of.</p>
+    </div>
+  </section>
+
   <div class="source-box">
     <span class="lbl">原文链接</span>
     <a href="https://x.com/karpathy/status/2116957135661945283" target="_blank" rel="noopener noreferrer">https://x.com/karpathy/status/2116957135661945283</a>

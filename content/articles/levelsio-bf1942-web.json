@@ -17,5 +17,17 @@
     "game",
     "WebAssembly"
   ],
+  "original": {
+    "lang": "en",
+    "title": "Battlefield 1942 decompiled to the browser",
+    "text_md": "I decompiled probably my favorite game ever: Battlefield 1942 and I put it on the web with multiplayer for you to play here:\n\n👉 https://t.co/6C8H8KtSaU 👈\n\n(It's the free shareware demo)\n\nIt was way harder than the other ports like Quake and DOOM I did because they already had lots of open source projects and work behind them\n\nIn case of Battlefield 1942 there was literally absolutely nothing to work on top of, nobody had ever ported it and there was no open source engine for it, nor did the makers ever open source it (like id Software did with Quake 3)\n\nI tried it 6 months ago and essentiay gave up but I tried it today again with Opus 5.5 asking \"can you try port the BF1942 demo in this folder to web\"\n\nSo me and Claude Code (well let's be honest mostly Claude Code) did crazy shit today:\n- it disassembled the x86 raw machine code to find 57,000 x86 functions\n- it translated each x86 function into a C function (mov eax, [esi+0x110] becomes eax = READ32(esi + 0x110), I have no idea what any of this means btw)\n- it outputed 100,000 lines of C\n- it then compiled that to WebAsswmbly with Emscripten\n- there were 300x Windows and Direct3D functions used which we had to rewrite to WebGL 2 and OpenGL to work on the web\n- then we had to build our own network stack so it could connect to our multiplayer server via WebSockets\n\nI have no idea how it did any of this but it did it and it seems to work! 😊 \n\nCome play and report any bugs here!",
+    "media": [
+      {
+        "type": "x_video",
+        "url": "https://video.twimg.com/amplify_video/2117374770253565952/vid/avc1/1080x1920/qdwjPQkAwvtgGImY.mp4",
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2117374770253565952/img/6WkHxBF81dMfyKCf.jpg"
+      }
+    ]
+  },
   "body_md": "Pieter Levels 把可能是他最爱的游戏，《Battlefield 1942》，搬进了浏览器，还带多人联机。\n\n地址：[bf1942.pieter.com](https://bf1942.pieter.com)（免费试玩版）。\n\n这事比他以前移植 Quake、DOOM 难一截。后两者早有开源项目垫底；BF1942 几乎没有任何现成底座，厂商也没开源引擎。半年前他试过，基本放弃。今天又拿 Opus 5.5 问了一句：「能不能把这个文件夹里的 BF1942 demo 移植到网页」。\n\n然后他和 Claude Code（他承认主要是 Claude）干了一堆听起来离谱的事：\n\n- 反汇编 x86，找出约 57,000 个函数\n- 把每个函数翻成 C（`mov eax, [esi+0x110]` 变成 `eax = READ32(esi + 0x110)`）\n- 吐出大约 10 万行 C\n- 用 Emscripten 编成 WebAssembly\n- 重写约 300 个 Windows / Direct3D 调用，接到 WebGL 2 / OpenGL\n- 自建网络栈，经 WebSocket 连多人服务器\n\n他自己的原话很诚实：「我不知道它怎么做到的，但它做到了，而且好像能玩。」\n\n这不是怀旧彩蛋那么简单。它在演示一件更锋利的事：当模型能在「无文档、无开源、只有二进制」的场景里硬凿出可运行系统，软件考古和废弃游戏保存，会突然变得可规模化。\n"
 }
