@@ -1,75 +1,271 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>X News</title>
     <link>https://xnews.qiaomu.ai/</link>
     <description>海外创始人长文 · AI 视频 · 乔木中文改写</description>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 05 Nov 2026 16:42:14 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 05 Nov 2026 17:19:39 +0000</lastBuildDate>
     <atom:link href="https://xnews.qiaomu.ai/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title>DeepSeek Super Agent：真正值得看的，是「一切皆插件」的 Harness</title>
       <link>https://xnews.qiaomu.ai/a/deepseek-super-agent-harness</link>
       <guid isPermaLink="true">https://xnews.qiaomu.ai/a/deepseek-super-agent-harness</guid>
       <pubDate>Thu, 05 Nov 2026 12:00:00 +0000</pubDate>
-      <description>同模型换九套编码 Agent，成本能差出一个数量级。Instacart 和 Box 的 CTO 都把票投给了 harness。</description>
       <author>AI news / DeepSeek Super Agent explainer</author>
+      <description><![CDATA[<p><em>同模型换九套编码 Agent，成本能差出一个数量级。Instacart 和 Box 的 CTO 都把票投给了 harness。</em></p>
+<p>很多人把 DeepSeek 新开源的东西叫「Claude Code 的回答」。视频作者觉得，更值得盯的是它怎么被做出来的。</p>
+<p><strong>Super Agent</strong> 不是又一个聊天窗口。它听团队已经在用的地方：GitHub Issue / PR，以及飞书。有权限的人提需求后，它开 work item，在独立目录里干活，再带着 PR 回来。DeepSeek 自己说，这是研究原型，很多工程甚至是编码 Agent 写的。</p>
+<p>底座是八月发布的 <strong>DeepSeek Harness（DSH）</strong>。口号很绝：一切皆插件。路由、工具注册、会话日志，连 Agent loop 本身都是插件，底下是叫 Cordis 的组合框架。两个关键能力：</p>
+<ul>
+<li>时间可组合：卸掉一个组件，它做过的注册会完整回滚</li>
+<li>空间可组合：组件声明依赖，运行时按依赖上下线</li>
+</ul>
+<p>Frontier Harness Eval 用同一模型 Kimi K3、同一批 30 个任务，跑九套 harness。Codex 通过率 66.7%，DeepSeek creator 模式和 Claude Code 都是 63.3%，但单次成功任务成本大约 $3.28 vs $18.34。样本不大，方向很清楚：<strong>换 harness，成败和账单都会变。</strong></p>
+<p>Super Agent 的架构也很有意思：上层一个长驻 router 负责人和分发，下层 worker 各自隔离会话。外部触发先过确定性门禁（在不在白名单、有没有真正 @ Agent），过了才进模型。Worker 认领 ticket 后直接订阅那条对话，评论不再绕 router，他们测过，关掉这层后 router 决策量大约多 30%。压力测试里触发从每分钟 1 次拉到 40 次，批量处理后单次决策时间反而下降。结论有点反直觉：router 往往更适合轻模型，重模型留给 worker。</p>
+<p>作者访谈过 Instacart 和 Box 的 CTO，两边都认为现阶段 harness 比模型更重要。视频收尾也留了清醒提醒：这是原型，安全问题（提示注入、凭据泄漏、跨设备权限）他们自己也承认没完全解决。</p>
+<p>如果你只记住一句：别再只评模型。同一模型至少丢进两三个 harness 再下判断，不然你骂的可能是壳，不是芯。</p>
+<p><strong>原文链接：</strong><a href="https://www.youtube.com/watch?v=OrcsMi2-IcM">https://www.youtube.com/watch?v=OrcsMi2-IcM</a></p>]]></description>
+      <content:encoded><![CDATA[<p><em>同模型换九套编码 Agent，成本能差出一个数量级。Instacart 和 Box 的 CTO 都把票投给了 harness。</em></p>
+<p>很多人把 DeepSeek 新开源的东西叫「Claude Code 的回答」。视频作者觉得，更值得盯的是它怎么被做出来的。</p>
+<p><strong>Super Agent</strong> 不是又一个聊天窗口。它听团队已经在用的地方：GitHub Issue / PR，以及飞书。有权限的人提需求后，它开 work item，在独立目录里干活，再带着 PR 回来。DeepSeek 自己说，这是研究原型，很多工程甚至是编码 Agent 写的。</p>
+<p>底座是八月发布的 <strong>DeepSeek Harness（DSH）</strong>。口号很绝：一切皆插件。路由、工具注册、会话日志，连 Agent loop 本身都是插件，底下是叫 Cordis 的组合框架。两个关键能力：</p>
+<ul>
+<li>时间可组合：卸掉一个组件，它做过的注册会完整回滚</li>
+<li>空间可组合：组件声明依赖，运行时按依赖上下线</li>
+</ul>
+<p>Frontier Harness Eval 用同一模型 Kimi K3、同一批 30 个任务，跑九套 harness。Codex 通过率 66.7%，DeepSeek creator 模式和 Claude Code 都是 63.3%，但单次成功任务成本大约 $3.28 vs $18.34。样本不大，方向很清楚：<strong>换 harness，成败和账单都会变。</strong></p>
+<p>Super Agent 的架构也很有意思：上层一个长驻 router 负责人和分发，下层 worker 各自隔离会话。外部触发先过确定性门禁（在不在白名单、有没有真正 @ Agent），过了才进模型。Worker 认领 ticket 后直接订阅那条对话，评论不再绕 router，他们测过，关掉这层后 router 决策量大约多 30%。压力测试里触发从每分钟 1 次拉到 40 次，批量处理后单次决策时间反而下降。结论有点反直觉：router 往往更适合轻模型，重模型留给 worker。</p>
+<p>作者访谈过 Instacart 和 Box 的 CTO，两边都认为现阶段 harness 比模型更重要。视频收尾也留了清醒提醒：这是原型，安全问题（提示注入、凭据泄漏、跨设备权限）他们自己也承认没完全解决。</p>
+<p>如果你只记住一句：别再只评模型。同一模型至少丢进两三个 harness 再下判断，不然你骂的可能是壳，不是芯。</p>
+<p><strong>原文链接：</strong><a href="https://www.youtube.com/watch?v=OrcsMi2-IcM">https://www.youtube.com/watch?v=OrcsMi2-IcM</a></p>]]></content:encoded>
     </item>
     <item>
       <title>Sarah Guo：非工程师也想改自己的软件，我之前判断错了</title>
       <link>https://xnews.qiaomu.ai/a/sarah-guo-personal-software</link>
       <guid isPermaLink="true">https://xnews.qiaomu.ai/a/sarah-guo-personal-software</guid>
       <pubDate>Wed, 04 Nov 2026 18:48:27 +0000</pubDate>
-      <description>从「我好有掌控感」到「没人会给我做这个工作流」，欲望光谱比想象中宽。</description>
       <author>Sarah Guo</author>
+      <description><![CDATA[<p><em>从「我好有掌控感」到「没人会给我做这个工作流」，欲望光谱比想象中宽。</em></p>
+<p>Sarah Guo 写得很短，但足以改一条产品假设。</p>
+<p>几年前，她不太相信大量非工程师真的想自己做、或改个人软件。现在她认错了。她看到的欲望大概分几档：</p>
+<ul>
+<li>我感觉自己很有力量</li>
+<li>没人会给我做我要的工作流 / 个性化</li>
+<li>能不能让我当几周产品经理，把这个天天烦我的点修掉</li>
+</ul>
+<p>事后看几乎是常识：<strong>只要「省力 / 能力」比值够好，人就会动手做自己的软件。</strong></p>
+<p>这和「人人都该学编程」不是一回事。更接近：当 Agent 把实现成本压下去之后，个人软件会从极客玩具，变成普通人处理生活摩擦的默认选项。</p>
+<p>对做工具的人来说，下一步产品问题大概是：你是继续做一个封闭的成品，还是留出足够安全的口子，让用户能把自己的流程焊进去。</p>
+<p><strong>原文链接：</strong><a href="https://x.com/saranormous/status/2118052772637704376">https://x.com/saranormous/status/2118052772637704376</a></p>]]></description>
+      <content:encoded><![CDATA[<p><em>从「我好有掌控感」到「没人会给我做这个工作流」，欲望光谱比想象中宽。</em></p>
+<p>Sarah Guo 写得很短，但足以改一条产品假设。</p>
+<p>几年前，她不太相信大量非工程师真的想自己做、或改个人软件。现在她认错了。她看到的欲望大概分几档：</p>
+<ul>
+<li>我感觉自己很有力量</li>
+<li>没人会给我做我要的工作流 / 个性化</li>
+<li>能不能让我当几周产品经理，把这个天天烦我的点修掉</li>
+</ul>
+<p>事后看几乎是常识：<strong>只要「省力 / 能力」比值够好，人就会动手做自己的软件。</strong></p>
+<p>这和「人人都该学编程」不是一回事。更接近：当 Agent 把实现成本压下去之后，个人软件会从极客玩具，变成普通人处理生活摩擦的默认选项。</p>
+<p>对做工具的人来说，下一步产品问题大概是：你是继续做一个封闭的成品，还是留出足够安全的口子，让用户能把自己的流程焊进去。</p>
+<p><strong>原文链接：</strong><a href="https://x.com/saranormous/status/2118052772637704376">https://x.com/saranormous/status/2118052772637704376</a></p>]]></content:encoded>
     </item>
     <item>
       <title>Rauch：Vercel 内部那个「惊人有效」的安全 Agent，终于对外开放了</title>
       <link>https://xnews.qiaomu.ai/a/rauchg-vercel-security-review</link>
       <guid isPermaLink="true">https://xnews.qiaomu.ai/a/rauchg-vercel-security-review</guid>
       <pubDate>Tue, 03 Nov 2026 21:45:04 +0000</pubDate>
-      <description>每行代码自动审计。他的判断很直白：你不能指望工程师记得装技能，或掷骰子赌第一版就安全。</description>
       <author>Guillermo Rauch</author>
+      <description><![CDATA[<p><em>每行代码自动审计。他的判断很直白：你不能指望工程师记得装技能，或掷骰子赌第一版就安全。</em></p>
+<p>Guillermo Rauch 等这一天很久了。</p>
+<p>Vercel 内部有个安全 Agent，昵称叫 <strong>@hacker</strong>。Rauch 的原话是「astonishingly effective」：每一行代码都会被自动审计。现在，同样的能力对外开放了。打开之后，不管你的项目是不是部署在 Vercel 上，都可以挂到仓库上跑。</p>
+<p>他为什么这么急着推？因为边界条件已经变了。</p>
+<p>你不能只靠工程师「记得装一个安全技能」，也不能只靠 prompt 里写一句「请写得安全一点」，更不能赌模型第一次就吐出靠谱代码。安全要变成默认流水线，而不是人品考验。</p>
+<p>配套产品是 <strong>Vercel Security Review</strong>（公测）。按官方说明，它挂在每次 GitHub push 上：扫变更、在 PR 留评论、进 Security 面板，也可以让 Vercel Agent 验证并直接提修复。扫描的是 diff，所以通常几秒结束，预览和生产部署都能跑。</p>
+<p>Rauch 还特意点了一句：这套东西是安全团队自己做出来的。很多公司正忙着招人补安全编制；如果你想「把一个安全团队下载成软件」，这大概是今天最接近的形态。</p>
+<p>我读完更在意的是分工。写代码的 Agent 越来越多，审代码的 Agent 如果不跟上，中间那截空档会变成默认攻击面。Rauch 这篇文章，其实是在说：安全也该产品化，而且要产品到「每 push 必审」。</p>
+<p><strong>原文链接：</strong><a href="https://x.com/rauchg/status/2117734833824948373">https://x.com/rauchg/status/2117734833824948373</a></p>
+<p><strong>相关链接：</strong><a href="https://vercel.com/blog/vercel-security-review">https://vercel.com/blog/vercel-security-review</a></p>]]></description>
+      <content:encoded><![CDATA[<p><em>每行代码自动审计。他的判断很直白：你不能指望工程师记得装技能，或掷骰子赌第一版就安全。</em></p>
+<p>Guillermo Rauch 等这一天很久了。</p>
+<p>Vercel 内部有个安全 Agent，昵称叫 <strong>@hacker</strong>。Rauch 的原话是「astonishingly effective」：每一行代码都会被自动审计。现在，同样的能力对外开放了。打开之后，不管你的项目是不是部署在 Vercel 上，都可以挂到仓库上跑。</p>
+<p>他为什么这么急着推？因为边界条件已经变了。</p>
+<p>你不能只靠工程师「记得装一个安全技能」，也不能只靠 prompt 里写一句「请写得安全一点」，更不能赌模型第一次就吐出靠谱代码。安全要变成默认流水线，而不是人品考验。</p>
+<p>配套产品是 <strong>Vercel Security Review</strong>（公测）。按官方说明，它挂在每次 GitHub push 上：扫变更、在 PR 留评论、进 Security 面板，也可以让 Vercel Agent 验证并直接提修复。扫描的是 diff，所以通常几秒结束，预览和生产部署都能跑。</p>
+<p>Rauch 还特意点了一句：这套东西是安全团队自己做出来的。很多公司正忙着招人补安全编制；如果你想「把一个安全团队下载成软件」，这大概是今天最接近的形态。</p>
+<p>我读完更在意的是分工。写代码的 Agent 越来越多，审代码的 Agent 如果不跟上，中间那截空档会变成默认攻击面。Rauch 这篇文章，其实是在说：安全也该产品化，而且要产品到「每 push 必审」。</p>
+<p><strong>原文链接：</strong><a href="https://x.com/rauchg/status/2117734833824948373">https://x.com/rauchg/status/2117734833824948373</a></p>
+<p><strong>相关链接：</strong><a href="https://vercel.com/blog/vercel-security-review">https://vercel.com/blog/vercel-security-review</a></p>]]></content:encoded>
     </item>
     <item>
       <title>25 岁做到 5 亿年化收入：Slash 怎么靠「超级小生意」打穿金融</title>
       <link>https://xnews.qiaomu.ai/a/victor-slash-supersmb</link>
       <guid isPermaLink="true">https://xnews.qiaomu.ai/a/victor-slash-supersmb</guid>
       <pubDate>Tue, 03 Nov 2026 21:24:49 +0000</pubDate>
-      <description>不到 100 人，年化收入过 $500m。Victor 把方法写得很清楚：找 SuperSMB，卖给他们，为他们做产品。</description>
       <author>Victor Cardenas</author>
+      <description><![CDATA[<p><em>不到 100 人，年化收入过 $500m。Victor 把方法写得很清楚：找 SuperSMB，卖给他们，为他们做产品。</em></p>
+<p>Victor Cardenas 宣布，Slash 年化收入刚越过 <strong>$500m</strong>。去年大约 $150m，再上一年 $50m。团队不到 100 人。他 25 岁。</p>
+<p>长文的核心概念叫 <strong>SuperSMB</strong>：人很少、收入很高、决策极快的公司。AI 让这类创业者密度暴涨。Victor 给的数据里，平台上 88% 的资产来自 35 岁以下创始人的公司，65% 的月支出流来自近三年成立的公司。</p>
+<p>他对销售的判断几乎是反常识的：</p>
+<blockquote><p>以前 B2B 得在「大单但慢」和「小单但快」之间二选一。卖给 SuperSMB，你可以同时要到大金额和短周期。</p></blockquote>
+<p>怎么找到他们？Slash 不用 Clay / ZoomInfo，也不靠冷邮件。三条硬要求：靠产品赢得转介、人必须在场（群、论坛、会议）、第一天就给人而不是把高级支持锁在员工数门槛后面。他说，一个销售一年带进超过 $1 亿收入，在他们团队是真实发生过的。</p>
+<p>产品侧同样围绕这群人：<strong>全球可用、Agent-ready（仪表盘能做的，API / MCP 也能做）、懂行业工作流、尽量 all-in-one、定价激进</strong>。他的原话是，靠砍自己的内部成本赚钱，别靠抬客户价格。</p>
+<p>读完最大的感觉是：AI native 创业者已经大到值得单独开一条银行产品线。谁还按「传统 SMB vs 企业」做分组，谁就会把最快的那批客人让出去。</p>
+<p><strong>原文链接：</strong><a href="https://x.com/victorcardenas/status/2117729738160496778">https://x.com/victorcardenas/status/2117729738160496778</a></p>]]></description>
+      <content:encoded><![CDATA[<p><em>不到 100 人，年化收入过 $500m。Victor 把方法写得很清楚：找 SuperSMB，卖给他们，为他们做产品。</em></p>
+<p>Victor Cardenas 宣布，Slash 年化收入刚越过 <strong>$500m</strong>。去年大约 $150m，再上一年 $50m。团队不到 100 人。他 25 岁。</p>
+<p>长文的核心概念叫 <strong>SuperSMB</strong>：人很少、收入很高、决策极快的公司。AI 让这类创业者密度暴涨。Victor 给的数据里，平台上 88% 的资产来自 35 岁以下创始人的公司，65% 的月支出流来自近三年成立的公司。</p>
+<p>他对销售的判断几乎是反常识的：</p>
+<blockquote><p>以前 B2B 得在「大单但慢」和「小单但快」之间二选一。卖给 SuperSMB，你可以同时要到大金额和短周期。</p></blockquote>
+<p>怎么找到他们？Slash 不用 Clay / ZoomInfo，也不靠冷邮件。三条硬要求：靠产品赢得转介、人必须在场（群、论坛、会议）、第一天就给人而不是把高级支持锁在员工数门槛后面。他说，一个销售一年带进超过 $1 亿收入，在他们团队是真实发生过的。</p>
+<p>产品侧同样围绕这群人：<strong>全球可用、Agent-ready（仪表盘能做的，API / MCP 也能做）、懂行业工作流、尽量 all-in-one、定价激进</strong>。他的原话是，靠砍自己的内部成本赚钱，别靠抬客户价格。</p>
+<p>读完最大的感觉是：AI native 创业者已经大到值得单独开一条银行产品线。谁还按「传统 SMB vs 企业」做分组，谁就会把最快的那批客人让出去。</p>
+<p><strong>原文链接：</strong><a href="https://x.com/victorcardenas/status/2117729738160496778">https://x.com/victorcardenas/status/2117729738160496778</a></p>]]></content:encoded>
     </item>
     <item>
       <title>Levelsio：全站开销砍到约 $300/月，Claude 帮他一年省下近三万刀月费</title>
       <link>https://xnews.qiaomu.ai/a/levelsio-300-month-expenses</link>
       <guid isPermaLink="true">https://xnews.qiaomu.ai/a/levelsio-300-month-expenses</guid>
       <pubDate>Tue, 03 Nov 2026 19:03:50 +0000</pubDate>
-      <description>2 万付费用户、2.52 亿访客、2.4PB 流量。AI 最擅长的，可能是帮你找到自己看不见的浪费。</description>
       <author>Pieter Levels</author>
+      <description><![CDATA[<p><em>2 万付费用户、2.52 亿访客、2.4PB 流量。AI 最擅长的，可能是帮你找到自己看不见的浪费。</em></p>
+<p>Pieter Levels 又晒了一张成本表。</p>
+<p>他所有网站加在一起，服务着大约 <strong>2 万付费用户、2.52 亿访客、24 亿请求、2.4PB 带宽</strong>。常规业务开销现在只剩大约 <strong>$300/月</strong>。如果把 Photo AI 的 GPU（约 $7000/月）和 R2（约 $800/月）算进去，大概 $8000/月。</p>
+<p>更刺眼的是降幅。他列了 Claude Code 帮他抠出来的账，合计接近 <strong>$34,000/月</strong>：</p>
+<ul>
+<li>视频模型换更便宜的、部分任务走 Google Cloud Credits 和市价转售，GPU 从 $36k 降到 $7k</li>
+<li>服务器合并，取消 DigitalOcean / Linode，迁到 Hetzner，约省 $3k</li>
+<li>Backblaze 无限版本改成 30 天生命周期，备份费从 $1200 降到 $26</li>
+<li>R2 加生命周期，90 天后进低频，从 $1200 降到 $800</li>
+<li>Cloudflare 域名清掉不用的，尤其是越来越贵的 <code>.io</code></li>
+<li>连 Claude 自己的 Max 20x 订阅也被降到 $100，因为他根本用不满</li>
+</ul>
+<p>连 Photo AI 算上，总成本比去年砍了大约九成，接近他十年前刚创业时的量级。</p>
+<p>他自己也说了一句很冷的话：短期看，AI 擅长找成本节约，对经济未必友好；长期看，它会削掉脂肪，把钱腾给更好的投资。</p>
+<p>独立开发者常年面对的「成本慢慢爬上去，你却没感觉」，终于有了一个很具体的对手方。不是再订一份监控 SaaS，是直接让模型读你的账单。</p>
+<p><strong>原文链接：</strong><a href="https://x.com/levelsio/status/2117694259558293692">https://x.com/levelsio/status/2117694259558293692</a></p>]]></description>
+      <content:encoded><![CDATA[<p><em>2 万付费用户、2.52 亿访客、2.4PB 流量。AI 最擅长的，可能是帮你找到自己看不见的浪费。</em></p>
+<p>Pieter Levels 又晒了一张成本表。</p>
+<p>他所有网站加在一起，服务着大约 <strong>2 万付费用户、2.52 亿访客、24 亿请求、2.4PB 带宽</strong>。常规业务开销现在只剩大约 <strong>$300/月</strong>。如果把 Photo AI 的 GPU（约 $7000/月）和 R2（约 $800/月）算进去，大概 $8000/月。</p>
+<p>更刺眼的是降幅。他列了 Claude Code 帮他抠出来的账，合计接近 <strong>$34,000/月</strong>：</p>
+<ul>
+<li>视频模型换更便宜的、部分任务走 Google Cloud Credits 和市价转售，GPU 从 $36k 降到 $7k</li>
+<li>服务器合并，取消 DigitalOcean / Linode，迁到 Hetzner，约省 $3k</li>
+<li>Backblaze 无限版本改成 30 天生命周期，备份费从 $1200 降到 $26</li>
+<li>R2 加生命周期，90 天后进低频，从 $1200 降到 $800</li>
+<li>Cloudflare 域名清掉不用的，尤其是越来越贵的 <code>.io</code></li>
+<li>连 Claude 自己的 Max 20x 订阅也被降到 $100，因为他根本用不满</li>
+</ul>
+<p>连 Photo AI 算上，总成本比去年砍了大约九成，接近他十年前刚创业时的量级。</p>
+<p>他自己也说了一句很冷的话：短期看，AI 擅长找成本节约，对经济未必友好；长期看，它会削掉脂肪，把钱腾给更好的投资。</p>
+<p>独立开发者常年面对的「成本慢慢爬上去，你却没感觉」，终于有了一个很具体的对手方。不是再订一份监控 SaaS，是直接让模型读你的账单。</p>
+<p><strong>原文链接：</strong><a href="https://x.com/levelsio/status/2117694259558293692">https://x.com/levelsio/status/2117694259558293692</a></p>]]></content:encoded>
     </item>
     <item>
       <title>Amjad：员工电脑上的 AI Agent，正在变成企业系统风险</title>
       <link>https://xnews.qiaomu.ai/a/amasad-managed-cloud-agents</link>
       <guid isPermaLink="true">https://xnews.qiaomu.ai/a/amasad-managed-cloud-agents</guid>
       <pubDate>Tue, 03 Nov 2026 06:28:06 +0000</pubDate>
-      <description>有人靠禁 Claude Code 止血。Replit 的建议更硬：托管、隔离、凭证外置，让云端受管环境成为默认。</description>
       <author>Amjad Masad</author>
+      <description><![CDATA[<p><em>有人靠禁 Claude Code 止血。Replit 的建议更硬：托管、隔离、凭证外置，让云端受管环境成为默认。</em></p>
+<p>Amjad Masad 发了一份安全咨询，标题几乎不绕弯：</p>
+<p><strong>让受管云环境，成为 AI Agent 的默认运行方式。</strong></p>
+<p>背景是这几个月一串真实事件叠在一起：个人 Claude 账号被接到敏感防务环境的报道、Cursor 市场上被篡改的 Claude Code 扩展、Nx 供应链攻击里恶意包征用已装好的 AI CLI 去翻密钥、GitHub MCP 演示里一条恶意 Issue 就能诱导 Agent 把私有仓信息写进公开 PR……路径不同，失败模式很像：不可信内容被当成指令，执行环境权限过大，控制面还在 Agent 自己手里。</p>
+<p>企业侧已经开始反应。有的直接限制 Claude Code 一类工具，高盛据称就是这么做的。Amjad 的判断是，禁用不解决长期问题。更干净的路是：</p>
+<blockquote><p>Agent 应该跑在组织可控、任务级隔离的环境里，只拿完成任务所需的最小资源。</p></blockquote>
+<p>咨询里列的控制项很工程化：验证过的执行隔离、经纪式凭证（credential broker）、逐步提权审批、任务作用域权限、网络与数据流限制、生产写入外置、供应链治理、以及 Agent 改不了的独立审计与熔断。</p>
+<p>一句话概括他的立场：云托管本身不等于安全，但「受管云 + 可验证边界」比「员工笔记本 + 个人 Agent」更适合当默认值。</p>
+<p>如果你正在给公司推 Coding Agent，这篇值得转给安全同事。争论焦点已经从「要不要用」换成「默认跑在谁的环境里」。</p>
+<p><strong>原文链接：</strong><a href="https://x.com/amasad/status/2117504072416890937">https://x.com/amasad/status/2117504072416890937</a></p>]]></description>
+      <content:encoded><![CDATA[<p><em>有人靠禁 Claude Code 止血。Replit 的建议更硬：托管、隔离、凭证外置，让云端受管环境成为默认。</em></p>
+<p>Amjad Masad 发了一份安全咨询，标题几乎不绕弯：</p>
+<p><strong>让受管云环境，成为 AI Agent 的默认运行方式。</strong></p>
+<p>背景是这几个月一串真实事件叠在一起：个人 Claude 账号被接到敏感防务环境的报道、Cursor 市场上被篡改的 Claude Code 扩展、Nx 供应链攻击里恶意包征用已装好的 AI CLI 去翻密钥、GitHub MCP 演示里一条恶意 Issue 就能诱导 Agent 把私有仓信息写进公开 PR……路径不同，失败模式很像：不可信内容被当成指令，执行环境权限过大，控制面还在 Agent 自己手里。</p>
+<p>企业侧已经开始反应。有的直接限制 Claude Code 一类工具，高盛据称就是这么做的。Amjad 的判断是，禁用不解决长期问题。更干净的路是：</p>
+<blockquote><p>Agent 应该跑在组织可控、任务级隔离的环境里，只拿完成任务所需的最小资源。</p></blockquote>
+<p>咨询里列的控制项很工程化：验证过的执行隔离、经纪式凭证（credential broker）、逐步提权审批、任务作用域权限、网络与数据流限制、生产写入外置、供应链治理、以及 Agent 改不了的独立审计与熔断。</p>
+<p>一句话概括他的立场：云托管本身不等于安全，但「受管云 + 可验证边界」比「员工笔记本 + 个人 Agent」更适合当默认值。</p>
+<p>如果你正在给公司推 Coding Agent，这篇值得转给安全同事。争论焦点已经从「要不要用」换成「默认跑在谁的环境里」。</p>
+<p><strong>原文链接：</strong><a href="https://x.com/amasad/status/2117504072416890937">https://x.com/amasad/status/2117504072416890937</a></p>]]></content:encoded>
     </item>
     <item>
       <title>Levelsio × Claude：把《战地 1942》反编译后塞进浏览器联机</title>
       <link>https://xnews.qiaomu.ai/a/levelsio-bf1942-web</link>
       <guid isPermaLink="true">https://xnews.qiaomu.ai/a/levelsio-bf1942-web</guid>
       <pubDate>Mon, 02 Nov 2026 21:55:09 +0000</pubDate>
-      <description>没有开源引擎可借，从 x86 机器码翻到 C，再编成 WebAssembly。他说自己大多时候只是在旁边看。</description>
       <author>Pieter Levels</author>
+      <description><![CDATA[<p><em>没有开源引擎可借，从 x86 机器码翻到 C，再编成 WebAssembly。他说自己大多时候只是在旁边看。</em></p>
+<p>Pieter Levels 把可能是他最爱的游戏，《Battlefield 1942》，搬进了浏览器，还带多人联机。</p>
+<p>地址：<a href="https://bf1942.pieter.com" target="_blank" rel="noopener noreferrer">bf1942.pieter.com</a>（免费试玩版）。</p>
+<p>这事比他以前移植 Quake、DOOM 难一截。后两者早有开源项目垫底；BF1942 几乎没有任何现成底座，厂商也没开源引擎。半年前他试过，基本放弃。今天又拿 Opus 5.5 问了一句：「能不能把这个文件夹里的 BF1942 demo 移植到网页」。</p>
+<p>然后他和 Claude Code（他承认主要是 Claude）干了一堆听起来离谱的事：</p>
+<ul>
+<li>反汇编 x86，找出约 57,000 个函数</li>
+<li>把每个函数翻成 C（<code>mov eax, [esi+0x110]</code> 变成 <code>eax = READ32(esi + 0x110)</code>）</li>
+<li>吐出大约 10 万行 C</li>
+<li>用 Emscripten 编成 WebAssembly</li>
+<li>重写约 300 个 Windows / Direct3D 调用，接到 WebGL 2 / OpenGL</li>
+<li>自建网络栈，经 WebSocket 连多人服务器</li>
+</ul>
+<p>他自己的原话很诚实：「我不知道它怎么做到的，但它做到了，而且好像能玩。」</p>
+<p>这不是怀旧彩蛋那么简单。它在演示一件更锋利的事：当模型能在「无文档、无开源、只有二进制」的场景里硬凿出可运行系统，软件考古和废弃游戏保存，会突然变得可规模化。</p>
+<p><strong>原文链接：</strong><a href="https://x.com/levelsio/status/2117374984192512391">https://x.com/levelsio/status/2117374984192512391</a></p>
+<p><strong>相关链接：</strong><a href="https://bf1942.pieter.com">https://bf1942.pieter.com</a></p>]]></description>
+      <content:encoded><![CDATA[<p><em>没有开源引擎可借，从 x86 机器码翻到 C，再编成 WebAssembly。他说自己大多时候只是在旁边看。</em></p>
+<p>Pieter Levels 把可能是他最爱的游戏，《Battlefield 1942》，搬进了浏览器，还带多人联机。</p>
+<p>地址：<a href="https://bf1942.pieter.com" target="_blank" rel="noopener noreferrer">bf1942.pieter.com</a>（免费试玩版）。</p>
+<p>这事比他以前移植 Quake、DOOM 难一截。后两者早有开源项目垫底；BF1942 几乎没有任何现成底座，厂商也没开源引擎。半年前他试过，基本放弃。今天又拿 Opus 5.5 问了一句：「能不能把这个文件夹里的 BF1942 demo 移植到网页」。</p>
+<p>然后他和 Claude Code（他承认主要是 Claude）干了一堆听起来离谱的事：</p>
+<ul>
+<li>反汇编 x86，找出约 57,000 个函数</li>
+<li>把每个函数翻成 C（<code>mov eax, [esi+0x110]</code> 变成 <code>eax = READ32(esi + 0x110)</code>）</li>
+<li>吐出大约 10 万行 C</li>
+<li>用 Emscripten 编成 WebAssembly</li>
+<li>重写约 300 个 Windows / Direct3D 调用，接到 WebGL 2 / OpenGL</li>
+<li>自建网络栈，经 WebSocket 连多人服务器</li>
+</ul>
+<p>他自己的原话很诚实：「我不知道它怎么做到的，但它做到了，而且好像能玩。」</p>
+<p>这不是怀旧彩蛋那么简单。它在演示一件更锋利的事：当模型能在「无文档、无开源、只有二进制」的场景里硬凿出可运行系统，软件考古和废弃游戏保存，会突然变得可规模化。</p>
+<p><strong>原文链接：</strong><a href="https://x.com/levelsio/status/2117374984192512391">https://x.com/levelsio/status/2117374984192512391</a></p>
+<p><strong>相关链接：</strong><a href="https://bf1942.pieter.com">https://bf1942.pieter.com</a></p>]]></content:encoded>
     </item>
     <item>
       <title>Karpathy 周末两小时：用 Claude 从 4300 万条 HN 评论里筛出 6454 个值得看的视频</title>
       <link>https://xnews.qiaomu.ai/a/karpathy-hackertube</link>
       <guid isPermaLink="true">https://xnews.qiaomu.ai/a/karpathy-hackertube</guid>
       <pubDate>Sun, 01 Nov 2026 18:14:46 +0000</pubDate>
-      <description>受够了 YouTube 推荐，他把二十年 Hacker News 评论扔给 Opus 5.5，做了个不登录也好用的 HackerTube。</description>
       <author>Andrej Karpathy</author>
+      <description><![CDATA[<p><em>受够了 YouTube 推荐，他把二十年 Hacker News 评论扔给 Opus 5.5，做了个不登录也好用的 HackerTube。</em></p>
+<p>Andrej Karpathy 又交了一份周末作业。</p>
+<p>这次叫 <strong>HackerTube</strong>。起因很简单：他烦 YouTube 推荐。于是让 Claude 把 Hacker News 二十年、大约 <strong>4300 万条评论</strong>滤了一遍，留下会反复被推荐的 <strong>6454 个视频</strong>。他自己说，用 Opus 5.5 大概花了两小时，观感「显著更好」。</p>
+<p>站点在 <a href="https://hackertube.org/" target="_blank" rel="noopener noreferrer">hackertube.org</a>。几个设计选择挺对味：</p>
+<ul>
+<li>不登录也能用，状态留在浏览器本地</li>
+<li>缩略图取视频中间的一帧，不跟那种被 A/B 测到极致的封面卷</li>
+<li>评论分析的底层数据打包成 zip，你也可以丢给 Claude，做自己的版本</li>
+<li>还有 HackerTube Longs</li>
+</ul>
+<p>过程也值得记一笔。他默认用 Claude Code 桌面端、Opus 5.5 Medium。自己动手的部分很少：去 Google Cloud 开 YouTube API key、起一台 VPS、买域名。机器起来之后，把 IP 丢给 Claude，让它更新、加固、部署、优化，整条链路基本交给模型。</p>
+<p>他收尾那句很轻，但分量不轻：</p>
+<blockquote><p>很多原本要花几周甚至几个月的项目，现在早饭前就能 few-shot 出来。我们还没想到的，还有多少？</p></blockquote>
+<p>这不是又一个「AI 写了个玩具」的故事。它更像在提醒：当你真正把「找信号」这件事外包给模型，产品形态会跟着变。HN 评论里本来就埋着高质量推荐，只是以前没人愿意花两小时把矿挖干净。</p>
+<p><strong>原文链接：</strong><a href="https://x.com/karpathy/status/2116957135661945283">https://x.com/karpathy/status/2116957135661945283</a></p>]]></description>
+      <content:encoded><![CDATA[<p><em>受够了 YouTube 推荐，他把二十年 Hacker News 评论扔给 Opus 5.5，做了个不登录也好用的 HackerTube。</em></p>
+<p>Andrej Karpathy 又交了一份周末作业。</p>
+<p>这次叫 <strong>HackerTube</strong>。起因很简单：他烦 YouTube 推荐。于是让 Claude 把 Hacker News 二十年、大约 <strong>4300 万条评论</strong>滤了一遍，留下会反复被推荐的 <strong>6454 个视频</strong>。他自己说，用 Opus 5.5 大概花了两小时，观感「显著更好」。</p>
+<p>站点在 <a href="https://hackertube.org/" target="_blank" rel="noopener noreferrer">hackertube.org</a>。几个设计选择挺对味：</p>
+<ul>
+<li>不登录也能用，状态留在浏览器本地</li>
+<li>缩略图取视频中间的一帧，不跟那种被 A/B 测到极致的封面卷</li>
+<li>评论分析的底层数据打包成 zip，你也可以丢给 Claude，做自己的版本</li>
+<li>还有 HackerTube Longs</li>
+</ul>
+<p>过程也值得记一笔。他默认用 Claude Code 桌面端、Opus 5.5 Medium。自己动手的部分很少：去 Google Cloud 开 YouTube API key、起一台 VPS、买域名。机器起来之后，把 IP 丢给 Claude，让它更新、加固、部署、优化，整条链路基本交给模型。</p>
+<p>他收尾那句很轻，但分量不轻：</p>
+<blockquote><p>很多原本要花几周甚至几个月的项目，现在早饭前就能 few-shot 出来。我们还没想到的，还有多少？</p></blockquote>
+<p>这不是又一个「AI 写了个玩具」的故事。它更像在提醒：当你真正把「找信号」这件事外包给模型，产品形态会跟着变。HN 评论里本来就埋着高质量推荐，只是以前没人愿意花两小时把矿挖干净。</p>
+<p><strong>原文链接：</strong><a href="https://x.com/karpathy/status/2116957135661945283">https://x.com/karpathy/status/2116957135661945283</a></p>]]></content:encoded>
     </item>
   </channel>
 </rss>

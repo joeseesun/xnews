@@ -437,23 +437,47 @@ def build_feed_items(articles: list[dict]) -> str:
     return "\n".join(rows)
 
 
+def rss_full_html(a: dict) -> str:
+    """Full article HTML for RSS readers (description + content:encoded)."""
+    src = a["source"]
+    body = md_to_html(a["body_md"])
+    parts = []
+    dek = (a.get("dek") or "").strip()
+    if dek:
+        parts.append(f"<p><em>{html.escape(dek)}</em></p>")
+    parts.append(body)
+    parts.append(
+        "<p><strong>原文链接：</strong>"
+        f'<a href="{html.escape(src["url"])}">{html.escape(src["url"])}</a></p>'
+    )
+    if src.get("related_url"):
+        parts.append(
+            "<p><strong>相关链接：</strong>"
+            f'<a href="{html.escape(src["related_url"])}">{html.escape(src["related_url"])}</a></p>'
+        )
+    return "\n".join(parts)
+
+
 def build_rss(articles: list[dict]) -> str:
     items = []
     for a in articles:
         link = f"{SITE_URL}/a/{a['id']}"
         dt = parse_dt(a)
-        desc = html.escape(a.get("dek") or a["title"])
+        full = rss_full_html(a)
+        # CDATA so readers get full HTML; escape any ]]> in body
+        cdata = full.replace("]]>", "]]]]><![CDATA[>")
         items.append(f"""    <item>
       <title>{xml_escape(a['title'])}</title>
       <link>{xml_escape(link)}</link>
       <guid isPermaLink="true">{xml_escape(link)}</guid>
       <pubDate>{format_datetime(dt.astimezone(timezone.utc))}</pubDate>
-      <description>{desc}</description>
       <author>{xml_escape(a['source'].get('author',''))}</author>
+      <description><![CDATA[{cdata}]]></description>
+      <content:encoded><![CDATA[{cdata}]]></content:encoded>
     </item>""")
     now = datetime.now(timezone.utc)
     return f"""<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>{xml_escape(SITE_NAME)}</title>
     <link>{SITE_URL}/</link>
