@@ -1,0 +1,84 @@
+{
+  "version": 1,
+  "fetched_at": "2026-11-06T08:21:45.773827+08:00",
+  "method": "Unauthenticated normal curl GET; no cookies, credentials or browser-session access. HTTP 200 image/jpeg; original bytes retained. Rendering-only local mapping; RSS and content metadata stay upstream.",
+  "assets": [
+    {
+      "source_url": "https://pbs.twimg.com/media/HWDnuuCaIAA__wa.jpg",
+      "local_url": "/media/karpathy-hackertube-image-cca841bfb0.jpg",
+      "role": "image",
+      "article_id": "karpathy-hackertube",
+      "content_type": "image/jpeg",
+      "bytes": 107280,
+      "width": 1200,
+      "height": 697,
+      "sha256": "3d2d2ca484818fb930de2228f4f154f8a47b2fd3127e7556a86b07c11086ae08"
+    },
+    {
+      "source_url": "https://pbs.twimg.com/media/HWOOvq5WoAAMsfw.jpg",
+      "local_url": "/media/levelsio-300-month-expenses-image-6e1d7a11c2.jpg",
+      "role": "image",
+      "article_id": "levelsio-300-month-expenses",
+      "content_type": "image/jpeg",
+      "bytes": 43818,
+      "width": 1199,
+      "height": 592,
+      "sha256": "8f33a7b25bde39c19adbf25dabe529bb179b7638d8fa54dcbd09b4bec2b616eb"
+    },
+    {
+      "source_url": "https://pbs.twimg.com/amplify_video_thumb/2117374770253565952/img/6WkHxBF81dMfyKCf.jpg",
+      "local_url": "/media/levelsio-bf1942-web-poster-fdbc2233d7.jpg",
+      "role": "poster",
+      "article_id": "levelsio-bf1942-web",
+      "content_type": "image/jpeg",
+      "bytes": 64351,
+      "width": 675,
+      "height": 1200,
+      "sha256": "23db755240b8f7ffa99585ac4be24ec41d72e05b7b056dc5c74b4b00f163df45"
+    },
+    {
+      "source_url": "https://i.ytimg.com/vi/OrcsMi2-IcM/sddefault.jpg",
+      "local_url": "/media/deepseek-super-agent-harness-poster-32294b3993.jpg",
+      "role": "poster",
+      "article_id": "deepseek-super-agent-harness",
+      "content_type": "image/jpeg",
+      "bytes": 43712,
+      "width": 640,
+      "height": 480,
+      "sha256": "3aae9b992064db05aeb0f2b57bee546a5f7e74e905ad6e29d5982a907c867deb"
+    },
+    {
+      "source_url": "https://pbs.twimg.com/amplify_video_thumb/2118458611320131584/img/uUJSIBl8QaDBnoAA.jpg",
+      "local_url": "/media/cursor-live-apps-poster-d4045da567.jpg",
+      "role": "poster",
+      "article_id": "cursor-live-apps",
+      "content_type": "image/jpeg",
+      "bytes": 21347,
+      "width": 1200,
+      "height": 675,
+      "sha256": "3fcfa2bfe32c9f8c69464172e9ab4ebeeff7a786805c35b05bbdc442dbce45b7"
+    },
+    {
+      "source_url": "https://pbs.twimg.com/amplify_video_thumb/2118387217588465664/img/N2grMUmP0O_EMvS2.jpg",
+      "local_url": "/media/openai-gpt6-cyber-poster-d795be1590.jpg",
+      "role": "poster",
+      "article_id": "openai-gpt6-cyber",
+      "content_type": "image/jpeg",
+      "bytes": 47191,
+      "width": 1200,
+      "height": 675,
+      "sha256": "2a4037e3f4b11463fbcc6ad05a8445827864a8c28bf4124dacfacda4aff01273"
+    },
+    {
+      "source_url": "https://pbs.twimg.com/amplify_video_thumb/2118289796053270528/img/CPvuvMCkuJt0y4QM.jpg",
+      "local_url": "/media/tibo-dropbox-launch-video-poster-839d50e043.jpg",
+      "role": "poster",
+      "article_id": "tibo-dropbox-launch-video",
+      "content_type": "image/jpeg",
+      "bytes": 12221,
+      "width": 480,
+      "height": 360,
+      "sha256": "263787b3d657175a534e2787a5982c5b13e26981efbd618a369e458de8286e6c"
+    }
+  ]
+}

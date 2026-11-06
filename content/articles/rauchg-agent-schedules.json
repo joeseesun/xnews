@@ -10,8 +10,8 @@
     "title_en": "Doing stuff for you over time is the killer app of agents",
     "related_url": "https://vercel.com/blog/introducing-vercel-schedules"
   },
-  "title": "Rauch：Agent 的杀手级应用，是「跨时间替你做事」",
-  "dek": "夜里整理记忆，早上提醒你，N 天没互动再戳一下。Vercel Schedules 像加强版 Cron，还能在运行时动态创建。",
+  "title": "Rauch 谈 Agent 持续任务：Vercel Schedules 可在运行时定义",
+  "dek": "Muse 和 Instinct 会夜间整理记忆、早上提醒，并在一段时间没互动后主动发消息。",
   "tags": [
     "agent",
     "Vercel",
@@ -23,5 +23,6 @@
     "text_md": "“Doing stuff for you over time” is the killer app of agents.\n\nMuse and Instinct consolidate memories at night, remind you of stuff in the morning, message you after N days passed since your last interaction…\n\nVercel Schedules are like Cron on steroids. They can be defined at runtime, scale infinitely, and sit outside of the Sandbox, which means you can cost-efficiently invoke compute as needed.",
     "media": []
   },
-  "body_md": "Guillermo Rauch 给 Agent 的杀手级应用下了个很短的定义：\n\n> Doing stuff for you over time.\n\n跨时间替你做事。\n\n他举的例子很生活：Muse、Instinct 夜里合并记忆，早上提醒你，距离上次互动过了 N 天再主动戳一下。对应到基础设施，就是刚进公测的 **Vercel Schedules**：可在代码里静态声明，也可运行时动态创建；能在 Preview 环境跑；调度落在 Sandbox 外，按需唤醒计算，账单更可控。\n\n这句话之所以有分量，是因为它把讨论从「单次对话里 Agent 聪不聪明」，拽回「它能不能成为你生活和工作的背景进程」。聊天窗口是同步的；真正值钱的，往往是异步的、隔夜的、过几天再回来的那一下。\n\n如果你在设计 Agent 产品，不妨先问：用户离开之后，它还剩什么可做的？\n"
+  "body_md": "Guillermo Rauch 认为，持续替用户处理事情，是 Agent 的杀手级应用。\n\n他举了 Muse 和 Instinct 的例子：它们会在夜间整理记忆，早上提醒用户，并在距离上一次互动过了 N 天后发来消息。\n\n谈到配套基础设施，Rauch 将 Vercel Schedules 形容为加强版 Cron。按他的介绍，任务可以在运行时定义，能够无限扩展，而且调度系统位于 Sandbox 之外，因此可以按需调用计算资源，以更低的成本运行。\n",
+  "rewrite_media": []
 }

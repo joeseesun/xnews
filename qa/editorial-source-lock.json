@@ -1,0 +1,26 @@
+{
+  "snapshot": "2026-11-06 (Asia/Shanghai)",
+  "protected_fields": [
+    "id",
+    "date",
+    "published_at",
+    "tags",
+    "source",
+    "original"
+  ],
+  "sha256_by_id": {
+    "karpathy-hackertube": "46a1a9741b4fd909e2ecaee4500a488b214922723dcee4ff5face1fc627339d3",
+    "rauchg-vercel-security-review": "67090645689cc0304ceac94eb4b806a5efa16f61bbcc0ee1cc450cd09a32ee4a",
+    "amasad-managed-cloud-agents": "2049221b3411e6709d2d4332517636d515953b5d2c6f9b499726f9a32c02c324",
+    "levelsio-300-month-expenses": "f1ae2155eb7235490745089e488cc9ac9ddf57504d563ff98fd00792ba8875c7",
+    "victor-slash-supersmb": "dbd5e0c6b261dd27e069c55e69858371aeca5d3e07394fe3f6d3ff07f321daaa",
+    "sarah-guo-personal-software": "a252cd63c6bf91e3af19918a79a29a898a89c15cc5471f4d0d90652eb6aa9fc8",
+    "levelsio-bf1942-web": "a8c3ecf9e93b39d3c187d9d04f48941bbe9cb3af7a7a9f6e8ab4a3b0a391b37e",
+    "deepseek-super-agent-harness": "933efa73189204466dd2f6da7fc186d38f6cd565dfb3a3ed92cd3cff8b3eb4b0",
+    "cursor-live-apps": "11e5bef058cba61e4c9d5a82ff547c00788f83b0c52238042e7f5f56d674cc83",
+    "openai-gpt6-cyber": "37f1184dce6afb29fcd48541916092a6327abda52ac1808eac0f3c9b3360bf2a",
+    "anthropic-vault-claude": "0ada92eaa46a99e7ae693ca46feffc688709113fcdbc4a6c461e789e953d5cdb",
+    "tibo-dropbox-launch-video": "775b918aa55e4fc73e243a886f8f30c9b80737a9d9b5b1c2177cbad241789bf4",
+    "rauchg-agent-schedules": "083755ae4f51d87583d4f5e2456e8ea6459baac6ab9c482645a66aab242958d7"
+  }
+}

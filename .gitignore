@@ -2,3 +2,8 @@ node_modules/
 .wrangler/
 .dev.vars
 .DS_Store
+__pycache__/
+*.pyc
+
+# Local public-media investigation scratch; not content or deployment input.
+.media-qa/

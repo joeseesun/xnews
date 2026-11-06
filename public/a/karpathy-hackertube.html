@@ -3,87 +3,53 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Karpathy 周末两小时：用 Claude 从 4300 万条 HN 评论里筛出 6454 个值得看的视频 · X News</title>
-<meta name="description" content="受够了 YouTube 推荐，他把二十年 Hacker News 评论扔给 Opus 5.5，做了个不登录也好用的 HackerTube。">
+<title>Karpathy 做了 HackerTube：从 4300 万条 HN 评论中找到 6454 个视频 · X News</title>
+<meta name="description" content="他用 Opus 5.5 花了约两小时完成这个周末项目；推荐无需登录，底层数据也可下载。">
 <meta name="color-scheme" content="light dark">
-<meta property="og:type" content="website">
+<meta name="theme-color" content="#fffefa">
+<meta property="og:type" content="article">
 <meta property="og:site_name" content="X News">
-<meta property="og:title" content="Karpathy 周末两小时：用 Claude 从 4300 万条 HN 评论里筛出 6454 个值得看的视频 · X News">
-<meta property="og:description" content="受够了 YouTube 推荐，他把二十年 Hacker News 评论扔给 Opus 5.5，做了个不登录也好用的 HackerTube。">
+<meta property="og:title" content="Karpathy 做了 HackerTube：从 4300 万条 HN 评论中找到 6454 个视频 · X News">
+<meta property="og:description" content="他用 Opus 5.5 花了约两小时完成这个周末项目；推荐无需登录，底层数据也可下载。">
 <meta property="og:url" content="https://xnews.qiaomu.ai/a/karpathy-hackertube">
 <link rel="canonical" href="https://xnews.qiaomu.ai/a/karpathy-hackertube">
 <link rel="alternate" type="application/rss+xml" title="X News" href="/feed.xml">
-<meta name="theme-color" content="#121212">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23121212'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-size='14' fill='%23fff' font-family='serif'%3EX%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231b1d18'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-size='19' fill='%23fffefa' font-family='sans-serif'%3EX%3C/text%3E%3C/svg%3E">
 <script>try{var t=localStorage.getItem('xn.theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="stylesheet" href="/app.css">
+<script src="/app.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">跳到正文</a>
-<header class="topbar">
-  <button id="menu-btn" class="icon-btn" aria-label="切换导航栏" aria-controls="sidebar" aria-expanded="false">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-  </button>
-  <a class="logo" href="/" aria-label="X News 首页">
-    <span class="logo-text">X News</span>
-    <span class="logo-sub">海外发现</span>
-  </a>
-  <div class="top-spacer"></div>
-  <a class="icon-btn" href="/feed.xml" aria-label="RSS" title="RSS">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
-  </a>
-  <button id="theme-btn" class="icon-btn" aria-label="切换明暗主题" title="切换主题">
-    <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
-    <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
-  </button>
+<header class="site-header">
+  <a class="brand" href="/" aria-label="X News 海外发现首页"><span class="brand-name">X News</span><span class="brand-slash" aria-hidden="true">/</span><span class="brand-sub">海外<br>发现</span></a>
+  <div class="header-side"><p class="header-caption">英文原作，中文视角。<br>长帖 · 文章 · 影像</p><nav class="site-nav" aria-label="主导航"><a href="/">精选</a><a class="archive-nav" href="/archive">往期</a><a href="/feed.xml" aria-label="订阅全文 RSS">RSS ↗</a></nav><button type="button" class="icon-button" id="theme-btn" aria-label="切换为暗色主题" aria-pressed="false"><span aria-hidden="true">◐</span></button></div>
 </header>
-<div class="scrim" id="scrim"></div>
-<div class="layout">
-  <nav id="sidebar" class="sidebar" aria-label="主导航">
-    <ul class="nav">
-      <li><a href="/" class="" data-route="home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>今日精选</a></li>
-      <li><a href="/archive" class="active" data-route="archive"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 22h16"/><path d="M16 4H8a2 2 0 0 0-2 2v14h12V6a2 2 0 0 0-2-2Z"/><path d="M10 10h4M10 14h4"/></svg>全部文章</a></li>
-      <li><a href="/feed.xml"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>RSS</a></li>
-      <li><a href="/about" class=""><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>关于</a></li>
-    </ul>
-    <div class="nav-h">说明</div>
-    <p style="margin:0;color:var(--muted);font-size:13px;line-height:1.55">英文长帖 / X Article / 海外 AI 视频 → 乔木中文改写，并保留原文与媒体。</p>
-  </nav>
-  <main id="main" class="main">
-
-<article class="article">
-  <div class="kicker">X · @karpathy</div>
-  <h1>Karpathy 周末两小时：用 Claude 从 4300 万条 HN 评论里筛出 6454 个值得看的视频</h1>
-  <p class="dek">受够了 YouTube 推荐，他把二十年 Hacker News 评论扔给 Opus 5.5，做了个不登录也好用的 HackerTube。</p>
-  <div class="meta">
-    <span>2026年11月1日 · 周日</span>
-    <span>Andrej Karpathy</span>
-    <span>AI coding · product · HN</span>
-  </div>
-  <div class="prose">
-<p>Andrej Karpathy 又交了一份周末作业。</p>
-<p>这次叫 <strong>HackerTube</strong>。起因很简单：他烦 YouTube 推荐。于是让 Claude 把 Hacker News 二十年、大约 <strong>4300 万条评论</strong>滤了一遍，留下会反复被推荐的 <strong>6454 个视频</strong>。他自己说，用 Opus 5.5 大概花了两小时，观感「显著更好」。</p>
-<p>站点在 <a href="https://hackertube.org/" target="_blank" rel="noopener noreferrer">hackertube.org</a>。几个设计选择挺对味：</p>
+<main class="site-main" id="main">
+<article class="article-reader" data-article-id="karpathy-hackertube">
+<a class="article-back" href="/">← 返回选刊</a>
+<header class="article-header"><p class="article-kicker">X · @karpathy / 长帖</p><h1>Karpathy 做了 HackerTube：从 4300 万条 HN 评论中找到 6454 个视频</h1><p class="article-dek">他用 Opus 5.5 花了约两小时完成这个周末项目；推荐无需登录，底层数据也可下载。</p><div class="article-meta"><time datetime="2026-11-01">2026年11月1日 · 周日</time><span>Andrej Karpathy</span><span>AI coding · product · HN</span></div></header>
+<nav class="reader-tabs" aria-label="文章版本与来源"><div data-tabs><a href="#rewrite" id="tab-rewrite" data-view="rewrite">乔木改写</a><a href="#original" id="tab-original" data-view="original">原文</a></div><a class="reader-source" href="https://x.com/karpathy/status/2116957135661945283" target="_blank" rel="noopener noreferrer">原文链接 ↗</a></nav>
+<section class="reader-panel" id="rewrite" data-reader-panel="rewrite" aria-label="乔木改写"><h2 class="section-heading">乔木改写</h2><div class="prose"><p>Andrej Karpathy 不满 YouTube 的推荐，于是做了一个周末项目 HackerTube。他让 Claude 从 Hacker News 二十年来约 4300 万条评论中，筛出反复被推荐的 6454 个视频。按他的说法，整个项目用 Opus 5.5 花了约两小时，观看体验明显更好。</p>
+<p>他列出了几个设计选择：</p>
 <ul>
-<li>不登录也能用，状态留在浏览器本地</li>
-<li>缩略图取视频中间的一帧，不跟那种被 A/B 测到极致的封面卷</li>
-<li>评论分析的底层数据打包成 zip，你也可以丢给 Claude，做自己的版本</li>
-<li>还有 HackerTube Longs</li>
+<li>不登录也能获得推荐，使用状态保存在本地浏览器会话中。</li>
+<li>缩略图选取视频中段有代表性的一帧，而非上传者经过大量 A/B 测试优化的封面。</li>
+<li>评论分析的底层数据打包为一个 zip 文件，其他人可以把它交给 Claude，要求制作自己的版本。</li>
+<li>另有 HackerTube Longs。</li>
 </ul>
-<p>过程也值得记一笔。他默认用 Claude Code 桌面端、Opus 5.5 Medium。自己动手的部分很少：去 Google Cloud 开 YouTube API key、起一台 VPS、买域名。机器起来之后，把 IP 丢给 Claude，让它更新、加固、部署、优化，整条链路基本交给模型。</p>
-<p>他收尾那句很轻，但分量不轻：</p>
-<blockquote><p>很多原本要花几周甚至几个月的项目，现在早饭前就能 few-shot 出来。我们还没想到的，还有多少？</p></blockquote>
-<p>这不是又一个「AI 写了个玩具」的故事。它更像在提醒：当你真正把「找信号」这件事外包给模型，产品形态会跟着变。HN 评论里本来就埋着高质量推荐，只是以前没人愿意花两小时把矿挖干净。</p>
-  </div>
-
-  <section class="original" aria-label="原文">
-    <h2>原文</h2>
-    <p class="orig-title">Weekend hack: HackerTube</p>
-    <div class="original-media">
-<img src="https://pbs.twimg.com/media/HWDnuuCaIAA__wa.jpg" alt="" loading="lazy" decoding="async">
+<p>他也介绍了制作过程。默认工具是 Mac 版 Claude Code 桌面应用，模型为 Opus 5.5，使用 Medium effort。他只与 Claude 对话，让它完成工作；自己配合做的手动操作都在浏览器中：从 Google Cloud 界面创建查询 YouTube 视频元数据所需的 API key、启动用于提供服务的 VPS，以及购买域名。他提到，这种配合方式让他想起 MenuGen。</p>
+<p>VPS 启动后，他把 IP 交给 Claude，让它更新系统、处理安全加固、部署并优化代码。他说，Claude 完成了这些工作。</p>
+<p>Karpathy 感慨，一些过去需要数周甚至数月的项目，如今吃顿早饭的工夫，用少量提示就能做出来。他想知道，还有哪些项目是大家尚未想到的。原帖中的项目链接是 <a href="https://t.co/JIhXN7OSh1" target="_blank" rel="noopener noreferrer">HackerTube</a>。</p>
+<section class="rewrite-source-media" aria-label="原文附带媒体"><h3 class="source-media-heading">原文附带媒体</h3><p class="completeness-note">原文附带媒体；未核验其与具体段落的对应关系。</p><div class="original-media">
+<figure class="media-figure" data-media-id="m_1056aca2aea7617b"><div class="media-frame"><img src="/media/karpathy-hackertube-image-cca841bfb0.jpg" data-original-src="https://pbs.twimg.com/media/HWDnuuCaIAA__wa.jpg" alt="原帖配图" loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://x.com/karpathy/status/2116957135661945283" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section></div></section>
+<section class="reader-panel" id="original" data-reader-panel="original" aria-label="原文">
+<h2 class="section-heading">原文</h2><h3 class="original-title">Weekend hack: HackerTube</h3>
+<div class="original-media">
+<figure class="media-figure" data-media-id="m_1056aca2aea7617b"><div class="media-frame"><img src="/media/karpathy-hackertube-image-cca841bfb0.jpg" data-original-src="https://pbs.twimg.com/media/HWDnuuCaIAA__wa.jpg" alt="原帖配图" loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://x.com/karpathy/status/2116957135661945283" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
 </div>
-    <div class="prose">
-<p>Weekend hack: HackerTube. I was annoyed with YouTube&#x27;s recommendations so I had Claude filter down 43M comments over 20 years of HN to 6,454 videos that keep being recommended. <em>Significantly</em> better viewing experience, ~2 hours with Opus 5.5: https://t.co/JIhXN7OSh1</p>
+<div class="prose" lang="en"><p>Weekend hack: HackerTube. I was annoyed with YouTube&#x27;s recommendations so I had Claude filter down 43M comments over 20 years of HN to 6,454 videos that keep being recommended. <em>Significantly</em> better viewing experience, ~2 hours with Opus 5.5: https://t.co/JIhXN7OSh1</p>
 <ul>
 <li>Excellent recs without any logins (state is kept in local browser session)</li>
 <li>Thumbnail is a representative frame from middle of the video instead of the super duper A/B test hyper-optimized user uploads</li>
@@ -91,34 +57,12 @@
 <li>HackerTube Longs ✊</li>
 </ul>
 <p>A bit more on the process: I use Claude Code (desktop app for Mac), Opus 5.5 on Medium effort as my default. I only talk to Claude and have it do everything, the only &quot;manual work&quot; I helped with in tandem was in the browser (reminiscent of MenuGen): 1) I had to create some kind of API key from Google Cloud UI to query YouTube for video metadata, 2) I booted up a VPS box for serving and 3) I bought the domain name. Once the box was up I gave Claude the IP and told it update, secure, harden, deploy and optimize the code, and it did the whole thing.</p>
-<p>Many awesome projects that would have normally taken weeks/months even can now be few-shotted for breakfast. What else are we not thinking of.</p>
-    </div>
-  </section>
-
-  <div class="source-box">
-    <span class="lbl">原文链接</span>
-    <a href="https://x.com/karpathy/status/2116957135661945283" target="_blank" rel="noopener noreferrer">https://x.com/karpathy/status/2116957135661945283</a>
-  </div>
-  <a class="back" href="/">← 返回今日精选</a>
+<p>Many awesome projects that would have normally taken weeks/months even can now be few-shotted for breakfast. What else are we not thinking of.</p></div>
+</section>
+<footer class="source-box"><span>内容来自原作者；中文为乔木风格改写，非逐字翻译。</span><div><a href="https://x.com/karpathy/status/2116957135661945283" target="_blank" rel="noopener noreferrer">打开原文 ↗</a></div></footer>
 </article>
+</main>
+<footer class="site-footer"><span>海外创始人长文 · 乔木中文改写<br>每日 08:00 更新 · 中国标准时间（UTC+8）</span><nav class="footer-links" aria-label="页尾导航"><a href="/feed.xml">全文 RSS ↗</a><a href="/archive">全部文章</a><a href="/about">关于</a></nav></footer>
 
-  </main>
-</div>
-<footer class="footer">
-  <div class="foot-cols">
-    <div class="foot-about">
-      <div class="foot-brand">X News</div>
-      <p style="margin-top:8px">海外创始人长文 · AI 视频 · 乔木中文改写</p>
-      <p>内容来自公开 X 帖文、X Articles 与 YouTube；中文为向阳乔木风格改写，非机器直译。</p>
-    </div>
-    <div class="foot-links">
-      <a href="/feed.xml">RSS /feed.xml</a>
-      <a href="https://github.com/joeseesun/xnews" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://hackerbooks.qiaomu.ai/" target="_blank" rel="noopener">黑客书架</a>
-      <a href="https://xnews.qiaomu.ai/">xnews.qiaomu.ai</a>
-    </div>
-  </div>
-</footer>
-<script src="/app.js"></script>
 </body>
 </html>

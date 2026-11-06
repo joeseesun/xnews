@@ -1,0 +1,23 @@
+{
+  "verified_at": "2026-11-06T08:44:32.837227+08:00",
+  "timezone": "Asia/Shanghai",
+  "article_count": 13,
+  "protected_fields_and_originals_unchanged": true,
+  "only_authorized_fields_changed": [
+    "body_md",
+    "dek",
+    "rewrite_media",
+    "title"
+  ],
+  "media_reference_count": 7,
+  "media_omissions": 0,
+  "media_references_preserve_order_and_metadata_only_evidence": true,
+  "rss_identity_dates_author_order_unchanged": true,
+  "cached_jpeg_count": 7,
+  "cached_jpeg_bytes": 339920,
+  "test_count": 42,
+  "non_visual_only": true,
+  "fixture": "http://127.0.0.1:33205/__qa/mobile",
+  "deployed": false,
+  "committed_or_pushed": false
+}

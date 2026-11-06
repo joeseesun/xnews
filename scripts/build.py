@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import html
+import hashlib
 import json
 import re
 from datetime import datetime, timezone, timedelta
@@ -18,243 +19,20 @@ SITE_NAME = "X News"
 SITE_SUB = "海外创始人长文 · AI 视频 · 乔木中文改写"
 TZ_SH = timezone(timedelta(hours=8))
 
-CSS = r"""
-:root {
-  color-scheme: light;
-  --bg: #ffffff;
-  --surface: #ffffff;
-  --surface-2: #f5f5f3;
-  --text: #121212;
-  --text-2: #4a4a4a;
-  --muted: #767676;
-  --faint: #b4b4b4;
-  --border: #e2e2e2;
-  --rule: #121212;
-  --divider: #e5e5e2;
-  --accent: #121212;
-  --accent-ink: #ffffff;
-  --focus: #121212;
-  --topbar-h: 60px;
-  --side-w: 220px;
-  --sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
-  --serif: "Noto Serif SC", "Songti SC", "STSong", "Source Han Serif SC", Georgia, serif;
-  --latin: Georgia, "Times New Roman", "Noto Serif SC", serif;
-  --ease: cubic-bezier(0.23, 1, 0.32, 1);
-  --max-prose: 40em;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    color-scheme: dark;
-    --bg: #121212; --surface: #121212; --surface-2: #1c1c1c;
-    --text: #ececea; --text-2: #b9b9b6; --muted: #8a8a87; --faint: #555553;
-    --border: #2c2c2c; --rule: #ececea; --divider: #2c2c2c;
-    --accent: #ececea; --accent-ink: #121212; --focus: #ececea;
-  }
-}
-:root[data-theme="dark"] {
-  color-scheme: dark;
-  --bg: #121212; --surface: #121212; --surface-2: #1c1c1c;
-  --text: #ececea; --text-2: #b9b9b6; --muted: #8a8a87; --faint: #555553;
-  --border: #2c2c2c; --rule: #ececea; --divider: #2c2c2c;
-  --accent: #ececea; --accent-ink: #121212; --focus: #ececea;
-}
-* { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--topbar-h) + 12px); }
-body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.7 var(--sans); -webkit-font-smoothing: antialiased; }
-a { color: inherit; text-decoration: none; }
-a:hover { text-decoration: underline; text-underline-offset: 0.22em; text-decoration-thickness: 1px; }
-:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
-.sr-only, .skip:not(:focus) { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-.skip:focus { position: fixed; z-index: 100; top: 8px; left: 8px; background: var(--text); color: var(--bg); padding: 6px 12px; }
-
-.topbar {
-  position: sticky; top: 0; z-index: 30; height: var(--topbar-h);
-  display: flex; align-items: center; gap: 6px; padding: 0 24px;
-  background: var(--bg); border-bottom: 1px solid var(--border);
-}
-.icon-btn {
-  flex: none; width: 36px; height: 36px; display: grid; place-items: center;
-  border: 0; background: transparent; color: var(--text-2); cursor: pointer;
-}
-.icon-btn:hover { color: var(--text); }
-.icon-btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-.logo { display: flex; align-items: baseline; gap: 10px; flex: none; margin: 0 14px 0 4px; }
-.logo:hover { text-decoration: none; }
-.logo-text { font: 700 22px/1 var(--serif); letter-spacing: 0.06em; }
-.logo-sub { color: var(--muted); font-size: 12.5px; }
-.top-spacer { flex: 1; }
-.i-moon { display: none; }
-:root[data-theme="dark"] .i-sun { display: none; }
-:root[data-theme="dark"] .i-moon { display: block; }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .i-sun { display: none; }
-  :root:not([data-theme="light"]) .i-moon { display: block; }
-}
-
-.layout { display: flex; align-items: flex-start; min-height: calc(100vh - var(--topbar-h) - 100px); }
-.sidebar {
-  position: sticky; top: var(--topbar-h); flex: none; width: var(--side-w);
-  max-height: calc(100vh - var(--topbar-h)); overflow-y: auto;
-  padding: 22px 16px 28px 24px; border-right: 1px solid var(--border);
-}
-.nav { list-style: none; margin: 0; padding: 0; }
-.nav a {
-  display: flex; align-items: center; gap: 10px; padding: 6px 0;
-  color: var(--text-2); font-size: 15px; font-weight: 500;
-}
-.nav a:hover { color: var(--text); text-decoration: none; }
-.nav a.active { color: var(--text); font-weight: 700; }
-.nav a svg { width: 18px; height: 18px; flex: none; fill: none; stroke: var(--muted); stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
-.nav a:hover svg, .nav a.active svg { stroke: var(--text); }
-.nav-h {
-  margin: 26px 0 8px; padding-top: 24px; border-top: 1px solid var(--divider);
-  font: 13px/1 var(--latin); letter-spacing: 0.04em; color: var(--muted);
-}
-.tag-list { list-style: none; margin: 0; padding: 0; }
-.tag-list a { display: block; padding: 4px 0; color: var(--text-2); font-size: 14px; }
-.tag-list a:hover { color: var(--text); text-decoration: none; }
-.main { flex: 1; min-width: 0; padding: 32px 40px 56px; }
-.scrim { display: none; }
-
-.page-h { margin-bottom: 8px; padding-top: 10px; }
-.page-h h1 { font: 700 clamp(28px, 3.2vw, 40px)/1.25 var(--serif); letter-spacing: 0.02em; }
-.sub { color: var(--text-2); margin: 10px 0 0; max-width: 46em; font-size: 15.5px; }
-.meta-line { margin: 14px 0 0; color: var(--muted); font-size: 13.5px; display: flex; flex-wrap: wrap; gap: 8px 16px; }
-
-.feed { list-style: none; margin: 28px 0 0; padding: 0; max-width: 760px; }
-.feed-item { padding: 22px 0; border-top: 1px solid var(--divider); }
-.feed-item:first-child { border-top: 1px solid var(--rule); }
-.feed-item a.item-link { display: block; color: inherit; }
-.feed-item a.item-link:hover { text-decoration: none; }
-.feed-item .date { color: var(--muted); font: 13px var(--latin); letter-spacing: 0.02em; }
-.feed-item h2 {
-  margin: 8px 0 8px; font: 650 clamp(20px, 2.4vw, 26px)/1.35 var(--serif);
-  text-decoration-line: underline; text-decoration-color: transparent;
-  text-underline-offset: 0.18em; transition: text-decoration-color 160ms var(--ease);
-}
-.feed-item a.item-link:hover h2 { text-decoration-color: currentColor; }
-.feed-item .dek { margin: 0; color: var(--text-2); font-size: 15.5px; line-height: 1.7; max-width: 42em; }
-.feed-item .byline { margin: 10px 0 0; color: var(--muted); font-size: 13px; }
-
-.article { max-width: var(--max-prose); padding-top: 10px; }
-.article .kicker { color: var(--muted); font-size: 13px; letter-spacing: 0.04em; }
-.article h1 { font: 700 clamp(28px, 3.4vw, 40px)/1.28 var(--serif); letter-spacing: 0.01em; margin: 10px 0 12px; }
-.article .dek { color: var(--text-2); font-size: 17px; line-height: 1.7; margin: 0 0 18px; }
-.article .meta { display: flex; flex-wrap: wrap; gap: 8px 18px; padding: 14px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); color: var(--muted); font-size: 13.5px; margin-bottom: 28px; }
-.article .meta a { color: var(--text); font-weight: 500; text-decoration: underline; text-decoration-color: var(--border); text-underline-offset: 0.22em; }
-.article .meta a:hover { text-decoration-color: currentColor; }
-.prose p { margin: 0 0 1.05em; color: var(--text); font-size: 16.5px; line-height: 1.85; }
-.prose strong { font-weight: 700; }
-.prose a { color: var(--text); font-weight: 500; text-decoration: underline; text-decoration-color: var(--border); text-underline-offset: 0.22em; }
-.prose a:hover { text-decoration-color: currentColor; }
-.prose ul, .prose ol { margin: 0 0 1.1em; padding-left: 1.3em; }
-.prose li { margin: 0.35em 0; color: var(--text); font-size: 16.5px; line-height: 1.75; }
-.prose blockquote {
-  margin: 1.2em 0; padding: 0.2em 0 0.2em 1em;
-  border-left: 2px solid var(--rule); color: var(--text-2);
-}
-.prose blockquote p { margin: 0; font-size: 16.5px; }
-.prose h2 { font: 700 22px var(--serif); margin: 1.6em 0 0.6em; }
-.prose hr { border: 0; border-top: 1px solid var(--divider); margin: 1.8em 0; }
-.source-box {
-  margin-top: 36px; padding: 16px 0 0; border-top: 1px solid var(--rule);
-  display: flex; flex-wrap: wrap; gap: 10px 22px; align-items: center;
-}
-.source-box .lbl { color: var(--muted); font-size: 13.5px; }
-.source-box a {
-  font-weight: 600; text-decoration: underline; text-underline-offset: 0.22em;
-}
-.back { display: inline-block; margin-top: 28px; color: var(--text-2); font-size: 14px; }
-.original {
-  margin-top: 40px; padding-top: 28px; border-top: 1px solid var(--rule);
-}
-.original > h2 {
-  font: 700 20px/1.3 var(--serif); letter-spacing: 0.04em; margin: 0 0 6px;
-}
-.original .orig-title {
-  color: var(--muted); font-size: 13.5px; margin: 0 0 18px; font-family: var(--latin);
-}
-.original .prose p { font-size: 15.5px; line-height: 1.8; color: var(--text-2); }
-.original-media { margin: 18px 0 8px; display: flex; flex-direction: column; gap: 14px; }
-.original-media img,
-.original-media video {
-  display: block; max-width: 100%; height: auto; border: 1px solid var(--border);
-  border-radius: 2px; background: var(--surface-2);
-}
-.original-media audio { width: 100%; }
-.original-media .yt {
-  position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden;
-  border: 1px solid var(--border); border-radius: 2px; background: #000;
-}
-.original-media .yt iframe {
-  position: absolute; inset: 0; width: 100%; height: 100%; border: 0;
-}
+# Presentation sources; public assets are regenerated from these files.
+CSS = (ROOT / "src" / "site.css").read_text(encoding="utf-8")
+JS = (ROOT / "src" / "site.js").read_text(encoding="utf-8")
+# Verified, rendering-only copies of small public images; never rewrite content or RSS URLs.
+MEDIA_MANIFEST = json.loads((ROOT / "src" / "media-manifest.json").read_text(encoding="utf-8")) if (ROOT / "src" / "media-manifest.json").exists() else {"assets": []}
+LOCAL_MEDIA = {asset["source_url"]: asset["local_url"] for asset in MEDIA_MANIFEST.get("assets", [])}
 
 
-.footer { border-top: 1px solid var(--divider); padding: 26px 40px 56px; color: var(--muted); font-size: 13.5px; }
-.foot-cols { display: flex; flex-wrap: wrap; gap: 18px 56px; max-width: 1100px; }
-.foot-brand { font: 700 18px var(--serif); color: var(--text); letter-spacing: 0.04em; }
-.foot-about { flex: 1 1 360px; max-width: 46em; }
-.foot-about p { margin: 0 0 6px; }
-.foot-links { display: flex; flex-direction: column; gap: 6px; }
-.foot-links a { color: var(--text-2); font-weight: 500; }
+def local_media_url(url: str) -> str:
+    local = LOCAL_MEDIA.get(url, "")
+    if local.startswith("/media/") and (PUBLIC / local.lstrip("/")).is_file():
+        return local
+    return url
 
-@media (max-width: 899px) {
-  .topbar { padding: 0 10px; }
-  .sidebar {
-    position: fixed; z-index: 40; top: var(--topbar-h); bottom: 0; left: 0;
-    background: var(--bg); transform: translateX(-102%); transition: transform .22s var(--ease);
-    border-right: 1px solid var(--rule);
-  }
-  body.drawer-open .sidebar { transform: none; }
-  body.drawer-open .scrim { display: block; position: fixed; inset: var(--topbar-h) 0 0 0; z-index: 35; background: rgba(0,0,0,.45); }
-  .main { padding: 22px 16px 44px; }
-  .logo-sub { display: none; }
-  .footer { padding: 22px 16px 44px; }
-}
-"""
-
-JS = r"""
-(function () {
-  try {
-    var t = localStorage.getItem('xn.theme');
-    if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
-  } catch (e) {}
-
-  function ready(fn) {
-    if (document.readyState !== 'loading') fn();
-    else document.addEventListener('DOMContentLoaded', fn);
-  }
-
-  ready(function () {
-    var themeBtn = document.getElementById('theme-btn');
-    if (themeBtn) {
-      themeBtn.addEventListener('click', function () {
-        var cur = document.documentElement.dataset.theme;
-        var next;
-        if (cur === 'dark') next = 'light';
-        else if (cur === 'light') next = 'dark';
-        else next = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'light' : 'dark';
-        document.documentElement.dataset.theme = next;
-        try { localStorage.setItem('xn.theme', next); } catch (e) {}
-      });
-    }
-    var menu = document.getElementById('menu-btn');
-    var scrim = document.getElementById('scrim');
-    function close() {
-      document.body.classList.remove('drawer-open');
-      if (menu) menu.setAttribute('aria-expanded', 'false');
-    }
-    if (menu) {
-      menu.addEventListener('click', function () {
-        var open = document.body.classList.toggle('drawer-open');
-        menu.setAttribute('aria-expanded', open ? 'true' : 'false');
-      });
-    }
-    if (scrim) scrim.addEventListener('click', close);
-  });
-})();
-"""
 
 
 def md_to_html(md: str) -> str:
@@ -351,16 +129,17 @@ def parse_dt(a: dict) -> datetime:
         return datetime.strptime(a["date"], "%Y-%m-%d").replace(tzinfo=TZ_SH)
 
 
-ICON_HOME = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>'
-ICON_ARCH = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 22h16"/><path d="M16 4H8a2 2 0 0 0-2 2v14h12V6a2 2 0 0 0-2-2Z"/><path d="M10 10h4M10 14h4"/></svg>'
-ICON_RSS = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>'
-ICON_ABOUT = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>'
-
-
 def shell(title: str, body_main: str, *, description: str = "", active: str = "home", canonical: str = "/") -> str:
     desc = html.escape(description or SITE_SUB)
     canon = SITE_URL.rstrip("/") + canonical
-    return f"""<!DOCTYPE html>
+    is_list = active in ("home", "archive") and canonical in ("/", "/archive")
+    dialog = '''<dialog class="reader-sheet" id="reader-sheet" aria-labelledby="sheet-label">
+  <header class="sheet-bar"><button type="button" class="sheet-close" data-close-sheet><span aria-hidden="true">×</span>返回选刊</button><span class="sheet-brand" id="sheet-label">X News · 阅读</span><a href="/" data-sheet-permalink target="_blank" rel="noopener noreferrer">独立页面 ↗</a></header>
+  <div class="sheet-scroll" tabindex="-1"></div>
+</dialog>''' if is_list else ""
+    def current(route):
+        return ' aria-current="page"' if active == route else ""
+    return f'''<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
@@ -368,72 +147,33 @@ def shell(title: str, body_main: str, *, description: str = "", active: str = "h
 <title>{html.escape(title)}</title>
 <meta name="description" content="{desc}">
 <meta name="color-scheme" content="light dark">
-<meta property="og:type" content="website">
+<meta name="theme-color" content="#fffefa">
+<meta property="og:type" content="{'article' if canonical.startswith('/a/') else 'website'}">
 <meta property="og:site_name" content="{SITE_NAME}">
 <meta property="og:title" content="{html.escape(title)}">
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{html.escape(canon)}">
 <link rel="canonical" href="{html.escape(canon)}">
 <link rel="alternate" type="application/rss+xml" title="{SITE_NAME}" href="/feed.xml">
-<meta name="theme-color" content="#121212">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23121212'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-size='14' fill='%23fff' font-family='serif'%3EX%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231b1d18'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-size='19' fill='%23fffefa' font-family='sans-serif'%3EX%3C/text%3E%3C/svg%3E">
 <script>try{{var t=localStorage.getItem('xn.theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}}catch(e){{}}</script>
 <link rel="stylesheet" href="/app.css">
+<script src="/app.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">跳到正文</a>
-<header class="topbar">
-  <button id="menu-btn" class="icon-btn" aria-label="切换导航栏" aria-controls="sidebar" aria-expanded="false">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-  </button>
-  <a class="logo" href="/" aria-label="{SITE_NAME} 首页">
-    <span class="logo-text">{SITE_NAME}</span>
-    <span class="logo-sub">海外发现</span>
-  </a>
-  <div class="top-spacer"></div>
-  <a class="icon-btn" href="/feed.xml" aria-label="RSS" title="RSS">
-    {ICON_RSS}
-  </a>
-  <button id="theme-btn" class="icon-btn" aria-label="切换明暗主题" title="切换主题">
-    <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
-    <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
-  </button>
+<header class="site-header">
+  <a class="brand" href="/" aria-label="X News 海外发现首页"><span class="brand-name">X News</span><span class="brand-slash" aria-hidden="true">/</span><span class="brand-sub">海外<br>发现</span></a>
+  <div class="header-side"><p class="header-caption">英文原作，中文视角。<br>长帖 · 文章 · 影像</p><nav class="site-nav" aria-label="主导航"><a href="/"{current('home')}>精选</a><a class="archive-nav" href="/archive"{current('archive')}>往期</a><a href="/feed.xml" aria-label="订阅全文 RSS">RSS ↗</a></nav><button type="button" class="icon-button" id="theme-btn" aria-label="切换为暗色主题" aria-pressed="false"><span aria-hidden="true">◐</span></button></div>
 </header>
-<div class="scrim" id="scrim"></div>
-<div class="layout">
-  <nav id="sidebar" class="sidebar" aria-label="主导航">
-    <ul class="nav">
-      <li><a href="/" class="{"active" if active=="home" else ""}" data-route="home">{ICON_HOME}今日精选</a></li>
-      <li><a href="/archive" class="{"active" if active=="archive" else ""}" data-route="archive">{ICON_ARCH}全部文章</a></li>
-      <li><a href="/feed.xml">{ICON_RSS}RSS</a></li>
-      <li><a href="/about" class="{"active" if active=="about" else ""}">{ICON_ABOUT}关于</a></li>
-    </ul>
-    <div class="nav-h">说明</div>
-    <p style="margin:0;color:var(--muted);font-size:13px;line-height:1.55">英文长帖 / X Article / 海外 AI 视频 → 乔木中文改写，并保留原文与媒体。</p>
-  </nav>
-  <main id="main" class="main">
+<main class="site-main" id="main">
 {body_main}
-  </main>
-</div>
-<footer class="footer">
-  <div class="foot-cols">
-    <div class="foot-about">
-      <div class="foot-brand">{SITE_NAME}</div>
-      <p style="margin-top:8px">{SITE_SUB}</p>
-      <p>内容来自公开 X 帖文、X Articles 与 YouTube；中文为向阳乔木风格改写，非机器直译。</p>
-    </div>
-    <div class="foot-links">
-      <a href="/feed.xml">RSS /feed.xml</a>
-      <a href="https://github.com/joeseesun/xnews" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://hackerbooks.qiaomu.ai/" target="_blank" rel="noopener">黑客书架</a>
-      <a href="https://xnews.qiaomu.ai/">xnews.qiaomu.ai</a>
-    </div>
-  </div>
-</footer>
-<script src="/app.js"></script>
+</main>
+<footer class="site-footer"><span>海外创始人长文 · 乔木中文改写<br>每日 08:00 更新 · 中国标准时间（UTC+8）</span><nav class="footer-links" aria-label="页尾导航"><a href="/feed.xml">全文 RSS ↗</a><a href="/archive">全部文章</a><a href="/about">关于</a></nav></footer>
+{dialog}
 </body>
 </html>
-"""
+'''
 
 
 def source_label(src: dict) -> str:
@@ -454,44 +194,135 @@ def youtube_id(url: str) -> str:
     return m.group(1) if m else ""
 
 
-def render_media_html(media: list) -> str:
+def original_notice(a: dict) -> str:
+    """Describe availability, never turn stored video excerpts into claimed transcripts."""
+    original = a.get("original") or {}
+    if original.get("completeness") in ("excerpt", "partial") or a["id"] == "deepseek-super-agent-harness":
+        return "视频原文摘录，非完整逐字稿；请以原视频为准。" if a["source"].get("type") == "youtube" else "当前保留的是原文摘录，完整内容请查看原文链接。"
+    if not original.get("text_md"):
+        return "此条目暂未保存原文文字；媒体与原文链接仍可查看。"
+    return ""
+
+
+def media_id(media: dict) -> str:
+    """Persist explicit IDs for new media; existing source objects need not be rewritten."""
+    explicit = media.get("id")
+    if explicit:
+        if not isinstance(explicit, str) or not re.fullmatch(r"[A-Za-z][A-Za-z0-9_-]{0,63}", explicit):
+            raise ValueError("Invalid original media ID")
+        return explicit
+    identity = media.get("type", "") + "\n" + media.get("url", "")
+    return "m_" + hashlib.sha256(identity.encode()).hexdigest()[:16]
+
+
+def rewrite_media_plan(a: dict) -> tuple[dict, list]:
+    """Fail closed on silent media loss, fabricated references or ambiguous placement."""
+    available = {}
+    for media in (a.get("original") or {}).get("media") or []:
+        mid = media_id(media)
+        if mid in available and available[mid] != media:
+            raise ValueError(f"{a['id']}: media ID collision {mid}")
+        available[mid] = media
+    references = a.get("rewrite_media", [])
+    if not isinstance(references, list):
+        raise ValueError(f"{a['id']}: rewrite_media must be an ordered array")
+    seen = set()
+    blocks = re.split(r"\n\s*\n", a["body_md"].strip())
+    for ref in references:
+        mid = ref.get("media_id")
+        if mid not in available or mid in seen:
+            raise ValueError(f"{a['id']}: unknown or repeated rewrite media {mid}")
+        seen.add(mid)
+        if "omit_reason" in ref:
+            if not isinstance(ref["omit_reason"], str) or not ref["omit_reason"].strip():
+                raise ValueError(f"{a['id']}: omission needs an explicit reason")
+            continue
+        if not available[mid].get("url"):
+            raise ValueError(f"{a['id']}: missing URL needs an explicit omission reason")
+        if ref.get("evidence") not in ("source_metadata_only", "source_position_verified"):
+            raise ValueError(f"{a['id']}: reference must state its placement evidence")
+        if ref.get("placement") not in ("after_body", "after_paragraph"):
+            raise ValueError(f"{a['id']}: invalid rewrite media placement")
+        if ref.get("placement") == "after_body" and not (ref.get("placement_note") or "").strip():
+            raise ValueError(f"{a['id']}: uncertain placement must be labeled")
+        if ref.get("placement") == "after_paragraph":
+            if ref.get("evidence") != "source_position_verified":
+                raise ValueError(f"{a['id']}: precise placement requires source-position evidence")
+            anchor = ref.get("after_md", "")
+            if not anchor or blocks.count(anchor) != 1 or md_to_html(a["body_md"]).count(md_to_html(anchor)) != 1:
+                raise ValueError(f"{a['id']}: placement paragraph must be complete and unique")
+    if set(available) != seen:
+        raise ValueError(f"{a['id']}: original media missing from rewrite_media: {sorted(set(available) - seen)}")
+    return available, references
+
+
+def render_rewrite(a: dict, *, rss: bool = False) -> str:
+    available, refs = rewrite_media_plan(a)
+    body = md_to_html(a["body_md"])
+    groups = {}
+    omissions = []
+    for ref in refs:
+        if "omit_reason" in ref:
+            omissions.append(f'<p class="completeness-note">原文媒体未在改写中展示：{html.escape(ref["omit_reason"])}</p>')
+            continue
+        key = (ref["placement"], ref.get("after_md", ""))
+        groups.setdefault(key, []).append((available[ref["media_id"]], ref.get("placement_note", "")))
+    appended = []
+    for (placement, anchor), entries in groups.items():
+        media = [entry[0] for entry in entries]
+        note = " ".join(dict.fromkeys(entry[1] for entry in entries if entry[1]))
+        rendered = rss_media_html(media) if rss else render_media_html(media, a["source"]["url"])
+        label = "原文附带媒体" if placement == "after_body" else "原文媒体"
+        notice = f'<p class="completeness-note">{html.escape(note)}</p>' if note else ""
+        block = f'<section class="rewrite-source-media" aria-label="{label}"><h3 class="source-media-heading">{label}</h3>{notice}{rendered}</section>'
+        if placement == "after_paragraph":
+            anchor_html = md_to_html(anchor)
+            body = body.replace(anchor_html, anchor_html + block, 1)
+        else:
+            appended.append(block)
+    return body + "\n" + "\n".join(appended + omissions)
+
+
+def render_media_html(media: list, source_url: str = "") -> str:
     if not media:
         return ""
     parts = ['<div class="original-media">']
+    seen = set()
     for m in media:
+        mid = media_id(m)
+        if mid in seen:
+            continue
+        seen.add(mid)
         t = (m or {}).get("type") or ""
         url = (m or {}).get("url") or ""
         if not url:
             continue
-        alt = html.escape((m or {}).get("alt") or "")
+        u = html.escape(url, quote=True)
+        alt = html.escape((m or {}).get("alt") or "原帖配图", quote=True)
         poster = (m or {}).get("poster") or ""
+        fallback = html.escape(source_url or url, quote=True)
         if t == "image":
-            parts.append(
-                f'<img src="{html.escape(url)}" alt="{alt}" loading="lazy" decoding="async">'
-            )
+            rendered = f'<img src="{html.escape(local_media_url(url), quote=True)}" data-original-src="{u}" alt="{alt}" loading="lazy" decoding="async" referrerpolicy="no-referrer">'
+            label = "原帖图片"
         elif t in ("video", "x_video"):
-            poster_attr = f' poster="{html.escape(poster)}"' if poster else ""
-            parts.append(
-                f'<video controls preload="metadata" src="{html.escape(url)}"{poster_attr}></video>'
-            )
+            poster_attr = f' poster="{html.escape(local_media_url(poster), quote=True)}" data-original-poster="{html.escape(poster, quote=True)}"' if poster else ""
+            rendered = f'<video controls playsinline preload="none" src="{u}"{poster_attr} aria-label="原帖视频"></video>'
+            if poster:
+                rendered += f'<img class="video-poster-fallback" data-video-fallback src="{html.escape(local_media_url(poster), quote=True)}" alt="原视频封面" loading="lazy" hidden>'
+            label = "原帖视频 · 外部播放"
         elif t == "audio":
-            parts.append(f'<audio controls preload="metadata" src="{html.escape(url)}"></audio>')
-        elif t == "youtube":
-            vid = youtube_id(url)
-            if vid:
-                parts.append(
-                    f'<div class="yt"><iframe src="https://www.youtube-nocookie.com/embed/{html.escape(vid)}" '
-                    f'title="YouTube" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" '
-                    f'allowfullscreen loading="lazy"></iframe></div>'
-                )
-            else:
-                parts.append(
-                    f'<p><a href="{html.escape(url)}" target="_blank" rel="noopener noreferrer">{html.escape(url)}</a></p>'
-                )
+            rendered = f'<audio controls preload="none" src="{u}" aria-label="原帖音频"></audio>'
+            label = "原帖音频"
+        elif t == "youtube" and youtube_id(url):
+            vid = html.escape(youtube_id(url), quote=True)
+            rendered = (f'<div class="yt"><iframe src="https://www.youtube-nocookie.com/embed/{vid}" '
+                        'title="原视频（需手动播放）" allow="encrypted-media; picture-in-picture; fullscreen" '
+                        'referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe></div>')
+            label = "外部播放器 · 需手动播放"
         else:
-            parts.append(
-                f'<p><a href="{html.escape(url)}" target="_blank" rel="noopener noreferrer">{html.escape(url)}</a></p>'
-            )
+            parts.append(f'<p><a href="{u}" target="_blank" rel="noopener noreferrer">打开原始媒体 ↗</a></p>')
+            continue
+        parts.append(f'''<figure class="media-figure" data-media-id="{html.escape(mid, quote=True)}"><div class="media-frame">{rendered}<p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>{label}</span><a href="{fallback}" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>''')
     parts.append("</div>")
     return "\n".join(parts) if len(parts) > 2 else ""
 
@@ -499,79 +330,134 @@ def render_media_html(media: list) -> str:
 def render_original_section(a: dict) -> str:
     orig = a.get("original") or {}
     text = (orig.get("text_md") or "").strip()
-    media = orig.get("media") or []
-    if not text and not media:
-        return ""
     title = (orig.get("title") or "").strip()
-    title_html = f'<p class="orig-title">{html.escape(title)}</p>' if title else ""
+    title_html = f'<h3 class="original-title">{html.escape(title)}</h3>' if title else ""
+    notice = original_notice(a)
+    notice_html = f'<p class="completeness-note">{html.escape(notice)}</p>' if notice else ""
     body = md_to_html(text) if text else ""
-    media_html = render_media_html(media)
-    return f"""
-  <section class="original" aria-label="原文">
-    <h2>原文</h2>
-    {title_html}
-    {media_html}
-    <div class="prose">
-{body}
-    </div>
-  </section>
-"""
+    lang = html.escape(orig.get("lang") or "en", quote=True)
+    return f'''<section class="reader-panel" id="original" data-reader-panel="original" aria-label="原文">
+<h2 class="section-heading">原文</h2>{notice_html}{title_html}
+{render_media_html(orig.get('media') or [], a['source']['url'])}
+<div class="prose" lang="{lang}">{body}</div>
+</section>'''
 
 
 def rss_media_html(media: list) -> str:
-    if not media:
-        return ""
-    parts = []
+    """Upstream media URLs, once per section; no local-path leakage into RSS."""
+    parts, seen = [], set()
     for m in media:
-        t = (m or {}).get("type") or ""
-        url = (m or {}).get("url") or ""
+        mid = media_id(m)
+        if mid in seen:
+            continue
+        seen.add(mid)
+        url = m.get("url") or ""
         if not url:
             continue
-        alt = html.escape((m or {}).get("alt") or "")
-        poster = (m or {}).get("poster") or ""
+        u = html.escape(url, quote=True)
+        alt = html.escape(m.get("alt") or "", quote=True)
+        t = m.get("type", "")
+        poster = m.get("poster") or ""
+        poster_attr = f' poster="{html.escape(poster, quote=True)}"' if poster else ""
         if t == "image":
-            parts.append(f'<p><img src="{html.escape(url)}" alt="{alt}"></p>')
+            rendered = f'<img src="{u}" alt="{alt}">'
         elif t in ("video", "x_video"):
-            poster_attr = f' poster="{html.escape(poster)}"' if poster else ""
-            parts.append(
-                f'<p><video controls src="{html.escape(url)}"{poster_attr}></video></p>'
-            )
+            rendered = f'<video controls playsinline preload="none" src="{u}"{poster_attr}></video>'
         elif t == "audio":
-            parts.append(f'<p><audio controls src="{html.escape(url)}"></audio></p>')
-        elif t == "youtube":
-            vid = youtube_id(url)
-            if vid:
-                parts.append(
-                    f'<p><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/{html.escape(vid)}" '
-                    f'frameborder="0" allowfullscreen></iframe></p>'
-                    f'<p><a href="{html.escape(url)}">{html.escape(url)}</a></p>'
-                )
-            else:
-                parts.append(f'<p><a href="{html.escape(url)}">{html.escape(url)}</a></p>')
+            rendered = f'<audio controls preload="none" src="{u}"></audio>'
+        elif t == "youtube" and youtube_id(url):
+            vid = html.escape(youtube_id(url))
+            rendered = f'<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/{vid}" title="原视频（手动播放）" loading="lazy" allowfullscreen></iframe>'
         else:
-            parts.append(f'<p><a href="{html.escape(url)}">{html.escape(url)}</a></p>')
+            rendered = ""
+        parts.append(f'<figure data-media-id="{html.escape(mid)}">{rendered}<figcaption><a href="{u}">打开原始媒体 ↗</a></figcaption></figure>')
     return "\n".join(parts)
 
 
+
+def cover_asset(a: dict) -> tuple[str, str]:
+    for media in (a.get("original") or {}).get("media") or []:
+        if media.get("type") == "image" and media.get("url"):
+            return local_media_url(media["url"]), media.get("alt") or "原帖配图"
+        if media.get("poster"):
+            return local_media_url(media["poster"]), "原视频封面"
+        if media.get("type") == "youtube" and youtube_id(media.get("url") or ""):
+            return f'https://i.ytimg.com/vi/{youtube_id(media["url"])}/hqdefault.jpg', "原视频封面"
+    return "", ""
+
+
+def story_type(a: dict) -> str:
+    source_type = a["source"].get("type")
+    if source_type == "youtube":
+        return "视频"
+    if source_type == "x_article":
+        return "X Article"
+    if any(m.get("type") in ("video", "x_video", "youtube") for m in (a.get("original") or {}).get("media") or []):
+        return "长帖 / 视频"
+    return "长帖" if source_type == "x_post" else "文章"
+
+
+def cover_word(a: dict) -> str:
+    # Use stored names or numbers from the actual title, not invented editorial claims.
+    if "$300" in a["title"]:
+        return "$300"
+    name = a["source"].get("author") or a["source"].get("handle") or SITE_NAME
+    if "/" in name:
+        name = a["source"].get("handle") or name.split("/")[0]
+    return name.split()[0] if name.split() else SITE_NAME
+
+
 def build_feed_items(articles: list[dict]) -> str:
+    if not articles:
+        return '<section class="empty-state"><h2>还没有文章</h2><p>稍后再来，或先订阅 <a href="/feed.xml">全文 RSS</a>。</p></section>'
     rows = []
-    for a in articles:
+    for index, a in enumerate(articles):
         src = a["source"]
-        rows.append(f"""<li class="feed-item">
-  <a class="item-link" href="/a/{html.escape(a['id'])}">
-    <div class="date">{fmt_date(a['date'])}</div>
-    <h2>{html.escape(a['title'])}</h2>
-    <p class="dek">{html.escape(a.get('dek',''))}</p>
-    <div class="byline">{html.escape(source_label(src))} · {html.escape(src.get('author',''))}</div>
-  </a>
-</li>""")
-    return "\n".join(rows)
+        image, alt = cover_asset(a)
+        slug = html.escape(a["id"], quote=True)
+        kind = story_type(a)
+        author = html.escape(src.get("author") or src.get("handle") or "原作者")
+        classes = ["news-card", "card--media" if image else "card--text"]
+        if index == 0 and image:
+            classes.append("is-featured")
+        elif image and index % 4 == 3:
+            classes.append("is-wide")
+        if not image:
+            classes.append("tone-ink" if index % 3 == 1 else "tone-sage" if index % 3 == 2 else "tone-paper")
+        word = html.escape(cover_word(a))
+        if image:
+            badge = f'<span class="cover-badge">▶ {html.escape(kind)}</span>' if "视频" in kind else ""
+            cover = f'''<div class="cover" data-cover><div class="cover-fallback" aria-hidden="true"><span class="cover-word">{word}</span></div><img src="{html.escape(image, quote=True)}" alt="{html.escape(alt, quote=True)}" loading="{'eager' if index == 0 else 'lazy'}" decoding="async" {'fetchpriority="high"' if index == 0 else ''} referrerpolicy="no-referrer">{badge}</div>'''
+        else:
+            cover = f'<div class="type-cover" aria-hidden="true"><span class="cover-word">{word}</span></div>'
+        rows.append(f'''<article class="{' '.join(classes)}" id="story-{slug}">
+<a class="card-link" href="/a/{slug}" id="read-{slug}" data-open-reader data-source-url="{html.escape(src['url'], quote=True)}">
+{cover}
+<div class="card-body"><div class="card-meta"><span>{html.escape(kind)} / {author}</span><time datetime="{html.escape(a['date'], quote=True)}">{html.escape(a['date'][5:].replace('-', '.'))}</time></div>
+<h2 class="card-title">{html.escape(a['title'])}</h2><p class="card-dek">{html.escape(a.get('dek') or '')}</p><div class="card-end"><span>乔木改写 · 保留原文</span><span class="card-arrow" aria-hidden="true">↗</span></div></div>
+</a><a class="cover-error-link" href="{html.escape(src['url'], quote=True)}" target="_blank" rel="noopener noreferrer">封面未能显示 · 去原文查看 ↗</a>
+</article>''')
+    return '\n'.join(rows)
+
+
+def render_article(a: dict) -> str:
+    src = a["source"]
+    source_url = html.escape(src["url"], quote=True)
+    related = f'<a href="{html.escape(src["related_url"], quote=True)}" target="_blank" rel="noopener noreferrer">相关链接 ↗</a>' if src.get("related_url") else ""
+    return f'''<article class="article-reader" data-article-id="{html.escape(a['id'], quote=True)}">
+<a class="article-back" href="/">← 返回选刊</a>
+<header class="article-header"><p class="article-kicker">{html.escape(source_label(src))} / {html.escape(story_type(a))}</p><h1>{html.escape(a['title'])}</h1><p class="article-dek">{html.escape(a.get('dek') or '')}</p><div class="article-meta"><time datetime="{html.escape(a['date'], quote=True)}">{fmt_date(a['date'])}</time><span>{html.escape(src.get('author') or '')}</span><span>{' · '.join(html.escape(t) for t in a.get('tags') or [])}</span></div></header>
+<nav class="reader-tabs" aria-label="文章版本与来源"><div data-tabs><a href="#rewrite" id="tab-rewrite" data-view="rewrite">乔木改写</a><a href="#original" id="tab-original" data-view="original">原文</a></div><a class="reader-source" href="{source_url}" target="_blank" rel="noopener noreferrer">原文链接 ↗</a></nav>
+<section class="reader-panel" id="rewrite" data-reader-panel="rewrite" aria-label="乔木改写"><h2 class="section-heading">乔木改写</h2><div class="prose">{render_rewrite(a)}</div></section>
+{render_original_section(a)}
+<footer class="source-box"><span>内容来自原作者；中文为乔木风格改写，非逐字翻译。</span><div><a href="{source_url}" target="_blank" rel="noopener noreferrer">打开原文 ↗</a>{related}</div></footer>
+</article>'''
 
 
 def rss_full_html(a: dict) -> str:
     """Full article HTML for RSS readers (description + content:encoded)."""
     src = a["source"]
-    body = md_to_html(a["body_md"])
+    body = render_rewrite(a, rss=True)
     parts = []
     dek = (a.get("dek") or "").strip()
     if dek:
@@ -583,6 +469,9 @@ def rss_full_html(a: dict) -> str:
     omedia = orig.get("media") or []
     if otext or omedia:
         parts.append("<h2>原文</h2>")
+        notice = original_notice(a)
+        if notice:
+            parts.append(f"<p>{html.escape(notice)}</p>")
         otitle = (orig.get("title") or "").strip()
         if otitle:
             parts.append(f"<p><em>{html.escape(otitle)}</em></p>")
@@ -666,97 +555,24 @@ def build() -> None:
         encoding="utf-8",
     )
 
-    # homepage
-    home = f"""
-<section class="page-h">
-  <h1>今日精选</h1>
-  <p class="sub">挑海外创始人长帖、X Article 和爆款 AI 视频，改写成乔木中文；页面同时保留原文与图片/视频。风格接近 Ben's Bites，阅读界面接近黑客书架。</p>
-  <div class="meta-line"><span>{len(articles)} 篇</span><span><a href="/feed.xml">订阅 RSS</a></span></div>
-</section>
-<ul class="feed">
-{build_feed_items(articles)}
-</ul>
-"""
+    latest = articles[0]["date"]
+    heading = f'''<section class="edition-line"><div><h1 tabindex="-1">近期精选</h1><p class="edition-description">长帖、文章与影像，保留原文和媒体。</p></div><p class="edition-meta">{len(articles)} 篇 / 最新收录<br><time datetime="{html.escape(latest, quote=True)}">{html.escape(latest.replace('-', '.'))}</time></p></section>'''
+    home = heading + f'<section class="news-grid" data-news-grid aria-label="海外发现选刊">{build_feed_items(articles)}</section>'
     (PUBLIC / "index.html").write_text(
-        shell(f"{SITE_NAME} · 海外发现", home, description=SITE_SUB, active="home", canonical="/"),
-        encoding="utf-8",
+        shell(f"{SITE_NAME} · 海外发现", home, description=SITE_SUB, active="home", canonical="/"), encoding="utf-8",
     )
-
-    archive = f"""
-<section class="page-h">
-  <h1>全部文章</h1>
-  <p class="sub">按发布时间倒序。每篇都有乔木改写、原文，以及原文链接。</p>
-</section>
-<ul class="feed">
-{build_feed_items(articles)}
-</ul>
-"""
+    archive = f'''<section class="edition-line"><div><h1 tabindex="-1">全部文章</h1><p>按发布时间倒序，乔木改写与原文一起保留。</p></div><p class="edition-meta">共 {len(articles)} 篇</p></section><section class="news-grid" data-news-grid aria-label="全部文章">{build_feed_items(articles)}</section>'''
     (PUBLIC / "archive.html").write_text(
-        shell(f"全部文章 · {SITE_NAME}", archive, active="archive", canonical="/archive"),
-        encoding="utf-8",
+        shell(f"全部文章 · {SITE_NAME}", archive, active="archive", canonical="/archive"), encoding="utf-8",
     )
-
-    about = f"""
-<article class="article prose">
-  <h1>关于 {SITE_NAME}</h1>
-  <p>{SITE_NAME} 关注英文世界里值得读的创始人长帖、X Articles，以及海外传播开的 AI 视频。我们用已有的 X / WebFetch 能力取原文，再改写成向阳乔木风格的中文；页面同时展示原文文本与媒体，并保留原文链接。</p>
-  <p>站点是静态生成：内容放在 <code>content/articles/*.json</code>，本地 <code>npm run build</code> 后用 Wrangler 部署到 Cloudflare Worker <code>xnews</code>（域名 xnews.qiaomu.ai）。</p>
-  <p>每日更新由例行任务在 Asia/Shanghai 早上 8 点抓取与改写，然后提交 JSON 并重新 build + deploy。本仓库不包含爬虫。</p>
-  <p><a href="/feed.xml">RSS</a> · <a href="https://github.com/joeseesun/xnews" target="_blank" rel="noopener">GitHub</a></p>
-</article>
-"""
-    (PUBLIC / "about.html").write_text(
-        shell(f"关于 · {SITE_NAME}", about, active="about", canonical="/about"),
-        encoding="utf-8",
-    )
-
+    about = f'''<article class="about-copy prose"><h1>关于 {SITE_NAME}</h1><p>从英文世界的创始人长帖、X Articles 与 AI 视频中，挑出值得读的内容，改写成乔木风格的中文。</p><p>每篇都保留已有原文、图片或视频，以及可直接打开的来源链接。中文是改写，不是逐字翻译；视频摘录不等于完整逐字稿，原作以来源页面为准。</p><p>每日 08:00（中国标准时间，UTC+8）更新。你可以在网页阅读，也可以<a href="/feed.xml">订阅全文 RSS</a>；RSS 包含中文改写、已保存的原文和媒体，不只提供摘要。</p><p><a href="/archive">全部文章</a> · <a href="https://github.com/joeseesun/xnews" target="_blank" rel="noopener noreferrer">项目源码 ↗</a></p></article>'''
+    (PUBLIC / "about.html").write_text(shell(f"关于 · {SITE_NAME}", about, active="about", canonical="/about"), encoding="utf-8")
     (PUBLIC / "404.html").write_text(
-        shell(
-            f"未找到 · {SITE_NAME}",
-            '<section class="page-h"><h1>页面不存在</h1><p class="sub"><a href="/">返回首页</a></p></section>',
-            active="",
-            canonical="/404",
-        ),
-        encoding="utf-8",
+        shell(f"未找到 · {SITE_NAME}", '<section class="empty-state"><p>404 / 未找到</p><h1>这篇内容不在这里。</h1><p>链接可能不完整，或内容已经移动。<a href="/">返回选刊</a>，或去<a href="/archive">全部文章</a>找找。</p></section>', active="", canonical="/404"), encoding="utf-8",
     )
-
     for a in articles:
-        src = a["source"]
-        body = md_to_html(a["body_md"])
-        original_html = render_original_section(a)
-        related = ""
-        if src.get("related_url"):
-            related = f' · <a href="{html.escape(src["related_url"])}" target="_blank" rel="noopener noreferrer">相关链接</a>'
-        main = f"""
-<article class="article">
-  <div class="kicker">{html.escape(source_label(src))}</div>
-  <h1>{html.escape(a['title'])}</h1>
-  <p class="dek">{html.escape(a.get('dek',''))}</p>
-  <div class="meta">
-    <span>{fmt_date(a['date'])}</span>
-    <span>{html.escape(src.get('author',''))}</span>
-    <span>{' · '.join(html.escape(t) for t in a.get('tags', []))}</span>
-  </div>
-  <div class="prose">
-{body}
-  </div>
-{original_html}
-  <div class="source-box">
-    <span class="lbl">原文链接</span>
-    <a href="{html.escape(src['url'])}" target="_blank" rel="noopener noreferrer">{html.escape(src['url'])}</a>{related}
-  </div>
-  <a class="back" href="/">← 返回今日精选</a>
-</article>
-"""
         (PUBLIC / "a" / f"{a['id']}.html").write_text(
-            shell(
-                f"{a['title']} · {SITE_NAME}",
-                main,
-                description=a.get("dek") or a["title"],
-                active="archive",
-                canonical=f"/a/{a['id']}",
-            ),
-            encoding="utf-8",
+            shell(f"{a['title']} · {SITE_NAME}", render_article(a), description=a.get("dek") or a["title"], active="article", canonical=f"/a/{a['id']}"), encoding="utf-8",
         )
 
     print(f"Built {len(articles)} articles → {PUBLIC}")

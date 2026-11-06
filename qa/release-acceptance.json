@@ -1,0 +1,32 @@
+{
+  "reported_at": "2026-11-06T08:49:00+08:00",
+  "timezone": "Asia/Shanghai",
+  "reporter": "parent agent final browser QA",
+  "desktop": {
+    "width": 1920,
+    "height": 1113,
+    "passed": true
+  },
+  "actual_iframe_widths": [
+    320,
+    390,
+    768
+  ],
+  "iframe_pages": [
+    "homepage",
+    "Cursor article"
+  ],
+  "no_overflow": true,
+  "local_source_images_loaded": true,
+  "tabs_source_return_accessible": true,
+  "video": {
+    "host": "video.twimg.com",
+    "manual_playback_attempted": true,
+    "http_status": 403,
+    "playback_success": false,
+    "unavailable_message_and_source_fallback_worked": true,
+    "no_bypass": true
+  },
+  "release_accepted": true,
+  "editorial_addon_sha256": "340592a228a9010f6790ae7eb0d8582f79a3a51c4b05e0814f8e79e905c5b997"
+}

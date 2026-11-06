@@ -5,7 +5,14 @@
   "description": "X News — overseas founder posts & AI videos, rewritten in Qiaomu Chinese",
   "scripts": {
     "build": "python3 scripts/build.py",
-    "deploy": "npm run build && wrangler deploy"
+    "deploy": "npm run build && wrangler deploy",
+    "preview": "python3 scripts/preview.py",
+    "test:static": "python3 -m unittest discover -s tests -p \"test_*.py\"",
+    "test:reader": "node --test tests/reader-state.test.cjs",
+    "test": "npm run build && npm run test:static && npm run test:reader"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "jsdom": "^26.1.0"
+  }
 }

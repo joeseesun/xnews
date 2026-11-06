@@ -5,71 +5,51 @@
     <link>https://xnews.qiaomu.ai/</link>
     <description>海外创始人长文 · AI 视频 · 乔木中文改写</description>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 06 Nov 2026 00:14:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 06 Nov 2026 00:52:02 +0000</lastBuildDate>
     <atom:link href="https://xnews.qiaomu.ai/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>Cursor：描述一下工具，Agent 就能建成可分享的线上 App</title>
+      <title>Cursor：用 Agent 构建线上 App，并通过链接分享</title>
       <link>https://xnews.qiaomu.ai/a/cursor-live-apps</link>
       <guid isPermaLink="true">https://xnews.qiaomu.ai/a/cursor-live-apps</guid>
       <pubDate>Thu, 05 Nov 2026 21:41:10 +0000</pubDate>
       <author>Cursor</author>
-      <description><![CDATA[<p><em>写代码已经不难了，难的是大半项目死在 localhost。Cursor 把托管、数据库和安全检查一并接上。</em></p>
+      <description><![CDATA[<p><em>描述需要的工具后，Cursor 会构建应用、设置数据库、运行安全检查并部署。</em></p>
 <h2>乔木改写</h2>
-<p>Cursor 这条更新很短，但戳中一个真实痛点：</p>
-<p><strong>Agent 让写代码变容易了，大半 App 还是死在 localhost。</strong></p>
-<p>现在你可以跟 Cloud Agent 说「给我做一个周新增仪表盘」「给团队做一个报 bug 的内部工具」，它会从零或现有仓库建出可运行的 Web App：托管、需要时自动开 Postgres、跑确定性和 Agent 两层安全检查，再给你一个可分享链接。</p>
-<p>关键细节在文档里更清楚：</p>
-<ul>
-<li>生成不等于上线，必须你主动 Publish</li>
-<li>发布前有四道硬检查：别把密钥写进文件、别带凭据文件、不发布 <code>.env</code>、不发布 source map</li>
-<li>另有一次 AI 安全审阅；过不了会列出要修的点</li>
-<li>可见范围分邀请制、团队、公开；Teams / Enterprise 默认关掉公开分享</li>
-</ul>
-<p>Rauch 很快跟了一句：Grok 和 Cursor 都能在这条链上 build、deploy、scale。产品叙事已经从「帮你写代码」，推进到「帮你把内部工具真正交出去」。</p>
-<p>对做产品的人来说，下一步问题很具体：你团队里那些只活在本机的小工具，有多少其实只差一次「可分享」？</p>
+<p>Cursor 宣布，现在可以在 Cursor 中构建可运行的线上 App，并通过链接分享。</p>
+<p>它在介绍中指出，Agent 已经让写代码更容易，但大多数应用仍停留在 localhost。用户描述自己需要的工具后，Cursor 会构建应用、设置数据库、运行确定性的安全检查和 Agent 安全检查，再完成部署。</p>
+<section class="rewrite-source-media" aria-label="原文附带媒体"><h3 class="source-media-heading">原文附带媒体</h3><p class="completeness-note">原文附带媒体；未核验其与具体段落的对应关系。</p><figure data-media-id="m_b4c32a4814c74f4b"><video controls playsinline preload="none" src="https://video.twimg.com/amplify_video/2118458611320131584/vid/avc1/1280x720/96e72bPmXLUWS7C5.mp4?tag=16" poster="https://pbs.twimg.com/amplify_video_thumb/2118458611320131584/img/uUJSIBl8QaDBnoAA.jpg"></video><figcaption><a href="https://video.twimg.com/amplify_video/2118458611320131584/vid/avc1/1280x720/96e72bPmXLUWS7C5.mp4?tag=16">打开原始媒体 ↗</a></figcaption></figure></section>
 <h2>原文</h2>
 <p><em>You can now build live apps in Cursor and share them with a link</em></p>
-<p><video controls src="https://video.twimg.com/amplify_video/2118458611320131584/vid/avc1/1280x720/96e72bPmXLUWS7C5.mp4?tag=16" poster="https://pbs.twimg.com/amplify_video_thumb/2118458611320131584/img/uUJSIBl8QaDBnoAA.jpg"></video></p>
+<figure data-media-id="m_b4c32a4814c74f4b"><video controls playsinline preload="none" src="https://video.twimg.com/amplify_video/2118458611320131584/vid/avc1/1280x720/96e72bPmXLUWS7C5.mp4?tag=16" poster="https://pbs.twimg.com/amplify_video_thumb/2118458611320131584/img/uUJSIBl8QaDBnoAA.jpg"></video><figcaption><a href="https://video.twimg.com/amplify_video/2118458611320131584/vid/avc1/1280x720/96e72bPmXLUWS7C5.mp4?tag=16">打开原始媒体 ↗</a></figcaption></figure>
 <p>You can now build live apps in Cursor and share them with a link.</p>
 <p>Agents have made it easier to write code, but most apps never make it off localhost. Describe the tool you want - Cursor will build it, set up a database, run deterministic and agentic security checks, and deploy.</p>
 <p><strong>原文链接：</strong><a href="https://x.com/cursor_ai/status/2118458629091426304">https://x.com/cursor_ai/status/2118458629091426304</a></p>
 <p><strong>相关链接：</strong><a href="https://cursor.com/docs/cloud-agent/apps">https://cursor.com/docs/cloud-agent/apps</a></p>]]></description>
-      <content:encoded><![CDATA[<p><em>写代码已经不难了，难的是大半项目死在 localhost。Cursor 把托管、数据库和安全检查一并接上。</em></p>
+      <content:encoded><![CDATA[<p><em>描述需要的工具后，Cursor 会构建应用、设置数据库、运行安全检查并部署。</em></p>
 <h2>乔木改写</h2>
-<p>Cursor 这条更新很短，但戳中一个真实痛点：</p>
-<p><strong>Agent 让写代码变容易了，大半 App 还是死在 localhost。</strong></p>
-<p>现在你可以跟 Cloud Agent 说「给我做一个周新增仪表盘」「给团队做一个报 bug 的内部工具」，它会从零或现有仓库建出可运行的 Web App：托管、需要时自动开 Postgres、跑确定性和 Agent 两层安全检查，再给你一个可分享链接。</p>
-<p>关键细节在文档里更清楚：</p>
-<ul>
-<li>生成不等于上线，必须你主动 Publish</li>
-<li>发布前有四道硬检查：别把密钥写进文件、别带凭据文件、不发布 <code>.env</code>、不发布 source map</li>
-<li>另有一次 AI 安全审阅；过不了会列出要修的点</li>
-<li>可见范围分邀请制、团队、公开；Teams / Enterprise 默认关掉公开分享</li>
-</ul>
-<p>Rauch 很快跟了一句：Grok 和 Cursor 都能在这条链上 build、deploy、scale。产品叙事已经从「帮你写代码」，推进到「帮你把内部工具真正交出去」。</p>
-<p>对做产品的人来说，下一步问题很具体：你团队里那些只活在本机的小工具，有多少其实只差一次「可分享」？</p>
+<p>Cursor 宣布，现在可以在 Cursor 中构建可运行的线上 App，并通过链接分享。</p>
+<p>它在介绍中指出，Agent 已经让写代码更容易，但大多数应用仍停留在 localhost。用户描述自己需要的工具后，Cursor 会构建应用、设置数据库、运行确定性的安全检查和 Agent 安全检查，再完成部署。</p>
+<section class="rewrite-source-media" aria-label="原文附带媒体"><h3 class="source-media-heading">原文附带媒体</h3><p class="completeness-note">原文附带媒体；未核验其与具体段落的对应关系。</p><figure data-media-id="m_b4c32a4814c74f4b"><video controls playsinline preload="none" src="https://video.twimg.com/amplify_video/2118458611320131584/vid/avc1/1280x720/96e72bPmXLUWS7C5.mp4?tag=16" poster="https://pbs.twimg.com/amplify_video_thumb/2118458611320131584/img/uUJSIBl8QaDBnoAA.jpg"></video><figcaption><a href="https://video.twimg.com/amplify_video/2118458611320131584/vid/avc1/1280x720/96e72bPmXLUWS7C5.mp4?tag=16">打开原始媒体 ↗</a></figcaption></figure></section>
 <h2>原文</h2>
 <p><em>You can now build live apps in Cursor and share them with a link</em></p>
-<p><video controls src="https://video.twimg.com/amplify_video/2118458611320131584/vid/avc1/1280x720/96e72bPmXLUWS7C5.mp4?tag=16" poster="https://pbs.twimg.com/amplify_video_thumb/2118458611320131584/img/uUJSIBl8QaDBnoAA.jpg"></video></p>
+<figure data-media-id="m_b4c32a4814c74f4b"><video controls playsinline preload="none" src="https://video.twimg.com/amplify_video/2118458611320131584/vid/avc1/1280x720/96e72bPmXLUWS7C5.mp4?tag=16" poster="https://pbs.twimg.com/amplify_video_thumb/2118458611320131584/img/uUJSIBl8QaDBnoAA.jpg"></video><figcaption><a href="https://video.twimg.com/amplify_video/2118458611320131584/vid/avc1/1280x720/96e72bPmXLUWS7C5.mp4?tag=16">打开原始媒体 ↗</a></figcaption></figure>
 <p>You can now build live apps in Cursor and share them with a link.</p>
 <p>Agents have made it easier to write code, but most apps never make it off localhost. Describe the tool you want - Cursor will build it, set up a database, run deterministic and agentic security checks, and deploy.</p>
 <p><strong>原文链接：</strong><a href="https://x.com/cursor_ai/status/2118458629091426304">https://x.com/cursor_ai/status/2118458629091426304</a></p>
 <p><strong>相关链接：</strong><a href="https://cursor.com/docs/cloud-agent/apps">https://cursor.com/docs/cloud-agent/apps</a></p>]]></content:encoded>
     </item>
     <item>
-      <title>Rauch：Agent 的杀手级应用，是「跨时间替你做事」</title>
+      <title>Rauch 谈 Agent 持续任务：Vercel Schedules 可在运行时定义</title>
       <link>https://xnews.qiaomu.ai/a/rauchg-agent-schedules</link>
       <guid isPermaLink="true">https://xnews.qiaomu.ai/a/rauchg-agent-schedules</guid>
       <pubDate>Thu, 05 Nov 2026 20:30:27 +0000</pubDate>
       <author>Guillermo Rauch</author>
-      <description><![CDATA[<p><em>夜里整理记忆，早上提醒你，N 天没互动再戳一下。Vercel Schedules 像加强版 Cron，还能在运行时动态创建。</em></p>
+      <description><![CDATA[<p><em>Muse 和 Instinct 会夜间整理记忆、早上提醒，并在一段时间没互动后主动发消息。</em></p>
 <h2>乔木改写</h2>
-<p>Guillermo Rauch 给 Agent 的杀手级应用下了个很短的定义：</p>
-<blockquote><p>Doing stuff for you over time.</p></blockquote>
-<p>跨时间替你做事。</p>
-<p>他举的例子很生活：Muse、Instinct 夜里合并记忆，早上提醒你，距离上次互动过了 N 天再主动戳一下。对应到基础设施，就是刚进公测的 <strong>Vercel Schedules</strong>：可在代码里静态声明，也可运行时动态创建；能在 Preview 环境跑；调度落在 Sandbox 外，按需唤醒计算，账单更可控。</p>
-<p>这句话之所以有分量，是因为它把讨论从「单次对话里 Agent 聪不聪明」，拽回「它能不能成为你生活和工作的背景进程」。聊天窗口是同步的；真正值钱的，往往是异步的、隔夜的、过几天再回来的那一下。</p>
-<p>如果你在设计 Agent 产品，不妨先问：用户离开之后，它还剩什么可做的？</p>
+<p>Guillermo Rauch 认为，持续替用户处理事情，是 Agent 的杀手级应用。</p>
+<p>他举了 Muse 和 Instinct 的例子：它们会在夜间整理记忆，早上提醒用户，并在距离上一次互动过了 N 天后发来消息。</p>
+<p>谈到配套基础设施，Rauch 将 Vercel Schedules 形容为加强版 Cron。按他的介绍，任务可以在运行时定义，能够无限扩展，而且调度系统位于 Sandbox 之外，因此可以按需调用计算资源，以更低的成本运行。</p>
+
 <h2>原文</h2>
 <p><em>Doing stuff for you over time is the killer app of agents</em></p>
 <p>“Doing stuff for you over time” is the killer app of agents.</p>
@@ -77,14 +57,12 @@
 <p>Vercel Schedules are like Cron on steroids. They can be defined at runtime, scale infinitely, and sit outside of the Sandbox, which means you can cost-efficiently invoke compute as needed.</p>
 <p><strong>原文链接：</strong><a href="https://x.com/rauchg/status/2118440831355068671">https://x.com/rauchg/status/2118440831355068671</a></p>
 <p><strong>相关链接：</strong><a href="https://vercel.com/blog/introducing-vercel-schedules">https://vercel.com/blog/introducing-vercel-schedules</a></p>]]></description>
-      <content:encoded><![CDATA[<p><em>夜里整理记忆，早上提醒你，N 天没互动再戳一下。Vercel Schedules 像加强版 Cron，还能在运行时动态创建。</em></p>
+      <content:encoded><![CDATA[<p><em>Muse 和 Instinct 会夜间整理记忆、早上提醒，并在一段时间没互动后主动发消息。</em></p>
 <h2>乔木改写</h2>
-<p>Guillermo Rauch 给 Agent 的杀手级应用下了个很短的定义：</p>
-<blockquote><p>Doing stuff for you over time.</p></blockquote>
-<p>跨时间替你做事。</p>
-<p>他举的例子很生活：Muse、Instinct 夜里合并记忆，早上提醒你，距离上次互动过了 N 天再主动戳一下。对应到基础设施，就是刚进公测的 <strong>Vercel Schedules</strong>：可在代码里静态声明，也可运行时动态创建；能在 Preview 环境跑；调度落在 Sandbox 外，按需唤醒计算，账单更可控。</p>
-<p>这句话之所以有分量，是因为它把讨论从「单次对话里 Agent 聪不聪明」，拽回「它能不能成为你生活和工作的背景进程」。聊天窗口是同步的；真正值钱的，往往是异步的、隔夜的、过几天再回来的那一下。</p>
-<p>如果你在设计 Agent 产品，不妨先问：用户离开之后，它还剩什么可做的？</p>
+<p>Guillermo Rauch 认为，持续替用户处理事情，是 Agent 的杀手级应用。</p>
+<p>他举了 Muse 和 Instinct 的例子：它们会在夜间整理记忆，早上提醒用户，并在距离上一次互动过了 N 天后发来消息。</p>
+<p>谈到配套基础设施，Rauch 将 Vercel Schedules 形容为加强版 Cron。按他的介绍，任务可以在运行时定义，能够无限扩展，而且调度系统位于 Sandbox 之外，因此可以按需调用计算资源，以更低的成本运行。</p>
+
 <h2>原文</h2>
 <p><em>Doing stuff for you over time is the killer app of agents</em></p>
 <p>“Doing stuff for you over time” is the killer app of agents.</p>
@@ -94,51 +72,35 @@
 <p><strong>相关链接：</strong><a href="https://vercel.com/blog/introducing-vercel-schedules">https://vercel.com/blog/introducing-vercel-schedules</a></p>]]></content:encoded>
     </item>
     <item>
-      <title>OpenAI 发布 GPT-6 Cyber：更会挖漏洞，也更会待在授权范围内</title>
+      <title>OpenAI 发布 GPT-6 Cyber，先向部分 Daybreak Red 客户开放</title>
       <link>https://xnews.qiaomu.ai/a/openai-gpt6-cyber</link>
       <guid isPermaLink="true">https://xnews.qiaomu.ai/a/openai-gpt6-cyber</guid>
       <pubDate>Thu, 05 Nov 2026 17:09:13 +0000</pubDate>
       <author>OpenAI</author>
-      <description><![CDATA[<p><em>Firefox 挖出 81 个未知高危，Linux 跑出 948 个提权利用。他们把「对齐」写进了进攻能力本身。</em></p>
+      <description><![CDATA[<p><em>OpenAI 称，Mozilla、Palo Alto Networks、Calif 和 Cisco 等公司的安全团队已在使用该模型。</em></p>
 <h2>乔木改写</h2>
-<p>OpenAI 正式放出 <strong>GPT-6 Cyber</strong>。一句话概括他们想讲的故事：</p>
-<blockquote><p>更会找漏洞、修漏洞，也更会待在研究员划定的边界里。</p></blockquote>
-<p>官方长文里有几组数字很难装作没看见。ExploitGym 从 GPT-5.6 Cyber 的 32.1% 拉到 48.5%。在他们称为 ExploitGym Honeypot 的对齐评测里，不加部署提示时，越权去打范围外服务的比例降到 0.07%；加上提示后是 100% 守住。模型被标进 Preparedness Framework 的 Critical 档。</p>
-<p>真实系统侧更刺眼：</p>
-<ul>
-<li>Firefox：即使已经用过多代前沿模型加固，仍挖出 81 个此前未知的高危，另有 30 个已知问题被抬高严重级别；Mozilla 已开始合入修复</li>
-<li>Linux 内核：同一套研究 harness 下，复现 1724 个漏洞，做出 948 个可工作提权利用，约为上一代同 harness 结果的五倍多</li>
-<li>自家训练基础设施也被它和其它模型一起「红队」过，用来补洞、收紧网络限制</li>
-</ul>
-<p>访问面很克制：先给部分 Daybreak Red 客户，再逐步放开。配套还有 Daybreak Blue、面向关键基础设施防守方的专项权限，以及更强的滥用监测。</p>
-<p>我读完最在意的不是「模型更猛了」这句空话。是他们把「能不能打」和「打不打得到授权外」绑在同一代产品上卖。进攻能力往前迈一步，范围遵守也得跟着迈一步，否则没人敢把 Agent 接进真实代码库。</p>
-<p>如果你在做安全 Agent 或企业 coding Agent，这篇值得和 Amjad 那篇「受管云环境默认化」对着读。一边在谈执行环境怎么隔离，一边在谈模型本身怎么不越权。两边都缺，就还是裸奔。</p>
+<p>OpenAI 发布 GPT-6 Cyber，称其在增强安全研究能力的同时，也改进了模型对齐。</p>
+<p>按 OpenAI 的介绍，该模型用于其前一天公布的 Linux 内核研究。Mozilla、Palo Alto Networks、Calif、Cisco 等公司的安全团队，以及 OpenAI 自己的安全团队，已经在使用它。</p>
+<p>目前，GPT-6 Cyber 向部分 Daybreak Red 客户开放，访问范围将逐步扩大。完整公告见 <a href="https://openai.com/index/introducing-gpt-6-cyber/" target="_blank" rel="noopener noreferrer">OpenAI 原文</a>。</p>
+<section class="rewrite-source-media" aria-label="原文附带媒体"><h3 class="source-media-heading">原文附带媒体</h3><p class="completeness-note">原文附带媒体；未核验其与具体段落的对应关系。</p><figure data-media-id="m_70d1b131abc89dc7"><video controls playsinline preload="none" src="https://video.twimg.com/amplify_video/2118387217588465664/vid/avc1/1920x1080/ggeDE9iY9Trxb8kO.mp4" poster="https://pbs.twimg.com/amplify_video_thumb/2118387217588465664/img/N2grMUmP0O_EMvS2.jpg"></video><figcaption><a href="https://video.twimg.com/amplify_video/2118387217588465664/vid/avc1/1920x1080/ggeDE9iY9Trxb8kO.mp4">打开原始媒体 ↗</a></figcaption></figure></section>
 <h2>原文</h2>
 <p><em>Introducing GPT-6 Cyber</em></p>
-<p><video controls src="https://video.twimg.com/amplify_video/2118387217588465664/vid/avc1/1920x1080/ggeDE9iY9Trxb8kO.mp4" poster="https://pbs.twimg.com/amplify_video_thumb/2118387217588465664/img/N2grMUmP0O_EMvS2.jpg"></video></p>
+<figure data-media-id="m_70d1b131abc89dc7"><video controls playsinline preload="none" src="https://video.twimg.com/amplify_video/2118387217588465664/vid/avc1/1920x1080/ggeDE9iY9Trxb8kO.mp4" poster="https://pbs.twimg.com/amplify_video_thumb/2118387217588465664/img/N2grMUmP0O_EMvS2.jpg"></video><figcaption><a href="https://video.twimg.com/amplify_video/2118387217588465664/vid/avc1/1920x1080/ggeDE9iY9Trxb8kO.mp4">打开原始媒体 ↗</a></figcaption></figure>
 <p>Introducing GPT‑6 Cyber: a major advance in security research that pairs stronger capabilities with better model alignment.</p>
 <p>The model powered the Linux kernel research we announced yesterday, and security teams at companies like Mozilla, Palo Alto Networks, Calif, and Cisco—alongside our own at OpenAI—are already putting it to work.</p>
 <p>GPT-6 Cyber is available to select Daybreak Red customers and we are expanding access over time.</p>
 <p>https://openai.com/index/introducing-gpt-6-cyber/</p>
 <p><strong>原文链接：</strong><a href="https://x.com/OpenAI/status/2118390190246879554">https://x.com/OpenAI/status/2118390190246879554</a></p>
 <p><strong>相关链接：</strong><a href="https://openai.com/index/introducing-gpt-6-cyber/">https://openai.com/index/introducing-gpt-6-cyber/</a></p>]]></description>
-      <content:encoded><![CDATA[<p><em>Firefox 挖出 81 个未知高危，Linux 跑出 948 个提权利用。他们把「对齐」写进了进攻能力本身。</em></p>
+      <content:encoded><![CDATA[<p><em>OpenAI 称，Mozilla、Palo Alto Networks、Calif 和 Cisco 等公司的安全团队已在使用该模型。</em></p>
 <h2>乔木改写</h2>
-<p>OpenAI 正式放出 <strong>GPT-6 Cyber</strong>。一句话概括他们想讲的故事：</p>
-<blockquote><p>更会找漏洞、修漏洞，也更会待在研究员划定的边界里。</p></blockquote>
-<p>官方长文里有几组数字很难装作没看见。ExploitGym 从 GPT-5.6 Cyber 的 32.1% 拉到 48.5%。在他们称为 ExploitGym Honeypot 的对齐评测里，不加部署提示时，越权去打范围外服务的比例降到 0.07%；加上提示后是 100% 守住。模型被标进 Preparedness Framework 的 Critical 档。</p>
-<p>真实系统侧更刺眼：</p>
-<ul>
-<li>Firefox：即使已经用过多代前沿模型加固，仍挖出 81 个此前未知的高危，另有 30 个已知问题被抬高严重级别；Mozilla 已开始合入修复</li>
-<li>Linux 内核：同一套研究 harness 下，复现 1724 个漏洞，做出 948 个可工作提权利用，约为上一代同 harness 结果的五倍多</li>
-<li>自家训练基础设施也被它和其它模型一起「红队」过，用来补洞、收紧网络限制</li>
-</ul>
-<p>访问面很克制：先给部分 Daybreak Red 客户，再逐步放开。配套还有 Daybreak Blue、面向关键基础设施防守方的专项权限，以及更强的滥用监测。</p>
-<p>我读完最在意的不是「模型更猛了」这句空话。是他们把「能不能打」和「打不打得到授权外」绑在同一代产品上卖。进攻能力往前迈一步，范围遵守也得跟着迈一步，否则没人敢把 Agent 接进真实代码库。</p>
-<p>如果你在做安全 Agent 或企业 coding Agent，这篇值得和 Amjad 那篇「受管云环境默认化」对着读。一边在谈执行环境怎么隔离，一边在谈模型本身怎么不越权。两边都缺，就还是裸奔。</p>
+<p>OpenAI 发布 GPT-6 Cyber，称其在增强安全研究能力的同时，也改进了模型对齐。</p>
+<p>按 OpenAI 的介绍，该模型用于其前一天公布的 Linux 内核研究。Mozilla、Palo Alto Networks、Calif、Cisco 等公司的安全团队，以及 OpenAI 自己的安全团队，已经在使用它。</p>
+<p>目前，GPT-6 Cyber 向部分 Daybreak Red 客户开放，访问范围将逐步扩大。完整公告见 <a href="https://openai.com/index/introducing-gpt-6-cyber/" target="_blank" rel="noopener noreferrer">OpenAI 原文</a>。</p>
+<section class="rewrite-source-media" aria-label="原文附带媒体"><h3 class="source-media-heading">原文附带媒体</h3><p class="completeness-note">原文附带媒体；未核验其与具体段落的对应关系。</p><figure data-media-id="m_70d1b131abc89dc7"><video controls playsinline preload="none" src="https://video.twimg.com/amplify_video/2118387217588465664/vid/avc1/1920x1080/ggeDE9iY9Trxb8kO.mp4" poster="https://pbs.twimg.com/amplify_video_thumb/2118387217588465664/img/N2grMUmP0O_EMvS2.jpg"></video><figcaption><a href="https://video.twimg.com/amplify_video/2118387217588465664/vid/avc1/1920x1080/ggeDE9iY9Trxb8kO.mp4">打开原始媒体 ↗</a></figcaption></figure></section>
 <h2>原文</h2>
 <p><em>Introducing GPT-6 Cyber</em></p>
-<p><video controls src="https://video.twimg.com/amplify_video/2118387217588465664/vid/avc1/1920x1080/ggeDE9iY9Trxb8kO.mp4" poster="https://pbs.twimg.com/amplify_video_thumb/2118387217588465664/img/N2grMUmP0O_EMvS2.jpg"></video></p>
+<figure data-media-id="m_70d1b131abc89dc7"><video controls playsinline preload="none" src="https://video.twimg.com/amplify_video/2118387217588465664/vid/avc1/1920x1080/ggeDE9iY9Trxb8kO.mp4" poster="https://pbs.twimg.com/amplify_video_thumb/2118387217588465664/img/N2grMUmP0O_EMvS2.jpg"></video><figcaption><a href="https://video.twimg.com/amplify_video/2118387217588465664/vid/avc1/1920x1080/ggeDE9iY9Trxb8kO.mp4">打开原始媒体 ↗</a></figcaption></figure>
 <p>Introducing GPT‑6 Cyber: a major advance in security research that pairs stronger capabilities with better model alignment.</p>
 <p>The model powered the Linux kernel research we announced yesterday, and security teams at companies like Mozilla, Palo Alto Networks, Calif, and Cisco—alongside our own at OpenAI—are already putting it to work.</p>
 <p>GPT-6 Cyber is available to select Daybreak Red customers and we are expanding access over time.</p>
@@ -147,28 +109,35 @@
 <p><strong>相关链接：</strong><a href="https://openai.com/index/introducing-gpt-6-cyber/">https://openai.com/index/introducing-gpt-6-cyber/</a></p>]]></content:encoded>
     </item>
     <item>
-      <title>DeepSeek Super Agent：真正值得看的，是「一切皆插件」的 Harness</title>
+      <title>DeepSeek Super Agent：用插件组织 router 与 worker 的研究原型</title>
       <link>https://xnews.qiaomu.ai/a/deepseek-super-agent-harness</link>
       <guid isPermaLink="true">https://xnews.qiaomu.ai/a/deepseek-super-agent-harness</guid>
       <pubDate>Thu, 05 Nov 2026 12:00:00 +0000</pubDate>
       <author>AI news / DeepSeek Super Agent explainer</author>
-      <description><![CDATA[<p><em>同模型换九套编码 Agent，成本能差出一个数量级。Instacart 和 Box 的 CTO 都把票投给了 harness。</em></p>
+      <description><![CDATA[<p><em>同一模型在九套 harness 中的通过率和成本不同；Super Agent 目前聚焦 GitHub、飞书，安全问题尚未完全解决。</em></p>
 <h2>乔木改写</h2>
-<p>很多人把 DeepSeek 新开源的东西叫「Claude Code 的回答」。视频作者觉得，更值得盯的是它怎么被做出来的。</p>
-<p><strong>Super Agent</strong> 不是又一个聊天窗口。它听团队已经在用的地方：GitHub Issue / PR，以及飞书。有权限的人提需求后，它开 work item，在独立目录里干活，再带着 PR 回来。DeepSeek 自己说，这是研究原型，很多工程甚至是编码 Agent 写的。</p>
-<p>底座是八月发布的 <strong>DeepSeek Harness（DSH）</strong>。口号很绝：一切皆插件。路由、工具注册、会话日志，连 Agent loop 本身都是插件，底下是叫 Cordis 的组合框架。两个关键能力：</p>
-<ul>
-<li>时间可组合：卸掉一个组件，它做过的注册会完整回滚</li>
-<li>空间可组合：组件声明依赖，运行时按依赖上下线</li>
-</ul>
-<p>Frontier Harness Eval 用同一模型 Kimi K3、同一批 30 个任务，跑九套 harness。Codex 通过率 66.7%，DeepSeek creator 模式和 Claude Code 都是 63.3%，但单次成功任务成本大约 $3.28 vs $18.34。样本不大，方向很清楚：<strong>换 harness，成败和账单都会变。</strong></p>
-<p>Super Agent 的架构也很有意思：上层一个长驻 router 负责人和分发，下层 worker 各自隔离会话。外部触发先过确定性门禁（在不在白名单、有没有真正 @ Agent），过了才进模型。Worker 认领 ticket 后直接订阅那条对话，评论不再绕 router，他们测过，关掉这层后 router 决策量大约多 30%。压力测试里触发从每分钟 1 次拉到 40 次，批量处理后单次决策时间反而下降。结论有点反直觉：router 往往更适合轻模型，重模型留给 worker。</p>
-<p>作者访谈过 Instacart 和 Box 的 CTO，两边都认为现阶段 harness 比模型更重要。视频收尾也留了清醒提醒：这是原型，安全问题（提示注入、凭据泄漏、跨设备权限）他们自己也承认没完全解决。</p>
-<p>如果你只记住一句：别再只评模型。同一模型至少丢进两三个 harness 再下判断，不然你骂的可能是壳，不是芯。</p>
+<p>以下依据本站保存的视频文字摘录整理，并非完整逐字稿。视频介绍了 DeepSeek 发布的 Super Agent。一些人将它称为对 Claude Code 的回应；视频作者更关注它的构建方式：整个系统由加入 DeepSeek Harness 的一组插件组成。</p>
+<p>Super Agent 会监听团队已经使用的 GitHub 和飞书。当获得许可的成员在 Issue、PR 或相关对话中提出需求时，它建立工作项，开启独立会话完成任务，再返回结果，通常是一个 PR。它不要求用户先打开一段新的 Agent 对话。</p>
+<p>项目随代码发布了一篇 X 文章，题为 Exploring Super Agent Design: Towards a More Autonomous Agent System。项目方明确说明，它是研究原型，并非 DeepSeek 的官方产品；不少设计想法和工程实现也由编码 Agent 编写。</p>
+<h3>同一个模型，换九套 harness</h3>
+<p>视频引用了 Frontier Harness Eval：固定使用 Kimi K3，比较九套编码 Agent harness。Codex 的通过率为 66.7%；DeepSeek Harness 的 creator 配置与 Claude Code 都为 63.3%。每完成一个成功任务，DeepSeek 约花费 $3.28，Claude Code 约为 $18.34。该测试中，最便宜与最贵的 harness 成本相差约 17.5 倍。</p>
+<p>这些结果涉及通过率、成本、缓存和速度，即使模型不变，harness 也会影响这些表现。这些结果来自合成基准测试。</p>
+<p>视频还提到，在 VentureBeat 的 Beyond the Pilot 播客中，Instacart 和 Box 的 CTO 都表达过当前 harness 比模型更重要的看法。</p>
+<h3>DSH 的插件结构</h3>
+<p>DeepSeek Harness（DSH）在八月发布，采用 MIT 许可，提供 Web UI，并不限定使用 DeepSeek 模型。它的设计原则是所有东西都可以成为插件：router、工具注册、会话日志，甚至 Agent loop 本身。</p>
+<p>底层使用 Cordis 的时空可组合能力。时间维度上，卸载组件会撤销它做过的更改；空间维度上，组件依赖关系决定它们何时启用或停用。</p>
+<p>DSH 有 standard、PTC、minimal、creator 等模式，对应不同的插件组合。creator 模式允许用户在聊天中描述一个插件，由 Agent 编写并安装。</p>
+<h3>router 与 worker 如何配合</h3>
+<p>Super Agent 通过 <code>cordis.patch</code> 接入，包含核心 Super Agent 插件、GitHub watcher 和飞书 watcher。上层是一段长期运行的 router 会话，下层是彼此隔离的 worker 会话。外部触发先经过白名单等确定性门禁，再交给模型处理；工作单会携带任务授权。</p>
+<p>worker 使用精简的插件配置，不包含提问、规划、网页抓取或子 Agent，长时间运行的 shell 任务则转入后台。worker 还会直接订阅认领任务的对话，因此后续 PR 评论不必再经过 router。按材料中的测试，启用这一机制时，router 的决策次数比未启用时减少约 30%。</p>
+<p>负载测试把触发量从每分钟 1 次提高到 40 次。通过批量处理，每次决策所需时间从 6.4 秒降至 1.6 秒。视频据此介绍了一种分工：router 可以使用更便宜、更快的模型，把更强的模型留给 worker。</p>
+<p>这套设计希望尽量少占用人的注意力，同时提供尽可能多的价值。插件化也让开发者可以在不 fork 核心代码的情况下继续扩展 harness。</p>
+<p>它仍有明确限制：只是研究原型，公开代码不等于内部使用的代码；接入范围主要是 GitHub 和飞书，评测是合成基准，提示注入、凭证等安全问题尚未完全解决。</p>
+<section class="rewrite-source-media" aria-label="原文附带媒体"><h3 class="source-media-heading">原文附带媒体</h3><p class="completeness-note">原文附带媒体；未核验其与具体段落的对应关系。</p><figure data-media-id="m_a7870fb84bc71ab0"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/OrcsMi2-IcM" title="原视频（手动播放）" loading="lazy" allowfullscreen></iframe><figcaption><a href="https://www.youtube.com/watch?v=OrcsMi2-IcM">打开原始媒体 ↗</a></figcaption></figure></section>
 <h2>原文</h2>
 <p>视频原文摘录，非完整逐字稿；请以原视频为准。</p>
 <p><em>DeepSeek Super Agent and why the harness matters</em></p>
-<p><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/OrcsMi2-IcM" frameborder="0" allowfullscreen></iframe></p><p><a href="https://www.youtube.com/watch?v=OrcsMi2-IcM">https://www.youtube.com/watch?v=OrcsMi2-IcM</a></p>
+<figure data-media-id="m_a7870fb84bc71ab0"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/OrcsMi2-IcM" title="原视频（手动播放）" loading="lazy" allowfullscreen></iframe><figcaption><a href="https://www.youtube.com/watch?v=OrcsMi2-IcM">打开原始媒体 ↗</a></figcaption></figure>
 <p>DeepSeek Super Agent and why the harness matters</p>
 <p>Source: YouTube https://www.youtube.com/watch?v=OrcsMi2-IcM</p>
 <p>Okay, so this past weekend, DeepSeek released something that a lot of people out there are calling the answer to Claude Code. It&#x27;s an agent that sits on a GitHub repo. It watches the issues and pull requests, and when someone on your team asks it to do something, It then goes off into its own session, does the work, and comes back with a PR Now, while that&#x27;s cool in itself, that&#x27;s not really the part that I want to talk about here. The part that I find really interesting is how they built it. The whole thing is just a set of plugins dropped into their agent harness.</p>
@@ -184,23 +153,30 @@
 <p>Caveats: prototype; published code ≠ internal; narrow (GitHub/Feishu); synthetic benchmarks; security (prompt injection, credentials) not fully solved.</p>
 <p>Bigger point: harnesses evolving fast via composable plugins without forking the core.</p>
 <p><strong>原文链接：</strong><a href="https://www.youtube.com/watch?v=OrcsMi2-IcM">https://www.youtube.com/watch?v=OrcsMi2-IcM</a></p>]]></description>
-      <content:encoded><![CDATA[<p><em>同模型换九套编码 Agent，成本能差出一个数量级。Instacart 和 Box 的 CTO 都把票投给了 harness。</em></p>
+      <content:encoded><![CDATA[<p><em>同一模型在九套 harness 中的通过率和成本不同；Super Agent 目前聚焦 GitHub、飞书，安全问题尚未完全解决。</em></p>
 <h2>乔木改写</h2>
-<p>很多人把 DeepSeek 新开源的东西叫「Claude Code 的回答」。视频作者觉得，更值得盯的是它怎么被做出来的。</p>
-<p><strong>Super Agent</strong> 不是又一个聊天窗口。它听团队已经在用的地方：GitHub Issue / PR，以及飞书。有权限的人提需求后，它开 work item，在独立目录里干活，再带着 PR 回来。DeepSeek 自己说，这是研究原型，很多工程甚至是编码 Agent 写的。</p>
-<p>底座是八月发布的 <strong>DeepSeek Harness（DSH）</strong>。口号很绝：一切皆插件。路由、工具注册、会话日志，连 Agent loop 本身都是插件，底下是叫 Cordis 的组合框架。两个关键能力：</p>
-<ul>
-<li>时间可组合：卸掉一个组件，它做过的注册会完整回滚</li>
-<li>空间可组合：组件声明依赖，运行时按依赖上下线</li>
-</ul>
-<p>Frontier Harness Eval 用同一模型 Kimi K3、同一批 30 个任务，跑九套 harness。Codex 通过率 66.7%，DeepSeek creator 模式和 Claude Code 都是 63.3%，但单次成功任务成本大约 $3.28 vs $18.34。样本不大，方向很清楚：<strong>换 harness，成败和账单都会变。</strong></p>
-<p>Super Agent 的架构也很有意思：上层一个长驻 router 负责人和分发，下层 worker 各自隔离会话。外部触发先过确定性门禁（在不在白名单、有没有真正 @ Agent），过了才进模型。Worker 认领 ticket 后直接订阅那条对话，评论不再绕 router，他们测过，关掉这层后 router 决策量大约多 30%。压力测试里触发从每分钟 1 次拉到 40 次，批量处理后单次决策时间反而下降。结论有点反直觉：router 往往更适合轻模型，重模型留给 worker。</p>
-<p>作者访谈过 Instacart 和 Box 的 CTO，两边都认为现阶段 harness 比模型更重要。视频收尾也留了清醒提醒：这是原型，安全问题（提示注入、凭据泄漏、跨设备权限）他们自己也承认没完全解决。</p>
-<p>如果你只记住一句：别再只评模型。同一模型至少丢进两三个 harness 再下判断，不然你骂的可能是壳，不是芯。</p>
+<p>以下依据本站保存的视频文字摘录整理，并非完整逐字稿。视频介绍了 DeepSeek 发布的 Super Agent。一些人将它称为对 Claude Code 的回应；视频作者更关注它的构建方式：整个系统由加入 DeepSeek Harness 的一组插件组成。</p>
+<p>Super Agent 会监听团队已经使用的 GitHub 和飞书。当获得许可的成员在 Issue、PR 或相关对话中提出需求时，它建立工作项，开启独立会话完成任务，再返回结果，通常是一个 PR。它不要求用户先打开一段新的 Agent 对话。</p>
+<p>项目随代码发布了一篇 X 文章，题为 Exploring Super Agent Design: Towards a More Autonomous Agent System。项目方明确说明，它是研究原型，并非 DeepSeek 的官方产品；不少设计想法和工程实现也由编码 Agent 编写。</p>
+<h3>同一个模型，换九套 harness</h3>
+<p>视频引用了 Frontier Harness Eval：固定使用 Kimi K3，比较九套编码 Agent harness。Codex 的通过率为 66.7%；DeepSeek Harness 的 creator 配置与 Claude Code 都为 63.3%。每完成一个成功任务，DeepSeek 约花费 $3.28，Claude Code 约为 $18.34。该测试中，最便宜与最贵的 harness 成本相差约 17.5 倍。</p>
+<p>这些结果涉及通过率、成本、缓存和速度，即使模型不变，harness 也会影响这些表现。这些结果来自合成基准测试。</p>
+<p>视频还提到，在 VentureBeat 的 Beyond the Pilot 播客中，Instacart 和 Box 的 CTO 都表达过当前 harness 比模型更重要的看法。</p>
+<h3>DSH 的插件结构</h3>
+<p>DeepSeek Harness（DSH）在八月发布，采用 MIT 许可，提供 Web UI，并不限定使用 DeepSeek 模型。它的设计原则是所有东西都可以成为插件：router、工具注册、会话日志，甚至 Agent loop 本身。</p>
+<p>底层使用 Cordis 的时空可组合能力。时间维度上，卸载组件会撤销它做过的更改；空间维度上，组件依赖关系决定它们何时启用或停用。</p>
+<p>DSH 有 standard、PTC、minimal、creator 等模式，对应不同的插件组合。creator 模式允许用户在聊天中描述一个插件，由 Agent 编写并安装。</p>
+<h3>router 与 worker 如何配合</h3>
+<p>Super Agent 通过 <code>cordis.patch</code> 接入，包含核心 Super Agent 插件、GitHub watcher 和飞书 watcher。上层是一段长期运行的 router 会话，下层是彼此隔离的 worker 会话。外部触发先经过白名单等确定性门禁，再交给模型处理；工作单会携带任务授权。</p>
+<p>worker 使用精简的插件配置，不包含提问、规划、网页抓取或子 Agent，长时间运行的 shell 任务则转入后台。worker 还会直接订阅认领任务的对话，因此后续 PR 评论不必再经过 router。按材料中的测试，启用这一机制时，router 的决策次数比未启用时减少约 30%。</p>
+<p>负载测试把触发量从每分钟 1 次提高到 40 次。通过批量处理，每次决策所需时间从 6.4 秒降至 1.6 秒。视频据此介绍了一种分工：router 可以使用更便宜、更快的模型，把更强的模型留给 worker。</p>
+<p>这套设计希望尽量少占用人的注意力，同时提供尽可能多的价值。插件化也让开发者可以在不 fork 核心代码的情况下继续扩展 harness。</p>
+<p>它仍有明确限制：只是研究原型，公开代码不等于内部使用的代码；接入范围主要是 GitHub 和飞书，评测是合成基准，提示注入、凭证等安全问题尚未完全解决。</p>
+<section class="rewrite-source-media" aria-label="原文附带媒体"><h3 class="source-media-heading">原文附带媒体</h3><p class="completeness-note">原文附带媒体；未核验其与具体段落的对应关系。</p><figure data-media-id="m_a7870fb84bc71ab0"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/OrcsMi2-IcM" title="原视频（手动播放）" loading="lazy" allowfullscreen></iframe><figcaption><a href="https://www.youtube.com/watch?v=OrcsMi2-IcM">打开原始媒体 ↗</a></figcaption></figure></section>
 <h2>原文</h2>
 <p>视频原文摘录，非完整逐字稿；请以原视频为准。</p>
 <p><em>DeepSeek Super Agent and why the harness matters</em></p>
-<p><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/OrcsMi2-IcM" frameborder="0" allowfullscreen></iframe></p><p><a href="https://www.youtube.com/watch?v=OrcsMi2-IcM">https://www.youtube.com/watch?v=OrcsMi2-IcM</a></p>
+<figure data-media-id="m_a7870fb84bc71ab0"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/OrcsMi2-IcM" title="原视频（手动播放）" loading="lazy" allowfullscreen></iframe><figcaption><a href="https://www.youtube.com/watch?v=OrcsMi2-IcM">打开原始媒体 ↗</a></figcaption></figure>
 <p>DeepSeek Super Agent and why the harness matters</p>
 <p>Source: YouTube https://www.youtube.com/watch?v=OrcsMi2-IcM</p>
 <p>Okay, so this past weekend, DeepSeek released something that a lot of people out there are calling the answer to Claude Code. It&#x27;s an agent that sits on a GitHub repo. It watches the issues and pull requests, and when someone on your team asks it to do something, It then goes off into its own session, does the work, and comes back with a PR Now, while that&#x27;s cool in itself, that&#x27;s not really the part that I want to talk about here. The part that I find really interesting is how they built it. The whole thing is just a set of plugins dropped into their agent harness.</p>
@@ -218,29 +194,27 @@
 <p><strong>原文链接：</strong><a href="https://www.youtube.com/watch?v=OrcsMi2-IcM">https://www.youtube.com/watch?v=OrcsMi2-IcM</a></p>]]></content:encoded>
     </item>
     <item>
-      <title>Tibo：硅谷最成功的发布视频，其实是一段屏录</title>
+      <title>Tibo：Dropbox 一段屏录，让候补名单从 5000 人增至 75000 人</title>
       <link>https://xnews.qiaomu.ai/a/tibo-dropbox-launch-video</link>
       <guid isPermaLink="true">https://xnews.qiaomu.ai/a/tibo-dropbox-launch-video</guid>
       <pubDate>Thu, 05 Nov 2026 10:30:35 +0000</pubDate>
       <author>Tibo</author>
-      <description><![CDATA[<p><em>Dropbox 当年把 waitlist 从 5000 拉到 75000。Tibo 说，现在人人用 Claude 做炫片，简单屏录反而更像真人。</em></p>
+      <description><![CDATA[<p><em>他回顾十八年前的发布视频，分析真实功能演示、目标受众与发布渠道如何配合。</em></p>
 <h2>乔木改写</h2>
-<p>Tibo 把那段将近二十年前的 Dropbox 发布视频又翻出来，说这是硅谷史上最成功的 launch video。</p>
-<p>Drew Houston 录了自己的屏幕。Waitlist 一夜从 5000 涨到 75000。</p>
-<p>他归纳了五条，很实在：</p>
+<p>Tibo 翻出十八年前 Dropbox 创始人录制的一段屏幕演示，称它是硅谷历史上最成功的发布视频。他说，这段视频让 Dropbox 的候补名单一夜间从 5000 人增长到 75000 人。</p>
+<p>在他看来，视频有效有五个原因：</p>
 <ol>
-<li>只演示产品承诺的那一件事：文件丢进文件夹，另一台电脑就出现</li>
-<li>里面塞满目标用户才懂的梗</li>
-<li>发在用户已经在的地方（HN、Digg）</li>
-<li>解释新概念，但不堆术语</li>
-<li>让人看见还用不了的东西，视频负责证明，waitlist 负责排队</li>
+<li>它展示了真实产品完成承诺的那件事：把文件放进一个文件夹，文件就会出现在另一台电脑上。</li>
+<li>视频中有许多目标受众才懂的内部笑话。</li>
+<li>创始人把视频发在用户已经聚集的地方：更早的版本发在 Hacker News，这个版本则发在 Digg。</li>
+<li>它解释了一个新概念，却没有使用术语。</li>
+<li>它让人看到了尚未开放使用的产品。Dropbox 当时还没向公众开放，视频先证明它能工作，之后由候补名单承接需求。</li>
 </ol>
-<p>收尾那句更刺：</p>
-<p><strong>大家都在用 Claude 做超炫视频时，你完全可以只做一段很土的屏录，真实感反而强十倍。</strong></p>
-<p>对独立开发者来说，这几乎是反潮流提醒。模型把「精致宣传片」的成本打下来了，稀缺的就变成另一边：你能不能把核心动作拍清楚，并发到对的人眼里。</p>
+<p>Tibo 的建议是，当大家都在用 Claude 制作精致的视频时，也可以只录一段简单的屏幕演示。在他看来，这样反而会显得真实十倍。</p>
+<section class="rewrite-source-media" aria-label="原文附带媒体"><h3 class="source-media-heading">原文附带媒体</h3><p class="completeness-note">原文附带媒体；未核验其与具体段落的对应关系。</p><figure data-media-id="m_5a424bc471e1372e"><video controls playsinline preload="none" src="https://video.twimg.com/amplify_video/2118289796053270528/vid/avc1/480x360/NH7IwVLQVlkf9n0t.mp4?tag=16" poster="https://pbs.twimg.com/amplify_video_thumb/2118289796053270528/img/CPvuvMCkuJt0y4QM.jpg"></video><figcaption><a href="https://video.twimg.com/amplify_video/2118289796053270528/vid/avc1/480x360/NH7IwVLQVlkf9n0t.mp4?tag=16">打开原始媒体 ↗</a></figcaption></figure></section>
 <h2>原文</h2>
 <p><em>The most successful launch video in Silicon Valley history</em></p>
-<p><video controls src="https://video.twimg.com/amplify_video/2118289796053270528/vid/avc1/480x360/NH7IwVLQVlkf9n0t.mp4?tag=16" poster="https://pbs.twimg.com/amplify_video_thumb/2118289796053270528/img/CPvuvMCkuJt0y4QM.jpg"></video></p>
+<figure data-media-id="m_5a424bc471e1372e"><video controls playsinline preload="none" src="https://video.twimg.com/amplify_video/2118289796053270528/vid/avc1/480x360/NH7IwVLQVlkf9n0t.mp4?tag=16" poster="https://pbs.twimg.com/amplify_video_thumb/2118289796053270528/img/CPvuvMCkuJt0y4QM.jpg"></video><figcaption><a href="https://video.twimg.com/amplify_video/2118289796053270528/vid/avc1/480x360/NH7IwVLQVlkf9n0t.mp4?tag=16">打开原始媒体 ↗</a></figcaption></figure>
 <p>this is the most successful launch video in Silicon Valley history</p>
 <p>18 years ago, the founder of Dropbox recorded his screen to make this demo</p>
 <p>it took their waitlist from 5,000 to 75,000 overnight</p>
@@ -263,24 +237,22 @@
 <p>while everyone is doing super fancy video with Claude, you can do a very simple screen recording</p>
 <p>you will look x10 more authentic</p>
 <p><strong>原文链接：</strong><a href="https://x.com/tibo_maker/status/2118289869428380138">https://x.com/tibo_maker/status/2118289869428380138</a></p>]]></description>
-      <content:encoded><![CDATA[<p><em>Dropbox 当年把 waitlist 从 5000 拉到 75000。Tibo 说，现在人人用 Claude 做炫片，简单屏录反而更像真人。</em></p>
+      <content:encoded><![CDATA[<p><em>他回顾十八年前的发布视频，分析真实功能演示、目标受众与发布渠道如何配合。</em></p>
 <h2>乔木改写</h2>
-<p>Tibo 把那段将近二十年前的 Dropbox 发布视频又翻出来，说这是硅谷史上最成功的 launch video。</p>
-<p>Drew Houston 录了自己的屏幕。Waitlist 一夜从 5000 涨到 75000。</p>
-<p>他归纳了五条，很实在：</p>
+<p>Tibo 翻出十八年前 Dropbox 创始人录制的一段屏幕演示，称它是硅谷历史上最成功的发布视频。他说，这段视频让 Dropbox 的候补名单一夜间从 5000 人增长到 75000 人。</p>
+<p>在他看来，视频有效有五个原因：</p>
 <ol>
-<li>只演示产品承诺的那一件事：文件丢进文件夹，另一台电脑就出现</li>
-<li>里面塞满目标用户才懂的梗</li>
-<li>发在用户已经在的地方（HN、Digg）</li>
-<li>解释新概念，但不堆术语</li>
-<li>让人看见还用不了的东西，视频负责证明，waitlist 负责排队</li>
+<li>它展示了真实产品完成承诺的那件事：把文件放进一个文件夹，文件就会出现在另一台电脑上。</li>
+<li>视频中有许多目标受众才懂的内部笑话。</li>
+<li>创始人把视频发在用户已经聚集的地方：更早的版本发在 Hacker News，这个版本则发在 Digg。</li>
+<li>它解释了一个新概念，却没有使用术语。</li>
+<li>它让人看到了尚未开放使用的产品。Dropbox 当时还没向公众开放，视频先证明它能工作，之后由候补名单承接需求。</li>
 </ol>
-<p>收尾那句更刺：</p>
-<p><strong>大家都在用 Claude 做超炫视频时，你完全可以只做一段很土的屏录，真实感反而强十倍。</strong></p>
-<p>对独立开发者来说，这几乎是反潮流提醒。模型把「精致宣传片」的成本打下来了，稀缺的就变成另一边：你能不能把核心动作拍清楚，并发到对的人眼里。</p>
+<p>Tibo 的建议是，当大家都在用 Claude 制作精致的视频时，也可以只录一段简单的屏幕演示。在他看来，这样反而会显得真实十倍。</p>
+<section class="rewrite-source-media" aria-label="原文附带媒体"><h3 class="source-media-heading">原文附带媒体</h3><p class="completeness-note">原文附带媒体；未核验其与具体段落的对应关系。</p><figure data-media-id="m_5a424bc471e1372e"><video controls playsinline preload="none" src="https://video.twimg.com/amplify_video/2118289796053270528/vid/avc1/480x360/NH7IwVLQVlkf9n0t.mp4?tag=16" poster="https://pbs.twimg.com/amplify_video_thumb/2118289796053270528/img/CPvuvMCkuJt0y4QM.jpg"></video><figcaption><a href="https://video.twimg.com/amplify_video/2118289796053270528/vid/avc1/480x360/NH7IwVLQVlkf9n0t.mp4?tag=16">打开原始媒体 ↗</a></figcaption></figure></section>
 <h2>原文</h2>
 <p><em>The most successful launch video in Silicon Valley history</em></p>
-<p><video controls src="https://video.twimg.com/amplify_video/2118289796053270528/vid/avc1/480x360/NH7IwVLQVlkf9n0t.mp4?tag=16" poster="https://pbs.twimg.com/amplify_video_thumb/2118289796053270528/img/CPvuvMCkuJt0y4QM.jpg"></video></p>
+<figure data-media-id="m_5a424bc471e1372e"><video controls playsinline preload="none" src="https://video.twimg.com/amplify_video/2118289796053270528/vid/avc1/480x360/NH7IwVLQVlkf9n0t.mp4?tag=16" poster="https://pbs.twimg.com/amplify_video_thumb/2118289796053270528/img/CPvuvMCkuJt0y4QM.jpg"></video><figcaption><a href="https://video.twimg.com/amplify_video/2118289796053270528/vid/avc1/480x360/NH7IwVLQVlkf9n0t.mp4?tag=16">打开原始媒体 ↗</a></figcaption></figure>
 <p>this is the most successful launch video in Silicon Valley history</p>
 <p>18 years ago, the founder of Dropbox recorded his screen to make this demo</p>
 <p>it took their waitlist from 5,000 to 75,000 overnight</p>
@@ -305,20 +277,19 @@
 <p><strong>原文链接：</strong><a href="https://x.com/tibo_maker/status/2118289869428380138">https://x.com/tibo_maker/status/2118289869428380138</a></p>]]></content:encoded>
     </item>
     <item>
-      <title>Anthropic × Claude：给细菌界的「穹顶蛋白」拍出第一张 3D 结构</title>
+      <title>Anthropic：用 Claude 解析细菌 vault 颗粒的首个三维结构</title>
       <link>https://xnews.qiaomu.ai/a/anthropic-vault-claude</link>
       <guid isPermaLink="true">https://xnews.qiaomu.ai/a/anthropic-vault-claude</guid>
       <pubDate>Wed, 04 Nov 2026 20:11:28 +0000</pubDate>
       <author>Anthropic</author>
-      <description><![CDATA[<p><em>传统纯化要三天，他们压到九十分钟。结构初稿 34 小时出炉。Claude 也踩过坑，团队把坑回灌进了训练。</em></p>
+      <description><![CDATA[<p><em>团队称，原本需要数周到数月的结构解析缩短到了几天；过程中也出现了需要纠正的错误。</em></p>
 <h2>乔木改写</h2>
-<p>Anthropic 生物学实验室又交了一份作业：用 Claude 帮忙，解出了细菌生命里 <strong>vault particle</strong> 的首个 3D 结构。</p>
-<p>Vault 是一种桶状空心蛋白壳，1986 年就被 Leonard Rome 和 Nancy Kedersha 发现，功能至今成谜。哺乳动物细胞里它大约是核糖体质量的三倍。过去只在动植物这类复杂细胞里确认过；这次他们证明，细菌和噬菌体里的类似蛋白，也能组装成完整 vault。</p>
-<p>为什么重要？简单生命里的版本，往往是拆解人类蛋白功能的捷径。cGAS–STING、gasdermin、viperin 都走过这条路。Vault 的功能还不知道，原核版本可能把谜底拉近一点。</p>
-<p>流程里 Claude 几乎全程在场：搜约 150 亿条预测蛋白、设计 DNA 构建、优化分离方法、跑冷冻电镜数据处理。传统糖梯度纯化大约三天，他们改成排阻层析后，从细胞到电镜载网大约 <strong>90 分钟</strong>；第一版结构模型 <strong>34 小时</strong> 出炉，团队估计人工通常要数周。</p>
-<p>也没藏丑。Claude 写过一份有坑的培养基配方，项目因此倒退两周；电镜处理早期跳过标准步骤，搞出镜像混叠的废图。研究员直接下指令：「Please let’s do normal things unless they don’t work。」这些失败笔记回灌给做训练的同事，后续模型在 DNA 设计和实验坑识别上明显好转。</p>
-<p>Vault 发现者 Rome 看完数据说：功能仍然极难，但 Anthropic 的发现够宽，后面会有更多人跟进，「会是一段有趣的旅程」。</p>
-<p>这不是「AI 取代科学家」的通稿。更像一份实验室日志：人定方向、拍板非常规路线，模型把检索、设计和重活压缩掉；人在自己不熟的领域，才最容易被模型带偏。</p>
+<p>Anthropic 介绍，其生物学研究团队与 Claude 合作，解析了来自细菌生命的 vault 颗粒的首个三维结构。</p>
+<p>Vault 颗粒呈桶状，是人体细胞中最大的蛋白质结构之一。Leonard Rome 和 Nancy Kedersha 于 1986 年发现了它，但它的功能至今仍不清楚。</p>
+<p>此前，人们只知道动物、植物等复杂生物的细胞中存在 vault。团队这次证明，细菌以及感染细菌的病毒中的类似蛋白，也能组装成 vault。在这些更简单的生命形式中找到相应结构，可能有助于研究它在人类细胞中的作用。</p>
+<p>Anthropic 将这一项目同时视为 AI 加速科学研究的潜力与局限的展示。团队估计，这次如果靠人工确定颗粒结构，原本需要数周到数月的细致工作，借助 Claude 则只用了几天。但 Claude 也犯了一些简单错误，生物学团队与机器学习研究人员合作处理了这些问题。</p>
+<p>本站保存的是这份研究介绍；详细过程可见 <a href="https://www.anthropic.com/research/investigating-vault-particles-with-claude" target="_blank" rel="noopener noreferrer">Anthropic 的完整文章</a>。</p>
+
 <h2>原文</h2>
 <p><em>Investigating vault particles with Claude</em></p>
 <p>We’re sharing how our biology research team worked with Claude to map the first 3D structure of a vault particle from bacterial life.</p>
@@ -330,15 +301,14 @@
 <p>Read more: https://www.anthropic.com/research/investigating-vault-particles-with-claude</p>
 <p><strong>原文链接：</strong><a href="https://x.com/AnthropicAI/status/2118073665296228863">https://x.com/AnthropicAI/status/2118073665296228863</a></p>
 <p><strong>相关链接：</strong><a href="https://www.anthropic.com/research/investigating-vault-particles-with-claude">https://www.anthropic.com/research/investigating-vault-particles-with-claude</a></p>]]></description>
-      <content:encoded><![CDATA[<p><em>传统纯化要三天，他们压到九十分钟。结构初稿 34 小时出炉。Claude 也踩过坑，团队把坑回灌进了训练。</em></p>
+      <content:encoded><![CDATA[<p><em>团队称，原本需要数周到数月的结构解析缩短到了几天；过程中也出现了需要纠正的错误。</em></p>
 <h2>乔木改写</h2>
-<p>Anthropic 生物学实验室又交了一份作业：用 Claude 帮忙，解出了细菌生命里 <strong>vault particle</strong> 的首个 3D 结构。</p>
-<p>Vault 是一种桶状空心蛋白壳，1986 年就被 Leonard Rome 和 Nancy Kedersha 发现，功能至今成谜。哺乳动物细胞里它大约是核糖体质量的三倍。过去只在动植物这类复杂细胞里确认过；这次他们证明，细菌和噬菌体里的类似蛋白，也能组装成完整 vault。</p>
-<p>为什么重要？简单生命里的版本，往往是拆解人类蛋白功能的捷径。cGAS–STING、gasdermin、viperin 都走过这条路。Vault 的功能还不知道，原核版本可能把谜底拉近一点。</p>
-<p>流程里 Claude 几乎全程在场：搜约 150 亿条预测蛋白、设计 DNA 构建、优化分离方法、跑冷冻电镜数据处理。传统糖梯度纯化大约三天，他们改成排阻层析后，从细胞到电镜载网大约 <strong>90 分钟</strong>；第一版结构模型 <strong>34 小时</strong> 出炉，团队估计人工通常要数周。</p>
-<p>也没藏丑。Claude 写过一份有坑的培养基配方，项目因此倒退两周；电镜处理早期跳过标准步骤，搞出镜像混叠的废图。研究员直接下指令：「Please let’s do normal things unless they don’t work。」这些失败笔记回灌给做训练的同事，后续模型在 DNA 设计和实验坑识别上明显好转。</p>
-<p>Vault 发现者 Rome 看完数据说：功能仍然极难，但 Anthropic 的发现够宽，后面会有更多人跟进，「会是一段有趣的旅程」。</p>
-<p>这不是「AI 取代科学家」的通稿。更像一份实验室日志：人定方向、拍板非常规路线，模型把检索、设计和重活压缩掉；人在自己不熟的领域，才最容易被模型带偏。</p>
+<p>Anthropic 介绍，其生物学研究团队与 Claude 合作，解析了来自细菌生命的 vault 颗粒的首个三维结构。</p>
+<p>Vault 颗粒呈桶状，是人体细胞中最大的蛋白质结构之一。Leonard Rome 和 Nancy Kedersha 于 1986 年发现了它，但它的功能至今仍不清楚。</p>
+<p>此前，人们只知道动物、植物等复杂生物的细胞中存在 vault。团队这次证明，细菌以及感染细菌的病毒中的类似蛋白，也能组装成 vault。在这些更简单的生命形式中找到相应结构，可能有助于研究它在人类细胞中的作用。</p>
+<p>Anthropic 将这一项目同时视为 AI 加速科学研究的潜力与局限的展示。团队估计，这次如果靠人工确定颗粒结构，原本需要数周到数月的细致工作，借助 Claude 则只用了几天。但 Claude 也犯了一些简单错误，生物学团队与机器学习研究人员合作处理了这些问题。</p>
+<p>本站保存的是这份研究介绍；详细过程可见 <a href="https://www.anthropic.com/research/investigating-vault-particles-with-claude" target="_blank" rel="noopener noreferrer">Anthropic 的完整文章</a>。</p>
+
 <h2>原文</h2>
 <p><em>Investigating vault particles with Claude</em></p>
 <p>We’re sharing how our biology research team worked with Claude to map the first 3D structure of a vault particle from bacterial life.</p>
@@ -352,23 +322,22 @@
 <p><strong>相关链接：</strong><a href="https://www.anthropic.com/research/investigating-vault-particles-with-claude">https://www.anthropic.com/research/investigating-vault-particles-with-claude</a></p>]]></content:encoded>
     </item>
     <item>
-      <title>Sarah Guo：非工程师也想改自己的软件，我之前判断错了</title>
+      <title>Sarah Guo 改变了看法：非工程师也想做自己的软件</title>
       <link>https://xnews.qiaomu.ai/a/sarah-guo-personal-software</link>
       <guid isPermaLink="true">https://xnews.qiaomu.ai/a/sarah-guo-personal-software</guid>
       <pubDate>Wed, 04 Nov 2026 18:48:27 +0000</pubDate>
       <author>Sarah Guo</author>
-      <description><![CDATA[<p><em>从「我好有掌控感」到「没人会给我做这个工作流」，欲望光谱比想象中宽。</em></p>
+      <description><![CDATA[<p><em>她列了几种动机：动手做软件带来的力量感、没人替自己实现的工作流，以及想花几周修好的恼人问题。</em></p>
 <h2>乔木改写</h2>
-<p>Sarah Guo 写得很短，但足以改一条产品假设。</p>
-<p>几年前，她不太相信大量非工程师真的想自己做、或改个人软件。现在她认错了。她看到的欲望大概分几档：</p>
+<p>几年前，Sarah Guo 怀疑是否真有很多非工程师想自己制作或修改个人软件。现在，她改变了看法，觉得自己当时想错了。</p>
+<p>她列了几种人们想做个人软件的理由：</p>
 <ul>
-<li>我感觉自己很有力量</li>
-<li>没人会给我做我要的工作流 / 个性化</li>
-<li>能不能让我当几周产品经理，把这个天天烦我的点修掉</li>
+<li>自己也能做软件，感觉很有力量。</li>
+<li>没人会替自己做出需要的工作流或个性化设置。</li>
+<li>想当几周产品经理，修好那个一直让自己烦躁的地方。</li>
 </ul>
-<p>事后看几乎是常识：<strong>只要「省力 / 能力」比值够好，人就会动手做自己的软件。</strong></p>
-<p>这和「人人都该学编程」不是一回事。更接近：当 Agent 把实现成本压下去之后，个人软件会从极客玩具，变成普通人处理生活摩擦的默认选项。</p>
-<p>对做工具的人来说，下一步产品问题大概是：你是继续做一个封闭的成品，还是留出足够安全的口子，让用户能把自己的流程焊进去。</p>
+<p>她回头看觉得，这其实不难理解：只要工具容易上手、能力又够强，人们当然会愿意做自己的软件。</p>
+
 <h2>原文</h2>
 <p><em>Non-engineers do want to make personal software</em></p>
 <p>a few years ago, I started out skeptical that many non-engineers really wanted to make/mod their own personal software -- but I&#x27;ve come around, think I was wrong. range of desires from:</p>
@@ -379,18 +348,17 @@
 </ul>
 <p>obvious in retrospect, but if the ease:power ratio is good enough, of course people will make their own software</p>
 <p><strong>原文链接：</strong><a href="https://x.com/saranormous/status/2118052772637704376">https://x.com/saranormous/status/2118052772637704376</a></p>]]></description>
-      <content:encoded><![CDATA[<p><em>从「我好有掌控感」到「没人会给我做这个工作流」，欲望光谱比想象中宽。</em></p>
+      <content:encoded><![CDATA[<p><em>她列了几种动机：动手做软件带来的力量感、没人替自己实现的工作流，以及想花几周修好的恼人问题。</em></p>
 <h2>乔木改写</h2>
-<p>Sarah Guo 写得很短，但足以改一条产品假设。</p>
-<p>几年前，她不太相信大量非工程师真的想自己做、或改个人软件。现在她认错了。她看到的欲望大概分几档：</p>
+<p>几年前，Sarah Guo 怀疑是否真有很多非工程师想自己制作或修改个人软件。现在，她改变了看法，觉得自己当时想错了。</p>
+<p>她列了几种人们想做个人软件的理由：</p>
 <ul>
-<li>我感觉自己很有力量</li>
-<li>没人会给我做我要的工作流 / 个性化</li>
-<li>能不能让我当几周产品经理，把这个天天烦我的点修掉</li>
+<li>自己也能做软件，感觉很有力量。</li>
+<li>没人会替自己做出需要的工作流或个性化设置。</li>
+<li>想当几周产品经理，修好那个一直让自己烦躁的地方。</li>
 </ul>
-<p>事后看几乎是常识：<strong>只要「省力 / 能力」比值够好，人就会动手做自己的软件。</strong></p>
-<p>这和「人人都该学编程」不是一回事。更接近：当 Agent 把实现成本压下去之后，个人软件会从极客玩具，变成普通人处理生活摩擦的默认选项。</p>
-<p>对做工具的人来说，下一步产品问题大概是：你是继续做一个封闭的成品，还是留出足够安全的口子，让用户能把自己的流程焊进去。</p>
+<p>她回头看觉得，这其实不难理解：只要工具容易上手、能力又够强，人们当然会愿意做自己的软件。</p>
+
 <h2>原文</h2>
 <p><em>Non-engineers do want to make personal software</em></p>
 <p>a few years ago, I started out skeptical that many non-engineers really wanted to make/mod their own personal software -- but I&#x27;ve come around, think I was wrong. range of desires from:</p>
@@ -403,20 +371,18 @@
 <p><strong>原文链接：</strong><a href="https://x.com/saranormous/status/2118052772637704376">https://x.com/saranormous/status/2118052772637704376</a></p>]]></content:encoded>
     </item>
     <item>
-      <title>Rauch：Vercel 内部那个「惊人有效」的安全 Agent，终于对外开放了</title>
+      <title>Rauch：Vercel 内部的安全审计 Agent 已对外开放</title>
       <link>https://xnews.qiaomu.ai/a/rauchg-vercel-security-review</link>
       <guid isPermaLink="true">https://xnews.qiaomu.ai/a/rauchg-vercel-security-review</guid>
       <pubDate>Tue, 03 Nov 2026 21:45:04 +0000</pubDate>
       <author>Guillermo Rauch</author>
-      <description><![CDATA[<p><em>每行代码自动审计。他的判断很直白：你不能指望工程师记得装技能，或掷骰子赌第一版就安全。</em></p>
+      <description><![CDATA[<p><em>Rauch 称，仓库无论是否托管在 Vercel，都可以启用与内部安全 Agent 相同的能力。</em></p>
 <h2>乔木改写</h2>
-<p>Guillermo Rauch 等这一天很久了。</p>
-<p>Vercel 内部有个安全 Agent，昵称叫 <strong>@hacker</strong>。Rauch 的原话是「astonishingly effective」：每一行代码都会被自动审计。现在，同样的能力对外开放了。打开之后，不管你的项目是不是部署在 Vercel 上，都可以挂到仓库上跑。</p>
-<p>他为什么这么急着推？因为边界条件已经变了。</p>
-<p>你不能只靠工程师「记得装一个安全技能」，也不能只靠 prompt 里写一句「请写得安全一点」，更不能赌模型第一次就吐出靠谱代码。安全要变成默认流水线，而不是人品考验。</p>
-<p>配套产品是 <strong>Vercel Security Review</strong>（公测）。按官方说明，它挂在每次 GitHub push 上：扫变更、在 PR 留评论、进 Security 面板，也可以让 Vercel Agent 验证并直接提修复。扫描的是 diff，所以通常几秒结束，预览和生产部署都能跑。</p>
-<p>Rauch 还特意点了一句：这套东西是安全团队自己做出来的。很多公司正忙着招人补安全编制；如果你想「把一个安全团队下载成软件」，这大概是今天最接近的形态。</p>
-<p>我读完更在意的是分工。写代码的 Agent 越来越多，审代码的 Agent 如果不跟上，中间那截空档会变成默认攻击面。Rauch 这篇文章，其实是在说：安全也该产品化，而且要产品到「每 push 必审」。</p>
+<p>Guillermo Rauch 说，他一直期待 Vercel 的这次发布。公司内部有一个昵称为 <code>@𝚑𝚊𝚌𝚔𝚎𝚛</code> 的安全 Agent，每一行代码都会自动接受审计；他认为这个工具的效果非常出色。</p>
+<p>现在，外部用户也能在自己的所有仓库中启用相同能力，无论项目是否托管在 Vercel。Rauch 表示，它能发现其他 Agent 遗漏的问题，让使用者更安心。</p>
+<p>他给出的理由很具体：不能只指望工程师已经安装某个安全技能，也不能只在提示词里写一句请把代码写安全，更不能寄希望于模型第一次生成的代码就足够可靠。</p>
+<p>这套产品完全由 Vercel 的安全团队开发。Rauch 推测，不少公司正在急着扩充安全人员；在他看来，如果希望把安全团队变成可以直接获得的软件，这已经是目前很接近的一种形式。</p>
+
 <h2>原文</h2>
 <p><em>Vercel internal security agent @hacker now available</em></p>
 <p>I&#x27;ve been looking forward to this day, because Vercel has an internal security agent that is <strong>astonishingly effective</strong> (lovingly called @𝚑𝚊𝚌𝚔𝚎𝚛). Every single line of code gets audited, automatically.</p>
@@ -425,15 +391,13 @@
 <p>The other cool thing about this is that this was entirely developed by our security team. A lot of companies out there are probably in a mad rush right now trying to staff up. If you wanted to &#x27;download a security team&#x27; as software, this is the closest you get today.</p>
 <p><strong>原文链接：</strong><a href="https://x.com/rauchg/status/2117734833824948373">https://x.com/rauchg/status/2117734833824948373</a></p>
 <p><strong>相关链接：</strong><a href="https://vercel.com/blog/vercel-security-review">https://vercel.com/blog/vercel-security-review</a></p>]]></description>
-      <content:encoded><![CDATA[<p><em>每行代码自动审计。他的判断很直白：你不能指望工程师记得装技能，或掷骰子赌第一版就安全。</em></p>
+      <content:encoded><![CDATA[<p><em>Rauch 称，仓库无论是否托管在 Vercel，都可以启用与内部安全 Agent 相同的能力。</em></p>
 <h2>乔木改写</h2>
-<p>Guillermo Rauch 等这一天很久了。</p>
-<p>Vercel 内部有个安全 Agent，昵称叫 <strong>@hacker</strong>。Rauch 的原话是「astonishingly effective」：每一行代码都会被自动审计。现在，同样的能力对外开放了。打开之后，不管你的项目是不是部署在 Vercel 上，都可以挂到仓库上跑。</p>
-<p>他为什么这么急着推？因为边界条件已经变了。</p>
-<p>你不能只靠工程师「记得装一个安全技能」，也不能只靠 prompt 里写一句「请写得安全一点」，更不能赌模型第一次就吐出靠谱代码。安全要变成默认流水线，而不是人品考验。</p>
-<p>配套产品是 <strong>Vercel Security Review</strong>（公测）。按官方说明，它挂在每次 GitHub push 上：扫变更、在 PR 留评论、进 Security 面板，也可以让 Vercel Agent 验证并直接提修复。扫描的是 diff，所以通常几秒结束，预览和生产部署都能跑。</p>
-<p>Rauch 还特意点了一句：这套东西是安全团队自己做出来的。很多公司正忙着招人补安全编制；如果你想「把一个安全团队下载成软件」，这大概是今天最接近的形态。</p>
-<p>我读完更在意的是分工。写代码的 Agent 越来越多，审代码的 Agent 如果不跟上，中间那截空档会变成默认攻击面。Rauch 这篇文章，其实是在说：安全也该产品化，而且要产品到「每 push 必审」。</p>
+<p>Guillermo Rauch 说，他一直期待 Vercel 的这次发布。公司内部有一个昵称为 <code>@𝚑𝚊𝚌𝚔𝚎𝚛</code> 的安全 Agent，每一行代码都会自动接受审计；他认为这个工具的效果非常出色。</p>
+<p>现在，外部用户也能在自己的所有仓库中启用相同能力，无论项目是否托管在 Vercel。Rauch 表示，它能发现其他 Agent 遗漏的问题，让使用者更安心。</p>
+<p>他给出的理由很具体：不能只指望工程师已经安装某个安全技能，也不能只在提示词里写一句请把代码写安全，更不能寄希望于模型第一次生成的代码就足够可靠。</p>
+<p>这套产品完全由 Vercel 的安全团队开发。Rauch 推测，不少公司正在急着扩充安全人员；在他看来，如果希望把安全团队变成可以直接获得的软件，这已经是目前很接近的一种形式。</p>
+
 <h2>原文</h2>
 <p><em>Vercel internal security agent @hacker now available</em></p>
 <p>I&#x27;ve been looking forward to this day, because Vercel has an internal security agent that is <strong>astonishingly effective</strong> (lovingly called @𝚑𝚊𝚌𝚔𝚎𝚛). Every single line of code gets audited, automatically.</p>
@@ -444,20 +408,48 @@
 <p><strong>相关链接：</strong><a href="https://vercel.com/blog/vercel-security-review">https://vercel.com/blog/vercel-security-review</a></p>]]></content:encoded>
     </item>
     <item>
-      <title>25 岁做到 5 亿年化收入：Slash 怎么靠「超级小生意」打穿金融</title>
+      <title>Slash 年化总收入达 5 亿美元，Victor 详述 SuperSMB 生意</title>
       <link>https://xnews.qiaomu.ai/a/victor-slash-supersmb</link>
       <guid isPermaLink="true">https://xnews.qiaomu.ai/a/victor-slash-supersmb</guid>
       <pubDate>Tue, 03 Nov 2026 21:24:49 +0000</pubDate>
       <author>Victor Cardenas</author>
-      <description><![CDATA[<p><em>不到 100 人，年化收入过 $500m。Victor 把方法写得很清楚：找 SuperSMB，卖给他们，为他们做产品。</em></p>
+      <description><![CDATA[<p><em>Victor Cardenas 列出客户的年龄、支出与团队规模，解释 Slash 如何获客、设计产品和定价。</em></p>
 <h2>乔木改写</h2>
-<p>Victor Cardenas 宣布，Slash 年化收入刚越过 <strong>$500m</strong>。去年大约 $150m，再上一年 $50m。团队不到 100 人。他 25 岁。</p>
-<p>长文的核心概念叫 <strong>SuperSMB</strong>：人很少、收入很高、决策极快的公司。AI 让这类创业者密度暴涨。Victor 给的数据里，平台上 88% 的资产来自 35 岁以下创始人的公司，65% 的月支出流来自近三年成立的公司。</p>
-<p>他对销售的判断几乎是反常识的：</p>
-<blockquote><p>以前 B2B 得在「大单但慢」和「小单但快」之间二选一。卖给 SuperSMB，你可以同时要到大金额和短周期。</p></blockquote>
-<p>怎么找到他们？Slash 不用 Clay / ZoomInfo，也不靠冷邮件。三条硬要求：靠产品赢得转介、人必须在场（群、论坛、会议）、第一天就给人而不是把高级支持锁在员工数门槛后面。他说，一个销售一年带进超过 $1 亿收入，在他们团队是真实发生过的。</p>
-<p>产品侧同样围绕这群人：<strong>全球可用、Agent-ready（仪表盘能做的，API / MCP 也能做）、懂行业工作流、尽量 all-in-one、定价激进</strong>。他的原话是，靠砍自己的内部成本赚钱，别靠抬客户价格。</p>
-<p>读完最大的感觉是：AI native 创业者已经大到值得单独开一条银行产品线。谁还按「传统 SMB vs 企业」做分组，谁就会把最快的那批客人让出去。</p>
+<p>Victor Cardenas 说，Slash 上个月的年化总收入超过了 5 亿美元，去年约为 1.5 亿美元，再前一年约为 5000 万美元。公司规模在扩大，增长也在加快，团队却不到 100 人。他写这篇文章时 25 岁。</p>
+<p>他将 Slash 称为有史以来增长最快的金融科技公司之一，并把增长几乎全部归因于：比竞争对手更擅长为真正的 AI 原生创业者开发和销售产品。他用 100 倍来形容这种优势。</p>
+<p>文章围绕三件事展开：SuperSMB 的兴起，如何找到并卖给这些客户，以及如何为他们做产品。SuperSMB 指的是团队非常精简、收入却很高的企业。</p>
+<h3>SuperSMB 是什么样的公司</h3>
+<p>Victor 认为，AI 正带来创业者数量的快速增长。他列出了几组数据：美国新设企业申请数在 2025 年约为 560 万份，比 2019 年的 350 万份增加约 60%；每隔 26 秒，就有一家 Shopify 商店获得第一笔销售；2025 年的 Stripe Atlas 创业公司在成立后头六个月的收入中位数，比 2024 年对应公司高 39%。在他看来，从零快速增长到数千万美元的现象已经不限于科技公司，其他行业的企业也在加速成长。</p>
+<p>Slash 客户每月支出数十亿美元，平台上存放的资产也达到数十亿美元。Victor 用自家平台的数据描述这批创业者：</p>
+<ul>
+<li>他们很年轻。平台超过 88% 的资产来自创始人未满 35 岁的企业，这类企业也贡献了 72% 的支出。</li>
+<li>他们常常同时经营多家公司。Slash 上 40% 的公司，其所属创业者在平台上还拥有至少另一家公司。</li>
+<li>业务增长很快。每月经 Slash 流转的数十亿美元支出中，65% 来自过去三年、也就是 ChatGPT 推出后成立的公司，25% 来自过去十二个月成立的公司。</li>
+<li>雇员很少。Slash 客户的中位画像是每月有数十万美元的卡支出，但只有几名员工。</li>
+<li>他们来自世界各地。AI 与互联网让全球企业主都能向美国消费者和企业销售，越来越多创业者以美元做生意，Slash 为他们提供服务。</li>
+</ul>
+<p>Victor 相信，这批企业将在未来十年变得非常重要。他预测，到 2035 年，美国银行持有的企业存款中，超过一半会来自 ChatGPT 推出后才注册成立的公司。他认为，包括银行在内，今天不少主流产品并非为 AI 原生创业者设计，也跟不上他们的需求，因此为这一快速成长群体开发专门产品存在机会。</p>
+<h3>怎样找到他们并完成销售</h3>
+<p>Victor 看重 SuperSMB 同时具备的两项特点：公司收入可观，交易金额可以很大；没有复杂官僚层级，销售又能很快完成。他认为，这改变了传统 B2B 销售周期与年度合同价值之间的取舍：企业客户通常成交慢但金额高，普通中小企业成交快却金额小，SuperSMB 有机会兼得两者。</p>
+<p>但这些公司并不好找。Slash 不用 Clay 或 ZoomInfo，也不做陌生电话销售或冷邮件。Victor 提出了三项做法：</p>
+<ol>
+<li>赢得客户信任，让客户带来转介。只靠 LinkedIn，很难找出哪些两到十人的团队已做到数千万美元收入；客户需要成为最好的销售者。</li>
+<li>深入行业。加入重要群聊，关注关键论坛，参加会议。有些行业的 SuperSMB 明显更多，如果不成为行业专家，就会被甩在后面。</li>
+<li>从第一天就让客户获得真人服务。不能按客户的员工数设置高级支持门槛；这批创业者一开始就需要受到重视。</li>
+</ol>
+<p>他还说，一个销售人员在一年里带来超过 1 亿美元收入是可能的，并举团队中的 <code>@nickbruhman</code> 和其他同事为例。</p>
+<h3>怎样为 SuperSMB 做产品</h3>
+<p>Victor 说，Slash 的每一部分产品都围绕 SuperSMB 设计，主要包括以下方向。</p>
+<p><strong>从一开始就面向全球。</strong> 全球创业者可以用 Cursor 开发软件，通过 Shopify、Amazon 向美国消费者卖实物，再用 Meta 投广告，他因此质疑他们为什么还难以便捷地使用美元。Slash 将其美国市场标准的产品向全球互联网创业者开放，活跃客户已覆盖 40 多个国家。他建议，从第一天就把全球市场纳入设计。</p>
+<p><strong>让 Agent 也能使用。</strong> 用户在 Slash 仪表盘上能完成的每一个动作，都可以通过 API 或 MCP 完成。Victor 认为，SuperSMB 是 API 和 MCP 的重度用户，并不想为了操作而登录界面，产品应允许他们通过 Agent 调用。</p>
+<p><strong>理解行业。</strong> 营销代理机构、医疗美容机构、数据标注公司和批发商的财务流程、营运资金需求并不相同。Slash 为已进入的细分行业开发互补的专用工具；Victor 认为，这比横向通用产品能节省更多时间和资金。他判断，如今开发软件已经容易，缺乏行业差异化的产品很难成功，SuperSMB 期待的是面向自身行业的价值。</p>
+<p><strong>尽量在一个平台解决完整需求。</strong> 企业主想把时间用于改进产品和获得客户，不想花时间管理后台事务。Slash 因此提供四类会计产品：开票、账单支付、费用管理和会计自动化；同时把支付处理、银行服务、稳定币支付、外汇和发卡放在同一平台，并提供多实体管理体验。</p>
+<p>Victor 说，过去二十四个月，Slash 作为客户主要银行业务合作方的比例，从不足 20% 升至超过 80%。在他看来，这批客户希望少用工具而非多用工具，又倾向于自己开发；外部产品必须能一次解决很多问题，才值得考虑。Slash 希望为他们解决的是完整的财务需求。</p>
+<p><strong>积极定价，靠降低内部成本增加利润。</strong> SuperSMB 经常没有外部融资，很在意盈利能力。Victor 认为，不能傲慢地假设自己的价格可以高于竞争对手。Slash 自身团队也很精简，因此能够提供有竞争力的费率；他的建议是通过降低内部成本增加利润，而不是向最终客户涨价。</p>
+<h3>Slash 接下来要做什么</h3>
+<p>Victor 将公司的目标描述为成为全球最受欢迎的企业银行业务平台。他说，这个使命很直接，但极难实现；公司正在招聘有抱负、愿意努力工作的人，有意者可以按原文地址 <code>victor @ slash . com</code> 联系。</p>
+<p>原文特别注明：Slash 是金融科技公司，不是银行；银行服务由 FDIC 成员 Column N.A. 提供。</p>
+
 <h2>原文</h2>
 <p><em>Slash hit 500m annual revenue with 88 people. We invented a new playbook:</em></p>
 <p>Last month, we crossed $500m in annualized gross revenue, up from roughly $150m last year and $50m the year before. Our business is getting larger, and our growth is accelerating. Slash is one of the fastest growing fintech companies of all time, and we have a team of under 100 people.</p>
@@ -471,15 +463,43 @@
 <li>Slash is a financial technology company, not a bank. Banking services provided by Column N.A., Member FDIC.</li>
 </ul>
 <p><strong>原文链接：</strong><a href="https://x.com/victorcardenas/status/2117729738160496778">https://x.com/victorcardenas/status/2117729738160496778</a></p>]]></description>
-      <content:encoded><![CDATA[<p><em>不到 100 人，年化收入过 $500m。Victor 把方法写得很清楚：找 SuperSMB，卖给他们，为他们做产品。</em></p>
+      <content:encoded><![CDATA[<p><em>Victor Cardenas 列出客户的年龄、支出与团队规模，解释 Slash 如何获客、设计产品和定价。</em></p>
 <h2>乔木改写</h2>
-<p>Victor Cardenas 宣布，Slash 年化收入刚越过 <strong>$500m</strong>。去年大约 $150m，再上一年 $50m。团队不到 100 人。他 25 岁。</p>
-<p>长文的核心概念叫 <strong>SuperSMB</strong>：人很少、收入很高、决策极快的公司。AI 让这类创业者密度暴涨。Victor 给的数据里，平台上 88% 的资产来自 35 岁以下创始人的公司，65% 的月支出流来自近三年成立的公司。</p>
-<p>他对销售的判断几乎是反常识的：</p>
-<blockquote><p>以前 B2B 得在「大单但慢」和「小单但快」之间二选一。卖给 SuperSMB，你可以同时要到大金额和短周期。</p></blockquote>
-<p>怎么找到他们？Slash 不用 Clay / ZoomInfo，也不靠冷邮件。三条硬要求：靠产品赢得转介、人必须在场（群、论坛、会议）、第一天就给人而不是把高级支持锁在员工数门槛后面。他说，一个销售一年带进超过 $1 亿收入，在他们团队是真实发生过的。</p>
-<p>产品侧同样围绕这群人：<strong>全球可用、Agent-ready（仪表盘能做的，API / MCP 也能做）、懂行业工作流、尽量 all-in-one、定价激进</strong>。他的原话是，靠砍自己的内部成本赚钱，别靠抬客户价格。</p>
-<p>读完最大的感觉是：AI native 创业者已经大到值得单独开一条银行产品线。谁还按「传统 SMB vs 企业」做分组，谁就会把最快的那批客人让出去。</p>
+<p>Victor Cardenas 说，Slash 上个月的年化总收入超过了 5 亿美元，去年约为 1.5 亿美元，再前一年约为 5000 万美元。公司规模在扩大，增长也在加快，团队却不到 100 人。他写这篇文章时 25 岁。</p>
+<p>他将 Slash 称为有史以来增长最快的金融科技公司之一，并把增长几乎全部归因于：比竞争对手更擅长为真正的 AI 原生创业者开发和销售产品。他用 100 倍来形容这种优势。</p>
+<p>文章围绕三件事展开：SuperSMB 的兴起，如何找到并卖给这些客户，以及如何为他们做产品。SuperSMB 指的是团队非常精简、收入却很高的企业。</p>
+<h3>SuperSMB 是什么样的公司</h3>
+<p>Victor 认为，AI 正带来创业者数量的快速增长。他列出了几组数据：美国新设企业申请数在 2025 年约为 560 万份，比 2019 年的 350 万份增加约 60%；每隔 26 秒，就有一家 Shopify 商店获得第一笔销售；2025 年的 Stripe Atlas 创业公司在成立后头六个月的收入中位数，比 2024 年对应公司高 39%。在他看来，从零快速增长到数千万美元的现象已经不限于科技公司，其他行业的企业也在加速成长。</p>
+<p>Slash 客户每月支出数十亿美元，平台上存放的资产也达到数十亿美元。Victor 用自家平台的数据描述这批创业者：</p>
+<ul>
+<li>他们很年轻。平台超过 88% 的资产来自创始人未满 35 岁的企业，这类企业也贡献了 72% 的支出。</li>
+<li>他们常常同时经营多家公司。Slash 上 40% 的公司，其所属创业者在平台上还拥有至少另一家公司。</li>
+<li>业务增长很快。每月经 Slash 流转的数十亿美元支出中，65% 来自过去三年、也就是 ChatGPT 推出后成立的公司，25% 来自过去十二个月成立的公司。</li>
+<li>雇员很少。Slash 客户的中位画像是每月有数十万美元的卡支出，但只有几名员工。</li>
+<li>他们来自世界各地。AI 与互联网让全球企业主都能向美国消费者和企业销售，越来越多创业者以美元做生意，Slash 为他们提供服务。</li>
+</ul>
+<p>Victor 相信，这批企业将在未来十年变得非常重要。他预测，到 2035 年，美国银行持有的企业存款中，超过一半会来自 ChatGPT 推出后才注册成立的公司。他认为，包括银行在内，今天不少主流产品并非为 AI 原生创业者设计，也跟不上他们的需求，因此为这一快速成长群体开发专门产品存在机会。</p>
+<h3>怎样找到他们并完成销售</h3>
+<p>Victor 看重 SuperSMB 同时具备的两项特点：公司收入可观，交易金额可以很大；没有复杂官僚层级，销售又能很快完成。他认为，这改变了传统 B2B 销售周期与年度合同价值之间的取舍：企业客户通常成交慢但金额高，普通中小企业成交快却金额小，SuperSMB 有机会兼得两者。</p>
+<p>但这些公司并不好找。Slash 不用 Clay 或 ZoomInfo，也不做陌生电话销售或冷邮件。Victor 提出了三项做法：</p>
+<ol>
+<li>赢得客户信任，让客户带来转介。只靠 LinkedIn，很难找出哪些两到十人的团队已做到数千万美元收入；客户需要成为最好的销售者。</li>
+<li>深入行业。加入重要群聊，关注关键论坛，参加会议。有些行业的 SuperSMB 明显更多，如果不成为行业专家，就会被甩在后面。</li>
+<li>从第一天就让客户获得真人服务。不能按客户的员工数设置高级支持门槛；这批创业者一开始就需要受到重视。</li>
+</ol>
+<p>他还说，一个销售人员在一年里带来超过 1 亿美元收入是可能的，并举团队中的 <code>@nickbruhman</code> 和其他同事为例。</p>
+<h3>怎样为 SuperSMB 做产品</h3>
+<p>Victor 说，Slash 的每一部分产品都围绕 SuperSMB 设计，主要包括以下方向。</p>
+<p><strong>从一开始就面向全球。</strong> 全球创业者可以用 Cursor 开发软件，通过 Shopify、Amazon 向美国消费者卖实物，再用 Meta 投广告，他因此质疑他们为什么还难以便捷地使用美元。Slash 将其美国市场标准的产品向全球互联网创业者开放，活跃客户已覆盖 40 多个国家。他建议，从第一天就把全球市场纳入设计。</p>
+<p><strong>让 Agent 也能使用。</strong> 用户在 Slash 仪表盘上能完成的每一个动作，都可以通过 API 或 MCP 完成。Victor 认为，SuperSMB 是 API 和 MCP 的重度用户，并不想为了操作而登录界面，产品应允许他们通过 Agent 调用。</p>
+<p><strong>理解行业。</strong> 营销代理机构、医疗美容机构、数据标注公司和批发商的财务流程、营运资金需求并不相同。Slash 为已进入的细分行业开发互补的专用工具；Victor 认为，这比横向通用产品能节省更多时间和资金。他判断，如今开发软件已经容易，缺乏行业差异化的产品很难成功，SuperSMB 期待的是面向自身行业的价值。</p>
+<p><strong>尽量在一个平台解决完整需求。</strong> 企业主想把时间用于改进产品和获得客户，不想花时间管理后台事务。Slash 因此提供四类会计产品：开票、账单支付、费用管理和会计自动化；同时把支付处理、银行服务、稳定币支付、外汇和发卡放在同一平台，并提供多实体管理体验。</p>
+<p>Victor 说，过去二十四个月，Slash 作为客户主要银行业务合作方的比例，从不足 20% 升至超过 80%。在他看来，这批客户希望少用工具而非多用工具，又倾向于自己开发；外部产品必须能一次解决很多问题，才值得考虑。Slash 希望为他们解决的是完整的财务需求。</p>
+<p><strong>积极定价，靠降低内部成本增加利润。</strong> SuperSMB 经常没有外部融资，很在意盈利能力。Victor 认为，不能傲慢地假设自己的价格可以高于竞争对手。Slash 自身团队也很精简，因此能够提供有竞争力的费率；他的建议是通过降低内部成本增加利润，而不是向最终客户涨价。</p>
+<h3>Slash 接下来要做什么</h3>
+<p>Victor 将公司的目标描述为成为全球最受欢迎的企业银行业务平台。他说，这个使命很直接，但极难实现；公司正在招聘有抱负、愿意努力工作的人，有意者可以按原文地址 <code>victor @ slash . com</code> 联系。</p>
+<p>原文特别注明：Slash 是金融科技公司，不是银行；银行服务由 FDIC 成员 Column N.A. 提供。</p>
+
 <h2>原文</h2>
 <p><em>Slash hit 500m annual revenue with 88 people. We invented a new playbook:</em></p>
 <p>Last month, we crossed $500m in annualized gross revenue, up from roughly $150m last year and $50m the year before. Our business is getting larger, and our growth is accelerating. Slash is one of the fastest growing fintech companies of all time, and we have a team of under 100 people.</p>
@@ -495,30 +515,30 @@
 <p><strong>原文链接：</strong><a href="https://x.com/victorcardenas/status/2117729738160496778">https://x.com/victorcardenas/status/2117729738160496778</a></p>]]></content:encoded>
     </item>
     <item>
-      <title>Levelsio：全站开销砍到约 $300/月，Claude 帮他一年省下近三万刀月费</title>
+      <title>Levelsio：常规业务开销降到约 $300/月，不含 Photo AI</title>
       <link>https://xnews.qiaomu.ai/a/levelsio-300-month-expenses</link>
       <guid isPermaLink="true">https://xnews.qiaomu.ai/a/levelsio-300-month-expenses</guid>
       <pubDate>Tue, 03 Nov 2026 19:03:50 +0000</pubDate>
       <author>Pieter Levels</author>
-      <description><![CDATA[<p><em>2 万付费用户、2.52 亿访客、2.4PB 流量。AI 最擅长的，可能是帮你找到自己看不见的浪费。</em></p>
+      <description><![CDATA[<p><em>他称每月节省近 $34000；网站年度服务量为 2 万付费客户、2.52 亿访客、24 亿请求与 2.4 PB 带宽。</em></p>
 <h2>乔木改写</h2>
-<p>Pieter Levels 又晒了一张成本表。</p>
-<p>他所有网站加在一起，服务着大约 <strong>2 万付费用户、2.52 亿访客、24 亿请求、2.4PB 带宽</strong>。常规业务开销现在只剩大约 <strong>$300/月</strong>。如果把 Photo AI 的 GPU（约 $7000/月）和 R2（约 $800/月）算进去，大概 $8000/月。</p>
-<p>更刺眼的是降幅。他列了 Claude Code 帮他抠出来的账，合计接近 <strong>$34,000/月</strong>：</p>
+<p>Pieter Levels 更新了自己的业务开销：常规部分已降到约 $300/月。这些网站和 App 每年服务约 20000 名付费客户、2.52 亿访客，处理 24 亿次请求，消耗 2.4 PB 带宽。</p>
+<p>这个 $300/月的口径不包括 Photo AI。该项目的 GPU 费用约为 $7000/月，R2 存储约为 $800/月；把它算上，总开销约为 $8000/月。Levels 解释，Photo AI 单个项目的体量就远高于其他网站之和，因此在前面的数字中单独排除，但已经计入原帖图表。</p>
+<p>他认为 Claude Code 很擅长自主寻找节省成本的办法。这次列出的节省合计接近 $34000/月，具体包括：</p>
 <ul>
-<li>视频模型换更便宜的、部分任务走 Google Cloud Credits 和市价转售，GPU 从 $36k 降到 $7k</li>
-<li>服务器合并，取消 DigitalOcean / Linode，迁到 Hetzner，约省 $3k</li>
-<li>Backblaze 无限版本改成 30 天生命周期，备份费从 $1200 降到 $26</li>
-<li>R2 加生命周期，90 天后进低频，从 $1200 降到 $800</li>
-<li>Cloudflare 域名清掉不用的，尤其是越来越贵的 <code>.io</code></li>
-<li>连 Claude 自己的 Max 20x 订阅也被降到 $100，因为他根本用不满</li>
+<li>GPU：约省 $29000/月。Photo AI 改用更好、更便宜的视频模型；原先的视频成本一直很高，因为他长期没有更新相关模型。部分图片任务转到有 Google Cloud Credits 可用的 Google Cloud，另一些任务转到按市场成本销售 AI 模型的 Sume。GPU 账单由 $36000/月降至 $7000/月。</li>
+<li>服务器：约省 $3000/月。合并服务器，取消 DigitalOcean 和 Linode，将服务迁往 Hetzner。</li>
+<li>Backblaze B2 备份：他将这项节省记为约 $1100/月，并给出了账单从 $1200/月降到 $26/月的变化，称便宜了约 50 倍。此前保留了无限版本，没有限制的生命周期策略让服务器文件版本积累了十多年；现在改为保留 30 天。</li>
+<li>Cloudflare R2：约省 $400/月。为 Photo AI 的存储桶增加生命周期策略，让图片在 90 天后自动转入更便宜的 Infrequent Access。桶里已积累多年的照片，账单因此从 $1200/月降到 $800/月。</li>
+<li>域名：约省 $118/月。Claude 检查了他在 Cloudflare 的域名注册，找出许多不再使用、没有必要继续付费的域名。Levels 还认为，其中一些项目在他所说的后 AGI 世界里已没有太多保留意义；他特别提到，<code>.io</code> 域名续费已达 $50/年，数量一多就会累积成明显支出。</li>
+<li>Claude 订阅：约省 $100/月。Claude 分析了自己的订阅使用量，发现他用不到 Max 20x 套餐的上限，于是将套餐从 $200/月降到 $100/月。</li>
 </ul>
-<p>连 Photo AI 算上，总成本比去年砍了大约九成，接近他十年前刚创业时的量级。</p>
-<p>他自己也说了一句很冷的话：短期看，AI 擅长找成本节约，对经济未必友好；长期看，它会削掉脂肪，把钱腾给更好的投资。</p>
-<p>独立开发者常年面对的「成本慢慢爬上去，你却没感觉」，终于有了一个很具体的对手方。不是再订一份监控 SaaS，是直接让模型读你的账单。</p>
+<p>Levels 说，即便计入 Photo AI，他的总成本也比去年降低了约 90%，接近十年前刚开始做项目时的业务开销水平。</p>
+<p>他也谈到对这些节省的看法：AI 很擅长发现可以削减的成本，短期内对经济未必有利，但长期可能去掉多余开支，为更好的投资腾出资金。在他看来，成本会随时间悄悄增加，人们往往没意识到钱花到了哪里；AI 能帮助逐项梳理，个人生活的开销也一样。</p>
+<section class="rewrite-source-media" aria-label="原文附带媒体"><h3 class="source-media-heading">原文附带媒体</h3><p class="completeness-note">原文附带媒体；未核验其与具体段落的对应关系。</p><figure data-media-id="m_641fcc1e874a8380"><img src="https://pbs.twimg.com/media/HWOOvq5WoAAMsfw.jpg" alt=""><figcaption><a href="https://pbs.twimg.com/media/HWOOvq5WoAAMsfw.jpg">打开原始媒体 ↗</a></figcaption></figure></section>
 <h2>原文</h2>
 <p><em>Biz expenses down to ~$300/mo</em></p>
-<p><img src="https://pbs.twimg.com/media/HWOOvq5WoAAMsfw.jpg" alt=""></p>
+<figure data-media-id="m_641fcc1e874a8380"><img src="https://pbs.twimg.com/media/HWOOvq5WoAAMsfw.jpg" alt=""><figcaption><a href="https://pbs.twimg.com/media/HWOOvq5WoAAMsfw.jpg">打开原始媒体 ↗</a></figcaption></figure>
 <p>💸 Update: My total biz expenses have now dropped to just ~$300/mo!</p>
 <p>This is to run all my websites/apps serving per year:</p>
 <ul>
@@ -551,25 +571,25 @@
 <p>Even including Photo AI, I have now cut my costs by 90% from last year, getting me close to my biz expenses amount from a decade ago when I started building things</p>
 <p>Costs slowly creep up over the years and you don&#x27;t realize all the things you&#x27;re spending on but AI is nice to help you figure all that out (also in your personal life!)</p>
 <p><strong>原文链接：</strong><a href="https://x.com/levelsio/status/2117694259558293692">https://x.com/levelsio/status/2117694259558293692</a></p>]]></description>
-      <content:encoded><![CDATA[<p><em>2 万付费用户、2.52 亿访客、2.4PB 流量。AI 最擅长的，可能是帮你找到自己看不见的浪费。</em></p>
+      <content:encoded><![CDATA[<p><em>他称每月节省近 $34000；网站年度服务量为 2 万付费客户、2.52 亿访客、24 亿请求与 2.4 PB 带宽。</em></p>
 <h2>乔木改写</h2>
-<p>Pieter Levels 又晒了一张成本表。</p>
-<p>他所有网站加在一起，服务着大约 <strong>2 万付费用户、2.52 亿访客、24 亿请求、2.4PB 带宽</strong>。常规业务开销现在只剩大约 <strong>$300/月</strong>。如果把 Photo AI 的 GPU（约 $7000/月）和 R2（约 $800/月）算进去，大概 $8000/月。</p>
-<p>更刺眼的是降幅。他列了 Claude Code 帮他抠出来的账，合计接近 <strong>$34,000/月</strong>：</p>
+<p>Pieter Levels 更新了自己的业务开销：常规部分已降到约 $300/月。这些网站和 App 每年服务约 20000 名付费客户、2.52 亿访客，处理 24 亿次请求，消耗 2.4 PB 带宽。</p>
+<p>这个 $300/月的口径不包括 Photo AI。该项目的 GPU 费用约为 $7000/月，R2 存储约为 $800/月；把它算上，总开销约为 $8000/月。Levels 解释，Photo AI 单个项目的体量就远高于其他网站之和，因此在前面的数字中单独排除，但已经计入原帖图表。</p>
+<p>他认为 Claude Code 很擅长自主寻找节省成本的办法。这次列出的节省合计接近 $34000/月，具体包括：</p>
 <ul>
-<li>视频模型换更便宜的、部分任务走 Google Cloud Credits 和市价转售，GPU 从 $36k 降到 $7k</li>
-<li>服务器合并，取消 DigitalOcean / Linode，迁到 Hetzner，约省 $3k</li>
-<li>Backblaze 无限版本改成 30 天生命周期，备份费从 $1200 降到 $26</li>
-<li>R2 加生命周期，90 天后进低频，从 $1200 降到 $800</li>
-<li>Cloudflare 域名清掉不用的，尤其是越来越贵的 <code>.io</code></li>
-<li>连 Claude 自己的 Max 20x 订阅也被降到 $100，因为他根本用不满</li>
+<li>GPU：约省 $29000/月。Photo AI 改用更好、更便宜的视频模型；原先的视频成本一直很高，因为他长期没有更新相关模型。部分图片任务转到有 Google Cloud Credits 可用的 Google Cloud，另一些任务转到按市场成本销售 AI 模型的 Sume。GPU 账单由 $36000/月降至 $7000/月。</li>
+<li>服务器：约省 $3000/月。合并服务器，取消 DigitalOcean 和 Linode，将服务迁往 Hetzner。</li>
+<li>Backblaze B2 备份：他将这项节省记为约 $1100/月，并给出了账单从 $1200/月降到 $26/月的变化，称便宜了约 50 倍。此前保留了无限版本，没有限制的生命周期策略让服务器文件版本积累了十多年；现在改为保留 30 天。</li>
+<li>Cloudflare R2：约省 $400/月。为 Photo AI 的存储桶增加生命周期策略，让图片在 90 天后自动转入更便宜的 Infrequent Access。桶里已积累多年的照片，账单因此从 $1200/月降到 $800/月。</li>
+<li>域名：约省 $118/月。Claude 检查了他在 Cloudflare 的域名注册，找出许多不再使用、没有必要继续付费的域名。Levels 还认为，其中一些项目在他所说的后 AGI 世界里已没有太多保留意义；他特别提到，<code>.io</code> 域名续费已达 $50/年，数量一多就会累积成明显支出。</li>
+<li>Claude 订阅：约省 $100/月。Claude 分析了自己的订阅使用量，发现他用不到 Max 20x 套餐的上限，于是将套餐从 $200/月降到 $100/月。</li>
 </ul>
-<p>连 Photo AI 算上，总成本比去年砍了大约九成，接近他十年前刚创业时的量级。</p>
-<p>他自己也说了一句很冷的话：短期看，AI 擅长找成本节约，对经济未必友好；长期看，它会削掉脂肪，把钱腾给更好的投资。</p>
-<p>独立开发者常年面对的「成本慢慢爬上去，你却没感觉」，终于有了一个很具体的对手方。不是再订一份监控 SaaS，是直接让模型读你的账单。</p>
+<p>Levels 说，即便计入 Photo AI，他的总成本也比去年降低了约 90%，接近十年前刚开始做项目时的业务开销水平。</p>
+<p>他也谈到对这些节省的看法：AI 很擅长发现可以削减的成本，短期内对经济未必有利，但长期可能去掉多余开支，为更好的投资腾出资金。在他看来，成本会随时间悄悄增加，人们往往没意识到钱花到了哪里；AI 能帮助逐项梳理，个人生活的开销也一样。</p>
+<section class="rewrite-source-media" aria-label="原文附带媒体"><h3 class="source-media-heading">原文附带媒体</h3><p class="completeness-note">原文附带媒体；未核验其与具体段落的对应关系。</p><figure data-media-id="m_641fcc1e874a8380"><img src="https://pbs.twimg.com/media/HWOOvq5WoAAMsfw.jpg" alt=""><figcaption><a href="https://pbs.twimg.com/media/HWOOvq5WoAAMsfw.jpg">打开原始媒体 ↗</a></figcaption></figure></section>
 <h2>原文</h2>
 <p><em>Biz expenses down to ~$300/mo</em></p>
-<p><img src="https://pbs.twimg.com/media/HWOOvq5WoAAMsfw.jpg" alt=""></p>
+<figure data-media-id="m_641fcc1e874a8380"><img src="https://pbs.twimg.com/media/HWOOvq5WoAAMsfw.jpg" alt=""><figcaption><a href="https://pbs.twimg.com/media/HWOOvq5WoAAMsfw.jpg">打开原始媒体 ↗</a></figcaption></figure>
 <p>💸 Update: My total biz expenses have now dropped to just ~$300/mo!</p>
 <p>This is to run all my websites/apps serving per year:</p>
 <ul>
@@ -604,21 +624,71 @@
 <p><strong>原文链接：</strong><a href="https://x.com/levelsio/status/2117694259558293692">https://x.com/levelsio/status/2117694259558293692</a></p>]]></content:encoded>
     </item>
     <item>
-      <title>Amjad：员工电脑上的 AI Agent，正在变成企业系统风险</title>
+      <title>Amjad：让受管云环境成为 AI Agent 的默认运行方式</title>
       <link>https://xnews.qiaomu.ai/a/amasad-managed-cloud-agents</link>
       <guid isPermaLink="true">https://xnews.qiaomu.ai/a/amasad-managed-cloud-agents</guid>
       <pubDate>Tue, 03 Nov 2026 06:28:06 +0000</pubDate>
       <author>Amjad Masad</author>
-      <description><![CDATA[<p><em>有人靠禁 Claude Code 止血。Replit 的建议更硬：托管、隔离、凭证外置，让云端受管环境成为默认。</em></p>
+      <description><![CDATA[<p><em>Replit 建议把凭证、权限、网络和生产变更置于 Agent 控制之外，同时强调云托管本身不等于安全。</em></p>
 <h2>乔木改写</h2>
-<p>Amjad Masad 发了一份安全咨询，标题几乎不绕弯：</p>
-<p><strong>让受管云环境，成为 AI Agent 的默认运行方式。</strong></p>
-<p>背景是这几个月一串真实事件叠在一起：个人 Claude 账号被接到敏感防务环境的报道、Cursor 市场上被篡改的 Claude Code 扩展、Nx 供应链攻击里恶意包征用已装好的 AI CLI 去翻密钥、GitHub MCP 演示里一条恶意 Issue 就能诱导 Agent 把私有仓信息写进公开 PR……路径不同，失败模式很像：不可信内容被当成指令，执行环境权限过大，控制面还在 Agent 自己手里。</p>
-<p>企业侧已经开始反应。有的直接限制 Claude Code 一类工具，高盛据称就是这么做的。Amjad 的判断是，禁用不解决长期问题。更干净的路是：</p>
-<blockquote><p>Agent 应该跑在组织可控、任务级隔离的环境里，只拿完成任务所需的最小资源。</p></blockquote>
-<p>咨询里列的控制项很工程化：验证过的执行隔离、经纪式凭证（credential broker）、逐步提权审批、任务作用域权限、网络与数据流限制、生产写入外置、供应链治理、以及 Agent 改不了的独立审计与熔断。</p>
-<p>一句话概括他的立场：云托管本身不等于安全，但「受管云 + 可验证边界」比「员工笔记本 + 个人 Agent」更适合当默认值。</p>
-<p>如果你正在给公司推 Coding Agent，这篇值得转给安全同事。争论焦点已经从「要不要用」换成「默认跑在谁的环境里」。</p>
+<p>Amjad Masad 发布了一份安全建议，认为运行在员工终端上的 AI Agent 正成为企业和政府的系统性安全风险。一些机构已经开始限制 Claude Code 等工具；原文提到，据报道高盛采取了这样的措施。Replit 提出的办法，是让 Agent 默认运行在专用、受组织控制的云环境中，只访问完成当前任务所需的资源。</p>
+<p>建议书认为，供应链攻击原本就能侵入开发者电脑，并调用已安装的 AI 工具搜索企业敏感信息。Agent harness 往往拥有广泛权限，而人工监督正在减少，使其越来越值得攻击者关注。无人值守的自动化同样可能被 GitHub Issue 或邮件中隐藏的指令引向私有数据和未授权操作。</p>
+<p>个人 Agent 会进一步放大这类风险：它们主要由个人控制，组织管理不足，防护措施不一致，又被鼓励主动行动。读取每封邮件和日历邀请，也意味着每次互动都可能接触提示注入。Replit 因此主张，继续采用 Agent 的同时，要为会读取不可信内容、运行代码、代表用户行动的软件提供专门的执行环境；凭证、权限、网络访问和生产变更的控制应放在 Agent 无法自行改变的位置。</p>
+<h3>使用增长快于治理</h3>
+<p>原文引用 Stack Overflow 调查：使用或计划使用 AI 工具的受访者比例，从 2023 年的 70% 升至 2024 年的 76%，再到 2025 年的 84% [1][2]。这些数据反映的是不同年度样本中 AI 工具的采用与使用意向，并不是自主 Agent 使用率。</p>
+<p>Salt Labs 在其客户环境中检测到 MCP 相关基础设施的比例，从 2026 年 1 月的 16.7% 升至 8 月的 21.6%，增加 4.9 个百分点 [3]。原文提醒，这只是该供应商客户环境的观察，能否代表整个行业、前后客户样本是否一致，都还没有确定。</p>
+<p>部署与控制之间的差距更值得注意。在 Salt Security 2026 年 10 月的调查中，86.4% 的受访者说组织内至少有一个 Agent 在运行，但只有 17.5% 能自动停止在生产中出现异常行为的 Agent，只有 12.5% 能持续追踪所有 Agent 的完整执行路径 [3]。</p>
+<p>另一项 Cloud Security Alliance 研究中，47% 的受访者称过去一年发生过 Agent 相关安全事件，54% 称组织内有 1 到 100 个未经批准的 Agent，只有 31% 称组织正式采用了 Agent 治理政策 [4]。这项研究在 2025 年 9 月和 11 月调查了 445 名 IT 与安全专业人员，于 2026 年 4 月发布；Zenity 提供经费并参与设计问卷。原文认为，它支持治理存在缺口的判断，但不能把它与 Salt 的结果拼成一条事件率趋势。</p>
+<h3>不同攻击中的边界失效</h3>
+<p>建议书逐项列出了事故和研究案例，分别说明证据范围。</p>
+<p><strong>个人 Agent 接入敏感系统。</strong> WIRED 报道，一名 Accenture 承包商将个人 Claude Code 账号接入美国国防部的敏感环境，凭证和系统信息似乎流向了第三方服务 [5]。Accenture 否认这些指控，称独立调查认为指控没有根据。WIRED 也表示，没有迹象说明攻击者访问了机密或绝密系统。原文用这一争议案例说明敏感基础设施与个人 Agent 工具之间出现失控连接的风险，而非将争议当成定论。</p>
+<p><strong>开发者电脑上的恶意扩展。</strong> WIRED 报道，经 Cursor 市场分发的一个被篡改的 Claude Code 扩展，最多被 5000 名用户下载；它不是 Anthropic 发布的版本 [6]。Cursor 介绍，该扩展收集主机信息，并尝试安装持久化 SSH 后门 [7]。实现错误限制了后门在大部分受影响 macOS 和 Windows 主机上的效果，但仅卸载扩展不一定能移除持久化机制。原文提醒，不能依赖攻击者下次仍犯同样的错误。</p>
+<p><strong>恶意软件包调用 AI 工具寻找密钥。</strong> 在 2025 年 8 月 Nx 的 s1ngularity 攻击中，恶意软件包利用电脑上已有的 Claude、Gemini 和 Q 命令行工具辅助侦察。Wiz 观察到数百起成功的 AI 辅助活动，以及超过 1000 个有效 GitHub token 泄露。后续攻击使用这些 token，将超过 5500 个私有仓库公开，影响了 400 多名用户或组织；开发者电脑和部分构建流水线都受到了影响 [8]。</p>
+<p><strong>合法工具也可能成为数据外传通道。</strong> Invariant 演示了如何通过一个恶意公开 GitHub Issue，诱导使用 GitHub MCP 的 Agent 读取私有仓库资料，再将其写入公开 PR [9]。演示中的 MCP 服务器本身没有被攻破。这证明了一条可能的攻击路径，原始来源并未报告大规模泄露；获准使用的工具和目的服务，仍可能承载未经授权的数据转移。</p>
+<p><strong>工具跑出了预期沙箱。</strong> CodeRabbit 确认，研究人员于 2025 年 1 月发现 RuboCop 在沙箱外运行 [10]。公司称，它在 12 小时内完成了全面修复，没有发现客户数据被访问或存在恶意活动的证据。原文据此强调，隔离范围必须覆盖每一个可执行工具和子进程，不能只覆盖主要 Agent 运行时。</p>
+<p><strong>云端 Agent 暴露关联账号凭证。</strong> Salt Labs 演示了如何用恶意邮件内容，诱导 Manus 在云沙箱中执行代码；关联服务的 token 当时可被读取，安全警告却在载荷执行后才出现 [11]。Salt 称漏洞后来已修复。这也是云托管本身不等于安全的一个反例。</p>
+<p><strong>合法签名权限被滥用。</strong> Elliptic 对 10 月 29 日 Binance 失窃事件的分析认为，攻击者可能诱使 Binance 自身系统签署未经授权的交易。Binance 最初提到 DevOps 笔记本可能失陷，后来又披露其他入侵点，完整路径仍未确定。在以太坊上，签署的 EIP-7702 授权将热钱包的行为委托给攻击者控制的合约，而且委托在最初那笔交易后仍然有效 [12]。原文明确说明，这不是 AI Agent 攻击的证据；它体现的是另一项控制要求：即便凭证没有被直接窃取，只要失陷的调用方能用它授权有害操作，保护凭证本身也不够。</p>
+<p>原文将这些案例中的共同问题归为三类：不可信软件带着过大权限执行、不可信内容被当作指令，以及控制措施未能阻止最终操作。</p>
+<h3>为什么主张受管云环境</h3>
+<p>员工工作站可能同时拥有浏览器会话、SSH key、云凭证、私有仓库、内网访问和其他业务数据，远多于多数 Agent 任务所需的权限。</p>
+<p>专用云环境可以把 Agent 执行与工作站分离。组织能够只配置必要工作区，集中实施访问控制，独立记录操作，并在需要时停止或重建环境，而不必重建员工电脑。要获得这些收益，执行、策略实施和可观测性都必须真正进入受控环境。</p>
+<p>本地扩展即使把提示词发给云端模型，仍可能在本机执行代码。同样，把生产凭证复制到远端、给远端 Agent 不受限的网络访问，只是把风险挪了地方。目标是将失陷的 Agent 或依赖限制在一个权限有限的工作区内，组织政策对它的约束不应取决于员工本人拥有多大的权限。</p>
+<p>原文图 2 的文字说明描绘了这种边界：Agent 与工具运行在组织控制、任务限定的专用沙箱内，与员工设备的广泛权限分离；独立系统代理凭证，约束权限及流向获准资源的数据。审计、审批和遏制措施必须在 Agent 控制之外执行，而且这些保护需要经过验证，不能仅靠云托管的名称。</p>
+<h3>需要独立实施的控制</h3>
+<p>建议书要求将 Agent 执行视作不可信，并列出以下控制项：</p>
+<ul>
+<li><strong>经过验证的执行隔离。</strong> Agent、安装脚本、工具和依赖都应运行在专用沙箱内，安全实施机制放在其控制之外；不继承员工主目录、浏览器会话或不受限的企业网络权限。</li>
+<li><strong>经纪式凭证与独立身份。</strong> 外部服务凭证不应出现在 Agent 可读的内存、文件或环境变量中。请求通过代理授权，并绑定 Agent、发起人、组织和具体任务。</li>
+<li><strong>逐步提权授权。</strong> 隔离凭证还不够，操作、目标资源、目的地和委托权限的变化，都需要独立检查。高影响操作必须明确批准；拥有合法身份或能访问签名服务，不等于已经获准执行某项操作。</li>
+<li><strong>任务范围内的权限。</strong> 每次运行只获得需要的资源和操作权限，Agent 不得提升自身权限，也不得修改约束自己的政策。</li>
+<li><strong>网络与数据流限制。</strong> 对 DNS、直接 IP 访问、云元数据访问和外部请求加以控制；即使在同一个获准服务内部，也要区分操作和数据目的地。允许访问 GitHub，不等于允许把私有数据发布到 GitHub 任意位置。</li>
+<li><strong>独立的生产边界。</strong> Agent 可以提出改动，但不应长期持有生产写入权限。重要变更由可信的审批与部署系统实施，并向审批者展示真正将被授权的操作。</li>
+<li><strong>受控的软件供应链。</strong> 核查来源、固定获准版本、审阅工具和 MCP 配置的变化；安装依赖时不带生产凭证。</li>
+<li><strong>独立审计与遏制。</strong> 在 Agent 无法修改的位置记录操作及实施决策，不依赖 Agent 配合就能自动遏制或撤销权限。遏制还必须撤销已授予下游的委托与权限，而不只是停止最初进程或轮换凭证。</li>
+</ul>
+<h3>组织可以先做什么</h3>
+<p>Replit 建议，把获准的受管云 Agent 环境作为自主开发的标准路径；盘点现有本地 Agent 和扩展，移除不必要的访问，并禁止个人 Agent 账号连接敏感生产系统。</p>
+<p>供应商应实际证明这些边界：Agent 读不到服务凭证，不能绕过网络控制、扩大权限、修改审计记录或未经批准改动生产。遏制能力也应经过实测，包括紧急停止开关是否真的能停止 Agent 活动。</p>
+<p>可能受影响的 Cursor 安装，应先按供应商事件响应指南处理。把未来工作移到云端，并不能修复一台已经失陷的终端 [7]。监管行业和政府业务则应只使用获准处理相关数据与系统的环境，并检查模型端点、日志、存储和外部工具是否满足数据驻留、保留、合同及认证要求。</p>
+<p>建议书最后说明，它推荐的是有可验证安全控制支撑的云执行。所引资料并未建立本地 Agent 与云 Agent 之间可比的泄露率；它们说明的是隔离、有限权限、凭证分离和独立实施为何重要。每个 Agent 的访问都应按具体任务划定。</p>
+<p>原文另推荐 Replit 提出的 Agent Habitat Architecture 及其基于证据的成熟度分级，作为评估独立权限、经纪式凭证、受控数据流和带外遏制的参考框架。每一款云 Agent 产品仍需单独核查实际实现了哪些控制。</p>
+<h3>原文参考资料</h3>
+<p>以下资料由原文列出，查阅日期均为 2026 年 11 月 1 日；本站未在本轮重新核验这些外部材料。</p>
+<ol>
+<li><a href="https://survey.stackoverflow.co/2024/ai" target="_blank" rel="noopener noreferrer">Stack Overflow：AI | 2024 Developer Survey</a>。</li>
+<li><a href="https://survey.stackoverflow.co/2025/ai" target="_blank" rel="noopener noreferrer">Stack Overflow：AI | 2025 Developer Survey</a>。</li>
+<li><a href="https://salt.security/press-releases/state-of-agentic-ai-and-api-security-2h-2026" target="_blank" rel="noopener noreferrer">Salt Security：Nearly half of enterprises report an AI agent took an unauthorized action last year</a>，2026 年 10 月 13 日。</li>
+<li><a href="https://cloudsecurityalliance.org/press-releases/2026/04/16/more-than-half-of-organizations-experience-ai-agent-scope-violations-cloud-security-alliance-study-finds" target="_blank" rel="noopener noreferrer">Cloud Security Alliance：More than half of organizations experience AI agent scope violations</a>，2026 年 4 月 16 日。</li>
+<li><a href="https://www.wired.com/story/a-defense-contractor-gave-their-personal-ai-agent-access-to-a-secure-pentagon-system/" target="_blank" rel="noopener noreferrer">V. Elliott：A defense contractor gave their personal AI agent access to a secure Pentagon system | WIRED</a>。</li>
+<li><a href="https://www.wired.com/story/trojan-malware-targets-thousands-of-anthropic-claude-developer-systems/" target="_blank" rel="noopener noreferrer">L. H. Newman：A supply chain attack put malicious Anthropic Claude extensions on thousands of devices | WIRED</a>。</li>
+<li><a href="https://cursor.com/blog/claude-code-extension-security-notice" target="_blank" rel="noopener noreferrer">Cursor：Claude Code extension security notice</a>，2026 年 10 月 30 日更新。</li>
+<li><a href="https://www.wiz.io/blog/s1ngularity-supply-chain-attack" target="_blank" rel="noopener noreferrer">M. Bar、R. McCarthy：s1ngularity: Supply chain attack leaks secrets on GitHub | Wiz</a>，2025 年 8 月 27 日发布、8 月 29 日更新。</li>
+<li><a href="https://invariantlabs.ai/blog/mcp-github-vulnerability" target="_blank" rel="noopener noreferrer">Invariant Labs：GitHub MCP vulnerability research</a>。</li>
+<li><a href="https://www.coderabbit.ai/blog/our-response-to-the-january-2025-kudelski-security-vulnerability-disclosure-action-and-continuous-improvement" target="_blank" rel="noopener noreferrer">H. Gill：Our response to the January 2025 Kudelski Security vulnerability disclosure | CodeRabbit</a>，2025 年 8 月 19 日。</li>
+<li><a href="https://salt.security/blog/how-we-hijacked-an-ai-agent-with-a-single-email" target="_blank" rel="noopener noreferrer">Salt Labs：How we hijacked an AI agent with a single email</a>，2026 年 10 月 1 日。</li>
+<li><a href="https://www.elliptic.co/insights/binance-largest-hack-in-history/" target="_blank" rel="noopener noreferrer">T. Robinson：The largest theft in history: North Korea behind the $6.4 billion Binance hack | Elliptic</a>，2026 年 10 月 30 日发布、11 月 1 日更新。</li>
+</ol>
+
 <h2>原文</h2>
 <p><em>Security advisory: Make managed cloud environments the default for AI agents</em></p>
 <p>AI agents running on employee endpoints are becoming a systemic security risk for enterprises &amp; governments.</p>
@@ -629,16 +699,66 @@
 <p>AI agents should operate in dedicated, organization-controlled environments with limited access to the resources each task requires. Recent security incidents [5], [6] and research demonstrate why this is a growing necessity. Supply-chain attacks have always been able to compromise developer machines and recruit installed AI tools to search for sensitive corporate information and data. Agent harnesses are typically given broad privileges and have a shrinking amount of human oversight. Combined, these two effects are making agents an increasingly interesting target for attackers. Even unattended automations are being targeted: instructions hidden in a GitHub issue or email can redirect an agent toward private data and unauthorized actions. The rise of personal agents increases the risk even more, since they are insufficiently managed by organizations, mostly controlled by individuals, run with an inconsistent set of guardrails, and are incentivized to be proactive above all else: they read every email, every calendar invite; Every interaction is an opportunity to get prompt-injected. There is a better way forward: Organizations can continue adopting agents by giving them execution environments designed for software that reads untrusted content, runs code, and acts on a user’s behalf. In a world where agents are becoming more prevalent, @Replit believes that organizations must make managed, isolated cloud agents the default for autonomous development, with credentials, permissions, network access, and production changes controlled outside the agent’s reach. Adoption is growing faster than control AI development tools are becoming standard. Stack Overflow reports that the share of respondents using or planning to use AI tools rose from 70% in 2023 to 76% in 2024 [1] and 84% in 2025 [2]. This establishes the scale of AI-tool adoption and intent across annual respondent samples. Autonomous-agent usage falls outside the specific scope of this measure. Agent infrastructure is also expanding. Salt Labs [3] detected MCP-related infrastructure in 16.7% of its customer environments in January 2026 and 21.6% in August: a 4.9-percentage-point increase. These observations are limited to the vendor’s customer environments. Their applicability to the wider industry and the consistency of the customer cohort remain unestablished. The more consequential finding is the gap between deployment and control. In Salt Security’s October 2026 survey [3], 86.4% of respondents reported at least one agent operating in their organization, but only 17.5% could automatically stop an agent behaving unexpectedly in production. Only 12.5% could consistently trace complete agent paths across all agents.</p>
 <p>A separate Cloud Security Alliance study reinforces the concern [4]: 47% of respondents reported an agent-related security incident in the preceding year, 54% reported between one and 100 unsanctioned agents, and only 31% reported formally adopted agent-governance policies. The study surveyed 445 IT and security professionals in September and November 2025 and was published in April 2026. Zenity financed the research and co-developed the questionnaire. These findings corroborate a governance problem; they should not be combined with Salt’s results into a single incident-rate trend. Different attacks, recurring boundary failures The evidence extends beyond any one model, vendor, or delivery mechanism. Sensitive-system access through a personal agent. WIRED reports that an Accenture contractor connected a personal Claude Code account to a sensitive Department of Defense environment and that credentials and system information appear to have reached a third-party service [5]. Accenture disputes the allegations, saying an independent investigation found them without merit. WIRED reports no indication that attackers accessed classified or top-secret systems. The risk illustrated is an uncontrolled connection between sensitive infrastructure and personal agent tooling. A malicious extension on developer machines. WIRED reports that a tampered Claude Code extension distributed through Cursor’s marketplace was downloaded by at most 5,000 users [6]. It was not an Anthropic-published release. Cursor describes host-information collection and attempts to install a persistent SSH backdoor [7]. Implementation errors limited the backdoor’s effectiveness on most affected macOS and Windows hosts, but uninstalling the extension alone may not remove its persistence mechanisms. We cannot rely on attacker mistakes in the future. Compromised packages recruiting AI tools to find secrets. In the August 2025 Nx “s1ngularity” campaign, malicious packages used previously-installed Claude, Gemini, and Q command-line tools to assist reconnaissance. Wiz [8] observed successful AI-assisted activity in hundreds of cases and more than 1,000 valid GitHub tokens exposed. A subsequent phase used leaked tokens to make over 5,500 private repositories public, affecting more than 400 users or organizations. Developer machines and some build pipelines were affected. Private data leaked through legitimate tools. Invariant [9] demonstrated that a malicious public GitHub issue could persuade an agent using GitHub MCP to retrieve private-repository information and publish it in a public pull request. The researchers demonstrated this attack using an uncompromised MCP server. The demonstration establishes a possible attack path; the source reports no mass breach. An approved tool and destination can still carry an unauthorized data transfer. A tool running outside its intended sandbox. CodeRabbit confirmed that researchers discovered RuboCop operating outside its sandbox in January 2025 [10]. The company says it deployed a comprehensive fix within 12 hours and found no evidence of customer-data access or malicious activity. The lesson is that isolation must extend from the primary agent runtime to every executable tool and subprocess. A cloud agent exposing connected-account credentials. Salt Labs demonstrated that malicious email content could induce code execution in Manus’s cloud sandbox, where connected-service tokens were accessible [11]. A security warning appeared after the payload was executed. Salt says the flaw has since been resolved. This research is an important counterexample to the idea that cloud hosting alone provides security. Compromised infrastructure misusing legitimate signing authority. Elliptic’s analysis of the October 29 Binance theft suggests attackers induced Binance’s own systems to sign unauthorized transactions. Binance initially reported a possible compromised DevOps laptop and later disclosed additional breach points; the full intrusion path remains unresolved. On Ethereum, signed EIP-7702 authorizations delegated a hot wallet’s behavior to an attacker-controlled contract, with delegation persisting beyond the initial transaction [12]. This is not evidence of an AI-agent attack. It illustrates a relevant control requirement: protecting credentials is insufficient if a compromised caller can use them to authorize harmful actions. Together, these cases illustrate three recurring problems: untrusted software executing with excessive access, untrusted content being treated as instructions, and controls that do not prevent the resulting action. Why managed cloud agents are the better default An employee workstation may contain browser sessions, SSH keys, cloud credentials, private repositories, internal-network access, and unrelated business data. That is far more access than most agent tasks require. A dedicated cloud environment makes it possible to separate agent execution from that workstation. The organization can provision only the necessary workspace, enforce access centrally, record actions independently, and stop or rebuild the environment without rebuilding the employee’s laptop. Realizing that benefit requires moving execution, policy enforcement, and observability into the controlled environment. A local extension that sends prompts to a cloud model still executes local code. Likewise, a remote agent with copied production credentials and unrestricted network access reproduces the same risks elsewhere. The objective is to contain a compromised agent or dependency within a limited workspace. Organizational policy must govern the agent’s access independently of the employee’s broader authority. 📷 Fig. 2. A conceptual security boundary for autonomous agents. The agent and its tools run in a dedicated, task-scoped sandbox within an organization-controlled environment, separate from the employee device’s broader authority. Independent controls broker credentials and govern permissions and data flows to approved resources. Audit records, approval gates, and containment are enforced outside the agent’s control. Cloud hosting requires verified controls to provide these protections. Required controls It is recommended to treat agent execution as untrusted and enforce boundaries independently of the agent’s cooperation. Organizations should require: Verified execution isolation. Keep agents, installation scripts, tools, and dependencies inside dedicated sandboxes. Place security enforcement outside their control. Do not inherit employee home directories, browser sessions, or unrestricted corporate-network access. Brokered credentials and distinct identities. Keep external-service credentials out of agent-readable memory, files, and environment variables. Authorize requests through a broker, bound to the agent, initiating principal, organization, and task. Step-up Authorization: Credential isolation must be paired with independent checks on the requested operation, target resource, destination, and any change in delegated authority. Require explicit approval for high-impact actions; possession of a valid identity or access to a signing service is not sufficient authorization. Task-scoped permissions. Give each run only the resources and operations it needs. Agents must not be able to raise their own permissions or alter the policy that governs them. Network and data-flow restrictions. Control DNS, direct-IP traffic, cloud-metadata access, and external requests. Distinguish permitted operations and data destinations within approved services; allowing GitHub must not imply allowing private data to be published anywhere on GitHub. A separate production boundary. Let agents propose changes without standing production-write authority. Apply consequential changes through trusted approval and deployment systems that display the actual action being authorized. Controlled software supply chains. Verify provenance, pin approved versions, and review tool and MCP configuration changes. Install dependencies without production credentials. Independent audit and containment. Record actions and enforcement decisions somewhere the agent cannot alter. Support automatic containment and revocation without depending on the agent’s cooperation. Containment must also revoke downstream delegations and permissions already granted, not just stop the initiating process or rotate its credentials. Recommended action Make approved, managed cloud-agent environments the standard path for autonomous development. Inventory existing local agents and extensions, remove unnecessary access, and prohibit personal agent accounts from connecting to sensitive production systems. Require vendors to demonstrate their boundaries: that an agent cannot read service credentials, bypass network controls, expand its permissions, modify audit records, or make unapproved production changes. Verify containment through practical tests, including whether the kill switch actually stops agent activity. For potentially affected Cursor installations, follow the vendor’s incident-response guidance now. Moving future work to the cloud does not remediate an already compromised endpoint [7]. For regulated and government workloads, use only environments authorized for the relevant data and systems. Assess model endpoints, logs, storage, and external tools against residency, retention, contractual, and accreditation requirements. The recommendation is cloud execution backed by verified security controls. The sources reviewed do not establish a comparative breach rate for local versus cloud agents. They establish why isolation, limited authority, credential separation, and independent enforcement matter. Agents’ access should be scoped to the requirements of each task. For a concrete framework to evaluate these controls, see Replit’s proposed Agent Habitat Architecture and its evidence-based maturity scale. It provides a reference architecture for independently enforced permissions, brokered credentials, controlled data flows, and out-of-band containment. Each cloud-agent product should be assessed separately to verify which controls it implements. References [1] Stack Overflow, “AI | 2024 Developer Survey”. Accessed: Nov. 1, 2026. [Online]. Available: https://survey.stackoverflow.co/2024/ai [2] Stack Overflow, “AI | 2025 Developer Survey”. Accessed: Nov. 1, 2026. [Online]. Available: https://survey.stackoverflow.co/2025/ai [3] Salt Security, “Nearly half of enterprises report an AI agent took an unauthorized action last year, Salt Security research finds,” Oct. 13, 2026. Accessed: Nov. 1, 2026. [Online]. Available: https://salt.security/press-releases/state-of-agentic-ai-and-api-security-2h-2026 [4] Cloud Security Alliance, “More than half of organizations experience AI agent scope violations, Cloud Security Alliance study finds,” Apr. 16, 2026. Accessed: Nov. 1, 2026. [Online]. Available: https://cloudsecurityalliance.org/press-releases/2026/04/16/more-than-half-of-organizations-experience-ai-agent-scope-violations-cloud-security-alliance-study-finds [5] V. Elliott, “A defense contractor gave their personal AI agent access to a secure Pentagon system | WIRED”. Accessed: Nov. 1, 2026. [Online]. Available: https://www.wired.com/story/a-defense-contractor-gave-their-personal-ai-agent-access-to-a-secure-pentagon-system/ [6] L. H. Newman, “A supply chain attack put malicious Anthropic Claude extensions on thousands of devices | WIRED”. Accessed: Nov. 1, 2026. [Online]. Available: https://www.wired.com/story/trojan-malware-targets-thousands-of-anthropic-claude-developer-systems/ [7] Cursor, “Claude Code extension security notice,” updated Oct. 30, 2026. Accessed: Nov. 1, 2026. [Online]. Available: https://cursor.com/blog/claude-code-extension-security-notice [8] M. Bar and R. McCarthy, “s1ngularity: Supply chain attack leaks secrets on GitHub: Everything you need to know | Wiz Blog,” Aug. 27, 2025, updated Aug. 29, 2025. Accessed: Nov. 1, 2026. [Online]. Available: https://www.wiz.io/blog/s1ngularity-supply-chain-attack [9] Invariant Labs, GitHub MCP vulnerability research. Accessed: Nov. 1, 2026. [Online]. Available: https://invariantlabs.ai/blog/mcp-github-vulnerability [10] H. Gill, “Our response to the January 2025 Kudelski Security vulnerability disclosure: Action and continuous improvement,” CodeRabbit, Aug. 19, 2025. Accessed: Nov. 1, 2026. [Online]. Available: https://www.coderabbit.ai/blog/our-response-to-the-january-2025-kudelski-security-vulnerability-disclosure-action-and-continuous-improvement [11] Salt Labs, “How we hijacked an AI agent with a single email,” Salt Security, Oct. 1, 2026. Accessed: Nov. 1, 2026. [Online]. Available: https://salt.security/blog/how-we-hijacked-an-ai-agent-with-a-single-email [12] T. Robinson, “The largest theft in history: North Korea behind the $6.4 billion Binance hack,” Elliptic, Oct. 30, 2026, updated Nov. 1, 2026. Accessed: Nov. 1, 2026. Available: https://www.elliptic.co/insights/binance-largest-hack-in-history/</p>
 <p><strong>原文链接：</strong><a href="https://x.com/amasad/status/2117504072416890937">https://x.com/amasad/status/2117504072416890937</a></p>]]></description>
-      <content:encoded><![CDATA[<p><em>有人靠禁 Claude Code 止血。Replit 的建议更硬：托管、隔离、凭证外置，让云端受管环境成为默认。</em></p>
+      <content:encoded><![CDATA[<p><em>Replit 建议把凭证、权限、网络和生产变更置于 Agent 控制之外，同时强调云托管本身不等于安全。</em></p>
 <h2>乔木改写</h2>
-<p>Amjad Masad 发了一份安全咨询，标题几乎不绕弯：</p>
-<p><strong>让受管云环境，成为 AI Agent 的默认运行方式。</strong></p>
-<p>背景是这几个月一串真实事件叠在一起：个人 Claude 账号被接到敏感防务环境的报道、Cursor 市场上被篡改的 Claude Code 扩展、Nx 供应链攻击里恶意包征用已装好的 AI CLI 去翻密钥、GitHub MCP 演示里一条恶意 Issue 就能诱导 Agent 把私有仓信息写进公开 PR……路径不同，失败模式很像：不可信内容被当成指令，执行环境权限过大，控制面还在 Agent 自己手里。</p>
-<p>企业侧已经开始反应。有的直接限制 Claude Code 一类工具，高盛据称就是这么做的。Amjad 的判断是，禁用不解决长期问题。更干净的路是：</p>
-<blockquote><p>Agent 应该跑在组织可控、任务级隔离的环境里，只拿完成任务所需的最小资源。</p></blockquote>
-<p>咨询里列的控制项很工程化：验证过的执行隔离、经纪式凭证（credential broker）、逐步提权审批、任务作用域权限、网络与数据流限制、生产写入外置、供应链治理、以及 Agent 改不了的独立审计与熔断。</p>
-<p>一句话概括他的立场：云托管本身不等于安全，但「受管云 + 可验证边界」比「员工笔记本 + 个人 Agent」更适合当默认值。</p>
-<p>如果你正在给公司推 Coding Agent，这篇值得转给安全同事。争论焦点已经从「要不要用」换成「默认跑在谁的环境里」。</p>
+<p>Amjad Masad 发布了一份安全建议，认为运行在员工终端上的 AI Agent 正成为企业和政府的系统性安全风险。一些机构已经开始限制 Claude Code 等工具；原文提到，据报道高盛采取了这样的措施。Replit 提出的办法，是让 Agent 默认运行在专用、受组织控制的云环境中，只访问完成当前任务所需的资源。</p>
+<p>建议书认为，供应链攻击原本就能侵入开发者电脑，并调用已安装的 AI 工具搜索企业敏感信息。Agent harness 往往拥有广泛权限，而人工监督正在减少，使其越来越值得攻击者关注。无人值守的自动化同样可能被 GitHub Issue 或邮件中隐藏的指令引向私有数据和未授权操作。</p>
+<p>个人 Agent 会进一步放大这类风险：它们主要由个人控制，组织管理不足，防护措施不一致，又被鼓励主动行动。读取每封邮件和日历邀请，也意味着每次互动都可能接触提示注入。Replit 因此主张，继续采用 Agent 的同时，要为会读取不可信内容、运行代码、代表用户行动的软件提供专门的执行环境；凭证、权限、网络访问和生产变更的控制应放在 Agent 无法自行改变的位置。</p>
+<h3>使用增长快于治理</h3>
+<p>原文引用 Stack Overflow 调查：使用或计划使用 AI 工具的受访者比例，从 2023 年的 70% 升至 2024 年的 76%，再到 2025 年的 84% [1][2]。这些数据反映的是不同年度样本中 AI 工具的采用与使用意向，并不是自主 Agent 使用率。</p>
+<p>Salt Labs 在其客户环境中检测到 MCP 相关基础设施的比例，从 2026 年 1 月的 16.7% 升至 8 月的 21.6%，增加 4.9 个百分点 [3]。原文提醒，这只是该供应商客户环境的观察，能否代表整个行业、前后客户样本是否一致，都还没有确定。</p>
+<p>部署与控制之间的差距更值得注意。在 Salt Security 2026 年 10 月的调查中，86.4% 的受访者说组织内至少有一个 Agent 在运行，但只有 17.5% 能自动停止在生产中出现异常行为的 Agent，只有 12.5% 能持续追踪所有 Agent 的完整执行路径 [3]。</p>
+<p>另一项 Cloud Security Alliance 研究中，47% 的受访者称过去一年发生过 Agent 相关安全事件，54% 称组织内有 1 到 100 个未经批准的 Agent，只有 31% 称组织正式采用了 Agent 治理政策 [4]。这项研究在 2025 年 9 月和 11 月调查了 445 名 IT 与安全专业人员，于 2026 年 4 月发布；Zenity 提供经费并参与设计问卷。原文认为，它支持治理存在缺口的判断，但不能把它与 Salt 的结果拼成一条事件率趋势。</p>
+<h3>不同攻击中的边界失效</h3>
+<p>建议书逐项列出了事故和研究案例，分别说明证据范围。</p>
+<p><strong>个人 Agent 接入敏感系统。</strong> WIRED 报道，一名 Accenture 承包商将个人 Claude Code 账号接入美国国防部的敏感环境，凭证和系统信息似乎流向了第三方服务 [5]。Accenture 否认这些指控，称独立调查认为指控没有根据。WIRED 也表示，没有迹象说明攻击者访问了机密或绝密系统。原文用这一争议案例说明敏感基础设施与个人 Agent 工具之间出现失控连接的风险，而非将争议当成定论。</p>
+<p><strong>开发者电脑上的恶意扩展。</strong> WIRED 报道，经 Cursor 市场分发的一个被篡改的 Claude Code 扩展，最多被 5000 名用户下载；它不是 Anthropic 发布的版本 [6]。Cursor 介绍，该扩展收集主机信息，并尝试安装持久化 SSH 后门 [7]。实现错误限制了后门在大部分受影响 macOS 和 Windows 主机上的效果，但仅卸载扩展不一定能移除持久化机制。原文提醒，不能依赖攻击者下次仍犯同样的错误。</p>
+<p><strong>恶意软件包调用 AI 工具寻找密钥。</strong> 在 2025 年 8 月 Nx 的 s1ngularity 攻击中，恶意软件包利用电脑上已有的 Claude、Gemini 和 Q 命令行工具辅助侦察。Wiz 观察到数百起成功的 AI 辅助活动，以及超过 1000 个有效 GitHub token 泄露。后续攻击使用这些 token，将超过 5500 个私有仓库公开，影响了 400 多名用户或组织；开发者电脑和部分构建流水线都受到了影响 [8]。</p>
+<p><strong>合法工具也可能成为数据外传通道。</strong> Invariant 演示了如何通过一个恶意公开 GitHub Issue，诱导使用 GitHub MCP 的 Agent 读取私有仓库资料，再将其写入公开 PR [9]。演示中的 MCP 服务器本身没有被攻破。这证明了一条可能的攻击路径，原始来源并未报告大规模泄露；获准使用的工具和目的服务，仍可能承载未经授权的数据转移。</p>
+<p><strong>工具跑出了预期沙箱。</strong> CodeRabbit 确认，研究人员于 2025 年 1 月发现 RuboCop 在沙箱外运行 [10]。公司称，它在 12 小时内完成了全面修复，没有发现客户数据被访问或存在恶意活动的证据。原文据此强调，隔离范围必须覆盖每一个可执行工具和子进程，不能只覆盖主要 Agent 运行时。</p>
+<p><strong>云端 Agent 暴露关联账号凭证。</strong> Salt Labs 演示了如何用恶意邮件内容，诱导 Manus 在云沙箱中执行代码；关联服务的 token 当时可被读取，安全警告却在载荷执行后才出现 [11]。Salt 称漏洞后来已修复。这也是云托管本身不等于安全的一个反例。</p>
+<p><strong>合法签名权限被滥用。</strong> Elliptic 对 10 月 29 日 Binance 失窃事件的分析认为，攻击者可能诱使 Binance 自身系统签署未经授权的交易。Binance 最初提到 DevOps 笔记本可能失陷，后来又披露其他入侵点，完整路径仍未确定。在以太坊上，签署的 EIP-7702 授权将热钱包的行为委托给攻击者控制的合约，而且委托在最初那笔交易后仍然有效 [12]。原文明确说明，这不是 AI Agent 攻击的证据；它体现的是另一项控制要求：即便凭证没有被直接窃取，只要失陷的调用方能用它授权有害操作，保护凭证本身也不够。</p>
+<p>原文将这些案例中的共同问题归为三类：不可信软件带着过大权限执行、不可信内容被当作指令，以及控制措施未能阻止最终操作。</p>
+<h3>为什么主张受管云环境</h3>
+<p>员工工作站可能同时拥有浏览器会话、SSH key、云凭证、私有仓库、内网访问和其他业务数据，远多于多数 Agent 任务所需的权限。</p>
+<p>专用云环境可以把 Agent 执行与工作站分离。组织能够只配置必要工作区，集中实施访问控制，独立记录操作，并在需要时停止或重建环境，而不必重建员工电脑。要获得这些收益，执行、策略实施和可观测性都必须真正进入受控环境。</p>
+<p>本地扩展即使把提示词发给云端模型，仍可能在本机执行代码。同样，把生产凭证复制到远端、给远端 Agent 不受限的网络访问，只是把风险挪了地方。目标是将失陷的 Agent 或依赖限制在一个权限有限的工作区内，组织政策对它的约束不应取决于员工本人拥有多大的权限。</p>
+<p>原文图 2 的文字说明描绘了这种边界：Agent 与工具运行在组织控制、任务限定的专用沙箱内，与员工设备的广泛权限分离；独立系统代理凭证，约束权限及流向获准资源的数据。审计、审批和遏制措施必须在 Agent 控制之外执行，而且这些保护需要经过验证，不能仅靠云托管的名称。</p>
+<h3>需要独立实施的控制</h3>
+<p>建议书要求将 Agent 执行视作不可信，并列出以下控制项：</p>
+<ul>
+<li><strong>经过验证的执行隔离。</strong> Agent、安装脚本、工具和依赖都应运行在专用沙箱内，安全实施机制放在其控制之外；不继承员工主目录、浏览器会话或不受限的企业网络权限。</li>
+<li><strong>经纪式凭证与独立身份。</strong> 外部服务凭证不应出现在 Agent 可读的内存、文件或环境变量中。请求通过代理授权，并绑定 Agent、发起人、组织和具体任务。</li>
+<li><strong>逐步提权授权。</strong> 隔离凭证还不够，操作、目标资源、目的地和委托权限的变化，都需要独立检查。高影响操作必须明确批准；拥有合法身份或能访问签名服务，不等于已经获准执行某项操作。</li>
+<li><strong>任务范围内的权限。</strong> 每次运行只获得需要的资源和操作权限，Agent 不得提升自身权限，也不得修改约束自己的政策。</li>
+<li><strong>网络与数据流限制。</strong> 对 DNS、直接 IP 访问、云元数据访问和外部请求加以控制；即使在同一个获准服务内部，也要区分操作和数据目的地。允许访问 GitHub，不等于允许把私有数据发布到 GitHub 任意位置。</li>
+<li><strong>独立的生产边界。</strong> Agent 可以提出改动，但不应长期持有生产写入权限。重要变更由可信的审批与部署系统实施，并向审批者展示真正将被授权的操作。</li>
+<li><strong>受控的软件供应链。</strong> 核查来源、固定获准版本、审阅工具和 MCP 配置的变化；安装依赖时不带生产凭证。</li>
+<li><strong>独立审计与遏制。</strong> 在 Agent 无法修改的位置记录操作及实施决策，不依赖 Agent 配合就能自动遏制或撤销权限。遏制还必须撤销已授予下游的委托与权限，而不只是停止最初进程或轮换凭证。</li>
+</ul>
+<h3>组织可以先做什么</h3>
+<p>Replit 建议，把获准的受管云 Agent 环境作为自主开发的标准路径；盘点现有本地 Agent 和扩展，移除不必要的访问，并禁止个人 Agent 账号连接敏感生产系统。</p>
+<p>供应商应实际证明这些边界：Agent 读不到服务凭证，不能绕过网络控制、扩大权限、修改审计记录或未经批准改动生产。遏制能力也应经过实测，包括紧急停止开关是否真的能停止 Agent 活动。</p>
+<p>可能受影响的 Cursor 安装，应先按供应商事件响应指南处理。把未来工作移到云端，并不能修复一台已经失陷的终端 [7]。监管行业和政府业务则应只使用获准处理相关数据与系统的环境，并检查模型端点、日志、存储和外部工具是否满足数据驻留、保留、合同及认证要求。</p>
+<p>建议书最后说明，它推荐的是有可验证安全控制支撑的云执行。所引资料并未建立本地 Agent 与云 Agent 之间可比的泄露率；它们说明的是隔离、有限权限、凭证分离和独立实施为何重要。每个 Agent 的访问都应按具体任务划定。</p>
+<p>原文另推荐 Replit 提出的 Agent Habitat Architecture 及其基于证据的成熟度分级，作为评估独立权限、经纪式凭证、受控数据流和带外遏制的参考框架。每一款云 Agent 产品仍需单独核查实际实现了哪些控制。</p>
+<h3>原文参考资料</h3>
+<p>以下资料由原文列出，查阅日期均为 2026 年 11 月 1 日；本站未在本轮重新核验这些外部材料。</p>
+<ol>
+<li><a href="https://survey.stackoverflow.co/2024/ai" target="_blank" rel="noopener noreferrer">Stack Overflow：AI | 2024 Developer Survey</a>。</li>
+<li><a href="https://survey.stackoverflow.co/2025/ai" target="_blank" rel="noopener noreferrer">Stack Overflow：AI | 2025 Developer Survey</a>。</li>
+<li><a href="https://salt.security/press-releases/state-of-agentic-ai-and-api-security-2h-2026" target="_blank" rel="noopener noreferrer">Salt Security：Nearly half of enterprises report an AI agent took an unauthorized action last year</a>，2026 年 10 月 13 日。</li>
+<li><a href="https://cloudsecurityalliance.org/press-releases/2026/04/16/more-than-half-of-organizations-experience-ai-agent-scope-violations-cloud-security-alliance-study-finds" target="_blank" rel="noopener noreferrer">Cloud Security Alliance：More than half of organizations experience AI agent scope violations</a>，2026 年 4 月 16 日。</li>
+<li><a href="https://www.wired.com/story/a-defense-contractor-gave-their-personal-ai-agent-access-to-a-secure-pentagon-system/" target="_blank" rel="noopener noreferrer">V. Elliott：A defense contractor gave their personal AI agent access to a secure Pentagon system | WIRED</a>。</li>
+<li><a href="https://www.wired.com/story/trojan-malware-targets-thousands-of-anthropic-claude-developer-systems/" target="_blank" rel="noopener noreferrer">L. H. Newman：A supply chain attack put malicious Anthropic Claude extensions on thousands of devices | WIRED</a>。</li>
+<li><a href="https://cursor.com/blog/claude-code-extension-security-notice" target="_blank" rel="noopener noreferrer">Cursor：Claude Code extension security notice</a>，2026 年 10 月 30 日更新。</li>
+<li><a href="https://www.wiz.io/blog/s1ngularity-supply-chain-attack" target="_blank" rel="noopener noreferrer">M. Bar、R. McCarthy：s1ngularity: Supply chain attack leaks secrets on GitHub | Wiz</a>，2025 年 8 月 27 日发布、8 月 29 日更新。</li>
+<li><a href="https://invariantlabs.ai/blog/mcp-github-vulnerability" target="_blank" rel="noopener noreferrer">Invariant Labs：GitHub MCP vulnerability research</a>。</li>
+<li><a href="https://www.coderabbit.ai/blog/our-response-to-the-january-2025-kudelski-security-vulnerability-disclosure-action-and-continuous-improvement" target="_blank" rel="noopener noreferrer">H. Gill：Our response to the January 2025 Kudelski Security vulnerability disclosure | CodeRabbit</a>，2025 年 8 月 19 日。</li>
+<li><a href="https://salt.security/blog/how-we-hijacked-an-ai-agent-with-a-single-email" target="_blank" rel="noopener noreferrer">Salt Labs：How we hijacked an AI agent with a single email</a>，2026 年 10 月 1 日。</li>
+<li><a href="https://www.elliptic.co/insights/binance-largest-hack-in-history/" target="_blank" rel="noopener noreferrer">T. Robinson：The largest theft in history: North Korea behind the $6.4 billion Binance hack | Elliptic</a>，2026 年 10 月 30 日发布、11 月 1 日更新。</li>
+</ol>
+
 <h2>原文</h2>
 <p><em>Security advisory: Make managed cloud environments the default for AI agents</em></p>
 <p>AI agents running on employee endpoints are becoming a systemic security risk for enterprises &amp; governments.</p>
@@ -651,30 +771,30 @@
 <p><strong>原文链接：</strong><a href="https://x.com/amasad/status/2117504072416890937">https://x.com/amasad/status/2117504072416890937</a></p>]]></content:encoded>
     </item>
     <item>
-      <title>Levelsio × Claude：把《战地 1942》反编译后塞进浏览器联机</title>
+      <title>Levelsio 用 Claude Code 将《战地 1942》试玩版移植到浏览器</title>
       <link>https://xnews.qiaomu.ai/a/levelsio-bf1942-web</link>
       <guid isPermaLink="true">https://xnews.qiaomu.ai/a/levelsio-bf1942-web</guid>
       <pubDate>Mon, 02 Nov 2026 21:55:09 +0000</pubDate>
       <author>Pieter Levels</author>
-      <description><![CDATA[<p><em>没有开源引擎可借，从 x86 机器码翻到 C，再编成 WebAssembly。他说自己大多时候只是在旁边看。</em></p>
+      <description><![CDATA[<p><em>他介绍了从 x86 反汇编、翻译成 C，到编译为 WebAssembly 和接入多人服务器的过程。</em></p>
 <h2>乔木改写</h2>
-<p>Pieter Levels 把可能是他最爱的游戏，《Battlefield 1942》，搬进了浏览器，还带多人联机。</p>
-<p>地址：<a href="https://bf1942.pieter.com" target="_blank" rel="noopener noreferrer">bf1942.pieter.com</a>（免费试玩版）。</p>
-<p>这事比他以前移植 Quake、DOOM 难一截。后两者早有开源项目垫底；BF1942 几乎没有任何现成底座，厂商也没开源引擎。半年前他试过，基本放弃。今天又拿 Opus 5.5 问了一句：「能不能把这个文件夹里的 BF1942 demo 移植到网页」。</p>
-<p>然后他和 Claude Code（他承认主要是 Claude）干了一堆听起来离谱的事：</p>
+<p>Pieter Levels 说，他反编译了可能是自己最喜欢的游戏《Battlefield 1942》，把它放到网页上，并加入多人联机。可试玩的是免费 shareware demo，地址为 <a href="https://bf1942.pieter.com" target="_blank" rel="noopener noreferrer">bf1942.pieter.com</a>。</p>
+<p>按他的介绍，这次比之前移植 Quake 和 DOOM 困难得多：后两者已有大量开源项目和前人的工作可用，而《Battlefield 1942》没有这样的基础。他说，之前没人做过这个移植，也没有可用的开源引擎；开发商不像 id Software 对 Quake 3 那样开放过引擎源码。</p>
+<p>他在半年前试过一次，基本放弃了。这次使用 Opus 5.5，重新请它尝试把文件夹中的 BF1942 demo 移植到网页。Levels 坦言，虽然说是自己和 Claude Code 合作，大部分工作实际由 Claude Code 完成。</p>
+<p>他列出的步骤包括：</p>
 <ul>
-<li>反汇编 x86，找出约 57,000 个函数</li>
-<li>把每个函数翻成 C（<code>mov eax, [esi+0x110]</code> 变成 <code>eax = READ32(esi + 0x110)</code>）</li>
-<li>吐出大约 10 万行 C</li>
-<li>用 Emscripten 编成 WebAssembly</li>
-<li>重写约 300 个 Windows / Direct3D 调用，接到 WebGL 2 / OpenGL</li>
-<li>自建网络栈，经 WebSocket 连多人服务器</li>
+<li>反汇编原始 x86 机器码，识别出约 57000 个 x86 函数。</li>
+<li>把每个 x86 函数翻译成 C 函数，例如将 <code>mov eax, [esi+0x110]</code> 转为 <code>eax = READ32(esi + 0x110)</code>。他也承认自己并不理解这些代码的含义。</li>
+<li>生成约 100000 行 C 代码。</li>
+<li>用 Emscripten 编译为 WebAssembly。</li>
+<li>将游戏使用的约 300 个 Windows 和 Direct3D 函数重写为 WebGL 2、OpenGL 对应实现，使其能在网页上运行。</li>
+<li>自行构建网络栈，通过 WebSocket 连接多人服务器。</li>
 </ul>
-<p>他自己的原话很诚实：「我不知道它怎么做到的，但它做到了，而且好像能玩。」</p>
-<p>这不是怀旧彩蛋那么简单。它在演示一件更锋利的事：当模型能在「无文档、无开源、只有二进制」的场景里硬凿出可运行系统，软件考古和废弃游戏保存，会突然变得可规模化。</p>
+<p>Levels 说，他并不清楚 Claude 是怎么完成这些工作的，但结果似乎能运行。他邀请读者试玩，并到原帖反馈发现的问题。</p>
+<section class="rewrite-source-media" aria-label="原文附带媒体"><h3 class="source-media-heading">原文附带媒体</h3><p class="completeness-note">原文附带媒体；未核验其与具体段落的对应关系。</p><figure data-media-id="m_7e6088547aeb5301"><video controls playsinline preload="none" src="https://video.twimg.com/amplify_video/2117374770253565952/vid/avc1/1080x1920/qdwjPQkAwvtgGImY.mp4" poster="https://pbs.twimg.com/amplify_video_thumb/2117374770253565952/img/6WkHxBF81dMfyKCf.jpg"></video><figcaption><a href="https://video.twimg.com/amplify_video/2117374770253565952/vid/avc1/1080x1920/qdwjPQkAwvtgGImY.mp4">打开原始媒体 ↗</a></figcaption></figure></section>
 <h2>原文</h2>
 <p><em>Battlefield 1942 decompiled to the browser</em></p>
-<p><video controls src="https://video.twimg.com/amplify_video/2117374770253565952/vid/avc1/1080x1920/qdwjPQkAwvtgGImY.mp4" poster="https://pbs.twimg.com/amplify_video_thumb/2117374770253565952/img/6WkHxBF81dMfyKCf.jpg"></video></p>
+<figure data-media-id="m_7e6088547aeb5301"><video controls playsinline preload="none" src="https://video.twimg.com/amplify_video/2117374770253565952/vid/avc1/1080x1920/qdwjPQkAwvtgGImY.mp4" poster="https://pbs.twimg.com/amplify_video_thumb/2117374770253565952/img/6WkHxBF81dMfyKCf.jpg"></video><figcaption><a href="https://video.twimg.com/amplify_video/2117374770253565952/vid/avc1/1080x1920/qdwjPQkAwvtgGImY.mp4">打开原始媒体 ↗</a></figcaption></figure>
 <p>I decompiled probably my favorite game ever: Battlefield 1942 and I put it on the web with multiplayer for you to play here:</p>
 <p>👉 https://t.co/6C8H8KtSaU 👈</p>
 <p>(It&#x27;s the free shareware demo)</p>
@@ -694,25 +814,25 @@
 <p>Come play and report any bugs here!</p>
 <p><strong>原文链接：</strong><a href="https://x.com/levelsio/status/2117374984192512391">https://x.com/levelsio/status/2117374984192512391</a></p>
 <p><strong>相关链接：</strong><a href="https://bf1942.pieter.com">https://bf1942.pieter.com</a></p>]]></description>
-      <content:encoded><![CDATA[<p><em>没有开源引擎可借，从 x86 机器码翻到 C，再编成 WebAssembly。他说自己大多时候只是在旁边看。</em></p>
+      <content:encoded><![CDATA[<p><em>他介绍了从 x86 反汇编、翻译成 C，到编译为 WebAssembly 和接入多人服务器的过程。</em></p>
 <h2>乔木改写</h2>
-<p>Pieter Levels 把可能是他最爱的游戏，《Battlefield 1942》，搬进了浏览器，还带多人联机。</p>
-<p>地址：<a href="https://bf1942.pieter.com" target="_blank" rel="noopener noreferrer">bf1942.pieter.com</a>（免费试玩版）。</p>
-<p>这事比他以前移植 Quake、DOOM 难一截。后两者早有开源项目垫底；BF1942 几乎没有任何现成底座，厂商也没开源引擎。半年前他试过，基本放弃。今天又拿 Opus 5.5 问了一句：「能不能把这个文件夹里的 BF1942 demo 移植到网页」。</p>
-<p>然后他和 Claude Code（他承认主要是 Claude）干了一堆听起来离谱的事：</p>
+<p>Pieter Levels 说，他反编译了可能是自己最喜欢的游戏《Battlefield 1942》，把它放到网页上，并加入多人联机。可试玩的是免费 shareware demo，地址为 <a href="https://bf1942.pieter.com" target="_blank" rel="noopener noreferrer">bf1942.pieter.com</a>。</p>
+<p>按他的介绍，这次比之前移植 Quake 和 DOOM 困难得多：后两者已有大量开源项目和前人的工作可用，而《Battlefield 1942》没有这样的基础。他说，之前没人做过这个移植，也没有可用的开源引擎；开发商不像 id Software 对 Quake 3 那样开放过引擎源码。</p>
+<p>他在半年前试过一次，基本放弃了。这次使用 Opus 5.5，重新请它尝试把文件夹中的 BF1942 demo 移植到网页。Levels 坦言，虽然说是自己和 Claude Code 合作，大部分工作实际由 Claude Code 完成。</p>
+<p>他列出的步骤包括：</p>
 <ul>
-<li>反汇编 x86，找出约 57,000 个函数</li>
-<li>把每个函数翻成 C（<code>mov eax, [esi+0x110]</code> 变成 <code>eax = READ32(esi + 0x110)</code>）</li>
-<li>吐出大约 10 万行 C</li>
-<li>用 Emscripten 编成 WebAssembly</li>
-<li>重写约 300 个 Windows / Direct3D 调用，接到 WebGL 2 / OpenGL</li>
-<li>自建网络栈，经 WebSocket 连多人服务器</li>
+<li>反汇编原始 x86 机器码，识别出约 57000 个 x86 函数。</li>
+<li>把每个 x86 函数翻译成 C 函数，例如将 <code>mov eax, [esi+0x110]</code> 转为 <code>eax = READ32(esi + 0x110)</code>。他也承认自己并不理解这些代码的含义。</li>
+<li>生成约 100000 行 C 代码。</li>
+<li>用 Emscripten 编译为 WebAssembly。</li>
+<li>将游戏使用的约 300 个 Windows 和 Direct3D 函数重写为 WebGL 2、OpenGL 对应实现，使其能在网页上运行。</li>
+<li>自行构建网络栈，通过 WebSocket 连接多人服务器。</li>
 </ul>
-<p>他自己的原话很诚实：「我不知道它怎么做到的，但它做到了，而且好像能玩。」</p>
-<p>这不是怀旧彩蛋那么简单。它在演示一件更锋利的事：当模型能在「无文档、无开源、只有二进制」的场景里硬凿出可运行系统，软件考古和废弃游戏保存，会突然变得可规模化。</p>
+<p>Levels 说，他并不清楚 Claude 是怎么完成这些工作的，但结果似乎能运行。他邀请读者试玩，并到原帖反馈发现的问题。</p>
+<section class="rewrite-source-media" aria-label="原文附带媒体"><h3 class="source-media-heading">原文附带媒体</h3><p class="completeness-note">原文附带媒体；未核验其与具体段落的对应关系。</p><figure data-media-id="m_7e6088547aeb5301"><video controls playsinline preload="none" src="https://video.twimg.com/amplify_video/2117374770253565952/vid/avc1/1080x1920/qdwjPQkAwvtgGImY.mp4" poster="https://pbs.twimg.com/amplify_video_thumb/2117374770253565952/img/6WkHxBF81dMfyKCf.jpg"></video><figcaption><a href="https://video.twimg.com/amplify_video/2117374770253565952/vid/avc1/1080x1920/qdwjPQkAwvtgGImY.mp4">打开原始媒体 ↗</a></figcaption></figure></section>
 <h2>原文</h2>
 <p><em>Battlefield 1942 decompiled to the browser</em></p>
-<p><video controls src="https://video.twimg.com/amplify_video/2117374770253565952/vid/avc1/1080x1920/qdwjPQkAwvtgGImY.mp4" poster="https://pbs.twimg.com/amplify_video_thumb/2117374770253565952/img/6WkHxBF81dMfyKCf.jpg"></video></p>
+<figure data-media-id="m_7e6088547aeb5301"><video controls playsinline preload="none" src="https://video.twimg.com/amplify_video/2117374770253565952/vid/avc1/1080x1920/qdwjPQkAwvtgGImY.mp4" poster="https://pbs.twimg.com/amplify_video_thumb/2117374770253565952/img/6WkHxBF81dMfyKCf.jpg"></video><figcaption><a href="https://video.twimg.com/amplify_video/2117374770253565952/vid/avc1/1080x1920/qdwjPQkAwvtgGImY.mp4">打开原始媒体 ↗</a></figcaption></figure>
 <p>I decompiled probably my favorite game ever: Battlefield 1942 and I put it on the web with multiplayer for you to play here:</p>
 <p>👉 https://t.co/6C8H8KtSaU 👈</p>
 <p>(It&#x27;s the free shareware demo)</p>
@@ -734,29 +854,28 @@
 <p><strong>相关链接：</strong><a href="https://bf1942.pieter.com">https://bf1942.pieter.com</a></p>]]></content:encoded>
     </item>
     <item>
-      <title>Karpathy 周末两小时：用 Claude 从 4300 万条 HN 评论里筛出 6454 个值得看的视频</title>
+      <title>Karpathy 做了 HackerTube：从 4300 万条 HN 评论中找到 6454 个视频</title>
       <link>https://xnews.qiaomu.ai/a/karpathy-hackertube</link>
       <guid isPermaLink="true">https://xnews.qiaomu.ai/a/karpathy-hackertube</guid>
       <pubDate>Sun, 01 Nov 2026 18:14:46 +0000</pubDate>
       <author>Andrej Karpathy</author>
-      <description><![CDATA[<p><em>受够了 YouTube 推荐，他把二十年 Hacker News 评论扔给 Opus 5.5，做了个不登录也好用的 HackerTube。</em></p>
+      <description><![CDATA[<p><em>他用 Opus 5.5 花了约两小时完成这个周末项目；推荐无需登录，底层数据也可下载。</em></p>
 <h2>乔木改写</h2>
-<p>Andrej Karpathy 又交了一份周末作业。</p>
-<p>这次叫 <strong>HackerTube</strong>。起因很简单：他烦 YouTube 推荐。于是让 Claude 把 Hacker News 二十年、大约 <strong>4300 万条评论</strong>滤了一遍，留下会反复被推荐的 <strong>6454 个视频</strong>。他自己说，用 Opus 5.5 大概花了两小时，观感「显著更好」。</p>
-<p>站点在 <a href="https://hackertube.org/" target="_blank" rel="noopener noreferrer">hackertube.org</a>。几个设计选择挺对味：</p>
+<p>Andrej Karpathy 不满 YouTube 的推荐，于是做了一个周末项目 HackerTube。他让 Claude 从 Hacker News 二十年来约 4300 万条评论中，筛出反复被推荐的 6454 个视频。按他的说法，整个项目用 Opus 5.5 花了约两小时，观看体验明显更好。</p>
+<p>他列出了几个设计选择：</p>
 <ul>
-<li>不登录也能用，状态留在浏览器本地</li>
-<li>缩略图取视频中间的一帧，不跟那种被 A/B 测到极致的封面卷</li>
-<li>评论分析的底层数据打包成 zip，你也可以丢给 Claude，做自己的版本</li>
-<li>还有 HackerTube Longs</li>
+<li>不登录也能获得推荐，使用状态保存在本地浏览器会话中。</li>
+<li>缩略图选取视频中段有代表性的一帧，而非上传者经过大量 A/B 测试优化的封面。</li>
+<li>评论分析的底层数据打包为一个 zip 文件，其他人可以把它交给 Claude，要求制作自己的版本。</li>
+<li>另有 HackerTube Longs。</li>
 </ul>
-<p>过程也值得记一笔。他默认用 Claude Code 桌面端、Opus 5.5 Medium。自己动手的部分很少：去 Google Cloud 开 YouTube API key、起一台 VPS、买域名。机器起来之后，把 IP 丢给 Claude，让它更新、加固、部署、优化，整条链路基本交给模型。</p>
-<p>他收尾那句很轻，但分量不轻：</p>
-<blockquote><p>很多原本要花几周甚至几个月的项目，现在早饭前就能 few-shot 出来。我们还没想到的，还有多少？</p></blockquote>
-<p>这不是又一个「AI 写了个玩具」的故事。它更像在提醒：当你真正把「找信号」这件事外包给模型，产品形态会跟着变。HN 评论里本来就埋着高质量推荐，只是以前没人愿意花两小时把矿挖干净。</p>
+<p>他也介绍了制作过程。默认工具是 Mac 版 Claude Code 桌面应用，模型为 Opus 5.5，使用 Medium effort。他只与 Claude 对话，让它完成工作；自己配合做的手动操作都在浏览器中：从 Google Cloud 界面创建查询 YouTube 视频元数据所需的 API key、启动用于提供服务的 VPS，以及购买域名。他提到，这种配合方式让他想起 MenuGen。</p>
+<p>VPS 启动后，他把 IP 交给 Claude，让它更新系统、处理安全加固、部署并优化代码。他说，Claude 完成了这些工作。</p>
+<p>Karpathy 感慨，一些过去需要数周甚至数月的项目，如今吃顿早饭的工夫，用少量提示就能做出来。他想知道，还有哪些项目是大家尚未想到的。原帖中的项目链接是 <a href="https://t.co/JIhXN7OSh1" target="_blank" rel="noopener noreferrer">HackerTube</a>。</p>
+<section class="rewrite-source-media" aria-label="原文附带媒体"><h3 class="source-media-heading">原文附带媒体</h3><p class="completeness-note">原文附带媒体；未核验其与具体段落的对应关系。</p><figure data-media-id="m_1056aca2aea7617b"><img src="https://pbs.twimg.com/media/HWDnuuCaIAA__wa.jpg" alt=""><figcaption><a href="https://pbs.twimg.com/media/HWDnuuCaIAA__wa.jpg">打开原始媒体 ↗</a></figcaption></figure></section>
 <h2>原文</h2>
 <p><em>Weekend hack: HackerTube</em></p>
-<p><img src="https://pbs.twimg.com/media/HWDnuuCaIAA__wa.jpg" alt=""></p>
+<figure data-media-id="m_1056aca2aea7617b"><img src="https://pbs.twimg.com/media/HWDnuuCaIAA__wa.jpg" alt=""><figcaption><a href="https://pbs.twimg.com/media/HWDnuuCaIAA__wa.jpg">打开原始媒体 ↗</a></figcaption></figure>
 <p>Weekend hack: HackerTube. I was annoyed with YouTube&#x27;s recommendations so I had Claude filter down 43M comments over 20 years of HN to 6,454 videos that keep being recommended. <em>Significantly</em> better viewing experience, ~2 hours with Opus 5.5: https://t.co/JIhXN7OSh1</p>
 <ul>
 <li>Excellent recs without any logins (state is kept in local browser session)</li>
@@ -767,24 +886,23 @@
 <p>A bit more on the process: I use Claude Code (desktop app for Mac), Opus 5.5 on Medium effort as my default. I only talk to Claude and have it do everything, the only &quot;manual work&quot; I helped with in tandem was in the browser (reminiscent of MenuGen): 1) I had to create some kind of API key from Google Cloud UI to query YouTube for video metadata, 2) I booted up a VPS box for serving and 3) I bought the domain name. Once the box was up I gave Claude the IP and told it update, secure, harden, deploy and optimize the code, and it did the whole thing.</p>
 <p>Many awesome projects that would have normally taken weeks/months even can now be few-shotted for breakfast. What else are we not thinking of.</p>
 <p><strong>原文链接：</strong><a href="https://x.com/karpathy/status/2116957135661945283">https://x.com/karpathy/status/2116957135661945283</a></p>]]></description>
-      <content:encoded><![CDATA[<p><em>受够了 YouTube 推荐，他把二十年 Hacker News 评论扔给 Opus 5.5，做了个不登录也好用的 HackerTube。</em></p>
+      <content:encoded><![CDATA[<p><em>他用 Opus 5.5 花了约两小时完成这个周末项目；推荐无需登录，底层数据也可下载。</em></p>
 <h2>乔木改写</h2>
-<p>Andrej Karpathy 又交了一份周末作业。</p>
-<p>这次叫 <strong>HackerTube</strong>。起因很简单：他烦 YouTube 推荐。于是让 Claude 把 Hacker News 二十年、大约 <strong>4300 万条评论</strong>滤了一遍，留下会反复被推荐的 <strong>6454 个视频</strong>。他自己说，用 Opus 5.5 大概花了两小时，观感「显著更好」。</p>
-<p>站点在 <a href="https://hackertube.org/" target="_blank" rel="noopener noreferrer">hackertube.org</a>。几个设计选择挺对味：</p>
+<p>Andrej Karpathy 不满 YouTube 的推荐，于是做了一个周末项目 HackerTube。他让 Claude 从 Hacker News 二十年来约 4300 万条评论中，筛出反复被推荐的 6454 个视频。按他的说法，整个项目用 Opus 5.5 花了约两小时，观看体验明显更好。</p>
+<p>他列出了几个设计选择：</p>
 <ul>
-<li>不登录也能用，状态留在浏览器本地</li>
-<li>缩略图取视频中间的一帧，不跟那种被 A/B 测到极致的封面卷</li>
-<li>评论分析的底层数据打包成 zip，你也可以丢给 Claude，做自己的版本</li>
-<li>还有 HackerTube Longs</li>
+<li>不登录也能获得推荐，使用状态保存在本地浏览器会话中。</li>
+<li>缩略图选取视频中段有代表性的一帧，而非上传者经过大量 A/B 测试优化的封面。</li>
+<li>评论分析的底层数据打包为一个 zip 文件，其他人可以把它交给 Claude，要求制作自己的版本。</li>
+<li>另有 HackerTube Longs。</li>
 </ul>
-<p>过程也值得记一笔。他默认用 Claude Code 桌面端、Opus 5.5 Medium。自己动手的部分很少：去 Google Cloud 开 YouTube API key、起一台 VPS、买域名。机器起来之后，把 IP 丢给 Claude，让它更新、加固、部署、优化，整条链路基本交给模型。</p>
-<p>他收尾那句很轻，但分量不轻：</p>
-<blockquote><p>很多原本要花几周甚至几个月的项目，现在早饭前就能 few-shot 出来。我们还没想到的，还有多少？</p></blockquote>
-<p>这不是又一个「AI 写了个玩具」的故事。它更像在提醒：当你真正把「找信号」这件事外包给模型，产品形态会跟着变。HN 评论里本来就埋着高质量推荐，只是以前没人愿意花两小时把矿挖干净。</p>
+<p>他也介绍了制作过程。默认工具是 Mac 版 Claude Code 桌面应用，模型为 Opus 5.5，使用 Medium effort。他只与 Claude 对话，让它完成工作；自己配合做的手动操作都在浏览器中：从 Google Cloud 界面创建查询 YouTube 视频元数据所需的 API key、启动用于提供服务的 VPS，以及购买域名。他提到，这种配合方式让他想起 MenuGen。</p>
+<p>VPS 启动后，他把 IP 交给 Claude，让它更新系统、处理安全加固、部署并优化代码。他说，Claude 完成了这些工作。</p>
+<p>Karpathy 感慨，一些过去需要数周甚至数月的项目，如今吃顿早饭的工夫，用少量提示就能做出来。他想知道，还有哪些项目是大家尚未想到的。原帖中的项目链接是 <a href="https://t.co/JIhXN7OSh1" target="_blank" rel="noopener noreferrer">HackerTube</a>。</p>
+<section class="rewrite-source-media" aria-label="原文附带媒体"><h3 class="source-media-heading">原文附带媒体</h3><p class="completeness-note">原文附带媒体；未核验其与具体段落的对应关系。</p><figure data-media-id="m_1056aca2aea7617b"><img src="https://pbs.twimg.com/media/HWDnuuCaIAA__wa.jpg" alt=""><figcaption><a href="https://pbs.twimg.com/media/HWDnuuCaIAA__wa.jpg">打开原始媒体 ↗</a></figcaption></figure></section>
 <h2>原文</h2>
 <p><em>Weekend hack: HackerTube</em></p>
-<p><img src="https://pbs.twimg.com/media/HWDnuuCaIAA__wa.jpg" alt=""></p>
+<figure data-media-id="m_1056aca2aea7617b"><img src="https://pbs.twimg.com/media/HWDnuuCaIAA__wa.jpg" alt=""><figcaption><a href="https://pbs.twimg.com/media/HWDnuuCaIAA__wa.jpg">打开原始媒体 ↗</a></figcaption></figure>
 <p>Weekend hack: HackerTube. I was annoyed with YouTube&#x27;s recommendations so I had Claude filter down 43M comments over 20 years of HN to 6,454 videos that keep being recommended. <em>Significantly</em> better viewing experience, ~2 hours with Opus 5.5: https://t.co/JIhXN7OSh1</p>
 <ul>
 <li>Excellent recs without any logins (state is kept in local browser session)</li>

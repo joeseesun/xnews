@@ -9,8 +9,8 @@
     "handle": "saranormous",
     "title_en": "Non-engineers do want to make personal software"
   },
-  "title": "Sarah Guo：非工程师也想改自己的软件，我之前判断错了",
-  "dek": "从「我好有掌控感」到「没人会给我做这个工作流」，欲望光谱比想象中宽。",
+  "title": "Sarah Guo 改变了看法：非工程师也想做自己的软件",
+  "dek": "她列了几种动机：动手做软件带来的力量感、没人替自己实现的工作流，以及想花几周修好的恼人问题。",
   "tags": [
     "product",
     "personal software",
@@ -22,5 +22,6 @@
     "text_md": "a few years ago, I started out skeptical that many non-engineers really wanted to make/mod their own personal software -- but I've come around, think I was wrong. range of desires from:\n- I feel so powerful\n- no one will make me the workflow/personalization I need\n- can I just PM the product for a few weeks and fix this thing that is driving me crazy\n\nobvious in retrospect, but if the ease:power ratio is good enough, of course people will make their own software",
     "media": []
   },
-  "body_md": "Sarah Guo 写得很短，但足以改一条产品假设。\n\n几年前，她不太相信大量非工程师真的想自己做、或改个人软件。现在她认错了。她看到的欲望大概分几档：\n\n- 我感觉自己很有力量\n- 没人会给我做我要的工作流 / 个性化\n- 能不能让我当几周产品经理，把这个天天烦我的点修掉\n\n事后看几乎是常识：**只要「省力 / 能力」比值够好，人就会动手做自己的软件。**\n\n这和「人人都该学编程」不是一回事。更接近：当 Agent 把实现成本压下去之后，个人软件会从极客玩具，变成普通人处理生活摩擦的默认选项。\n\n对做工具的人来说，下一步产品问题大概是：你是继续做一个封闭的成品，还是留出足够安全的口子，让用户能把自己的流程焊进去。\n"
+  "body_md": "几年前，Sarah Guo 怀疑是否真有很多非工程师想自己制作或修改个人软件。现在，她改变了看法，觉得自己当时想错了。\n\n她列了几种人们想做个人软件的理由：\n\n- 自己也能做软件，感觉很有力量。\n- 没人会替自己做出需要的工作流或个性化设置。\n- 想当几周产品经理，修好那个一直让自己烦躁的地方。\n\n她回头看觉得，这其实不难理解：只要工具容易上手、能力又够强，人们当然会愿意做自己的软件。\n",
+  "rewrite_media": []
 }

@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Rauch：Agent 的杀手级应用，是「跨时间替你做事」 · X News</title>
-<meta name="description" content="夜里整理记忆，早上提醒你，N 天没互动再戳一下。Vercel Schedules 像加强版 Cron，还能在运行时动态创建。">
+<title>Rauch 谈 Agent 持续任务：Vercel Schedules 可在运行时定义 · X News</title>
+<meta name="description" content="Muse 和 Instinct 会夜间整理记忆、早上提醒，并在一段时间没互动后主动发消息。">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#fffefa">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="X News">
-<meta property="og:title" content="Rauch：Agent 的杀手级应用，是「跨时间替你做事」 · X News">
-<meta property="og:description" content="夜里整理记忆，早上提醒你，N 天没互动再戳一下。Vercel Schedules 像加强版 Cron，还能在运行时动态创建。">
+<meta property="og:title" content="Rauch 谈 Agent 持续任务：Vercel Schedules 可在运行时定义 · X News">
+<meta property="og:description" content="Muse 和 Instinct 会夜间整理记忆、早上提醒，并在一段时间没互动后主动发消息。">
 <meta property="og:url" content="https://xnews.qiaomu.ai/a/rauchg-agent-schedules">
 <link rel="canonical" href="https://xnews.qiaomu.ai/a/rauchg-agent-schedules">
 <link rel="alternate" type="application/rss+xml" title="X News" href="/feed.xml">
@@ -28,14 +28,12 @@
 <main class="site-main" id="main">
 <article class="article-reader" data-article-id="rauchg-agent-schedules">
 <a class="article-back" href="/">← 返回选刊</a>
-<header class="article-header"><p class="article-kicker">X · @rauchg / 长帖</p><h1>Rauch：Agent 的杀手级应用，是「跨时间替你做事」</h1><p class="article-dek">夜里整理记忆，早上提醒你，N 天没互动再戳一下。Vercel Schedules 像加强版 Cron，还能在运行时动态创建。</p><div class="article-meta"><time datetime="2026-11-06">2026年11月6日 · 周五</time><span>Guillermo Rauch</span><span>agent · Vercel · Schedules</span></div></header>
+<header class="article-header"><p class="article-kicker">X · @rauchg / 长帖</p><h1>Rauch 谈 Agent 持续任务：Vercel Schedules 可在运行时定义</h1><p class="article-dek">Muse 和 Instinct 会夜间整理记忆、早上提醒，并在一段时间没互动后主动发消息。</p><div class="article-meta"><time datetime="2026-11-06">2026年11月6日 · 周五</time><span>Guillermo Rauch</span><span>agent · Vercel · Schedules</span></div></header>
 <nav class="reader-tabs" aria-label="文章版本与来源"><div data-tabs><a href="#rewrite" id="tab-rewrite" data-view="rewrite">乔木改写</a><a href="#original" id="tab-original" data-view="original">原文</a></div><a class="reader-source" href="https://x.com/rauchg/status/2118440831355068671" target="_blank" rel="noopener noreferrer">原文链接 ↗</a></nav>
-<section class="reader-panel" id="rewrite" data-reader-panel="rewrite" aria-label="乔木改写"><h2 class="section-heading">乔木改写</h2><div class="prose"><p>Guillermo Rauch 给 Agent 的杀手级应用下了个很短的定义：</p>
-<blockquote><p>Doing stuff for you over time.</p></blockquote>
-<p>跨时间替你做事。</p>
-<p>他举的例子很生活：Muse、Instinct 夜里合并记忆，早上提醒你，距离上次互动过了 N 天再主动戳一下。对应到基础设施，就是刚进公测的 <strong>Vercel Schedules</strong>：可在代码里静态声明，也可运行时动态创建；能在 Preview 环境跑；调度落在 Sandbox 外，按需唤醒计算，账单更可控。</p>
-<p>这句话之所以有分量，是因为它把讨论从「单次对话里 Agent 聪不聪明」，拽回「它能不能成为你生活和工作的背景进程」。聊天窗口是同步的；真正值钱的，往往是异步的、隔夜的、过几天再回来的那一下。</p>
-<p>如果你在设计 Agent 产品，不妨先问：用户离开之后，它还剩什么可做的？</p></div></section>
+<section class="reader-panel" id="rewrite" data-reader-panel="rewrite" aria-label="乔木改写"><h2 class="section-heading">乔木改写</h2><div class="prose"><p>Guillermo Rauch 认为，持续替用户处理事情，是 Agent 的杀手级应用。</p>
+<p>他举了 Muse 和 Instinct 的例子：它们会在夜间整理记忆，早上提醒用户，并在距离上一次互动过了 N 天后发来消息。</p>
+<p>谈到配套基础设施，Rauch 将 Vercel Schedules 形容为加强版 Cron。按他的介绍，任务可以在运行时定义，能够无限扩展，而且调度系统位于 Sandbox 之外，因此可以按需调用计算资源，以更低的成本运行。</p>
+</div></section>
 <section class="reader-panel" id="original" data-reader-panel="original" aria-label="原文">
 <h2 class="section-heading">原文</h2><h3 class="original-title">Doing stuff for you over time is the killer app of agents</h3>
 

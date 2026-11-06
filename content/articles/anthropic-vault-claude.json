@@ -10,8 +10,8 @@
     "title_en": "Investigating vault particles with Claude",
     "related_url": "https://www.anthropic.com/research/investigating-vault-particles-with-claude"
   },
-  "title": "Anthropic × Claude：给细菌界的「穹顶蛋白」拍出第一张 3D 结构",
-  "dek": "传统纯化要三天，他们压到九十分钟。结构初稿 34 小时出炉。Claude 也踩过坑，团队把坑回灌进了训练。",
+  "title": "Anthropic：用 Claude 解析细菌 vault 颗粒的首个三维结构",
+  "dek": "团队称，原本需要数周到数月的结构解析缩短到了几天；过程中也出现了需要纠正的错误。",
   "tags": [
     "Anthropic",
     "Claude",
@@ -23,5 +23,6 @@
     "text_md": "We’re sharing how our biology research team worked with Claude to map the first 3D structure of a vault particle from bacterial life.\n\nVault particles are a longstanding mystery. They are barrel-shaped objects, among the largest protein structures found in our cells. They were first discovered by Leonard Rome and Nancy Kedersha in 1986, but their function remains unknown.\n\nWith Claude, we’ve found results that might bring us closer to solving that mystery.\n\nUntil now, vaults were only known in the cells of complex things like animals and plants. We have shown that similar proteins from bacteria (and the viruses that infect them) can also assemble into vaults. Finding the structures in these simpler forms of life may make it easier to investigate their function in our own cells.\n\nFor our life sciences team, the project was also a demonstration of the potential (and the limitations) of using AI to accelerate science.\n\nIn our full piece, we discuss how Claude was able to dramatically speed up some stages—manually determining the vault particle’s structure would have taken weeks to months of painstaking work, but here it took days. We also discuss how Claude made some simple mistakes along the way, and how we collaborated with our machine learning researchers to address them.\n\nRead more: https://www.anthropic.com/research/investigating-vault-particles-with-claude",
     "media": []
   },
-  "body_md": "Anthropic 生物学实验室又交了一份作业：用 Claude 帮忙，解出了细菌生命里 **vault particle** 的首个 3D 结构。\n\nVault 是一种桶状空心蛋白壳，1986 年就被 Leonard Rome 和 Nancy Kedersha 发现，功能至今成谜。哺乳动物细胞里它大约是核糖体质量的三倍。过去只在动植物这类复杂细胞里确认过；这次他们证明，细菌和噬菌体里的类似蛋白，也能组装成完整 vault。\n\n为什么重要？简单生命里的版本，往往是拆解人类蛋白功能的捷径。cGAS–STING、gasdermin、viperin 都走过这条路。Vault 的功能还不知道，原核版本可能把谜底拉近一点。\n\n流程里 Claude 几乎全程在场：搜约 150 亿条预测蛋白、设计 DNA 构建、优化分离方法、跑冷冻电镜数据处理。传统糖梯度纯化大约三天，他们改成排阻层析后，从细胞到电镜载网大约 **90 分钟**；第一版结构模型 **34 小时** 出炉，团队估计人工通常要数周。\n\n也没藏丑。Claude 写过一份有坑的培养基配方，项目因此倒退两周；电镜处理早期跳过标准步骤，搞出镜像混叠的废图。研究员直接下指令：「Please let’s do normal things unless they don’t work。」这些失败笔记回灌给做训练的同事，后续模型在 DNA 设计和实验坑识别上明显好转。\n\nVault 发现者 Rome 看完数据说：功能仍然极难，但 Anthropic 的发现够宽，后面会有更多人跟进，「会是一段有趣的旅程」。\n\n这不是「AI 取代科学家」的通稿。更像一份实验室日志：人定方向、拍板非常规路线，模型把检索、设计和重活压缩掉；人在自己不熟的领域，才最容易被模型带偏。\n"
+  "body_md": "Anthropic 介绍，其生物学研究团队与 Claude 合作，解析了来自细菌生命的 vault 颗粒的首个三维结构。\n\nVault 颗粒呈桶状，是人体细胞中最大的蛋白质结构之一。Leonard Rome 和 Nancy Kedersha 于 1986 年发现了它，但它的功能至今仍不清楚。\n\n此前，人们只知道动物、植物等复杂生物的细胞中存在 vault。团队这次证明，细菌以及感染细菌的病毒中的类似蛋白，也能组装成 vault。在这些更简单的生命形式中找到相应结构，可能有助于研究它在人类细胞中的作用。\n\nAnthropic 将这一项目同时视为 AI 加速科学研究的潜力与局限的展示。团队估计，这次如果靠人工确定颗粒结构，原本需要数周到数月的细致工作，借助 Claude 则只用了几天。但 Claude 也犯了一些简单错误，生物学团队与机器学习研究人员合作处理了这些问题。\n\n本站保存的是这份研究介绍；详细过程可见 [Anthropic 的完整文章](https://www.anthropic.com/research/investigating-vault-particles-with-claude)。\n",
+  "rewrite_media": []
 }

@@ -10,8 +10,8 @@
     "title_en": "Battlefield 1942 decompiled to the browser",
     "related_url": "https://bf1942.pieter.com"
   },
-  "title": "Levelsio × Claude：把《战地 1942》反编译后塞进浏览器联机",
-  "dek": "没有开源引擎可借，从 x86 机器码翻到 C，再编成 WebAssembly。他说自己大多时候只是在旁边看。",
+  "title": "Levelsio 用 Claude Code 将《战地 1942》试玩版移植到浏览器",
+  "dek": "他介绍了从 x86 反汇编、翻译成 C，到编译为 WebAssembly 和接入多人服务器的过程。",
   "tags": [
     "Claude",
     "game",
@@ -29,5 +29,13 @@
       }
     ]
   },
-  "body_md": "Pieter Levels 把可能是他最爱的游戏，《Battlefield 1942》，搬进了浏览器，还带多人联机。\n\n地址：[bf1942.pieter.com](https://bf1942.pieter.com)（免费试玩版）。\n\n这事比他以前移植 Quake、DOOM 难一截。后两者早有开源项目垫底；BF1942 几乎没有任何现成底座，厂商也没开源引擎。半年前他试过，基本放弃。今天又拿 Opus 5.5 问了一句：「能不能把这个文件夹里的 BF1942 demo 移植到网页」。\n\n然后他和 Claude Code（他承认主要是 Claude）干了一堆听起来离谱的事：\n\n- 反汇编 x86，找出约 57,000 个函数\n- 把每个函数翻成 C（`mov eax, [esi+0x110]` 变成 `eax = READ32(esi + 0x110)`）\n- 吐出大约 10 万行 C\n- 用 Emscripten 编成 WebAssembly\n- 重写约 300 个 Windows / Direct3D 调用，接到 WebGL 2 / OpenGL\n- 自建网络栈，经 WebSocket 连多人服务器\n\n他自己的原话很诚实：「我不知道它怎么做到的，但它做到了，而且好像能玩。」\n\n这不是怀旧彩蛋那么简单。它在演示一件更锋利的事：当模型能在「无文档、无开源、只有二进制」的场景里硬凿出可运行系统，软件考古和废弃游戏保存，会突然变得可规模化。\n"
+  "body_md": "Pieter Levels 说，他反编译了可能是自己最喜欢的游戏《Battlefield 1942》，把它放到网页上，并加入多人联机。可试玩的是免费 shareware demo，地址为 [bf1942.pieter.com](https://bf1942.pieter.com)。\n\n按他的介绍，这次比之前移植 Quake 和 DOOM 困难得多：后两者已有大量开源项目和前人的工作可用，而《Battlefield 1942》没有这样的基础。他说，之前没人做过这个移植，也没有可用的开源引擎；开发商不像 id Software 对 Quake 3 那样开放过引擎源码。\n\n他在半年前试过一次，基本放弃了。这次使用 Opus 5.5，重新请它尝试把文件夹中的 BF1942 demo 移植到网页。Levels 坦言，虽然说是自己和 Claude Code 合作，大部分工作实际由 Claude Code 完成。\n\n他列出的步骤包括：\n\n- 反汇编原始 x86 机器码，识别出约 57000 个 x86 函数。\n- 把每个 x86 函数翻译成 C 函数，例如将 `mov eax, [esi+0x110]` 转为 `eax = READ32(esi + 0x110)`。他也承认自己并不理解这些代码的含义。\n- 生成约 100000 行 C 代码。\n- 用 Emscripten 编译为 WebAssembly。\n- 将游戏使用的约 300 个 Windows 和 Direct3D 函数重写为 WebGL 2、OpenGL 对应实现，使其能在网页上运行。\n- 自行构建网络栈，通过 WebSocket 连接多人服务器。\n\nLevels 说，他并不清楚 Claude 是怎么完成这些工作的，但结果似乎能运行。他邀请读者试玩，并到原帖反馈发现的问题。\n",
+  "rewrite_media": [
+    {
+      "media_id": "m_7e6088547aeb5301",
+      "placement": "after_body",
+      "placement_note": "原文附带媒体；未核验其与具体段落的对应关系。",
+      "evidence": "source_metadata_only"
+    }
+  ]
 }
