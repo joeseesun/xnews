@@ -281,6 +281,31 @@
   history.scrollRestoration = 'manual';
   const sheetState = () => history.state?.xnewsSheet;
   const safePath = path => /^\/a\/[a-z0-9-]+\/?$/.test(path);
+  const prefetching = new Map();
+  // Warm only a link the reader shows intent to open; never preload media or all stories.
+  function prefetchArticle(event) {
+    if (event.type === 'pointerover' && event.pointerType === 'touch') return;
+    const connection = navigator.connection;
+    if (connection?.saveData || /(^|-)2g$/.test(connection?.effectiveType || '')) return;
+    const anchor = event.target.closest?.('[data-open-reader]');
+    if (!anchor) return;
+    const url = new URL(anchor.href, location.href), path = url.pathname;
+    if (url.origin !== location.origin || !safePath(path) || cache.has(path) || prefetching.has(path) || prefetching.size >= 2) return;
+    const abort = new AbortController();
+    const timer = setTimeout(() => abort.abort(), 8000);
+    const promise = fetch(path, {signal: abort.signal, priority: 'low', headers: {'Accept': 'text/html'}})
+      .then(response => { if (!response.ok) throw new Error('Prefetch failed'); return response.text(); })
+      .then(html => {
+        const raw = new DOMParser().parseFromString(html, 'text/html').querySelector('[data-article-id]');
+        if (!raw || '/a/' + raw.dataset.articleId !== path.replace(/\/$/, '')) return null;
+        cache.set(path, html);
+        if (cache.size > 12) cache.delete(cache.keys().next().value);
+        return html;
+      }).catch(() => null).finally(() => { clearTimeout(timer); prefetching.delete(path); });
+    prefetching.set(path, promise);
+  }
+  grid.addEventListener('pointerover', prefetchArticle);
+  grid.addEventListener('focusin', prefetchArticle);
   function togglePageInert(value) { pageRoots.forEach(element => { element.inert = value; }); }
   function showSheet(keyboard) {
     if (sheet.open) return;
@@ -321,7 +346,9 @@
     const signal = controller.signal;
     const timeout = setTimeout(() => controller?.signal === signal && controller.abort(), 12000);
     try {
-      let html = cache.get(path);
+      let html = cache.get(path) || await prefetching.get(path);
+      if (ownSequence !== sequence || !active) return;
+      if (signal.aborted) throw new Error('Article load timed out');
       if (!html) {
         const response = await fetch(path, {signal, headers: {'Accept': 'text/html'}});
         if (!response.ok) throw new Error('HTTP ' + response.status);

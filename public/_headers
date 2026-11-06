@@ -1,0 +1,21 @@
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+/static/*
+  Cache-Control: public, max-age=31536000, immutable
+/media/*
+  Cache-Control: public, max-age=31536000, immutable
+/a/*
+  Cache-Control: public, max-age=300, stale-while-revalidate=3600
+/
+  Cache-Control: public, max-age=60, stale-while-revalidate=300
+/archive
+  Cache-Control: public, max-age=60, stale-while-revalidate=300
+/feed.xml
+  Cache-Control: public, max-age=300, stale-while-revalidate=600
+/sitemap.xml
+  Cache-Control: public, max-age=300
+/robots.txt
+  Cache-Control: public, max-age=300
+/404
+  X-Robots-Tag: noindex
