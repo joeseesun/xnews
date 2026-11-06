@@ -10,6 +10,7 @@ import sys
 from datetime import datetime, timezone, timedelta
 from email.utils import format_datetime
 from pathlib import Path
+from urllib.parse import quote
 from xml.sax.saxutils import escape as xml_escape
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -533,6 +534,85 @@ def rss_full_html(a: dict) -> str:
     return "\n".join(parts)
 
 
+def markdown_label(value: str) -> str:
+    """Plain metadata must not create Markdown/HTML in the exported rewrite."""
+    value = html.escape(" ".join(value.split()), quote=False)
+    return re.sub(r"([\\`*_{}\[\]()#!|])", r"\\\1", value)
+
+
+def markdown_media(media: dict) -> str:
+    # Angle-delimited destinations support parentheses; encode whitespace and
+    # delimiters so a metadata URL cannot terminate the Markdown destination.
+    url = quote(media["url"], safe="/:#?&=%@+;,~!$'()*[]")
+    kind = media.get("type")
+    if kind == "image":
+        return f'![{markdown_label(media.get("alt") or "原帖图片")}](<{url}>)'
+    label = "收听原始音频" if kind == "audio" else "观看原视频" if kind in ("video", "x_video", "youtube") else "打开原始媒体"
+    return f"[{label}](<{url}>)"
+
+
+def render_rewrite_markdown(a: dict) -> str:
+    """Published body with its validated media placements; never original prose."""
+    available, refs = rewrite_media_plan(a)
+    groups, omissions = {}, []
+    for ref in refs:
+        if "omit_reason" in ref:
+            omissions.append("原文媒体未在改写中展示：" + markdown_label(ref["omit_reason"]))
+            continue
+        key = (ref["placement"], ref.get("after_md", ""))
+        groups.setdefault(key, []).append((available[ref["media_id"]], ref.get("placement_note", "")))
+    body = a["body_md"]
+    # Keep the source Markdown and whitespace intact, inserting only at the
+    # exact complete paragraph already checked by rewrite_media_plan.
+    blocks = re.split(r"(\n\s*\n)", body.strip())
+    appended = []
+    for (placement, anchor), entries in groups.items():
+        label = "原文附带媒体" if placement == "after_body" else "原文媒体"
+        note = " ".join(dict.fromkeys(entry[1] for entry in entries if entry[1]))
+        parts = ["### " + label]
+        if note:
+            parts.append(markdown_label(note))
+        parts.extend(markdown_media(media) for media, _ in entries)
+        block = "\n\n".join(parts)
+        if placement == "after_paragraph":
+            for i in range(0, len(blocks), 2):
+                if blocks[i] == anchor:
+                    blocks[i] += "\n\n" + block
+                    break
+        else:
+            appended.append(block)
+    leading = body[:len(body) - len(body.lstrip())]
+    trailing = body[len(body.rstrip()):]
+    body = leading + "".join(blocks) + trailing if body.strip() else body
+    return body + ("\n\n" + "\n\n".join(appended + omissions) if appended or omissions else "")
+
+
+def rss_versions(a: dict) -> dict:
+    """Version 1 transport: two self-contained bodies for aware RSS readers."""
+    orig, src = a.get("original") or {}, a["source"]
+    title = (orig.get("title") or "").strip() or (src.get("title_en") or "").strip() or "Original source"
+    text = (orig.get("text_md") or "").strip()
+    parts = [f"<h2>{html.escape(title)}</h2>"]
+    notice = original_notice(a) if text else "此条目暂未保存原文文字；媒体与原文链接仍可查看。"
+    if notice:
+        parts.append(f"<p>{html.escape(notice)}</p>")
+    media = orig.get("media") or []
+    parts.append(rss_media_html(media))
+    if any(not m.get("url") for m in media):
+        parts.append("<p>部分原文媒体地址缺失，请通过原文链接查看。</p>")
+    if text:
+        parts.append(md_to_html(text))
+    for label, url in (("原文链接", src["url"]), ("相关链接", src.get("related_url"))):
+        if url:
+            escaped = html.escape(url, quote=True)
+            parts.append(f'<p>{label}：<a href="{escaped}">{escaped}</a></p>')
+    return {
+        "version": 1,
+        "original": {"title": title, "url": src["url"], "lang": (orig.get("lang") or "").strip() or "und", "html": "\n".join(parts)},
+        "rewrite": {"title": a["title"], "markdown": render_rewrite_markdown(a), "html": render_rewrite(a, rss=True)},
+    }
+
+
 def build_rss(articles: list[dict]) -> str:
     items = []
     for a in articles:
@@ -541,6 +621,7 @@ def build_rss(articles: list[dict]) -> str:
         full = rss_full_html(a)
         # CDATA so readers get full HTML; escape any ]]> in body
         cdata = full.replace("]]>", "]]]]><![CDATA[>")
+        versions = json.dumps(rss_versions(a), ensure_ascii=False).replace("]]>", "]]]]><![CDATA[>")
         items.append(f"""    <item>
       <title>{xml_escape(a['title'])}</title>
       <link>{xml_escape(link)}</link>
@@ -549,10 +630,11 @@ def build_rss(articles: list[dict]) -> str:
       <author>{xml_escape(a['source'].get('author',''))}</author>
       <description><![CDATA[{cdata}]]></description>
       <content:encoded><![CDATA[{cdata}]]></content:encoded>
+      <qiaomu:versions><![CDATA[{versions}]]></qiaomu:versions>
     </item>""")
     now = datetime.now(timezone.utc)
     return f"""<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:qiaomu="https://qiaomu.ai/ns/rss/1.0">
   <channel>
     <title>{xml_escape(SITE_NAME)}</title>
     <link>{SITE_URL}/</link>

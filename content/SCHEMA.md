@@ -84,3 +84,34 @@ Outputs: `public/index.html`, `public/a/<id>.html`, `public/feed.xml`, `public/a
 ## Style
 
 Read [`EDITORIAL_PROMPT.md`](./EDITORIAL_PROMPT.md) and its stable reviewed addon [`EDITORIAL_ADDON.md`](./EDITORIAL_ADDON.md) first. Its fidelity/natural-Chinese rules override generic style templates. The writing-style/tropes references may help expression, but do not require questions, analogies, short-line emphasis or grand endings. Show the Chinese body **with its source-media references**, then **原文** (unaltered original text + media), then 原文链接. The same reference plan renders the Chinese RSS section. Do not ship Chinese KOL digests here.
+# RSS 双版本协议（v1）
+
+`https://xnews.qiaomu.ai/feed.xml` 是 RSS 2.0。标准 `description` 和
+`content:encoded` 保持兼容：它们包含完整「乔木改写 + 原文」，**不能当作独立原文保存**。
+支持双版本的阅读器应读取每个 `item` 中唯一的 `qiaomu:versions`：
+
+```xml
+<rss version="2.0" xmlns:qiaomu="https://qiaomu.ai/ns/rss/1.0" ...>
+  <channel>
+    <item>
+      <qiaomu:versions><![CDATA[{"version":1,"original":{"title":"Original title","url":"https://example.com/source","lang":"en","html":"<p>Original text.</p>"},"rewrite":{"title":"中文标题","markdown":"已发布的中文改写。","html":"<p>已发布的中文改写。</p>"}}]]></qiaomu:versions>
+    </item>
+  </channel>
+</rss>
+```
+
+上例仅示意字段。JSON 精确结构为：
+
+```ts
+{
+  version: 1;
+  original: { title: string; url: string; lang: string; html: string };
+  rewrite: { title: string; markdown: string; html: string };
+}
+```
+
+- 命名空间 URI 固定为 `https://qiaomu.ai/ns/rss/1.0`；按 URI + 本地名识别字段，不依赖 XML 前缀。JSON 使用 Unicode，CDATA 终止序列会安全拆分；先解析 XML，再解析 JSON。
+- `original.html` 只来自 `original.text_md`、原文媒体、来源/相关链接及完整性说明，不包含 `body_md`。无文字时明确显示「暂未保存原文文字」，绝不回退到中文改写；摘录仍标明不是完整逐字稿。原文标题依次使用 `original.title`、`source.title_en`、`Original source`；语言缺失使用 `und`。`original.url` 为 `source.url`，不是本站文章地址。
+- `rewrite.title` 为已发布中文标题；`rewrite.html` 使用本站改写渲染器及 `rewrite_media` 的相同位置/遗漏规则，并使用上游绝对媒体 URL，适合外站嵌入。它不包含原文英文正文。`rewrite.markdown` 保留 `body_md` 与媒体位置、说明：图片用 Markdown 图片，音频/视频/YouTube 用明确媒体链接；不会编造转写。
+- 两份 HTML 的图片使用 `img`，视频使用带 `controls`、`playsinline`、`preload="none"` 的 `video` 并保留已存 `poster`，音频使用带 `controls`、`preload="none"` 的 `audio`。YouTube 使用 `youtube-nocookie.com/embed/…` iframe，全部媒体保留原始链接作为 fallback，无自动播放。未知媒体类型保留链接；缺失 URL 明确标注。上游媒体可用性及嵌入许可不由本站保证。
+- 阅读器应分别保存两份 HTML，安全净化后显示，允许合法媒体标签/属性及受信任的嵌入地址；Markdown 用于复制/上下文。不要将标准混合全文再写入原文，也不要对已发布改写再次调用 AI。旧阅读器可忽略扩展继续使用标准全文；未知协议版本应降级为普通全文，并避免把混合全文标记为独立原文。
