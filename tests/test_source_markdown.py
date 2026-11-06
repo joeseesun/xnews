@@ -87,6 +87,8 @@ echo '<script>literal code</script>'
         headers = (ROOT / "public/_headers").read_text()
         self.assertIn("Referrer-Policy: no-referrer", headers)
         for path in (ROOT / "public").rglob("*.html"):
+            if path.parent.name == "read":
+                continue  # Inert reader payload inherits the host document policy.
             self.assertTrue(Tags(path.read_text()).select("meta", name="referrer", content="no-referrer"), path)
         a = next(a for a in build.load_articles() if a["id"] == "cursor-live-apps")
         for output in (build.render_article(a), build.rss_versions(a)["original"]["html"], build.rss_versions(a)["rewrite"]["html"]):

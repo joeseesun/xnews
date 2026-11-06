@@ -8,6 +8,7 @@ const root = path.join(__dirname, '..');
 const script = fs.readFileSync(path.join(root, 'public/app.js'), 'utf8');
 const articleCount = JSON.parse(fs.readFileSync(path.join(root, 'public/articles.json'), 'utf8')).length;
 const html = name => fs.readFileSync(path.join(root, 'public', name), 'utf8');
+const responseHTML = url => html(url.slice(1) + (url.endsWith('.html') ? '' : '.html'));
 const pause = ms => new Promise(resolve => setTimeout(resolve, ms));
 async function until(predicate, message) {
   const end = Date.now() + 1400;
@@ -29,7 +30,7 @@ function setup({page = 'index.html', url = 'https://xnews.qiaomu.ai/', fetcher, 
   w.fetch = async (url, options) => {
     requests.push({url, options});
     if (fetcher) return fetcher(url, options, requests.length);
-    return {ok: true, text: async () => html(url.replace(/^\//, '') + '.html')};
+    return {ok: true, text: async () => responseHTML(url)};
   };
   w.eval(script);
   const $ = selector => d.querySelector(selector);
@@ -103,7 +104,7 @@ test('modified clicks remain native links and do not fetch', t => {
 });
 
 test('failed fetch offers retry, independent route and original; retry recovers', async t => {
-  const s = setup({fetcher: async (url, options, n) => n === 1 ? {ok: false, status: 503} : {ok: true, text: async () => html(url.slice(1) + '.html')}});
+  const s = setup({fetcher: async (url, options, n) => n === 1 ? {ok: false, status: 503} : {ok: true, text: async () => responseHTML(url)}});
   t.after(() => s.dom.window.close()); s.click(s.$('[data-open-reader]'));
   await until(() => s.$('.retry-button'), 'error');
   assert.match(s.$('.sheet-status').textContent, /独立文章页/);
@@ -115,7 +116,7 @@ test('failed fetch offers retry, independent route and original; retry recovers'
 
 test('closing aborts a pending fetch and late response cannot reopen the sheet', async t => {
   let resolve;
-  const s = setup({fetcher: url => new Promise(r => { resolve = () => r({ok: true, text: async () => html(url.slice(1) + '.html')}); })});
+  const s = setup({fetcher: url => new Promise(r => { resolve = () => r({ok: true, text: async () => responseHTML(url)}); })});
   t.after(() => s.dom.window.close()); s.click(s.$('[data-open-reader]'));
   assert.match(s.$('.sheet-status').textContent, /正在打开/);
   s.click(s.$('[data-close-sheet]')); await until(() => !s.$('#reader-sheet').open, 'close pending');
@@ -297,7 +298,7 @@ test('Space activates the focused article version without scrolling the page', a
 
 test('intent prefetch is shared with click and never preloads every story', async t => {
   let finish;
-  const s = setup({fetcher: url => new Promise(resolve => { finish = () => resolve({ok: true, text: async () => html(url.slice(1) + '.html')}); })});
+  const s = setup({fetcher: url => new Promise(resolve => { finish = () => resolve({ok: true, text: async () => responseHTML(url)}); })});
   t.after(() => s.dom.window.close());
   assert.equal(s.requests.length, 0);
   const link = s.$('#read-cursor-live-apps');
@@ -312,7 +313,7 @@ test('intent prefetch is shared with click and never preloads every story', asyn
 });
 
 test('failed or mismatched prefetch does not poison a later article open', async t => {
-  const s = setup({fetcher: async (url, options, n) => ({ok: true, text: async () => n === 1 ? html('a/karpathy-hackertube.html') : html(url.slice(1) + '.html')})});
+  const s = setup({fetcher: async (url, options, n) => ({ok: true, text: async () => n === 1 ? html('a/karpathy-hackertube.html') : responseHTML(url)})});
   t.after(() => s.dom.window.close());
   const link = s.$('#read-cursor-live-apps');
   link.dispatchEvent(new s.w.Event('pointerover', {bubbles: true}));
@@ -330,4 +331,22 @@ test('data saver disables speculative fetch but permits explicit reading', async
   link.focus(); assert.equal(s.requests.length, 0);
   s.click(link); await until(() => s.$('#reader-sheet [data-article-id]'), 'explicit reader');
   assert.equal(s.requests.length, 1);
+});
+
+test('click escapes a stalled low-priority prefetch and requests the reader at high priority', async t => {
+  const s = setup({fetcher: (url, options) => options.priority === 'low'
+    ? new Promise(() => {})
+    : Promise.resolve({ok: true, text: async () => responseHTML(url)})});
+  t.after(() => s.dom.window.close());
+  const link = s.$('#read-cursor-live-apps');
+  link.dispatchEvent(new s.w.Event('pointerover', {bubbles: true}));
+  const start = Date.now();
+  s.click(link);
+  await until(() => s.$('#reader-sheet [data-article-id]'), 'foreground reader despite stalled prefetch');
+  assert.ok(Date.now() - start < 1000);
+  assert.equal(s.requests.length, 2);
+  assert.equal(s.requests[0].options.signal.aborted, true);
+  assert.equal(s.requests[1].options.priority, 'high');
+  assert.match(s.requests[1].url, /^\/read\/cursor-live-apps\.[a-f0-9]{12}\.html$/);
+  assert.equal(s.w.location.pathname, '/a/cursor-live-apps');
 });

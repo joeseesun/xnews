@@ -1,0 +1,46 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>DeepSeek Super Agent：用插件组织 router 与 worker 的研究原型 · X News</title><meta name="robots" content="noindex"></head><body><article class="article-reader" data-article-id="deepseek-super-agent-harness">
+<a class="article-back" href="/">← 返回选刊</a>
+<header class="article-header"><p class="article-kicker">YouTube / 视频</p><h1>DeepSeek Super Agent：用插件组织 router 与 worker 的研究原型</h1><p class="article-dek">同一模型在九套 harness 中的通过率和成本不同；Super Agent 目前聚焦 GitHub、飞书，安全问题尚未完全解决。</p><div class="article-meta"><time datetime="2026-11-05">2026年11月5日 · 周四</time><span>原作者：AI news / DeepSeek Super Agent explainer</span><span>中文改写：<a href="/about">X News · 乔木</a></span><span>DeepSeek · harness · agent</span></div></header>
+<nav class="reader-tabs" aria-label="文章版本与来源"><div data-tabs><a href="#rewrite" id="tab-rewrite" data-view="rewrite">乔木改写</a><a href="#original" id="tab-original" data-view="original">原文</a></div><a class="reader-source" href="https://www.youtube.com/watch?v=OrcsMi2-IcM" target="_blank" rel="noopener noreferrer">原文链接 ↗</a><div class="reading-position" hidden><progress max="100" value="0" aria-label="当前版本阅读进度"></progress><span data-reading-percent aria-hidden="true">0%</span></div></nav>
+<section class="reader-panel" id="rewrite" data-reader-panel="rewrite" aria-label="乔木改写"><h2 class="section-heading">乔木改写</h2><div class="prose"><p>以下依据本站保存的视频文字摘录整理，并非完整逐字稿。视频介绍了 DeepSeek 发布的 Super Agent。一些人将它称为对 Claude Code 的回应；视频作者更关注它的构建方式：整个系统由加入 DeepSeek Harness 的一组插件组成。</p>
+<p>Super Agent 会监听团队已经使用的 GitHub 和飞书。当获得许可的成员在 Issue、PR 或相关对话中提出需求时，它建立工作项，开启独立会话完成任务，再返回结果，通常是一个 PR。它不要求用户先打开一段新的 Agent 对话。</p>
+<p>项目随代码发布了一篇 X 文章，题为 Exploring Super Agent Design: Towards a More Autonomous Agent System。项目方明确说明，它是研究原型，并非 DeepSeek 的官方产品；不少设计想法和工程实现也由编码 Agent 编写。</p>
+<h3>同一个模型，换九套 harness</h3>
+<p>视频引用了 Frontier Harness Eval：固定使用 Kimi K3，比较九套编码 Agent harness。Codex 的通过率为 66.7%；DeepSeek Harness 的 creator 配置与 Claude Code 都为 63.3%。每完成一个成功任务，DeepSeek 约花费 $3.28，Claude Code 约为 $18.34。该测试中，最便宜与最贵的 harness 成本相差约 17.5 倍。</p>
+<p>这些结果涉及通过率、成本、缓存和速度，即使模型不变，harness 也会影响这些表现。这些结果来自合成基准测试。</p>
+<p>视频还提到，在 VentureBeat 的 Beyond the Pilot 播客中，Instacart 和 Box 的 CTO 都表达过当前 harness 比模型更重要的看法。</p>
+<h3>DSH 的插件结构</h3>
+<p>DeepSeek Harness（DSH）在八月发布，采用 MIT 许可，提供 Web UI，并不限定使用 DeepSeek 模型。它的设计原则是所有东西都可以成为插件：router、工具注册、会话日志，甚至 Agent loop 本身。</p>
+<p>底层使用 Cordis 的时空可组合能力。时间维度上，卸载组件会撤销它做过的更改；空间维度上，组件依赖关系决定它们何时启用或停用。</p>
+<p>DSH 有 standard、PTC、minimal、creator 等模式，对应不同的插件组合。creator 模式允许用户在聊天中描述一个插件，由 Agent 编写并安装。</p>
+<h3>router 与 worker 如何配合</h3>
+<p>Super Agent 通过 <code>cordis.patch</code> 接入，包含核心 Super Agent 插件、GitHub watcher 和飞书 watcher。上层是一段长期运行的 router 会话，下层是彼此隔离的 worker 会话。外部触发先经过白名单等确定性门禁，再交给模型处理；工作单会携带任务授权。</p>
+<p>worker 使用精简的插件配置，不包含提问、规划、网页抓取或子 Agent，长时间运行的 shell 任务则转入后台。worker 还会直接订阅认领任务的对话，因此后续 PR 评论不必再经过 router。按材料中的测试，启用这一机制时，router 的决策次数比未启用时减少约 30%。</p>
+<p>负载测试把触发量从每分钟 1 次提高到 40 次。通过批量处理，每次决策所需时间从 6.4 秒降至 1.6 秒。视频据此介绍了一种分工：router 可以使用更便宜、更快的模型，把更强的模型留给 worker。</p>
+<p>这套设计希望尽量少占用人的注意力，同时提供尽可能多的价值。插件化也让开发者可以在不 fork 核心代码的情况下继续扩展 harness。</p>
+<p>它仍有明确限制：只是研究原型，公开代码不等于内部使用的代码；接入范围主要是 GitHub 和飞书，评测是合成基准，提示注入、凭证等安全问题尚未完全解决。</p>
+<section class="rewrite-source-media" aria-label="原文附带媒体"><h3 class="source-media-heading">原文附带媒体</h3><p class="completeness-note">原文附带媒体；未核验其与具体段落的对应关系。</p><div class="original-media">
+<figure class="media-figure" data-media-id="m_a7870fb84bc71ab0"><div class="media-frame"><div class="yt"><iframe src="https://www.youtube-nocookie.com/embed/OrcsMi2-IcM" title="原视频（需手动播放）" allow="encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe></div><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>外部播放器 · 需手动播放</span><a href="https://www.youtube.com/watch?v=OrcsMi2-IcM" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section></div></section>
+<section class="reader-panel" id="original" data-reader-panel="original" aria-label="原文">
+<h2 class="section-heading">原文</h2><p class="completeness-note">视频原文摘录，非完整逐字稿；请以原视频为准。</p><h3 class="original-title">DeepSeek Super Agent and why the harness matters</h3>
+<div class="original-media">
+<figure class="media-figure" data-media-id="m_a7870fb84bc71ab0"><div class="media-frame"><div class="yt"><iframe src="https://www.youtube-nocookie.com/embed/OrcsMi2-IcM" title="原视频（需手动播放）" allow="encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe></div><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>外部播放器 · 需手动播放</span><a href="https://www.youtube.com/watch?v=OrcsMi2-IcM" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div>
+<div class="prose" lang="en"><p>DeepSeek Super Agent and why the harness matters</p>
+<p>Source: YouTube https://www.youtube.com/watch?v=OrcsMi2-IcM</p>
+<p>Okay, so this past weekend, DeepSeek released something that a lot of people out there are calling the answer to Claude Code. It&#x27;s an agent that sits on a GitHub repo. It watches the issues and pull requests, and when someone on your team asks it to do something, It then goes off into its own session, does the work, and comes back with a PR Now, while that&#x27;s cool in itself, that&#x27;s not really the part that I want to talk about here. The part that I find really interesting is how they built it. The whole thing is just a set of plugins dropped into their agent harness.</p>
+<p>When the DeepSeek Harness came out back in August, the plugin architecture is really cool. The new thing DeepSeek launched is called Super Agent. Along with the repo, they&#x27;ve written an article on X called Exploring Super Agent Design: Towards a More Autonomous Agent System. They&#x27;re upfront that this is a research prototype, not an official DeepSeek product. Ideas and engineering were often written by coding agents themselves.</p>
+<p>Basic idea: instead of you opening a session and talking to an agent, the agent listens to where your team already works — GitHub, and Feishu. When someone allowed asks it for something, it opens a work item, spins up its own session, does the work, replies back usually with a PR.</p>
+<p>On the VentureBeat podcast Beyond the Pilot, CTOs of Instacart and Box both said the harness matters more than the model right now.</p>
+<p>Frontier Harness Eval: same model (Kimi K3) through nine coding agent harnesses. Codex 66.7% pass rate; DeepSeek Harness creator config and Claude Code both 63.3%. DeepSeek ~$3.28 per successful task vs Claude Code ~$18.34. Gap cheapest to most expensive ~17.5x. Harness changes cost, caching, speed, and success rate even with model held constant.</p>
+<p>DeepSeek Harness (DSH) MIT licensed, web UI, not locked to DeepSeek models. Tagline: everything is a plugin — router, tool registry, session log, even the agent loop. Built on Cordis (spatiotemporal composability): temporal (unload reverses everything) and spatial (dependencies activate/deactivate).</p>
+<p>Modes: standard, PTC, minimal, creator — different plugin sets. Creator: describe a plugin in chat and agent writes/installs it.</p>
+<p>Super Agent integrates via cordis.patch: core Super Agent plugin, GitHub watcher, Feishu watcher. Workers: stripped preset, no questions/plan/web fetch/sub-agents; long shell jobs backgrounded. Architecture: long-running router session + isolated worker sessions. Triggers go through a deterministic gate (allow-list) before the model. Tickets carry a mandate. Workers subscribe to conversation so PR comments skip the router (30% fewer router decisions when on).</p>
+<p>Under load (1→40 triggers/min), batching made time per decision drop 6.4s→1.6s. Router can use a cheap/fast model; stronger models for workers.</p>
+<p>Philosophy: take as little human attention as possible and give as much value as possible.</p>
+<p>Caveats: prototype; published code ≠ internal; narrow (GitHub/Feishu); synthetic benchmarks; security (prompt injection, credentials) not fully solved.</p>
+<p>Bigger point: harnesses evolving fast via composable plugins without forking the core.</p></div>
+</section>
+<footer class="source-box"><span>内容来自原作者；中文为乔木风格改写，非逐字翻译。</span><div><a href="https://www.youtube.com/watch?v=OrcsMi2-IcM" target="_blank" rel="noopener noreferrer">打开原文 ↗</a></div></footer>
+</article></body></html>

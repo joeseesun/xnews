@@ -221,6 +221,9 @@ class BuildRegression(unittest.TestCase):
 
     def test_analytics_is_unique_and_scoped_to_production(self):
         for page in self.public.rglob("*.html"):
+            if page.parent.name == "read":
+                self.assertFalse(Tags(page.read_text()).select("script"))
+                continue
             scripts = Tags(page.read_text()).select("script", src="https://umami.qiaomu.ai/script.js")
             self.assertEqual(len(scripts), 1, page.name)
             self.assertEqual(scripts[0]["data-website-id"], build.UMAMI_WEBSITE_ID)

@@ -181,8 +181,7 @@ def shell(title: str, body_main: str, *, description: str = "", active: str = "h
 <link rel="alternate" type="application/rss+xml" title="{SITE_NAME}" href="/feed.xml">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-7 -7 58 58'%3E%3Crect x='-7' y='-7' width='58' height='58' rx='5' fill='%231b1d18'/%3E%3Cpath fill='%23fffefa' d='M2 0h11l29 44H31zM32 0h10L26 18l-5-7zM17 26l5 7-10 11H2z'/%3E%3C/svg%3E">
 <script>try{{var t=localStorage.getItem('xn.theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}}catch(e){{}}</script>
-<link rel="stylesheet" href="{CSS_FILE}">
-<script src="{JS_FILE}" defer></script>
+<style data-source="{CSS_FILE}">{CSS}</style>
 <script defer src="https://umami.qiaomu.ai/script.js" data-website-id="{UMAMI_WEBSITE_ID}" data-domains="xnews.qiaomu.ai" data-exclude-search="true" data-exclude-hash="true"></script>
 </head>
 <body>
@@ -196,6 +195,7 @@ def shell(title: str, body_main: str, *, description: str = "", active: str = "h
 </main>
 <footer class="site-footer"><span>海外创始人长文 · 乔木中文改写<br>每日 08:00 更新 · 中国标准时间（UTC+8）</span><nav class="footer-links" aria-label="页尾导航"><a href="/feed.xml">全文 RSS ↗</a><a href="/archive">全部文章</a><a href="/about">关于</a></nav></footer>
 {dialog}
+<script data-source="{JS_FILE}">{JS}</script>
 </body>
 </html>
 '''
@@ -482,7 +482,7 @@ def build_feed_items(articles: list[dict]) -> str:
         # Lead with the headline, keeping source and visual reading order identical.
         card_content = card_body + cover if "is-featured" in classes else cover + card_body
         rows.append(f'''<article class="{' '.join(classes)}" id="story-{slug}" data-kind="{'video' if '视频' in kind else 'text'}" data-search="{search}">
-<a class="card-link" href="/a/{slug}" id="read-{slug}" data-open-reader data-source-url="{html.escape(src['url'], quote=True)}">
+<a class="card-link" href="/a/{slug}" id="read-{slug}" data-open-reader data-reader-src="{reader_url(a)}" data-source-url="{html.escape(src['url'], quote=True)}">
 {card_content}
 </a><a class="cover-error-link" href="{html.escape(src['url'], quote=True)}" target="_blank" rel="noopener noreferrer">封面未能显示 · 去原文查看 ↗</a>
 </article>''')
@@ -504,6 +504,16 @@ def render_article(a: dict) -> str:
 {render_original_section(a)}
 <footer class="source-box"><span>内容来自原作者；中文为乔木风格改写，非逐字翻译。</span><div><a href="{source_url}" target="_blank" rel="noopener noreferrer">打开原文 ↗</a>{related}</div></footer>
 </article>'''
+
+
+def reader_document(a: dict) -> str:
+    """The in-page reader needs the article, not another copy of the site shell."""
+    return f'<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>{html.escape(a["title"])} · {SITE_NAME}</title><meta name="robots" content="noindex"></head><body>{render_article(a)}</body></html>'
+
+
+def reader_url(a: dict) -> str:
+    digest = hashlib.sha256(reader_document(a).encode()).hexdigest()[:12]
+    return f'/read/{a["id"]}.{digest}.html'
 
 
 def rss_full_html(a: dict) -> str:
@@ -665,6 +675,7 @@ def build() -> None:
 
     PUBLIC.mkdir(parents=True, exist_ok=True)
     (PUBLIC / "a").mkdir(exist_ok=True)
+    (PUBLIC / "read").mkdir(exist_ok=True)
     (PUBLIC / "static").mkdir(exist_ok=True)
     (PUBLIC / CSS_FILE.lstrip("/")).write_text(CSS, encoding="utf-8")
     (PUBLIC / JS_FILE.lstrip("/")).write_text(JS, encoding="utf-8")
@@ -708,6 +719,7 @@ def build() -> None:
         shell(f"未找到 · {SITE_NAME}", '<section class="empty-state"><p>404 / 未找到</p><h1>这篇内容不在这里。</h1><p>链接可能不完整，或内容已经移动。<a href="/">返回选刊</a>，或去<a href="/archive">全部文章</a>找找。</p></section>', active="", canonical="/404"), encoding="utf-8",
     )
     for a in articles:
+        (PUBLIC / reader_url(a).lstrip("/")).write_text(reader_document(a), encoding="utf-8")
         (PUBLIC / "a" / f"{a['id']}.html").write_text(
             shell(f"{a['title']} · {SITE_NAME}", render_article(a), description=a.get("dek") or a["title"], active="article", canonical=f"/a/{a['id']}", article=a), encoding="utf-8",
         )

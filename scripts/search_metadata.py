@@ -49,6 +49,9 @@ def discovery_files(public, articles):
   Referrer-Policy: no-referrer
 /static/*
   Cache-Control: public, max-age=31536000, immutable
+/read/*
+  Cache-Control: public, max-age=31536000, immutable
+  X-Robots-Tag: noindex
 /media/*
   Cache-Control: public, max-age=31536000, immutable
 /a/*

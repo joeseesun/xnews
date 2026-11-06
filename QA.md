@@ -1,3 +1,11 @@
+# 速度修复进行中 · 2026-11-07 (Asia/Shanghai)
+
+用户确认：首页与点击文章都慢。基线 `b1454d9`，目标保持 xnews.qiaomu.ai、全部文章/RSS/设计与原文分离不变，减少首屏关键请求和文章点击等待；独立验证现有 Hostinger 静态服务作为候选。正式域名切换前先准备完整副本、HTTPS、逐路由检查与 DNS/Worker 回退记录。候选主机 qiaomu-hostinger（76.13.103.27），项目专属目录 `/opt/qiaomu-apps/xnews`，Nginx 静态托管，无应用端口、不涉及 RSS Writer 或其他服务。当前仍由 Cloudflare Worker 提供正式站点。
+
+本轮只处理性能，保留既有 SEO/GEO、Umami、设计和站点入口；不新增 PWA、支付、注册或推广界面。测速、候选与回读证据存于 `.qa-ui/speed-round2/`。
+
+---
+
 # 原文 README 排版与媒体核验 · 2026-11-06 (Asia/Shanghai)
 
 在 `67bfaa3` 上修复 CaptureFlow 完整 README 被简化渲染器当作字面文本展示的问题，并核对 Cursor / 其他 X 视频地址。已发布；线上页面和 CaptureFlow RSS payload 已验证，完整 RSS 下载受网络限制。

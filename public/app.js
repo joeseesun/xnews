@@ -282,6 +282,8 @@
   const sheetState = () => history.state?.xnewsSheet;
   const safePath = path => /^\/a\/[a-z0-9-]+\/?$/.test(path);
   const prefetching = new Map();
+  const readerURLs = new Map($$('[data-open-reader]', grid).map(a => [new URL(a.href, location.href).pathname, a.dataset.readerSrc]));
+  const requestURL = path => readerURLs.get(path) || path;
   // Warm only a link the reader shows intent to open; never preload media or all stories.
   function prefetchArticle(event) {
     if (event.type === 'pointerover' && event.pointerType === 'touch') return;
@@ -293,7 +295,7 @@
     if (url.origin !== location.origin || !safePath(path) || cache.has(path) || prefetching.has(path) || prefetching.size >= 2) return;
     const abort = new AbortController();
     const timer = setTimeout(() => abort.abort(), 8000);
-    const promise = fetch(path, {signal: abort.signal, priority: 'low', headers: {'Accept': 'text/html'}})
+    const promise = fetch(requestURL(path), {signal: abort.signal, priority: 'low', headers: {'Accept': 'text/html'}})
       .then(response => { if (!response.ok) throw new Error('Prefetch failed'); return response.text(); })
       .then(html => {
         const raw = new DOMParser().parseFromString(html, 'text/html').querySelector('[data-article-id]');
@@ -301,11 +303,24 @@
         cache.set(path, html);
         if (cache.size > 12) cache.delete(cache.keys().next().value);
         return html;
-      }).catch(() => null).finally(() => { clearTimeout(timer); prefetching.delete(path); });
-    prefetching.set(path, promise);
+      }).catch(() => null).finally(() => { clearTimeout(timer); if (prefetching.get(path)?.promise === promise) prefetching.delete(path); });
+    prefetching.set(path, {promise, abort});
   }
   grid.addEventListener('pointerover', prefetchArticle);
   grid.addEventListener('focusin', prefetchArticle);
+  grid.addEventListener('pointerdown', prefetchArticle);
+  async function readyPrefetch(path) {
+    const pending = prefetching.get(path);
+    if (!pending) return null;
+    let timer;
+    try {
+      // A click is foreground work. Do not inherit an eight-second speculative
+      // request deadline when that request is queued or stalled on a slow link.
+      const ready = await Promise.race([pending.promise, new Promise(resolve => { timer = setTimeout(() => resolve(null), 120); })]);
+      if (!ready) pending.abort.abort();
+      return ready;
+    } finally { clearTimeout(timer); }
+  }
   function togglePageInert(value) { pageRoots.forEach(element => { element.inert = value; }); }
   function showSheet(keyboard) {
     if (sheet.open) return;
@@ -346,11 +361,11 @@
     const signal = controller.signal;
     const timeout = setTimeout(() => controller?.signal === signal && controller.abort(), 12000);
     try {
-      let html = cache.get(path) || await prefetching.get(path);
+      let html = cache.get(path) || await readyPrefetch(path);
       if (ownSequence !== sequence || !active) return;
       if (signal.aborted) throw new Error('Article load timed out');
       if (!html) {
-        const response = await fetch(path, {signal, headers: {'Accept': 'text/html'}});
+        const response = await fetch(requestURL(path), {signal, priority: 'high', headers: {'Accept': 'text/html'}});
         if (!response.ok) throw new Error('HTTP ' + response.status);
         html = await response.text();
       }

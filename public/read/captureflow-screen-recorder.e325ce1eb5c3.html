@@ -1,0 +1,190 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>CaptureFlow：边录屏边上传，支持 Docker 自托管 · X News</title><meta name="robots" content="noindex"></head><body><article class="article-reader" data-article-id="captureflow-screen-recorder">
+<a class="article-back" href="/">← 返回选刊</a>
+<header class="article-header"><p class="article-kicker">X · @sardorml / 长帖</p><h1>CaptureFlow：边录屏边上传，支持 Docker 自托管</h1><p class="article-dek">Chrome 扩展已上架，macOS 签名版仍待发布；Docker 使用 SQLite 和本地磁盘，也可部署到 Cloudflare Workers、D1、R2。</p><div class="article-meta"><time datetime="2026-11-06">2026年11月6日 · 周五</time><span>原作者：Sardor</span><span>中文改写：<a href="/about">X News · 乔木</a></span><span>开源实作 · 录屏 · 自托管</span></div></header>
+<nav class="reader-tabs" aria-label="文章版本与来源"><div data-tabs><a href="#rewrite" id="tab-rewrite" data-view="rewrite">乔木改写</a><a href="#original" id="tab-original" data-view="original">原文</a></div><a class="reader-source" href="https://x.com/sardorml/status/2118616954085024133" target="_blank" rel="noopener noreferrer">原文链接 ↗</a><div class="reading-position" hidden><progress max="100" value="0" aria-label="当前版本阅读进度"></progress><span data-reading-percent aria-hidden="true">0%</span></div></nav>
+<section class="reader-panel" id="rewrite" data-reader-panel="rewrite" aria-label="乔木改写"><h2 class="section-heading">乔木改写</h2><div class="prose"><p>Sardor 在 11 月 6 日介绍了自己做的开源录屏工具 CaptureFlow：人在 Chrome 里录屏，结束后把链接发给别人；AI Agent 也可以通过 MCP 录制演示。它支持 Docker 自托管。原帖所链接的仓库 README 进一步写明，录制过程中就会上传，停止录制时分享链接已经准备好了。</p>
+<h2>能录什么，在哪里使用</h2>
+<p>CaptureFlow 可以录制浏览器标签页、窗口或整个屏幕，并加入摄像头悬浮画面和麦克风声音。观看者可以在视频里发表情、留言，录制者能看到谁看过。截图也可以加箭头、文字和模糊遮挡，再用同样的链接方式分享。</p>
+<p>团队使用工作区管理内容，可设为公开、仅工作区成员可见或私密。托管服务按整个团队的存储量收费，不按席位收费；付费方案提供 100 GB、500 GB 或 1 TB 存储空间。作者说明，全部功能都包含在开源构建中，也可以部署到自己的 Cloudflare 账户，并把登录范围限制在公司内。</p>
+<p>Chrome 扩展已经在 <a href="https://chromewebstore.google.com/detail/lgpgeoelaokbigdljofhkgbfnfcnmcol" target="_blank" rel="noopener noreferrer">Chrome Web Store</a> 上架。macOS 应用目前可以从源码构建，签名发行版仍是即将推出的状态；网页管理台和观看页支持现代浏览器。托管版可以先<a href="https://captureflow.dev/login?mode=signup" target="_blank" rel="noopener noreferrer">注册免费账户</a>，再安装扩展，具体付费额度见<a href="https://captureflow.dev/pricing" target="_blank" rel="noopener noreferrer">价格页</a>。</p>
+<p>在原帖评论里，@progerallworld 提出的用途是让 Agent 重现 Bug、录下步骤，再附上视频。Sardor 回复说，这正是他加入 MCP 时考虑的场景。随后他又补充，也可以让 Agent 为 GitHub Pull Request 录制演示，并附到 PR 描述里；安装扩展后，审阅者可以观看演示来理解改动。这是作者对用途的说明，本轮没有连接 MCP 或试录视频。</p>
+<h2>用 Docker 部署</h2>
+<p>README 给出的 Docker 启动方式很短：先执行 <code>cp .env.example .env</code>，设置 <code>APP_URL</code>，再执行 <code>docker compose up -d</code>。</p>
+<p>数据都保存在 <code>./data</code>：SQLite 数据库、磁盘上的录屏文件，以及第一次启动时生成的密钥。这条部署路线不需要 Cloudflare 账户。生成转写可以使用兼容 OpenAI 接口的 Whisper 服务；Compose 也提供 <code>--profile whisper</code> 来运行一个这样的服务。完整说明在 <a href="https://docs.captureflow.dev/self-hosting/docker" target="_blank" rel="noopener noreferrer">Docker 部署文档</a>。</p>
+<h2>部署到自己的 Cloudflare 账户</h2>
+<p>另一条路线使用 Cloudflare Workers、D1 和 R2。仓库提供了<a href="https://deploy.workers.cloudflare.com/?url=https://github.com/sardorml/captureflow" target="_blank" rel="noopener noreferrer">一键部署入口</a>，也列出了手动步骤。</p>
+<p>先运行 <code>pnpm --filter @captureflow/web exec wrangler d1 create captureflow</code> 创建数据库，再运行 <code>pnpm --filter @captureflow/web exec wrangler r2 bucket create captureflow-recordings</code> 创建存储桶。把数据库 ID 填入 <code>apps/web/wrangler.jsonc</code> 后，依次执行 <code>pnpm --filter @captureflow/web db:apply:remote</code> 和 <code>pnpm --filter @captureflow/web cf:deploy</code>。</p>
+<p><a href="https://github.com/sardorml/captureflow/blob/c5792345e7d5e47084c5e829b3f11c98a432c859/DEPLOY.md" target="_blank" rel="noopener noreferrer">DEPLOY.md</a> 说明了密钥、登录服务、自定义域名，以及如何让扩展和桌面应用连接自己的实例。部署在自己的域名下会作为自托管实例运行；如果要做成公司内部工具，还需要按照<a href="https://docs.captureflow.dev/self-hosting/configuration" target="_blank" rel="noopener noreferrer">配置文档</a>设置 <code>ALLOWED_EMAIL_DOMAINS</code>。仓库也链接了<a href="https://captureflow.dev/blog/self-hosted-screen-recorder" target="_blank" rel="noopener noreferrer">逐步自托管教程</a>和<a href="https://captureflow.dev/self-host-setup" target="_blank" rel="noopener noreferrer">代配置服务</a>。</p>
+<h2>本地开发和检查</h2>
+<p>开发环境需要 Node.js 24.13 或更新版本，以及 pnpm 10；README 提示用 <code>corepack enable</code> 启用。取得仓库并进入目录后，先执行 <code>pnpm install</code>。</p>
+<p>完整的取代码命令是 <code>git clone git@github.com:sardorml/captureflow.git</code>，接着执行 <code>cd captureflow</code>。<code>pnpm web</code> 启动网页管理台和官网，地址为 <code>http://localhost:3032</code>；<code>pnpm admin</code> 启动实例管理后台，地址为 <code>http://localhost:3034</code>。<code>pnpm extension</code> 会在一个新的 Chrome 配置环境中启动浏览器扩展；macOS 录屏应用的开发命令是 <code>pnpm --filter @captureflow/desktop dev</code>。</p>
+<p>仓库列出的检查命令分别是 <code>pnpm typecheck</code>、<code>pnpm --filter @captureflow/web test</code>、<code>pnpm --filter @captureflow/extension test</code> 和 <code>pnpm format</code>。这里保留的是作者提供的命令，没有把文档中的检查项写成本站已经跑过的结果。</p>
+<h2>仓库如何拆分</h2>
+<p>应用放在 <code>apps/</code>，共享包放在 <code>packages/</code>。依赖方向有明确约束：应用可以依赖共享包，共享包不能反向依赖应用，应用之间也不能互相依赖。</p>
+<ul>
+<li><code>apps/web</code> 使用 Next.js 16，包含官网、博客、管理台、观看页和 API，通过 OpenNext 部署到 Cloudflare Workers。</li>
+<li><code>apps/admin</code> 是运行在独立主机名下的实例管理 Worker，与主应用绑定同一组 D1 和 R2。</li>
+<li><code>apps/mailer</code> 是产品邮件 Worker，通过 Resend 发送管理员编写的邮件活动，并处理退订。</li>
+<li><code>apps/extension</code> 是基于 WXT、MV3 的浏览器录屏扩展，包含面板、离屏采集和页面内控制。</li>
+<li><code>apps/desktop</code> 是基于 Electron 的 macOS 录屏应用；<code>apps/docs</code> 是 VitePress 文档站。</li>
+<li><code>packages/engine</code> 是桌面端与扩展共用的采集引擎，包含 macOS 辅助程序、录制协议和封装处理，采用 MIT 许可。</li>
+<li><code>packages/admin</code> 为管理后台提供认证与数据逻辑；<code>packages/mail</code> 负责邮件活动、渲染、退订令牌、Resend 投递和事务邮件。</li>
+<li><code>packages/quota</code> 管理存储额度、限制与工作区；<code>packages/shared</code> 放各应用共享的类型和常量；<code>packages/ui</code> 放主题令牌，以及没有对应 HeroUI 组件的 React 组件。</li>
+</ul>
+<p>macOS 采集辅助程序以编译后的二进制文件形式存入仓库。修改 Swift 源码后，需要运行 <code>packages/engine/scripts/build-native.sh</code> 重新构建；加上 <code>--universal</code> 可以同时支持 arm64 和 x86_64。</p>
+<h2>文档、贡献和许可</h2>
+<p>项目的<a href="https://captureflow.dev" target="_blank" rel="noopener noreferrer">官网</a>、<a href="https://docs.captureflow.dev" target="_blank" rel="noopener noreferrer">文档</a>、<a href="https://docs.captureflow.dev/self-hosting/overview" target="_blank" rel="noopener noreferrer">自托管总览</a>、<a href="https://captureflow.dev/blog" target="_blank" rel="noopener noreferrer">博客</a>、<a href="https://captureflow.dev/faq" target="_blank" rel="noopener noreferrer">FAQ</a>、<a href="https://captureflow.dev/security" target="_blank" rel="noopener noreferrer">安全说明</a>、<a href="https://github.com/sardorml/captureflow/releases" target="_blank" rel="noopener noreferrer">发行记录</a>和 <a href="https://discord.gg/qzeBCaEeNq" target="_blank" rel="noopener noreferrer">Discord</a> 均由 README 提供入口。</p>
+<p>作者欢迎 Bug 报告、想法和 Pull Request，可以到<a href="https://github.com/sardorml/captureflow/issues/new" target="_blank" rel="noopener noreferrer">仓库 Issues</a>或<a href="https://captureflow.dev/suggest-feature" target="_blank" rel="noopener noreferrer">功能建议页</a>提交。贡献前需要阅读 <a href="https://github.com/sardorml/captureflow/blob/c5792345e7d5e47084c5e829b3f11c98a432c859/CONVENTIONS.md" target="_blank" rel="noopener noreferrer">CONVENTIONS.md</a>。发现安全问题应按照安全页说明私下报告，不要发到公开 Issue。</p>
+<p>项目采用 <a href="https://github.com/sardorml/captureflow/blob/c5792345e7d5e47084c5e829b3f11c98a432c859/LICENSE" target="_blank" rel="noopener noreferrer">AGPL-3.0-only</a>，例外是可复用的采集引擎 <code>packages/engine</code>，它采用 <a href="https://github.com/sardorml/captureflow/blob/c5792345e7d5e47084c5e829b3f11c98a432c859/packages/engine/LICENSE" target="_blank" rel="noopener noreferrer">MIT</a> 许可。桌面应用与浏览器扩展的组合构建，整体仍适用 AGPL-3.0-only。</p>
+<p>本文完整改写上述作者帖文、已取得的作者回复及固定版本 README；README 最近修改于 11 月 4 日，不能把 11 月 6 日的介绍帖当成当天发布新版本。文档文字按上游 AGPL-3.0-only 许可使用，<a href="https://xnews.qiaomu.ai/source-licenses/captureflow-AGPL-3.0.txt" target="_blank" rel="noopener noreferrer">许可全文</a>随站点提供；本站中文不是官方文档。</p>
+<section class="rewrite-source-media" aria-label="原文附带媒体"><h3 class="source-media-heading">原文附带媒体</h3><p class="completeness-note">来源附带的产品概览配图；未核验与中文具体段落的一一对应关系，集中保留于文末。</p><div class="original-media">
+<figure class="media-figure" data-media-id="x_2118616401619603456"><div class="media-frame"><img src="/media/captureflow-screen-recorder-image-5129d6d002.jpg" data-original-src="https://pbs.twimg.com/media/HWbWZHHaUAAm62F.jpg" alt="CaptureFlow 作者原帖配图" loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://x.com/sardorml/status/2118616954085024133" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="captureflow_readme_hero"><div class="media-frame"><img src="https://raw.githubusercontent.com/sardorml/captureflow/c5792345e7d5e47084c5e829b3f11c98a432c859/.github/assets/readme-hero.png" data-original-src="https://raw.githubusercontent.com/sardorml/captureflow/c5792345e7d5e47084c5e829b3f11c98a432c859/.github/assets/readme-hero.png" alt="CaptureFlow: open-source screen recorder with shareable links, above the recordings dashboard" loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://x.com/sardorml/status/2118616954085024133" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section></div></section>
+<section class="reader-panel" id="original" data-reader-panel="original" aria-label="原文">
+<h2 class="section-heading">原文</h2><h3 class="original-title">CaptureFlow — author announcement, replies and complete README</h3>
+<div class="original-media">
+<figure class="media-figure" data-media-id="x_2118616401619603456"><div class="media-frame"><img src="/media/captureflow-screen-recorder-image-5129d6d002.jpg" data-original-src="https://pbs.twimg.com/media/HWbWZHHaUAAm62F.jpg" alt="CaptureFlow 作者原帖配图" loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://x.com/sardorml/status/2118616954085024133" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="captureflow_readme_hero"><div class="media-frame"><img src="https://raw.githubusercontent.com/sardorml/captureflow/c5792345e7d5e47084c5e829b3f11c98a432c859/.github/assets/readme-hero.png" data-original-src="https://raw.githubusercontent.com/sardorml/captureflow/c5792345e7d5e47084c5e829b3f11c98a432c859/.github/assets/readme-hero.png" alt="CaptureFlow: open-source screen recorder with shareable links, above the recordings dashboard" loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://x.com/sardorml/status/2118616954085024133" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div>
+<div class="prose" lang="en"><h2>Author announcement — Sardor (@sardorml)</h2>
+<p>Source: https://x.com/sardorml/status/2118616954085024133</p>
+<p>I built CaptureFlow, an open-source screen recorder for you and your AI agents.</p>
+<p>Record your screen in Chrome and get a link you can share with anyone. Or let your agent record the demo over #MCP.</p>
+<p>Self-host it with Docker.</p>
+<p>https://t.co/GwIkaJEH9C</p>
+<p>#opensource #buildinpublic https://t.co/dlOESaA0wJ</p>
+<h2>Public reply context — @progerallworld (not the author)</h2>
+<p>Source: https://x.com/progerallworld/status/2118618493977313326</p>
+<p>@sardorml This could be useful for bug reports too: agent reproduces the issue, records the steps, attaches the clip. Much easier to review than “I clicked around and it broke” 😅</p>
+<h2>Author reply — Sardor (@sardorml)</h2>
+<p>Source: https://x.com/sardorml/status/2118619339041755560</p>
+<p>@progerallworld Yes, definitely. That's the use case i had in mind when i added the MCP.</p>
+<h2>Author reply — Sardor (@sardorml)</h2>
+<p>Source: https://x.com/sardorml/status/2118621775856865775</p>
+<p>@progerallworld You can also ask it record a demo for your github pull request and it will attach it to the pr description. With extension installed reviewers can watch the demo to get a better idea of the changes.</p>
+<h2>Linked README — complete text, fixed source snapshot</h2>
+<p>Source: https://github.com/sardorml/captureflow/blob/c5792345e7d5e47084c5e829b3f11c98a432c859/README.md</p>
+<div><a rel="noopener noreferrer"></a>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/sardorml/captureflow/c5792345e7d5e47084c5e829b3f11c98a432c859/apps/web/public/brand-mark-light.svg">
+  <img src="https://raw.githubusercontent.com/sardorml/captureflow/c5792345e7d5e47084c5e829b3f11c98a432c859/apps/web/public/brand-mark-dark.svg" height="112" alt="CaptureFlow">
+</picture>
+<h1>CaptureFlow</h1>
+<p>Open-source screen recorder with instant share links, self-hostable on your own Cloudflare account.</p>
+<p><a href="https://github.com/sardorml/captureflow/actions/workflows/ci.yml" rel="noopener noreferrer"><img src="https://github.com/sardorml/captureflow/actions/workflows/ci.yml/badge.svg" alt="CI status"></a> <a href="https://github.com/sardorml/captureflow/blob/c5792345e7d5e47084c5e829b3f11c98a432c859/LICENSE" rel="noopener noreferrer"><img src="https://img.shields.io/badge/license-AGPL--3.0-2563EB.svg?style=flat-square" alt="License: AGPL-3.0"></a> <a href="https://chromewebstore.google.com/detail/lgpgeoelaokbigdljofhkgbfnfcnmcol" rel="noopener noreferrer"><img src="https://img.shields.io/chrome-web-store/v/lgpgeoelaokbigdljofhkgbfnfcnmcol?label=chrome%20web%20store&amp;color=2563EB&amp;style=flat-square" alt="Chrome Web Store"></a> <a href="https://github.com/sardorml/captureflow/stargazers" rel="noopener noreferrer"><img src="https://img.shields.io/github/stars/sardorml/captureflow?color=2563EB&amp;style=flat-square" alt="Stars"></a> <a href="https://discord.gg/qzeBCaEeNq" rel="noopener noreferrer"><img src="https://img.shields.io/badge/chat-discord-5865F2.svg?style=flat-square" alt="Discord"></a></p>
+<p><a href="https://captureflow.dev" rel="noopener noreferrer">Website</a> · <a href="https://docs.captureflow.dev" rel="noopener noreferrer">Docs</a> · <a href="https://captureflow.dev/blog" rel="noopener noreferrer">Blog</a> · <a href="https://github.com/sardorml/captureflow/issues/new" rel="noopener noreferrer">Report Bug</a> · <a href="https://captureflow.dev/suggest-feature" rel="noopener noreferrer">Request Feature</a></p>
+</div>
+<p><a href="https://captureflow.dev" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/sardorml/captureflow/c5792345e7d5e47084c5e829b3f11c98a432c859/.github/assets/readme-hero.png" alt="CaptureFlow: open-source screen recorder with shareable links, above the recordings dashboard"></a></p>
+<h2>✨ Features</h2>
+<ul>
+<li>🔗 The share link is ready the moment you stop: the upload runs while you record.</li>
+<li>🎥 Record a tab, a window or your whole screen, with camera bubble and mic.</li>
+<li>💬 Viewers react with emoji and comment right on the video, and you see who watched.</li>
+<li>🖼 Annotated screenshots with arrows, text and blur, shared by the same kind of link.</li>
+<li>👥 Workspaces for your team, with public, workspace-only or private visibility.</li>
+<li>💸 Priced by storage for the whole team, never per seat.</li>
+<li>☁️ Self-host on your own Cloudflare account, with sign-in limited to your company.</li>
+<li>🔓 Every feature ships in the open-source build.</li>
+</ul>
+<h2>🖥 Where it runs</h2>
+<table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chrome extension</td>
+<td>Available on the <a href="https://chromewebstore.google.com/detail/lgpgeoelaokbigdljofhkgbfnfcnmcol" rel="noopener noreferrer">Chrome Web Store</a></td>
+</tr>
+<tr>
+<td>macOS app</td>
+<td>Build from source; signed release coming soon</td>
+</tr>
+<tr>
+<td>Web dashboard and viewers</td>
+<td>Any modern browser</td>
+</tr>
+</tbody>
+</table>
+<h2>📦 Get started</h2>
+<ul>
+<li><strong>Hosted:</strong> <a href="https://captureflow.dev/login?mode=signup" rel="noopener noreferrer">create a free account</a> and install the <a href="https://chromewebstore.google.com/detail/lgpgeoelaokbigdljofhkgbfnfcnmcol" rel="noopener noreferrer">Chrome extension</a>. Paid plans add 100 GB, 500 GB or 1 TB for the whole team; see <a href="https://captureflow.dev/pricing" rel="noopener noreferrer">pricing</a>.</li>
+<li><strong>Self-hosted:</strong> <code>docker compose up</code> on your own server, or run it on your own Cloudflare account (Workers, D1 and R2). Follow the <a href="https://captureflow.dev/blog/self-hosted-screen-recorder" rel="noopener noreferrer">step-by-step guide</a>, or <a href="https://captureflow.dev/self-host-setup" rel="noopener noreferrer">let us set it up for you</a>.</li>
+</ul>
+<h2>☁️ Self-hosting</h2>
+<h3>Docker</h3>
+<pre><code>cp .env.example .env    # set APP_URL
+docker compose up -d
+</code></pre>
+<p>Everything lives in <code>./data</code>: a SQLite database, the recordings on disk, and secrets generated on first start. You don't need a Cloudflare account. Transcripts can use any OpenAI-compatible Whisper server, including one compose runs for you with <code>--profile whisper</code>. See the <a href="https://docs.captureflow.dev/self-hosting/docker" rel="noopener noreferrer">Docker guide</a>.</p>
+<h3>Cloudflare</h3>
+<p><a href="https://deploy.workers.cloudflare.com/?url=https://github.com/sardorml/captureflow" rel="noopener noreferrer"><img src="https://deploy.workers.cloudflare.com/button" alt="Deploy to Cloudflare"></a></p>
+<p>Or manually:</p>
+<pre><code>pnpm --filter @captureflow/web exec wrangler d1 create captureflow
+pnpm --filter @captureflow/web exec wrangler r2 bucket create captureflow-recordings
+# paste the database id into apps/web/wrangler.jsonc, then:
+pnpm --filter @captureflow/web db:apply:remote
+pnpm --filter @captureflow/web cf:deploy
+</code></pre>
+<p><a href="https://github.com/sardorml/captureflow/blob/c5792345e7d5e47084c5e829b3f11c98a432c859/DEPLOY.md" rel="noopener noreferrer"><code>DEPLOY.md</code></a> is the full runbook: secrets, sign-in providers, custom domains, and pointing the extension and desktop app at your own instance. A deployment on your own domain runs as a self-hosted instance; to make it a private company tool, set <code>ALLOWED_EMAIL_DOMAINS</code> as described in the <a href="https://docs.captureflow.dev/self-hosting/configuration" rel="noopener noreferrer">configuration docs</a>.</p>
+<h2>⌨️ Development</h2>
+<p>Requires Node.js 24.13 or newer and pnpm 10 (<code>corepack enable</code>).</p>
+<pre><code>git clone git@github.com:sardorml/captureflow.git
+cd captureflow
+pnpm install
+pnpm web                                  # dashboard and landing on http://localhost:3032
+pnpm admin                                # instance admin on http://localhost:3034
+pnpm extension                            # browser extension, in a fresh Chrome profile
+pnpm --filter @captureflow/desktop dev    # macOS recorder
+</code></pre>
+<p>Checks:</p>
+<pre><code>pnpm typecheck
+pnpm --filter @captureflow/web test
+pnpm --filter @captureflow/extension test
+pnpm format
+</code></pre>
+<details>
+<summary>Monorepo layout</summary>
+<pre><code>apps/
+  web/         Next.js 16 landing, blog, dashboard, viewers and API → Cloudflare Workers (OpenNext)
+  admin/       Instance-admin Worker on its own host, bound to the same D1 and R2
+  mailer/      Product-email Worker: sends admin-written campaigns via Resend, handles unsubscribe
+  extension/   Browser recorder (WXT, MV3): panel, offscreen capture, in-page controls
+  desktop/     Electron screen recorder (macOS)
+  docs/        VitePress documentation site
+packages/
+  engine/      Capture engine shared by desktop and extension: macOS sidecars, record protocol, mux (MIT)
+  admin/       Admin auth and data logic behind apps/admin
+  mail/        Campaigns, email rendering, unsubscribe tokens, Resend delivery, transactional sends
+  quota/       Storage quota, limits and workspace logic
+  shared/      Types and constants shared across the apps
+  ui/          Theme tokens and the React components with no HeroUI equivalent
+</code></pre>
+<p>Apps depend on packages, never the reverse, and never on each other.</p>
+<p>The macOS capture sidecars are committed as built binaries. After editing the Swift sources, rebuild them with <code>packages/engine/scripts/build-native.sh</code> (add <code>--universal</code> for arm64 + x86_64).</p>
+</details>
+<h2>🔗 Links</h2>
+<ul>
+<li><a href="https://captureflow.dev" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://docs.captureflow.dev" rel="noopener noreferrer">Documentation</a></li>
+<li><a href="https://docs.captureflow.dev/self-hosting/overview" rel="noopener noreferrer">Self-hosting docs</a></li>
+<li><a href="https://captureflow.dev/blog" rel="noopener noreferrer">Blog</a></li>
+<li><a href="https://captureflow.dev/pricing" rel="noopener noreferrer">Pricing</a></li>
+<li><a href="https://captureflow.dev/faq" rel="noopener noreferrer">FAQ</a></li>
+<li><a href="https://captureflow.dev/security" rel="noopener noreferrer">Security</a></li>
+<li><a href="https://github.com/sardorml/captureflow/releases" rel="noopener noreferrer">Releases</a></li>
+<li><a href="https://discord.gg/qzeBCaEeNq" rel="noopener noreferrer">Discord</a></li>
+</ul>
+<h2>🤝 Contributing <a href="https://github.com/sardorml/captureflow/pulls" rel="noopener noreferrer"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome"></a></h2>
+<p>Bug reports, ideas and pull requests are all welcome. Open an <a href="https://github.com/sardorml/captureflow/issues/new" rel="noopener noreferrer">issue</a>, <a href="https://captureflow.dev/suggest-feature" rel="noopener noreferrer">suggest a feature</a>, or send a pull request. Read <a href="https://github.com/sardorml/captureflow/blob/c5792345e7d5e47084c5e829b3f11c98a432c859/CONVENTIONS.md" rel="noopener noreferrer"><code>CONVENTIONS.md</code></a> first: it's the standard every change follows.</p>
+<p>Found a security issue? Please report it privately as described on the <a href="https://captureflow.dev/security" rel="noopener noreferrer">security page</a>, not in a public issue.</p>
+<h2>📄 License</h2>
+<p><a href="https://github.com/sardorml/captureflow/blob/c5792345e7d5e47084c5e829b3f11c98a432c859/LICENSE" rel="noopener noreferrer">AGPL-3.0-only</a>, with one exception: the reusable capture engine in <a href="https://github.com/sardorml/captureflow/blob/c5792345e7d5e47084c5e829b3f11c98a432c859/packages/engine" rel="noopener noreferrer"><code>packages/engine</code></a> is <a href="https://github.com/sardorml/captureflow/blob/c5792345e7d5e47084c5e829b3f11c98a432c859/packages/engine/LICENSE" rel="noopener noreferrer">MIT-licensed</a>. Combined builds (the desktop app and the browser extension) are AGPL-3.0-only as a whole.</p>
+<div><a href="https://github.com/sardorml/captureflow/blob/c5792345e7d5e47084c5e829b3f11c98a432c859/README.md#readme-top" rel="noopener noreferrer">Back to top ↑</a></div></div>
+</section>
+<footer class="source-box"><span>内容来自原作者；中文为乔木风格改写，非逐字翻译。</span><div><a href="https://x.com/sardorml/status/2118616954085024133" target="_blank" rel="noopener noreferrer">打开原文 ↗</a><a href="https://github.com/sardorml/captureflow/blob/c5792345e7d5e47084c5e829b3f11c98a432c859/README.md" target="_blank" rel="noopener noreferrer">相关链接 ↗</a></div></footer>
+</article></body></html>
