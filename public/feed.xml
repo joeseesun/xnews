@@ -5,8 +5,147 @@
     <link>https://xnews.qiaomu.ai/</link>
     <description>海外创始人长文 · AI 视频 · 乔木中文改写</description>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 05 Nov 2026 17:21:52 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 06 Nov 2026 00:14:00 +0000</lastBuildDate>
     <atom:link href="https://xnews.qiaomu.ai/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Cursor：描述一下工具，Agent 就能建成可分享的线上 App</title>
+      <link>https://xnews.qiaomu.ai/a/cursor-live-apps</link>
+      <guid isPermaLink="true">https://xnews.qiaomu.ai/a/cursor-live-apps</guid>
+      <pubDate>Thu, 05 Nov 2026 21:41:10 +0000</pubDate>
+      <author>Cursor</author>
+      <description><![CDATA[<p><em>写代码已经不难了，难的是大半项目死在 localhost。Cursor 把托管、数据库和安全检查一并接上。</em></p>
+<h2>乔木改写</h2>
+<p>Cursor 这条更新很短，但戳中一个真实痛点：</p>
+<p><strong>Agent 让写代码变容易了，大半 App 还是死在 localhost。</strong></p>
+<p>现在你可以跟 Cloud Agent 说「给我做一个周新增仪表盘」「给团队做一个报 bug 的内部工具」，它会从零或现有仓库建出可运行的 Web App：托管、需要时自动开 Postgres、跑确定性和 Agent 两层安全检查，再给你一个可分享链接。</p>
+<p>关键细节在文档里更清楚：</p>
+<ul>
+<li>生成不等于上线，必须你主动 Publish</li>
+<li>发布前有四道硬检查：别把密钥写进文件、别带凭据文件、不发布 <code>.env</code>、不发布 source map</li>
+<li>另有一次 AI 安全审阅；过不了会列出要修的点</li>
+<li>可见范围分邀请制、团队、公开；Teams / Enterprise 默认关掉公开分享</li>
+</ul>
+<p>Rauch 很快跟了一句：Grok 和 Cursor 都能在这条链上 build、deploy、scale。产品叙事已经从「帮你写代码」，推进到「帮你把内部工具真正交出去」。</p>
+<p>对做产品的人来说，下一步问题很具体：你团队里那些只活在本机的小工具，有多少其实只差一次「可分享」？</p>
+<h2>原文</h2>
+<p><em>You can now build live apps in Cursor and share them with a link</em></p>
+<p><video controls src="https://video.twimg.com/amplify_video/2118458611320131584/vid/avc1/1280x720/96e72bPmXLUWS7C5.mp4?tag=16" poster="https://pbs.twimg.com/amplify_video_thumb/2118458611320131584/img/uUJSIBl8QaDBnoAA.jpg"></video></p>
+<p>You can now build live apps in Cursor and share them with a link.</p>
+<p>Agents have made it easier to write code, but most apps never make it off localhost. Describe the tool you want - Cursor will build it, set up a database, run deterministic and agentic security checks, and deploy.</p>
+<p><strong>原文链接：</strong><a href="https://x.com/cursor_ai/status/2118458629091426304">https://x.com/cursor_ai/status/2118458629091426304</a></p>
+<p><strong>相关链接：</strong><a href="https://cursor.com/docs/cloud-agent/apps">https://cursor.com/docs/cloud-agent/apps</a></p>]]></description>
+      <content:encoded><![CDATA[<p><em>写代码已经不难了，难的是大半项目死在 localhost。Cursor 把托管、数据库和安全检查一并接上。</em></p>
+<h2>乔木改写</h2>
+<p>Cursor 这条更新很短，但戳中一个真实痛点：</p>
+<p><strong>Agent 让写代码变容易了，大半 App 还是死在 localhost。</strong></p>
+<p>现在你可以跟 Cloud Agent 说「给我做一个周新增仪表盘」「给团队做一个报 bug 的内部工具」，它会从零或现有仓库建出可运行的 Web App：托管、需要时自动开 Postgres、跑确定性和 Agent 两层安全检查，再给你一个可分享链接。</p>
+<p>关键细节在文档里更清楚：</p>
+<ul>
+<li>生成不等于上线，必须你主动 Publish</li>
+<li>发布前有四道硬检查：别把密钥写进文件、别带凭据文件、不发布 <code>.env</code>、不发布 source map</li>
+<li>另有一次 AI 安全审阅；过不了会列出要修的点</li>
+<li>可见范围分邀请制、团队、公开；Teams / Enterprise 默认关掉公开分享</li>
+</ul>
+<p>Rauch 很快跟了一句：Grok 和 Cursor 都能在这条链上 build、deploy、scale。产品叙事已经从「帮你写代码」，推进到「帮你把内部工具真正交出去」。</p>
+<p>对做产品的人来说，下一步问题很具体：你团队里那些只活在本机的小工具，有多少其实只差一次「可分享」？</p>
+<h2>原文</h2>
+<p><em>You can now build live apps in Cursor and share them with a link</em></p>
+<p><video controls src="https://video.twimg.com/amplify_video/2118458611320131584/vid/avc1/1280x720/96e72bPmXLUWS7C5.mp4?tag=16" poster="https://pbs.twimg.com/amplify_video_thumb/2118458611320131584/img/uUJSIBl8QaDBnoAA.jpg"></video></p>
+<p>You can now build live apps in Cursor and share them with a link.</p>
+<p>Agents have made it easier to write code, but most apps never make it off localhost. Describe the tool you want - Cursor will build it, set up a database, run deterministic and agentic security checks, and deploy.</p>
+<p><strong>原文链接：</strong><a href="https://x.com/cursor_ai/status/2118458629091426304">https://x.com/cursor_ai/status/2118458629091426304</a></p>
+<p><strong>相关链接：</strong><a href="https://cursor.com/docs/cloud-agent/apps">https://cursor.com/docs/cloud-agent/apps</a></p>]]></content:encoded>
+    </item>
+    <item>
+      <title>Rauch：Agent 的杀手级应用，是「跨时间替你做事」</title>
+      <link>https://xnews.qiaomu.ai/a/rauchg-agent-schedules</link>
+      <guid isPermaLink="true">https://xnews.qiaomu.ai/a/rauchg-agent-schedules</guid>
+      <pubDate>Thu, 05 Nov 2026 20:30:27 +0000</pubDate>
+      <author>Guillermo Rauch</author>
+      <description><![CDATA[<p><em>夜里整理记忆，早上提醒你，N 天没互动再戳一下。Vercel Schedules 像加强版 Cron，还能在运行时动态创建。</em></p>
+<h2>乔木改写</h2>
+<p>Guillermo Rauch 给 Agent 的杀手级应用下了个很短的定义：</p>
+<blockquote><p>Doing stuff for you over time.</p></blockquote>
+<p>跨时间替你做事。</p>
+<p>他举的例子很生活：Muse、Instinct 夜里合并记忆，早上提醒你，距离上次互动过了 N 天再主动戳一下。对应到基础设施，就是刚进公测的 <strong>Vercel Schedules</strong>：可在代码里静态声明，也可运行时动态创建；能在 Preview 环境跑；调度落在 Sandbox 外，按需唤醒计算，账单更可控。</p>
+<p>这句话之所以有分量，是因为它把讨论从「单次对话里 Agent 聪不聪明」，拽回「它能不能成为你生活和工作的背景进程」。聊天窗口是同步的；真正值钱的，往往是异步的、隔夜的、过几天再回来的那一下。</p>
+<p>如果你在设计 Agent 产品，不妨先问：用户离开之后，它还剩什么可做的？</p>
+<h2>原文</h2>
+<p><em>Doing stuff for you over time is the killer app of agents</em></p>
+<p>“Doing stuff for you over time” is the killer app of agents.</p>
+<p>Muse and Instinct consolidate memories at night, remind you of stuff in the morning, message you after N days passed since your last interaction…</p>
+<p>Vercel Schedules are like Cron on steroids. They can be defined at runtime, scale infinitely, and sit outside of the Sandbox, which means you can cost-efficiently invoke compute as needed.</p>
+<p><strong>原文链接：</strong><a href="https://x.com/rauchg/status/2118440831355068671">https://x.com/rauchg/status/2118440831355068671</a></p>
+<p><strong>相关链接：</strong><a href="https://vercel.com/blog/introducing-vercel-schedules">https://vercel.com/blog/introducing-vercel-schedules</a></p>]]></description>
+      <content:encoded><![CDATA[<p><em>夜里整理记忆，早上提醒你，N 天没互动再戳一下。Vercel Schedules 像加强版 Cron，还能在运行时动态创建。</em></p>
+<h2>乔木改写</h2>
+<p>Guillermo Rauch 给 Agent 的杀手级应用下了个很短的定义：</p>
+<blockquote><p>Doing stuff for you over time.</p></blockquote>
+<p>跨时间替你做事。</p>
+<p>他举的例子很生活：Muse、Instinct 夜里合并记忆，早上提醒你，距离上次互动过了 N 天再主动戳一下。对应到基础设施，就是刚进公测的 <strong>Vercel Schedules</strong>：可在代码里静态声明，也可运行时动态创建；能在 Preview 环境跑；调度落在 Sandbox 外，按需唤醒计算，账单更可控。</p>
+<p>这句话之所以有分量，是因为它把讨论从「单次对话里 Agent 聪不聪明」，拽回「它能不能成为你生活和工作的背景进程」。聊天窗口是同步的；真正值钱的，往往是异步的、隔夜的、过几天再回来的那一下。</p>
+<p>如果你在设计 Agent 产品，不妨先问：用户离开之后，它还剩什么可做的？</p>
+<h2>原文</h2>
+<p><em>Doing stuff for you over time is the killer app of agents</em></p>
+<p>“Doing stuff for you over time” is the killer app of agents.</p>
+<p>Muse and Instinct consolidate memories at night, remind you of stuff in the morning, message you after N days passed since your last interaction…</p>
+<p>Vercel Schedules are like Cron on steroids. They can be defined at runtime, scale infinitely, and sit outside of the Sandbox, which means you can cost-efficiently invoke compute as needed.</p>
+<p><strong>原文链接：</strong><a href="https://x.com/rauchg/status/2118440831355068671">https://x.com/rauchg/status/2118440831355068671</a></p>
+<p><strong>相关链接：</strong><a href="https://vercel.com/blog/introducing-vercel-schedules">https://vercel.com/blog/introducing-vercel-schedules</a></p>]]></content:encoded>
+    </item>
+    <item>
+      <title>OpenAI 发布 GPT-6 Cyber：更会挖漏洞，也更会待在授权范围内</title>
+      <link>https://xnews.qiaomu.ai/a/openai-gpt6-cyber</link>
+      <guid isPermaLink="true">https://xnews.qiaomu.ai/a/openai-gpt6-cyber</guid>
+      <pubDate>Thu, 05 Nov 2026 17:09:13 +0000</pubDate>
+      <author>OpenAI</author>
+      <description><![CDATA[<p><em>Firefox 挖出 81 个未知高危，Linux 跑出 948 个提权利用。他们把「对齐」写进了进攻能力本身。</em></p>
+<h2>乔木改写</h2>
+<p>OpenAI 正式放出 <strong>GPT-6 Cyber</strong>。一句话概括他们想讲的故事：</p>
+<blockquote><p>更会找漏洞、修漏洞，也更会待在研究员划定的边界里。</p></blockquote>
+<p>官方长文里有几组数字很难装作没看见。ExploitGym 从 GPT-5.6 Cyber 的 32.1% 拉到 48.5%。在他们称为 ExploitGym Honeypot 的对齐评测里，不加部署提示时，越权去打范围外服务的比例降到 0.07%；加上提示后是 100% 守住。模型被标进 Preparedness Framework 的 Critical 档。</p>
+<p>真实系统侧更刺眼：</p>
+<ul>
+<li>Firefox：即使已经用过多代前沿模型加固，仍挖出 81 个此前未知的高危，另有 30 个已知问题被抬高严重级别；Mozilla 已开始合入修复</li>
+<li>Linux 内核：同一套研究 harness 下，复现 1724 个漏洞，做出 948 个可工作提权利用，约为上一代同 harness 结果的五倍多</li>
+<li>自家训练基础设施也被它和其它模型一起「红队」过，用来补洞、收紧网络限制</li>
+</ul>
+<p>访问面很克制：先给部分 Daybreak Red 客户，再逐步放开。配套还有 Daybreak Blue、面向关键基础设施防守方的专项权限，以及更强的滥用监测。</p>
+<p>我读完最在意的不是「模型更猛了」这句空话。是他们把「能不能打」和「打不打得到授权外」绑在同一代产品上卖。进攻能力往前迈一步，范围遵守也得跟着迈一步，否则没人敢把 Agent 接进真实代码库。</p>
+<p>如果你在做安全 Agent 或企业 coding Agent，这篇值得和 Amjad 那篇「受管云环境默认化」对着读。一边在谈执行环境怎么隔离，一边在谈模型本身怎么不越权。两边都缺，就还是裸奔。</p>
+<h2>原文</h2>
+<p><em>Introducing GPT-6 Cyber</em></p>
+<p><video controls src="https://video.twimg.com/amplify_video/2118387217588465664/vid/avc1/1920x1080/ggeDE9iY9Trxb8kO.mp4" poster="https://pbs.twimg.com/amplify_video_thumb/2118387217588465664/img/N2grMUmP0O_EMvS2.jpg"></video></p>
+<p>Introducing GPT‑6 Cyber: a major advance in security research that pairs stronger capabilities with better model alignment.</p>
+<p>The model powered the Linux kernel research we announced yesterday, and security teams at companies like Mozilla, Palo Alto Networks, Calif, and Cisco—alongside our own at OpenAI—are already putting it to work.</p>
+<p>GPT-6 Cyber is available to select Daybreak Red customers and we are expanding access over time.</p>
+<p>https://openai.com/index/introducing-gpt-6-cyber/</p>
+<p><strong>原文链接：</strong><a href="https://x.com/OpenAI/status/2118390190246879554">https://x.com/OpenAI/status/2118390190246879554</a></p>
+<p><strong>相关链接：</strong><a href="https://openai.com/index/introducing-gpt-6-cyber/">https://openai.com/index/introducing-gpt-6-cyber/</a></p>]]></description>
+      <content:encoded><![CDATA[<p><em>Firefox 挖出 81 个未知高危，Linux 跑出 948 个提权利用。他们把「对齐」写进了进攻能力本身。</em></p>
+<h2>乔木改写</h2>
+<p>OpenAI 正式放出 <strong>GPT-6 Cyber</strong>。一句话概括他们想讲的故事：</p>
+<blockquote><p>更会找漏洞、修漏洞，也更会待在研究员划定的边界里。</p></blockquote>
+<p>官方长文里有几组数字很难装作没看见。ExploitGym 从 GPT-5.6 Cyber 的 32.1% 拉到 48.5%。在他们称为 ExploitGym Honeypot 的对齐评测里，不加部署提示时，越权去打范围外服务的比例降到 0.07%；加上提示后是 100% 守住。模型被标进 Preparedness Framework 的 Critical 档。</p>
+<p>真实系统侧更刺眼：</p>
+<ul>
+<li>Firefox：即使已经用过多代前沿模型加固，仍挖出 81 个此前未知的高危，另有 30 个已知问题被抬高严重级别；Mozilla 已开始合入修复</li>
+<li>Linux 内核：同一套研究 harness 下，复现 1724 个漏洞，做出 948 个可工作提权利用，约为上一代同 harness 结果的五倍多</li>
+<li>自家训练基础设施也被它和其它模型一起「红队」过，用来补洞、收紧网络限制</li>
+</ul>
+<p>访问面很克制：先给部分 Daybreak Red 客户，再逐步放开。配套还有 Daybreak Blue、面向关键基础设施防守方的专项权限，以及更强的滥用监测。</p>
+<p>我读完最在意的不是「模型更猛了」这句空话。是他们把「能不能打」和「打不打得到授权外」绑在同一代产品上卖。进攻能力往前迈一步，范围遵守也得跟着迈一步，否则没人敢把 Agent 接进真实代码库。</p>
+<p>如果你在做安全 Agent 或企业 coding Agent，这篇值得和 Amjad 那篇「受管云环境默认化」对着读。一边在谈执行环境怎么隔离，一边在谈模型本身怎么不越权。两边都缺，就还是裸奔。</p>
+<h2>原文</h2>
+<p><em>Introducing GPT-6 Cyber</em></p>
+<p><video controls src="https://video.twimg.com/amplify_video/2118387217588465664/vid/avc1/1920x1080/ggeDE9iY9Trxb8kO.mp4" poster="https://pbs.twimg.com/amplify_video_thumb/2118387217588465664/img/N2grMUmP0O_EMvS2.jpg"></video></p>
+<p>Introducing GPT‑6 Cyber: a major advance in security research that pairs stronger capabilities with better model alignment.</p>
+<p>The model powered the Linux kernel research we announced yesterday, and security teams at companies like Mozilla, Palo Alto Networks, Calif, and Cisco—alongside our own at OpenAI—are already putting it to work.</p>
+<p>GPT-6 Cyber is available to select Daybreak Red customers and we are expanding access over time.</p>
+<p>https://openai.com/index/introducing-gpt-6-cyber/</p>
+<p><strong>原文链接：</strong><a href="https://x.com/OpenAI/status/2118390190246879554">https://x.com/OpenAI/status/2118390190246879554</a></p>
+<p><strong>相关链接：</strong><a href="https://openai.com/index/introducing-gpt-6-cyber/">https://openai.com/index/introducing-gpt-6-cyber/</a></p>]]></content:encoded>
+    </item>
     <item>
       <title>DeepSeek Super Agent：真正值得看的，是「一切皆插件」的 Harness</title>
       <link>https://xnews.qiaomu.ai/a/deepseek-super-agent-harness</link>
@@ -27,6 +166,7 @@
 <p>作者访谈过 Instacart 和 Box 的 CTO，两边都认为现阶段 harness 比模型更重要。视频收尾也留了清醒提醒：这是原型，安全问题（提示注入、凭据泄漏、跨设备权限）他们自己也承认没完全解决。</p>
 <p>如果你只记住一句：别再只评模型。同一模型至少丢进两三个 harness 再下判断，不然你骂的可能是壳，不是芯。</p>
 <h2>原文</h2>
+<p>视频原文摘录，非完整逐字稿；请以原视频为准。</p>
 <p><em>DeepSeek Super Agent and why the harness matters</em></p>
 <p><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/OrcsMi2-IcM" frameborder="0" allowfullscreen></iframe></p><p><a href="https://www.youtube.com/watch?v=OrcsMi2-IcM">https://www.youtube.com/watch?v=OrcsMi2-IcM</a></p>
 <p>DeepSeek Super Agent and why the harness matters</p>
@@ -58,6 +198,7 @@
 <p>作者访谈过 Instacart 和 Box 的 CTO，两边都认为现阶段 harness 比模型更重要。视频收尾也留了清醒提醒：这是原型，安全问题（提示注入、凭据泄漏、跨设备权限）他们自己也承认没完全解决。</p>
 <p>如果你只记住一句：别再只评模型。同一模型至少丢进两三个 harness 再下判断，不然你骂的可能是壳，不是芯。</p>
 <h2>原文</h2>
+<p>视频原文摘录，非完整逐字稿；请以原视频为准。</p>
 <p><em>DeepSeek Super Agent and why the harness matters</em></p>
 <p><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/OrcsMi2-IcM" frameborder="0" allowfullscreen></iframe></p><p><a href="https://www.youtube.com/watch?v=OrcsMi2-IcM">https://www.youtube.com/watch?v=OrcsMi2-IcM</a></p>
 <p>DeepSeek Super Agent and why the harness matters</p>
@@ -75,6 +216,140 @@
 <p>Caveats: prototype; published code ≠ internal; narrow (GitHub/Feishu); synthetic benchmarks; security (prompt injection, credentials) not fully solved.</p>
 <p>Bigger point: harnesses evolving fast via composable plugins without forking the core.</p>
 <p><strong>原文链接：</strong><a href="https://www.youtube.com/watch?v=OrcsMi2-IcM">https://www.youtube.com/watch?v=OrcsMi2-IcM</a></p>]]></content:encoded>
+    </item>
+    <item>
+      <title>Tibo：硅谷最成功的发布视频，其实是一段屏录</title>
+      <link>https://xnews.qiaomu.ai/a/tibo-dropbox-launch-video</link>
+      <guid isPermaLink="true">https://xnews.qiaomu.ai/a/tibo-dropbox-launch-video</guid>
+      <pubDate>Thu, 05 Nov 2026 10:30:35 +0000</pubDate>
+      <author>Tibo</author>
+      <description><![CDATA[<p><em>Dropbox 当年把 waitlist 从 5000 拉到 75000。Tibo 说，现在人人用 Claude 做炫片，简单屏录反而更像真人。</em></p>
+<h2>乔木改写</h2>
+<p>Tibo 把那段将近二十年前的 Dropbox 发布视频又翻出来，说这是硅谷史上最成功的 launch video。</p>
+<p>Drew Houston 录了自己的屏幕。Waitlist 一夜从 5000 涨到 75000。</p>
+<p>他归纳了五条，很实在：</p>
+<ol>
+<li>只演示产品承诺的那一件事：文件丢进文件夹，另一台电脑就出现</li>
+<li>里面塞满目标用户才懂的梗</li>
+<li>发在用户已经在的地方（HN、Digg）</li>
+<li>解释新概念，但不堆术语</li>
+<li>让人看见还用不了的东西，视频负责证明，waitlist 负责排队</li>
+</ol>
+<p>收尾那句更刺：</p>
+<p><strong>大家都在用 Claude 做超炫视频时，你完全可以只做一段很土的屏录，真实感反而强十倍。</strong></p>
+<p>对独立开发者来说，这几乎是反潮流提醒。模型把「精致宣传片」的成本打下来了，稀缺的就变成另一边：你能不能把核心动作拍清楚，并发到对的人眼里。</p>
+<h2>原文</h2>
+<p><em>The most successful launch video in Silicon Valley history</em></p>
+<p><video controls src="https://video.twimg.com/amplify_video/2118289796053270528/vid/avc1/480x360/NH7IwVLQVlkf9n0t.mp4?tag=16" poster="https://pbs.twimg.com/amplify_video_thumb/2118289796053270528/img/CPvuvMCkuJt0y4QM.jpg"></video></p>
+<p>this is the most successful launch video in Silicon Valley history</p>
+<p>18 years ago, the founder of Dropbox recorded his screen to make this demo</p>
+<p>it took their waitlist from 5,000 to 75,000 overnight</p>
+<p>imo, here&#x27;s what made it work:</p>
+<ol>
+<li>it showed the real product doing the one thing it promised. you drop a file into a folder and it shows up on your other computer</li>
+</ol>
+<ol>
+<li>it was full of inside jokes for the exact audience he was trying to reach</li>
+</ol>
+<ol>
+<li>he posted it where his users already were. an earlier version went on Hacker News, and this one went on Digg</li>
+</ol>
+<ol>
+<li>it explained a new idea without any jargon</li>
+</ol>
+<ol>
+<li>it let people see something they couldn&#x27;t use yet. Dropbox wasn&#x27;t open to the public, so the video showed it working and the waitlist did the rest</li>
+</ol>
+<p>while everyone is doing super fancy video with Claude, you can do a very simple screen recording</p>
+<p>you will look x10 more authentic</p>
+<p><strong>原文链接：</strong><a href="https://x.com/tibo_maker/status/2118289869428380138">https://x.com/tibo_maker/status/2118289869428380138</a></p>]]></description>
+      <content:encoded><![CDATA[<p><em>Dropbox 当年把 waitlist 从 5000 拉到 75000。Tibo 说，现在人人用 Claude 做炫片，简单屏录反而更像真人。</em></p>
+<h2>乔木改写</h2>
+<p>Tibo 把那段将近二十年前的 Dropbox 发布视频又翻出来，说这是硅谷史上最成功的 launch video。</p>
+<p>Drew Houston 录了自己的屏幕。Waitlist 一夜从 5000 涨到 75000。</p>
+<p>他归纳了五条，很实在：</p>
+<ol>
+<li>只演示产品承诺的那一件事：文件丢进文件夹，另一台电脑就出现</li>
+<li>里面塞满目标用户才懂的梗</li>
+<li>发在用户已经在的地方（HN、Digg）</li>
+<li>解释新概念，但不堆术语</li>
+<li>让人看见还用不了的东西，视频负责证明，waitlist 负责排队</li>
+</ol>
+<p>收尾那句更刺：</p>
+<p><strong>大家都在用 Claude 做超炫视频时，你完全可以只做一段很土的屏录，真实感反而强十倍。</strong></p>
+<p>对独立开发者来说，这几乎是反潮流提醒。模型把「精致宣传片」的成本打下来了，稀缺的就变成另一边：你能不能把核心动作拍清楚，并发到对的人眼里。</p>
+<h2>原文</h2>
+<p><em>The most successful launch video in Silicon Valley history</em></p>
+<p><video controls src="https://video.twimg.com/amplify_video/2118289796053270528/vid/avc1/480x360/NH7IwVLQVlkf9n0t.mp4?tag=16" poster="https://pbs.twimg.com/amplify_video_thumb/2118289796053270528/img/CPvuvMCkuJt0y4QM.jpg"></video></p>
+<p>this is the most successful launch video in Silicon Valley history</p>
+<p>18 years ago, the founder of Dropbox recorded his screen to make this demo</p>
+<p>it took their waitlist from 5,000 to 75,000 overnight</p>
+<p>imo, here&#x27;s what made it work:</p>
+<ol>
+<li>it showed the real product doing the one thing it promised. you drop a file into a folder and it shows up on your other computer</li>
+</ol>
+<ol>
+<li>it was full of inside jokes for the exact audience he was trying to reach</li>
+</ol>
+<ol>
+<li>he posted it where his users already were. an earlier version went on Hacker News, and this one went on Digg</li>
+</ol>
+<ol>
+<li>it explained a new idea without any jargon</li>
+</ol>
+<ol>
+<li>it let people see something they couldn&#x27;t use yet. Dropbox wasn&#x27;t open to the public, so the video showed it working and the waitlist did the rest</li>
+</ol>
+<p>while everyone is doing super fancy video with Claude, you can do a very simple screen recording</p>
+<p>you will look x10 more authentic</p>
+<p><strong>原文链接：</strong><a href="https://x.com/tibo_maker/status/2118289869428380138">https://x.com/tibo_maker/status/2118289869428380138</a></p>]]></content:encoded>
+    </item>
+    <item>
+      <title>Anthropic × Claude：给细菌界的「穹顶蛋白」拍出第一张 3D 结构</title>
+      <link>https://xnews.qiaomu.ai/a/anthropic-vault-claude</link>
+      <guid isPermaLink="true">https://xnews.qiaomu.ai/a/anthropic-vault-claude</guid>
+      <pubDate>Wed, 04 Nov 2026 20:11:28 +0000</pubDate>
+      <author>Anthropic</author>
+      <description><![CDATA[<p><em>传统纯化要三天，他们压到九十分钟。结构初稿 34 小时出炉。Claude 也踩过坑，团队把坑回灌进了训练。</em></p>
+<h2>乔木改写</h2>
+<p>Anthropic 生物学实验室又交了一份作业：用 Claude 帮忙，解出了细菌生命里 <strong>vault particle</strong> 的首个 3D 结构。</p>
+<p>Vault 是一种桶状空心蛋白壳，1986 年就被 Leonard Rome 和 Nancy Kedersha 发现，功能至今成谜。哺乳动物细胞里它大约是核糖体质量的三倍。过去只在动植物这类复杂细胞里确认过；这次他们证明，细菌和噬菌体里的类似蛋白，也能组装成完整 vault。</p>
+<p>为什么重要？简单生命里的版本，往往是拆解人类蛋白功能的捷径。cGAS–STING、gasdermin、viperin 都走过这条路。Vault 的功能还不知道，原核版本可能把谜底拉近一点。</p>
+<p>流程里 Claude 几乎全程在场：搜约 150 亿条预测蛋白、设计 DNA 构建、优化分离方法、跑冷冻电镜数据处理。传统糖梯度纯化大约三天，他们改成排阻层析后，从细胞到电镜载网大约 <strong>90 分钟</strong>；第一版结构模型 <strong>34 小时</strong> 出炉，团队估计人工通常要数周。</p>
+<p>也没藏丑。Claude 写过一份有坑的培养基配方，项目因此倒退两周；电镜处理早期跳过标准步骤，搞出镜像混叠的废图。研究员直接下指令：「Please let’s do normal things unless they don’t work。」这些失败笔记回灌给做训练的同事，后续模型在 DNA 设计和实验坑识别上明显好转。</p>
+<p>Vault 发现者 Rome 看完数据说：功能仍然极难，但 Anthropic 的发现够宽，后面会有更多人跟进，「会是一段有趣的旅程」。</p>
+<p>这不是「AI 取代科学家」的通稿。更像一份实验室日志：人定方向、拍板非常规路线，模型把检索、设计和重活压缩掉；人在自己不熟的领域，才最容易被模型带偏。</p>
+<h2>原文</h2>
+<p><em>Investigating vault particles with Claude</em></p>
+<p>We’re sharing how our biology research team worked with Claude to map the first 3D structure of a vault particle from bacterial life.</p>
+<p>Vault particles are a longstanding mystery. They are barrel-shaped objects, among the largest protein structures found in our cells. They were first discovered by Leonard Rome and Nancy Kedersha in 1986, but their function remains unknown.</p>
+<p>With Claude, we’ve found results that might bring us closer to solving that mystery.</p>
+<p>Until now, vaults were only known in the cells of complex things like animals and plants. We have shown that similar proteins from bacteria (and the viruses that infect them) can also assemble into vaults. Finding the structures in these simpler forms of life may make it easier to investigate their function in our own cells.</p>
+<p>For our life sciences team, the project was also a demonstration of the potential (and the limitations) of using AI to accelerate science.</p>
+<p>In our full piece, we discuss how Claude was able to dramatically speed up some stages—manually determining the vault particle’s structure would have taken weeks to months of painstaking work, but here it took days. We also discuss how Claude made some simple mistakes along the way, and how we collaborated with our machine learning researchers to address them.</p>
+<p>Read more: https://www.anthropic.com/research/investigating-vault-particles-with-claude</p>
+<p><strong>原文链接：</strong><a href="https://x.com/AnthropicAI/status/2118073665296228863">https://x.com/AnthropicAI/status/2118073665296228863</a></p>
+<p><strong>相关链接：</strong><a href="https://www.anthropic.com/research/investigating-vault-particles-with-claude">https://www.anthropic.com/research/investigating-vault-particles-with-claude</a></p>]]></description>
+      <content:encoded><![CDATA[<p><em>传统纯化要三天，他们压到九十分钟。结构初稿 34 小时出炉。Claude 也踩过坑，团队把坑回灌进了训练。</em></p>
+<h2>乔木改写</h2>
+<p>Anthropic 生物学实验室又交了一份作业：用 Claude 帮忙，解出了细菌生命里 <strong>vault particle</strong> 的首个 3D 结构。</p>
+<p>Vault 是一种桶状空心蛋白壳，1986 年就被 Leonard Rome 和 Nancy Kedersha 发现，功能至今成谜。哺乳动物细胞里它大约是核糖体质量的三倍。过去只在动植物这类复杂细胞里确认过；这次他们证明，细菌和噬菌体里的类似蛋白，也能组装成完整 vault。</p>
+<p>为什么重要？简单生命里的版本，往往是拆解人类蛋白功能的捷径。cGAS–STING、gasdermin、viperin 都走过这条路。Vault 的功能还不知道，原核版本可能把谜底拉近一点。</p>
+<p>流程里 Claude 几乎全程在场：搜约 150 亿条预测蛋白、设计 DNA 构建、优化分离方法、跑冷冻电镜数据处理。传统糖梯度纯化大约三天，他们改成排阻层析后，从细胞到电镜载网大约 <strong>90 分钟</strong>；第一版结构模型 <strong>34 小时</strong> 出炉，团队估计人工通常要数周。</p>
+<p>也没藏丑。Claude 写过一份有坑的培养基配方，项目因此倒退两周；电镜处理早期跳过标准步骤，搞出镜像混叠的废图。研究员直接下指令：「Please let’s do normal things unless they don’t work。」这些失败笔记回灌给做训练的同事，后续模型在 DNA 设计和实验坑识别上明显好转。</p>
+<p>Vault 发现者 Rome 看完数据说：功能仍然极难，但 Anthropic 的发现够宽，后面会有更多人跟进，「会是一段有趣的旅程」。</p>
+<p>这不是「AI 取代科学家」的通稿。更像一份实验室日志：人定方向、拍板非常规路线，模型把检索、设计和重活压缩掉；人在自己不熟的领域，才最容易被模型带偏。</p>
+<h2>原文</h2>
+<p><em>Investigating vault particles with Claude</em></p>
+<p>We’re sharing how our biology research team worked with Claude to map the first 3D structure of a vault particle from bacterial life.</p>
+<p>Vault particles are a longstanding mystery. They are barrel-shaped objects, among the largest protein structures found in our cells. They were first discovered by Leonard Rome and Nancy Kedersha in 1986, but their function remains unknown.</p>
+<p>With Claude, we’ve found results that might bring us closer to solving that mystery.</p>
+<p>Until now, vaults were only known in the cells of complex things like animals and plants. We have shown that similar proteins from bacteria (and the viruses that infect them) can also assemble into vaults. Finding the structures in these simpler forms of life may make it easier to investigate their function in our own cells.</p>
+<p>For our life sciences team, the project was also a demonstration of the potential (and the limitations) of using AI to accelerate science.</p>
+<p>In our full piece, we discuss how Claude was able to dramatically speed up some stages—manually determining the vault particle’s structure would have taken weeks to months of painstaking work, but here it took days. We also discuss how Claude made some simple mistakes along the way, and how we collaborated with our machine learning researchers to address them.</p>
+<p>Read more: https://www.anthropic.com/research/investigating-vault-particles-with-claude</p>
+<p><strong>原文链接：</strong><a href="https://x.com/AnthropicAI/status/2118073665296228863">https://x.com/AnthropicAI/status/2118073665296228863</a></p>
+<p><strong>相关链接：</strong><a href="https://www.anthropic.com/research/investigating-vault-particles-with-claude">https://www.anthropic.com/research/investigating-vault-particles-with-claude</a></p>]]></content:encoded>
     </item>
     <item>
       <title>Sarah Guo：非工程师也想改自己的软件，我之前判断错了</title>

@@ -1,0 +1,27 @@
+{
+  "id": "rauchg-agent-schedules",
+  "date": "2026-11-06",
+  "published_at": "2026-11-05T20:30:27+00:00",
+  "source": {
+    "type": "x_post",
+    "url": "https://x.com/rauchg/status/2118440831355068671",
+    "author": "Guillermo Rauch",
+    "handle": "rauchg",
+    "title_en": "Doing stuff for you over time is the killer app of agents",
+    "related_url": "https://vercel.com/blog/introducing-vercel-schedules"
+  },
+  "title": "Rauch：Agent 的杀手级应用，是「跨时间替你做事」",
+  "dek": "夜里整理记忆，早上提醒你，N 天没互动再戳一下。Vercel Schedules 像加强版 Cron，还能在运行时动态创建。",
+  "tags": [
+    "agent",
+    "Vercel",
+    "Schedules"
+  ],
+  "original": {
+    "lang": "en",
+    "title": "Doing stuff for you over time is the killer app of agents",
+    "text_md": "“Doing stuff for you over time” is the killer app of agents.\n\nMuse and Instinct consolidate memories at night, remind you of stuff in the morning, message you after N days passed since your last interaction…\n\nVercel Schedules are like Cron on steroids. They can be defined at runtime, scale infinitely, and sit outside of the Sandbox, which means you can cost-efficiently invoke compute as needed.",
+    "media": []
+  },
+  "body_md": "Guillermo Rauch 给 Agent 的杀手级应用下了个很短的定义：\n\n> Doing stuff for you over time.\n\n跨时间替你做事。\n\n他举的例子很生活：Muse、Instinct 夜里合并记忆，早上提醒你，距离上次互动过了 N 天再主动戳一下。对应到基础设施，就是刚进公测的 **Vercel Schedules**：可在代码里静态声明，也可运行时动态创建；能在 Preview 环境跑；调度落在 Sandbox 外，按需唤醒计算，账单更可控。\n\n这句话之所以有分量，是因为它把讨论从「单次对话里 Agent 聪不聪明」，拽回「它能不能成为你生活和工作的背景进程」。聊天窗口是同步的；真正值钱的，往往是异步的、隔夜的、过几天再回来的那一下。\n\n如果你在设计 Agent 产品，不妨先问：用户离开之后，它还剩什么可做的？\n"
+}

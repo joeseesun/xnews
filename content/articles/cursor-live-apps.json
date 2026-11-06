@@ -1,0 +1,29 @@
+{
+  "id": "cursor-live-apps",
+  "date": "2026-11-06",
+  "published_at": "2026-11-05T21:41:10+00:00",
+  "source": {
+    "type": "x_post",
+    "url": "https://x.com/cursor_ai/status/2118458629091426304",
+    "author": "Cursor",
+    "handle": "cursor_ai",
+    "title_en": "You can now build live apps in Cursor and share them with a link",
+    "related_url": "https://cursor.com/docs/cloud-agent/apps"
+  },
+  "title": "Cursor：描述一下工具，Agent 就能建成可分享的线上 App",
+  "dek": "写代码已经不难了，难的是大半项目死在 localhost。Cursor 把托管、数据库和安全检查一并接上。",
+  "tags": ["Cursor", "Cloud Agent", "Apps"],
+  "original": {
+    "lang": "en",
+    "title": "You can now build live apps in Cursor and share them with a link",
+    "text_md": "You can now build live apps in Cursor and share them with a link.\n\nAgents have made it easier to write code, but most apps never make it off localhost. Describe the tool you want - Cursor will build it, set up a database, run deterministic and agentic security checks, and deploy.",
+    "media": [
+      {
+        "type": "x_video",
+        "url": "https://video.twimg.com/amplify_video/2118458611320131584/vid/avc1/1280x720/96e72bPmXLUWS7C5.mp4?tag=16",
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2118458611320131584/img/uUJSIBl8QaDBnoAA.jpg"
+      }
+    ]
+  },
+  "body_md": "Cursor 这条更新很短，但戳中一个真实痛点：\n\n**Agent 让写代码变容易了，大半 App 还是死在 localhost。**\n\n现在你可以跟 Cloud Agent 说「给我做一个周新增仪表盘」「给团队做一个报 bug 的内部工具」，它会从零或现有仓库建出可运行的 Web App：托管、需要时自动开 Postgres、跑确定性和 Agent 两层安全检查，再给你一个可分享链接。\n\n关键细节在文档里更清楚：\n\n- 生成不等于上线，必须你主动 Publish\n- 发布前有四道硬检查：别把密钥写进文件、别带凭据文件、不发布 `.env`、不发布 source map\n- 另有一次 AI 安全审阅；过不了会列出要修的点\n- 可见范围分邀请制、团队、公开；Teams / Enterprise 默认关掉公开分享\n\nRauch 很快跟了一句：Grok 和 Cursor 都能在这条链上 build、deploy、scale。产品叙事已经从「帮你写代码」，推进到「帮你把内部工具真正交出去」。\n\n对做产品的人来说，下一步问题很具体：你团队里那些只活在本机的小工具，有多少其实只差一次「可分享」？\n"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "openai-gpt6-cyber",
+  "date": "2026-11-06",
+  "published_at": "2026-11-05T17:09:13+00:00",
+  "source": {
+    "type": "x_post",
+    "url": "https://x.com/OpenAI/status/2118390190246879554",
+    "author": "OpenAI",
+    "handle": "OpenAI",
+    "title_en": "Introducing GPT-6 Cyber",
+    "related_url": "https://openai.com/index/introducing-gpt-6-cyber/"
+  },
+  "title": "OpenAI 发布 GPT-6 Cyber：更会挖漏洞，也更会待在授权范围内",
+  "dek": "Firefox 挖出 81 个未知高危，Linux 跑出 948 个提权利用。他们把「对齐」写进了进攻能力本身。",
+  "tags": [
+    "OpenAI",
+    "security",
+    "GPT-6"
+  ],
+  "original": {
+    "lang": "en",
+    "title": "Introducing GPT-6 Cyber",
+    "text_md": "Introducing GPT‑6 Cyber: a major advance in security research that pairs stronger capabilities with better model alignment.\n\nThe model powered the Linux kernel research we announced yesterday, and security teams at companies like Mozilla, Palo Alto Networks, Calif, and Cisco—alongside our own at OpenAI—are already putting it to work.\n\nGPT-6 Cyber is available to select Daybreak Red customers and we are expanding access over time.\n\nhttps://openai.com/index/introducing-gpt-6-cyber/",
+    "media": [
+      {
+        "type": "x_video",
+        "url": "https://video.twimg.com/amplify_video/2118387217588465664/vid/avc1/1920x1080/ggeDE9iY9Trxb8kO.mp4",
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2118387217588465664/img/N2grMUmP0O_EMvS2.jpg"
+      }
+    ]
+  },
+  "body_md": "OpenAI 正式放出 **GPT-6 Cyber**。一句话概括他们想讲的故事：\n\n> 更会找漏洞、修漏洞，也更会待在研究员划定的边界里。\n\n官方长文里有几组数字很难装作没看见。ExploitGym 从 GPT-5.6 Cyber 的 32.1% 拉到 48.5%。在他们称为 ExploitGym Honeypot 的对齐评测里，不加部署提示时，越权去打范围外服务的比例降到 0.07%；加上提示后是 100% 守住。模型被标进 Preparedness Framework 的 Critical 档。\n\n真实系统侧更刺眼：\n\n- Firefox：即使已经用过多代前沿模型加固，仍挖出 81 个此前未知的高危，另有 30 个已知问题被抬高严重级别；Mozilla 已开始合入修复\n- Linux 内核：同一套研究 harness 下，复现 1724 个漏洞，做出 948 个可工作提权利用，约为上一代同 harness 结果的五倍多\n- 自家训练基础设施也被它和其它模型一起「红队」过，用来补洞、收紧网络限制\n\n访问面很克制：先给部分 Daybreak Red 客户，再逐步放开。配套还有 Daybreak Blue、面向关键基础设施防守方的专项权限，以及更强的滥用监测。\n\n我读完最在意的不是「模型更猛了」这句空话。是他们把「能不能打」和「打不打得到授权外」绑在同一代产品上卖。进攻能力往前迈一步，范围遵守也得跟着迈一步，否则没人敢把 Agent 接进真实代码库。\n\n如果你在做安全 Agent 或企业 coding Agent，这篇值得和 Amjad 那篇「受管云环境默认化」对着读。一边在谈执行环境怎么隔离，一边在谈模型本身怎么不越权。两边都缺，就还是裸奔。\n"
+}

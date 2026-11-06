@@ -1,0 +1,32 @@
+{
+  "id": "tibo-dropbox-launch-video",
+  "date": "2026-11-05",
+  "published_at": "2026-11-05T10:30:35+00:00",
+  "source": {
+    "type": "x_post",
+    "url": "https://x.com/tibo_maker/status/2118289869428380138",
+    "author": "Tibo",
+    "handle": "tibo_maker",
+    "title_en": "The most successful launch video in Silicon Valley history"
+  },
+  "title": "Tibo：硅谷最成功的发布视频，其实是一段屏录",
+  "dek": "Dropbox 当年把 waitlist 从 5000 拉到 75000。Tibo 说，现在人人用 Claude 做炫片，简单屏录反而更像真人。",
+  "tags": [
+    "indie",
+    "launch",
+    "video"
+  ],
+  "original": {
+    "lang": "en",
+    "title": "The most successful launch video in Silicon Valley history",
+    "text_md": "this is the most successful launch video in Silicon Valley history\n\n18 years ago, the founder of Dropbox recorded his screen to make this demo\n\nit took their waitlist from 5,000 to 75,000 overnight\n\nimo, here's what made it work:\n\n1. it showed the real product doing the one thing it promised. you drop a file into a folder and it shows up on your other computer\n\n2. it was full of inside jokes for the exact audience he was trying to reach\n\n3. he posted it where his users already were. an earlier version went on Hacker News, and this one went on Digg\n\n4. it explained a new idea without any jargon\n\n5. it let people see something they couldn't use yet. Dropbox wasn't open to the public, so the video showed it working and the waitlist did the rest\n\nwhile everyone is doing super fancy video with Claude, you can do a very simple screen recording\n\nyou will look x10 more authentic",
+    "media": [
+      {
+        "type": "x_video",
+        "url": "https://video.twimg.com/amplify_video/2118289796053270528/vid/avc1/480x360/NH7IwVLQVlkf9n0t.mp4?tag=16",
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2118289796053270528/img/CPvuvMCkuJt0y4QM.jpg"
+      }
+    ]
+  },
+  "body_md": "Tibo 把那段将近二十年前的 Dropbox 发布视频又翻出来，说这是硅谷史上最成功的 launch video。\n\nDrew Houston 录了自己的屏幕。Waitlist 一夜从 5000 涨到 75000。\n\n他归纳了五条，很实在：\n\n1. 只演示产品承诺的那一件事：文件丢进文件夹，另一台电脑就出现\n2. 里面塞满目标用户才懂的梗\n3. 发在用户已经在的地方（HN、Digg）\n4. 解释新概念，但不堆术语\n5. 让人看见还用不了的东西，视频负责证明，waitlist 负责排队\n\n收尾那句更刺：\n\n**大家都在用 Claude 做超炫视频时，你完全可以只做一段很土的屏录，真实感反而强十倍。**\n\n对独立开发者来说，这几乎是反潮流提醒。模型把「精致宣传片」的成本打下来了，稀缺的就变成另一边：你能不能把核心动作拍清楚，并发到对的人眼里。\n"
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenAI 发布 GPT-6 Cyber：更会挖漏洞，也更会待在授权范围内 · X News</title>
+<meta name="description" content="Firefox 挖出 81 个未知高危，Linux 跑出 948 个提权利用。他们把「对齐」写进了进攻能力本身。">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#fffefa">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="X News">
+<meta property="og:title" content="OpenAI 发布 GPT-6 Cyber：更会挖漏洞，也更会待在授权范围内 · X News">
+<meta property="og:description" content="Firefox 挖出 81 个未知高危，Linux 跑出 948 个提权利用。他们把「对齐」写进了进攻能力本身。">
+<meta property="og:url" content="https://xnews.qiaomu.ai/a/openai-gpt6-cyber">
+<link rel="canonical" href="https://xnews.qiaomu.ai/a/openai-gpt6-cyber">
+<link rel="alternate" type="application/rss+xml" title="X News" href="/feed.xml">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231b1d18'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-size='19' fill='%23fffefa' font-family='sans-serif'%3EX%3C/text%3E%3C/svg%3E">
+<script>try{var t=localStorage.getItem('xn.theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="stylesheet" href="/app.css">
+<script src="/app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">跳到正文</a>
+<header class="site-header">
+  <a class="brand" href="/" aria-label="X News 海外发现首页"><span class="brand-name">X News</span><span class="brand-slash" aria-hidden="true">/</span><span class="brand-sub">海外<br>发现</span></a>
+  <div class="header-side"><p class="header-caption">英文原作，中文视角。<br>长帖 · 文章 · 影像</p><nav class="site-nav" aria-label="主导航"><a href="/">精选</a><a class="archive-nav" href="/archive">往期</a><a href="/feed.xml" aria-label="订阅全文 RSS">RSS ↗</a></nav><button type="button" class="icon-button" id="theme-btn" aria-label="切换为暗色主题" aria-pressed="false"><span aria-hidden="true">◐</span></button></div>
+</header>
+<main class="site-main" id="main">
+<article class="article-reader" data-article-id="openai-gpt6-cyber">
+<a class="article-back" href="/">← 返回选刊</a>
+<header class="article-header"><p class="article-kicker">X · @OpenAI / 长帖 / 视频</p><h1>OpenAI 发布 GPT-6 Cyber：更会挖漏洞，也更会待在授权范围内</h1><p class="article-dek">Firefox 挖出 81 个未知高危，Linux 跑出 948 个提权利用。他们把「对齐」写进了进攻能力本身。</p><div class="article-meta"><time datetime="2026-11-06">2026年11月6日 · 周五</time><span>OpenAI</span><span>OpenAI · security · GPT-6</span></div></header>
+<nav class="reader-tabs" aria-label="文章版本与来源"><div data-tabs><a href="#rewrite" id="tab-rewrite" data-view="rewrite">乔木改写</a><a href="#original" id="tab-original" data-view="original">原文</a></div><a class="reader-source" href="https://x.com/OpenAI/status/2118390190246879554" target="_blank" rel="noopener noreferrer">原文链接 ↗</a></nav>
+<section class="reader-panel" id="rewrite" data-reader-panel="rewrite" aria-label="乔木改写"><h2 class="section-heading">乔木改写</h2><div class="prose"><p>OpenAI 正式放出 <strong>GPT-6 Cyber</strong>。一句话概括他们想讲的故事：</p>
+<blockquote><p>更会找漏洞、修漏洞，也更会待在研究员划定的边界里。</p></blockquote>
+<p>官方长文里有几组数字很难装作没看见。ExploitGym 从 GPT-5.6 Cyber 的 32.1% 拉到 48.5%。在他们称为 ExploitGym Honeypot 的对齐评测里，不加部署提示时，越权去打范围外服务的比例降到 0.07%；加上提示后是 100% 守住。模型被标进 Preparedness Framework 的 Critical 档。</p>
+<p>真实系统侧更刺眼：</p>
+<ul>
+<li>Firefox：即使已经用过多代前沿模型加固，仍挖出 81 个此前未知的高危，另有 30 个已知问题被抬高严重级别；Mozilla 已开始合入修复</li>
+<li>Linux 内核：同一套研究 harness 下，复现 1724 个漏洞，做出 948 个可工作提权利用，约为上一代同 harness 结果的五倍多</li>
+<li>自家训练基础设施也被它和其它模型一起「红队」过，用来补洞、收紧网络限制</li>
+</ul>
+<p>访问面很克制：先给部分 Daybreak Red 客户，再逐步放开。配套还有 Daybreak Blue、面向关键基础设施防守方的专项权限，以及更强的滥用监测。</p>
+<p>我读完最在意的不是「模型更猛了」这句空话。是他们把「能不能打」和「打不打得到授权外」绑在同一代产品上卖。进攻能力往前迈一步，范围遵守也得跟着迈一步，否则没人敢把 Agent 接进真实代码库。</p>
+<p>如果你在做安全 Agent 或企业 coding Agent，这篇值得和 Amjad 那篇「受管云环境默认化」对着读。一边在谈执行环境怎么隔离，一边在谈模型本身怎么不越权。两边都缺，就还是裸奔。</p></div></section>
+<section class="reader-panel" id="original" data-reader-panel="original" aria-label="原文">
+<h2 class="section-heading">原文</h2><h3 class="original-title">Introducing GPT-6 Cyber</h3>
+<div class="original-media">
+<figure class="media-figure"><div class="media-frame"><video controls playsinline preload="none" src="https://video.twimg.com/amplify_video/2118387217588465664/vid/avc1/1920x1080/ggeDE9iY9Trxb8kO.mp4" poster="https://pbs.twimg.com/amplify_video_thumb/2118387217588465664/img/N2grMUmP0O_EMvS2.jpg" aria-label="原帖视频"></video><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频</span><a href="https://x.com/OpenAI/status/2118390190246879554" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div>
+<div class="prose" lang="en"><p>Introducing GPT‑6 Cyber: a major advance in security research that pairs stronger capabilities with better model alignment.</p>
+<p>The model powered the Linux kernel research we announced yesterday, and security teams at companies like Mozilla, Palo Alto Networks, Calif, and Cisco—alongside our own at OpenAI—are already putting it to work.</p>
+<p>GPT-6 Cyber is available to select Daybreak Red customers and we are expanding access over time.</p>
+<p>https://openai.com/index/introducing-gpt-6-cyber/</p></div>
+</section>
+<footer class="source-box"><span>内容来自原作者；中文为乔木风格改写，非逐字翻译。</span><div><a href="https://x.com/OpenAI/status/2118390190246879554" target="_blank" rel="noopener noreferrer">打开原文 ↗</a><a href="https://openai.com/index/introducing-gpt-6-cyber/" target="_blank" rel="noopener noreferrer">相关链接 ↗</a></div></footer>
+</article>
+</main>
+<footer class="site-footer"><span>海外创始人长文 · 乔木中文改写<br>每日 08:00 更新 · 中国标准时间（UTC+8）</span><nav class="footer-links" aria-label="页尾导航"><a href="/feed.xml">全文 RSS ↗</a><a href="/archive">全部文章</a><a href="/about">关于</a></nav></footer>
+
+</body>
+</html>

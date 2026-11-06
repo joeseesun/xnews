@@ -1,5 +1,44 @@
 [
   {
+    "id": "cursor-live-apps",
+    "date": "2026-11-06",
+    "title": "Cursor：描述一下工具，Agent 就能建成可分享的线上 App",
+    "dek": "写代码已经不难了，难的是大半项目死在 localhost。Cursor 把托管、数据库和安全检查一并接上。",
+    "url": "/a/cursor-live-apps",
+    "source_url": "https://x.com/cursor_ai/status/2118458629091426304",
+    "tags": [
+      "Cursor",
+      "Cloud Agent",
+      "Apps"
+    ]
+  },
+  {
+    "id": "rauchg-agent-schedules",
+    "date": "2026-11-06",
+    "title": "Rauch：Agent 的杀手级应用，是「跨时间替你做事」",
+    "dek": "夜里整理记忆，早上提醒你，N 天没互动再戳一下。Vercel Schedules 像加强版 Cron，还能在运行时动态创建。",
+    "url": "/a/rauchg-agent-schedules",
+    "source_url": "https://x.com/rauchg/status/2118440831355068671",
+    "tags": [
+      "agent",
+      "Vercel",
+      "Schedules"
+    ]
+  },
+  {
+    "id": "openai-gpt6-cyber",
+    "date": "2026-11-06",
+    "title": "OpenAI 发布 GPT-6 Cyber：更会挖漏洞，也更会待在授权范围内",
+    "dek": "Firefox 挖出 81 个未知高危，Linux 跑出 948 个提权利用。他们把「对齐」写进了进攻能力本身。",
+    "url": "/a/openai-gpt6-cyber",
+    "source_url": "https://x.com/OpenAI/status/2118390190246879554",
+    "tags": [
+      "OpenAI",
+      "security",
+      "GPT-6"
+    ]
+  },
+  {
     "id": "deepseek-super-agent-harness",
     "date": "2026-11-05",
     "title": "DeepSeek Super Agent：真正值得看的，是「一切皆插件」的 Harness",
@@ -10,6 +49,32 @@
       "DeepSeek",
       "harness",
       "agent"
+    ]
+  },
+  {
+    "id": "tibo-dropbox-launch-video",
+    "date": "2026-11-05",
+    "title": "Tibo：硅谷最成功的发布视频，其实是一段屏录",
+    "dek": "Dropbox 当年把 waitlist 从 5000 拉到 75000。Tibo 说，现在人人用 Claude 做炫片，简单屏录反而更像真人。",
+    "url": "/a/tibo-dropbox-launch-video",
+    "source_url": "https://x.com/tibo_maker/status/2118289869428380138",
+    "tags": [
+      "indie",
+      "launch",
+      "video"
+    ]
+  },
+  {
+    "id": "anthropic-vault-claude",
+    "date": "2026-11-05",
+    "title": "Anthropic × Claude：给细菌界的「穹顶蛋白」拍出第一张 3D 结构",
+    "dek": "传统纯化要三天，他们压到九十分钟。结构初稿 34 小时出炉。Claude 也踩过坑，团队把坑回灌进了训练。",
+    "url": "/a/anthropic-vault-claude",
+    "source_url": "https://x.com/AnthropicAI/status/2118073665296228863",
+    "tags": [
+      "Anthropic",
+      "Claude",
+      "science"
     ]
   },
   {
