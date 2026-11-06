@@ -2,6 +2,7 @@
 # Worker「xnews」· https://xnews.qiaomu.ai
 # 纯 assets，无电台 KV/R2/Queue/cron。域名已在 CF 绑定，不写 routes。
 name = "xnews"
+account_id = "d060d68463fc12fa91fa2aa216bbab02"
 main = "src/worker.js"
 compatibility_date = "2026-09-01"
 workers_dev = true

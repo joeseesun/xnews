@@ -16,6 +16,9 @@ CONTENT = ROOT / "content" / "articles"
 PUBLIC = ROOT / "public"
 SITE_URL = "https://xnews.qiaomu.ai"
 SITE_NAME = "X News"
+UMAMI_WEBSITE_ID = "31e0098c-6852-46b6-899c-11eed5ed16e1"
+if not re.fullmatch(r"[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}", UMAMI_WEBSITE_ID):
+    raise ValueError("A valid production Umami website ID is required")
 SITE_SUB = "海外创始人长文 · AI 视频 · 乔木中文改写"
 TZ_SH = timezone(timedelta(hours=8))
 
@@ -155,16 +158,17 @@ def shell(title: str, body_main: str, *, description: str = "", active: str = "h
 <meta property="og:url" content="{html.escape(canon)}">
 <link rel="canonical" href="{html.escape(canon)}">
 <link rel="alternate" type="application/rss+xml" title="{SITE_NAME}" href="/feed.xml">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231b1d18'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-size='19' fill='%23fffefa' font-family='sans-serif'%3EX%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-7 -7 58 58'%3E%3Crect x='-7' y='-7' width='58' height='58' rx='5' fill='%231b1d18'/%3E%3Cpath fill='%23fffefa' d='M2 0h11l29 44H31zM32 0h10L26 18l-5-7zM17 26l5 7-10 11H2z'/%3E%3C/svg%3E">
 <script>try{{var t=localStorage.getItem('xn.theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}}catch(e){{}}</script>
 <link rel="stylesheet" href="/app.css">
 <script src="/app.js" defer></script>
+<script defer src="https://umami.qiaomu.ai/script.js" data-website-id="{UMAMI_WEBSITE_ID}" data-domains="xnews.qiaomu.ai" data-exclude-search="true" data-exclude-hash="true"></script>
 </head>
 <body>
 <a class="skip" href="#main">跳到正文</a>
 <header class="site-header">
-  <a class="brand" href="/" aria-label="X News 海外发现首页"><span class="brand-name">X News</span><span class="brand-slash" aria-hidden="true">/</span><span class="brand-sub">海外<br>发现</span></a>
-  <div class="header-side"><p class="header-caption">英文原作，中文视角。<br>长帖 · 文章 · 影像</p><nav class="site-nav" aria-label="主导航"><a href="/"{current('home')}>精选</a><a class="archive-nav" href="/archive"{current('archive')}>往期</a><a href="/feed.xml" aria-label="订阅全文 RSS">RSS ↗</a></nav><button type="button" class="icon-button" id="theme-btn" aria-label="切换为暗色主题" aria-pressed="false"><span aria-hidden="true">◐</span></button></div>
+  <a class="brand" href="/" aria-label="X News 海外发现首页"><span class="brand-wordmark" aria-hidden="true"><svg class="brand-mark" viewBox="0 0 44 44" fill="currentColor"><path d="M2 0h11l29 44H31zM32 0h10L26 18l-5-7zM17 26l5 7-10 11H2z"/></svg><span class="brand-name">News<span class="brand-period">.</span></span></span><span class="brand-sub">海外发现<span>英文原作 · 中文视角</span></span></a>
+  <div class="header-side"><nav class="site-nav" aria-label="主导航"><a href="/"{current('home')}>精选</a><a class="archive-nav" href="/archive"{current('archive')}>往期</a><a href="/feed.xml" aria-label="订阅全文 RSS">订阅 RSS <span aria-hidden="true">↗</span></a></nav><button type="button" class="icon-button" id="theme-btn" aria-label="切换为暗色主题" aria-pressed="false"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16Z" fill="currentColor" stroke="none"/></svg></button></div>
 </header>
 <main class="site-main" id="main">
 {body_main}
@@ -407,6 +411,29 @@ def cover_word(a: dict) -> str:
     return name.split()[0] if name.split() else SITE_NAME
 
 
+def reading_minutes(a: dict) -> int:
+    """Approximate Chinese reading time; video duration is deliberately excluded."""
+    text = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", a.get("body_md") or "")
+    units = len(re.findall(r"[\u3400-\u9fff]|[A-Za-z0-9]+", text))
+    return max(1, (units + 299) // 300)
+
+
+def discovery_tools(articles: list[dict], *, archive: bool = False) -> str:
+    videos = sum("视频" in story_type(a) for a in articles)
+    return f'''<section class="discovery" data-discovery data-default-view="{'list' if archive else 'journal'}" aria-label="查找文章" hidden>
+<div class="discovery-top"><div class="filter-group" role="group" aria-label="内容类型">
+<button type="button" data-filter="all" aria-pressed="true">全部 <span>{len(articles)}</span></button>
+<button type="button" data-filter="text" aria-pressed="false">图文 <span>{len(articles) - videos}</span></button>
+<button type="button" data-filter="video" aria-pressed="false">含视频 <span>{videos}</span></button></div>
+<div class="search-field"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><label class="sr-only" for="story-search">搜索标题、作者或主题</label><input id="story-search" type="search" name="q" placeholder="搜索标题、作者或主题" autocomplete="off" aria-controls="news-grid"><button type="button" data-clear-search aria-label="清除搜索" hidden>×</button></div></div>
+<div class="discovery-bottom"><p data-result-count role="status" aria-live="polite" aria-atomic="true"></p><div class="view-switch" role="group" aria-label="浏览方式"><button type="button" data-layout="journal" aria-pressed="true"><svg viewBox="0 0 18 18" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 2h5v14H2zM11 2h5v5h-5zM11 11h5v5h-5z"/></svg>影像刊</button><button type="button" data-layout="list" aria-pressed="false"><svg viewBox="0 0 18 18" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 3h14M2 9h14M2 15h14"/></svg>速览</button></div></div>
+</section>'''
+
+
+def discovery_empty() -> str:
+    return '''<section class="search-empty" data-search-empty hidden><p class="empty-symbol" aria-hidden="true">↳</p><h2>没有找到匹配的文章</h2><p data-empty-description></p><button class="reset-button" type="button" data-reset-filters>查看全部文章</button></section>'''
+
+
 def build_feed_items(articles: list[dict]) -> str:
     if not articles:
         return '<section class="empty-state"><h2>还没有文章</h2><p>稍后再来，或先订阅 <a href="/feed.xml">全文 RSS</a>。</p></section>'
@@ -420,8 +447,6 @@ def build_feed_items(articles: list[dict]) -> str:
         classes = ["news-card", "card--media" if image else "card--text"]
         if index == 0 and image:
             classes.append("is-featured")
-        elif image and index % 4 == 3:
-            classes.append("is-wide")
         if not image:
             classes.append("tone-ink" if index % 3 == 1 else "tone-sage" if index % 3 == 2 else "tone-paper")
         word = html.escape(cover_word(a))
@@ -429,12 +454,15 @@ def build_feed_items(articles: list[dict]) -> str:
             badge = f'<span class="cover-badge">▶ {html.escape(kind)}</span>' if "视频" in kind else ""
             cover = f'''<div class="cover" data-cover><div class="cover-fallback" aria-hidden="true"><span class="cover-word">{word}</span></div><img src="{html.escape(image, quote=True)}" alt="{html.escape(alt, quote=True)}" loading="{'eager' if index == 0 else 'lazy'}" decoding="async" {'fetchpriority="high"' if index == 0 else ''} referrerpolicy="no-referrer">{badge}</div>'''
         else:
-            cover = f'<div class="type-cover" aria-hidden="true"><span class="cover-word">{word}</span></div>'
-        rows.append(f'''<article class="{' '.join(classes)}" id="story-{slug}">
+            cover = f'<div class="type-cover" aria-hidden="true"><span class="type-index">{index + 1:02d} / VOICES</span><span class="cover-word">{word}<span class="type-dot">.</span></span></div>'
+        search = html.escape(' '.join([a['title'], a.get('dek') or '', src.get('author') or '', src.get('handle') or '', ' '.join(a.get('tags') or [])]), quote=True)
+        card_body = f'''<div class="card-body"><div class="card-meta"><span>{html.escape(kind)} / {author}</span><time datetime="{html.escape(a['date'], quote=True)}">{html.escape(a['date'][5:].replace('-', '.'))}</time></div>
+<h2 class="card-title">{html.escape(a['title'])}</h2><p class="card-dek">{html.escape(a.get('dek') or '')}</p><div class="card-end"><span>中文约 {reading_minutes(a)} 分钟</span><span class="card-read">阅读全文 <span class="card-arrow" aria-hidden="true">→</span></span></div></div>'''
+        # Lead with the headline, keeping source and visual reading order identical.
+        card_content = card_body + cover if "is-featured" in classes else cover + card_body
+        rows.append(f'''<article class="{' '.join(classes)}" id="story-{slug}" data-kind="{'video' if '视频' in kind else 'text'}" data-search="{search}">
 <a class="card-link" href="/a/{slug}" id="read-{slug}" data-open-reader data-source-url="{html.escape(src['url'], quote=True)}">
-{cover}
-<div class="card-body"><div class="card-meta"><span>{html.escape(kind)} / {author}</span><time datetime="{html.escape(a['date'], quote=True)}">{html.escape(a['date'][5:].replace('-', '.'))}</time></div>
-<h2 class="card-title">{html.escape(a['title'])}</h2><p class="card-dek">{html.escape(a.get('dek') or '')}</p><div class="card-end"><span>乔木改写 · 保留原文</span><span class="card-arrow" aria-hidden="true">↗</span></div></div>
+{card_content}
 </a><a class="cover-error-link" href="{html.escape(src['url'], quote=True)}" target="_blank" rel="noopener noreferrer">封面未能显示 · 去原文查看 ↗</a>
 </article>''')
     return '\n'.join(rows)
@@ -443,11 +471,14 @@ def build_feed_items(articles: list[dict]) -> str:
 def render_article(a: dict) -> str:
     src = a["source"]
     source_url = html.escape(src["url"], quote=True)
+    source = source_label(src)
+    kind = story_type(a)
+    kicker = source if kind in source else f"{source} / {kind}"
     related = f'<a href="{html.escape(src["related_url"], quote=True)}" target="_blank" rel="noopener noreferrer">相关链接 ↗</a>' if src.get("related_url") else ""
     return f'''<article class="article-reader" data-article-id="{html.escape(a['id'], quote=True)}">
 <a class="article-back" href="/">← 返回选刊</a>
-<header class="article-header"><p class="article-kicker">{html.escape(source_label(src))} / {html.escape(story_type(a))}</p><h1>{html.escape(a['title'])}</h1><p class="article-dek">{html.escape(a.get('dek') or '')}</p><div class="article-meta"><time datetime="{html.escape(a['date'], quote=True)}">{fmt_date(a['date'])}</time><span>{html.escape(src.get('author') or '')}</span><span>{' · '.join(html.escape(t) for t in a.get('tags') or [])}</span></div></header>
-<nav class="reader-tabs" aria-label="文章版本与来源"><div data-tabs><a href="#rewrite" id="tab-rewrite" data-view="rewrite">乔木改写</a><a href="#original" id="tab-original" data-view="original">原文</a></div><a class="reader-source" href="{source_url}" target="_blank" rel="noopener noreferrer">原文链接 ↗</a></nav>
+<header class="article-header"><p class="article-kicker">{html.escape(kicker)}</p><h1>{html.escape(a['title'])}</h1><p class="article-dek">{html.escape(a.get('dek') or '')}</p><div class="article-meta"><time datetime="{html.escape(a['date'], quote=True)}">{fmt_date(a['date'])}</time><span>{html.escape(src.get('author') or '')}</span><span>{' · '.join(html.escape(t) for t in a.get('tags') or [])}</span></div></header>
+<nav class="reader-tabs" aria-label="文章版本与来源"><div data-tabs><a href="#rewrite" id="tab-rewrite" data-view="rewrite">乔木改写</a><a href="#original" id="tab-original" data-view="original">原文</a></div><a class="reader-source" href="{source_url}" target="_blank" rel="noopener noreferrer">原文链接 ↗</a><div class="reading-position" hidden><progress max="100" value="0" aria-label="当前版本阅读进度"></progress><span data-reading-percent aria-hidden="true">0%</span></div></nav>
 <section class="reader-panel" id="rewrite" data-reader-panel="rewrite" aria-label="乔木改写"><h2 class="section-heading">乔木改写</h2><div class="prose">{render_rewrite(a)}</div></section>
 {render_original_section(a)}
 <footer class="source-box"><span>内容来自原作者；中文为乔木风格改写，非逐字翻译。</span><div><a href="{source_url}" target="_blank" rel="noopener noreferrer">打开原文 ↗</a>{related}</div></footer>
@@ -556,12 +587,12 @@ def build() -> None:
     )
 
     latest = articles[0]["date"]
-    heading = f'''<section class="edition-line"><div><h1 tabindex="-1">近期精选</h1><p class="edition-description">长帖、文章与影像，保留原文和媒体。</p></div><p class="edition-meta">{len(articles)} 篇 / 最新收录<br><time datetime="{html.escape(latest, quote=True)}">{html.escape(latest.replace('-', '.'))}</time></p></section>'''
-    home = heading + f'<section class="news-grid" data-news-grid aria-label="海外发现选刊">{build_feed_items(articles)}</section>'
+    heading = f'''<section class="edition-line"><div><p class="edition-kicker">THE EDIT <span aria-hidden="true">/</span> 近期精选</p><h1 tabindex="-1">看见世界的新想法。</h1><p class="edition-description">创始人的思考，正在发生的 AI。长帖、文章与影像，一起读。</p></div><div class="edition-meta"><span class="edition-label">最新收录</span><time datetime="{html.escape(latest, quote=True)}">{html.escape(latest.replace('-', '.'))}</time><span class="edition-note">乔木选编 · 保留原文与媒体</span></div></section>'''
+    home = heading + discovery_tools(articles) + f'<section class="news-grid" id="news-grid" data-news-grid aria-label="海外发现选刊">{build_feed_items(articles)}</section>' + discovery_empty()
     (PUBLIC / "index.html").write_text(
         shell(f"{SITE_NAME} · 海外发现", home, description=SITE_SUB, active="home", canonical="/"), encoding="utf-8",
     )
-    archive = f'''<section class="edition-line"><div><h1 tabindex="-1">全部文章</h1><p>按发布时间倒序，乔木改写与原文一起保留。</p></div><p class="edition-meta">共 {len(articles)} 篇</p></section><section class="news-grid" data-news-grid aria-label="全部文章">{build_feed_items(articles)}</section>'''
+    archive = f'''<section class="edition-line"><div><h1 tabindex="-1">全部文章</h1><p>按发布时间倒序，乔木改写与原文一起保留。</p></div><p class="edition-meta">共 {len(articles)} 篇</p></section>''' + discovery_tools(articles, archive=True) + f'<section class="news-grid" id="news-grid" data-news-grid aria-label="全部文章">{build_feed_items(articles)}</section>' + discovery_empty()
     (PUBLIC / "archive.html").write_text(
         shell(f"全部文章 · {SITE_NAME}", archive, active="archive", canonical="/archive"), encoding="utf-8",
     )

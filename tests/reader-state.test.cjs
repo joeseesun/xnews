@@ -235,3 +235,61 @@ test('user-requested stalled media gets honest recovery and clears on playback/p
   assert.equal(notice.dataset.mediaState, 'failed'); assert.match(notice.textContent, /暂时无法播放/);
   assert.ok(figure.querySelector('figcaption a').href.startsWith('https://x.com/'));
 });
+
+test('discovery combines case-insensitive search and type, with a recoverable empty state', t => {
+  const s = setup(); t.after(() => s.dom.window.close());
+  const search = s.$('#story-search');
+  search.value = 'CURSOR'; search.dispatchEvent(new s.w.Event('input', {bubbles: true}));
+  assert.equal(s.d.querySelectorAll('.news-card:not([hidden])').length, 1);
+  assert.match(s.$('.news-card:not([hidden])').textContent, /Cursor/);
+  s.click(s.$('[data-filter="text"]'));
+  assert.equal(s.d.querySelectorAll('.news-card:not([hidden])').length, 0);
+  assert.equal(s.$('[data-search-empty]').hidden, false);
+  assert.match(s.$('[data-empty-description]').textContent, /CURSOR/);
+  s.click(s.$('[data-reset-filters]'));
+  assert.equal(s.d.querySelectorAll('.news-card:not([hidden])').length, 13);
+  assert.equal(s.$('[data-search-empty]').hidden, true);
+  assert.equal(s.d.activeElement, search);
+  assert.equal(s.w.location.search, '');
+});
+
+test('query and layout deep links survive a reader round trip and Forward', async t => {
+  const s = setup({url: 'https://xnews.qiaomu.ai/?q=Amjad&type=text&view=list'});
+  t.after(() => s.dom.window.close());
+  assert.equal(s.$('#story-search').value, 'Amjad');
+  assert.equal(s.$('[data-news-grid]').dataset.layout, 'list');
+  const card = s.$('.news-card:not([hidden]) [data-open-reader]');
+  assert.ok(card.href.endsWith('/a/amasad-managed-cloud-agents'));
+  s.click(card); await until(() => s.$('#reader-sheet [data-article-id]'), 'article');
+  s.click(s.$('[data-close-sheet]')); await until(() => !s.$('#reader-sheet').open, 'close');
+  await frames();
+  assert.equal(s.w.location.search, '?q=Amjad&type=text&view=list');
+  assert.equal(s.$('#story-search').value, 'Amjad');
+  assert.equal(s.d.querySelectorAll('.news-card:not([hidden])').length, 1);
+  assert.equal(s.d.activeElement, card);
+  s.w.history.forward(); await until(() => s.$('#reader-sheet [data-article-id]'), 'forward');
+  assert.equal(s.$('#reader-sheet [data-article-id]').dataset.articleId, 'amasad-managed-cloud-agents');
+});
+
+test('archive defaults to a readable list; invalid URL controls fall back safely', t => {
+  const s = setup({page: 'archive.html', url: 'https://xnews.qiaomu.ai/archive?type=unknown&view=unknown&q=%3Csvg%3E'});
+  t.after(() => s.dom.window.close());
+  assert.equal(s.$('[data-news-grid]').dataset.layout, 'list');
+  assert.equal(s.$('[data-filter="all"]').getAttribute('aria-pressed'), 'true');
+  assert.equal(s.$('[data-empty-description]').querySelector('svg'), null);
+  assert.match(s.$('[data-empty-description]').textContent, /<svg>/);
+  s.click(s.$('[data-clear-search]'));
+  assert.equal(s.w.location.search, '');
+  assert.equal(s.d.activeElement, s.$('#story-search'));
+});
+
+test('Space activates the focused article version without scrolling the page', async t => {
+  const s = setup(); t.after(() => s.dom.window.close());
+  s.click(s.$('[data-open-reader]')); await until(() => s.$('#reader-sheet [data-article-id]'), 'article');
+  const tab = s.$('[data-view="original"]'); tab.focus();
+  const event = new s.w.KeyboardEvent('keydown', {key: ' ', bubbles: true, cancelable: true});
+  tab.dispatchEvent(event);
+  assert.equal(event.defaultPrevented, true);
+  assert.equal(s.$('#original').hidden, false);
+  assert.equal(s.w.location.hash, '#original');
+});

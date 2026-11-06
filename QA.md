@@ -1,3 +1,63 @@
+# Production release · 2026-11-06
+
+User authorized publication with “上线啊”. Release baseline: `801d1918e00d3ddba9865793e0b144d4daa524a6`; remote main matched before staging. This release includes the completed brand/interaction refinement below, the explicit Cloudflare account ID verified against the qiaomu.ai zone, and restoration of the domain’s existing Umami property `31e0098c-6852-46b6-899c-11eed5ed16e1`.
+
+Umami is restricted to `xnews.qiaomu.ai`; search/query strings and fragments are excluded, so typing filters and switching versions do not generate duplicate pageviews or transmit search terms. Local preview traffic is excluded. All generated HTML pages have exactly one validated tracking script. The existing dashboard label still reads “AI 大V电台”; its configured domain is xnews.qiaomu.ai and no property, ownership or stored data was changed.
+
+Release regression: **26 Python + 21 DOM/state tests passed**. The 39 Chrome checks and visual QA from the preceding implementation remain recorded below. Publishing uses the existing Wrangler OAuth identity: the shell API token is valid for the domain but lacks Worker access and must not shadow OAuth (`env -u CLOUDFLARE_API_TOKEN wrangler deploy`). No credentials are committed.
+
+Deployment ID, public-asset comparison and real pageview ingestion will be recorded after publication. All earlier “local only” statements below describe the pre-release stage.
+
+---
+
+# Local brand and interaction refinement · 2026-11-06 (Asia/Shanghai)
+
+Current scope: the homepage → search/filter → full article → original/rewrite → return flow, archive scan mode, and shared header/theme. Stack remains Python-generated static HTML, plain CSS and vanilla JS. Conventions inspected: `DESIGN.md`, `README.md`, `QA.md`, source schema and existing tests; no repository AGENTS.md or CLAUDE.md was present. Earlier handoffs below are historical and do not authorize a release in this chat.
+
+## Completed outcome
+
+- Original geometric X mark + serif News wordmark + matching favicon; consistent masthead spacing and quieter metadata. Reused the existing paper/olive palette and system fonts.
+- Lead headline precedes its cover; desktop opening spread stays asymmetric, later rows have three equal columns. Visible 1440px lead title moved from roughly 940px down the old page to 484px in the new page. All real titles, source images and chronological ordering remain intact.
+- Search, text/video filters, URL-backed state, recoverable empty state and a text-only scan mode. Archive defaults to scan mode. Mobile keeps the archive navigation entry visible.
+- Approximate Chinese reading time (excludes video duration); per-version reading progress; keyboard Space activation; arrow focus preserves scroll. Close/Back/Forward preserve query, layout, focus and reading positions.
+- Rem typography, wrapping controls, image outlines, deliberate light/dark contrast surfaces, reduced-motion handling and instantaneous theme swaps.
+
+## Interface coverage
+
+| Domain | Evidence inspected | Result |
+| --- | --- | --- |
+| Accessibility | `src/site.js`, native buttons/links/progress, keyboard article flow, axe audits on desktop light/dark, article, 320px home/reader | No automated WCAG violations in five inspected states; VoiceOver not verified |
+| Layout | `src/site.css`, actual Chrome screenshots and geometry at 320/390/768/1440/1920px, equivalent 200% zoom viewport, 200% root font size | No tested page/reader horizontal overflow; native browser zoom and RTL mirror not verified |
+| Writing | `scripts/build.py` discovery/reader copy, empty/loading/error/retry states, source/kind labels | Actions and recovery paths explicit; duplicate X Article label removed; editorial JSON unchanged |
+| Typography | Wordmark, cover author names, headlines, prose and metadata in `src/site.css` | Chinese tracking preserved; Latin optical tracking scoped; rem text sizes and numeric alignment |
+| Colors | Source tokens, actual rendered light/dark screenshots and axe contrast checks | Primary text 16.84:1 light / 13.70:1 dark; secondary 5.71:1 / 8.45:1; input boundaries 3.73:1 / 5.00:1 |
+| UI polish | SVG mark/icons, image outlines, selected controls, hover/focus styles, reduced motion and theme switch | Consistent states in inspected views; no native Safari/real touch-device verification |
+
+## Resolved findings and design changes
+
+| Severity | Domain | Location | Before | After | Why |
+| --- | --- | --- | --- | --- | --- |
+| HIGH | Accessibility | `src/site.js:237` | Tab anchors had manual ARIA roles but Space did not activate them | Space activates the focused version; arrow keys use preventScroll focus | Complete the expected keyboard tab interaction and preserve reading context |
+| MEDIUM | Layout | `scripts/build.py:433`; `src/site.css:88` | Oversized opening cover pushed its title near the bottom of the first desktop screen | Title-first opening story, shorter cover, single-row span | Readers can identify the lead story immediately |
+| MEDIUM | Layout | `src/site.css:250` | Archive entry disappeared on mobile | Visible archive entry with wrapping header | Preserve the same navigation path across widths |
+| MEDIUM | Typography | `src/site.css:20`; `src/site.css:174` | Fixed pixel typography and fixed-height bar | Rem typography and a flexible, wrapping reader bar | Respect text enlargement without losing controls |
+| LOW | Writing | `scripts/build.py:467` | Repeated “X Article” source/type label | Single source/type description | Reduce redundant metadata |
+
+The new wordmark, discovery tools and darker card surfaces are requested product improvements, not retroactive claims that the prior aesthetic was inherently wrong.
+
+## Verification and reproduction
+
+- `npm test`: **25 Python tests + 21 reader DOM/state tests passed**. Covers all 13 static article routes, full Chinese/original/media RSS, source locks, no-JS structure, retry/races, history/focus and the new discovery behavior.
+- `XNEWS_BROWSER_CHANNEL=chrome npm run test:browser`: **39 real Chrome checks passed** on Chrome 157. Tests start/stop their own loopback server. Includes combined filters, reset/focus, theme persistence, separate reading offsets, Escape/Forward, progress to 100%, responsive geometry, archive default, fetch-failure retry and no-JS fallback.
+- Browser evidence: `.qa-ui/verification.json`, `.qa-ui/accessibility.json` and `.qa-ui/*.png`; generated locally and gitignored, never deployed. Screenshots were visually inspected for desktop light/dark, mobile, scan mode and the 320px reader.
+- `node --check src/site.js`, `python3 -m py_compile scripts/build.py`, `git diff --check` passed. `content/` and `public/articles.json` have no diff. RSS article contents are unchanged; only the build timestamp is regenerated.
+- Color ratios above were calculated using WCAG relative luminance from the declared opaque token pairs; automated browser contrast checks supplement those calculations.
+- Not verified: VoiceOver, Safari/iOS native behavior, RTL, native browser-chrome zoom, external video/audio playback. Browser UI tests block off-origin requests; this is not a playback validation. No production deployment or remote push was performed.
+
+Verdict: **Approve for the inspected local homepage/archive/reader surfaces.** Unverified assistive-technology/platform behavior remains explicitly outside that verdict. Local preview: `npm run preview -- --port 33205`. Changes are in the main checkout `/Users/joe/Documents/ChatGPT/qiaomu-xnews`; no temporary worktree or task branch was created.
+
+---
+
 # D 影像刊 · latest refinement handoff
 
 ## Accepted release gate (2026-11-06, 中国标准时间)

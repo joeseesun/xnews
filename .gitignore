@@ -7,3 +7,6 @@ __pycache__/
 
 # Local public-media investigation scratch; not content or deployment input.
 .media-qa/
+
+# Local browser verification and screenshots.
+.qa-ui/

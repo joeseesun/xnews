@@ -19,11 +19,68 @@
   }
   paintTheme();
   $('#theme-btn')?.addEventListener('click', () => {
+    const style = document.createElement('style');
+    style.textContent = '*,*::before,*::after{transition:none!important}';
+    document.head.append(style);
     const next = currentTheme() === 'dark' ? 'light' : 'dark';
     document.documentElement.dataset.theme = next;
     try { localStorage.setItem('xn.theme', next); } catch {}
     paintTheme();
+    void document.documentElement.offsetHeight;
+    nextFrame(() => nextFrame(() => style.remove()));
   });
+
+  // Filter the existing static cards; content and native links work without JS.
+  const discovery = $('[data-discovery]');
+  if (discovery) {
+    const grid = $('[data-news-grid]');
+    const cards = $$('.news-card', grid);
+    const search = $('#story-search');
+    const clear = $('[data-clear-search]');
+    const empty = $('[data-search-empty]');
+    const normalize = value => value.normalize('NFKC').toLocaleLowerCase().trim();
+    const index = cards.map(card => normalize(card.dataset.search || ''));
+    let kind = 'all', layout = discovery.dataset.defaultView;
+    function render(writeURL = true) {
+      const terms = normalize(search.value).split(/\s+/).filter(Boolean);
+      let count = 0;
+      cards.forEach((card, i) => {
+        card.hidden = !(kind === 'all' || card.dataset.kind === kind) || !terms.every(term => index[i].includes(term));
+        if (!card.hidden) count++;
+      });
+      grid.dataset.layout = layout;
+      grid.classList.toggle('is-filtered', kind !== 'all' || terms.length > 0);
+      $$('[data-filter]', discovery).forEach(button => button.setAttribute('aria-pressed', String(button.dataset.filter === kind)));
+      $$('[data-layout]', discovery).forEach(button => button.setAttribute('aria-pressed', String(button.dataset.layout === layout)));
+      $('[data-result-count]').textContent = count === cards.length ? `${count} 篇文章 · 最新在前` : `找到 ${count} 篇 · 共 ${cards.length} 篇`;
+      clear.hidden = !search.value;
+      empty.hidden = count !== 0;
+      $('[data-empty-description]').textContent = search.value.trim() ? `试试更短的关键词，或清除「${search.value.trim()}」与类型筛选。` : '这个类型暂时没有文章，试试查看全部内容。';
+      if (writeURL) {
+        const url = new URL(location.href);
+        for (const [key, value] of [['q', search.value.trim()], ['type', kind === 'all' ? '' : kind], ['view', layout === discovery.dataset.defaultView ? '' : layout]]) {
+          if (value) url.searchParams.set(key, value); else url.searchParams.delete(key);
+        }
+        history.replaceState(history.state, '', url.pathname + url.search + url.hash);
+      }
+    }
+    function restore() {
+      if (location.pathname.startsWith('/a/')) return;
+      const params = new URLSearchParams(location.search);
+      search.value = params.get('q') || '';
+      kind = ['text', 'video'].includes(params.get('type')) ? params.get('type') : 'all';
+      layout = ['journal', 'list'].includes(params.get('view')) ? params.get('view') : discovery.dataset.defaultView;
+      render(false);
+    }
+    search.addEventListener('input', () => render());
+    clear.addEventListener('click', () => { search.value = ''; render(); search.focus(); });
+    $$('[data-filter]', discovery).forEach(button => button.addEventListener('click', () => { kind = button.dataset.filter; render(); }));
+    $$('[data-layout]', discovery).forEach(button => button.addEventListener('click', () => { layout = button.dataset.layout; render(); }));
+    $('[data-reset-filters]').addEventListener('click', () => { kind = 'all'; search.value = ''; render(); search.focus(); });
+    window.addEventListener('popstate', restore);
+    discovery.hidden = false;
+    restore();
+  }
   function suspendMedia(root) {
     $$('video,audio', root).forEach(media => { try { media.pause(); } catch {} });
     $$('iframe[src]', root).forEach(frame => {
@@ -104,6 +161,30 @@
     const getTop = () => isWindow ? window.scrollY : scroller.scrollTop;
     const setTop = value => { if (isWindow) window.scrollTo(0, value); else scroller.scrollTop = value; };
     const toolbar = tablist.closest('.reader-tabs');
+    const position = $('.reading-position', toolbar);
+    const progress = $('progress', toolbar);
+    const percent = $('[data-reading-percent]', toolbar);
+    let progressFrame = null;
+    function updateProgress() {
+      progressFrame = null;
+      if (!article.isConnected || !progress) return;
+      const panel = panels.find(item => !item.hidden);
+      if (!panel) return;
+      const viewport = isWindow ? window.innerHeight : scroller.clientHeight;
+      const origin = isWindow ? 0 : scroller.getBoundingClientRect().top;
+      const top = panel.getBoundingClientRect().top - origin;
+      const distance = panel.getBoundingClientRect().height - viewport + toolbar.offsetHeight;
+      const value = distance <= 0 ? (top < viewport ? 100 : 0) : Math.round(Math.max(0, Math.min(1, (toolbar.offsetHeight - top) / distance)) * 100);
+      progress.value = value;
+      percent.textContent = value + '%';
+    }
+    function scheduleProgress() { if (progressFrame == null) progressFrame = nextFrame(updateProgress); }
+    if (position) position.hidden = false;
+    scroller.addEventListener('scroll', scheduleProgress, {passive: true});
+    window.addEventListener('resize', scheduleProgress);
+    article.addEventListener('load', scheduleProgress, true);
+    const observer = typeof ResizeObserver === 'function' ? new ResizeObserver(scheduleProgress) : null;
+    panels.forEach(panel => observer?.observe(panel));
     const toolbarTop = () => Math.max(0, toolbar.getBoundingClientRect().top + getTop() - (isWindow ? 0 : scroller.getBoundingClientRect().top));
     let view = null, generation = 0;
     article.classList.add('reader-enhanced');
@@ -146,6 +227,7 @@
           if (thisGeneration === generation && article.isConnected) setTop(saved ?? toolbarTop());
         });
       }
+      scheduleProgress();
     }
     tabs.forEach(tab => tab.addEventListener('click', event => {
       if (event.ctrlKey || event.metaKey || event.altKey || event.shiftKey) return;
@@ -155,16 +237,23 @@
     tablist.addEventListener('keydown', event => {
       const index = tabs.indexOf(document.activeElement);
       if (index < 0) return;
+      if (event.key === ' ') { event.preventDefault(); show(tabs[index].dataset.view); return; }
       let target = null;
       if (event.key === 'ArrowRight') target = tabs[(index + 1) % tabs.length];
       if (event.key === 'ArrowLeft') target = tabs[(index - 1 + tabs.length) % tabs.length];
       if (event.key === 'Home') target = tabs[0];
       if (event.key === 'End') target = tabs.at(-1);
-      if (target) { event.preventDefault(); target.focus(); }
+      if (target) { event.preventDefault(); safeFocus(target); }
     });
     show(location.hash === '#original' ? 'original' : 'rewrite', {initial: true, updateURL: false});
     bindMedia(article);
-    return {show, remember};
+    return {show, remember, dispose() {
+      scroller.removeEventListener('scroll', scheduleProgress);
+      window.removeEventListener('resize', scheduleProgress);
+      article.removeEventListener('load', scheduleProgress, true);
+      observer?.disconnect();
+      if (progressFrame != null) cancelAnimationFrame(progressFrame);
+    }};
   }
   function replaceViewURL(view) {
     const url = new URL(location.href);
@@ -225,7 +314,7 @@
     if (!safePath(path)) return;
     const ownSequence = ++sequence;
     controller?.abort();
-    viewController?.remember(); viewController = null;
+    viewController?.remember(); viewController?.dispose(); viewController = null;
     suspendMedia(scroll);
     loading();
     controller = new AbortController();
@@ -277,7 +366,7 @@
     const previous = active;
     ++sequence;
     controller?.abort(); controller = null;
-    viewController?.remember(); viewController = null;
+    viewController?.remember(); viewController?.dispose(); viewController = null;
     suspendMedia(scroll);
     if (typeof sheet.close === 'function' && sheet.open) sheet.close();
     sheet.removeAttribute('open'); sheet.classList.remove('sheet-fallback');

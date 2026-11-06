@@ -14,22 +14,23 @@
 <meta property="og:url" content="https://xnews.qiaomu.ai/a/karpathy-hackertube">
 <link rel="canonical" href="https://xnews.qiaomu.ai/a/karpathy-hackertube">
 <link rel="alternate" type="application/rss+xml" title="X News" href="/feed.xml">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231b1d18'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-size='19' fill='%23fffefa' font-family='sans-serif'%3EX%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-7 -7 58 58'%3E%3Crect x='-7' y='-7' width='58' height='58' rx='5' fill='%231b1d18'/%3E%3Cpath fill='%23fffefa' d='M2 0h11l29 44H31zM32 0h10L26 18l-5-7zM17 26l5 7-10 11H2z'/%3E%3C/svg%3E">
 <script>try{var t=localStorage.getItem('xn.theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="stylesheet" href="/app.css">
 <script src="/app.js" defer></script>
+<script defer src="https://umami.qiaomu.ai/script.js" data-website-id="31e0098c-6852-46b6-899c-11eed5ed16e1" data-domains="xnews.qiaomu.ai" data-exclude-search="true" data-exclude-hash="true"></script>
 </head>
 <body>
 <a class="skip" href="#main">跳到正文</a>
 <header class="site-header">
-  <a class="brand" href="/" aria-label="X News 海外发现首页"><span class="brand-name">X News</span><span class="brand-slash" aria-hidden="true">/</span><span class="brand-sub">海外<br>发现</span></a>
-  <div class="header-side"><p class="header-caption">英文原作，中文视角。<br>长帖 · 文章 · 影像</p><nav class="site-nav" aria-label="主导航"><a href="/">精选</a><a class="archive-nav" href="/archive">往期</a><a href="/feed.xml" aria-label="订阅全文 RSS">RSS ↗</a></nav><button type="button" class="icon-button" id="theme-btn" aria-label="切换为暗色主题" aria-pressed="false"><span aria-hidden="true">◐</span></button></div>
+  <a class="brand" href="/" aria-label="X News 海外发现首页"><span class="brand-wordmark" aria-hidden="true"><svg class="brand-mark" viewBox="0 0 44 44" fill="currentColor"><path d="M2 0h11l29 44H31zM32 0h10L26 18l-5-7zM17 26l5 7-10 11H2z"/></svg><span class="brand-name">News<span class="brand-period">.</span></span></span><span class="brand-sub">海外发现<span>英文原作 · 中文视角</span></span></a>
+  <div class="header-side"><nav class="site-nav" aria-label="主导航"><a href="/">精选</a><a class="archive-nav" href="/archive">往期</a><a href="/feed.xml" aria-label="订阅全文 RSS">订阅 RSS <span aria-hidden="true">↗</span></a></nav><button type="button" class="icon-button" id="theme-btn" aria-label="切换为暗色主题" aria-pressed="false"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16Z" fill="currentColor" stroke="none"/></svg></button></div>
 </header>
 <main class="site-main" id="main">
 <article class="article-reader" data-article-id="karpathy-hackertube">
 <a class="article-back" href="/">← 返回选刊</a>
 <header class="article-header"><p class="article-kicker">X · @karpathy / 长帖</p><h1>Karpathy 做了 HackerTube：从 4300 万条 HN 评论中找到 6454 个视频</h1><p class="article-dek">他用 Opus 5.5 花了约两小时完成这个周末项目；推荐无需登录，底层数据也可下载。</p><div class="article-meta"><time datetime="2026-11-01">2026年11月1日 · 周日</time><span>Andrej Karpathy</span><span>AI coding · product · HN</span></div></header>
-<nav class="reader-tabs" aria-label="文章版本与来源"><div data-tabs><a href="#rewrite" id="tab-rewrite" data-view="rewrite">乔木改写</a><a href="#original" id="tab-original" data-view="original">原文</a></div><a class="reader-source" href="https://x.com/karpathy/status/2116957135661945283" target="_blank" rel="noopener noreferrer">原文链接 ↗</a></nav>
+<nav class="reader-tabs" aria-label="文章版本与来源"><div data-tabs><a href="#rewrite" id="tab-rewrite" data-view="rewrite">乔木改写</a><a href="#original" id="tab-original" data-view="original">原文</a></div><a class="reader-source" href="https://x.com/karpathy/status/2116957135661945283" target="_blank" rel="noopener noreferrer">原文链接 ↗</a><div class="reading-position" hidden><progress max="100" value="0" aria-label="当前版本阅读进度"></progress><span data-reading-percent aria-hidden="true">0%</span></div></nav>
 <section class="reader-panel" id="rewrite" data-reader-panel="rewrite" aria-label="乔木改写"><h2 class="section-heading">乔木改写</h2><div class="prose"><p>Andrej Karpathy 不满 YouTube 的推荐，于是做了一个周末项目 HackerTube。他让 Claude 从 Hacker News 二十年来约 4300 万条评论中，筛出反复被推荐的 6454 个视频。按他的说法，整个项目用 Opus 5.5 花了约两小时，观看体验明显更好。</p>
 <p>他列出了几个设计选择：</p>
 <ul>

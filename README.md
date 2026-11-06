@@ -31,3 +31,22 @@ Content lives in [`content/articles/`](./content/articles/). Schema + daily ops:
 ## License
 
 MIT
+
+
+## Interaction and brand refinement
+
+The homepage keeps the visual-journal direction with an original X mark, serif wordmark, headline-first opening spread, light/dark palette and responsive reading controls. Search by title, author or topic, filter by video presence, or switch to a text-only scan view. `/archive` defaults to scan view. Filter state is shareable in the URL and survives opening/closing the reader. All article content and full RSS remain generated from the existing source files.
+
+```bash
+npm install
+npm test
+npm run preview -- --port 33205
+
+# Real Chrome interaction, layout and accessibility checks (local Chrome installed):
+XNEWS_BROWSER_CHANNEL=chrome npm run test:browser
+# Or install Playwright Chromium and use the default:
+npx playwright install chromium
+npm run test:browser
+```
+
+Browser evidence is written to ignored `.qa-ui/`, outside deployment assets. See the current section at the top of `QA.md` for scope and unverified platforms. Release status and production verification are recorded at the top of `QA.md`. If a shell-injected Cloudflare token is DNS-only, deploy with the existing authorized OAuth session using `env -u CLOUDFLARE_API_TOKEN wrangler deploy` after building.

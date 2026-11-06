@@ -219,11 +219,24 @@ class BuildRegression(unittest.TestCase):
         self.assertEqual((self.public / "app.css").read_text(), (ROOT / "src/site.css").read_text())
         self.assertEqual((self.public / "app.js").read_text(), (ROOT / "src/site.js").read_text())
 
+    def test_analytics_is_unique_and_scoped_to_production(self):
+        for page in self.public.rglob("*.html"):
+            scripts = Tags(page.read_text()).select("script", src="https://umami.qiaomu.ai/script.js")
+            self.assertEqual(len(scripts), 1, page.name)
+            self.assertEqual(scripts[0]["data-website-id"], build.UMAMI_WEBSITE_ID)
+            self.assertEqual(scripts[0]["data-domains"], "xnews.qiaomu.ai")
+            self.assertEqual(scripts[0]["data-exclude-search"], "true")
+            self.assertEqual(scripts[0]["data-exclude-hash"], "true")
+
     def test_responsive_css_and_motion_contract(self):
         css = (ROOT / "src/site.css").read_text()
         for required in ["@media(max-width:1050px)", "@media(max-width:680px)", "prefers-reduced-motion", "pointer:fine", "grid-template-columns:minmax(0,1fr)", "overscroll-behavior:contain", "100dvh", "font-style:normal"]:
             self.assertIn(required, css)
-        self.assertNotRegex(css, r"font-style\s*:\s*italic|transition\s*:\s*all|letter-spacing\s*:\s*-")
+        self.assertNotRegex(css, r"font-style\s*:\s*italic|transition\s*:\s*all")
+        # Compact tracking is intentional on the Latin wordmark and author covers only.
+        for selector, declarations in re.findall(r"([^{}]+)\{([^{}]*)\}", css):
+            if re.search(r"letter-spacing\s*:\s*-", declarations):
+                self.assertIn(selector.strip(), {".brand-name", ".card--text .cover-word"})
         self.assertNotIn("grid-auto-flow:dense", css)
 
     def test_rss_cdata_edge_and_media_variants(self):
