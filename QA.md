@@ -1,3 +1,14 @@
+# Grok Bot 内容发布协作同步 · 2026-11-07 02:06 (Asia/Shanghai)
+
+用户明确分工：Grok Bot 抓取和整理 X 内容，Codex 维护网站。已通过 Grok Bot 桌面应用向负责 X News 的「乔布斯」发送完整交接，并观察到「已更新 例行任务」记录及 02:05:56 的确认回复；不是仅写了待发送草稿。
+
+- 原有「X News 海外发现更新」任务保持每日北京时间 08:00 前后 15 分钟、原选材要求，无重复新建。部署步骤已更新为：同步最新 main → 准备虚拟环境/requirements → 内容 JSON → npm test → 源内容和全部 public 一起 commit/push → 干净工作区 npm run deploy → 发布 SHA、首页、文章、read payload、RSS v1 双版本验收。Wrangler 只更新备用站、push 不等于上线已明确。
+- **Grok Bot 回报，本站未独立进入其 Linux 环境执行：**工作目录 `/workspace/xnews`；既有 `qiaomu-hostinger` SSH 已成功连接；当前副本落后 15 个提交且无 `.venv`。后续执行必须先更新代码和安装固定依赖，不能直接从旧副本发布。当前内容试跑已接收新流程；本次同步没有新增或分享凭据。
+- **本站独立复核：**正常 HTTPS 首页 200，Nginx，`X-XNews-Release=f52d330c8b27`，约 0.95 秒；SSH 读取 current 与 release 配置吻合。先前本机 curl 的 DNS 负缓存现已消退。
+- 分工、无 SSH 时的提交交接和发布验收标准已写进 DEPLOYMENT.md，并推送 GitHub。当前任务仅同步流程和核验发布能力；Grok Bot 正在进行的内容试跑尚未完成本轮新稿上线，不能把任务配置确认当作新内容已发布。
+
+---
+
 # 首页与文章速度修复 · 2026-11-07 (Asia/Shanghai)
 
 代码源提交 `1007d9ec74e147a870e86b235d62d3b246a2d499` 已推送 main。正式域名现为 DNS-only A → `76.13.103.27`，由已有 qiaomu-hostinger 的 Nginx 静态托管；公开 Cloudflare DoH 和 Hostinger/LA 的正常域名请求均确认新源。Worker `xnews` 保留为备用：`https://xnews.vista8.workers.dev`，版本 `31754947-3515-49f5-b5eb-a560fbc14b0b`。主站发布入口现为 `npm run deploy`，要求先提交测试后的生成文件，避免发布时重建使源码与产物失配。详见 DEPLOYMENT.md。
