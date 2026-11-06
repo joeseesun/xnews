@@ -14,9 +14,15 @@
 
 ## 正式客户端验收状态
 
-01:44 CST：正式 DNS 和远端 HTTPS 正常；本机 DNS 仍缓存迁移期间的负响应，正在等待缓存自然到期后验收浏览器和普通 curl。暂不把候选源站验证写成完成的本机正式浏览器验收。
+01:50–01:52 CST：**正式 Chrome 验收通过**。首页显示 15 篇，无外部 app CSS/JS；搜索 CaptureFlow→打开正文→切换原文（1 个 table、5 个 pre）→返回，搜索值与卡片焦点恢复。Nginx 日志确认 Chrome 首页、指纹正文和 QA 404 请求均进入新源站，避免把浏览器旧缓存误当新线路。线上截图 `live-home.png`、`live-original.png`，结构化证据 `browser-live.json`。
 
-本轮只处理性能，保留既有设计、SEO/GEO、Umami property `31e0098c-6852-46b6-899c-11eed5ed16e1` 与站点入口；不新增 PWA、推广、支付或注册，不修改 RSS Reader 消费端。旧的 Umami 入库证据不冒充本次发布新证据。完整原始记录位于忽略目录 `.qa-ui/speed-round2/`。未创建临时 worktree。
+**本次 Umami 入库已验证**：同一 property 的实时列表出现 `/__qa-speed-20261107-1007d9e`（01:50:47 CST），同时包含新首页与 CaptureFlow 访问。证据 `umami-live.txt/png`。保留旧 property 的显示名称「AI 大V电台」，未改历史数据。
+
+`npm run deploy` 已真实执行，当前主站发布头为 `f52d330c8b27`，current 指向该 release，previous 为 `1007d9e`；两者 public 文件相同。最终源站 RSS、文章、正文、404 再次逐字节匹配。Certbot webroot 模拟续期已通过，临时 DNS 凭据清理完成。
+
+**边界**：迁移时本地 DNS 曾缓存负响应。公共 Cloudflare/Google DoH、两台远端正常域名请求和本机 Chrome 已确认正常；最后一次本机 curl 仍被系统解析负缓存阻断，不把它算通过。浏览器 viewport 覆盖未实际生效（真实 DOM 仍为 1512px），因此名为 `live-mobile.png` 的尝试不是手机验收；本轮不声称新做了移动端或 Safari 实机验证。之前窄屏布局证据仍对应未改动的 CSS。临时 33208/33209/33210 预览服务已停止。
+
+本轮只处理性能，保留既有设计、SEO/GEO、Umami property `31e0098c-6852-46b6-899c-11eed5ed16e1` 与站点入口；不新增 PWA、推广、支付或注册，不修改 RSS Reader 消费端。本次 Umami 新入库证据见上。完整原始记录位于忽略目录 `.qa-ui/speed-round2/`。未创建临时 worktree。
 
 ---
 
