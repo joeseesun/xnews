@@ -1,3 +1,24 @@
+# Performance and search release · 2026-11-06 (Asia/Shanghai)
+
+Scope explicitly requested: optimize and publish **xnews.qiaomu.ai** loading speed, SEO and GEO; separately register its RSS in 乔木精选. Coordinated with the UI release chat and started editing only after it became idle and the checkout was clean at `4ed2ec3` (UI/content base `ddff8be`, 15 articles).
+
+## Changes and evidence
+
+- Fingerprinted CSS/JS under `/static/` and content-addressed media use one-year immutable browser caching. HTML uses short freshness windows (home/archive 60 seconds, articles 300 seconds); RSS 300 seconds. Old `/app.css` and `/app.js` remain for compatibility. Keep older fingerprinted assets while old HTML may still reference them.
+- Hover/keyboard intent prefetches at most two same-origin article requests concurrently and shares the response with the reader. No bulk article or media preloading; save-data/2G skip speculative requests. Failed/mismatched responses never enter the cache; explicit reading still works.
+- Build generates `robots.txt`, an 18-URL canonical sitemap (15 articles + home/archive/about), Article/WebPage/WebSite/publisher JSON-LD, article source references and sharing images. 404 is noindex with no misleading canonical. No invented `lastmod` or modification timestamps. Publisher/original-author roles and date meaning are visible in the article/about page; original content and media are unchanged.
+- Before: public robots/sitemap returned 404; CSS/JS used `max-age=0, must-revalidate`. Terminal sample TTFB: home 0.517s, article 0.760s; browser observed ~1.54s CSS/JS fetches and a reader still loading after 5 seconds. Browser before runs did not yield a stable aggregate; they must not be presented as field Core Web Vitals.
+- Controlled Chrome comparison (600ms added article latency, 850ms hover lead, 3 runs each): baseline click-to-article 824/817/826ms; intent prefetch 34/35/41ms. This isolates the prefetch benefit, not a population-wide speed claim. `.qa-ui/speed-seo/performance-lab.json` contains raw results.
+- Verification: 29 Python + 24 reader state tests passed; 39 real Chrome checks passed on identical candidate sources, including desktop/mobile layout and accessibility. Desktop reader screenshot inspected. Original `content/` and `articles.json` unchanged. Wrangler dry run passed.
+
+## Search documentation checked
+
+Reviewed 2026-11-06: [Cloudflare asset headers](https://developers.cloudflare.com/workers/static-assets/headers/), [Google Article markup](https://developers.google.com/search/docs/appearance/structured-data/article), [Google AI search foundations](https://developers.google.com/search/docs/appearance/ai-features), [OpenAI crawler distinctions](https://developers.openai.com/api/docs/bots). Scope is live/code/rendered inventory of this small site; no Search Console property, indexing, rankings, real-user performance distributions or AI citations were available. Sitemap publication and valid markup are not evidence of search-engine processing. Search/AI citation outcomes require later platform data; do not fabricate a universal GEO score.
+
+Deployment and final live verification: pending below. Rollback baseline: Cloudflare Worker version `2d8c75ee-d16b-46cd-bbfe-d39da9236a2b`. Existing Umami property is preserved. No temporary worktree created.
+
+---
+
 # Production release · 2026-11-06
 
 User authorized publication with “上线啊”. Release baseline: `801d1918e00d3ddba9865793e0b144d4daa524a6`; remote main matched before staging. This release includes the completed brand/interaction refinement below, the explicit Cloudflare account ID verified against the qiaomu.ai zone, and restoration of the domain’s existing Umami property `31e0098c-6852-46b6-899c-11eed5ed16e1`.

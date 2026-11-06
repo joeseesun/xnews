@@ -13,11 +13,17 @@
 <meta property="og:description" content="v0.11.0 支持 Claude Code 钩子和 CI 检查，默认只阻断 high；历史评测有明确的版本、样本与误报边界。">
 <meta property="og:url" content="https://xnews.qiaomu.ai/a/checkwash-test-weakening">
 <link rel="canonical" href="https://xnews.qiaomu.ai/a/checkwash-test-weakening">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="checkwash 用 Git diff 检查测试弱化，Alpha 版仍有漏检和误报 · X News">
+<meta name="twitter:description" content="v0.11.0 支持 Claude Code 钩子和 CI 检查，默认只阻断 high；历史评测有明确的版本、样本与误报边界。">
+<meta property="article:published_time" content="2026-11-06">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://xnews.qiaomu.ai/#publisher", "name": "X News", "url": "https://xnews.qiaomu.ai/", "description": "海外创始人长文与 AI 视频的中文改写选刊"}, {"@type": "WebSite", "@id": "https://xnews.qiaomu.ai/#website", "name": "X News", "url": "https://xnews.qiaomu.ai/", "inLanguage": "zh-CN", "publisher": {"@id": "https://xnews.qiaomu.ai/#publisher"}}, {"@type": "Article", "@id": "https://xnews.qiaomu.ai/a/checkwash-test-weakening#article", "url": "https://xnews.qiaomu.ai/a/checkwash-test-weakening", "mainEntityOfPage": {"@id": "https://xnews.qiaomu.ai/a/checkwash-test-weakening#page"}, "headline": "checkwash 用 Git diff 检查测试弱化，Alpha 版仍有漏检和误报", "description": "v0.11.0 支持 Claude Code 钩子和 CI 检查，默认只阻断 high；历史评测有明确的版本、样本与误报边界。", "inLanguage": "zh-CN", "datePublished": "2026-11-06", "author": {"@id": "https://xnews.qiaomu.ai/#publisher"}, "publisher": {"@id": "https://xnews.qiaomu.ai/#publisher"}, "isBasedOn": {"@type": "CreativeWork", "url": "https://x.com/kartg123451/status/2118550260104769565", "name": "I built checkwash because a green CI run can still hide a weaker test.", "datePublished": "2026-11-06T11:45:17+08:00"}, "citation": "https://x.com/kartg123451/status/2118550260104769565", "keywords": ["技术深潜", "代码审查", "开源"]}, {"@type": "WebPage", "@id": "https://xnews.qiaomu.ai/a/checkwash-test-weakening#page", "url": "https://xnews.qiaomu.ai/a/checkwash-test-weakening", "name": "checkwash 用 Git diff 检查测试弱化，Alpha 版仍有漏检和误报 · X News", "description": "v0.11.0 支持 Claude Code 钩子和 CI 检查，默认只阻断 high；历史评测有明确的版本、样本与误报边界。", "inLanguage": "zh-CN", "isPartOf": {"@id": "https://xnews.qiaomu.ai/#website"}, "mainEntity": {"@id": "https://xnews.qiaomu.ai/a/checkwash-test-weakening#article"}}]}</script>
 <link rel="alternate" type="application/rss+xml" title="X News" href="/feed.xml">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-7 -7 58 58'%3E%3Crect x='-7' y='-7' width='58' height='58' rx='5' fill='%231b1d18'/%3E%3Cpath fill='%23fffefa' d='M2 0h11l29 44H31zM32 0h10L26 18l-5-7zM17 26l5 7-10 11H2z'/%3E%3C/svg%3E">
 <script>try{var t=localStorage.getItem('xn.theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
-<link rel="stylesheet" href="/app.css">
-<script src="/app.js" defer></script>
+<link rel="stylesheet" href="/static/app.0e8b5dd3d353.css">
+<script src="/static/app.1da45950a6f6.js" defer></script>
 <script defer src="https://umami.qiaomu.ai/script.js" data-website-id="31e0098c-6852-46b6-899c-11eed5ed16e1" data-domains="xnews.qiaomu.ai" data-exclude-search="true" data-exclude-hash="true"></script>
 </head>
 <body>
@@ -29,7 +35,7 @@
 <main class="site-main" id="main">
 <article class="article-reader" data-article-id="checkwash-test-weakening">
 <a class="article-back" href="/">← 返回选刊</a>
-<header class="article-header"><p class="article-kicker">X · @kartg123451 / 长帖</p><h1>checkwash 用 Git diff 检查测试弱化，Alpha 版仍有漏检和误报</h1><p class="article-dek">v0.11.0 支持 Claude Code 钩子和 CI 检查，默认只阻断 high；历史评测有明确的版本、样本与误报边界。</p><div class="article-meta"><time datetime="2026-11-06">2026年11月6日 · 周五</time><span>Nelson Chu</span><span>技术深潜 · 代码审查 · 开源</span></div></header>
+<header class="article-header"><p class="article-kicker">X · @kartg123451 / 长帖</p><h1>checkwash 用 Git diff 检查测试弱化，Alpha 版仍有漏检和误报</h1><p class="article-dek">v0.11.0 支持 Claude Code 钩子和 CI 检查，默认只阻断 high；历史评测有明确的版本、样本与误报边界。</p><div class="article-meta"><time datetime="2026-11-06">2026年11月6日 · 周五</time><span>原作者：Nelson Chu</span><span>中文改写：<a href="/about">X News · 乔木</a></span><span>技术深潜 · 代码审查 · 开源</span></div></header>
 <nav class="reader-tabs" aria-label="文章版本与来源"><div data-tabs><a href="#rewrite" id="tab-rewrite" data-view="rewrite">乔木改写</a><a href="#original" id="tab-original" data-view="original">原文</a></div><a class="reader-source" href="https://x.com/kartg123451/status/2118550260104769565" target="_blank" rel="noopener noreferrer">原文链接 ↗</a><div class="reading-position" hidden><progress max="100" value="0" aria-label="当前版本阅读进度"></progress><span data-reading-percent aria-hidden="true">0%</span></div></nav>
 <section class="reader-panel" id="rewrite" data-reader-panel="rewrite" aria-label="乔木改写"><h2 class="section-heading">乔木改写</h2><div class="prose"><p>Nelson Chu 在 11 月 6 日介绍了自己做的 checkwash：一个在本地读取 Git diff、检查测试是否被改弱的开源工具。它不调用大模型，分析时不联网，也不会执行被检查的代码。测试通过并不一定意味着检查仍然有效，例如把 <code>assert total == 105.3</code> 改成 <code>assert total &gt; 0</code>，许多错误的金额也会被放行。checkwash 会标记这类改动，包括编程 Agent 写出的改动，交给人审阅。</p>
 <p>下面的使用方式和限制来自作者仓库的完整 README。文档推荐的 CLI 和 Action 均为 v0.11.0，说明它是公开发行文件已经核验的版本；本轮阅读了文档，没有安装或执行 checkwash，也没有把文档自述当成本站的独立测试结果。</p>

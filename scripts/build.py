@@ -6,6 +6,7 @@ import html
 import hashlib
 import json
 import re
+import sys
 from datetime import datetime, timezone, timedelta
 from email.utils import format_datetime
 from pathlib import Path
@@ -14,6 +15,9 @@ from xml.sax.saxutils import escape as xml_escape
 ROOT = Path(__file__).resolve().parents[1]
 CONTENT = ROOT / "content" / "articles"
 PUBLIC = ROOT / "public"
+sys.path.insert(0, str(ROOT / 'scripts'))
+from search_metadata import metadata, discovery_files
+
 SITE_URL = "https://xnews.qiaomu.ai"
 SITE_NAME = "X News"
 UMAMI_WEBSITE_ID = "31e0098c-6852-46b6-899c-11eed5ed16e1"
@@ -25,6 +29,8 @@ TZ_SH = timezone(timedelta(hours=8))
 # Presentation sources; public assets are regenerated from these files.
 CSS = (ROOT / "src" / "site.css").read_text(encoding="utf-8")
 JS = (ROOT / "src" / "site.js").read_text(encoding="utf-8")
+CSS_FILE = '/static/app.' + hashlib.sha256(CSS.encode()).hexdigest()[:12] + '.css'
+JS_FILE = '/static/app.' + hashlib.sha256(JS.encode()).hexdigest()[:12] + '.js'
 # Verified, rendering-only copies of small public images; never rewrite content or RSS URLs.
 MEDIA_MANIFEST = json.loads((ROOT / "src" / "media-manifest.json").read_text(encoding="utf-8")) if (ROOT / "src" / "media-manifest.json").exists() else {"assets": []}
 LOCAL_MEDIA = {asset["source_url"]: asset["local_url"] for asset in MEDIA_MANIFEST.get("assets", [])}
@@ -132,9 +138,12 @@ def parse_dt(a: dict) -> datetime:
         return datetime.strptime(a["date"], "%Y-%m-%d").replace(tzinfo=TZ_SH)
 
 
-def shell(title: str, body_main: str, *, description: str = "", active: str = "home", canonical: str = "/") -> str:
+def shell(title: str, body_main: str, *, description: str = "", active: str = "home", canonical: str = "/", article: dict | None = None) -> str:
     desc = html.escape(description or SITE_SUB)
     canon = SITE_URL.rstrip("/") + canonical
+    image = cover_asset(article)[0] if article else ""
+    search_meta = metadata(title, description or SITE_SUB, canonical, article, image) if canonical != "/404" else '<meta name="robots" content="noindex">'
+    canonical_tag = f'<link rel="canonical" href="{html.escape(canon)}">' if canonical != "/404" else ""
     is_list = active in ("home", "archive") and canonical in ("/", "/archive")
     dialog = '''<dialog class="reader-sheet" id="reader-sheet" aria-labelledby="sheet-label">
   <header class="sheet-bar"><button type="button" class="sheet-close" data-close-sheet><span aria-hidden="true">×</span>返回选刊</button><span class="sheet-brand" id="sheet-label">X News · 阅读</span><a href="/" data-sheet-permalink target="_blank" rel="noopener noreferrer">独立页面 ↗</a></header>
@@ -156,12 +165,13 @@ def shell(title: str, body_main: str, *, description: str = "", active: str = "h
 <meta property="og:title" content="{html.escape(title)}">
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{html.escape(canon)}">
-<link rel="canonical" href="{html.escape(canon)}">
+{canonical_tag}
+{search_meta}
 <link rel="alternate" type="application/rss+xml" title="{SITE_NAME}" href="/feed.xml">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-7 -7 58 58'%3E%3Crect x='-7' y='-7' width='58' height='58' rx='5' fill='%231b1d18'/%3E%3Cpath fill='%23fffefa' d='M2 0h11l29 44H31zM32 0h10L26 18l-5-7zM17 26l5 7-10 11H2z'/%3E%3C/svg%3E">
 <script>try{{var t=localStorage.getItem('xn.theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}}catch(e){{}}</script>
-<link rel="stylesheet" href="/app.css">
-<script src="/app.js" defer></script>
+<link rel="stylesheet" href="{CSS_FILE}">
+<script src="{JS_FILE}" defer></script>
 <script defer src="https://umami.qiaomu.ai/script.js" data-website-id="{UMAMI_WEBSITE_ID}" data-domains="xnews.qiaomu.ai" data-exclude-search="true" data-exclude-hash="true"></script>
 </head>
 <body>
@@ -477,7 +487,7 @@ def render_article(a: dict) -> str:
     related = f'<a href="{html.escape(src["related_url"], quote=True)}" target="_blank" rel="noopener noreferrer">相关链接 ↗</a>' if src.get("related_url") else ""
     return f'''<article class="article-reader" data-article-id="{html.escape(a['id'], quote=True)}">
 <a class="article-back" href="/">← 返回选刊</a>
-<header class="article-header"><p class="article-kicker">{html.escape(kicker)}</p><h1>{html.escape(a['title'])}</h1><p class="article-dek">{html.escape(a.get('dek') or '')}</p><div class="article-meta"><time datetime="{html.escape(a['date'], quote=True)}">{fmt_date(a['date'])}</time><span>{html.escape(src.get('author') or '')}</span><span>{' · '.join(html.escape(t) for t in a.get('tags') or [])}</span></div></header>
+<header class="article-header"><p class="article-kicker">{html.escape(kicker)}</p><h1>{html.escape(a['title'])}</h1><p class="article-dek">{html.escape(a.get('dek') or '')}</p><div class="article-meta"><time datetime="{html.escape(a['date'], quote=True)}">{fmt_date(a['date'])}</time><span>原作者：{html.escape(src.get('author') or '')}</span><span>中文改写：<a href="/about">X News · 乔木</a></span><span>{' · '.join(html.escape(t) for t in a.get('tags') or [])}</span></div></header>
 <nav class="reader-tabs" aria-label="文章版本与来源"><div data-tabs><a href="#rewrite" id="tab-rewrite" data-view="rewrite">乔木改写</a><a href="#original" id="tab-original" data-view="original">原文</a></div><a class="reader-source" href="{source_url}" target="_blank" rel="noopener noreferrer">原文链接 ↗</a><div class="reading-position" hidden><progress max="100" value="0" aria-label="当前版本阅读进度"></progress><span data-reading-percent aria-hidden="true">0%</span></div></nav>
 <section class="reader-panel" id="rewrite" data-reader-panel="rewrite" aria-label="乔木改写"><h2 class="section-heading">乔木改写</h2><div class="prose">{render_rewrite(a)}</div></section>
 {render_original_section(a)}
@@ -563,6 +573,10 @@ def build() -> None:
 
     PUBLIC.mkdir(parents=True, exist_ok=True)
     (PUBLIC / "a").mkdir(exist_ok=True)
+    (PUBLIC / "static").mkdir(exist_ok=True)
+    (PUBLIC / CSS_FILE.lstrip("/")).write_text(CSS, encoding="utf-8")
+    (PUBLIC / JS_FILE.lstrip("/")).write_text(JS, encoding="utf-8")
+    discovery_files(PUBLIC, articles)
     (PUBLIC / "app.css").write_text(CSS, encoding="utf-8")
     (PUBLIC / "app.js").write_text(JS, encoding="utf-8")
     (PUBLIC / "feed.xml").write_text(build_rss(articles), encoding="utf-8")
@@ -596,14 +610,14 @@ def build() -> None:
     (PUBLIC / "archive.html").write_text(
         shell(f"全部文章 · {SITE_NAME}", archive, active="archive", canonical="/archive"), encoding="utf-8",
     )
-    about = f'''<article class="about-copy prose"><h1>关于 {SITE_NAME}</h1><p>从英文世界的创始人长帖、X Articles 与 AI 视频中，挑出值得读的内容，改写成乔木风格的中文。</p><p>每篇都保留已有原文、图片或视频，以及可直接打开的来源链接。中文是改写，不是逐字翻译；视频摘录不等于完整逐字稿，原作以来源页面为准。</p><p>每日 08:00（中国标准时间，UTC+8）更新。你可以在网页阅读，也可以<a href="/feed.xml">订阅全文 RSS</a>；RSS 包含中文改写、已保存的原文和媒体，不只提供摘要。</p><p><a href="/archive">全部文章</a> · <a href="https://github.com/joeseesun/xnews" target="_blank" rel="noopener noreferrer">项目源码 ↗</a></p></article>'''
+    about = f'''<article class="about-copy prose"><h1>关于 {SITE_NAME}</h1><p>从英文世界的创始人长帖、X Articles 与 AI 视频中，挑出值得读的内容，改写成乔木风格的中文。</p><p>每篇都保留已有原文、图片或视频，以及可直接打开的来源链接。中文是改写，不是逐字翻译；视频摘录不等于完整逐字稿，原作以来源页面为准。</p><p>中文选刊由 X News · 乔木整理，保留原作者署名和原始链接；文章日期为中文刊发日期，RSS 中的时间对应已记录的原作发布时间。发现遗漏或需要更正，可通过<a href="https://github.com/joeseesun/xnews/issues" target="_blank" rel="noopener noreferrer">项目问题页</a>反馈。</p><p>每日 08:00（中国标准时间，UTC+8）更新。你可以在网页阅读，也可以<a href="/feed.xml">订阅全文 RSS</a>；RSS 包含中文改写、已保存的原文和媒体，不只提供摘要。</p><p><a href="/archive">全部文章</a> · <a href="https://github.com/joeseesun/xnews" target="_blank" rel="noopener noreferrer">项目源码 ↗</a></p></article>'''
     (PUBLIC / "about.html").write_text(shell(f"关于 · {SITE_NAME}", about, active="about", canonical="/about"), encoding="utf-8")
     (PUBLIC / "404.html").write_text(
         shell(f"未找到 · {SITE_NAME}", '<section class="empty-state"><p>404 / 未找到</p><h1>这篇内容不在这里。</h1><p>链接可能不完整，或内容已经移动。<a href="/">返回选刊</a>，或去<a href="/archive">全部文章</a>找找。</p></section>', active="", canonical="/404"), encoding="utf-8",
     )
     for a in articles:
         (PUBLIC / "a" / f"{a['id']}.html").write_text(
-            shell(f"{a['title']} · {SITE_NAME}", render_article(a), description=a.get("dek") or a["title"], active="article", canonical=f"/a/{a['id']}"), encoding="utf-8",
+            shell(f"{a['title']} · {SITE_NAME}", render_article(a), description=a.get("dek") or a["title"], active="article", canonical=f"/a/{a['id']}", article=a), encoding="utf-8",
         )
 
     print(f"Built {len(articles)} articles → {PUBLIC}")

@@ -294,3 +294,40 @@ test('Space activates the focused article version without scrolling the page', a
   assert.equal(s.$('#original').hidden, false);
   assert.equal(s.w.location.hash, '#original');
 });
+
+test('intent prefetch is shared with click and never preloads every story', async t => {
+  let finish;
+  const s = setup({fetcher: url => new Promise(resolve => { finish = () => resolve({ok: true, text: async () => html(url.slice(1) + '.html')}); })});
+  t.after(() => s.dom.window.close());
+  assert.equal(s.requests.length, 0);
+  const link = s.$('#read-cursor-live-apps');
+  link.dispatchEvent(new s.w.Event('pointerover', {bubbles: true}));
+  link.dispatchEvent(new s.w.Event('pointerover', {bubbles: true}));
+  s.click(link);
+  assert.equal(s.requests.length, 1);
+  finish();
+  await until(() => s.$('#reader-sheet [data-article-id]'), 'prefetched reader');
+  assert.equal(s.requests.length, 1);
+  assert.equal(s.requests[0].options.priority, 'low');
+});
+
+test('failed or mismatched prefetch does not poison a later article open', async t => {
+  const s = setup({fetcher: async (url, options, n) => ({ok: true, text: async () => n === 1 ? html('a/karpathy-hackertube.html') : html(url.slice(1) + '.html')})});
+  t.after(() => s.dom.window.close());
+  const link = s.$('#read-cursor-live-apps');
+  link.dispatchEvent(new s.w.Event('pointerover', {bubbles: true}));
+  await frames(); s.click(link);
+  await until(() => s.$('#reader-sheet [data-article-id]'), 'correct article');
+  assert.equal(s.$('#reader-sheet [data-article-id]').dataset.articleId, 'cursor-live-apps');
+  assert.equal(s.requests.length, 2);
+});
+
+test('data saver disables speculative fetch but permits explicit reading', async t => {
+  const s = setup(); t.after(() => s.dom.window.close());
+  Object.defineProperty(s.w.navigator, 'connection', {value: {saveData: true}});
+  const link = s.$('#read-cursor-live-apps');
+  link.dispatchEvent(new s.w.Event('pointerover', {bubbles: true}));
+  link.focus(); assert.equal(s.requests.length, 0);
+  s.click(link); await until(() => s.$('#reader-sheet [data-article-id]'), 'explicit reader');
+  assert.equal(s.requests.length, 1);
+});
