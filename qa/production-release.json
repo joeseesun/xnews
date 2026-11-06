@@ -1,0 +1,43 @@
+{
+  "domain": "xnews.qiaomu.ai",
+  "sourceCommit": "ddff8be",
+  "deploymentId": "2d8c75ee-d16b-46cd-bbfe-d39da9236a2b",
+  "previousDeploymentId": "87bdee7f-5f0c-47f8-956d-dd6a8dbd893a",
+  "recordedAtUTC": "2026-11-06T08:47:02.800548+00:00",
+  "articleCount": 15,
+  "regression": {
+    "pythonPassed": 26,
+    "readerPassed": 21
+  },
+  "productionBrowserChecks": [
+    "New wordmark and 15-article homepage rendered",
+    "CaptureFlow search returns one result",
+    "CaptureFlow opens in full-screen reader",
+    "Original tab displays full stored source",
+    "Close restores search URL, query and originating link focus",
+    "Clear search restores 15 articles"
+  ],
+  "umami": {
+    "websiteId": "31e0098c-6852-46b6-899c-11eed5ed16e1",
+    "domain": "xnews.qiaomu.ai",
+    "qaPath": "/__qa-release-20261106-ddff8be",
+    "eventIngestionVerified": true,
+    "observedEventTimeShanghai": "2026-11-06 16:43:53 +08:00",
+    "method": "Real Chrome visit to intentional 404 QA path, followed by realtime dashboard readback; homepage and article pageviews also present",
+    "dashboard": "https://umami.qiaomu.ai/websites/31e0098c-6852-46b6-899c-11eed5ed16e1/realtime"
+  },
+  "screenshots": [
+    ".qa-ui/production-live-ddff8be.png",
+    ".qa-ui/umami-release-ddff8be.png"
+  ],
+  "limitations": [
+    "Full terminal HTTP byte comparison incomplete: urllib returned 403/connection closures and curl timed out. No claim that all public files were compared byte-for-byte. Real Chrome production pages and interactions passed.",
+    "No new real Safari/iOS, screen-reader or video/audio playback verification."
+  ],
+  "deploymentAuth": {
+    "method": "Existing Wrangler OAuth, with shell API token unset for command",
+    "command": "env -u CLOUDFLARE_API_TOKEN wrangler deploy",
+    "credentialLocation": "/Users/joe/Library/Preferences/.wrangler/config/default.toml",
+    "accountId": "d060d68463fc12fa91fa2aa216bbab02"
+  }
+}
