@@ -18,6 +18,7 @@ CONTENT = ROOT / "content" / "articles"
 PUBLIC = ROOT / "public"
 sys.path.insert(0, str(ROOT / 'scripts'))
 from search_metadata import metadata, discovery_files
+from source_markdown import render_source_markdown
 
 SITE_URL = "https://xnews.qiaomu.ai"
 SITE_NAME = "X News"
@@ -122,6 +123,14 @@ def load_articles() -> list[dict]:
     return items
 
 
+def render_original_text(a: dict) -> str:
+    orig = a.get("original") or {}
+    text = (orig.get("text_md") or "").strip()
+    if orig.get("markdown_base_url"):
+        return render_source_markdown(text, orig["markdown_base_url"])
+    return md_to_html(text)
+
+
 def fmt_date(date: str) -> str:
     try:
         d = datetime.strptime(date, "%Y-%m-%d")
@@ -155,6 +164,7 @@ def shell(title: str, body_main: str, *, description: str = "", active: str = "h
     return f'''<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+<meta name="referrer" content="no-referrer">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{html.escape(title)}</title>
@@ -349,7 +359,7 @@ def render_original_section(a: dict) -> str:
     title_html = f'<h3 class="original-title">{html.escape(title)}</h3>' if title else ""
     notice = original_notice(a)
     notice_html = f'<p class="completeness-note">{html.escape(notice)}</p>' if notice else ""
-    body = md_to_html(text) if text else ""
+    body = render_original_text(a) if text else ""
     lang = html.escape(orig.get("lang") or "en", quote=True)
     return f'''<section class="reader-panel" id="original" data-reader-panel="original" aria-label="原文">
 <h2 class="section-heading">原文</h2>{notice_html}{title_html}
@@ -521,7 +531,7 @@ def rss_full_html(a: dict) -> str:
         if media_html:
             parts.append(media_html)
         if otext:
-            parts.append(md_to_html(otext))
+            parts.append(render_original_text(a))
     parts.append(
         "<p><strong>原文链接：</strong>"
         f'<a href="{html.escape(src["url"])}">{html.escape(src["url"])}</a></p>'
@@ -601,7 +611,7 @@ def rss_versions(a: dict) -> dict:
     if any(not m.get("url") for m in media):
         parts.append("<p>部分原文媒体地址缺失，请通过原文链接查看。</p>")
     if text:
-        parts.append(md_to_html(text))
+        parts.append(render_original_text(a))
     for label, url in (("原文链接", src["url"]), ("相关链接", src.get("related_url"))):
         if url:
             escaped = html.escape(url, quote=True)

@@ -86,6 +86,10 @@ Outputs: `public/index.html`, `public/a/<id>.html`, `public/feed.xml`, `public/a
 Read [`EDITORIAL_PROMPT.md`](./EDITORIAL_PROMPT.md) and its stable reviewed addon [`EDITORIAL_ADDON.md`](./EDITORIAL_ADDON.md) first. Its fidelity/natural-Chinese rules override generic style templates. The writing-style/tropes references may help expression, but do not require questions, analogies, short-line emphasis or grand endings. Show the Chinese body **with its source-media references**, then **原文** (unaltered original text + media), then 原文链接. The same reference plan renders the Chinese RSS section. Do not ship Chinese KOL digests here.
 # RSS 双版本协议（v1）
 
+复杂来源 Markdown（例如完整 GitHub README）可以设置 `original.markdown_base_url`，值为固定版本的 HTTPS 文档地址。构建时使用 CommonMark + 表格解析和 HTML 白名单净化；图片相对路径解析到该版本的 raw 文件，文档链接解析到同版本页面。原始 `text_md` 不作替换，代码块中的 HTML 仍保留为代码，正文 HTML 不再作为字面文本展示。未设置此字段的旧短帖保持既有排版。Python 依赖在 `requirements.txt` 固定版本。
+
+视频可用性需区分未加载、请求失败和实际播放。X CDN 在本轮实测中对带外站 Referer 的媒体请求返回 403，不带 Referer 的公开请求返回视频；本站通过 HTTP 头和 HTML meta 使用 `no-referrer`。RSS 消费端的请求策略由其宿主控制，不能依赖视频标签上的非标准属性覆盖；YouTube iframe 保留自身 referrerpolicy，以满足播放器识别来源的要求。媒体地址和原始 fallback 链接保持不变。
+
 `https://xnews.qiaomu.ai/feed.xml` 是 RSS 2.0。标准 `description` 和
 `content:encoded` 保持兼容：它们包含完整「乔木改写 + 原文」，**不能当作独立原文保存**。
 支持双版本的阅读器应读取每个 `item` 中唯一的 `qiaomu:versions`：

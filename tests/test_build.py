@@ -49,7 +49,7 @@ class BuildRegression(unittest.TestCase):
             self.assertIn(build.md_to_html(a["body_md"]), page)
             original = (a.get("original") or {}).get("text_md", "")
             if original:
-                self.assertIn(build.md_to_html(original), page)
+                self.assertIn(build.render_original_text(a), page)
             doc = Tags(page)
             for panel in ("rewrite", "original"):
                 self.assertTrue(doc.select("a", href="#" + panel))
@@ -73,7 +73,7 @@ class BuildRegression(unittest.TestCase):
             self.assertIn(a["source"]["url"], full)
             original = a.get("original") or {}
             if original.get("text_md"):
-                self.assertIn(build.md_to_html(original["text_md"]), full)
+                self.assertIn(build.render_original_text(a), full)
             for media in original.get("media") or []:
                 if media.get("url"):
                     self.assertIn(media["url"].replace("&", "&amp;"), full)

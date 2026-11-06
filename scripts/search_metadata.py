@@ -46,7 +46,7 @@ def discovery_files(public, articles):
     (public / 'robots.txt').write_text('User-agent: *\nAllow: /\n\nSitemap: ' + SITE + '/sitemap.xml\n', encoding='utf-8')
     (public / '_headers').write_text('''/*
   X-Content-Type-Options: nosniff
-  Referrer-Policy: strict-origin-when-cross-origin
+  Referrer-Policy: no-referrer
 /static/*
   Cache-Control: public, max-age=31536000, immutable
 /media/*

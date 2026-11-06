@@ -4,6 +4,7 @@ node_modules/
 .DS_Store
 __pycache__/
 *.pyc
+.venv/
 
 # Local public-media investigation scratch; not content or deployment input.
 .media-qa/

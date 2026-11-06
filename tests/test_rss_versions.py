@@ -47,8 +47,8 @@ class RssVersions(unittest.TestCase):
                 self.assertIn(build.md_to_html(a["body_md"]), p["rewrite"]["html"])
                 self.assertNotIn(build.md_to_html(a["body_md"]), p["original"]["html"])
                 original = a["original"]["text_md"]
-                self.assertIn(build.md_to_html(original), p["original"]["html"])
-                self.assertNotIn(build.md_to_html(original), p["rewrite"]["html"])
+                self.assertIn(build.render_original_text(a), p["original"]["html"])
+                self.assertNotIn(build.render_original_text(a), p["rewrite"]["html"])
                 self.assertNotIn(original.strip(), p["rewrite"]["markdown"])
                 for media in a["original"].get("media", []):
                     if media.get("url"):

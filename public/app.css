@@ -148,6 +148,12 @@ img{max-width:100%;height:auto}
 .original-title{font-size:1.1875rem;line-height:1.7;margin:0 0 22px;font-weight:500;overflow-wrap:anywhere}
 .completeness-note{font-size:0.875rem;line-height:1.85;color:var(--muted);background:var(--surface);border:1px solid var(--rule);padding:12px 16px;margin:0 0 24px}
 .prose{overflow-wrap:anywhere;text-wrap:pretty}
+.prose pre{max-width:100%;overflow-x:auto;padding:1rem;border:1px solid var(--rule);background:var(--surface);text-wrap:initial}
+.prose pre code{white-space:pre;font-size:.875rem}
+.prose table{display:block;max-width:100%;overflow-x:auto;border-collapse:collapse;margin:1.5em 0;font-size:.9375rem;line-height:1.7}
+.prose th,.prose td{padding:.6em .8em;border:1px solid var(--rule);text-align:left;min-width:8rem}
+.prose th{font-weight:600;background:var(--surface)}
+.prose img{max-width:100%;height:auto}
 .prose p,.prose li{font-size:1.125rem;line-height:1.95;margin:0 0 1em}
 .prose h1,.prose h2,.prose h3{font-size:1.5625rem;font-weight:500;line-height:1.6;margin:1.8em 0 .7em}
 .prose ul,.prose ol{padding-left:1.4em;margin:0 0 1.2em}

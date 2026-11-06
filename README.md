@@ -10,8 +10,11 @@
 ## Develop
 
 ```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
 python3 scripts/build.py
-npx wrangler deploy   # needs CLOUDFLARE_API_TOKEN
+env -u CLOUDFLARE_API_TOKEN npx wrangler deploy   # existing authorized OAuth
 ```
 
 Content lives in [`content/articles/`](./content/articles/). Schema + daily ops: [`content/SCHEMA.md`](./content/SCHEMA.md).
@@ -38,6 +41,7 @@ MIT
 The homepage keeps the visual-journal direction with an original X mark, serif wordmark, headline-first opening spread, light/dark palette and responsive reading controls. Search by title, author or topic, filter by video presence, or switch to a text-only scan view. `/archive` defaults to scan view. Filter state is shareable in the URL and survives opening/closing the reader. All article content and full RSS remain generated from the existing source files.
 
 ```bash
+source .venv/bin/activate
 npm install
 npm test
 npm run preview -- --port 33205

@@ -1,3 +1,17 @@
+# 原文 README 排版与媒体核验 · 2026-11-06 (Asia/Shanghai)
+
+在 `67bfaa3` 上修复 CaptureFlow 完整 README 被简化渲染器当作字面文本展示的问题，并核对 Cursor / 其他 X 视频地址。发布结果见本节后续记录。
+
+- 为复杂来源增加可选 `original.markdown_base_url`；CaptureFlow 使用已保存的固定 GitHub commit。CommonMark + 表格解析后经 nh3 白名单净化，引用链接、嵌套列表、围栏代码、picture、表格、details 正常呈现；相对图片指向同一版本的 raw 文件，文档指向同一版本的 GitHub 页面。不改原文和中文改写内容。旧短帖维持原有渲染，三种输出（网站原文、标准 RSS、双版本 original.html）使用同一来源渲染器。依赖版本固定于 requirements.txt，按 README 在虚拟环境安装。
+- RSS 双版本协议仍为 v1、字段不变；只更新 CaptureFlow 的原文 HTML（包含标准混合全文中的原文）。没有修改消费者代码或制造新转写。所有 15 篇的原文文字、中文正文和媒体 URL 与基线逐项比较一致；CaptureFlow 只新增渲染基准地址元数据。
+- **媒体证据，约 21:16–21:23 CST：**四条 X 视频（Cursor/OpenAI/levelsio/tibo）的公开无 Referer Range 请求全部返回 `206`、`video/mp4`、1024 字节。带 `Referer: app://obsidian.md/` 的请求全部返回 `403`。Cursor 进一步分离变量：仅 `Origin: app://obsidian.md` 返回 `206`，仅 app Referer 返回 `403`；带本站 HTTPS Origin + Referer 同样 `403`。这证明此请求环境的 Referer 限制，不证明 URL 过期，也不能把未加载控件提示当作真实失败。现有地址保持不变，不引入代理。
+- Cursor 全文件普通 GET 成功：1,513,678 字节，H.264 1280×720 + AAC，24.277333 秒；ffmpeg 完整解码无错误。SHA-256 `4b599c8c8536ba42cb83477cddc2213bc62f0df0da4a2e4ac7fd581e9d2f1ede`。网站 HTTP 头和 HTML meta 改为 `no-referrer`，以免外部视频请求携带本站 Referer；YouTube iframe 保留原有单独 referrerpolicy。
+- **实际 Chrome 播放：**本地最终页面点击 Cursor 播放控件后，先读到 `currentTime=17.57714`、`readyState=4`、无错误，结束附近读到 `24.276238/24.277333`、`error=null`。证据 `.qa-ui/media-audit/cursor-browser-playback.json` 和 PNG。其他三条只验证了响应，不冒充实际播放测试。
+- **验证：41 Python + 24 reader state = 65 项通过。**新增 5 项覆盖真实 README 结构、固定版本链接/图片、代码与嵌套列表、HTML/URL 净化、非法基准地址、页面 Referer 策略。Chrome 桌面实际看到 1 个表格、5 个代码块；390px 宽度页面 scrollWidth=390，长代码仅在代码块内部横向滚动。截图 `.qa-ui/media-audit/captureflow-desktop.png`、`captureflow-mobile.png`。未重复此前全站 39 项浏览器回归。
+- 网络矩阵、原始响应头、视频取样与本机播放证据位于忽略目录 `.qa-ui/media-audit/`。原文安全处理依据 [markdown-it-py 安全文档](https://markdown-it-py.readthedocs.io/en/latest/security.html) 与 [nh3 API](https://nh3.readthedocs.io/en/latest/)。Nowledge Mem 续做检索因 localhost:14242 拒绝连接不可用，历史仅用于定位，本次结论以 Git、源文件、实际响应和浏览器为准。
+
+---
+
 # RSS 双版本与嵌入媒体 · 2026-11-06 (Asia/Shanghai)
 
 本次在主干 `2ef6797`（保留 PR #1 的性能、SEO 和 GEO 改动）上，为 RSS Reader 增加已发布原文/乔木改写的独立输出。已部署并完成线上 RSS 验证。
