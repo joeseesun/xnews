@@ -1,6 +1,6 @@
 # 原文 README 排版与媒体核验 · 2026-11-06 (Asia/Shanghai)
 
-在 `67bfaa3` 上修复 CaptureFlow 完整 README 被简化渲染器当作字面文本展示的问题，并核对 Cursor / 其他 X 视频地址。发布结果见本节后续记录。
+在 `67bfaa3` 上修复 CaptureFlow 完整 README 被简化渲染器当作字面文本展示的问题，并核对 Cursor / 其他 X 视频地址。已发布；线上页面和 CaptureFlow RSS payload 已验证，完整 RSS 下载受网络限制。
 
 - 为复杂来源增加可选 `original.markdown_base_url`；CaptureFlow 使用已保存的固定 GitHub commit。CommonMark + 表格解析后经 nh3 白名单净化，引用链接、嵌套列表、围栏代码、picture、表格、details 正常呈现；相对图片指向同一版本的 raw 文件，文档指向同一版本的 GitHub 页面。不改原文和中文改写内容。旧短帖维持原有渲染，三种输出（网站原文、标准 RSS、双版本 original.html）使用同一来源渲染器。依赖版本固定于 requirements.txt，按 README 在虚拟环境安装。
 - RSS 双版本协议仍为 v1、字段不变；只更新 CaptureFlow 的原文 HTML（包含标准混合全文中的原文）。没有修改消费者代码或制造新转写。所有 15 篇的原文文字、中文正文和媒体 URL 与基线逐项比较一致；CaptureFlow 只新增渲染基准地址元数据。
@@ -9,6 +9,13 @@
 - **实际 Chrome 播放：**本地最终页面点击 Cursor 播放控件后，先读到 `currentTime=17.57714`、`readyState=4`、无错误，结束附近读到 `24.276238/24.277333`、`error=null`。证据 `.qa-ui/media-audit/cursor-browser-playback.json` 和 PNG。其他三条只验证了响应，不冒充实际播放测试。
 - **验证：41 Python + 24 reader state = 65 项通过。**新增 5 项覆盖真实 README 结构、固定版本链接/图片、代码与嵌套列表、HTML/URL 净化、非法基准地址、页面 Referer 策略。Chrome 桌面实际看到 1 个表格、5 个代码块；390px 宽度页面 scrollWidth=390，长代码仅在代码块内部横向滚动。截图 `.qa-ui/media-audit/captureflow-desktop.png`、`captureflow-mobile.png`。未重复此前全站 39 项浏览器回归。
 - 网络矩阵、原始响应头、视频取样与本机播放证据位于忽略目录 `.qa-ui/media-audit/`。原文安全处理依据 [markdown-it-py 安全文档](https://markdown-it-py.readthedocs.io/en/latest/security.html) 与 [nh3 API](https://nh3.readthedocs.io/en/latest/)。Nowledge Mem 续做检索因 localhost:14242 拒绝连接不可用，历史仅用于定位，本次结论以 Git、源文件、实际响应和浏览器为准。
+
+
+发布记录（2026-11-06，Asia/Shanghai）：源提交 **`d909a82a025878b265f4d1832edb4587d221bc91`** 已推送 origin/main；Cloudflare Worker 版本 **`6cb9cfcb-403d-434b-a4cb-f3933e0190e9`**。正式 CaptureFlow/Cursor 两篇页面及新 CSS `/static/app.7ac82213fe25.css` 均回读并与本地文件逐字节一致，HTTP `Referrer-Policy: no-referrer` 正确。证据 `.qa-ui/media-audit/live-verification.json`。
+
+RSS 终端两次有限请求均为 TLS 握手超时；Chrome 访问正式 `/feed.xml` 后能读取新 XML，提取出的 **完整 CaptureFlow `qiaomu:versions` JSON 与本地已发布对象完全一致**，确认原文包含真实 `<table>`、`<pre><code>`，不再出现转义的 `<picture>` 或引用定义字面文本，协议仍 v1。证据 `.qa-ui/media-audit/live-rss-browser.json` 含完整 payload 和比较结果。浏览器最后一次观察只载入 13 条且等待完整加载超时，因此**不声称本轮全部 15 条线上 feed 字节核验通过**；本地完整 15 条测试通过。阅读器可以重新同步 CaptureFlow 后验收新 HTML，本站没有修改其数据或代码。
+
+未创建临时 worktree。验证用的本机 33207 预览服务在交付前停止。
 
 ---
 
