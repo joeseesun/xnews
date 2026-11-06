@@ -72,14 +72,16 @@ The media backfill added only `rewrite_media` references to the current 13 stori
 ## Build & deploy
 
 ```bash
-cd /workspace/xnews
-python3 scripts/build.py
-# or: npm run build
-# Use the existing authenticated Wrangler environment; never commit credentials.
-npx wrangler deploy
+source .venv/bin/activate
+npm test
+# Commit tested source + generated public/, then push before publishing.
+git add content public
+git commit -m "Publish reviewed articles"
+git push origin main
+npm run deploy
 ```
 
-Outputs: `public/index.html`, `public/a/<id>.html`, `public/feed.xml`, `public/articles.json`.
+Outputs: `public/index.html`, `public/a/<id>.html`, fingerprinted `public/read/` payloads, `public/feed.xml`, `public/articles.json`. Deployment and rollback: [`DEPLOYMENT.md`](../DEPLOYMENT.md).
 
 ## Style
 

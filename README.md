@@ -5,7 +5,7 @@
 - Live: https://xnews.qiaomu.ai
 - RSS: https://xnews.qiaomu.ai/feed.xml
 - UI: D「影像刊」visual journal; design contract: [`DESIGN.md`](./DESIGN.md)
-- Hosting: Cloudflare Worker `xnews` (assets only — no radio KV/R2/Queue)
+- Hosting: Nginx static files on `qiaomu-hostinger`; Worker `xnews` is a fallback. See [`DEPLOYMENT.md`](./DEPLOYMENT.md).
 
 ## Develop
 
@@ -13,8 +13,9 @@
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
-python3 scripts/build.py
-env -u CLOUDFLARE_API_TOKEN npx wrangler deploy   # existing authorized OAuth
+npm install
+npm test
+npm run preview
 ```
 
 Content lives in [`content/articles/`](./content/articles/). Schema + daily ops: [`content/SCHEMA.md`](./content/SCHEMA.md).
@@ -24,7 +25,7 @@ Content lives in [`content/articles/`](./content/articles/). Schema + daily ops:
 1. Pick English founder posts / X Articles / viral AI videos.
 2. Fetch with **existing X tools + WebFetch** (no crawler code in this repo).
 3. Read [`content/EDITORIAL_PROMPT.md`](./content/EDITORIAL_PROMPT.md): rewrite text **and images/video/audio**, account for every attachment via `rewrite_media`, then write `content/articles/<id>.json`. Reviewed addon: [`content/EDITORIAL_ADDON.md`](./content/EDITORIAL_ADDON.md). Fidelity and natural Chinese override generic style quotas; audit evidence: [`content/EDITORIAL_QA.md`](./content/EDITORIAL_QA.md).
-4. Run `npm test`; deploy only when the current task explicitly authorizes release. (`npx wrangler deploy` is the existing deployment command.)
+4. Run `npm test`, commit the tested source and generated `public/`, then push. Run `npm run deploy` when release is authorized; it publishes the clean committed tree without rebuilding. Verify the public release header and content as described in [`DEPLOYMENT.md`](./DEPLOYMENT.md).
 5. Suggested schedule: **08:00 Asia/Shanghai**.
 
 ## Local QA
@@ -53,4 +54,4 @@ npx playwright install chromium
 npm run test:browser
 ```
 
-Browser evidence is written to ignored `.qa-ui/`, outside deployment assets. See the current section at the top of `QA.md` for scope and unverified platforms. Release status and production verification are recorded at the top of `QA.md`. If a shell-injected Cloudflare token is DNS-only, deploy with the existing authorized OAuth session using `env -u CLOUDFLARE_API_TOKEN wrangler deploy` after building.
+Browser evidence is written to ignored `.qa-ui/`, outside deployment assets. Release status, production verification and remaining limits are recorded at the top of `QA.md`. `npm run deploy:worker` explicitly refreshes the fallback Worker using the existing OAuth identity; it does not publish the primary site.

@@ -1,8 +1,22 @@
-# 速度修复进行中 · 2026-11-07 (Asia/Shanghai)
+# 首页与文章速度修复 · 2026-11-07 (Asia/Shanghai)
 
-用户确认：首页与点击文章都慢。基线 `b1454d9`，目标保持 xnews.qiaomu.ai、全部文章/RSS/设计与原文分离不变，减少首屏关键请求和文章点击等待；独立验证现有 Hostinger 静态服务作为候选。正式域名切换前先准备完整副本、HTTPS、逐路由检查与 DNS/Worker 回退记录。候选主机 qiaomu-hostinger（76.13.103.27），项目专属目录 `/opt/qiaomu-apps/xnews`，Nginx 静态托管，无应用端口、不涉及 RSS Writer 或其他服务。当前仍由 Cloudflare Worker 提供正式站点。
+代码源提交 `1007d9ec74e147a870e86b235d62d3b246a2d499` 已推送 main。正式域名现为 DNS-only A → `76.13.103.27`，由已有 qiaomu-hostinger 的 Nginx 静态托管；公开 Cloudflare DoH 和 Hostinger/LA 的正常域名请求均确认新源。Worker `xnews` 保留为备用：`https://xnews.vista8.workers.dev`，版本 `31754947-3515-49f5-b5eb-a560fbc14b0b`。主站发布入口现为 `npm run deploy`，要求先提交测试后的生成文件，避免发布时重建使源码与产物失配。详见 DEPLOYMENT.md。
 
-本轮只处理性能，保留既有 SEO/GEO、Umami、设计和站点入口；不新增 PWA、支付、注册或推广界面。测速、候选与回读证据存于 `.qa-ui/speed-round2/`。
+## 修复与证据
+
+- 首页 CSS/JS 随文档交付，减少 2 次关键资源请求；无额外字体请求。首页文档 gzip 从 7,031 增至 20,204 字节（包含原本独立下载的代码），优化的是网络往返，不声称文档字节减少。
+- 文章点击使用仅含正文的指纹化 `/read/` 文件，保留原文与改写、图片、视频、音频。Cursor 压缩负载 3,626→1,971 字节，CaptureFlow 10,494→8,869 字节。公开文章链接和 canonical 不变。阅读 payload 单独 noindex、不可变缓存，不含脚本。
+- 低优先级预加载卡住时，点击最多等其 120ms，然后取消该请求并以高优先级请求正文，避免继承 8 秒预加载超时。停滞预加载回归测试约 137ms 完成；这不是线上所有文章的打开速度承诺。保持同时最多 2 个意图预加载、节流网络/省流量跳过、不预加载视频。
+- **68 项通过：43 Python + 25 Node reader state。**日常筛选、返回焦点/滚动、原文切换、原始媒体和 RSS v1 协议仍受测试覆盖。生产内容未改写。`tests.log` 保存完整结果。
+- **受控 Chrome 实验**：每个请求固定增加 700ms，两组首屏 FCP 为 1524→1004ms、1512→952ms；新版本没有外部 app CSS/JS 请求。证据 `browser-lab-runs.json`。这是实验室对照，不是用户群体 Core Web Vitals。
+- **源站路由验证**：53 个已发布资源使用 HTTPS `--resolve` 逐字节匹配本地构建，另验真实 404/noindex/no-store、RSS MIME、压缩与缓存。源站本机客户端 3 次完整首页传输 0.956/1.301/1.042 秒；这些绕过 DNS 的数据不能冒充正常解析。旧线路同机请求曾 3.974 秒，另有 10–25 秒超时；网络有波动，不能把单样本差值当普遍提速比例。
+- TLS 到期日 2027-02-04；Certbot 已切为 webroot，模拟续期通过，timer enabled/active，已有 Nginx reload hook。临时 DNS 凭据及过时配置键已删除。没有数据库、容器或应用进程变更。
+
+## 正式客户端验收状态
+
+01:44 CST：正式 DNS 和远端 HTTPS 正常；本机 DNS 仍缓存迁移期间的负响应，正在等待缓存自然到期后验收浏览器和普通 curl。暂不把候选源站验证写成完成的本机正式浏览器验收。
+
+本轮只处理性能，保留既有设计、SEO/GEO、Umami property `31e0098c-6852-46b6-899c-11eed5ed16e1` 与站点入口；不新增 PWA、推广、支付或注册，不修改 RSS Reader 消费端。旧的 Umami 入库证据不冒充本次发布新证据。完整原始记录位于忽略目录 `.qa-ui/speed-round2/`。未创建临时 worktree。
 
 ---
 
