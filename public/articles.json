@@ -1,5 +1,31 @@
 [
   {
+    "id": "captureflow-screen-recorder",
+    "date": "2026-11-06",
+    "title": "CaptureFlow：边录屏边上传，支持 Docker 自托管",
+    "dek": "Chrome 扩展已上架，macOS 签名版仍待发布；Docker 使用 SQLite 和本地磁盘，也可部署到 Cloudflare Workers、D1、R2。",
+    "url": "/a/captureflow-screen-recorder",
+    "source_url": "https://x.com/sardorml/status/2118616954085024133",
+    "tags": [
+      "开源实作",
+      "录屏",
+      "自托管"
+    ]
+  },
+  {
+    "id": "checkwash-test-weakening",
+    "date": "2026-11-06",
+    "title": "checkwash 用 Git diff 检查测试弱化，Alpha 版仍有漏检和误报",
+    "dek": "v0.11.0 支持 Claude Code 钩子和 CI 检查，默认只阻断 high；历史评测有明确的版本、样本与误报边界。",
+    "url": "/a/checkwash-test-weakening",
+    "source_url": "https://x.com/kartg123451/status/2118550260104769565",
+    "tags": [
+      "技术深潜",
+      "代码审查",
+      "开源"
+    ]
+  },
+  {
     "id": "cursor-live-apps",
     "date": "2026-11-06",
     "title": "Cursor：用 Agent 构建线上 App，并通过链接分享",

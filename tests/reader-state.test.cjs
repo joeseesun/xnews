@@ -6,6 +6,7 @@ const path = require('node:path');
 const {JSDOM, VirtualConsole} = require('jsdom');
 const root = path.join(__dirname, '..');
 const script = fs.readFileSync(path.join(root, 'public/app.js'), 'utf8');
+const articleCount = JSON.parse(fs.readFileSync(path.join(root, 'public/articles.json'), 'utf8')).length;
 const html = name => fs.readFileSync(path.join(root, 'public', name), 'utf8');
 const pause = ms => new Promise(resolve => setTimeout(resolve, ms));
 async function until(predicate, message) {
@@ -247,7 +248,7 @@ test('discovery combines case-insensitive search and type, with a recoverable em
   assert.equal(s.$('[data-search-empty]').hidden, false);
   assert.match(s.$('[data-empty-description]').textContent, /CURSOR/);
   s.click(s.$('[data-reset-filters]'));
-  assert.equal(s.d.querySelectorAll('.news-card:not([hidden])').length, 13);
+  assert.equal(s.d.querySelectorAll('.news-card:not([hidden])').length, articleCount);
   assert.equal(s.$('[data-search-empty]').hidden, true);
   assert.equal(s.d.activeElement, search);
   assert.equal(s.w.location.search, '');

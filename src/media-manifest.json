@@ -79,6 +79,17 @@
       "width": 480,
       "height": 360,
       "sha256": "263787b3d657175a534e2787a5982c5b13e26981efbd618a369e458de8286e6c"
+    },
+    {
+      "source_url": "https://pbs.twimg.com/media/HWbWZHHaUAAm62F.jpg",
+      "local_url": "/media/captureflow-screen-recorder-image-5129d6d002.jpg",
+      "role": "image",
+      "article_id": "captureflow-screen-recorder",
+      "content_type": "image/jpeg",
+      "bytes": 163405,
+      "width": 1200,
+      "height": 810,
+      "sha256": "5129d6d002568e67898acee326a8218b1af3ecd8f536b4baee639c70be260820"
     }
   ]
 }

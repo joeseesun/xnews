@@ -7,6 +7,7 @@ const {chromium} = require('playwright');
 const AxeBuilder = require('@axe-core/playwright').default;
 const root = path.join(__dirname, '..');
 const output = path.join(root, '.qa-ui');
+const articleCount = JSON.parse(fs.readFileSync(path.join(root, 'public/articles.json'), 'utf8')).length;
 fs.mkdirSync(output, {recursive: true});
 const checks = [], errors = [], audits = [];
 const server = spawn('python3', ['scripts/preview.py', '--port', '0'], {cwd: root, stdio: ['ignore', 'pipe', 'pipe']});
@@ -60,7 +61,7 @@ async function audit(page, label) {
   check('Combined filters show a recoverable empty state', await page.locator('[data-search-empty]').isVisible());
   await capture(page, 'empty-search.png');
   await page.locator('[data-reset-filters]').click();
-  check('Reset restores all 13 real articles', await page.locator('.news-card:visible').count() === 13);
+  check('Reset restores all published articles', await page.locator('.news-card:visible').count() === articleCount);
   check('Reset restores search focus', await page.locator('#story-search').evaluate(el => el === document.activeElement));
   await page.locator('[data-layout="list"]').click();
   await capture(page, 'list.png');
@@ -122,7 +123,7 @@ async function audit(page, label) {
   await direct.goto(base + 'a/amasad-managed-cloud-agents');
   check('No-JS direct article preserves both full versions', await direct.locator('#rewrite').isVisible() && await direct.locator('#original').isVisible());
   await direct.goto(base);
-  check('No-JS homepage has all native article links and no inert search controls', await direct.locator('[data-open-reader]').count() === 13 && !await direct.locator('[data-discovery]').isVisible());
+  check('No-JS homepage has all native article links and no inert search controls', await direct.locator('[data-open-reader]').count() === articleCount && !await direct.locator('[data-discovery]').isVisible());
   await nojs.close();
   check('No JavaScript runtime exceptions', errors.length === 0);
   fs.writeFileSync(path.join(output, 'verification.json'), JSON.stringify({date: '2026-11-06', browser: await browser.version(), checks, errors, limitations: ['External media blocked in this test; no playback claim.', 'No VoiceOver or real iOS/Safari validation.', 'Zoom uses equivalent CSS viewport and root font size, not browser chrome zoom.']}, null, 2));

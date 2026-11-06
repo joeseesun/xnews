@@ -6,7 +6,7 @@ Umami is restricted to `xnews.qiaomu.ai`; search/query strings and fragments are
 
 Release regression: **26 Python + 21 DOM/state tests passed**. The 39 Chrome checks and visual QA from the preceding implementation remain recorded below. Publishing uses the existing Wrangler OAuth identity: the shell API token is valid for the domain but lacks Worker access and must not shadow OAuth (`env -u CLOUDFLARE_API_TOKEN wrangler deploy`). No credentials are committed.
 
-Deployment ID, public-asset comparison and real pageview ingestion will be recorded after publication. All earlier “local only” statements below describe the pre-release stage.
+During publication, remote main advanced to `71944ac` with CaptureFlow and checkwash articles, source licences and a media asset. That commit was merged intact; only conflicting generated home/archive/RSS files were regenerated from the combined sources. The final corpus is **15 articles**, and all 47 regression tests passed again. Discovery tests now derive the article count from the content index rather than assuming 13. The initial 13-article upload (`46b917e0-768b-4583-8acb-ba3a11323d6c`) is superseded by the integrated release recorded below. Deployment ID, public-asset comparison and real pageview ingestion will be recorded after publication. All earlier “local only” statements below describe the pre-release stage.
 
 ---
 
