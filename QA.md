@@ -1,12 +1,20 @@
 # RSS 双版本与嵌入媒体 · 2026-11-06 (Asia/Shanghai)
 
-本次在主干 `2ef6797`（保留 PR #1 的性能、SEO 和 GEO 改动）上，为 RSS Reader 增加已发布原文/乔木改写的独立输出。部署状态以本节后续记录为准。
+本次在主干 `2ef6797`（保留 PR #1 的性能、SEO 和 GEO 改动）上，为 RSS Reader 增加已发布原文/乔木改写的独立输出。已部署并完成线上 RSS 验证。
 
 - 协议：`xmlns:qiaomu="https://qiaomu.ai/ns/rss/1.0"`；每条 `qiaomu:versions` 是 CDATA JSON，精确结构为 `{version:1, original:{title,url,lang,html}, rewrite:{title,markdown,html}}`，所有叶字段均为字符串。完整约定见 `content/SCHEMA.md`。
 - 原文 HTML 只包含保存的原文文字、原文媒体、来源/相关链接和完整性说明；缺失文字明确提示，不用中文改写回填。改写 HTML 复用已发布渲染器与媒体位置/遗漏规则；Markdown 保留正文及对应媒体链接/图片。视频/音频使用原生 controls、preload=none，视频保留 poster；YouTube 使用 privacy-enhanced iframe，所有媒体带原始链接兜底，不生成转写。
 - 测试先复现旧协议缺字段的问题，再通过：**36 Python + 24 reader state = 60 项**。新增 7 项回归覆盖实际全部 15 篇文章的隔离、精确字段、缺失/摘录提示、图片/视频/X 视频/音频/YouTube/未知类型、段落位置、遗漏说明及 JSON/CDATA/Markdown 转义。
 - 独立兼容性比较：与修改前保存的 feed 对比，全部 15 条旧 RSS item 的每个标准字段、属性和完整 HTML 逐一相同。仅增加命名空间、版本字段并更新频道构建时间。未修改文章 JSON、网页、媒体文件、CSS/JS、SEO 或缓存策略。原始证据位于忽略目录 `.qa-ui/rss-versions/legacy-feed.xml` 与 `local-contract.json`。
 - 验证边界：本次是 RSS 传输格式改动；浏览器界面未变化，未重复视觉回归。HTML 内嵌媒体标签与属性已验证；第三方媒体真实播放、外站净化后的显示及阅读器历史记录修复由消费端另行验收。
+
+
+发布证据（2026-11-06 17:10–17:11 Asia/Shanghai）：
+
+- 发布源提交：`97e346bf434b65dec724a91dba67731f1ae0d5a1`，已推送 `origin/main`；Cloudflare Worker `xnews` 版本：`dbcf9bbf-6647-4b39-bf61-95017293c4ce`。使用既有 OAuth：`env -u CLOUDFLARE_API_TOKEN wrangler deploy`；本次只上传一个修改的静态文件 `/feed.xml`。
+- 正式 `https://xnews.qiaomu.ai/feed.xml` 与带 `?versions=97e346b` 的请求均成功，响应与提交的本地 feed 字节完全相同。SHA-256：`79e249e6056d486a88e4824619018470dc3b0a44c13f319e51562faac1daef43`。两次线上解析均确认 15 条、version=1、original 四字段和 rewrite 三字段（含必需 html）。HTTP 头、完整 feed 与校验记录分别保存于 `.qa-ui/rss-versions/live*-headers.txt`、`live*-feed.xml`、`live*-contract.json`。
+- 消费端联调样例：DeepSeek 条目的完整实际 JSON 位于 `.qa-ui/rss-versions/example-deepseek.json`（从与线上一致的 feed 提取）；原文标题 `DeepSeek Super Agent and why the harness matters`，来源 `https://www.youtube.com/watch?v=OrcsMi2-IcM`，两份 HTML 均含 `https://www.youtube-nocookie.com/embed/OrcsMi2-IcM`，原文保留「视频原文摘录，非完整逐字稿」提示。协议与联调约定一致，没有额外字段或后续 AI 改写。
+- 本会话未创建临时 worktree；只使用主工作区 `/Users/joe/Documents/ChatGPT/qiaomu-xnews` 的 `main`。
 
 ---
 
