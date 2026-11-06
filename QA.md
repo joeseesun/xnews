@@ -15,6 +15,9 @@
 
 RSS 终端两次有限请求均为 TLS 握手超时；Chrome 访问正式 `/feed.xml` 后能读取新 XML，提取出的 **完整 CaptureFlow `qiaomu:versions` JSON 与本地已发布对象完全一致**，确认原文包含真实 `<table>`、`<pre><code>`，不再出现转义的 `<picture>` 或引用定义字面文本，协议仍 v1。证据 `.qa-ui/media-audit/live-rss-browser.json` 含完整 payload 和比较结果。浏览器最后一次观察只载入 13 条且等待完整加载超时，因此**不声称本轮全部 15 条线上 feed 字节核验通过**；本地完整 15 条测试通过。阅读器可以重新同步 CaptureFlow 后验收新 HTML，本站没有修改其数据或代码。
 
+
+消费端联调补证（2026-11-06，来源：RSS Reader 协调会话 `01a1b000-6035-7fa1-b646-4922a9526bea` 的验收回报，本会话未重复调用其 API）：主动刷新 RSS source 后，公开 `/api/entry/9a4a403830f1e9299441283ed7652940` 返回 CaptureFlow 原文 `content` 13,317 字符、1 个 table、5 个 pre，无混合的「乔木改写」标题；独立 `rewriteHtml` 为 7,445 字符。该消费端回读确认新排版已沿 RSS 链路送达，补足本站终端完整 feed 回读受网络限制时的交付证据。用户实际 Obsidian 文章的刷新显示仍由该会话继续验收，不能把 API 到达等同于其界面已完成刷新。
+
 未创建临时 worktree。验证用的本机 33207 预览服务在交付前停止。
 
 ---
