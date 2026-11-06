@@ -2,6 +2,16 @@
 
 Since 2026-11-07, the primary domain uses the independent Nginx static origin on `qiaomu-hostinger` (`76.13.103.27`), via a DNS-only A record. The Worker remains available at its workers.dev hostname. **Use the newest QA.md entry for verification evidence and known limits.** No Docker, database, RSS writer, or application port is involved.
 
+## Grok Bot and website ownership
+
+- Grok Bot's `乔布斯` owns X discovery, source retrieval, selection and editorial content. Its existing `X News 海外发现更新` routine is the content producer; keep its existing schedule and selection rules rather than creating a duplicate routine.
+- Codex owns website design, interactions, performance, rendering, RSS integration and deployment infrastructure. Content updates must preserve the latest website implementation and the source/rewrite/media contract in `content/SCHEMA.md`.
+- Routine content publishing may use the established flow below when its execution environment already has the authorized `qiaomu-hostinger` SSH access and `rsync`. No credentials should be copied between agents or placed in the repository.
+- If Grok Bot lacks that access, hand off the pushed content commit SHA, article IDs, original source URLs, validation result and any known gaps to the website maintainer. The maintainer builds/tests the integrated content, commits generated output, pushes and deploys. Report **awaiting deployment**, not published, until the public checks pass.
+- Git push alone does **not** deploy this repository. `npm run deploy:worker` updates only the fallback. A clean checkout alone does not prove that `public/` was regenerated: always run the build/tests before committing the complete content release.
+
+Each content release must verify the expected `X-XNews-Release`, the new article on the homepage and `/a/<id>`, its fingerprinted `/read/` payload, and its RSS item with the independent `qiaomu:versions` v1 fields. Keep the published commit and article URLs in the release report.
+
 ## Source and build
 
 ```bash
