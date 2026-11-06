@@ -193,5 +193,18 @@
       "product",
       "HN"
     ]
+  },
+  {
+    "id": "clocktower-astra-detection",
+    "date": "2026-10-05",
+    "title": "AI 玩《血染钟楼》26 局好人全胜：复盘发现它们怎样核对证词",
+    "dek": "一份 10 月 5 日的 372 局分析，经研究员 11 月 6 日讨论的 Clocktower 项目重新进入视野：先核对证词来历，再集体决定处决；26/26 的战绩也有猎手命中、对手差异和小样本的限制。",
+    "url": "/a/clocktower-astra-detection",
+    "source_url": "https://github.com/dwarkeshsp/clocktower/blob/52155afe38a696283756f142bdb1565e07951ae1/docs/findings/why-astra-wins/detection.md",
+    "tags": [
+      "AI 评测",
+      "多智能体",
+      "能力边界"
+    ]
   }
 ]

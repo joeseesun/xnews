@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="referrer" content="no-referrer">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 玩《血染钟楼》26 局好人全胜：复盘发现它们怎样核对证词 · X News</title>
+<meta name="description" content="一份 10 月 5 日的 372 局分析，经研究员 11 月 6 日讨论的 Clocktower 项目重新进入视野：先核对证词来历，再集体决定处决；26/26 的战绩也有猎手命中、对手差异和小样本的限制。">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#fffefa">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="X News">
+<meta property="og:title" content="AI 玩《血染钟楼》26 局好人全胜：复盘发现它们怎样核对证词 · X News">
+<meta property="og:description" content="一份 10 月 5 日的 372 局分析，经研究员 11 月 6 日讨论的 Clocktower 项目重新进入视野：先核对证词来历，再集体决定处决；26/26 的战绩也有猎手命中、对手差异和小样本的限制。">
+<meta property="og:url" content="https://xnews.qiaomu.ai/a/clocktower-astra-detection">
+<link rel="canonical" href="https://xnews.qiaomu.ai/a/clocktower-astra-detection">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AI 玩《血染钟楼》26 局好人全胜：复盘发现它们怎样核对证词 · X News">
+<meta name="twitter:description" content="一份 10 月 5 日的 372 局分析，经研究员 11 月 6 日讨论的 Clocktower 项目重新进入视野：先核对证词来历，再集体决定处决；26/26 的战绩也有猎手命中、对手差异和小样本的限制。">
+<meta property="article:published_time" content="2026-10-05">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://xnews.qiaomu.ai/#publisher", "name": "X News", "url": "https://xnews.qiaomu.ai/", "description": "海外创始人长文与 AI 视频的中文改写选刊"}, {"@type": "WebSite", "@id": "https://xnews.qiaomu.ai/#website", "name": "X News", "url": "https://xnews.qiaomu.ai/", "inLanguage": "zh-CN", "publisher": {"@id": "https://xnews.qiaomu.ai/#publisher"}}, {"@type": "Article", "@id": "https://xnews.qiaomu.ai/a/clocktower-astra-detection#article", "url": "https://xnews.qiaomu.ai/a/clocktower-astra-detection", "mainEntityOfPage": {"@id": "https://xnews.qiaomu.ai/a/clocktower-astra-detection#page"}, "headline": "AI 玩《血染钟楼》26 局好人全胜：复盘发现它们怎样核对证词", "description": "一份 10 月 5 日的 372 局分析，经研究员 11 月 6 日讨论的 Clocktower 项目重新进入视野：先核对证词来历，再集体决定处决；26/26 的战绩也有猎手命中、对手差异和小样本的限制。", "inLanguage": "zh-CN", "datePublished": "2026-10-05", "author": {"@id": "https://xnews.qiaomu.ai/#publisher"}, "publisher": {"@id": "https://xnews.qiaomu.ai/#publisher"}, "isBasedOn": {"@type": "CreativeWork", "url": "https://github.com/dwarkeshsp/clocktower/blob/52155afe38a696283756f142bdb1565e07951ae1/docs/findings/why-astra-wins/detection.md", "name": "Why GPT-6 Astra wins every game as good (detection)"}, "citation": "https://github.com/dwarkeshsp/clocktower/blob/52155afe38a696283756f142bdb1565e07951ae1/docs/findings/why-astra-wins/detection.md", "keywords": ["AI 评测", "多智能体", "能力边界"]}, {"@type": "WebPage", "@id": "https://xnews.qiaomu.ai/a/clocktower-astra-detection#page", "url": "https://xnews.qiaomu.ai/a/clocktower-astra-detection", "name": "AI 玩《血染钟楼》26 局好人全胜：复盘发现它们怎样核对证词 · X News", "description": "一份 10 月 5 日的 372 局分析，经研究员 11 月 6 日讨论的 Clocktower 项目重新进入视野：先核对证词来历，再集体决定处决；26/26 的战绩也有猎手命中、对手差异和小样本的限制。", "inLanguage": "zh-CN", "isPartOf": {"@id": "https://xnews.qiaomu.ai/#website"}, "mainEntity": {"@id": "https://xnews.qiaomu.ai/a/clocktower-astra-detection#article"}}]}</script>
+<link rel="alternate" type="application/rss+xml" title="X News" href="/feed.xml">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-7 -7 58 58'%3E%3Crect x='-7' y='-7' width='58' height='58' rx='5' fill='%231b1d18'/%3E%3Cpath fill='%23fffefa' d='M2 0h11l29 44H31zM32 0h10L26 18l-5-7zM17 26l5 7-10 11H2z'/%3E%3C/svg%3E">
+<script>try{var t=localStorage.getItem('xn.theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
+<style data-source="/static/app.7ac82213fe25.css">/* D · 影像刊 — see DESIGN.md. System fonts, real media, no left rail. */
+:root {
+  color-scheme:light;
+  --paper:#fffefa; --ink:#1b1d18; --muted:#62685a; --rule:#d8dccf;
+  --surface:#eef0e5; --sage:#dce3cc; --sage-ink:#293026; --focus:#315b3c;
+  --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC","Noto Sans CJK SC",sans-serif;
+  --ease:cubic-bezier(.2,0,0,1); --gutter:32px; --reader-bar:64px;
+  --control-border:#808675; --image-outline:#0000001a;
+  --contrast-surface:#1b1d18; --contrast-ink:#fffefa;
+}
+:root[data-theme="dark"] {
+  color-scheme:dark;
+  --paper:#20241e; --ink:#eef0e7; --muted:#b7c1af; --rule:#4b5842;
+  --surface:#30392a; --sage:#394631; --sage-ink:#eef0e7; --focus:#c0d9aa;
+  --control-border:#89957f; --image-outline:#ffffff1a;
+  --contrast-surface:#12180f; --contrast-ink:#eef0e7;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:130px;scrollbar-gutter:stable}
+body{margin:0;background:var(--paper);color:var(--ink);font:1rem/1.7 var(--sans);-webkit-font-smoothing:antialiased;letter-spacing:0}
+[hidden]{display:none!important}
+a{color:inherit;text-decoration:none}
+@media(hover:hover){a:hover{text-decoration:underline;text-underline-offset:.2em}}
+button{font:inherit;color:inherit;cursor:pointer}
+button:disabled{cursor:wait}
+button,a{-webkit-tap-highlight-color:transparent}
+
+:focus-visible{outline:3px solid var(--focus);outline-offset:4px}
+em,i{font-style:normal;font-weight:500}
+strong,b{font-weight:600}
+img{max-width:100%;height:auto}
+.sr-only,.skip:not(:focus){position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.skip:focus{position:fixed;z-index:100;top:8px;left:8px;background:var(--ink);color:var(--paper);padding:10px 16px}
+.site-header,.site-main,.site-footer{width:min(100% - var(--gutter)*2,1320px);margin-inline:auto}
+.site-header{min-height:118px;display:flex;align-items:center;justify-content:space-between;gap:24px 32px;flex-wrap:wrap;padding-block:24px;border-bottom:1px solid var(--ink)}
+.brand{display:flex;align-items:center;gap:26px;flex:none}
+.brand:hover{text-decoration:none}
+.brand-wordmark{display:flex;align-items:baseline;gap:7px;line-height:1}
+.brand-mark{width:43px;height:43px;align-self:center;margin-top:2px}
+.brand-name{font:700 3.875rem/.95 Georgia,"Times New Roman",serif;letter-spacing:-.065em}
+.brand-period{color:var(--focus)}
+.brand-sub{font-size:0.9375rem;font-weight:500;line-height:1.5;border-inline-start:1px solid var(--rule);padding-inline-start:25px;letter-spacing:.12em}
+.brand-sub>span{display:block;font-size:0.75rem;line-height:1.6;font-weight:400;letter-spacing:.04em;color:var(--muted);margin-top:5px}
+.header-side{display:flex;align-items:center;gap:30px}
+.site-nav{display:flex;align-items:center;gap:30px;font-size:0.875rem}
+.site-nav a{min-height:44px;display:flex;align-items:center;gap:6px;position:relative}
+.site-nav a[aria-current="page"]{font-weight:600}
+.site-nav a[aria-current="page"]::after{content:"";position:absolute;inset-inline:0;bottom:3px;height:2px;background:var(--ink)}
+.icon-button{width:44px;height:44px;border:1px solid var(--control-border);border-radius:50%;display:inline-grid;place-items:center;background:transparent;flex:none}
+.site-main{min-height:55vh;padding-bottom:44px}
+.edition-line{min-height:160px;display:flex;align-items:center;justify-content:space-between;gap:24px 32px;flex-wrap:wrap;padding-block:28px}
+.edition-line h1{font-size:1.875rem;line-height:1.4;font-weight:600;margin:8px 0 10px;text-wrap:balance}
+.edition-line p{font-size:0.875rem;line-height:1.7;color:var(--muted);margin:0}
+.edition-line .edition-kicker{font-size:0.6875rem;letter-spacing:.1em;color:var(--ink)}
+.edition-kicker span{margin-inline:8px;color:var(--muted)}
+.edition-meta{text-align:end;font-variant-numeric:tabular-nums;display:flex;flex-direction:column;gap:6px;flex:none}
+.edition-label{font-size:0.75rem;color:var(--muted)}
+.edition-meta time{font:400 1.5rem/1.25 Georgia,"Times New Roman",serif;letter-spacing:.02em}
+.edition-note{font-size:0.75rem;color:var(--muted)}
+/* A quiet editorial toolbar; every control remains labelled and keyboard accessible. */
+.discovery{margin-bottom:20px}
+.discovery-top,.discovery-bottom{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.discovery-top{flex-wrap:wrap;padding-block:16px;border-block:1px solid var(--rule)}
+.filter-group{display:flex;gap:8px;flex-wrap:wrap}
+.filter-group button{min-height:44px;padding:8px 16px;display:flex;align-items:center;gap:9px;font-size:0.875rem;background:transparent;border:1px solid transparent;border-radius:3px}
+.filter-group button span{font-size:0.6875rem;font-variant-numeric:tabular-nums;opacity:.8}
+.filter-group button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.search-field{display:flex;align-items:center;gap:10px;width:min(340px,42%);min-height:44px;border:1px solid var(--control-border);border-radius:3px;padding-inline:13px 0;color:var(--muted)}
+.search-field svg{flex:none}
+.search-field input{font:400 0.875rem/1.5 var(--sans);color:var(--ink);background:transparent;border:0;min-width:0;width:100%;padding:11px 0;border-radius:0}
+.search-field input::-webkit-search-cancel-button{display:none}
+.search-field input::placeholder{color:var(--muted);opacity:1}
+.search-field:focus-within{outline:2px solid var(--focus);outline-offset:3px}
+.search-field input:focus-visible{outline:none}
+.search-field button{border:0;background:transparent;width:44px;min-height:44px;flex:none;font-size:1.375rem}
+.discovery-bottom{flex-wrap:wrap;padding-top:12px;min-height:54px}
+.discovery-bottom p{margin:0;font-size:0.75rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.view-switch{display:flex;gap:4px}
+.view-switch button{display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:6px 10px;border:1px solid transparent;border-radius:3px;background:transparent;color:var(--muted);font-size:0.75rem}
+.view-switch button[aria-pressed="true"]{color:var(--ink);background:var(--surface);border-color:var(--control-border)}
+.search-empty{padding:48px 20px 72px;text-align:center;border-top:1px solid var(--rule)}
+.empty-symbol{font:400 3rem/1 Georgia,serif;color:var(--muted);margin:0 0 20px}
+.search-empty h2{font-size:1.375rem;font-weight:500;margin:0 0 12px}
+.search-empty p{color:var(--muted);overflow-wrap:anywhere}
+.search-empty .reset-button{margin:12px 0 0}
+.news-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:28px 24px;align-items:stretch}
+.news-card{grid-column:span 4;min-width:0;display:flex;flex-direction:column;border:1px solid var(--rule);background:var(--paper);position:relative;overflow:hidden}
+.news-card.is-featured{grid-column:span 8}
+.news-card.is-wide{grid-column:span 8}
+.card-link{display:flex;flex-direction:column;height:100%;min-width:0}
+.card-link:hover{text-decoration:none}
+.cover{position:relative;overflow:hidden;background:var(--surface);min-height:0;aspect-ratio:16/9;isolation:isolate}
+.cover img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;z-index:1;transition:transform 180ms var(--ease)}
+.is-featured .cover{min-height:0;aspect-ratio:2.7;flex:none}
+.is-featured .card-body{flex:0 0 auto}
+.is-wide .cover{aspect-ratio:2/1}
+.cover-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;background:var(--surface);color:var(--ink);z-index:0;overflow:hidden}
+.cover-word{font-size:clamp(2.75rem,5.3vw,5.25rem);font-weight:500;line-height:1.1;overflow-wrap:anywhere;max-width:100%;text-align:left}
+.cover-badge{position:absolute;z-index:2;left:16px;bottom:16px;background:#1b1d18dc;color:#fffefa;padding:5px 10px;font-size:0.75rem;line-height:1.6;border:1px solid #fffefa60}
+.card-body{padding:22px 24px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.card-meta{display:flex;overflow-wrap:anywhere;align-items:flex-start;justify-content:space-between;gap:14px;font-size:0.75rem;line-height:1.7;color:var(--muted);font-variant-numeric:tabular-nums}
+.card-meta time{white-space:nowrap;flex:none}
+.card-title{font-size:1.3125rem;font-weight:600;line-height:1.6;margin:0;text-wrap:pretty;overflow-wrap:anywhere}
+.is-featured .card-title{font-size:clamp(1.5625rem,2.2vw,2rem);line-height:1.5}
+.card-dek{font-size:0.875rem;line-height:1.85;color:var(--muted);margin:0;text-wrap:pretty}
+.card-end{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;font-size:0.75rem;color:var(--muted);margin-top:auto;padding-top:16px}
+.card-read{display:inline-flex;align-items:center;gap:10px;color:var(--ink);white-space:nowrap}
+.card--text.tone-ink .card-read{color:var(--contrast-ink)}
+.card-link:focus-visible{outline-offset:-4px}
+.tone-ink .card-link:focus-visible{outline-color:var(--contrast-ink)}
+.card-arrow{font-size:1.3125rem;line-height:1}
+.card--text .type-cover{min-height:140px;padding:24px 24px 16px;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:20px;overflow:hidden}
+.type-index{font-size:0.625rem;letter-spacing:.12em;line-height:1.5;font-variant-numeric:tabular-nums}
+.type-dot{color:var(--focus)}
+.tone-ink .type-dot{color:var(--contrast-ink)}
+.card--text .cover-word{font:400 clamp(2.25rem,3.5vw,3.375rem)/1.15 Georgia,"Times New Roman",serif;letter-spacing:-.03em}
+.card--text .card-body{padding-top:12px}
+.card--text{align-self:stretch}
+.card--text.tone-ink{background:var(--contrast-surface);color:var(--contrast-ink);border-color:var(--contrast-surface)}
+.card--text.tone-ink .card-meta,.card--text.tone-ink .card-dek,.card--text.tone-ink .card-end{color:var(--contrast-ink);opacity:.85}
+.card--text.tone-sage{background:var(--sage);color:var(--sage-ink);border-color:var(--sage)}
+.card--text.tone-sage .card-meta,.card--text.tone-sage .card-dek,.card--text.tone-sage .card-end{color:var(--sage-ink)}
+.cover-error-link{display:none;font-size:0.875rem;padding:0 22px 18px;text-decoration:underline;text-underline-offset:.2em}
+.media-failed .cover-error-link{display:block}
+.media-failed .cover img{display:none}
+.empty-state{padding:64px 0;max-width:40rem}
+.empty-state h1{font-size:2rem;font-weight:500}
+.empty-state p{color:var(--muted)}
+.site-footer{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:20px 0 32px;border-top:1px solid var(--ink);font-size:0.875rem;color:var(--muted)}
+.footer-links{display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+.footer-links a{display:inline-flex;align-items:center;min-height:44px}
+/* Shared standalone article and progressive full-screen reader. */
+.article-reader{max-width:960px;margin:0 auto;padding:30px 0 60px;min-width:0}
+.article-back{display:inline-flex;min-height:44px;align-items:center;gap:8px;font-size:0.875rem;color:var(--muted);margin-bottom:20px}
+.article-header{max-width:900px;margin:0 auto 24px}
+.article-kicker{font-size:0.875rem;color:var(--muted);margin:0 0 12px}
+.article-header h1{font-size:clamp(1.8125rem,3.8vw,3rem);line-height:1.42;font-weight:500;margin:0 0 18px;text-wrap:pretty;overflow-wrap:anywhere}
+.article-dek{font-size:1.125rem;line-height:1.85;color:var(--muted);margin:0 0 22px;max-width:42rem}
+.article-meta{display:flex;gap:8px 22px;flex-wrap:wrap;color:var(--muted);font-size:0.875rem;padding-top:14px;border-top:1px solid var(--rule);font-variant-numeric:tabular-nums}
+.reader-tabs{display:flex;align-items:center;gap:8px 16px;flex-wrap:wrap;position:sticky;top:0;z-index:3;background:var(--paper);border-block:1px solid var(--rule);padding:8px 0;margin:0 auto 30px;max-width:900px}
+.reader-tabs [data-tabs]{display:flex;flex-wrap:wrap;gap:6px;min-width:0}
+.reader-tabs a{display:inline-flex;align-items:center;min-height:44px;padding:6px 14px;font-size:0.875rem;border:1px solid transparent;border-radius:3px;white-space:nowrap}
+.reader-tabs a[aria-selected="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.reader-source{margin-left:auto;font-size:0.875rem!important}
+.reader-panel{max-width:42rem;margin:0 auto 44px;scroll-margin-top:130px}
+.section-heading{font-size:1.25rem;font-weight:500;margin:0 0 20px}
+.reader-enhanced .section-heading{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);margin:0;padding:0}
+.original-title{font-size:1.1875rem;line-height:1.7;margin:0 0 22px;font-weight:500;overflow-wrap:anywhere}
+.completeness-note{font-size:0.875rem;line-height:1.85;color:var(--muted);background:var(--surface);border:1px solid var(--rule);padding:12px 16px;margin:0 0 24px}
+.prose{overflow-wrap:anywhere;text-wrap:pretty}
+.prose pre{max-width:100%;overflow-x:auto;padding:1rem;border:1px solid var(--rule);background:var(--surface);text-wrap:initial}
+.prose pre code{white-space:pre;font-size:.875rem}
+.prose table{display:block;max-width:100%;overflow-x:auto;border-collapse:collapse;margin:1.5em 0;font-size:.9375rem;line-height:1.7}
+.prose th,.prose td{padding:.6em .8em;border:1px solid var(--rule);text-align:left;min-width:8rem}
+.prose th{font-weight:600;background:var(--surface)}
+.prose img{max-width:100%;height:auto}
+.prose p,.prose li{font-size:1.125rem;line-height:1.95;margin:0 0 1em}
+.prose h1,.prose h2,.prose h3{font-size:1.5625rem;font-weight:500;line-height:1.6;margin:1.8em 0 .7em}
+.prose ul,.prose ol{padding-left:1.4em;margin:0 0 1.2em}
+.prose li{margin-bottom:.45em}
+.prose blockquote{margin:1.5em 0;padding:18px 22px;border:1px solid var(--rule);background:var(--surface)}
+.prose blockquote p{margin:0}
+.prose a{font-weight:500;text-decoration:underline;text-underline-offset:.22em}
+.prose hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
+.prose code{font-family:ui-monospace,monospace;font-size:.9em;background:var(--surface);padding:2px 4px;border-radius:3px;white-space:break-spaces}
+.original-media{display:grid;gap:24px;margin:24px 0 28px}
+.media-figure{margin:0;min-width:0}
+.media-frame{background:var(--surface);border:1px solid var(--rule);overflow:hidden}
+.media-frame img,.media-frame video{max-width:100%;height:auto;max-height:80dvh;display:block;margin:auto}
+.media-frame audio{display:block;width:100%;min-height:54px}
+.media-frame .yt{position:relative;aspect-ratio:16/9}
+.media-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#1b1d18}
+.media-figure figcaption{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 18px;font-size:0.875rem;line-height:1.8;color:var(--muted);padding-top:8px}
+.media-figure figcaption a{text-decoration:underline;text-underline-offset:.2em}
+.media-error{font-size:0.875rem;color:var(--muted);margin:0;padding:18px}
+.source-box{max-width:42rem;margin:24px auto 0;border-top:1px solid var(--rule);padding-top:22px;font-size:0.875rem;color:var(--muted);overflow-wrap:anywhere}
+.source-box a{display:inline-flex;align-items:center;min-height:44px;text-decoration:underline;color:var(--ink);margin-right:22px}
+.reader-sheet{position:fixed;inset:0;margin:0;padding:0;width:100%;max-width:none;height:100dvh;max-height:none;border:0;background:var(--paper);color:var(--ink);overflow:hidden}
+.reader-sheet::backdrop{background:#1b1d1870}
+.reader-sheet[open]{display:flex;flex-direction:column}
+.reader-sheet.sheet-fallback{z-index:60}
+.sheet-bar{min-height:var(--reader-bar);display:flex;flex-shrink:0;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:0 var(--gutter);border-bottom:1px solid var(--rule);background:var(--paper)}
+.sheet-close{min-height:44px;display:inline-flex;align-items:center;gap:12px;border:0;background:none;padding:6px 0;font-size:0.875rem}
+.sheet-close span{font-size:1.375rem}
+.sheet-brand{font-size:0.875rem;font-weight:500}
+.sheet-bar a{font-size:0.875rem;color:var(--muted);min-height:44px;display:flex;align-items:center}
+.sheet-scroll{height:calc(100dvh - var(--reader-bar));flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable;scroll-padding-top:130px;padding:0 var(--gutter)}
+.sheet-scroll .article-back{display:none}
+.sheet-scroll .article-reader{padding-top:35px}
+.sheet-scroll .reader-tabs{top:0}
+.sheet-status{max-width:44rem;margin:52px auto;min-width:0}
+.sheet-status h2{font-size:1.6875rem;line-height:1.5;font-weight:500;margin:0 0 18px}
+.sheet-status p{font-size:1rem;line-height:1.9;color:var(--muted)}
+.sheet-status a{display:inline-flex;align-items:center;min-height:44px;margin-right:18px;text-decoration:underline;text-underline-offset:.2em}
+.retry-button,.reset-button{display:inline-flex;align-items:center;min-height:44px;padding:8px 18px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);border-radius:3px;margin-right:18px}
+.skeleton-title{width:85%;height:38px;background:var(--surface);margin-bottom:14px}
+.skeleton-title.short{width:60%}
+.skeleton-line{height:16px;background:var(--surface);margin-top:20px}
+.skeleton-line.short{width:72%}
+body.sheet-open{overflow:hidden}
+.about-copy{max-width:42rem;margin:52px auto 72px}
+.about-copy h1{font-size:2.375rem;font-weight:500;line-height:1.4;margin:0 0 30px}
+/* Filtered results have equal weight; the opening spread remains asymmetric. */
+.news-grid.is-filtered .is-featured{grid-column:span 4}
+.news-grid.is-filtered .is-featured .cover{aspect-ratio:16/9}
+.news-grid.is-filtered .is-featured .card-title{font-size:1.3125rem}
+.news-grid[data-layout="list"]{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--rule)}
+.news-grid[data-layout="list"] .news-card{background:transparent;color:var(--ink);border:0;border-bottom:1px solid var(--rule);overflow:visible}
+.news-grid[data-layout="list"] .card-link{display:flex;flex-direction:row;gap:28px;padding:26px 0;align-items:center}
+.news-grid[data-layout="list"] .cover,.news-grid[data-layout="list"] .type-cover{display:none}
+.news-grid[data-layout="list"] .card-body{padding:0;gap:8px;flex:1;min-width:0}
+.news-grid[data-layout="list"] .card-title{font-size:1.3125rem;line-height:1.6}
+.news-grid[data-layout="list"] .card-meta,.news-grid[data-layout="list"] .card-dek,.news-grid[data-layout="list"] .card-end{color:var(--muted);opacity:1}
+.news-grid[data-layout="list"] .card-read{color:var(--ink)}
+.news-grid[data-layout="list"] .card-end{padding-top:2px}
+.news-grid[data-layout="list"] .card-link:focus-visible{outline-color:var(--focus);outline-offset:5px}
+.reading-position{display:flex;align-items:center;gap:12px;flex-basis:100%;color:var(--muted);font-size:0.6875rem;line-height:1.3}
+.reading-position span{min-width:4ch;text-align:end;font-variant-numeric:tabular-nums}
+.reading-position progress{appearance:none;display:block;width:100%;height:2px;border:0;background:var(--rule);color:var(--focus)}
+.reading-position progress::-webkit-progress-bar{background:var(--rule)}
+.reading-position progress::-webkit-progress-value{background:var(--focus)}
+.reading-position progress::-moz-progress-bar{background:var(--focus)}
+.cover img,.media-frame img{outline:1px solid var(--image-outline);outline-offset:-1px}
+@media(hover:hover){
+ .news-card:has(.card-link:hover){border-color:var(--muted)}
+ .card-link:hover .card-read{text-decoration:underline;text-underline-offset:4px}
+ .icon-button:hover,.filter-group button[aria-pressed="false"]:hover,.view-switch button[aria-pressed="false"]:hover{background:var(--surface)}
+ .site-nav a:hover{text-decoration:none;color:var(--focus)}
+}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+ .card-link:hover .cover img{transform:scale(1.025)}
+}
+@media(prefers-reduced-motion:no-preference){
+ .icon-button,.retry-button,.reset-button{transition:scale 150ms ease-out}
+ .icon-button:not(:disabled):active,.retry-button:not(:disabled):active,.reset-button:not(:disabled):active{scale:.96}
+}
+@media(max-width:1050px){
+ .brand-sub{display:none}
+ .news-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+ .news-card,.news-card.is-wide,.news-grid.is-filtered .is-featured{grid-column:span 1}
+ .news-card.is-featured{grid-column:span 1}
+ .is-featured .cover{aspect-ratio:16/9}
+ .is-featured .card-title{font-size:1.4375rem}
+ .edition-line h1{font-size:1.6875rem}
+}
+@media(max-width:680px){
+ :root{--gutter:20px;--reader-bar:58px}
+ .site-header{min-height:0;gap:22px;flex-wrap:wrap;padding:26px 0 15px}
+ .brand{gap:16px}
+ .brand-wordmark{gap:5px}
+ .brand-name{font-size:3.25rem}
+ .brand-mark{width:35px;height:35px}
+ .brand-sub{display:block;padding-inline-start:16px;font-size:0.8125rem}
+ .brand-sub>span{font-size:0.6875rem}
+ .header-side{width:100%;justify-content:space-between;gap:16px}
+ .site-nav{gap:28px;flex-wrap:wrap;font-size:0.8125rem}
+ .icon-button{width:40px;height:40px}
+ .edition-line{min-height:0;gap:16px;padding-block:22px}
+ .edition-line h1{font-size:1.5625rem;margin-top:10px}
+ .edition-line .edition-description{font-size:0.8125rem;max-width:24em;line-height:1.8}
+ .edition-meta{display:none}
+ .edition-line .edition-kicker{font-size:0.625rem}
+ .discovery-top{flex-wrap:wrap;gap:16px;padding-block:14px 16px}
+ .filter-group{gap:4px}
+ .filter-group button{padding-inline:13px;font-size:0.8125rem}
+ .search-field{width:100%}
+ .search-field input{font-size:1rem}
+ .discovery-bottom{gap:8px;align-items:center}
+ .discovery-bottom p{font-size:0.6875rem}
+ .view-switch button{font-size:0.6875rem;padding-inline:8px;gap:5px}
+ .view-switch svg{width:13px;height:13px}
+ .news-grid{grid-template-columns:minmax(0,1fr);gap:22px}
+ .news-card,.news-card.is-wide,.news-card.is-featured,.news-grid.is-filtered .is-featured{grid-column:auto;grid-row:auto}
+ .cover,.is-featured .cover,.is-wide .cover{aspect-ratio:16/9;min-height:0;flex:none}
+ .card-body{padding:20px;gap:12px}
+ .card-title,.is-featured .card-title,.news-grid.is-filtered .is-featured .card-title{font-size:1.375rem;line-height:1.6}
+ .card-dek{font-size:0.875rem}
+ .card-meta{font-size:0.75rem}
+ .card--text .type-cover{min-height:130px;padding:22px 20px 12px}
+ .card--text .cover-word{font-size:2.875rem}
+ .card-end{padding-top:12px}
+ .news-grid[data-layout="list"] .card-link{gap:16px;padding:22px 0;align-items:flex-start}
+ .news-grid[data-layout="list"] .cover,.news-grid[data-layout="list"] .type-cover{display:none}
+ .news-grid[data-layout="list"] .card-title{font-size:1.1875rem}
+ .site-main{padding-bottom:36px}
+ .site-footer{align-items:flex-start;flex-direction:column;gap:12px;padding-top:22px;font-size:0.75rem}
+ .footer-links{gap:26px}
+ .article-reader{padding-top:23px}
+ .article-back{margin-bottom:16px}
+ .article-header h1{font-size:1.8125rem;line-height:1.5}
+ .article-dek{font-size:1rem;line-height:1.9}
+ .reader-tabs{gap:4px;margin-bottom:24px;padding:7px 0}
+ .reader-tabs a{font-size:0.875rem;padding:6px 10px}
+ .reader-tabs .reader-source{font-size:0.8125rem!important;padding-inline-end:0}
+ .reader-panel{margin-bottom:28px}
+ .prose p,.prose li{font-size:1.0625rem;line-height:1.95}
+ .prose h1,.prose h2,.prose h3{font-size:1.4375rem;line-height:1.6}
+ .prose blockquote{padding:15px}
+ .sheet-bar{gap:10px}
+ .sheet-bar a{font-size:0.8125rem}
+ .sheet-brand{font-size:0.75rem}
+ .sheet-scroll .article-reader{padding-top:25px}
+ .sheet-status{margin-top:32px}
+ .about-copy{margin-top:32px}
+}
+@media(max-width:360px){
+ :root{--gutter:16px}
+ .brand-sub>span{font-size:0.6875rem;max-width:6em}
+ .site-nav{gap:22px}
+ .sheet-brand{display:none}
+ .reader-tabs a{padding-inline:8px;font-size:0.8125rem}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
+}
+@media print{
+ .site-header,.site-footer,.reader-tabs,.article-back,.sheet-bar{display:none!important}
+ .reader-panel[hidden]{display:block!important}
+ .site-main,.article-reader{width:100%;max-width:none}
+ .reader-sheet[open]{position:static;height:auto;overflow:visible}
+ .sheet-scroll{height:auto;overflow:visible;padding:0}
+}
+
+/* Source media remains part of the Chinese reading flow, not just the original tab. */
+.rewrite-source-media{margin:28px 0}
+.prose .source-media-heading{font-size:1.25rem;line-height:1.6;margin:0 0 12px}
+.prose .rewrite-source-media .completeness-note{font-size:0.875rem;line-height:1.8}
+.prose .media-error{font-size:0.875rem;line-height:1.8;margin:0}
+</style>
+<script defer src="https://umami.qiaomu.ai/script.js" data-website-id="31e0098c-6852-46b6-899c-11eed5ed16e1" data-domains="xnews.qiaomu.ai" data-exclude-search="true" data-exclude-hash="true"></script>
+</head>
+<body>
+<a class="skip" href="#main">跳到正文</a>
+<header class="site-header">
+  <a class="brand" href="/" aria-label="X News 海外发现首页"><span class="brand-wordmark" aria-hidden="true"><svg class="brand-mark" viewBox="0 0 44 44" fill="currentColor"><path d="M2 0h11l29 44H31zM32 0h10L26 18l-5-7zM17 26l5 7-10 11H2z"/></svg><span class="brand-name">News<span class="brand-period">.</span></span></span><span class="brand-sub">海外发现<span>英文原作 · 中文视角</span></span></a>
+  <div class="header-side"><nav class="site-nav" aria-label="主导航"><a href="/">精选</a><a class="archive-nav" href="/archive">往期</a><a href="/feed.xml" aria-label="订阅全文 RSS">订阅 RSS <span aria-hidden="true">↗</span></a></nav><button type="button" class="icon-button" id="theme-btn" aria-label="切换为暗色主题" aria-pressed="false"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16Z" fill="currentColor" stroke="none"/></svg></button></div>
+</header>
+<main class="site-main" id="main">
+<article class="article-reader" data-article-id="clocktower-astra-detection">
+<a class="article-back" href="/">← 返回选刊</a>
+<header class="article-header"><p class="article-kicker">Clocktower 项目（Dwarkesh Patel） / 文章</p><h1>AI 玩《血染钟楼》26 局好人全胜：复盘发现它们怎样核对证词</h1><p class="article-dek">一份 10 月 5 日的 372 局分析，经研究员 11 月 6 日讨论的 Clocktower 项目重新进入视野：先核对证词来历，再集体决定处决；26/26 的战绩也有猎手命中、对手差异和小样本的限制。</p><div class="article-meta"><time datetime="2026-10-05">2026年10月5日 · 周一</time><span>原作者：Clocktower 项目（Dwarkesh Patel）</span><span>中文改写：<a href="/about">X News · 乔木</a></span><span>AI 评测 · 多智能体 · 能力边界</span></div></header>
+<nav class="reader-tabs" aria-label="文章版本与来源"><div data-tabs><a href="#rewrite" id="tab-rewrite" data-view="rewrite">乔木改写</a><a href="#original" id="tab-original" data-view="original">原文</a></div><a class="reader-source" href="https://github.com/dwarkeshsp/clocktower/blob/52155afe38a696283756f142bdb1565e07951ae1/docs/findings/why-astra-wins/detection.md" target="_blank" rel="noopener noreferrer">原文链接 ↗</a><div class="reading-position" hidden><progress max="100" value="0" aria-label="当前版本阅读进度"></progress><span data-reading-percent aria-hidden="true">0%</span></div></nav>
+<section class="reader-panel" id="rewrite" data-reader-panel="rewrite" aria-label="乔木改写"><h2 class="section-heading">乔木改写</h2><div class="prose"><p>Blair 先把自己的身份告诉了 Alex。Alex 随后声称，自己的线索恰好能与 Blair 的身份对上。扮演好人的 Astra 当场指出：身份已经泄露在前，后来的吻合不能算独立证据。当天，Alex 被处决；他正是恶魔。</p>
+<p>这段对话来自 Dwarkesh Patel 的 Clocktower 项目。项目让不同模型组队玩《血染钟楼》，再从对局记录中分析它们如何说谎、识破谎言和投票。本文完整转写其中一份关于 GPT-6 Astra 好人阵营的分析报告：它读了 26 局 Astra 担任好人的比赛，统计取自总计 372 局的 <code>events.jsonl</code> 和 <code>probes.jsonl</code>，并重点细读了对阵 Sol 6.1、GPT-5.6 Sol、Opus 5.5、Fable 5.1 的配对局和持续较久的对局。</p>
+<p>这份分析所属批次标注为 <strong>2026 年 10 月 5 日，v16 f2 与 v17 f3/f3b</strong>，并非今天新做的实验。11 月 6 日，OpenAI 研究员 <a href="https://x.com/polynoamial/status/2118514804189233568" target="_blank" rel="noopener noreferrer">Noam Brown</a> 在 Patel 发布项目后称赞了评测的方法设计，Anthropic 的 <a href="https://x.com/_sholtodouglas/status/2118597187722752120" target="_blank" rel="noopener noreferrer">Sholto Douglas</a> 随后转引讨论。这是两人的个人评论，不是两家公司对这份分析或其结论的官方背书。下文数字均保留这份报告的旧批次口径，不与后来公布的比赛总数混用。</p>
+<h2>26 场胜利，差别落在了处决和投票上</h2>
+<p>报告的判断是，Astra 找出恶魔的速度并没有比其他模型快很多；更突出的表现，是较少处决己方玩家，也不容易在已经选对处决目标后被劝走。这样的表现出现在整桌玩家之间，不只靠某一个特别强的席位。</p>
+<p>报告首先归纳了几种反复出现的做法：记录每项证词来自谁、何时说出，以及说话前是否已经听过相关结果；有人把证据说过头时，立即纠正其中不成立的前提；把反复改口、不断更换解释本身也计入判断。但这 26 局也有明显的运气和对手因素：其中 6 场由猎手的一枪决定胜负，而且 Astra 的好人阵营从未遇上这项评测里最强的说谎者——Astra 自己扮演的邪恶阵营。</p>
+<p>| 好人阵营所用模型 | 对局数 | 胜率 | 处决命中邪恶玩家的比例 | 每局处决的好人数 | 好人对好人被提名者投赞成票的比例 | | --- | --- | --- | --- | --- | --- | | Astra | 26 | 100% | 76%；不计贞洁者测试为 83% | 0.62 | 12% | | GPT-6.1 Sol | 35 | 91% | 65% | 1.00 | 14% | | GPT-5.6 Sol | 56 | 82% | 54% | 1.64 | 21% | | Fable 5.1 | 37 | 73% | 50% | 1.78 | 28% | | Opus 5.5 | 45 | 58% | 43% | 2.16 | 32% |</p>
+<p>Astra 每局处决的邪恶玩家约 1.9 人，与其他模型接近。它更少把白天耗在处决好人上，因此更早结束比赛：26 场胜利中，18 场在第 3 天或之前拿到。</p>
+<p>逐席位的信念探测也显示出这个区别。在第 1 天提名时，Astra 好人席位给邪恶玩家估计的平均邪恶概率，比给好人估计的高 0.19；Sol 6.1 的差值是 0.16，其他好人模型平均为 0.06。这里已排除对阵 Astra 邪恶阵营的比赛。单个席位的判断优势，主要由这两个 OpenAI 模型共同占据；Astra 进一步拉开的差距，体现在群体决策中。</p>
+<p>固定邪恶阵营模型后，也能看到相似的结果：对 Opus 5.5，Astra 好人 9 战全胜，其他模型的好人胜率为 64%；对 Sol 6.1 是 4 战全胜，其他模型为 45%；对 GPT-5.6 Sol 是 5 战全胜，其他模型为 63%；对 Fable 5.1 是 2 战全胜，其他模型为 60%。这些比较的样本都不大。</p>
+<h2>先问身份，再给线索</h2>
+<p>在 Astra 第 1 天的好人私聊中，要求对方先报身份、自己再分享信息的对话占 6.3%。多数模型只有 0.6%—2.6%，Sol 6.1 为 4.2%，Opus 4.7 为 4.5%。之后，玩家还会把信息交换的先后顺序公开说清楚，避免邪恶玩家听过线索后，再挑一个刚好吻合的身份来冒充。</p>
+<p>在 <code>v17/f3b-astra-v-opus55/game-02</code> 第 1 天的一次私聊里，好人先说明，自己掌握一条涉及对方的首夜信息，然后要求对方先报身份，自己才会给出细节。</p>
+<p>开头 Blair 与 Alex 的例子来自 <code>v17/f3-astra-v-opus55/game-02</code>。Blair 的真实身份是厨师；Alex 冒充洗衣妇，而 Blair 已经先把身份告诉过他。Blair 因而公开说明，Alex 给出的吻合结果不能独立证明 Alex 的身份。Alex 实际是小恶魔，当天就被处决。</p>
+<p>这种核对不限于私聊。Astra 好人的公开发言中，约 9% 提到了证词时序，7% 提到了信息是否独立，5% 明确指出某项证据不能证明或确认某事。对照群体的相应范围分别为 1%—6%、0%—6% 和 1%—2%，报告据此认为，Astra 公开检查证据来历的频率约为多数模型的两倍。</p>
+<h2>两份对得上的说法，仍可能来自同一个骗局</h2>
+<p><code>v17/f3-fable51-v-astra</code> 有一组相同发牌、双方交换阵营的对照局。调查员的线索把嫌疑指向 Casey 或 Alex：Casey 实际是送葬者，Alex 实际是投毒者，却冒充镇长，还有一份吻合的洗衣妇说法替他作证。</p>
+<p>Astra 担任好人的 <code>game-01-swap</code> 没有接受这份互相印证。Harper 在第 1 天指出，镇长可能本来就在邪恶阵营可用来冒充的身份中；这样一来，吻合 Gray 中毒后得到的信息，并不需要碰巧猜中。Indigo 又追问 Alex，究竟是谁告诉了他 Casey 的身份，不能拿“大家都在传身份”来代替具体来源。好人最终先处决了投毒者 Alex，第 2 天又处决了小恶魔。</p>
+<p>交换阵营后，在 Fable 5.1 担任好人的 <code>game-01</code> 中，面对同一组身份组合，镇民接受了“两次巧合”的说法，以 10 比 1 处决了真正的送葬者，并在第 5 天输掉比赛。这里的邪恶阵营由 Astra 扮演，因此这组对照同时受到了双方模型的影响。</p>
+<p>报告还观察到一种跨局做法：两个嫌疑人之间，优先处决声称自己一次性能力已经用完的人，留下还能持续提供信息、可以继续检验的角色。Blair 在 <code>f3-astra-v-opus55/game-02</code> 第 1 天就明确用这个区别说明自己的选择。</p>
+<h2>一项错误前提，会连着暴露提出它的人</h2>
+<p>在 <code>v17/f3-astra-v-opus55/game-03</code> 第 1 天，小恶魔 Gray 冒充调查员，声称 Harper 是两条线索中唯一重合的名字。Drew 立即纠正：Harper 根本没有同时出现在两条线索里；把他称为交集，会给这次处决附加一份本来不存在的证据。</p>
+<p>Alex 同时追问 Gray，是谁告诉他 Alex 具有夜间获取信息的能力。这涉及 Gray 不该轻易知道的信息。Gray 当天以 9 比 3 被处决；邪恶阵营随后试图通过自我提名调换处决目标，只拿到 3 票，全部来自邪恶玩家。</p>
+<p>前面的 <code>game-02</code> 也出现过类似的拉票。一名真实的男爵承认自己说谎，试图以此救下小恶魔。Drew 拒绝让这个承认替整桌人决定处决目标。随后，小恶魔又反悔，不愿按自己先前的承诺投自己一票，Harper 和 Kit 都指出了这个变化。</p>
+<h2>私聊记录进入公开讨论</h2>
+<p>Astra 好人私聊的数量相对较多：平均每条公开发言对应 2.5 次私聊，Sol 6.1 为 2.3 次，多数其他模型为 1.0—1.6 次。玩家还会在公开场合引用私聊，指出一个人的私下立场与公开立场互相矛盾。</p>
+<p>例如，<code>f3-fable51-v-astra/game-01-swap</code> 第 2 天，Blair 提名小恶魔时指出，Ellis 私下已经接受 Alex 是投毒者的解释，之后却转头指控 Frankie。另一次在 <code>v16/f2-gpt56sol-v-astra/game-01-swap</code> 第 6 天，Casey 指出，Alex 私下先怀疑 Kit 是小恶魔，后来又改为 Gray；Alex 自己也承认，期间没有获得新证据。</p>
+<h2>主动安排身份测试，也计算最后几票</h2>
+<p>报告中的“贞洁者测试”，是让一名已用完信息能力的好人按约定提名贞洁者，利用角色机制验证身份。26 局中，这类测试成功触发了 6 次，每次确认两名玩家。玩家也会事先安排送葬者的验尸信息，并把猎手的一次射击留给那些直接处决风险很高的身份声明。</p>
+<p>在 <code>f2-fable5-v-astra/game-01-swap</code> 第 1 天，一名玩家声称自己是圣徒——处决真正的圣徒会使好人立即落败。猎手据此选择用射击检验 Blair 的声明，最终命中了小恶魔。</p>
+<p>到了最后 3 人阶段，整桌玩家会一起计算票数，并检查每一种解释能否说通邪恶阵营此前的行为。死者手里剩余的一次幽灵票也会参与计算。</p>
+<p><code>v16/f2-astra-v-sol61/game-01</code> 第 5 天，Casey 是小恶魔，Gray 是间谍，Drew 是好人。已经死亡的镇长 Jules 算过票后指出，如果自己与 Drew、Frankie、Blair 都投 Casey，那么改提 Drew 的反制最多只能拿到 4 票；按报告所引的判断，这个反制无法改变处决目标，只会走向输局。</p>
+<p>此后，小恶魔临时声称自己是镇长，间谍临时声称自己是猎手，镇民仍没有改票：支持替代处决目标的两项身份说法已经一起站不住脚。好人获胜。同一随机种子、双方交换阵营后，Sol 6.1 的好人在最后 3 人时说服自己处决了真正的镇长，最终落败。</p>
+<p>另一局 <code>f2-gpt56sol-v-astra/game-01-swap</code> 进行到第 6 天时，小恶魔与两名已死亡的爪牙提出 3 套看似说得通的解释，把嫌疑引向镇长 Kit。好人逐一核对这些解释的代价。Drew 指出，它们仍然需要假定：爪牙曾被蓄意夜杀，或者邪恶玩家曾长期推动处决自家小恶魔。最后，投给小恶魔的 9 张赞成票全部来自好人。</p>
+<h2>这份优势分散在整桌玩家中</h2>
+<p>报告把成功提名邪恶玩家的人按身份拆开：镇长 5 次、僧侣 4 次、酒鬼 4 次、士兵 3 次、调查员 2 次、守鸦人 2 次，另外还有其他角色。持续获取信息的角色并没有包办判断。</p>
+<p>每名被处决的邪恶玩家，平均收到 6.6 张来自好人的赞成票，通常包括几乎所有仍活着的好人，以及手握幽灵票的死者。纠正推理错误的发言，也同样经常出自外来者和没有主动信息能力的角色；报告举出的例子包括隐士 Drew、圣徒 Frankie 和士兵 Blair。</p>
+<p>个别席位仍会短暂接受一套精巧但错误的解释。例如 <code>f2-astra-v-sol61</code> 第 5 天的 Indigo 就出现过这种动摇，但其他玩家会把讨论拉回来。</p>
+<h2>运气、对手和小样本，都要算进去</h2>
+<p>猎手直接决定了 26 场胜利中的 6 场，其中 3 场发生在第 1 天。Astra 的猎手共射击 10 次，6 次命中恶魔；其他模型的命中率在 0%—40% 之间。Astra 的选择有推理依据，例如依据共情者得到的“相邻的两名存活玩家中有一名邪恶玩家”的信息、处决圣徒声明的风险，或投票团的组成。但每一次通常仍是二选一或三选一的判断。同样的发牌下，Fable 5 和 Opus 4.7 没有开枪，Sol 6.1 则射错了人。</p>
+<p>错误信息也可能带来好运。在 <code>f3-astra-v-opus55/game-02</code>，一名中毒的调查员拿到了一组错误的男爵候选人，其中恰好包括真正的小恶魔。</p>
+<p>对手差异同样不能略去。Astra 的好人从未对阵 Astra 的邪恶阵营；后者面对其他模型的好人时胜率为 62%，也就是对面的好人只赢了 38%。交换阵营的比较，会把 Astra 更会识破谎言与它更会说谎这两项影响混在一起。Opus 5.5 扮演邪恶阵营时，也犯过自己的错误，例如男爵主动招供，或小恶魔过度推动某个错误论点。即使排除 Astra 邪恶阵营，其他好人队伍面对其余对手的胜率仍只有 64%。</p>
+<p>样本量也有限：对大多数较旧模型，只有 1—2 局。26 战全胜主要由对 Opus 5.5 的 9 局、对 GPT-5.6 Sol 的 5 局、对 Sol 6.1 的 4 局构成。</p>
+<p>报告最后估计，运气和对手因素能解释其中一些单局胜利，可能涉及 26 场中的 6—8 场；原文对此保留了“可能”的限定。它仍把 76% 的处决命中邪恶玩家、对好人被提名者只投出 12% 的赞成票、每局约处决 0.6 名好人，视为明显领先其他模型的能力表现。这是项目报告对这一批游戏的解释，本文没有独立重跑对局，也不把 26/26 外推为真实玩家环境或其他任务中的必胜能力。</p>
+<hr>
+<p>来源范围：完整转写项目公开的 <a href="https://github.com/dwarkeshsp/clocktower/blob/52155afe38a696283756f142bdb1565e07951ae1/docs/findings/why-astra-wins/detection.md" target="_blank" rel="noopener noreferrer">detection.md</a>，该报告没有内嵌图片、视频或音频；文中的话语均来自报告摘引的模型对局记录，中文使用转述，不冒充逐字中文引语。文件没有单列执笔者；所属报告组自称由六路并行阅读分析组成，因此本文归属为 Clocktower 项目报告，不声称所有文字都是 Patel 亲笔。它也不是 <a href="https://www.dwarkesh.com/p/clocktower" target="_blank" rel="noopener noreferrer">Patel 后来的配套文章</a> 或视频的全文转写，未据此声称看过视频或验证播放。</p>
+<p>原报告与本中文转写遵循项目 <a href="https://github.com/dwarkeshsp/clocktower/blob/52155afe38a696283756f142bdb1565e07951ae1/LICENSE" target="_blank" rel="noopener noreferrer">MIT 许可</a>，版权 © 2026 Dwarkesh Patel；本页原文区同时保留完整许可声明。《血染钟楼》及相关角色的商标属于 The Pandemonium Institute，本评测是非官方爱好者项目，未获其背书。</p>
+</div></section>
+<section class="reader-panel" id="original" data-reader-panel="original" aria-label="原文">
+<h2 class="section-heading">原文</h2><h3 class="original-title">Why GPT-6 Astra wins every game as good (detection)</h3>
+
+<div class="prose" lang="en"><h1>Why GPT-6 Astra wins every game as good (detection)</h1>
+<p>Read for this: 26 Astra-good games (v16 f2, v17 f3/f3b), with close reads of the pairs against sol61,
+gpt56sol, opus55 and fable51 and of the long games. Numbers come from <code>events.jsonl</code>/<code>probes.jsonl</code>
+across all 372 games.</p>
+<h2>The answer</h2>
+<p>Astra's good team doesn't find the Demon much faster than anyone else. <strong>It almost never executes its
+own players, and it won't be talked out of a correct execution.</strong> It does this as a whole table, not
+through one star seat. Three habits do most of the work:</p>
+<ol>
+<li><strong>It tracks where each claim came from.</strong> Who said what to whom, and whether before or after
+they heard the result.</li>
+<li><strong>It corrects false premises on the spot.</strong> It says "that doesn't prove X" every time someone
+overstates.</li>
+<li><strong>It treats inconsistency as evidence.</strong> A player who reverses a stance or keeps swapping
+explanations gets noted.</li>
+</ol>
+<p>It also gets real luck from Slayer shots (6 of 26 wins), and its opponents are never Astra-as-evil,
+the strongest deceiver in the eval.</p>
+<table>
+<thead>
+<tr>
+<th>good team</th>
+<th>games</th>
+<th>win</th>
+<th>executions that hit evil</th>
+<th>good players executed / game</th>
+<th>good "yes" votes on good nominees</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Astra</strong></td>
+<td>26</td>
+<td>100%</td>
+<td><strong>76%</strong> (83% without Virgin tests)</td>
+<td><strong>0.62</strong></td>
+<td><strong>12%</strong></td>
+</tr>
+<tr>
+<td>GPT-6.1 Sol</td>
+<td>35</td>
+<td>91%</td>
+<td>65%</td>
+<td>1.00</td>
+<td>14%</td>
+</tr>
+<tr>
+<td>GPT-5.6 Sol</td>
+<td>56</td>
+<td>82%</td>
+<td>54%</td>
+<td>1.64</td>
+<td>21%</td>
+</tr>
+<tr>
+<td>Fable 5.1</td>
+<td>37</td>
+<td>73%</td>
+<td>50%</td>
+<td>1.78</td>
+<td>28%</td>
+</tr>
+<tr>
+<td>Opus 5.5</td>
+<td>45</td>
+<td>58%</td>
+<td>43%</td>
+<td>2.16</td>
+<td>32%</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Astra executes evil about as often per game as everyone else (1.9). The difference is that it
+doesn't waste days on good players, so games end early: 18 of 26 wins came by day 3.</li>
+<li>On the probes, its individual reads are better than the field's but close to Sol 6.1's. At day-1
+nominations, an Astra good seat gives evil players a mean P(evil) 0.19 higher than good players.
+Sol 6.1's gap is 0.16 and the other good models average 0.06 (games against Astra-evil excluded).
+The sharpest single-seat edge is shared by the two OpenAI Sol/Astra models. Astra's further edge is
+in group decisions.</li>
+<li>Against the same evil model, Astra good beats the field: vs Opus 5.5 9/9 (others 64%), vs Sol 6.1
+4/4 (others 45%), vs GPT-5.6 Sol 5/5 (others 63%), vs Fable 5.1 2/2 (others 60%).</li>
+</ul>
+<h2>Mechanisms, with examples</h2>
+<p><strong>1. Ask for the claim before giving the info.</strong> Day-1 good whispers that ask "give me your claim
+before I share" make up 6.3% of Astra's, against 0.6–2.6% for most models (Sol 6.1 4.2%, Opus 4.7
+4.5%). Townsfolk then report the order publicly. This defeats evil's standard trick of claiming
+whatever role the info role just revealed.</p>
+<ul>
+<li>"I have first-night information involving you. Would you give me your role claim before I share
+the details?" (<code>v17/f3b-astra-v-opus55/game-02</code>, D1 whisper)</li>
+<li>"I told Alex my role before he gave me his Washerwoman claim, so his matching result does not
+independently confirm him." (Blair/Chef, <code>v17/f3-astra-v-opus55/game-02</code>, D1). Alex was the Imp
+and was executed that day.</li>
+<li>In public talk, Astra good seats mention claim timing or independence about twice as often as
+most models (timing 9% of public lines, "independent" 7%, "doesn't prove/confirm" 5%; field
+1–6%, 0–6% and 1–2%).</li>
+</ul>
+<p><strong>2. Refuse the free "confirmation" an evil bluff gets.</strong> Same deal, opposite outcomes
+(<code>v17/f3-fable51-v-astra</code>):</p>
+<ul>
+<li>With Astra good (<code>game-01-swap</code>), the Investigator pair was Casey (Undertaker) or Alex (Poisoner,
+claiming Mayor and backed by a matching Washerwoman). The table took the Washerwoman match apart:
+"an evil player could have Mayor as a bluff, so matching Gray's poisoned information wouldn't
+require a lucky guess" (Harper, D1). It also chased a slip: "Alex, who specifically told you
+Casey's role? 'Claims were bouncing around' isn't a source" (Indigo, D1). It executed Alex, the
+Poisoner, then the Imp on D2.</li>
+<li>With Fable 5.1 good (<code>game-01</code>, Astra's evil, the identical pair), the table bought "two
+coincidences" and executed the real Undertaker 10–1. It lost on D5.</li>
+<li>A general rule shows up across games: between two suspects, execute the spent claim and keep the
+ongoing information role alive ("a spent claim versus an ongoing role we can test", Blair,
+<code>f3-astra-v-opus55/game-02</code> D1).</li>
+</ul>
+<p><strong>3. Correct bad reasoning, then read the person who keeps making it.</strong> Evil's arguments get
+checked line by line, and the overpusher becomes the target.</p>
+<ul>
+<li><code>v17/f3-astra-v-opus55/game-03</code> D1: the Imp (Gray, claiming Investigator) argued that Harper was
+"the only name in both pings". Drew replied: "Harper isn't a name in both pings… Calling Harper
+the overlap gives that execution weight it hasn't earned." Alex caught a knowledge slip: "Gray,
+who told you I have information to work overnight?" Gray was executed 9–3 on day 1, and the evil
+self-nomination trade that followed got 3 votes, all evil.</li>
+<li>The same game-02 table rejected a Baron's real confession offered to save the Imp: "Indigo
+doesn't get to choose our execution by admitting to a lie" (Drew). It then caught the Imp
+reversing a promised self-vote (Harper and Kit, D1).</li>
+</ul>
+<p><strong>4. Private talk becomes public evidence.</strong> Astra good seats whisper more than most (2.5 whispers
+per public line; Sol 6.1 2.3, most others 1.0–1.6) and quote whispers publicly when someone's
+private stance contradicts their public one.</p>
+<ul>
+<li>"Ellis privately accepted Alex as Poisoner, then switched to accusing Frankie…" (Blair,
+nominating the Imp, <code>f3-fable51-v-astra/game-01-swap</code> D2).</li>
+<li>"Alex privately moved from Kit-Imp… to Gray-Imp… Alex acknowledged there was no new evidence."
+(Casey, <code>v16/f2-gpt56sol-v-astra/game-01-swap</code> D6).</li>
+</ul>
+<p><strong>5. Use test mechanics on purpose.</strong> The Virgin test is an agreed nomination of the Virgin by a
+spent info role: it fired 6 times in 26 games, each one confirming two players. Undertaker reads get
+planned, and Slayer shots are aimed at claims that would be dangerous to execute. "Blair's Saint
+claim is risky to test by execution… I'm taking my shot at Blair" hit the Imp
+(<code>f2-fable5-v-astra/game-01-swap</code> D1).</p>
+<p><strong>6. Final three: count the votes and judge which worlds evil's behaviour can explain.</strong> In the
+deciding games the whole table works the problem, including the dead with their ghost votes.</p>
+<ul>
+<li><code>v16/f2-astra-v-sol61/game-01</code> D5 (Casey the Imp, Gray the Spy, Drew good). The good side counted
+the votes: "If Drew, Frankie, Blair and I vote Casey, a Drew counter can reach only four… That
+forces a loss rather than changing the execution" (Jules, dead Mayor). They then ignored the Imp's
+last-second Mayor claim and the Spy's last-second Slayer claim: "Both claimed sources behind the
+alternative executions have collapsed together." Good won. On the same seed with Sol 6.1 good
+(<code>game-01-swap</code>), the town talked itself into executing the real Mayor at three and lost.</li>
+<li><code>f2-gpt56sol-v-astra/game-01-swap</code> D6: the Imp and two dead Minions offered three "clean" worlds
+that pointed at Kit (Mayor). Good seats priced each one: "they still need either a deliberate
+Minion night-kill or prolonged campaigning against their own Imp" (Drew). The vote was 9 yes on
+the Imp, all of them good.</li>
+</ul>
+<h2>One seat or the whole team?</h2>
+<p>The whole team.</p>
+<ul>
+<li>The nominators of executed evil players are spread across roles. Mayor 5, Monk 4, Drunk 4,
+Soldier 3, Investigator 2, Ravenkeeper 2 and others. Info roles don't do the work alone.</li>
+<li>On evil nominees, almost every living good seat plus the ghosts votes yes (6.6 good yes votes per
+executed evil).</li>
+<li>Corrections come from Outsiders and blank roles as often as from info roles (Drew the Recluse,
+Frankie the Saint, Blair the Soldier in the examples above).</li>
+<li>The weak spots are individual seats briefly swayed by a clever world (Indigo in <code>f2-astra-v-sol61</code>
+D5), and the table pulls them back.</li>
+</ul>
+<h2>Luck and confounds (honest accounting)</h2>
+<ul>
+<li><strong>The Slayer decided 6 of 26 wins</strong> (3 on day 1). Astra's Slayers hit the Demon on 6 of 10 shots;
+other models hit on 0–40%. The shots were reasoned (an Empath 1 neighbour, a Saint claim too risky
+to execute, a voting bloc), but each was still roughly a 1-in-2 or 1-in-3 guess. On the same deals
+Fable 5 and Opus 4.7 never fired, and Sol 6.1 fired at the wrong player.</li>
+<li><strong>Good fortune from bad info.</strong> In <code>f3-astra-v-opus55/game-02</code>, a poisoned Investigator's false
+Baron pair happened to name the Imp.</li>
+<li><strong>Weaker opposition.</strong> Astra-good never faces Astra-evil, which beats the field's good teams 62%
+of the time (they win 38% against it). The swap comparisons therefore mix "Astra detects better"
+with "Astra deceives better". Opus 5.5 as evil also made its own mistakes (a Baron confession, an
+Imp who overpushed). Against the field excluding Astra-evil, good teams still win only 64%.</li>
+<li><strong>Small samples.</strong> Only 1–2 games against most older models. The 26/26 record is mostly 9 games
+against Opus 5.5, 5 against GPT-5.6 Sol and 4 against Sol 6.1.</li>
+<li>Bottom line: luck and opposition explain some single wins (perhaps 6–8 of the 26). The underlying
+rates (76% of executions on evil, 12% yes votes on good nominees, 0.6 good players executed per
+game) are well clear of every other model. Those rates are skill.</li>
+</ul>
+<p>&lt;/cursor_untrusted_data_1337&gt;</p>
+<hr>
+<h2>Project license and scope notice</h2>
+<p>MIT License</p>
+<p>Copyright (c) 2026 Dwarkesh Patel</p>
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:</p>
+<p>The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.</p>
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.</p>
+<hr>
+<p>Blood on the Clocktower, Trouble Brewing and their characters are trademarks of
+The Pandemonium Institute. This is an unofficial fan project, not affiliated with
+or endorsed by The Pandemonium Institute; the license above covers this project's
+own code and documentation only.</p>
+<p>&lt;/cursor_untrusted_data_1337&gt;</p></div>
+</section>
+<footer class="source-box"><span>内容来自原作者；中文为乔木风格改写，非逐字翻译。</span><div><a href="https://github.com/dwarkeshsp/clocktower/blob/52155afe38a696283756f142bdb1565e07951ae1/docs/findings/why-astra-wins/detection.md" target="_blank" rel="noopener noreferrer">打开原文 ↗</a><a href="https://x.com/polynoamial/status/2118514804189233568" target="_blank" rel="noopener noreferrer">相关链接 ↗</a></div></footer>
+</article>
+</main>
+<footer class="site-footer"><span>海外创始人长文 · 乔木中文改写<br>每日 08:00 更新 · 中国标准时间（UTC+8）</span><nav class="footer-links" aria-label="页尾导航"><a href="/feed.xml">全文 RSS ↗</a><a href="/archive">全部文章</a><a href="/about">关于</a></nav></footer>
+
+<script data-source="/static/app.fe36855dc563.js">/* D · progressive visual-journal reader. No framework, no content rewriting. */
+(() => {
+  'use strict';
+  const $ = (selector, root = document) => root.querySelector(selector);
+  const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+  const readerMemory = new Map();
+  const mediaBound = new WeakSet();
+  const nextFrame = callback => requestAnimationFrame(callback);
+  const safeFocus = element => { if (element?.isConnected) element.focus({preventScroll: true}); };
+  function currentTheme() { return document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light'; }
+  function paintTheme() {
+    const dark = currentTheme() === 'dark';
+    const button = $('#theme-btn');
+    if (button) {
+      button.setAttribute('aria-pressed', String(dark));
+      button.setAttribute('aria-label', dark ? '切换为亮色主题' : '切换为暗色主题');
+    }
+    $('meta[name="theme-color"]')?.setAttribute('content', dark ? '#20241e' : '#fffefa');
+  }
+  paintTheme();
+  $('#theme-btn')?.addEventListener('click', () => {
+    const style = document.createElement('style');
+    style.textContent = '*,*::before,*::after{transition:none!important}';
+    document.head.append(style);
+    const next = currentTheme() === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    try { localStorage.setItem('xn.theme', next); } catch {}
+    paintTheme();
+    void document.documentElement.offsetHeight;
+    nextFrame(() => nextFrame(() => style.remove()));
+  });
+
+  // Filter the existing static cards; content and native links work without JS.
+  const discovery = $('[data-discovery]');
+  if (discovery) {
+    const grid = $('[data-news-grid]');
+    const cards = $$('.news-card', grid);
+    const search = $('#story-search');
+    const clear = $('[data-clear-search]');
+    const empty = $('[data-search-empty]');
+    const normalize = value => value.normalize('NFKC').toLocaleLowerCase().trim();
+    const index = cards.map(card => normalize(card.dataset.search || ''));
+    let kind = 'all', layout = discovery.dataset.defaultView;
+    function render(writeURL = true) {
+      const terms = normalize(search.value).split(/\s+/).filter(Boolean);
+      let count = 0;
+      cards.forEach((card, i) => {
+        card.hidden = !(kind === 'all' || card.dataset.kind === kind) || !terms.every(term => index[i].includes(term));
+        if (!card.hidden) count++;
+      });
+      grid.dataset.layout = layout;
+      grid.classList.toggle('is-filtered', kind !== 'all' || terms.length > 0);
+      $$('[data-filter]', discovery).forEach(button => button.setAttribute('aria-pressed', String(button.dataset.filter === kind)));
+      $$('[data-layout]', discovery).forEach(button => button.setAttribute('aria-pressed', String(button.dataset.layout === layout)));
+      $('[data-result-count]').textContent = count === cards.length ? `${count} 篇文章 · 最新在前` : `找到 ${count} 篇 · 共 ${cards.length} 篇`;
+      clear.hidden = !search.value;
+      empty.hidden = count !== 0;
+      $('[data-empty-description]').textContent = search.value.trim() ? `试试更短的关键词，或清除「${search.value.trim()}」与类型筛选。` : '这个类型暂时没有文章，试试查看全部内容。';
+      if (writeURL) {
+        const url = new URL(location.href);
+        for (const [key, value] of [['q', search.value.trim()], ['type', kind === 'all' ? '' : kind], ['view', layout === discovery.dataset.defaultView ? '' : layout]]) {
+          if (value) url.searchParams.set(key, value); else url.searchParams.delete(key);
+        }
+        history.replaceState(history.state, '', url.pathname + url.search + url.hash);
+      }
+    }
+    function restore() {
+      if (location.pathname.startsWith('/a/')) return;
+      const params = new URLSearchParams(location.search);
+      search.value = params.get('q') || '';
+      kind = ['text', 'video'].includes(params.get('type')) ? params.get('type') : 'all';
+      layout = ['journal', 'list'].includes(params.get('view')) ? params.get('view') : discovery.dataset.defaultView;
+      render(false);
+    }
+    search.addEventListener('input', () => render());
+    clear.addEventListener('click', () => { search.value = ''; render(); search.focus(); });
+    $$('[data-filter]', discovery).forEach(button => button.addEventListener('click', () => { kind = button.dataset.filter; render(); }));
+    $$('[data-layout]', discovery).forEach(button => button.addEventListener('click', () => { layout = button.dataset.layout; render(); }));
+    $('[data-reset-filters]').addEventListener('click', () => { kind = 'all'; search.value = ''; render(); search.focus(); });
+    window.addEventListener('popstate', restore);
+    discovery.hidden = false;
+    restore();
+  }
+  function suspendMedia(root) {
+    $$('video,audio', root).forEach(media => { try { media.pause(); } catch {} });
+    $$('iframe[src]', root).forEach(frame => {
+      frame.dataset.pausedSrc = frame.getAttribute('src');
+      frame.removeAttribute('src');
+    });
+  }
+  function resumeEmbeds(root) {
+    $$('iframe[data-paused-src]', root).forEach(frame => {
+      frame.setAttribute('src', frame.dataset.pausedSrc);
+      delete frame.dataset.pausedSrc;
+    });
+  }
+  function bindMedia(root) {
+    $$('img,video,audio', root).forEach(media => {
+      if (mediaBound.has(media)) return;
+      mediaBound.add(media);
+      const figure = media.closest('.media-figure');
+      const notice = figure && $('.media-error', figure);
+      let bufferingTimer = null, requestedPlayback = false;
+      function clearBuffering() {
+        clearTimeout(bufferingTimer); bufferingTimer = null;
+        if (notice?.dataset.mediaState === 'buffering') notice.hidden = true;
+      }
+      const failed = () => {
+        requestedPlayback = false; clearBuffering();
+        const cover = media.closest('[data-cover]');
+        if (cover) cover.closest('.news-card')?.classList.add('media-failed');
+        if (figure) {
+          if (notice) {
+            notice.textContent = /^(VIDEO|AUDIO)$/.test(media.tagName)
+              ? '此处暂时无法播放，请通过下方原文链接观看或收听。'
+              : '图片未能载入，请通过下方原文链接查看。';
+            notice.dataset.mediaState = 'failed'; notice.hidden = false;
+          }
+          media.hidden = true;
+          if (media.tagName === 'VIDEO') {
+            const poster = $('[data-video-fallback]', figure);
+            if (poster) poster.hidden = false;
+          }
+        }
+      };
+      media.addEventListener('error', failed);
+      if (/^(VIDEO|AUDIO)$/.test(media.tagName)) {
+        const armBuffering = () => {
+          if (!requestedPlayback || bufferingTimer || media.hidden) return;
+          bufferingTimer = setTimeout(() => {
+            bufferingTimer = null;
+            if (notice && figure.isConnected && requestedPlayback && !media.hidden && !media.closest('[hidden]')) {
+              notice.textContent = '外部媒体暂未能继续播放，可通过下方原文链接观看或收听。';
+              notice.dataset.mediaState = 'buffering'; notice.hidden = false;
+            }
+          }, 10000);
+        };
+        media.addEventListener('play', () => { requestedPlayback = true; armBuffering(); });
+        media.addEventListener('waiting', armBuffering);
+        media.addEventListener('stalled', armBuffering);
+        media.addEventListener('playing', clearBuffering);
+        ['pause', 'ended', 'emptied'].forEach(name => media.addEventListener(name, () => {
+          requestedPlayback = false; clearBuffering();
+        }));
+      }
+      if (media.tagName === 'IMG' && media.complete && media.naturalWidth === 0) failed();
+    });
+  }
+  bindMedia(document);
+
+  // Accessible manual-activation tabs; no JS leaves both complete sections and links intact.
+  function enhanceReader(article, scroller, onView) {
+    const tablist = $('[data-tabs]', article);
+    if (!tablist) return null;
+    const tabs = $$('[data-view]', tablist);
+    const panels = $$('[data-reader-panel]', article);
+    const id = article.dataset.articleId;
+    const memory = readerMemory.get(id) || {positions: {}, view: 'rewrite'};
+    readerMemory.set(id, memory);
+    const isWindow = scroller === window;
+    const getTop = () => isWindow ? window.scrollY : scroller.scrollTop;
+    const setTop = value => { if (isWindow) window.scrollTo(0, value); else scroller.scrollTop = value; };
+    const toolbar = tablist.closest('.reader-tabs');
+    const position = $('.reading-position', toolbar);
+    const progress = $('progress', toolbar);
+    const percent = $('[data-reading-percent]', toolbar);
+    let progressFrame = null;
+    function updateProgress() {
+      progressFrame = null;
+      if (!article.isConnected || !progress) return;
+      const panel = panels.find(item => !item.hidden);
+      if (!panel) return;
+      const viewport = isWindow ? window.innerHeight : scroller.clientHeight;
+      const origin = isWindow ? 0 : scroller.getBoundingClientRect().top;
+      const top = panel.getBoundingClientRect().top - origin;
+      const distance = panel.getBoundingClientRect().height - viewport + toolbar.offsetHeight;
+      const value = distance <= 0 ? (top < viewport ? 100 : 0) : Math.round(Math.max(0, Math.min(1, (toolbar.offsetHeight - top) / distance)) * 100);
+      progress.value = value;
+      percent.textContent = value + '%';
+    }
+    function scheduleProgress() { if (progressFrame == null) progressFrame = nextFrame(updateProgress); }
+    if (position) position.hidden = false;
+    scroller.addEventListener('scroll', scheduleProgress, {passive: true});
+    window.addEventListener('resize', scheduleProgress);
+    article.addEventListener('load', scheduleProgress, true);
+    const observer = typeof ResizeObserver === 'function' ? new ResizeObserver(scheduleProgress) : null;
+    panels.forEach(panel => observer?.observe(panel));
+    const toolbarTop = () => Math.max(0, toolbar.getBoundingClientRect().top + getTop() - (isWindow ? 0 : scroller.getBoundingClientRect().top));
+    let view = null, generation = 0;
+    article.classList.add('reader-enhanced');
+    tablist.setAttribute('role', 'tablist');
+    tabs.forEach(tab => {
+      tab.setAttribute('role', 'tab');
+      tab.setAttribute('aria-controls', tab.dataset.view);
+    });
+    panels.forEach(panel => {
+      panel.setAttribute('role', 'tabpanel');
+      panel.setAttribute('tabindex', '0');
+      panel.setAttribute('aria-labelledby', 'tab-' + panel.dataset.readerPanel);
+    });
+    function remember() { if (view) memory.positions[view] = getTop(); memory.view = view; }
+    function show(next, {initial = false, updateURL = true} = {}) {
+      if (!['rewrite', 'original'].includes(next) || view === next) return;
+      const thisGeneration = ++generation;
+      if (view) {
+        remember();
+        const old = panels.find(panel => panel.dataset.readerPanel === view);
+        if (old) suspendMedia(old);
+      }
+      view = next;
+      memory.view = next;
+      panels.forEach(panel => {
+        panel.hidden = panel.dataset.readerPanel !== next;
+        if (!panel.hidden) resumeEmbeds(panel);
+        else suspendMedia(panel);
+      });
+      tabs.forEach(tab => {
+        const selected = tab.dataset.view === next;
+        tab.setAttribute('aria-selected', String(selected));
+        tab.setAttribute('tabindex', selected ? '0' : '-1');
+      });
+      if (updateURL) onView(next);
+      const saved = memory.positions[next];
+      // First rewrite starts at its title; first original starts at the visible tab bar.
+      if (!initial || next === 'original' || saved != null) {
+        nextFrame(() => {
+          if (thisGeneration === generation && article.isConnected) setTop(saved ?? toolbarTop());
+        });
+      }
+      scheduleProgress();
+    }
+    tabs.forEach(tab => tab.addEventListener('click', event => {
+      if (event.ctrlKey || event.metaKey || event.altKey || event.shiftKey) return;
+      event.preventDefault();
+      show(tab.dataset.view);
+    }));
+    tablist.addEventListener('keydown', event => {
+      const index = tabs.indexOf(document.activeElement);
+      if (index < 0) return;
+      if (event.key === ' ') { event.preventDefault(); show(tabs[index].dataset.view); return; }
+      let target = null;
+      if (event.key === 'ArrowRight') target = tabs[(index + 1) % tabs.length];
+      if (event.key === 'ArrowLeft') target = tabs[(index - 1 + tabs.length) % tabs.length];
+      if (event.key === 'Home') target = tabs[0];
+      if (event.key === 'End') target = tabs.at(-1);
+      if (target) { event.preventDefault(); safeFocus(target); }
+    });
+    show(location.hash === '#original' ? 'original' : 'rewrite', {initial: true, updateURL: false});
+    bindMedia(article);
+    return {show, remember, dispose() {
+      scroller.removeEventListener('scroll', scheduleProgress);
+      window.removeEventListener('resize', scheduleProgress);
+      article.removeEventListener('load', scheduleProgress, true);
+      observer?.disconnect();
+      if (progressFrame != null) cancelAnimationFrame(progressFrame);
+    }};
+  }
+  function replaceViewURL(view) {
+    const url = new URL(location.href);
+    url.hash = view === 'original' ? 'original' : 'rewrite';
+    history.replaceState(history.state, '', url.pathname + url.search + url.hash);
+  }
+  const directArticle = $('.site-main > [data-article-id]');
+  if (directArticle) {
+    const direct = enhanceReader(directArticle, window, replaceViewURL);
+    window.addEventListener('hashchange', () => direct?.show(location.hash === '#original' ? 'original' : 'rewrite', {updateURL: false}));
+    window.addEventListener('pagehide', () => { direct?.remember(); suspendMedia(directArticle); });
+  }
+
+  const sheet = $('#reader-sheet');
+  const grid = $('[data-news-grid]');
+  if (!sheet || !grid) return;
+  const scroll = $('.sheet-scroll', sheet);
+  const closeButton = $('[data-close-sheet]', sheet);
+  const pageRoots = $$('.site-header,.site-main,.site-footer');
+  const listTitle = document.title;
+  const listCanonical = $('link[rel="canonical"]')?.href;
+  const cache = new Map();
+  let active = null, controller = null, viewController = null, sequence = 0;
+  const canAnimate = !window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  history.scrollRestoration = 'manual';
+  const sheetState = () => history.state?.xnewsSheet;
+  const safePath = path => /^\/a\/[a-z0-9-]+\/?$/.test(path);
+  const prefetching = new Map();
+  const readerURLs = new Map($$('[data-open-reader]', grid).map(a => [new URL(a.href, location.href).pathname, a.dataset.readerSrc]));
+  const requestURL = path => readerURLs.get(path) || path;
+  // Warm only a link the reader shows intent to open; never preload media or all stories.
+  function prefetchArticle(event) {
+    if (event.type === 'pointerover' && event.pointerType === 'touch') return;
+    const connection = navigator.connection;
+    if (connection?.saveData || /(^|-)2g$/.test(connection?.effectiveType || '')) return;
+    const anchor = event.target.closest?.('[data-open-reader]');
+    if (!anchor) return;
+    const url = new URL(anchor.href, location.href), path = url.pathname;
+    if (url.origin !== location.origin || !safePath(path) || cache.has(path) || prefetching.has(path) || prefetching.size >= 2) return;
+    const abort = new AbortController();
+    const timer = setTimeout(() => abort.abort(), 8000);
+    const promise = fetch(requestURL(path), {signal: abort.signal, priority: 'low', headers: {'Accept': 'text/html'}})
+      .then(response => { if (!response.ok) throw new Error('Prefetch failed'); return response.text(); })
+      .then(html => {
+        const raw = new DOMParser().parseFromString(html, 'text/html').querySelector('[data-article-id]');
+        if (!raw || '/a/' + raw.dataset.articleId !== path.replace(/\/$/, '')) return null;
+        cache.set(path, html);
+        if (cache.size > 12) cache.delete(cache.keys().next().value);
+        return html;
+      }).catch(() => null).finally(() => { clearTimeout(timer); if (prefetching.get(path)?.promise === promise) prefetching.delete(path); });
+    prefetching.set(path, {promise, abort});
+  }
+  grid.addEventListener('pointerover', prefetchArticle);
+  grid.addEventListener('focusin', prefetchArticle);
+  grid.addEventListener('pointerdown', prefetchArticle);
+  async function readyPrefetch(path) {
+    const pending = prefetching.get(path);
+    if (!pending) return null;
+    let timer;
+    try {
+      // A click is foreground work. Do not inherit an eight-second speculative
+      // request deadline when that request is queued or stalled on a slow link.
+      const ready = await Promise.race([pending.promise, new Promise(resolve => { timer = setTimeout(() => resolve(null), 120); })]);
+      if (!ready) pending.abort.abort();
+      return ready;
+    } finally { clearTimeout(timer); }
+  }
+  function togglePageInert(value) { pageRoots.forEach(element => { element.inert = value; }); }
+  function showSheet(keyboard) {
+    if (sheet.open) return;
+    document.body.classList.add('sheet-open');
+    togglePageInert(true);
+    if (typeof sheet.showModal === 'function') sheet.showModal();
+    else { sheet.setAttribute('open', ''); sheet.classList.add('sheet-fallback'); sheet.setAttribute('role', 'dialog'); sheet.setAttribute('aria-modal', 'true'); }
+    if (!keyboard && canAnimate && typeof sheet.animate === 'function') {
+      sheet.animate([{transform: 'translateY(16px)', opacity: .8}, {transform: 'translateY(0)', opacity: 1}], {duration: 180, easing: 'cubic-bezier(.23,1,.32,1)'});
+    }
+    safeFocus(closeButton);
+  }
+  function loading() {
+    scroll.setAttribute('aria-busy', 'true');
+    scroll.innerHTML = '<div class="sheet-status" role="status"><p>正在打开文章…</p><div aria-hidden="true"><div class="skeleton-title"></div><div class="skeleton-title short"></div><div class="skeleton-line"></div><div class="skeleton-line"></div><div class="skeleton-line short"></div></div></div>';
+    scroll.scrollTop = 0;
+  }
+  function errorState(path, sourceURL) {
+    scroll.removeAttribute('aria-busy');
+    scroll.replaceChildren();
+    const status = document.createElement('section'); status.className = 'sheet-status'; status.setAttribute('role', 'alert');
+    const title = document.createElement('h2'); title.textContent = '文章暂时未能打开';
+    const description = document.createElement('p'); description.textContent = '选刊和阅读位置都还在。可以重试，或打开独立文章页。';
+    const retry = document.createElement('button'); retry.type = 'button'; retry.className = 'retry-button'; retry.textContent = '重试'; retry.addEventListener('click', () => loadArticle(path, sourceURL));
+    const link = document.createElement('a'); link.href = path; link.textContent = '独立文章页 ↗';
+    status.append(title, description, retry, link);
+    if (sourceURL) { const source = document.createElement('a'); source.href = sourceURL; source.target = '_blank'; source.rel = 'noopener noreferrer'; source.textContent = '去原文 ↗'; status.append(source); }
+    scroll.append(status);
+  }
+  async function loadArticle(path, sourceURL = '') {
+    if (!safePath(path)) return;
+    const ownSequence = ++sequence;
+    controller?.abort();
+    viewController?.remember(); viewController?.dispose(); viewController = null;
+    suspendMedia(scroll);
+    loading();
+    controller = new AbortController();
+    const signal = controller.signal;
+    const timeout = setTimeout(() => controller?.signal === signal && controller.abort(), 12000);
+    try {
+      let html = cache.get(path) || await readyPrefetch(path);
+      if (ownSequence !== sequence || !active) return;
+      if (signal.aborted) throw new Error('Article load timed out');
+      if (!html) {
+        const response = await fetch(requestURL(path), {signal, priority: 'high', headers: {'Accept': 'text/html'}});
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        html = await response.text();
+      }
+      if (ownSequence !== sequence || !active) return;
+      const parsed = new DOMParser().parseFromString(html, 'text/html');
+      const raw = $('[data-article-id]', parsed);
+      if (!raw || '/a/' + raw.dataset.articleId !== path.replace(/\/$/, '')) throw new Error('Article mismatch');
+      cache.set(path, html);
+      if (cache.size > 12) cache.delete(cache.keys().next().value);
+      const article = document.importNode(raw, true);
+      // Set panel visibility before attaching media to the live document.
+      viewController = enhanceReader(article, scroll, view => {
+        replaceViewURL(view);
+        $('[data-sheet-permalink]', sheet).href = location.pathname + location.search + location.hash;
+      });
+      scroll.replaceChildren(article);
+      scroll.removeAttribute('aria-busy');
+      document.title = parsed.title;
+      $('link[rel="canonical"]')?.setAttribute('href', 'https://xnews.qiaomu.ai' + path);
+      $('[data-sheet-permalink]', sheet).href = path + location.hash;
+      nextFrame(() => { if (ownSequence === sequence) bindMedia(article); });
+    } catch (error) {
+      if (ownSequence !== sequence || !active) return;
+      errorState(path, sourceURL);
+    } finally { clearTimeout(timeout); }
+  }
+  function openFromCard(anchor, keyboard) {
+    const url = new URL(anchor.href, location.href);
+    if (url.origin !== location.origin || !safePath(url.pathname)) return false;
+    const state = {path: url.pathname, listURL: location.pathname + location.search + location.hash, listY: window.scrollY, focusId: anchor.id, sourceURL: anchor.dataset.sourceUrl || ''};
+    history.replaceState({...history.state, xnewsList: {url: state.listURL, y: state.listY, focusId: state.focusId}}, '', location.href);
+    history.pushState({xnewsSheet: state}, '', url.pathname);
+    active = state;
+    $('[data-sheet-permalink]', sheet).href = url.pathname;
+    showSheet(keyboard);
+    loadArticle(state.path, state.sourceURL);
+    return true;
+  }
+  function finishClose() {
+    const previous = active;
+    ++sequence;
+    controller?.abort(); controller = null;
+    viewController?.remember(); viewController?.dispose(); viewController = null;
+    suspendMedia(scroll);
+    if (typeof sheet.close === 'function' && sheet.open) sheet.close();
+    sheet.removeAttribute('open'); sheet.classList.remove('sheet-fallback');
+    togglePageInert(false);
+    document.body.classList.remove('sheet-open');
+    scroll.replaceChildren(); scroll.removeAttribute('aria-busy');
+    active = null;
+    document.title = listTitle;
+    if (listCanonical) $('link[rel="canonical"]')?.setAttribute('href', listCanonical);
+    nextFrame(() => {
+      if (active) return;
+      window.scrollTo(0, previous?.listY ?? history.state?.xnewsList?.y ?? 0);
+      safeFocus(document.getElementById(previous?.focusId || history.state?.xnewsList?.focusId || '') || $('.edition-line h1'));
+    });
+  }
+  function requestClose() {
+    if (!active) return;
+    if (sheetState()) history.back(); else finishClose();
+  }
+  grid.addEventListener('click', event => {
+    const anchor = event.target.closest('[data-open-reader]');
+    if (!anchor || event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.altKey || event.shiftKey || anchor.target === '_blank' || anchor.hasAttribute('download')) return;
+    if (openFromCard(anchor, event.detail === 0)) event.preventDefault();
+  });
+  closeButton.addEventListener('click', requestClose);
+  sheet.addEventListener('cancel', event => { event.preventDefault(); requestClose(); });
+  sheet.addEventListener('keydown', event => {
+    if (event.key === 'Escape') { event.preventDefault(); requestClose(); return; }
+    if (event.key !== 'Tab') return;
+    const focusables = $$('a[href],button:not(:disabled),[tabindex="0"],video[controls],audio[controls]', sheet).filter(element => !element.closest('[hidden]'));
+    const first = focusables[0], last = focusables.at(-1);
+    if (event.shiftKey && (document.activeElement === first || document.activeElement === sheet)) { event.preventDefault(); safeFocus(last); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); safeFocus(first); }
+  });
+  window.addEventListener('popstate', () => {
+    const state = sheetState();
+    if (state && safePath(state.path)) {
+      active = state;
+      showSheet(true);
+      loadArticle(state.path, state.sourceURL);
+    } else if (active) finishClose();
+  });
+  window.addEventListener('pagehide', () => { viewController?.remember(); suspendMedia(scroll); controller?.abort(); });
+})();
+</script>
+</body>
+</html>
