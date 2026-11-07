@@ -2,8 +2,8 @@
   {
     "id": "anthropic-agent-memory-dreaming",
     "date": "2026-11-06",
-    "title": "Anthropic：用 dreaming 整理智能体记忆，并在 CL-Bench 与宝可梦等任务上给出评测",
-    "dek": "Lance Martin 执笔的工程研究帖说明，会话空闲时回看日志可纠正错误笔记、构建 wiki，并报告具体分数与文件规模；文中也保留局限与开放问题。",
+    "title": "Claude 写了 413 份笔记，只拿到 1 枚徽章：智能体记忆该怎么整理",
+    "dek": "413 份笔记只换来 1 枚徽章，10 份笔记却拿到 4 枚。Anthropic 用宝可梦、数据库与法律文档实验，拆解智能体怎样筛选经验、核对错误，并让下一次任务用上记忆。",
     "url": "/a/anthropic-agent-memory-dreaming",
     "source_url": "https://x.com/AnthropicAI/status/2118814753154064501",
     "tags": [

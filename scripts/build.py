@@ -299,7 +299,8 @@ def render_rewrite(a: dict, *, rss: bool = False) -> str:
         rendered = rss_media_html(media) if rss else render_media_html(media, a["source"]["url"])
         label = "原文附带媒体" if placement == "after_body" else "原文媒体"
         notice = f'<p class="completeness-note">{html.escape(note)}</p>' if note else ""
-        block = f'<section class="rewrite-source-media" aria-label="{label}"><h3 class="source-media-heading">{label}</h3>{notice}{rendered}</section>'
+        heading = f'<h3 class="source-media-heading">{label}</h3>' if placement == "after_body" else ""
+        block = f'<section class="rewrite-source-media" aria-label="{label}">{heading}{notice}{rendered}</section>'
         if placement == "after_paragraph":
             anchor_html = md_to_html(anchor)
             body = body.replace(anchor_html, anchor_html + block, 1)
@@ -589,7 +590,7 @@ def render_rewrite_markdown(a: dict) -> str:
     for (placement, anchor), entries in groups.items():
         label = "原文附带媒体" if placement == "after_body" else "原文媒体"
         note = " ".join(dict.fromkeys(entry[1] for entry in entries if entry[1]))
-        parts = ["### " + label]
+        parts = ["### " + label] if placement == "after_body" else []
         if note:
             parts.append(markdown_label(note))
         parts.extend(markdown_media(media) for media, _ in entries)

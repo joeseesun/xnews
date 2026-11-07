@@ -90,6 +90,66 @@
       "width": 1200,
       "height": 810,
       "sha256": "5129d6d002568e67898acee326a8218b1af3ecd8f536b4baee639c70be260820"
+    },
+    {
+      "source_url": "https://cdn.sanity.io/images/4zrzovbb/website/a0bcfa203214d817d2b4261b7188aba8be6db5b2-3840x1754.png",
+      "local_url": "/media/anthropic-memory-media_fig_01-57a1c13359.webp",
+      "role": "image",
+      "article_id": "anthropic-agent-memory-dreaming",
+      "content_type": "image/webp",
+      "bytes": 40118,
+      "width": 1920,
+      "height": 877,
+      "sha256": "57a1c13359b28f478bd67e41dc6757a3c2c364e924f78cf224c81f594aaabb34",
+      "transformation": "Resize to maximum 1920 pixels and encode WebP quality 88"
+    },
+    {
+      "source_url": "https://cdn.sanity.io/images/4zrzovbb/website/2ef2bf5c81ea6d578749782782eff10cf3136de4-3840x1754.png",
+      "local_url": "/media/anthropic-memory-media_fig_02-e6b9adf209.webp",
+      "role": "image",
+      "article_id": "anthropic-agent-memory-dreaming",
+      "content_type": "image/webp",
+      "bytes": 35316,
+      "width": 1920,
+      "height": 877,
+      "sha256": "e6b9adf209af1eade74d8e121655eec8795a612e09812d494b6eeef31bcbced2",
+      "transformation": "Resize to maximum 1920 pixels and encode WebP quality 88"
+    },
+    {
+      "source_url": "https://cdn.sanity.io/images/4zrzovbb/website/bb0d44c78cc431fb5e84fbf2cb17c4303bc6bd65-3840x2160.png",
+      "local_url": "/media/anthropic-memory-media_fig_03-492b33fb61.webp",
+      "role": "image",
+      "article_id": "anthropic-agent-memory-dreaming",
+      "content_type": "image/webp",
+      "bytes": 130012,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "492b33fb61a3d21033a3ec239e1aaccf41c2c468e23be114c5cb92fb1400c43c",
+      "transformation": "Resize to maximum 1920 pixels and encode WebP quality 88"
+    },
+    {
+      "source_url": "https://cdn.sanity.io/images/4zrzovbb/website/5e15e10f665773050d90fafc38ab8dd76ae5368b-3840x2545.png",
+      "local_url": "/media/anthropic-memory-media_fig_04-8ecd23291f.webp",
+      "role": "image",
+      "article_id": "anthropic-agent-memory-dreaming",
+      "content_type": "image/webp",
+      "bytes": 62686,
+      "width": 1920,
+      "height": 1273,
+      "sha256": "8ecd23291f8163562ded898cc2d2325f56d8201086e1c335f7e65c10c5d7e3f9",
+      "transformation": "Resize to maximum 1920 pixels and encode WebP quality 88"
+    },
+    {
+      "source_url": "https://cdn.sanity.io/images/4zrzovbb/website/da03e864e4eba93a91314fa5f2a5d0e4c14b2a0f-3840x2310.png",
+      "local_url": "/media/anthropic-memory-media_fig_05-b434579838.webp",
+      "role": "image",
+      "article_id": "anthropic-agent-memory-dreaming",
+      "content_type": "image/webp",
+      "bytes": 61232,
+      "width": 1920,
+      "height": 1155,
+      "sha256": "b4345798385b3a4391ef2d7345e02166524c6cf120e0b103eb933cf9ca579dc7",
+      "transformation": "Resize to maximum 1920 pixels and encode WebP quality 88"
     }
   ]
 }

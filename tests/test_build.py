@@ -26,6 +26,16 @@ class Tags(HTMLParser):
         return [a for t, a in self.tags if t == tag and all(a.get(k) == v for k, v in attrs.items())]
 
 
+def assert_body_in_order(case, article, rendered, *, markdown=False):
+    """Media can split the body; every original block must remain in order."""
+    cursor = 0
+    for block in re.split(r"\n\s*\n", article["body_md"].strip()):
+        expected = block if markdown else build.md_to_html(block)
+        position = rendered.find(expected, cursor)
+        case.assertGreaterEqual(position, 0, f"{article['id']}: missing or reordered body block: {block[:80]}")
+        cursor = position + len(expected)
+
+
 class BuildRegression(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -46,7 +56,7 @@ class BuildRegression(unittest.TestCase):
     def test_complete_static_bodies_and_no_js_navigation(self):
         for a in self.articles:
             page = (self.public / "a" / (a["id"] + ".html")).read_text()
-            self.assertIn(build.md_to_html(a["body_md"]), page)
+            assert_body_in_order(self, a, page)
             original = (a.get("original") or {}).get("text_md", "")
             if original:
                 self.assertIn(build.render_original_text(a), page)
@@ -69,7 +79,7 @@ class BuildRegression(unittest.TestCase):
             self.assertEqual(item.findtext("title"), a["title"])
             full = item.findtext("{http://purl.org/rss/1.0/modules/content/}encoded")
             self.assertEqual(item.findtext("description"), full)
-            self.assertIn(build.md_to_html(a["body_md"]), full)
+            assert_body_in_order(self, a, full)
             self.assertIn(a["source"]["url"], full)
             original = a.get("original") or {}
             if original.get("text_md"):
@@ -134,13 +144,17 @@ class BuildRegression(unittest.TestCase):
             self.assertNotIn('src="/media/', full)
             self.assertNotIn('poster="/media/', full)
 
-    def test_source_cache_is_small_verified_original_bytes_and_rendering_only(self):
+    def test_source_cache_is_small_verified_image_bytes_and_rendering_only(self):
         manifest = json.loads((ROOT / "src/media-manifest.json").read_text())
         self.assertLess(sum(asset["bytes"] for asset in manifest["assets"]), 1024 * 1024)
         for asset in manifest["assets"]:
             file = self.public / asset["local_url"].lstrip("/")
             data = file.read_bytes()
-            self.assertTrue(data.startswith(b"\xff\xd8\xff"))
+            if asset["content_type"] == "image/webp":
+                self.assertTrue(data.startswith(b"RIFF") and data[8:12] == b"WEBP")
+                self.assertEqual(asset["transformation"], "Resize to maximum 1920 pixels and encode WebP quality 88")
+            else:
+                self.assertTrue(data.startswith(b"\xff\xd8\xff"))
             self.assertEqual(len(data), asset["bytes"])
             self.assertEqual(hashlib.sha256(data).hexdigest(), asset["sha256"])
             self.assertEqual(build.local_media_url(asset["source_url"]), asset["local_url"])
@@ -155,6 +169,19 @@ class BuildRegression(unittest.TestCase):
                     video = doc.select("video", src=media["url"])[0]
                     self.assertEqual(video.get("poster"), build.local_media_url(media["poster"]))
                     self.assertEqual(video.get("data-original-poster"), media["poster"])
+
+    def test_anthropic_memory_all_images_are_contextual(self):
+        a = next(a for a in self.articles if a["id"] == "anthropic-agent-memory-dreaming")
+        self.assertEqual(len(a["rewrite_media"]), 15)
+        for ref in a["rewrite_media"]:
+            self.assertEqual(ref["placement"], "after_paragraph")
+            self.assertEqual(ref["evidence"], "source_position_verified")
+        for rendered in (build.render_rewrite(a), build.render_rewrite(a, rss=True)):
+            self.assertNotIn('aria-label="原文附带媒体"', rendered)
+            self.assertNotIn('<h3 class="source-media-heading">', rendered)
+            for ref in a["rewrite_media"]:
+                self.assertLess(rendered.index(build.md_to_html(ref["after_md"])), rendered.index('data-media-id="' + ref["media_id"] + '"'))
+        self.assertEqual(len(Tags(build.render_rewrite(a)).select("img")), 15)
 
     def media_fixture(self):
         return {"id": "test-only-multimodal", "source": {"url": "https://example.invalid/source"},

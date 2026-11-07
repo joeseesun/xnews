@@ -4,7 +4,7 @@ import json
 import unittest
 from xml.etree import ElementTree as ET
 
-from test_build import Tags, build
+from test_build import Tags, build, assert_body_in_order
 
 VERSIONS = "{https://qiaomu.ai/ns/rss/1.0}versions"
 CONTENT = "{http://purl.org/rss/1.0/modules/content/}encoded"
@@ -43,8 +43,8 @@ class RssVersions(unittest.TestCase):
                 self.assertEqual(p["original"]["url"], a["source"]["url"])
                 self.assertEqual(p["original"]["lang"], a["original"]["lang"])
                 self.assertEqual(p["rewrite"]["title"], a["title"])
-                self.assertIn(a["body_md"].strip(), p["rewrite"]["markdown"])
-                self.assertIn(build.md_to_html(a["body_md"]), p["rewrite"]["html"])
+                assert_body_in_order(self, a, p["rewrite"]["markdown"], markdown=True)
+                assert_body_in_order(self, a, p["rewrite"]["html"])
                 self.assertNotIn(build.md_to_html(a["body_md"]), p["original"]["html"])
                 original = a["original"]["text_md"]
                 self.assertIn(build.render_original_text(a), p["original"]["html"])

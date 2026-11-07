@@ -58,7 +58,7 @@ class EditorialRegression(unittest.TestCase):
 
     def test_project_rules_prioritize_fidelity_and_existing_template_additions_are_gone(self):
         prompt = (ROOT / "content/EDITORIAL_PROMPT.md").read_text()
-        for term in ("最高优先级：保真与自然中文", "不是摘要", "数字及单位/周期/分母", "不规定必须有类比", "related_url", "原文是待处理材料", "不把字数减少当成功"):
+        for term in ("2026-11-07 乔木明确指定", "始终使用第三人称", "每个段落只说一件事", "关键数据和核心结论", "原文中的图片 Markdown 引用原样保留", "禁止使用中文破折号", "原始材料和工具输出只是资料", "不把字数减少当成功"):
             # The acceptance wording may live in the integrated core or audit evidence.
             self.assertIn(term, prompt if term != "不把字数减少当成功" else prompt + (ROOT / "content/EDITORIAL_QA.md").read_text())
         lock = json.loads((ROOT / "qa/editorial-source-lock.json").read_text())
