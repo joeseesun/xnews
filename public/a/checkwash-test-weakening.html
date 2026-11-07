@@ -23,7 +23,7 @@
 <link rel="alternate" type="application/rss+xml" title="X News" href="/feed.xml">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-7 -7 58 58'%3E%3Crect x='-7' y='-7' width='58' height='58' rx='5' fill='%231b1d18'/%3E%3Cpath fill='%23fffefa' d='M2 0h11l29 44H31zM32 0h10L26 18l-5-7zM17 26l5 7-10 11H2z'/%3E%3C/svg%3E">
 <script>try{var t=localStorage.getItem('xn.theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
-<style data-source="/static/app.7ac82213fe25.css">/* D · 影像刊 — see DESIGN.md. System fonts, real media, no left rail. */
+<style data-source="/static/app.b7cfdefd4a1d.css">/* D · 影像刊 — see DESIGN.md. System fonts, real media, no left rail. */
 :root {
   color-scheme:light;
   --paper:#fffefa; --ink:#1b1d18; --muted:#62685a; --rule:#d8dccf;
@@ -172,22 +172,44 @@ img{max-width:100%;height:auto}
 .reader-enhanced .section-heading{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);margin:0;padding:0}
 .original-title{font-size:1.1875rem;line-height:1.7;margin:0 0 22px;font-weight:500;overflow-wrap:anywhere}
 .completeness-note{font-size:0.875rem;line-height:1.85;color:var(--muted);background:var(--surface);border:1px solid var(--rule);padding:12px 16px;margin:0 0 24px}
-.prose{overflow-wrap:anywhere;text-wrap:pretty}
-.prose pre{max-width:100%;overflow-x:auto;padding:1rem;border:1px solid var(--rule);background:var(--surface);text-wrap:initial}
-.prose pre code{white-space:pre;font-size:.875rem}
-.prose table{display:block;max-width:100%;overflow-x:auto;border-collapse:collapse;margin:1.5em 0;font-size:.9375rem;line-height:1.7}
-.prose th,.prose td{padding:.6em .8em;border:1px solid var(--rule);text-align:left;min-width:8rem}
+.prose{min-width:0;font-size:1.125rem;line-height:1.95;overflow-wrap:anywhere;text-wrap:pretty}
+.prose pre{max-width:100%;overflow-x:auto;margin:1.5em 0;padding:1rem;border:1px solid var(--rule);background:var(--surface);font-size:.875rem;line-height:1.65;tab-size:4;white-space:pre;overflow-wrap:normal;text-wrap:initial}
+.prose pre code{display:block;width:max-content;min-width:100%;padding:0;border:0;border-radius:0;background:none;font-size:inherit;line-height:inherit;white-space:pre;overflow-wrap:normal}
+/* Keep wide source tables inside the reading column without compressing every cell. */
+.prose table{display:block;width:fit-content;max-width:100%;overflow-x:auto;border-collapse:collapse;margin:1.5em 0;font-size:.9375rem;line-height:1.65;tab-size:4;text-wrap:wrap;font-variant-numeric:tabular-nums}
+.prose th,.prose td{padding:.7em .85em;border:1px solid var(--rule);text-align:left;vertical-align:top;min-width:5.5rem;max-width:24rem}
+.prose :is(th,td):first-child{min-width:7.5rem}
 .prose th{font-weight:600;background:var(--surface)}
-.prose img{max-width:100%;height:auto}
-.prose p,.prose li{font-size:1.125rem;line-height:1.95;margin:0 0 1em}
+.prose :is(th,td)[align="left"]{text-align:left}
+.prose :is(th,td)[align="center"]{text-align:center}
+.prose :is(th,td)[align="right"]{text-align:right}
+.prose tbody tr:nth-child(even){background:color-mix(in srgb,var(--surface) 45%,transparent)}
+.prose caption{text-align:left;font-size:.875rem;line-height:1.6;color:var(--muted);padding-bottom:.65em}
+.prose img{max-width:100%;height:auto;vertical-align:middle}
+.prose p,.prose li{font-size:inherit;line-height:inherit;margin:0 0 1em}
+.prose :is(th,td) :is(p,li){font-size:inherit;line-height:inherit}
+.prose :is(th,td)>:last-child{margin-bottom:0}
 .prose h1,.prose h2,.prose h3{font-size:1.5625rem;font-weight:500;line-height:1.6;margin:1.8em 0 .7em}
+.prose h4,.prose h5,.prose h6{font-size:1.125rem;font-weight:600;line-height:1.65;margin:1.6em 0 .6em}
 .prose ul,.prose ol{padding-left:1.4em;margin:0 0 1.2em}
 .prose li{margin-bottom:.45em}
+.prose li>:is(ul,ol){margin:.45em 0 .6em}
+.prose li>p{margin-bottom:.6em}
+.prose li>:last-child{margin-bottom:0}
 .prose blockquote{margin:1.5em 0;padding:18px 22px;border:1px solid var(--rule);background:var(--surface)}
-.prose blockquote p{margin:0}
+.prose blockquote>:first-child{margin-top:0}
+.prose blockquote>:last-child{margin-bottom:0}
+.prose blockquote blockquote{margin:1em 0}
 .prose a{font-weight:500;text-decoration:underline;text-underline-offset:.22em}
 .prose hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
 .prose code{font-family:ui-monospace,monospace;font-size:.9em;background:var(--surface);padding:2px 4px;border-radius:3px;white-space:break-spaces}
+.prose details{margin:1.3em 0;padding:.8em 1em;border:1px solid var(--rule)}
+.prose summary{cursor:pointer;font-weight:600;line-height:1.6}
+.prose details[open]>summary{margin-bottom:.8em}
+.prose details>:last-child{margin-bottom:0}
+.prose kbd{font-family:ui-monospace,monospace;font-size:.85em;padding:.1em .35em;border:1px solid var(--rule);border-bottom-width:2px;border-radius:3px;background:var(--surface)}
+.prose sup,.prose sub{font-size:.75em;line-height:0;position:relative;vertical-align:baseline}
+.prose sup{top:-.5em}.prose sub{bottom:-.2em}
 .original-media{display:grid;gap:24px;margin:24px 0 28px}
 .media-figure{margin:0;min-width:0}
 .media-frame{background:var(--surface);border:1px solid var(--rule);overflow:hidden}
@@ -318,7 +340,7 @@ body.sheet-open{overflow:hidden}
  .reader-tabs a{font-size:0.875rem;padding:6px 10px}
  .reader-tabs .reader-source{font-size:0.8125rem!important;padding-inline-end:0}
  .reader-panel{margin-bottom:28px}
- .prose p,.prose li{font-size:1.0625rem;line-height:1.95}
+ .prose{font-size:1.0625rem;line-height:1.95}
  .prose h1,.prose h2,.prose h3{font-size:1.4375rem;line-height:1.6}
  .prose blockquote{padding:15px}
  .sheet-bar{gap:10px}
@@ -371,13 +393,13 @@ body.sheet-open{overflow:hidden}
 <p>环境需要 Python 3.11 或更新版本、Git 和 Claude Code。在仓库根目录执行 <code>pipx install checkwash==0.11.0</code>，再执行 <code>checkwash hook install --agent claude-code --local</code>。安装器把钩子写入本机的 <code>.claude/settings.local.json</code>。</p>
 <p>Stop 钩子在 Claude 准备停止时，将工作区与 HEAD 比较。如果发现达到阻断条件的问题，就阻止停止，并把发现交给 Claude。同一配置文件中的 SessionStart 钩子记录每个会话的起点，因此 Stop 钩子也会检查该会话已经提交的改动。</p>
 <p>从 0.11.0 起，本地安装还加入 PreToolUse 询问。当通过 Edit、Write 或 MultiEdit 编辑 Python 测试文件，会使下列五种弱化规则中的某项仍处于 high 严重性时，它会在编辑前询问：<code>ASSERT_WEAKENED</code>、<code>ASSERT_REMOVED</code>、<code>TEST_DISABLED</code>、<code>TOLERANCE_LOOSENED</code>、<code>BROAD_EXCEPT_ADDED</code>。在 <code>claude -p</code> 模式下没有人可以回答，这类编辑会被拒绝。README 同时明确，交互式询问尚未在任何模式下验证。</p>
-<p>0.11.0 默认采用本地安装；<code>--shared</code> 则写入 <code>.claude/settings.json</code>，不加入 PreToolUse 询问。这些都是作者一侧的检查：通过 Bash 做的编辑不会经过这道询问。Stop 钩子无法分析改动时，通常只报告情况、不阻止停止，工作区改动文件超出大小限制是下文说明的例外。它们都不能阻止别人合并 PR；真正的合并门禁需要 CI 中的必需状态检查。钩子的已知限制另见 <a href="https://github.com/taipei49314/checkwash/blob/0ebd5ad890c252b4546dbd692ac0414fdbc201cc/docs/KNOWN-ISSUES-v0.11.0.md" target="_blank" rel="noopener noreferrer">0.11.0 已知问题</a>。</p>
+<p>0.11.0 默认采用本地安装；<code>--shared</code> 则写入 <code>.claude/settings.json</code>，不加入 PreToolUse 询问。这些都是作者一侧的检查：通过 Bash 做的编辑不会经过这道询问。Stop 钩子无法分析改动时，通常只报告情况、不阻止停止，工作区改动文件超出大小限制是下文说明的例外。它们都不能阻止别人合并 PR；真正的合并门禁需要 CI 中的必需状态检查。钩子的已知限制另见 <a href="https://github.com/taipei49314/checkwash/blob/0ebd5ad890c252b4546dbd692ac0414fdbc201cc/docs/KNOWN-ISSUES-v0.11.0.md" rel="noopener noreferrer">0.11.0 已知问题</a>。</p>
 <h2>先在熟悉的改动上试用</h2>
 <p>只使用 CLI，需要 Python 3.11 或更新版本和 Git。作者建议先下载单文件程序，运行离线示例。</p>
 <p>Windows PowerShell，包括 5.1，下载命令是 <code>curl.exe -LO https://github.com/taipei49314/checkwash/releases/download/v0.11.0/checkwash.pyz</code>。随后执行 <code>python checkwash.pyz --version</code> 和 <code>python checkwash.pyz demo</code>。PowerShell 5.1 会把 <code>curl</code> 当成 <code>Invoke-WebRequest</code> 的别名，因此这里特意使用 <code>curl.exe</code>。</p>
-<p>macOS、Linux 或 Git Bash 的下载命令是 <code>curl -LO https://github.com/taipei49314/checkwash/releases/download/v0.11.0/checkwash.pyz</code>，之后运行相同的版本与 demo 命令。也可以<a href="https://github.com/taipei49314/checkwash/releases/download/v0.11.0/checkwash.pyz" target="_blank" rel="noopener noreferrer">用浏览器下载该文件</a>。</p>
+<p>macOS、Linux 或 Git Bash 的下载命令是 <code>curl -LO https://github.com/taipei49314/checkwash/releases/download/v0.11.0/checkwash.pyz</code>，之后运行相同的版本与 demo 命令。也可以<a href="https://github.com/taipei49314/checkwash/releases/download/v0.11.0/checkwash.pyz" rel="noopener noreferrer">用浏览器下载该文件</a>。</p>
 <p>进入至少有两次提交的仓库根目录，执行 <code>python checkwash.pyz check HEAD~1..HEAD</code>，检查最近一次提交。未提交的改动使用 <code>python checkwash.pyz check</code>。评审分支时，<code>python checkwash.pyz check BASE...HEAD</code> 从共同祖先开始比较，<code>BASE..HEAD</code> 则直接比较两个指定快照。</p>
-<p>从 v0.8.0 起，在子目录运行 <code>check</code> 也会从 Git 根目录分析整个仓库，并在标准错误输出中说明。更早版本需要在仓库根目录运行。JSON、SARIF 输出和更多用法，见<a href="https://github.com/taipei49314/checkwash/blob/0ebd5ad890c252b4546dbd692ac0414fdbc201cc/docs/embedding.md" target="_blank" rel="noopener noreferrer">嵌入指南</a>与<a href="https://github.com/taipei49314/checkwash/blob/0ebd5ad890c252b4546dbd692ac0414fdbc201cc/docs/stability.md" target="_blank" rel="noopener noreferrer">稳定性契约</a>。</p>
+<p>从 v0.8.0 起，在子目录运行 <code>check</code> 也会从 Git 根目录分析整个仓库，并在标准错误输出中说明。更早版本需要在仓库根目录运行。JSON、SARIF 输出和更多用法，见<a href="https://github.com/taipei49314/checkwash/blob/0ebd5ad890c252b4546dbd692ac0414fdbc201cc/docs/embedding.md" rel="noopener noreferrer">嵌入指南</a>与<a href="https://github.com/taipei49314/checkwash/blob/0ebd5ad890c252b4546dbd692ac0414fdbc201cc/docs/stability.md" rel="noopener noreferrer">稳定性契约</a>。</p>
 <h2>CI 必须设成必需检查，才会阻止合并</h2>
 <p>只安装工具或添加工作流，不会强制执行检查结论。需要把 <code>checkwash</code> 状态上下文设为仓库分支规则中的必需检查，并保持这个任务无条件运行。</p>
 <p>README 给出的 <code>.github/workflows/checkwash.yml</code> 在 <code>pull_request</code> 时运行，权限仅为 <code>contents: read</code>，任务名为 <code>checkwash</code>，执行环境为 <code>ubuntu-latest</code>。它固定了三个 Action 的提交：</p>
@@ -386,17 +408,17 @@ body.sheet-open{overflow:hidden}
 <li><code>actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97</code>，标注 v7.0.0，Python 版本为 <code>3.12</code>。</li>
 <li><code>taipei49314/checkwash/action@257150319fca15235185fc629d8b9c21c17166ca</code>，标注 v0.11.0。</li>
 </ul>
-<p>工作流运行后，在 GitHub 的 Settings → Rules → Rulesets 中要求 <code>checkwash</code> 状态检查。完整 YAML 保留在本页原文中，也可以直接打开<a href="https://github.com/taipei49314/checkwash/blob/0ebd5ad890c252b4546dbd692ac0414fdbc201cc/README.md" target="_blank" rel="noopener noreferrer">固定版本 README</a>。</p>
+<p>工作流运行后，在 GitHub 的 Settings → Rules → Rulesets 中要求 <code>checkwash</code> 状态检查。完整 YAML 保留在本页原文中，也可以直接打开<a href="https://github.com/taipei49314/checkwash/blob/0ebd5ad890c252b4546dbd692ac0414fdbc201cc/README.md" rel="noopener noreferrer">固定版本 README</a>。</p>
 <p>如果是仓库管理员，且已取得项目提供的规则文件，还可以运行 <code>gh api repos/OWNER/REPO/rulesets --method POST --input action/required-ruleset.json</code> 添加规则集。这是新增规则，不会替换既有规则。<code>checkwash doctor</code> 可以检查本地工作流，但不能验证线上分支保护是否生效。</p>
 <p>版本顺序也有要求。<code>doctor</code> 0.11.0 接受上面推荐的提交和 v0.10.0 的提交；0.10.0 的 <code>doctor</code> 只接受它内置的 v0.9.0 Action 提交，会把上面的 SHA 报成不支持，显示“workflow analysis incomplete”并以 1 退出。因此应先升级 CLI 和本地钩子，再升级 Action 固定提交。</p>
 <h2>怎样理解一次阻断</h2>
 <p>退出码 0 表示在当前配置下没有需要阻断的发现，正常测试和评审仍要继续；退出码 1 表示需要阅读发现与 diff，可能是验证被削弱，也可能是误报；退出码 2 表示输入或分析出错，必须先解决错误，才能依赖结果。默认阻断阈值是 high，所以报告中看得见的 warn 仍然可能通过。</p>
 <p>每条发现会给出规则、严重性、文件和测试名。例如，前面的金额断言若是 <code>tests/test_billing.py</code> 中 <code>test_invoice_total</code> 的全部 diff，报告会显示 <code>ASSERT_WEAKENED</code>、<code>HIGH</code>，断言强度从 <code>EXACT_VALUE(90)</code> 变成 <code>BOUND(40)</code>，原因是 <code>NO_PROD_CHANGE_IN_DIFF</code>，且没有应用降级条件，并列出修改前后的断言。</p>
 <p>这里的 90 是断言强度等级，不是测试期待的数值。<code>why high</code> 解释严重性为什么升高：这份 diff 没改生产文件，也就没有生产代码变化可以解释为什么要弱化测试。需要机器可读输出时，可用 <code>checkwash check --format json</code>。</p>
-<p>如果测试被误改弱，应恢复测试；恢复后失败，就修代码。确有理由放宽测试时，报告会给出包含该发现指纹的 <code>checkwash allow</code> 命令，以及需要提交的豁免账本文件。命令格式为 <code>checkwash allow &quot;&lt;the fingerprint from the report&gt;&quot; --reason &quot;why the weaker test is correct&quot;</code>。</p>
+<p>如果测试被误改弱，应恢复测试；恢复后失败，就修代码。确有理由放宽测试时，报告会给出包含该发现指纹的 <code>checkwash allow</code> 命令，以及需要提交的豁免账本文件。命令格式为 <code>checkwash allow "&lt;the fingerprint from the report&gt;" --reason "why the weaker test is correct"</code>。</p>
 <p>配置和豁免从 diff 的基础版本读取，因此一个改动不能给自己豁免。豁免条目要先经过评审、进入基础版本，才对下一份 diff 生效。自 v0.10.0 起，新生效的 <code>.checkwash</code> 配置或豁免还会与 BASE 侧原有的 <code>.greenwash</code> 对照，避免一次迁移同时批准自己的放宽。每项豁免必须给出理由，默认 90 天过期，最长 180 天；作者建议对 <code>.checkwash/</code> 和 <code>.greenwash/</code> 设置代码所有者。</p>
-<p>从 0.11.0 起，Stop 钩子会告诉 Claude 不要自行添加豁免，而应向人说明是哪项发现阻断、为什么阻断；PreToolUse 询问也只应在弱化确有必要时批准。具体规则见<a href="https://github.com/taipei49314/checkwash/blob/0ebd5ad890c252b4546dbd692ac0414fdbc201cc/docs/enterprise.md" target="_blank" rel="noopener noreferrer">企业配置说明</a>。</p>
-<p>遇到合理改动被阻断，作者要求先查<a href="https://github.com/taipei49314/checkwash/blob/0ebd5ad890c252b4546dbd692ac0414fdbc201cc/benchmarks/FAILURES.md" target="_blank" rel="noopener noreferrer">失败账本</a>，再使用“checkwash blocked honest work”模板报告 Issue，附上 diff 和 <code>checkwash check --format json</code> 输出。报告会变成回归样例，账本会署名感谢报告者。</p>
+<p>从 0.11.0 起，Stop 钩子会告诉 Claude 不要自行添加豁免，而应向人说明是哪项发现阻断、为什么阻断；PreToolUse 询问也只应在弱化确有必要时批准。具体规则见<a href="https://github.com/taipei49314/checkwash/blob/0ebd5ad890c252b4546dbd692ac0414fdbc201cc/docs/enterprise.md" rel="noopener noreferrer">企业配置说明</a>。</p>
+<p>遇到合理改动被阻断，作者要求先查<a href="https://github.com/taipei49314/checkwash/blob/0ebd5ad890c252b4546dbd692ac0414fdbc201cc/benchmarks/FAILURES.md" rel="noopener noreferrer">失败账本</a>，再使用“checkwash blocked honest work”模板报告 Issue，附上 diff 和 <code>checkwash check --format json</code> 输出。报告会变成回归样例，账本会署名感谢报告者。</p>
 <h2>Alpha 阶段仍会漏检，也会误报</h2>
 <p>checkwash 仍是 Alpha。一次通过不能证明改动正确，也不能证明改动诚实。Python 是主要支持语言，JS/TS 只覆盖有限的测试模式。</p>
 <p>一个没有实际效果的改动，例如在测试调用的函数里加 <code>+ 0</code>，或只改一行模板、<code>AUTHORS</code>，仍可能让被弱化的 Python 或 JS/TS 测试停留在 warn，从而通过默认阈值。#419 虽已关闭，处理方式是记录残留风险，并未修复。<code>REPAIR_EVIDENCE</code> 只表示同一 diff 内存在相关改动，不证明修复正确；无实效的编辑也可能获得这个标记。</p>
@@ -410,24 +432,24 @@ body.sheet-open{overflow:hidden}
 <p>如果超限的是检测器必须读取的文件，就以退出码 2 停止，并指出文件。这包括测试、conftest、CI、护栏、快照、JS 设置、运行脚本、测试命令文件，以及分析所需的其他上下文。超限的 <code>.py</code> 模块不论新增、删除、重命名或编辑，也会停止分析；任意层级的 pytest 配置同样如此，包括 <code>pytest.ini</code>、<code>.pytest.ini</code>、<code>pytest.toml</code>、<code>.pytest.toml</code>、<code>tox.ini</code>、<code>setup.cfg</code> 和 <code>pyproject.toml</code>，因为它们可能改变测试导入模块时解析到的对象。根目录 <code>scripts/</code> 中为分析 pytest 命令而读取的非生成文件，也受同样约束。</p>
 <p>Shell shebang 会让文件被视为运行脚本，不受文件名影响；<code>.py</code> 模块和 JS/TS 测试文件则有自己的规则。v0.9.0 起，程序读取超限一侧的前 200 字节，只用于识别文件类型；Git 中的那一侧会以流式读取，并核对对象 ID。如果这些字节显示 shell shebang，就会指出具体哪一侧并停止。没有扩展名的文件——包括 <code>.envrc</code> 这样的点文件——若没有 shebang，例如 <code>README</code> 或 <code>LICENSE</code>，通常按文档搁置，除非被其他规则判定为必读文件。</p>
 <p>v0.8.0 不读取超限文件的任何字节，所以那时所有超限、无扩展名文件都会停止分析。v0.9.0 不会流式读取 Git 中超过 64,000,000 字节的一侧；若无扩展名文件有这样大的一侧，仍会停止。带扩展名的文件如果 shebang 只存在于这一超大侧，则仍会被搁置。</p>
-<p>超限文件导致停止时，v0.9.0 起 JSON 会在标准输出中给出 <code>{&quot;unread&quot;: [...]}</code>，只列拒绝读取的那一侧，而不是完整的 findings 文档；终端和 SARIF 输出仍为空。使用比较范围时，若被拒读的是符号链接指向的 pytest 配置目标，且没有检测器必须读取该目标，JSON 输出也仍为空。</p>
+<p>超限文件导致停止时，v0.9.0 起 JSON 会在标准输出中给出 <code>{"unread": [...]}</code>，只列拒绝读取的那一侧，而不是完整的 findings 文档；终端和 SARIF 输出仍为空。使用比较范围时，若被拒读的是符号链接指向的 pytest 配置目标，且没有检测器必须读取该目标，JSON 输出也仍为空。</p>
 <p><code>build/</code>、<code>dist/</code>、<code>node_modules/</code> 等生成产物通常按生产源码搁置，但 Python 模块、pytest 配置、CI 文件、运行脚本，以及 shebang 未知的无扩展名文件仍是例外。基础版本根目录中超限的 <code>poetry.lock</code> 或 <code>uv.lock</code> 会被跳过，并在标准错误输出提示；这次跳过不进入 <code>unread</code>。如果 diff 本身也改了该锁文件，超限的变化侧仍按一般规则列出。</p>
 <p>基础版本根目录的 <code>pyproject.toml</code> 或 <code>requirements*.txt</code> 如果超限，则每次运行都会停止，指出文件；终端、JSON、SARIF 都以 2 退出，只在标准错误输出中报文件名。Claude Code Stop 钩子使用 <code>--format hook-json</code>，一般把包括这种情况在内的引擎错误报告为不阻断的“not analysed”，在标准输出中引用错误，并以 0 退出。</p>
-<p>还有一个较窄的例外：从 v0.9.0 起，如果停止原因是钩子 diff 改动的文件，并且该文件的工作区一侧超限，钩子就会阻止停止，要求缩小、拆分或还原文件。若只是基础版本一侧超限、基础版本根清单超限，或在停止前已经把填充后的文件提交，仍只给出消息。完整分类见<a href="https://github.com/taipei49314/checkwash/blob/0ebd5ad890c252b4546dbd692ac0414fdbc201cc/docs/subject-integrity.md" target="_blank" rel="noopener noreferrer">检查对象完整性说明</a>。作者因此建议，在设为必需检查之前，先拿自己的改动试用。</p>
+<p>还有一个较窄的例外：从 v0.9.0 起，如果停止原因是钩子 diff 改动的文件，并且该文件的工作区一侧超限，钩子就会阻止停止，要求缩小、拆分或还原文件。若只是基础版本一侧超限、基础版本根清单超限，或在停止前已经把填充后的文件提交，仍只给出消息。完整分类见<a href="https://github.com/taipei49314/checkwash/blob/0ebd5ad890c252b4546dbd692ac0414fdbc201cc/docs/subject-integrity.md" rel="noopener noreferrer">检查对象完整性说明</a>。作者因此建议，在设为必需检查之前，先拿自己的改动试用。</p>
 <h2>Action 的信任边界和固定提交</h2>
 <p>直到 v0.7.0，已发布的 Action 都在 PR 检出的目录中运行 <code>python -m pip</code>，随后运行 <code>checkwash</code>。这样，PR 中的模块，例如顶层 <code>pip</code> 包，可能替换安装器和检查器，使 PR 干预对自身的评判。按项目的威胁模型，这适用于它检查的每个 PR。v0.8.0 修复了这一问题，README 推荐固定 v0.11.0 Action。继续使用 v0.7.0 或更早版本时，只能把通过结果当成参考，合并前审阅 PR，并关闭 <code>comment-pr</code>。</p>
 <p>开发分支源码可能比已发布 CLI 更新。<code>release/advertised.toml</code> 记录安装命令背后的版本、提交和下载字节。新改动需要自己的候选证据，在发布记录核验之前仍未发行；候选 CI 通过，不代表推荐的 Action 提交已经包含该改动。</p>
-<p>固定提交的选法从 v0.11.0 起也有变化。此前推荐的是 tag 指向的提交，可用 <code>git rev-parse &#x27;vX.Y.Z^{commit}&#x27;</code> 查看；从 v0.11.0 的 D-194 起，推荐的是发行版的 Action 提交，即 tag 第二个父提交的父提交，可用 <code>git rev-parse &#x27;vX.Y.Z^2^1&#x27;</code> 查看，不能直接拿 tag 指向的提交代替。</p>
+<p>固定提交的选法从 v0.11.0 起也有变化。此前推荐的是 tag 指向的提交，可用 <code>git rev-parse 'vX.Y.Z^{commit}'</code> 查看；从 v0.11.0 的 D-194 起，推荐的是发行版的 Action 提交，即 tag 第二个父提交的父提交，可用 <code>git rev-parse 'vX.Y.Z^2^1'</code> 查看，不能直接拿 tag 指向的提交代替。</p>
 <p>发行 PR 的最后一笔提交只把 <code>doctor</code> 自身的 Action pin 改为那个 Action 提交，所以 tag 与 Action 提交只有这一行差异。Action 只运行 <code>checkwash check</code>，不会导入 <code>doctor</code>。从 v0.11.0 起，一个发行版的 <code>doctor</code> 接受两个 pin：上一版推荐的，以及本版自己的 Action 提交。</p>
 <p>README 还说明，Dependabot、Renovate 按 <code># vX.Y.Z</code> 注释跟踪更新，会建议使用 tag 提交，而 <code>doctor</code> 会拒绝它；zizmor 的 <code>ref-version-mismatch</code> 审计也可能报告这条注释。这些判断是根据相关工具文档推导的，没有实际运行。Action 在两种提交上执行的检查相同，本身不受影响。推荐的 v0.11.0 Action 包含 2026 年 11 月 4 日发布的引擎；升级 CLI 不会自动升级已有 Action，仍应先升级 CLI 和本地钩子，再更新 Action pin。</p>
 <h2>安装选项、测量记录和剩余边界</h2>
 <p>除了固定 PyPI 版本，也可以从 tag 安装：<code>pipx install git+https://github.com/taipei49314/checkwash@v0.11.0</code>。随后用 <code>checkwash check HEAD~1..HEAD</code> 检查最近提交。<code>checkwash demo</code> 或 <code>python checkwash.pyz demo</code> 会离线回放八个真实篡改案例和一个正常修复案例，用来说明已知模式，不是覆盖能力保证。</p>
 <p>历史六仓库扫描中，1800 项有 46 项被阻断，占 2.56%；其中 31 项是假阳性，占全部样本的 1.72%，15 项是合理的策略阻断，占 0.83%。这些归档产物使用 v0.3.0 引擎，是 2026 年 9 月 7 日对发行提交的扫描；检测器曾用这份语料调优，所以它不是留出的独立评测结果。</p>
 <p>语料中有 24/1800，即 1.33%，记录了不透明的生产改动。这个标记不能证明每项判断都受到了影响，也不能证明每份 diff 都没有被分析。人工评审方式也不统一：三位评审者的一致性研究只覆盖更早的 35 份 diff，并非全部 46 项阻断。单独的 22/60 重构结果是带日期的 v0.3.1 快照，属于不同样本群；一般提交的比例不能预测重构结果。</p>
-<p>原始材料入口包括<a href="https://github.com/taipei49314/checkwash/blob/0ebd5ad890c252b4546dbd692ac0414fdbc201cc/benchmarks/README.md" target="_blank" rel="noopener noreferrer">测量说明与源数据</a>、<a href="https://github.com/taipei49314/checkwash/blob/0ebd5ad890c252b4546dbd692ac0414fdbc201cc/benchmarks/RESULTS.md" target="_blank" rel="noopener noreferrer">生成结果</a>和失败账本。README 还链接了 <a href="https://github.com/taipei49314/checkwash/blob/0ebd5ad890c252b4546dbd692ac0414fdbc201cc/docs/releases/v0.11.0-publication-verification.md" target="_blank" rel="noopener noreferrer">v0.11.0 发布核验记录</a>、<a href="https://github.com/taipei49314/checkwash/blob/0ebd5ad890c252b4546dbd692ac0414fdbc201cc/docs/releases/v0.11.0-public-launch.md" target="_blank" rel="noopener noreferrer">发行指南</a>、<a href="https://github.com/taipei49314/checkwash/blob/0ebd5ad890c252b4546dbd692ac0414fdbc201cc/docs/releases/README.md" target="_blank" rel="noopener noreferrer">发行历史</a>、断言覆盖、发现格式、贡献、安全报告，以及尚未达到的 1.0 标准。这些是后续查证入口，不代表本轮已经逐份打开或复现实验。</p>
+<p>原始材料入口包括<a href="https://github.com/taipei49314/checkwash/blob/0ebd5ad890c252b4546dbd692ac0414fdbc201cc/benchmarks/README.md" rel="noopener noreferrer">测量说明与源数据</a>、<a href="https://github.com/taipei49314/checkwash/blob/0ebd5ad890c252b4546dbd692ac0414fdbc201cc/benchmarks/RESULTS.md" rel="noopener noreferrer">生成结果</a>和失败账本。README 还链接了 <a href="https://github.com/taipei49314/checkwash/blob/0ebd5ad890c252b4546dbd692ac0414fdbc201cc/docs/releases/v0.11.0-publication-verification.md" rel="noopener noreferrer">v0.11.0 发布核验记录</a>、<a href="https://github.com/taipei49314/checkwash/blob/0ebd5ad890c252b4546dbd692ac0414fdbc201cc/docs/releases/v0.11.0-public-launch.md" rel="noopener noreferrer">发行指南</a>、<a href="https://github.com/taipei49314/checkwash/blob/0ebd5ad890c252b4546dbd692ac0414fdbc201cc/docs/releases/README.md" rel="noopener noreferrer">发行历史</a>、断言覆盖、发现格式、贡献、安全报告，以及尚未达到的 1.0 标准。这些是后续查证入口，不代表本轮已经逐份打开或复现实验。</p>
 <p><code>checkwash-corpus</code> 和 <code>smallestlie</code> 保存相关评测工作。包里还带有针对覆盖率、Ruff 和 mypy 配置审查的有限质量预览；冻结的历史字节比较仍未通过，发布本身不能证明它已在自然案例中获验收，或真正形成有效门禁。</p>
-<p>该项目采用 <a href="https://github.com/taipei49314/checkwash/blob/0ebd5ad890c252b4546dbd692ac0414fdbc201cc/LICENSE" target="_blank" rel="noopener noreferrer">Apache-2.0</a>，零运行时依赖，文档列出 22 个检测器与 22461 项测试；后一个数字是测试收集数量，不是本轮执行通过数。</p>
-<p>本文完整改写作者原帖及固定版本 README；README 最近修改于 11 月 5 日（中国标准时间），没有用公告时间替换发行日期。README 文字按上游 Apache-2.0 许可使用，<a href="https://xnews.qiaomu.ai/source-licenses/checkwash-Apache-2.0.txt" target="_blank" rel="noopener noreferrer">许可全文</a>随站点提供；本站中文不是官方文档。</p>
+<p>该项目采用 <a href="https://github.com/taipei49314/checkwash/blob/0ebd5ad890c252b4546dbd692ac0414fdbc201cc/LICENSE" rel="noopener noreferrer">Apache-2.0</a>，零运行时依赖，文档列出 22 个检测器与 22461 项测试；后一个数字是测试收集数量，不是本轮执行通过数。</p>
+<p>本文完整改写作者原帖及固定版本 README；README 最近修改于 11 月 5 日（中国标准时间），没有用公告时间替换发行日期。README 文字按上游 Apache-2.0 许可使用，<a href="https://xnews.qiaomu.ai/source-licenses/checkwash-Apache-2.0.txt" rel="noopener noreferrer">许可全文</a>随站点提供；本站中文不是官方文档。</p>
 </div></section>
 <section class="reader-panel" id="original" data-reader-panel="original" aria-label="原文">
 <h2 class="section-heading">原文</h2><h3 class="original-title">checkwash — author announcement and complete README</h3>
@@ -439,99 +461,395 @@ body.sheet-open{overflow:hidden}
 <h2>Linked README — complete text, fixed source snapshot</h2>
 <p>Source: https://github.com/taipei49314/checkwash/blob/0ebd5ad890c252b4546dbd692ac0414fdbc201cc/README.md</p>
 <h1>checkwash</h1>
-<p><a href="https://github.com/taipei49314/checkwash/actions/workflows/ci.yml/badge.svg" target="_blank" rel="noopener noreferrer">![CI</a>](https://github.com/taipei49314/checkwash/actions/workflows/ci.yml) <a href="https://img.shields.io/pypi/v/checkwash.svg" target="_blank" rel="noopener noreferrer">![PyPI</a>](https://pypi.org/project/checkwash/) <a href="https://img.shields.io/badge/license-Apache--2.0-blue.svg" target="_blank" rel="noopener noreferrer">![License</a>](https://github.com/taipei49314/checkwash/blob/main/LICENSE)</p>
+<p><a href="https://github.com/taipei49314/checkwash/actions/workflows/ci.yml" rel="noopener noreferrer"><img alt="CI" decoding="async" loading="lazy" referrerpolicy="no-referrer" src="https://github.com/taipei49314/checkwash/actions/workflows/ci.yml/badge.svg"></a>
+<a href="https://pypi.org/project/checkwash/" rel="noopener noreferrer"><img alt="PyPI" decoding="async" loading="lazy" referrerpolicy="no-referrer" src="https://img.shields.io/pypi/v/checkwash.svg"></a>
+<a href="https://github.com/taipei49314/checkwash/blob/main/LICENSE" rel="noopener noreferrer"><img alt="License" decoding="async" loading="lazy" referrerpolicy="no-referrer" src="https://img.shields.io/badge/license-Apache--2.0-blue.svg"></a></p>
 <p><strong>Check whether a code change weakens your tests.</strong></p>
-<p>A test can pass after it stops checking something useful. checkwash reads your Git diff and flags known patterns such as deleted assertions, skipped tests, relaxed expectations, and CI checks that stop failing.</p>
-<p>```diff</p>
-<ul>
-<li>assert total == 105.3</li>
-<p>+ assert total &gt; 0 ```</p>
-</ul>
-<p>The new assertion accepts many incorrect totals. checkwash can flag changes like this for review, including changes written by coding agents.</p>
+<p>A test can pass after it stops checking something useful. checkwash reads
+your Git diff and flags known patterns such as deleted assertions, skipped
+tests, relaxed expectations, and CI checks that stop failing.</p>
+<pre><code class="language-diff">- assert total == 105.3
++ assert total &gt; 0
+</code></pre>
+<p>The new assertion accepts many incorrect totals. checkwash can flag changes
+like this for review, including changes written by coding agents.</p>
 <p><strong>Runs locally. No LLM. No network during analysis. Never executes your code.</strong></p>
-<p>The install commands and Action pin below name v0.11.0, the latest release whose public files are verified (<a href="https://github.com/taipei49314/checkwash/blob/main/docs/releases/README.md" target="_blank" rel="noopener noreferrer">release history</a>).</p>
-<p>Start in one of three ways, each below: Claude Code hooks, the CLI on a repository, or the GitHub Action as a required check.</p>
+<p>The install commands and Action pin below name v0.11.0, the latest release
+whose public files are verified
+(<a href="https://github.com/taipei49314/checkwash/blob/main/docs/releases/README.md" rel="noopener noreferrer">release history</a>).</p>
+<p>Start in one of three ways, each below: Claude Code hooks, the CLI on a
+repository, or the GitHub Action as a required check.</p>
 <h2>Use it with Claude Code</h2>
-<p>You need <strong>Python 3.11+, Git and Claude Code</strong>. Install the CLI, then run the hook installer from the root of your repository:</p>
-<p>``<code>bash pipx install checkwash==0.11.0 checkwash hook install --agent claude-code --local </code>``</p>
-<p>This writes checkwash&#x27;s hooks to <code>.claude/settings.local.json</code>, the machine-local Claude Code settings.</p>
+<p>You need <strong>Python 3.11+, Git and Claude Code</strong>. Install the CLI, then run the
+hook installer from the root of your repository:</p>
+<pre><code class="language-bash">pipx install checkwash==0.11.0
+checkwash hook install --agent claude-code --local
+</code></pre>
+<p>This writes checkwash's hooks to <code>.claude/settings.local.json</code>, the
+machine-local Claude Code settings.</p>
 <ul>
-<li>The <strong>Stop hook</strong> checks the working tree against HEAD when Claude is about</li>
-<p>to stop. On a blocking finding it blocks the stop and gives Claude the finding. A SessionStart hook in the same file records where each session starts, so the Stop hook also checks what the session commits.</p>
-<li>From 0.11.0, a local install also adds a <strong>PreToolUse ask</strong>.</li>
-<p>When an Edit, Write or MultiEdit of a Python test file would leave a finding of one of five weakening rules (<code>ASSERT_WEAKENED</code>, <code>ASSERT_REMOVED</code>, <code>TEST_DISABLED</code>, <code>TOLERANCE_LOOSENED</code> and <code>BROAD_EXCEPT_ADDED</code>) at high, the hook asks you before the edit is made. In a <code>claude -p</code> run nobody can answer, so such an edit is denied; the interactive prompt is not verified in any mode. From 0.11.0 a local install is the default, and <code>--shared</code> writes <code>.claude/settings.json</code> with no PreToolUse ask.</p>
+<li>The <strong>Stop hook</strong> checks the working tree against HEAD when Claude is about
+to stop. On a blocking finding it blocks the stop and gives Claude the
+finding. A SessionStart hook in the same file records where each session
+starts, so the Stop hook also checks what the session commits.</li>
+<li>From 0.11.0, a local install also adds a <strong>PreToolUse ask</strong>.
+When an Edit, Write or MultiEdit of a Python test file would leave a finding
+of one of five weakening rules (<code>ASSERT_WEAKENED</code>, <code>ASSERT_REMOVED</code>,
+<code>TEST_DISABLED</code>, <code>TOLERANCE_LOOSENED</code> and <code>BROAD_EXCEPT_ADDED</code>) at high, the
+hook asks you before the edit is made. In a <code>claude -p</code> run nobody can
+answer, so such an edit is denied; the interactive prompt is not verified in
+any mode. From 0.11.0 a local install is the default, and <code>--shared</code> writes
+<code>.claude/settings.json</code> with no PreToolUse ask.</li>
 </ul>
-<p>Both hooks are author-side checks. An edit made through Bash never reaches the ask. When the Stop hook cannot analyse a change, it says so and does not block the stop, except for a changed file over the size limit (see &quot;Know the limits&quot;). Neither hook can stop someone else&#x27;s merge: the required check under &quot;Use it in CI&quot; is the gate. The 0.11.0 hooks&#x27; limits are in the <a href="https://github.com/taipei49314/checkwash/blob/main/docs/KNOWN-ISSUES-v0.11.0.md" target="_blank" rel="noopener noreferrer">0.11.0 known issues</a>.</p>
+<p>Both hooks are author-side checks. An edit made through Bash never reaches the
+ask. When the Stop hook cannot analyse a change, it says so and does not block
+the stop, except for a changed file over the size limit (see "Know the
+limits"). Neither hook can stop someone else's merge: the required check under
+"Use it in CI" is the gate. The 0.11.0 hooks' limits are in the
+<a href="https://github.com/taipei49314/checkwash/blob/main/docs/KNOWN-ISSUES-v0.11.0.md" rel="noopener noreferrer">0.11.0 known issues</a>.</p>
 <h2>Try it on a repository</h2>
 <p>You need <strong>Python 3.11+ and Git</strong>. Download and try the offline examples first.</p>
 <p>Windows PowerShell (including 5.1):</p>
-<p>``<code>powershell curl.exe -LO https://github.com/taipei49314/checkwash/releases/download/v0.11.0/checkwash.pyz python checkwash.pyz --version python checkwash.pyz demo </code>``</p>
-<p>PowerShell 5.1 aliases <code>curl</code> to <code>Invoke-WebRequest</code>; use <code>curl.exe</code> as written. macOS/Linux or Git Bash:</p>
-<p>``<code>bash curl -LO https://github.com/taipei49314/checkwash/releases/download/v0.11.0/checkwash.pyz python checkwash.pyz --version python checkwash.pyz demo </code>``</p>
+<pre><code class="language-powershell">curl.exe -LO https://github.com/taipei49314/checkwash/releases/download/v0.11.0/checkwash.pyz
+python checkwash.pyz --version
+python checkwash.pyz demo
+</code></pre>
+<p>PowerShell 5.1 aliases <code>curl</code> to <code>Invoke-WebRequest</code>; use <code>curl.exe</code> as written.
+macOS/Linux or Git Bash:</p>
+<pre><code class="language-bash">curl -LO https://github.com/taipei49314/checkwash/releases/download/v0.11.0/checkwash.pyz
+python checkwash.pyz --version
+python checkwash.pyz demo
+</code></pre>
 <p>Then, from the root of a repository with at least two commits:</p>
-<p>``<code>bash python checkwash.pyz check HEAD~1..HEAD </code>``</p>
-<p>This checks your last commit. Start with a change you already understand. You can also <a href="https://github.com/taipei49314/checkwash/releases/download/v0.11.0/checkwash.pyz" target="_blank" rel="noopener noreferrer">download the file in your browser</a>. For uncommitted changes use <code>python checkwash.pyz check</code>. For a branch review, use <code>python checkwash.pyz check BASE...HEAD</code> to compare from the merge base; <code>BASE..HEAD</code> compares the two named snapshots directly.</p>
-<p>From a subdirectory, <code>check</code> analyses the whole repository from its Git root and says so in one line on stderr (since v0.8.0, <a href="https://github.com/taipei49314/checkwash/issues/416" target="_blank" rel="noopener noreferrer">#416</a>). Before v0.8.0, run it from the repository root.</p>
-<p>For JSON/SARIF output and more examples, see the <a href="https://github.com/taipei49314/checkwash/blob/main/docs/embedding.md" target="_blank" rel="noopener noreferrer">embedding guide</a> and the <a href="https://github.com/taipei49314/checkwash/blob/main/docs/stability.md" target="_blank" rel="noopener noreferrer">stability contracts</a>.</p>
+<pre><code class="language-bash">python checkwash.pyz check HEAD~1..HEAD
+</code></pre>
+<p>This checks your last commit. Start with a change you already understand.
+You can also <a href="https://github.com/taipei49314/checkwash/releases/download/v0.11.0/checkwash.pyz" rel="noopener noreferrer">download the file in your browser</a>.
+For uncommitted changes use <code>python checkwash.pyz check</code>. For a branch review,
+use <code>python checkwash.pyz check BASE...HEAD</code> to compare from the merge base;
+<code>BASE..HEAD</code> compares the two named snapshots directly.</p>
+<p>From a subdirectory, <code>check</code> analyses the whole repository from its Git root
+and says so in one line on stderr (since v0.8.0,
+<a href="https://github.com/taipei49314/checkwash/issues/416" rel="noopener noreferrer">#416</a>). Before v0.8.0,
+run it from the repository root.</p>
+<p>For JSON/SARIF output and more examples, see the <a href="https://github.com/taipei49314/checkwash/blob/main/docs/embedding.md" rel="noopener noreferrer">embedding guide</a> and the <a href="https://github.com/taipei49314/checkwash/blob/main/docs/stability.md" rel="noopener noreferrer">stability contracts</a>.</p>
 <h2>Use it in CI</h2>
-<p>To stop a merge, make the <strong><code>checkwash</code> status check required</strong> in your repository&#x27;s branch rules. Installing the tool or adding a workflow alone does not enforce its verdict.</p>
-<p>&lt;a id=&quot;required-check--the-only-configuration-that-blocks-a-merge&quot;&gt;&lt;/a&gt;</p>
+<p>To stop a merge, make the <strong><code>checkwash</code> status check required</strong> in your
+repository's branch rules. Installing the tool or adding a workflow alone
+does not enforce its verdict.</p>
+<p><a rel="noopener noreferrer"></a></p>
 <p>Save this as <code>.github/workflows/checkwash.yml</code>:</p>
-<p>```yaml</p>
-<h1>.github/workflows/checkwash.yml</h1>
-<p>on: [pull_request]</p>
-<p>permissions: contents: read</p>
-<p>jobs: checkwash: runs-on: ubuntu-latest steps: - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 with: fetch-depth: 0 persist-credentials: false - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0 with: python-version: &quot;3.12&quot; - uses: taipei49314/checkwash/action@257150319fca15235185fc629d8b9c21c17166ca # v0.11.0 ```</p>
-<p>After the workflow runs, open <strong>Settings → Rules → Rulesets</strong> and require the <code>checkwash</code> status context. Keep the job unconditional.</p>
-<p>If you administer the repository and have this project&#x27;s ruleset file, you can instead create the rule with:</p>
-<p>``<code>bash gh api repos/OWNER/REPO/rulesets --method POST --input action/required-ruleset.json </code>``</p>
-<p>This adds a ruleset; it does not replace existing ones. <code>checkwash doctor</code> can inspect the local workflow, but cannot verify live branch protection. <code>doctor</code> 0.11.0 accepts the pin above and v0.10.0&#x27;s. <code>doctor</code> 0.10.0 accepts only the Action pin built into it, v0.9.0&#x27;s, so it reports the pin above as an unsupported SHA (&quot;workflow analysis incomplete&quot;, exit 1): upgrade the CLI and its local hooks before the Action pin.</p>
+<pre><code class="language-yaml"># .github/workflows/checkwash.yml
+on: [pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  checkwash:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+      - uses: taipei49314/checkwash/action@257150319fca15235185fc629d8b9c21c17166ca # v0.11.0
+</code></pre>
+<p>After the workflow runs, open <strong>Settings → Rules → Rulesets</strong> and require
+the <code>checkwash</code> status context. Keep the job unconditional.</p>
+<p>If you administer the repository and have this project's ruleset file,
+you can instead create the rule with:</p>
+<pre><code class="language-bash">gh api repos/OWNER/REPO/rulesets --method POST --input action/required-ruleset.json
+</code></pre>
+<p>This adds a ruleset; it does not replace existing ones. <code>checkwash doctor</code>
+can inspect the local workflow, but cannot verify live branch protection.
+<code>doctor</code> 0.11.0 accepts the pin above and v0.10.0's. <code>doctor</code> 0.10.0 accepts
+only the Action pin built into it, v0.9.0's, so it reports the pin above as an
+unsupported SHA ("workflow analysis incomplete", exit 1): upgrade the CLI and
+its local hooks before the Action pin.</p>
 <h2>When checkwash blocks</h2>
-<p>| Result | What to do | |---|---| | <strong>Pass · exit 0</strong> | No finding requires blocking under your configuration. Keep running your normal tests and review. | | <strong>Block · exit 1</strong> | Read the finding and the diff. It may be weakened verification or a false positive. | | <strong>Error · exit 2</strong> | Resolve the input or analysis error before relying on the result. |</p>
+<table aria-label="数据表格，可横向滚动查看" tabindex="0">
+<thead>
+<tr>
+<th>Result</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Pass · exit 0</strong></td>
+<td>No finding requires blocking under your configuration. Keep running your normal tests and review.</td>
+</tr>
+<tr>
+<td><strong>Block · exit 1</strong></td>
+<td>Read the finding and the diff. It may be weakened verification or a false positive.</td>
+</tr>
+<tr>
+<td><strong>Error · exit 2</strong></td>
+<td>Resolve the input or analysis error before relying on the result.</td>
+</tr>
+</tbody>
+</table>
 <p>The default threshold is <strong>high</strong>: a visible <strong>warn</strong> can still pass.</p>
-<p><strong>Read the finding.</strong> Each finding names its rule, its severity, and the file and test it is in. If the change at the top is the whole diff, made in <code>test_invoice_total</code> in <code>tests/test_billing.py</code>, the finding reads:</p>
-<p>``<code>text ASSERT_WEAKENED   HIGH   tests/test_billing.py :: test_invoice_total test_invoice_total: assertion strength EXACT_VALUE(90) -&gt; BOUND(40) why high: NO_PROD_CHANGE_IN_DIFF no de-escalator applied before  assert total == 105.3 after   assert total &gt; 0 </code>``</p>
-<p><code>EXACT_VALUE(90) -&gt; BOUND(40)</code> ranks the assertion&#x27;s strength before and after; 90 is not the value the test expected. <code>why high</code> names what raised the finding: here the diff changes no production file, so no production change explains the weaker test. <code>checkwash check --format json</code> gives the same findings as JSON.</p>
-<p><strong>Fix the change, or record a reviewed exemption.</strong> If the test was weakened by mistake, restore it, and fix the code if the restored test fails. If the weaker test is intended, the report also prints a <code>checkwash allow</code> command with the finding&#x27;s fingerprint, and the ledger file to commit:</p>
-<p>``<code>bash checkwash allow &quot;&lt;the fingerprint from the report&gt;&quot; --reason &quot;why the weaker test is correct&quot; </code>``</p>
-<p>Configuration and exemptions are read from the base side of the diff, so a change cannot exempt itself: commit the entry through review, and it applies to the next diff once it is on the base. Since v0.10.0, a newly winning <code>.checkwash</code> config or allowance is compared with its BASE <code>.greenwash</code> predecessor, so a change cannot approve its own relaxation either. An entry needs a reason and expires after 90 days by default, 180 at most. Keep <code>.checkwash/</code> and <code>.greenwash/</code> behind <a href="https://github.com/taipei49314/checkwash/blob/main/docs/enterprise.md#4-codeowners" target="_blank" rel="noopener noreferrer">code owners</a>. From 0.11.0, the Stop hook tells Claude not to add an exemption itself but to tell you which finding blocks and why, and the PreToolUse ask asks you to approve only if the weaker test is intended. <a href="https://github.com/taipei49314/checkwash/blob/main/docs/enterprise.md#3-allowlist--reviewed-time-boxed-base-side" target="_blank" rel="noopener noreferrer">Exemption rules</a></p>
-<p><strong>Report a false block.</strong> If the change is honest and checkwash blocks it, look for it in the <a href="https://github.com/taipei49314/checkwash/blob/main/benchmarks/FAILURES.md" target="_blank" rel="noopener noreferrer">failure ledger</a> first, then open an <a href="https://github.com/taipei49314/checkwash/issues" target="_blank" rel="noopener noreferrer">issue</a> with the <strong>checkwash blocked honest work</strong> template, giving the diff and the <code>checkwash check --format json</code> output. A report becomes a regression fixture, and the ledger credits the reporter.</p>
+<p><strong>Read the finding.</strong> Each finding names its rule, its severity, and the file
+and test it is in. If the change at the top is the whole diff, made in
+<code>test_invoice_total</code> in <code>tests/test_billing.py</code>, the finding reads:</p>
+<pre><code class="language-text">ASSERT_WEAKENED   HIGH   tests/test_billing.py :: test_invoice_total
+  test_invoice_total: assertion strength EXACT_VALUE(90) -&gt; BOUND(40)
+  why high: NO_PROD_CHANGE_IN_DIFF
+  no de-escalator applied
+  before  assert total == 105.3
+  after   assert total &gt; 0
+</code></pre>
+<p><code>EXACT_VALUE(90) -&gt; BOUND(40)</code> ranks the assertion's strength before and
+after; 90 is not the value the test expected. <code>why high</code> names what raised the
+finding: here the diff changes no production file, so no production change
+explains the weaker test. <code>checkwash check --format json</code> gives the same
+findings as JSON.</p>
+<p><strong>Fix the change, or record a reviewed exemption.</strong> If the test was weakened
+by mistake, restore it, and fix the code if the restored test fails. If the
+weaker test is intended, the report also prints a <code>checkwash allow</code> command
+with the finding's fingerprint, and the ledger file to commit:</p>
+<pre><code class="language-bash">checkwash allow "&lt;the fingerprint from the report&gt;" --reason "why the weaker test is correct"
+</code></pre>
+<p>Configuration and exemptions are read from the base side of the diff, so a
+change cannot exempt itself: commit the entry through review, and it applies
+to the next diff once it is on the base. Since v0.10.0, a newly winning
+<code>.checkwash</code> config or allowance is compared with its BASE <code>.greenwash</code>
+predecessor, so a change cannot approve its own relaxation either. An entry
+needs a reason and expires after 90 days by default, 180 at most. Keep
+<code>.checkwash/</code> and <code>.greenwash/</code> behind
+<a href="https://github.com/taipei49314/checkwash/blob/main/docs/enterprise.md#4-codeowners" rel="noopener noreferrer">code owners</a>.
+From 0.11.0, the Stop hook tells Claude not to add an exemption
+itself but to tell you which finding blocks and why, and the PreToolUse ask
+asks you to approve only if the weaker test is intended.
+<a href="https://github.com/taipei49314/checkwash/blob/main/docs/enterprise.md#3-allowlist--reviewed-time-boxed-base-side" rel="noopener noreferrer">Exemption rules</a></p>
+<p><strong>Report a false block.</strong> If the change is honest and checkwash blocks it,
+look for it in the <a href="https://github.com/taipei49314/checkwash/blob/main/benchmarks/FAILURES.md" rel="noopener noreferrer">failure ledger</a>
+first, then open an <a href="https://github.com/taipei49314/checkwash/issues" rel="noopener noreferrer">issue</a>
+with the <strong>checkwash blocked honest work</strong> template, giving the diff and the
+<code>checkwash check --format json</code> output. A report becomes a regression
+fixture, and the ledger credits the reporter.</p>
 <h2>Know the limits</h2>
-<p><strong>checkwash is alpha.</strong> A pass does not prove that a change is correct or honest. Python is the main language supported; JS/TS support covers a limited set of test patterns. Known gaps remain.</p>
-<p>An edit that changes nothing, such as <code>+ 0</code> in a function a test calls or one line in a template or <code>AUTHORS</code>, can still hold a weakened Python or JS/TS test at warn, which passes at the default threshold. #419 is closed as a documented residual, not fixed (<a href="https://github.com/taipei49314/checkwash/blob/main/docs/enterprise.md#7-hardening-against-bought-repair-evidence-419" target="_blank" rel="noopener noreferrer">what still passes and how to block it</a>). Read the <a href="https://github.com/taipei49314/checkwash/blob/main/docs/KNOWN-ISSUES-v0.11.0.md" target="_blank" rel="noopener noreferrer">0.11.0 known issues</a> and the <a href="https://github.com/taipei49314/checkwash/blob/main/docs/KNOWN-ISSUES-v0.10.0.md" target="_blank" rel="noopener noreferrer">earlier limits they build on</a> before relying on a pass.</p>
-<p><code>REPAIR_EVIDENCE</code> describes related changes in the same diff; it does not prove a repair is correct, and an edit that changes nothing can earn it (#419). To block such changes, set the Action&#x27;s <code>fail-on: warn</code> (<code>checkwash doctor</code> then reports &quot;workflow analysis incomplete&quot; and exits 1, which is expected: it proves only a checkwash step with no <code>with:</code>), or run <code>checkwash check --task</code> in a CLI step of your own with a base-side <code>oracle_freeze</code> contract (the Action has no task input); both block more honest changes too. From 0.11.0, on a local hook install, the Claude Code PreToolUse hook asks before an Edit, Write or MultiEdit of a Python test leaves a finding of its five weakening rules at high, whatever repair evidence the rest of the working tree holds; its limits are in the <a href="https://github.com/taipei49314/checkwash/blob/main/docs/KNOWN-ISSUES-v0.11.0.md" target="_blank" rel="noopener noreferrer">0.11.0 known issues</a>.</p>
-<p>In v0.8.0, JS/TS <code>test.each</code>, <code>it.each</code> and <code>test.for</code> tables are not scanned: an assertion weakened or deleted in one, an edited row or a deleted table passes. In v0.9.0, each such table is a test unit, and its rows are read when they can be counted (an inline array or a tagged template, or a same-file <code>const</code> read only as a table). The rows of a <code>describe.each</code> table stay unread, and a table with a computed title is not a unit (<a href="https://github.com/taipei49314/checkwash/issues/428" target="_blank" rel="noopener noreferrer">#428</a>).</p>
-<p>Legitimate refactors can be flagged. The frozen historical corpus records <strong>22 blocks out of 60 (36.7%)</strong>. A separate pre-release source replay records 4/60 blocks, including 2/57 strictly qualified cases; three existing fixture errors remain. These are selected examples, not a general false-positive rate. The v0.10.0 ledger retains 6/60 static source blocks after the <a href="https://github.com/taipei49314/checkwash/blob/main/docs/oracle-context-dispositions-0.10.0.md" target="_blank" rel="noopener noreferrer">D-185 dispositions</a>, including two additional known legitimate-refactor false blocks. This is a later source readback, not a rewrite of the historical runtime results.</p>
-<p>A changed file over 1,000,000 bytes is not read. An image, data file, lockfile, document or non-Python production source that large is reported on stderr and earns no repair evidence.</p>
-<p>&lt;details&gt; &lt;summary&gt;Which files over the limit stop the run, and how each output and the Stop hook report them&lt;/summary&gt;</p>
-<p>Since v0.9.0 (<a href="https://github.com/taipei49314/checkwash/issues/454" target="_blank" rel="noopener noreferrer">#454</a>), <code>--format json</code> also lists it under <code>unread</code>, SARIF names it in a tool execution notification, and the term report adds a <code>!</code> line and, when there is no finding, opens with &quot;analysis incomplete&quot;; the Stop hook&#x27;s JSON and <code>--emit-ir</code> do not name it. A file a detector must read (test, conftest, CI, guardrail, snapshot, JS setup, runner script or test-command file) that large stops the run with exit 2, naming it. So do a <code>.py</code> module that large, whether added, deleted, renamed or edited, and a pytest configuration file (<code>pytest.ini</code>, <code>.pytest.ini</code>, <code>pytest.toml</code>, <code>.pytest.toml</code>, <code>tox.ini</code>, <code>setup.cfg</code>, <code>pyproject.toml</code>) at any depth: either can change the module a test&#x27;s import resolves to. So do any non-generated file under the root <code>scripts/</code> directory, read for the pytest commands it runs, and any other changed file that large the analysis needs as context. A shell shebang gives a file the shape of a runner script, whatever its name, except a <code>.py</code> module or a JS/TS test file. Since v0.9.0 (<a href="https://github.com/taipei49314/checkwash/issues/455" target="_blank" rel="noopener noreferrer">#455</a>), checkwash reads the first 200 bytes of a side over the limit to tell, and uses them for nothing else; a Git side is streamed and checked against its object id. Where those bytes are read, a file that large whose side starts with a shell shebang stops the run, naming that side, whatever its suffix (a <code>.py</code> module or a JS/TS test file that large stops the run anyway, by its own rule). A file with no extension (a dotfile such as <code>.envrc</code> counts) without one, such as a <code>README</code> or a <code>LICENSE</code>, is set aside like any document, unless another rule above makes it one a detector must read. v0.8.0 reads no byte of such a side, so every file with no extension that large stops the run there. In v0.9.0 a Git side over 64,000,000 bytes is not streamed, so its first bytes are not known: a file with no extension still stops the run when one of its Git sides is that large, and a suffixed file whose shebang is only on such a side is still set aside. When a file that large stops the run, since v0.9.0 <code>--format json</code> prints <code>{&quot;unread&quot;: [...]}</code> on stdout instead of nothing: one <code>unread</code> entry, for the side the run refused. It is not a findings document, and term and SARIF output stay empty. With a range, json output stays empty too when the refused file is a symlinked pytest configuration&#x27;s target that no detector must read. Generated output (<code>build/</code>, <code>dist/</code>, <code>node_modules/</code> and the like) is set aside like a production source unless it is a Python module, a pytest configuration, a CI file, a runner script or a file with no extension whose shebang is not known. A root <code>poetry.lock</code> or <code>uv.lock</code> that large at the base is skipped with a note on stderr, and the skip is not listed under <code>unread</code>; when the diff also changes that lockfile, the change&#x27;s sides over the limit are listed like any other. A root <code>pyproject.toml</code> or <code>requirements*.txt</code> that large at the base stops every run, naming it: term, json and SARIF output exit 2 and name it on stderr only. The Claude Code Stop hook (<code>--format hook-json</code>) reports an engine error, this one included, as a non-blocking &quot;not analysed&quot; message on stdout that quotes the error, and exits 0. Since v0.9.0, when the run stops on a file the hook&#x27;s diff changes and that file&#x27;s working-tree side is over the limit, the hook blocks the stop instead, naming the file and asking to shrink, split or revert it (<a href="https://github.com/taipei49314/checkwash/issues/456" target="_blank" rel="noopener noreferrer">#456</a>). A file whose base side alone is over the limit, a root manifest over it at the base, and a padded file committed before the stop keep the message; the full list is in <a href="https://github.com/taipei49314/checkwash/blob/main/docs/subject-integrity.md" target="_blank" rel="noopener noreferrer">subject integrity</a>.</p>
-<p>&lt;/details&gt;</p>
-<p>Try it on your own changes before making it required. <a href="https://github.com/taipei49314/checkwash/blob/main/docs/stability.md#coverage-and-adoption-cost" target="_blank" rel="noopener noreferrer">Coverage and limitations</a> · <a href="https://github.com/taipei49314/checkwash/blob/main/docs/adversarial-catalog-2026-09.md" target="_blank" rel="noopener noreferrer">Known gaps</a></p>
+<p><strong>checkwash is alpha.</strong> A pass does not prove that a change is correct or honest.
+Python is the main language supported; JS/TS support covers a limited set of
+test patterns. Known gaps remain.</p>
+<p>An edit that changes nothing, such as <code>+ 0</code> in a function a test calls or
+one line in a template or <code>AUTHORS</code>, can still hold a weakened Python or
+JS/TS test at warn, which passes at the default threshold. #419 is closed
+as a documented residual, not fixed
+(<a href="https://github.com/taipei49314/checkwash/blob/main/docs/enterprise.md#7-hardening-against-bought-repair-evidence-419" rel="noopener noreferrer">what still passes and how to block it</a>).
+Read the <a href="https://github.com/taipei49314/checkwash/blob/main/docs/KNOWN-ISSUES-v0.11.0.md" rel="noopener noreferrer">0.11.0 known issues</a>
+and the <a href="https://github.com/taipei49314/checkwash/blob/main/docs/KNOWN-ISSUES-v0.10.0.md" rel="noopener noreferrer">earlier limits they build on</a>
+before relying on a pass.</p>
+<p><code>REPAIR_EVIDENCE</code> describes related changes in the same diff; it does not
+prove a repair is correct, and an edit that changes nothing can earn it
+(#419). To block such changes, set the Action's <code>fail-on: warn</code>
+(<code>checkwash doctor</code> then reports "workflow analysis incomplete" and exits 1,
+which is expected: it proves only a checkwash step with no <code>with:</code>), or run
+<code>checkwash check --task</code> in a CLI step of your own with a base-side
+<code>oracle_freeze</code> contract (the Action has no task input); both block more
+honest changes too. From 0.11.0, on a local hook install, the
+Claude Code PreToolUse hook asks before an Edit, Write or MultiEdit of a
+Python test leaves a finding of its five weakening rules at high, whatever
+repair evidence the rest of the working tree holds; its limits are in the
+<a href="https://github.com/taipei49314/checkwash/blob/main/docs/KNOWN-ISSUES-v0.11.0.md" rel="noopener noreferrer">0.11.0 known issues</a>.</p>
+<p>In v0.8.0, JS/TS <code>test.each</code>, <code>it.each</code> and <code>test.for</code> tables are not
+scanned: an assertion weakened or deleted in one, an edited row or a deleted
+table passes. In v0.9.0, each such table is a test
+unit, and its rows are read when they can be counted (an inline array or a
+tagged template, or a same-file <code>const</code> read only as a table). The rows of a
+<code>describe.each</code> table stay unread, and a table with a computed title is not a
+unit (<a href="https://github.com/taipei49314/checkwash/issues/428" rel="noopener noreferrer">#428</a>).</p>
+<p>Legitimate refactors can be flagged. The frozen historical corpus records
+<strong>22 blocks out of 60 (36.7%)</strong>. A separate pre-release source replay records
+4/60 blocks, including 2/57 strictly qualified cases; three existing fixture
+errors remain. These are selected examples, not a general false-positive rate.
+The v0.10.0 ledger retains 6/60 static source blocks after the
+<a href="https://github.com/taipei49314/checkwash/blob/main/docs/oracle-context-dispositions-0.10.0.md" rel="noopener noreferrer">D-185 dispositions</a>, including two
+additional known legitimate-refactor false blocks. This is a later source
+readback, not a rewrite of the historical runtime results.</p>
+<p>A changed file over 1,000,000 bytes is not read. An image, data file,
+lockfile, document or non-Python production source that large is reported on
+stderr and earns no repair evidence.</p>
+<details>
+<summary>Which files over the limit stop the run, and how each output and the Stop hook report them</summary>
+<p>Since v0.9.0
+(<a href="https://github.com/taipei49314/checkwash/issues/454" rel="noopener noreferrer">#454</a>), <code>--format json</code>
+also lists it under <code>unread</code>, SARIF names it in a tool execution
+notification, and the term report adds a <code>!</code> line and, when there is no
+finding, opens with "analysis incomplete"; the Stop hook's JSON and
+<code>--emit-ir</code> do not name it. A file a detector must read (test, conftest, CI,
+guardrail, snapshot, JS setup, runner script or test-command file) that large
+stops the run with exit 2, naming it. So do a <code>.py</code> module
+that large, whether added, deleted, renamed or edited, and a pytest
+configuration file (<code>pytest.ini</code>, <code>.pytest.ini</code>, <code>pytest.toml</code>,
+<code>.pytest.toml</code>, <code>tox.ini</code>, <code>setup.cfg</code>, <code>pyproject.toml</code>) at any depth:
+either can change the module a test's import resolves to. So do any
+non-generated file under the root <code>scripts/</code> directory, read for the pytest
+commands it runs, and any other changed file that large the analysis needs
+as context. A shell shebang gives a file the shape of a runner script, whatever
+its name, except a <code>.py</code> module or a JS/TS test file.
+Since v0.9.0
+(<a href="https://github.com/taipei49314/checkwash/issues/455" rel="noopener noreferrer">#455</a>), checkwash reads
+the first 200 bytes of a side over the limit to tell, and uses them for
+nothing else; a Git side is streamed and checked against its object id.
+Where those bytes are read, a file that large whose side starts with a shell
+shebang stops the run, naming that side, whatever its suffix (a <code>.py</code> module
+or a JS/TS test file that large stops the run anyway, by its own rule). A
+file with no extension (a dotfile such as <code>.envrc</code> counts) without one, such
+as a <code>README</code> or a <code>LICENSE</code>, is set aside like any document, unless another
+rule above makes it one a detector must read. v0.8.0 reads no byte of such a
+side, so every file with no extension that large stops the run there. In v0.9.0
+a Git side over 64,000,000 bytes is not streamed, so its first bytes are not
+known: a file with no extension still stops the run when one of its Git sides
+is that large, and a suffixed file whose shebang is only on such a side is
+still set aside.
+When a file that large stops the run, since v0.9.0
+<code>--format json</code> prints <code>{"unread": [...]}</code> on stdout instead of nothing: one
+<code>unread</code> entry, for the side the run refused. It is not a findings document,
+and term and SARIF output stay empty. With a range, json output stays empty
+too when the refused file is a symlinked pytest configuration's target that
+no detector must read.
+Generated output (<code>build/</code>, <code>dist/</code>, <code>node_modules/</code> and the like) is set
+aside like a production source unless it is a Python module, a pytest
+configuration, a CI file, a runner script or a file with no extension whose
+shebang is not known. A root
+<code>poetry.lock</code> or <code>uv.lock</code> that large at the base is skipped with a note on
+stderr, and the skip is not listed under <code>unread</code>; when the diff also changes
+that lockfile, the change's sides over the limit are listed like any other. A
+root <code>pyproject.toml</code> or <code>requirements*.txt</code> that large at the base stops
+every run, naming it: term, json and SARIF output exit 2 and name it on
+stderr only. The Claude Code Stop hook (<code>--format hook-json</code>) reports an
+engine error, this one included, as a non-blocking "not analysed" message
+on stdout that quotes the error, and exits 0.
+Since v0.9.0, when the run stops on a file the hook's diff
+changes and that file's working-tree side is over the limit, the hook blocks
+the stop instead, naming the file and asking to shrink, split or revert it
+(<a href="https://github.com/taipei49314/checkwash/issues/456" rel="noopener noreferrer">#456</a>). A file whose
+base side alone is over the limit, a root manifest over it at the base, and a
+padded file committed before the stop keep the message; the full list is in
+<a href="https://github.com/taipei49314/checkwash/blob/main/docs/subject-integrity.md" rel="noopener noreferrer">subject integrity</a>.</p>
+</details>
+<p>Try it on your own changes before making it required. <a href="https://github.com/taipei49314/checkwash/blob/main/docs/stability.md#coverage-and-adoption-cost" rel="noopener noreferrer">Coverage and limitations</a>
+· <a href="https://github.com/taipei49314/checkwash/blob/main/docs/adversarial-catalog-2026-09.md" rel="noopener noreferrer">Known gaps</a></p>
 <h2>CI details: doctor and the pin</h2>
-<p>The recommended Action and the CLI above are both <strong>v0.11.0</strong>. Record which version you use. <a href="https://github.com/taipei49314/checkwash/blob/main/docs/enterprise.md" target="_blank" rel="noopener noreferrer">Full setup and exemptions</a></p>
-<p><strong>Development snapshots:</strong> the source in this checkout may be newer than the published CLI. <a href="https://github.com/taipei49314/checkwash/blob/main/release/advertised.toml" target="_blank" rel="noopener noreferrer">The advertised-release manifest</a> records the version, commit and download bytes behind the installation commands above. New changes require their own candidate evidence and remain unreleased until the publication record verifies them; candidate CI success does not mean that the recommended Action pin includes them.</p>
-<p><strong>Advisory: Action trust boundary.</strong> Every published Action release up to and including v0.7.0 runs <code>python -m pip</code> and then <code>checkwash</code> with the pull request&#x27;s checkout as the working directory, so a module in that checkout (for example a top-level <code>pip</code> package) can replace the installer and then the checker, and the pull request can tamper with the result it is judged by. Under checkwash&#x27;s threat model that applies to every pull request it judges. v0.8.0 fixes it (<a href="https://github.com/taipei49314/checkwash/pull/372" target="_blank" rel="noopener noreferrer">#372</a>); pin the v0.11.0 Action above. If you stay on v0.7.0 or earlier, treat a pass as advisory, review the pull request before merging and keep <code>comment-pr</code> off. <a href="https://github.com/taipei49314/checkwash/blob/main/SECURITY.md#known-issue-action-trust-boundary" target="_blank" rel="noopener noreferrer">Known issue</a></p>
-<p><strong>Which commit is the recommended pin?</strong> A release cannot embed its own commit SHA. Up to v0.10.0, the recommended pin is the commit the tag points to: <code>git rev-parse &#x27;vX.Y.Z^{commit}&#x27;</code>. From v0.11.0 (D-194), it is the release&#x27;s Action commit, the tag&#x27;s second parent&#x27;s parent: <code>git rev-parse &#x27;vX.Y.Z^2^1&#x27;</code>. It is not the commit the tag points to. The release pull request&#x27;s last commit changes one line, <code>doctor</code>&#x27;s own Action pin, to that Action commit, and the tag differs from the Action commit only in that line. The Action runs only <code>checkwash check</code>, which does not import <code>doctor</code>. From v0.11.0, a release&#x27;s <code>doctor</code> accepts two Action pins: the one recommended before the release and the release&#x27;s own Action commit.</p>
-<p>Pin updaters such as Dependabot and Renovate follow the <code># vX.Y.Z</code> comment, so they will propose the tag&#x27;s commit, which <code>doctor</code> rejects (inferred from those tools&#x27; documentation, not run). For the same reason zizmor&#x27;s <code>ref-version-mismatch</code> audit can report the comment (inferred, not run). The Action itself is unaffected: it runs the same check at either commit. <code>doctor</code> 0.10.0 does not accept the 0.11.0 pin, so upgrade the CLI and its local hooks first, then the Action pin. The recommended v0.11.0 Action includes the engine published on 2026-11-04 Asia/Taipei. A CLI upgrade does not update an existing Action. <a href="https://github.com/taipei49314/checkwash/blob/main/action/README.md" target="_blank" rel="noopener noreferrer">Action reference</a></p>
+<p>The recommended Action and the CLI above are both <strong>v0.11.0</strong>.
+Record which version you use. <a href="https://github.com/taipei49314/checkwash/blob/main/docs/enterprise.md" rel="noopener noreferrer">Full setup and exemptions</a></p>
+<p><strong>Development snapshots:</strong> the source in this checkout may be newer than the
+published CLI. <a href="https://github.com/taipei49314/checkwash/blob/main/release/advertised.toml" rel="noopener noreferrer">The advertised-release manifest</a>
+records the version, commit and download bytes behind the installation commands
+above. New changes require their own candidate evidence and remain unreleased
+until the publication record verifies them; candidate CI success does not mean
+that the recommended Action pin includes them.</p>
+<p><strong>Advisory: Action trust boundary.</strong> Every published Action release up to and
+including v0.7.0 runs <code>python -m pip</code> and then <code>checkwash</code> with the pull
+request's checkout as the working directory, so a module in that checkout (for
+example a top-level <code>pip</code> package) can replace the installer and then the
+checker, and the pull request can tamper with the result it is judged by. Under
+checkwash's threat model that applies to every pull request it judges. v0.8.0
+fixes it (<a href="https://github.com/taipei49314/checkwash/pull/372" rel="noopener noreferrer">#372</a>); pin the
+v0.11.0 Action above. If you stay on v0.7.0 or earlier, treat a pass as
+advisory, review the pull request before merging and keep <code>comment-pr</code> off.
+<a href="https://github.com/taipei49314/checkwash/blob/main/SECURITY.md#known-issue-action-trust-boundary" rel="noopener noreferrer">Known issue</a></p>
+<p><strong>Which commit is the recommended pin?</strong> A release cannot embed its own commit SHA.
+Up to v0.10.0, the recommended pin is the commit the tag points to:
+<code>git rev-parse 'vX.Y.Z^{commit}'</code>. From v0.11.0 (D-194), it is the release's
+Action commit, the tag's second parent's parent: <code>git rev-parse 'vX.Y.Z^2^1'</code>.
+It is not the commit the tag points to. The release pull request's last commit
+changes one line, <code>doctor</code>'s own Action pin, to that Action commit, and the tag
+differs from the Action commit only in that line. The Action runs only
+<code>checkwash check</code>, which does not import <code>doctor</code>. From v0.11.0, a release's
+<code>doctor</code> accepts two Action pins: the one recommended before the release and
+the release's own Action commit.</p>
+<p>Pin updaters such as Dependabot and Renovate follow the <code># vX.Y.Z</code> comment, so
+they will propose the tag's commit, which <code>doctor</code> rejects (inferred from those
+tools' documentation, not run). For the same reason zizmor's
+<code>ref-version-mismatch</code> audit can report the comment (inferred, not run). The
+Action itself is unaffected: it runs the same check at either commit. <code>doctor</code> 0.10.0 does not accept the 0.11.0 pin, so
+upgrade the CLI and its local hooks first, then the Action pin. The recommended
+v0.11.0 Action includes the engine published on 2026-11-04 Asia/Taipei. A CLI
+upgrade does not update an existing Action.
+<a href="https://github.com/taipei49314/checkwash/blob/main/action/README.md" rel="noopener noreferrer">Action reference</a></p>
 <h2>More options and evidence</h2>
-<p>&lt;a id=&quot;install&quot;&gt;&lt;/a&gt; &lt;details&gt; &lt;summary&gt;Install as a CLI or try the included examples&lt;/summary&gt;</p>
+<p><a rel="noopener noreferrer"></a></p>
+<details>
+<summary>Install as a CLI or try the included examples</summary>
 <p>If you already use pipx, install the fixed version:</p>
-<p>```bash pipx install checkwash==0.11.0</p>
-<h1>or from the release tag:</h1>
-<p>pipx install git+https://github.com/taipei49314/checkwash@v0.11.0</p>
-<p>checkwash check HEAD~1..HEAD checkwash demo                  # 8 real tampering cases, blocked, offline ```</p>
-<p><code>checkwash demo</code> replays eight real tampering cases and one honest fix. It illustrates known patterns; it is not a coverage guarantee. You can run the same examples with <code>python checkwash.pyz demo</code>.</p>
-<p>&lt;/details&gt;</p>
-<p>&lt;a id=&quot;measured-not-asserted&quot;&gt;&lt;/a&gt; &lt;details&gt; &lt;summary&gt;Read the measurements and their limits&lt;/summary&gt;</p>
-<p>The historical six-repo sweep recorded <strong>46 / 1800 = 2.56%</strong> blocks: <strong>31 false positives (1.72%)</strong>, 15 legitimate policy blocks (0.83%). The tracked artifacts record engine <strong>v0.3.0</strong> (the release commit, swept 2026-09-07) on a corpus used to tune the detectors, not a held-out result.</p>
-<p><strong>1.33% of the corpus (24/1800) records opaque production changes</strong>. That flag does not establish that each verdict changed or each diff was unanalyzed.</p>
-<p>Review methods vary: the three-rater agreement study covers an older 35-diff cohort, not all 46 blocks. The dedicated <strong>22/60 refactor</strong> result (<code>benchmarks/refactors/results-latest.json</code>, a dated v0.3.1 snapshot) is a separate population; the general-commit rate does not predict it.</p>
-<p><a href="https://github.com/taipei49314/checkwash/blob/main/benchmarks/README.md" target="_blank" rel="noopener noreferrer">Measurements and source data</a> · <a href="https://github.com/taipei49314/checkwash/blob/main/benchmarks/RESULTS.md" target="_blank" rel="noopener noreferrer">Generated results</a> · <a href="https://github.com/taipei49314/checkwash/blob/main/benchmarks/FAILURES.md" target="_blank" rel="noopener noreferrer">Failure ledger</a></p>
-<p>&lt;/details&gt;</p>
-<p>| Looking for… | Start here | |---|---| | Installation checks, versions and first use | <a href="https://github.com/taipei49314/checkwash/blob/main/docs/releases/v0.11.0-publication-verification.md" target="_blank" rel="noopener noreferrer">v0.11.0 publication record</a> · <a href="https://github.com/taipei49314/checkwash/blob/main/docs/releases/v0.11.0-public-launch.md" target="_blank" rel="noopener noreferrer">v0.11.0 release guide</a> · <a href="https://github.com/taipei49314/checkwash/blob/main/docs/releases/README.md" target="_blank" rel="noopener noreferrer">Release history</a> | | JSON/SARIF contracts and upgrades | <a href="https://github.com/taipei49314/checkwash/blob/main/docs/stability.md" target="_blank" rel="noopener noreferrer">Stability</a> · <a href="https://github.com/taipei49314/checkwash/blob/main/docs/embedding.md" target="_blank" rel="noopener noreferrer">Embedding guide</a> · <a href="https://github.com/taipei49314/checkwash/blob/main/docs/findings.schema.json" target="_blank" rel="noopener noreferrer">Findings schema</a> | | Assertion support, coverage warnings and artifact checks | <a href="https://github.com/taipei49314/checkwash/blob/main/docs/assertion-coverage.md" target="_blank" rel="noopener noreferrer">Assertion coverage</a> | | Required checks and reviewed exemptions | <a href="https://github.com/taipei49314/checkwash/blob/main/docs/enterprise.md" target="_blank" rel="noopener noreferrer">Enterprise setup</a> | | Contributing or reporting a problem | <a href="https://github.com/taipei49314/checkwash/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">Contributing</a> · <a href="https://github.com/taipei49314/checkwash/issues" target="_blank" rel="noopener noreferrer">Issues</a> · <a href="https://github.com/taipei49314/checkwash/blob/main/SECURITY.md" target="_blank" rel="noopener noreferrer">Security reports</a> | | Readiness for 1.0 | <a href="https://github.com/taipei49314/checkwash/blob/main/docs/stability.md#what-must-change-before-10" target="_blank" rel="noopener noreferrer">Criteria — not met</a> |</p>
-<p>Related projects: <a href="https://github.com/taipei49314/checkwash-corpus" target="_blank" rel="noopener noreferrer">checkwash-corpus</a> and <a href="https://github.com/taipei49314/smallestlie" target="_blank" rel="noopener noreferrer">smallestlie</a> hold evaluation work.</p>
-<p>The package also includes a limited quality preview for coverage, Ruff and mypy configuration review. <a href="https://github.com/taipei49314/checkwash/blob/main/docs/quality-adoption.md" target="_blank" rel="noopener noreferrer">Setup and CI adoption guide</a>. Its frozen legacy-byte comparison remains red; publication does not establish natural-case acceptance or effective enforcement.</p>
-<p>Alpha pre-release. 22 detectors, 22461 tests (collection denominator). Zero runtime dependencies. <a href="https://github.com/taipei49314/checkwash/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">Apache-2.0</a>.</p></div>
+<pre><code class="language-bash">pipx install checkwash==0.11.0
+# or from the release tag:
+pipx install git+https://github.com/taipei49314/checkwash@v0.11.0
+
+checkwash check HEAD~1..HEAD
+checkwash demo                  # 8 real tampering cases, blocked, offline
+</code></pre>
+<p><code>checkwash demo</code> replays eight real tampering cases and one honest fix.
+It illustrates known patterns; it is not a coverage guarantee.
+You can run the same examples with <code>python checkwash.pyz demo</code>.</p>
+</details>
+<p><a rel="noopener noreferrer"></a></p>
+<details>
+<summary>Read the measurements and their limits</summary>
+<p>The historical six-repo sweep recorded <strong>46 / 1800 = 2.56%</strong> blocks:
+<strong>31 false positives (1.72%)</strong>, 15 legitimate
+policy blocks (0.83%). The tracked artifacts record engine <strong>v0.3.0</strong>
+(the release commit, swept 2026-09-07) on a corpus used to tune the
+detectors, not a held-out result.</p>
+<p><strong>1.33% of the corpus (24/1800) records opaque production changes</strong>.
+That flag does not establish that each verdict changed or each diff was unanalyzed.</p>
+<p>Review methods vary: the three-rater agreement study covers an older
+35-diff cohort, not all 46 blocks. The dedicated <strong>22/60 refactor</strong> result
+(<code>benchmarks/refactors/results-latest.json</code>, a dated v0.3.1 snapshot) is a
+separate population; the general-commit rate does not predict it.</p>
+<p><a href="https://github.com/taipei49314/checkwash/blob/main/benchmarks/README.md" rel="noopener noreferrer">Measurements and source data</a>
+· <a href="https://github.com/taipei49314/checkwash/blob/main/benchmarks/RESULTS.md" rel="noopener noreferrer">Generated results</a>
+· <a href="https://github.com/taipei49314/checkwash/blob/main/benchmarks/FAILURES.md" rel="noopener noreferrer">Failure ledger</a></p>
+</details>
+<table aria-label="数据表格，可横向滚动查看" tabindex="0">
+<thead>
+<tr>
+<th>Looking for…</th>
+<th>Start here</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Installation checks, versions and first use</td>
+<td><a href="https://github.com/taipei49314/checkwash/blob/main/docs/releases/v0.11.0-publication-verification.md" rel="noopener noreferrer">v0.11.0 publication record</a> · <a href="https://github.com/taipei49314/checkwash/blob/main/docs/releases/v0.11.0-public-launch.md" rel="noopener noreferrer">v0.11.0 release guide</a> · <a href="https://github.com/taipei49314/checkwash/blob/main/docs/releases/README.md" rel="noopener noreferrer">Release history</a></td>
+</tr>
+<tr>
+<td>JSON/SARIF contracts and upgrades</td>
+<td><a href="https://github.com/taipei49314/checkwash/blob/main/docs/stability.md" rel="noopener noreferrer">Stability</a> · <a href="https://github.com/taipei49314/checkwash/blob/main/docs/embedding.md" rel="noopener noreferrer">Embedding guide</a> · <a href="https://github.com/taipei49314/checkwash/blob/main/docs/findings.schema.json" rel="noopener noreferrer">Findings schema</a></td>
+</tr>
+<tr>
+<td>Assertion support, coverage warnings and artifact checks</td>
+<td><a href="https://github.com/taipei49314/checkwash/blob/main/docs/assertion-coverage.md" rel="noopener noreferrer">Assertion coverage</a></td>
+</tr>
+<tr>
+<td>Required checks and reviewed exemptions</td>
+<td><a href="https://github.com/taipei49314/checkwash/blob/main/docs/enterprise.md" rel="noopener noreferrer">Enterprise setup</a></td>
+</tr>
+<tr>
+<td>Contributing or reporting a problem</td>
+<td><a href="https://github.com/taipei49314/checkwash/blob/main/CONTRIBUTING.md" rel="noopener noreferrer">Contributing</a> · <a href="https://github.com/taipei49314/checkwash/issues" rel="noopener noreferrer">Issues</a> · <a href="https://github.com/taipei49314/checkwash/blob/main/SECURITY.md" rel="noopener noreferrer">Security reports</a></td>
+</tr>
+<tr>
+<td>Readiness for 1.0</td>
+<td><a href="https://github.com/taipei49314/checkwash/blob/main/docs/stability.md#what-must-change-before-10" rel="noopener noreferrer">Criteria — not met</a></td>
+</tr>
+</tbody>
+</table>
+<p>Related projects: <a href="https://github.com/taipei49314/checkwash-corpus" rel="noopener noreferrer">checkwash-corpus</a>
+and <a href="https://github.com/taipei49314/smallestlie" rel="noopener noreferrer">smallestlie</a> hold evaluation work.</p>
+<p>The package also includes a limited quality preview for coverage, Ruff and
+mypy configuration review. <a href="https://github.com/taipei49314/checkwash/blob/main/docs/quality-adoption.md" rel="noopener noreferrer">Setup and CI adoption guide</a>.
+Its frozen legacy-byte comparison remains red; publication does not establish
+natural-case acceptance or effective enforcement.</p>
+<p>Alpha pre-release. 22 detectors, 22461 tests (collection denominator).
+Zero runtime dependencies. <a href="https://github.com/taipei49314/checkwash/blob/main/LICENSE" rel="noopener noreferrer">Apache-2.0</a>.</p></div>
 </section>
 <footer class="source-box"><span>内容来自原作者；中文为乔木风格改写，非逐字翻译。</span><div><a href="https://x.com/kartg123451/status/2118550260104769565" target="_blank" rel="noopener noreferrer">打开原文 ↗</a><a href="https://github.com/taipei49314/checkwash/blob/0ebd5ad890c252b4546dbd692ac0414fdbc201cc/README.md" target="_blank" rel="noopener noreferrer">相关链接 ↗</a></div></footer>
 </article>

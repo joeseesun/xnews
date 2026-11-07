@@ -59,7 +59,7 @@ Daily updates (parent routine, Asia/Shanghai 08:00) should **fetch with X tools 
 Ordered references to `original.media`, not a second copy of the asset. Use `[]` when the source has no media. The build fails if an available original attachment is silently missing, referenced twice, unknown, or imprecisely anchored. One source attachment is rendered at most once **per section**; the rewrite and original remain independently readable, including in RSS.
 
 - Stable identity: `original.media[].id` if present (regex `[A-Za-z][A-Za-z0-9_-]{0,63}`); otherwise `m_` + the first 16 lowercase hexadecimal characters of SHA-256(`type + "\n" + url`, UTF-8). No array-position IDs. History backfill does not modify original objects. Preserve an explicit ID across URL refreshes.
-- Known semantic position: `{ "media_id": "...", "placement": "after_paragraph", "after_md": "complete unique Markdown paragraph from body_md", "evidence": "source_position_verified" }`. The paragraph must match a whole Markdown block and appear exactly once; a change to the text must update its anchor. Multiple references at one anchor render in array order. Verified placement does not claim video/audio was viewed.
+- Known semantic position: `{ "media_id": "...", "placement": "after_paragraph", "after_md": "complete unique Markdown paragraph from body_md", "evidence": "source_position_verified" }`. The anchor must match one complete top-level Markdown paragraph, exactly once; headings, list items, quotations, table cells and fenced code are not paragraph anchors. A change to the text must update its anchor. Reference-style links and multiline paragraphs are supported. Multiple references at one anchor render in array order. Malformed/removed HTML that prevents safe insertion fails the build instead of silently losing the media. Verified placement does not claim video/audio was viewed.
 - Unknown semantic position: `{ "media_id": "...", "placement": "after_body", "placement_note": "原文附带媒体；未核验其与具体段落的对应关系。", "evidence": "source_metadata_only" }`. Render a clearly labeled source-media block after the complete Chinese body; do not infer scene/caption/paragraph relationships.
 - Exceptional omission: `{ "media_id": "...", "omit_reason": "specific verified reason" }`; the reason is visible in the Chinese page and RSS, and the stored original remains intact. An empty reason is invalid. “It is in the original tab” is not a valid editorial reason.
 - Keep every paragraph in `body_md`; do not duplicate body text into media references. Do not add unsupported Markdown placeholders.
@@ -86,9 +86,18 @@ Outputs: `public/index.html`, `public/a/<id>.html`, fingerprinted `public/read/`
 ## Style
 
 Read [`EDITORIAL_PROMPT.md`](./EDITORIAL_PROMPT.md) and its stable reviewed addon [`EDITORIAL_ADDON.md`](./EDITORIAL_ADDON.md) first. Its fidelity/natural-Chinese rules override generic style templates. The writing-style/tropes references may help expression, but do not require questions, analogies, short-line emphasis or grand endings. Show the Chinese body **with its source-media references**, then **原文** (unaltered original text + media), then 原文链接. The same reference plan renders the Chinese RSS section. Do not ship Chinese KOL digests here.
+
+## Markdown rendering contract
+
+Both `body_md` and `original.text_md` use the same CommonMark parser, with tables and strikethrough enabled, across article pages, reader payloads and RSS HTML. This includes headings, nested lists, blockquotes, fenced/indented code, inline code, images, and inline/reference-style links. Preserve source newlines and code indentation in JSON strings. Tables need a header, a delimiter row, and one newline per row; escape literal cell pipes as `\|`. Do not flatten tables into prose or guess missing row boundaries. This is not a promise to support every Markdown extension (e.g. math, Mermaid or footnotes).
+
+HTML is sanitized with an allowlist. Source scripts, event handlers, arbitrary styles and embeds are removed; validated `rewrite_media` remains the way to insert playable media. Table alignment is preserved, long tables/code scroll within the article on narrow screens, and code indentation is retained. Reference definitions apply across the whole document even when media is inserted between paragraphs. Images load lazily; no browser Markdown parser or additional client dependency is required.
+
+Optional `original.markdown_base_url` must be an absolute HTTPS source document URL, ideally pinned to a revision. It only resolves relative source links/images; it is **not** a switch for Markdown support. Without a base URL, relative URLs are dropped rather than guessed against the website. Absolute links remain available. Original source text is never rewritten by rendering.
+
 # RSS 双版本协议（v1）
 
-复杂来源 Markdown（例如完整 GitHub README）可以设置 `original.markdown_base_url`，值为固定版本的 HTTPS 文档地址。构建时使用 CommonMark + 表格解析和 HTML 白名单净化；图片相对路径解析到该版本的 raw 文件，文档链接解析到同版本页面。原始 `text_md` 不作替换，代码块中的 HTML 仍保留为代码，正文 HTML 不再作为字面文本展示。未设置此字段的旧短帖保持既有排版。Python 依赖在 `requirements.txt` 固定版本。
+复杂来源 Markdown（例如完整 GitHub README）可以设置 `original.markdown_base_url`，值为固定版本的 HTTPS 文档地址。所有正文统一使用 CommonMark + 表格解析和 HTML 白名单净化；该可选字段只决定相对地址的基准。GitHub 图片相对路径解析到该版本的 raw 文件，文档链接解析到同版本页面。原始 `text_md` 不作替换，代码块中的 HTML 仍保留为代码。Python 依赖在 `requirements.txt` 固定版本。
 
 视频可用性需区分未加载、请求失败和实际播放。X CDN 在本轮实测中对带外站 Referer 的媒体请求返回 403，不带 Referer 的公开请求返回视频；本站通过 HTTP 头和 HTML meta 使用 `no-referrer`。RSS 消费端的请求策略由其宿主控制，不能依赖视频标签上的非标准属性覆盖；YouTube iframe 保留自身 referrerpolicy，以满足播放器识别来源的要求。媒体地址和原始 fallback 链接保持不变。
 

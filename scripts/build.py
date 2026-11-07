@@ -18,7 +18,7 @@ CONTENT = ROOT / "content" / "articles"
 PUBLIC = ROOT / "public"
 sys.path.insert(0, str(ROOT / 'scripts'))
 from search_metadata import metadata, discovery_files
-from source_markdown import render_source_markdown
+from source_markdown import render_source_markdown, render_markdown, paragraph_end, normalize_paragraph
 
 SITE_URL = "https://xnews.qiaomu.ai"
 SITE_NAME = "X News"
@@ -47,70 +47,7 @@ def local_media_url(url: str) -> str:
 
 
 def md_to_html(md: str) -> str:
-    lines = md.replace("\r\n", "\n").split("\n")
-    out: list[str] = []
-    i = 0
-    in_ul = in_ol = False
-    para: list[str] = []
-
-    def flush_para():
-        nonlocal para
-        if para:
-            out.append("<p>" + inline(" ".join(para).strip()) + "</p>")
-            para = []
-
-    def close_lists():
-        nonlocal in_ul, in_ol
-        if in_ul:
-            out.append("</ul>"); in_ul = False
-        if in_ol:
-            out.append("</ol>"); in_ol = False
-
-    def inline(s: str) -> str:
-        s = html.escape(s)
-        s = re.sub(r"`([^`]+)`", r"<code>\1</code>", s)
-        s = re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", s)
-        s = re.sub(r"(?<!\*)\*([^*]+)\*(?!\*)", r"<em>\1</em>", s)
-        s = re.sub(
-            r"\[([^\]]+)\]\((https?://[^)\s]+)\)",
-            r'<a href="\2" target="_blank" rel="noopener noreferrer">\1</a>',
-            s,
-        )
-        return s
-
-    while i < len(lines):
-        line = lines[i]
-        if not line.strip():
-            flush_para(); close_lists(); i += 1; continue
-        if re.match(r"^#{1,3}\s", line):
-            flush_para(); close_lists()
-            m = re.match(r"^(#{1,3})\s+(.*)$", line)
-            out.append(f"<h{len(m.group(1))}>{inline(m.group(2))}</h{len(m.group(1))}>")
-            i += 1; continue
-        if line.strip() in ("---", "***"):
-            flush_para(); close_lists(); out.append("<hr>"); i += 1; continue
-        if line.startswith("> "):
-            flush_para(); close_lists()
-            q = [line[2:]]; i += 1
-            while i < len(lines) and lines[i].startswith("> "):
-                q.append(lines[i][2:]); i += 1
-            out.append("<blockquote><p>" + inline(" ".join(q)) + "</p></blockquote>")
-            continue
-        m_ul = re.match(r"^[-*]\s+(.*)$", line)
-        if m_ul:
-            flush_para()
-            if in_ol: out.append("</ol>"); in_ol = False
-            if not in_ul: out.append("<ul>"); in_ul = True
-            out.append(f"<li>{inline(m_ul.group(1))}</li>"); i += 1; continue
-        m_ol = re.match(r"^(\d+)\.\s+(.*)$", line)
-        if m_ol:
-            flush_para()
-            if in_ul: out.append("</ul>"); in_ul = False
-            if not in_ol: out.append("<ol>"); in_ol = True
-            out.append(f"<li>{inline(m_ol.group(2))}</li>"); i += 1; continue
-        para.append(line.strip()); i += 1
-    flush_para(); close_lists()
-    return "\n".join(out)
+    return render_markdown(md)
 
 
 def load_articles() -> list[dict]:
@@ -252,7 +189,6 @@ def rewrite_media_plan(a: dict) -> tuple[dict, list]:
     if not isinstance(references, list):
         raise ValueError(f"{a['id']}: rewrite_media must be an ordered array")
     seen = set()
-    blocks = re.split(r"\n\s*\n", a["body_md"].strip())
     for ref in references:
         mid = ref.get("media_id")
         if mid not in available or mid in seen:
@@ -274,8 +210,10 @@ def rewrite_media_plan(a: dict) -> tuple[dict, list]:
             if ref.get("evidence") != "source_position_verified":
                 raise ValueError(f"{a['id']}: precise placement requires source-position evidence")
             anchor = ref.get("after_md", "")
-            if not anchor or blocks.count(anchor) != 1 or md_to_html(a["body_md"]).count(md_to_html(anchor)) != 1:
-                raise ValueError(f"{a['id']}: placement paragraph must be complete and unique")
+            try:
+                paragraph_end(a["body_md"], anchor)
+            except ValueError as error:
+                raise ValueError(f"{a['id']}: {error}") from error
     if set(available) != seen:
         raise ValueError(f"{a['id']}: original media missing from rewrite_media: {sorted(set(available) - seen)}")
     return available, references
@@ -283,14 +221,14 @@ def rewrite_media_plan(a: dict) -> tuple[dict, list]:
 
 def render_rewrite(a: dict, *, rss: bool = False) -> str:
     available, refs = rewrite_media_plan(a)
-    body = md_to_html(a["body_md"])
+    insertions = {}
     groups = {}
     omissions = []
     for ref in refs:
         if "omit_reason" in ref:
             omissions.append(f'<p class="completeness-note">原文媒体未在改写中展示：{html.escape(ref["omit_reason"])}</p>')
             continue
-        key = (ref["placement"], ref.get("after_md", ""))
+        key = (ref["placement"], normalize_paragraph(ref.get("after_md", "")))
         groups.setdefault(key, []).append((available[ref["media_id"]], ref.get("placement_note", "")))
     appended = []
     for (placement, anchor), entries in groups.items():
@@ -302,10 +240,10 @@ def render_rewrite(a: dict, *, rss: bool = False) -> str:
         heading = f'<h3 class="source-media-heading">{label}</h3>' if placement == "after_body" else ""
         block = f'<section class="rewrite-source-media" aria-label="{label}">{heading}{notice}{rendered}</section>'
         if placement == "after_paragraph":
-            anchor_html = md_to_html(anchor)
-            body = body.replace(anchor_html, anchor_html + block, 1)
+            insertions[anchor] = block
         else:
             appended.append(block)
+    body = render_markdown(a["body_md"], after_paragraph=insertions)
     return body + "\n" + "\n".join(appended + omissions)
 
 
@@ -580,12 +518,12 @@ def render_rewrite_markdown(a: dict) -> str:
         if "omit_reason" in ref:
             omissions.append("原文媒体未在改写中展示：" + markdown_label(ref["omit_reason"]))
             continue
-        key = (ref["placement"], ref.get("after_md", ""))
+        key = (ref["placement"], normalize_paragraph(ref.get("after_md", "")))
         groups.setdefault(key, []).append((available[ref["media_id"]], ref.get("placement_note", "")))
     body = a["body_md"]
     # Keep the source Markdown and whitespace intact, inserting only at the
     # exact complete paragraph already checked by rewrite_media_plan.
-    blocks = re.split(r"(\n\s*\n)", body.strip())
+    insertions = []
     appended = []
     for (placement, anchor), entries in groups.items():
         label = "原文附带媒体" if placement == "after_body" else "原文媒体"
@@ -596,15 +534,11 @@ def render_rewrite_markdown(a: dict) -> str:
         parts.extend(markdown_media(media) for media, _ in entries)
         block = "\n\n".join(parts)
         if placement == "after_paragraph":
-            for i in range(0, len(blocks), 2):
-                if blocks[i] == anchor:
-                    blocks[i] += "\n\n" + block
-                    break
+            insertions.append((paragraph_end(body, anchor), "\n\n" + block))
         else:
             appended.append(block)
-    leading = body[:len(body) - len(body.lstrip())]
-    trailing = body[len(body.rstrip()):]
-    body = leading + "".join(blocks) + trailing if body.strip() else body
+    for offset, fragment in sorted(insertions, reverse=True):
+        body = body[:offset] + fragment + body[offset:]
     return body + ("\n\n" + "\n\n".join(appended + omissions) if appended or omissions else "")
 
 

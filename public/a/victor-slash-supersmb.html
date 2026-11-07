@@ -23,7 +23,7 @@
 <link rel="alternate" type="application/rss+xml" title="X News" href="/feed.xml">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-7 -7 58 58'%3E%3Crect x='-7' y='-7' width='58' height='58' rx='5' fill='%231b1d18'/%3E%3Cpath fill='%23fffefa' d='M2 0h11l29 44H31zM32 0h10L26 18l-5-7zM17 26l5 7-10 11H2z'/%3E%3C/svg%3E">
 <script>try{var t=localStorage.getItem('xn.theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
-<style data-source="/static/app.7ac82213fe25.css">/* D · 影像刊 — see DESIGN.md. System fonts, real media, no left rail. */
+<style data-source="/static/app.b7cfdefd4a1d.css">/* D · 影像刊 — see DESIGN.md. System fonts, real media, no left rail. */
 :root {
   color-scheme:light;
   --paper:#fffefa; --ink:#1b1d18; --muted:#62685a; --rule:#d8dccf;
@@ -172,22 +172,44 @@ img{max-width:100%;height:auto}
 .reader-enhanced .section-heading{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);margin:0;padding:0}
 .original-title{font-size:1.1875rem;line-height:1.7;margin:0 0 22px;font-weight:500;overflow-wrap:anywhere}
 .completeness-note{font-size:0.875rem;line-height:1.85;color:var(--muted);background:var(--surface);border:1px solid var(--rule);padding:12px 16px;margin:0 0 24px}
-.prose{overflow-wrap:anywhere;text-wrap:pretty}
-.prose pre{max-width:100%;overflow-x:auto;padding:1rem;border:1px solid var(--rule);background:var(--surface);text-wrap:initial}
-.prose pre code{white-space:pre;font-size:.875rem}
-.prose table{display:block;max-width:100%;overflow-x:auto;border-collapse:collapse;margin:1.5em 0;font-size:.9375rem;line-height:1.7}
-.prose th,.prose td{padding:.6em .8em;border:1px solid var(--rule);text-align:left;min-width:8rem}
+.prose{min-width:0;font-size:1.125rem;line-height:1.95;overflow-wrap:anywhere;text-wrap:pretty}
+.prose pre{max-width:100%;overflow-x:auto;margin:1.5em 0;padding:1rem;border:1px solid var(--rule);background:var(--surface);font-size:.875rem;line-height:1.65;tab-size:4;white-space:pre;overflow-wrap:normal;text-wrap:initial}
+.prose pre code{display:block;width:max-content;min-width:100%;padding:0;border:0;border-radius:0;background:none;font-size:inherit;line-height:inherit;white-space:pre;overflow-wrap:normal}
+/* Keep wide source tables inside the reading column without compressing every cell. */
+.prose table{display:block;width:fit-content;max-width:100%;overflow-x:auto;border-collapse:collapse;margin:1.5em 0;font-size:.9375rem;line-height:1.65;tab-size:4;text-wrap:wrap;font-variant-numeric:tabular-nums}
+.prose th,.prose td{padding:.7em .85em;border:1px solid var(--rule);text-align:left;vertical-align:top;min-width:5.5rem;max-width:24rem}
+.prose :is(th,td):first-child{min-width:7.5rem}
 .prose th{font-weight:600;background:var(--surface)}
-.prose img{max-width:100%;height:auto}
-.prose p,.prose li{font-size:1.125rem;line-height:1.95;margin:0 0 1em}
+.prose :is(th,td)[align="left"]{text-align:left}
+.prose :is(th,td)[align="center"]{text-align:center}
+.prose :is(th,td)[align="right"]{text-align:right}
+.prose tbody tr:nth-child(even){background:color-mix(in srgb,var(--surface) 45%,transparent)}
+.prose caption{text-align:left;font-size:.875rem;line-height:1.6;color:var(--muted);padding-bottom:.65em}
+.prose img{max-width:100%;height:auto;vertical-align:middle}
+.prose p,.prose li{font-size:inherit;line-height:inherit;margin:0 0 1em}
+.prose :is(th,td) :is(p,li){font-size:inherit;line-height:inherit}
+.prose :is(th,td)>:last-child{margin-bottom:0}
 .prose h1,.prose h2,.prose h3{font-size:1.5625rem;font-weight:500;line-height:1.6;margin:1.8em 0 .7em}
+.prose h4,.prose h5,.prose h6{font-size:1.125rem;font-weight:600;line-height:1.65;margin:1.6em 0 .6em}
 .prose ul,.prose ol{padding-left:1.4em;margin:0 0 1.2em}
 .prose li{margin-bottom:.45em}
+.prose li>:is(ul,ol){margin:.45em 0 .6em}
+.prose li>p{margin-bottom:.6em}
+.prose li>:last-child{margin-bottom:0}
 .prose blockquote{margin:1.5em 0;padding:18px 22px;border:1px solid var(--rule);background:var(--surface)}
-.prose blockquote p{margin:0}
+.prose blockquote>:first-child{margin-top:0}
+.prose blockquote>:last-child{margin-bottom:0}
+.prose blockquote blockquote{margin:1em 0}
 .prose a{font-weight:500;text-decoration:underline;text-underline-offset:.22em}
 .prose hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
 .prose code{font-family:ui-monospace,monospace;font-size:.9em;background:var(--surface);padding:2px 4px;border-radius:3px;white-space:break-spaces}
+.prose details{margin:1.3em 0;padding:.8em 1em;border:1px solid var(--rule)}
+.prose summary{cursor:pointer;font-weight:600;line-height:1.6}
+.prose details[open]>summary{margin-bottom:.8em}
+.prose details>:last-child{margin-bottom:0}
+.prose kbd{font-family:ui-monospace,monospace;font-size:.85em;padding:.1em .35em;border:1px solid var(--rule);border-bottom-width:2px;border-radius:3px;background:var(--surface)}
+.prose sup,.prose sub{font-size:.75em;line-height:0;position:relative;vertical-align:baseline}
+.prose sup{top:-.5em}.prose sub{bottom:-.2em}
 .original-media{display:grid;gap:24px;margin:24px 0 28px}
 .media-figure{margin:0;min-width:0}
 .media-frame{background:var(--surface);border:1px solid var(--rule);overflow:hidden}
@@ -318,7 +340,7 @@ body.sheet-open{overflow:hidden}
  .reader-tabs a{font-size:0.875rem;padding:6px 10px}
  .reader-tabs .reader-source{font-size:0.8125rem!important;padding-inline-end:0}
  .reader-panel{margin-bottom:28px}
- .prose p,.prose li{font-size:1.0625rem;line-height:1.95}
+ .prose{font-size:1.0625rem;line-height:1.95}
  .prose h1,.prose h2,.prose h3{font-size:1.4375rem;line-height:1.6}
  .prose blockquote{padding:15px}
  .sheet-bar{gap:10px}
@@ -403,13 +425,79 @@ body.sheet-open{overflow:hidden}
 <section class="reader-panel" id="original" data-reader-panel="original" aria-label="原文">
 <h2 class="section-heading">原文</h2><h3 class="original-title">Slash hit 500m annual revenue with 88 people. We invented a new playbook:</h3>
 
-<div class="prose" lang="en"><p>Last month, we crossed $500m in annualized gross revenue, up from roughly $150m last year and $50m the year before. Our business is getting larger, and our growth is accelerating. Slash is one of the fastest growing fintech companies of all time, and we have a team of under 100 people.</p>
-<p>Our growth can be almost entirely attributed to the fact that we are 100x better at building for and selling to truly AI native entrepreneurs than our competitors. In this article I’m going to talk about three things that helped me build a half a billion dollar revenue business by 25: The rise of the “SuperSMB”, very lean companies with tons of revenue. How to find and sell to the “SuperSMB”. How to build product for the “SuperSMB”. Bookmark this, my promise is that this will be the MOST valuable read of your week.</p>
-<p>THE RISE OF THE SUPER-SMB AI is causing a Cambrian explosion of entrepreneurs. In the last three years: U.S. business applications reached roughly 5.6 million in 2025, up about 60% from 3.5 million in 2019. Every 26 seconds, a Shopify store makes its first sale. The median Stripe Atlas startup generated 39% more revenue in its first six months in 2025 than its 2024 counterpart. The “fastest from $0 -&gt; $XXm” isn’t a phenomenon that’s restricted to tech companies. Businesses are growing faster in every sector of the economy. These entrepreneurs are young. Slash customers spend billions of dollars every month, and hold billions of dollars on platform: Over 88% of the assets on the Slash platform belong to businesses with founders under the age of 35. 72% of the spend on Slash is done by businesses with founders under the age of 35. These entrepreneurs start many businesses. 40% of the companies on Slash are owned by an entrepreneur that has at least more than one more business on the platform. Their businesses grow incredibly fast. 65% of the billions of dollars in spend that flow through the Slash platform every month come from businesses that were started in the last 3 years (post ChatGPT!), and 25% come from businesses that were started in the last 12 months. They don’t employ that many people. The median Slash customer spends hundreds of thousands a month on their card, but only has a few employees. And they’re from all over the world. AI and the internet have made it possible for business owners all over the world to sell to the US consumer and business. Entrepreneurs worldwide are increasingly doing business in dollars, and Slash is powering all of them. We believe they are going to be running the world in 10 years I predict that by 2035, over half of all the business deposits held in US banks will come from businesses incorporated post the launch of ChatGPT. The most popular products of today – including banks – were not built for, and cannot keep up with the AI native entrepreneur. You have a massive opportunity to build a product tailored to this ultra fast growing sector of the economy.</p>
-<p>HOW TO SELL TO SUPER-SMBs Selling to SuperSMBs is a cheat code if you want your business to grow quickly. They are businesses that can both make you a lot of money (because they are big) and are fast to close (because they are not bureaucratic at all). This is unprecedented in the history of business. Typically, B2B companies had to trade off between sales cycle and ACV: Enterprises = take long to close, but make you a lot of cash. SMBs = faster to close, but don’t make you that much money. You do not have to make that tradeoff if you sell to SuperSMBs.</p>
-<p>However, it is not that easy to find them. Slash does not use Clay or Zoominfo. Slash does not do any cold calling or cold emailing. Without giving away all of our secret sauce, you have to at least do these three things: Earn your customers’ trust so you can unlock referrals. You are going to have a brutal time trying to find which 2-10 person teams are doing multiple 8 figures in revenue by checking LinkedIn. Your customers need to be your best sales people. You need to be on the ground. Join every big group chat, stay on top of every important forum, and go to every conference. There are some industries with many more SuperSMBs than others. If you are not an industry expert, you will be left behind. Put a human in front of your customers. You cannot gate premium support to businesses with a certain amount of employees. You must roll out the red carpet for these entrepreneurs on day 0. It is physically possible for one salesperson to bring in &gt; $100m in revenue in a year. @nickbruhman and others on our team are living, breathing examples of that:</p>
-<p>HOW TO BUILD FOR SUPER-SMBs Every part of the Slash product was engineered with SuperSMBs in mind. Build a global product from day 0 Entrepreneurs globally can use Cursor to create amazing software, Shopify/Amazon to sell physical goods to the US consumer, and Meta to advertise to them. So why can’t they easily access the dollar? Slash makes its American-caliber product available to internet entrepreneurs all over the world, and has active customers in over 40 countries. SuperSMBs are everywhere. Be global from day 1. Be agent ready Every action a user can perform via the Slash dashboard they can perform via our API or MCP. Nobody wants to log into your UI. SuperSMBs are API and MCP power users. Make your product available to them agentically. Be industry aware Marketing agencies, med spas, data labeling companies, and wholesalers all have different financial workflows, and different working capital needs. Slash builds bespoke, complementary tooling for all the niches it has a presence in, saving our customers much more time and money than our horizontal competitors. Making software is trivial now. Products with no industry differentiation will never make it. SuperSMBs expect you to deliver differentiated value for their niche. Be an all-in-one Business owners want to spend all of their time making their products better and getting more customers. They do not want to spend any time thinking about their back office. Slash eliminates the need for that by offering: 4 accounting products (invoicing, bill pay, expense management, accounting automation) Processing, banking*, stablecoin payments, FX, and issuing via one platform A delightful multi-entity experience. As a result, we’ve gone from being the primary banking partner for less than 20% of our customers to over 80% of them in the last 24 months. SuperSMBs want to consume less tools not more. They have a bias towards building, and so won’t consider your solution unless it solves a lot of their problems. In our case, they solve all of finance for them. Price aggressively SuperSMBs are often bootstrapped and care about profitability. Don’t be arrogant and think you can charge more than your competitors. Slash has some of the best rates out there, and we&#x27;re able to price so aggressively because we are a very lean company ourselves. Grow your profit by cutting your internal costs, not jacking up prices for your end user.</p>
-<p>WHAT’S NEXT FOR SLASH We have a straightforward, but extremely difficult mission of becoming the most popular business banking platform in the world. If you’re ambitious, incredibly hard working, and want to help us build the world’s next great financial services business, we’re hiring. Email me at victor @ slash . com if interested.</p>
+<div class="prose" lang="en"><p>Last month, we crossed $500m in annualized gross revenue, up from roughly $150m last year and $50m the year before. Our business is getting larger, and our growth is accelerating.
+Slash is one of the fastest growing fintech companies of all time, and we have a team of under 100 people.</p>
+<p>Our growth can be almost entirely attributed to the fact that we are 100x better at building for and selling to truly AI native entrepreneurs than our competitors.
+In this article I’m going to talk about three things that helped me build a half a billion dollar revenue business by 25:
+The rise of the “SuperSMB”, very lean companies with tons of revenue.
+How to find and sell to the “SuperSMB”.
+How to build product for the “SuperSMB”.
+Bookmark this, my promise is that this will be the MOST valuable read of your week.</p>
+<p>THE RISE OF THE SUPER-SMB
+AI is causing a Cambrian explosion of entrepreneurs. In the last three years:
+U.S. business applications reached roughly 5.6 million in 2025, up about 60% from 3.5 million in 2019.
+Every 26 seconds, a Shopify store makes its first sale.
+The median Stripe Atlas startup generated 39% more revenue in its first six months in 2025 than its 2024 counterpart.
+The “fastest from $0 -&gt; $XXm” isn’t a phenomenon that’s restricted to tech companies. Businesses are growing faster in every sector of the economy.
+These entrepreneurs are young.
+Slash customers spend billions of dollars every month, and hold billions of dollars on platform:
+Over 88% of the assets on the Slash platform belong to businesses with founders under the age of 35.
+72% of the spend on Slash is done by businesses with founders under the age of 35.
+These entrepreneurs start many businesses.
+40% of the companies on Slash are owned by an entrepreneur that has at least more than one more business on the platform.
+Their businesses grow incredibly fast.
+65% of the billions of dollars in spend that flow through the Slash platform every month come from businesses that were started in the last 3 years (post ChatGPT!), and 25% come from businesses that were started in the last 12 months.
+They don’t employ that many people.
+The median Slash customer spends hundreds of thousands a month on their card, but only has a few employees.
+And they’re from all over the world.
+AI and the internet have made it possible for business owners all over the world to sell to the US consumer and business. Entrepreneurs worldwide are increasingly doing business in dollars, and Slash is powering all of them.
+We believe they are going to be running the world in 10 years
+I predict that by 2035, over half of all the business deposits held in US banks will come from businesses incorporated post the launch of ChatGPT.
+The most popular products of today – including banks – were not built for, and cannot keep up with the AI native entrepreneur.
+You have a massive opportunity to build a product tailored to this ultra fast growing sector of the economy.</p>
+<p>HOW TO SELL TO SUPER-SMBs
+Selling to SuperSMBs is a cheat code if you want your business to grow quickly. They are businesses that can both make you a lot of money (because they are big) and are fast to close (because they are not bureaucratic at all).
+This is unprecedented in the history of business.
+Typically, B2B companies had to trade off between sales cycle and ACV:
+Enterprises = take long to close, but make you a lot of cash.
+SMBs = faster to close, but don’t make you that much money.
+You do not have to make that tradeoff if you sell to SuperSMBs.</p>
+<p>However, it is not that easy to find them. Slash does not use Clay or Zoominfo. Slash does not do any cold calling or cold emailing.
+Without giving away all of our secret sauce, you have to at least do these three things:
+Earn your customers’ trust so you can unlock referrals. You are going to have a brutal time trying to find which 2-10 person teams are doing multiple 8 figures in revenue by checking LinkedIn. Your customers need to be your best sales people.
+You need to be on the ground. Join every big group chat, stay on top of every important forum, and go to every conference. There are some industries with many more SuperSMBs than others. If you are not an industry expert, you will be left behind.
+Put a human in front of your customers. You cannot gate premium support to businesses with a certain amount of employees. You must roll out the red carpet for these entrepreneurs on day 0.
+It is physically possible for one salesperson to bring in &gt; $100m in revenue in a year. @nickbruhman and others on our team are living, breathing examples of that:</p>
+<p>HOW TO BUILD FOR SUPER-SMBs
+Every part of the Slash product was engineered with SuperSMBs in mind.
+Build a global product from day 0
+Entrepreneurs globally can use Cursor to create amazing software, Shopify/Amazon to sell physical goods to the US consumer, and Meta to advertise to them.
+So why can’t they easily access the dollar?
+Slash makes its American-caliber product available to internet entrepreneurs all over the world, and has active customers in over 40 countries.
+SuperSMBs are everywhere. Be global from day 1.
+Be agent ready
+Every action a user can perform via the Slash dashboard they can perform via our API or MCP.
+Nobody wants to log into your UI. SuperSMBs are API and MCP power users. Make your product available to them agentically.
+Be industry aware
+Marketing agencies, med spas, data labeling companies, and wholesalers all have different financial workflows, and different working capital needs.
+Slash builds bespoke, complementary tooling for all the niches it has a presence in, saving our customers much more time and money than our horizontal competitors.
+Making software is trivial now. Products with no industry differentiation will never make it. SuperSMBs expect you to deliver differentiated value for their niche.
+Be an all-in-one
+Business owners want to spend all of their time making their products better and getting more customers. They do not want to spend any time thinking about their back office.
+Slash eliminates the need for that by offering:
+4 accounting products (invoicing, bill pay, expense management, accounting automation)
+Processing, banking*, stablecoin payments, FX, and issuing via one platform
+A delightful multi-entity experience.
+As a result, we’ve gone from being the primary banking partner for less than 20% of our customers to over 80% of them in the last 24 months.
+SuperSMBs want to consume less tools not more. They have a bias towards building, and so won’t consider your solution unless it solves a lot of their problems.
+In our case, they solve all of finance for them.
+Price aggressively
+SuperSMBs are often bootstrapped and care about profitability. Don’t be arrogant and think you can charge more than your competitors.
+Slash has some of the best rates out there, and we're able to price so aggressively because we are a very lean company ourselves.
+Grow your profit by cutting your internal costs, not jacking up prices for your end user.</p>
+<p>WHAT’S NEXT FOR SLASH
+We have a straightforward, but extremely difficult mission of becoming the most popular business banking platform in the world.
+If you’re ambitious, incredibly hard working, and want to help us build the world’s next great financial services business, we’re hiring. Email me at victor @ slash . com if interested.</p>
 <ul>
 <li>Slash is a financial technology company, not a bank. Banking services provided by Column N.A., Member FDIC.</li>
 </ul></div>

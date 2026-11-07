@@ -1,3 +1,18 @@
+# Markdown 统一渲染与排版 · 2026-11-07 (Asia/Shanghai)
+
+用户截图对应 `clocktower-astra-detection` 的六列表格。源 JSON 是合法的多行 Markdown；旧改写渲染器不支持表格，将所有行并成了一个段落。基线改写 HTML 有 0 个 table，修复后有 1 个六列、五行数据的 table，原数值逐项不变。
+
+- 所有改写/原文、独立文章、指纹阅读正文、标准 RSS 与 RSS v1 双版本统一使用现有固定版本的 markdown-it-py + nh3。原文基准 URL 仅负责相对地址解析，不再决定是否启用完整解析。支持表格/对齐、标题、嵌套列表、引用、围栏/缩进代码、行内代码、删除线及引用式链接；未引入浏览器端解析库或新依赖。
+- 表格有表头层次、行间区分、数字等宽及局部横向滚动；桌面 Clocktower 表格宽度/内容均 672px。真实页面置于 320/390/768px iframe，首页及文章页面均无横向溢出；390px 表格宽 350px、内容 561px，键盘右移到 scrollLeft=211 可到末列。CaptureFlow 的五段代码保留空格/缩进，长行局部滚动。此为 Chrome 真实窄屏 CSS 验收，不是手机 Safari 实机验证。
+- 媒体按解析后的完整段落定位，保留全篇引用定义及混合 HTML 容器。净化整个文档后，通过内部不可预测且最终移除的标记，结构化插入受控播放器/图片；不会用正文字符串替换或分片净化导致失真。标记无法消费时明确失败。按归一化锚点合并多图，保持原数组顺序。
+- 安全回归涵盖危险 URL/HTML、title/alt 中字面标签、代码里的 HTML、净化后的稳定属性序列化、details 容器、畸形 HTML 吞标记和同段多媒体。来源 comments 不发布，原始脚本/事件不执行。
+- 新增 15 项 Markdown 回归，覆盖截图原数据及网页/阅读正文/RSS 一致性。**完整 84 项通过：59 Python + 25 Node reader state**，记录在 `.qa-ui/markdown/tests.log`。官方解析/净化依据：[markdown-it-py](https://markdown-it-py.readthedocs.io/en/latest/using.html)、[nh3](https://nh3.readthedocs.io/en/latest/)。
+- 已先合入 Grok Bot 最新内容提交 `b7c438e`；Anthropic 文稿及 15 张图的段落位置保留。本轮未修改 `content/articles/` 或 `src/media-manifest.json`。契约更新到 `content/SCHEMA.md`，RSS 协议仍为 v1。
+
+发布与线上回读结果在完成部署后追加。此次未创建临时 worktree；本地预览端口 33211 在交付前关闭。
+
+---
+
 # Grok Bot 内容发布协作同步 · 2026-11-07 02:06 (Asia/Shanghai)
 
 用户明确分工：Grok Bot 抓取和整理 X 内容，Codex 维护网站。已通过 Grok Bot 桌面应用向负责 X News 的「乔布斯」发送完整交接，并观察到「已更新 例行任务」记录及 02:05:56 的确认回复；不是仅写了待发送草稿。

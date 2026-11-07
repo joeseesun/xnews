@@ -22,7 +22,7 @@
 <link rel="alternate" type="application/rss+xml" title="X News" href="/feed.xml">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-7 -7 58 58'%3E%3Crect x='-7' y='-7' width='58' height='58' rx='5' fill='%231b1d18'/%3E%3Cpath fill='%23fffefa' d='M2 0h11l29 44H31zM32 0h10L26 18l-5-7zM17 26l5 7-10 11H2z'/%3E%3C/svg%3E">
 <script>try{var t=localStorage.getItem('xn.theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
-<style data-source="/static/app.7ac82213fe25.css">/* D · 影像刊 — see DESIGN.md. System fonts, real media, no left rail. */
+<style data-source="/static/app.b7cfdefd4a1d.css">/* D · 影像刊 — see DESIGN.md. System fonts, real media, no left rail. */
 :root {
   color-scheme:light;
   --paper:#fffefa; --ink:#1b1d18; --muted:#62685a; --rule:#d8dccf;
@@ -171,22 +171,44 @@ img{max-width:100%;height:auto}
 .reader-enhanced .section-heading{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);margin:0;padding:0}
 .original-title{font-size:1.1875rem;line-height:1.7;margin:0 0 22px;font-weight:500;overflow-wrap:anywhere}
 .completeness-note{font-size:0.875rem;line-height:1.85;color:var(--muted);background:var(--surface);border:1px solid var(--rule);padding:12px 16px;margin:0 0 24px}
-.prose{overflow-wrap:anywhere;text-wrap:pretty}
-.prose pre{max-width:100%;overflow-x:auto;padding:1rem;border:1px solid var(--rule);background:var(--surface);text-wrap:initial}
-.prose pre code{white-space:pre;font-size:.875rem}
-.prose table{display:block;max-width:100%;overflow-x:auto;border-collapse:collapse;margin:1.5em 0;font-size:.9375rem;line-height:1.7}
-.prose th,.prose td{padding:.6em .8em;border:1px solid var(--rule);text-align:left;min-width:8rem}
+.prose{min-width:0;font-size:1.125rem;line-height:1.95;overflow-wrap:anywhere;text-wrap:pretty}
+.prose pre{max-width:100%;overflow-x:auto;margin:1.5em 0;padding:1rem;border:1px solid var(--rule);background:var(--surface);font-size:.875rem;line-height:1.65;tab-size:4;white-space:pre;overflow-wrap:normal;text-wrap:initial}
+.prose pre code{display:block;width:max-content;min-width:100%;padding:0;border:0;border-radius:0;background:none;font-size:inherit;line-height:inherit;white-space:pre;overflow-wrap:normal}
+/* Keep wide source tables inside the reading column without compressing every cell. */
+.prose table{display:block;width:fit-content;max-width:100%;overflow-x:auto;border-collapse:collapse;margin:1.5em 0;font-size:.9375rem;line-height:1.65;tab-size:4;text-wrap:wrap;font-variant-numeric:tabular-nums}
+.prose th,.prose td{padding:.7em .85em;border:1px solid var(--rule);text-align:left;vertical-align:top;min-width:5.5rem;max-width:24rem}
+.prose :is(th,td):first-child{min-width:7.5rem}
 .prose th{font-weight:600;background:var(--surface)}
-.prose img{max-width:100%;height:auto}
-.prose p,.prose li{font-size:1.125rem;line-height:1.95;margin:0 0 1em}
+.prose :is(th,td)[align="left"]{text-align:left}
+.prose :is(th,td)[align="center"]{text-align:center}
+.prose :is(th,td)[align="right"]{text-align:right}
+.prose tbody tr:nth-child(even){background:color-mix(in srgb,var(--surface) 45%,transparent)}
+.prose caption{text-align:left;font-size:.875rem;line-height:1.6;color:var(--muted);padding-bottom:.65em}
+.prose img{max-width:100%;height:auto;vertical-align:middle}
+.prose p,.prose li{font-size:inherit;line-height:inherit;margin:0 0 1em}
+.prose :is(th,td) :is(p,li){font-size:inherit;line-height:inherit}
+.prose :is(th,td)>:last-child{margin-bottom:0}
 .prose h1,.prose h2,.prose h3{font-size:1.5625rem;font-weight:500;line-height:1.6;margin:1.8em 0 .7em}
+.prose h4,.prose h5,.prose h6{font-size:1.125rem;font-weight:600;line-height:1.65;margin:1.6em 0 .6em}
 .prose ul,.prose ol{padding-left:1.4em;margin:0 0 1.2em}
 .prose li{margin-bottom:.45em}
+.prose li>:is(ul,ol){margin:.45em 0 .6em}
+.prose li>p{margin-bottom:.6em}
+.prose li>:last-child{margin-bottom:0}
 .prose blockquote{margin:1.5em 0;padding:18px 22px;border:1px solid var(--rule);background:var(--surface)}
-.prose blockquote p{margin:0}
+.prose blockquote>:first-child{margin-top:0}
+.prose blockquote>:last-child{margin-bottom:0}
+.prose blockquote blockquote{margin:1em 0}
 .prose a{font-weight:500;text-decoration:underline;text-underline-offset:.22em}
 .prose hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
 .prose code{font-family:ui-monospace,monospace;font-size:.9em;background:var(--surface);padding:2px 4px;border-radius:3px;white-space:break-spaces}
+.prose details{margin:1.3em 0;padding:.8em 1em;border:1px solid var(--rule)}
+.prose summary{cursor:pointer;font-weight:600;line-height:1.6}
+.prose details[open]>summary{margin-bottom:.8em}
+.prose details>:last-child{margin-bottom:0}
+.prose kbd{font-family:ui-monospace,monospace;font-size:.85em;padding:.1em .35em;border:1px solid var(--rule);border-bottom-width:2px;border-radius:3px;background:var(--surface)}
+.prose sup,.prose sub{font-size:.75em;line-height:0;position:relative;vertical-align:baseline}
+.prose sup{top:-.5em}.prose sub{bottom:-.2em}
 .original-media{display:grid;gap:24px;margin:24px 0 28px}
 .media-figure{margin:0;min-width:0}
 .media-frame{background:var(--surface);border:1px solid var(--rule);overflow:hidden}
@@ -317,7 +339,7 @@ body.sheet-open{overflow:hidden}
  .reader-tabs a{font-size:0.875rem;padding:6px 10px}
  .reader-tabs .reader-source{font-size:0.8125rem!important;padding-inline-end:0}
  .reader-panel{margin-bottom:28px}
- .prose p,.prose li{font-size:1.0625rem;line-height:1.95}
+ .prose{font-size:1.0625rem;line-height:1.95}
  .prose h1,.prose h2,.prose h3{font-size:1.4375rem;line-height:1.6}
  .prose blockquote{padding:15px}
  .sheet-bar{gap:10px}
@@ -368,19 +390,19 @@ body.sheet-open{overflow:hidden}
 <div class="search-field"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><label class="sr-only" for="story-search">搜索标题、作者或主题</label><input id="story-search" type="search" name="q" placeholder="搜索标题、作者或主题" autocomplete="off" aria-controls="news-grid"><button type="button" data-clear-search aria-label="清除搜索" hidden>×</button></div></div>
 <div class="discovery-bottom"><p data-result-count role="status" aria-live="polite" aria-atomic="true"></p><div class="view-switch" role="group" aria-label="浏览方式"><button type="button" data-layout="journal" aria-pressed="true"><svg viewBox="0 0 18 18" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 2h5v14H2zM11 2h5v5h-5zM11 11h5v5h-5z"/></svg>影像刊</button><button type="button" data-layout="list" aria-pressed="false"><svg viewBox="0 0 18 18" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 3h14M2 9h14M2 15h14"/></svg>速览</button></div></div>
 </section><section class="news-grid" id="news-grid" data-news-grid aria-label="全部文章"><article class="news-card card--media is-featured" id="story-anthropic-agent-memory-dreaming" data-kind="text" data-search="Claude 写了 413 份笔记，只拿到 1 枚徽章：智能体记忆该怎么整理 413 份笔记只换来 1 枚徽章，10 份笔记却拿到 4 枚。Anthropic 用宝可梦、数据库与法律文档实验，拆解智能体怎样筛选经验、核对错误，并让下一次任务用上记忆。 Anthropic AnthropicAI Anthropic Claude agent memory engineering">
-<a class="card-link" href="/a/anthropic-agent-memory-dreaming" id="read-anthropic-agent-memory-dreaming" data-open-reader data-reader-src="/read/anthropic-agent-memory-dreaming.eeea61f58d43.html" data-source-url="https://x.com/AnthropicAI/status/2118814753154064501">
+<a class="card-link" href="/a/anthropic-agent-memory-dreaming" id="read-anthropic-agent-memory-dreaming" data-open-reader data-reader-src="/read/anthropic-agent-memory-dreaming.2b555cf4feec.html" data-source-url="https://x.com/AnthropicAI/status/2118814753154064501">
 <div class="card-body"><div class="card-meta"><span>长帖 / Anthropic</span><time datetime="2026-11-06">11.06</time></div>
 <h2 class="card-title">Claude 写了 413 份笔记，只拿到 1 枚徽章：智能体记忆该怎么整理</h2><p class="card-dek">413 份笔记只换来 1 枚徽章，10 份笔记却拿到 4 枚。Anthropic 用宝可梦、数据库与法律文档实验，拆解智能体怎样筛选经验、核对错误，并让下一次任务用上记忆。</p><div class="card-end"><span>中文约 15 分钟</span><span class="card-read">阅读全文 <span class="card-arrow" aria-hidden="true">→</span></span></div></div><div class="cover" data-cover><div class="cover-fallback" aria-hidden="true"><span class="cover-word">Anthropic</span></div><img src="/media/anthropic-memory-media_fig_01-57a1c13359.webp" alt="Diagram of a memory hierarchy between one session and the next. From bottom to top: transcripts (a searchable event log), memory notes written by Claude, memory representations such as wikis, and injected context loaded into every session. Inside a box labeled &quot;Dreaming,&quot; arrows run from transcripts up to each layer, and in both directions between neighboring upper layers." loading="eager" decoding="async" fetchpriority="high" referrerpolicy="no-referrer"></div>
 </a><a class="cover-error-link" href="https://x.com/AnthropicAI/status/2118814753154064501" target="_blank" rel="noopener noreferrer">封面未能显示 · 去原文查看 ↗</a>
 </article>
 <article class="news-card card--media" id="story-captureflow-screen-recorder" data-kind="text" data-search="CaptureFlow：边录屏边上传，支持 Docker 自托管 Chrome 扩展已上架，macOS 签名版仍待发布；Docker 使用 SQLite 和本地磁盘，也可部署到 Cloudflare Workers、D1、R2。 Sardor sardorml 开源实作 录屏 自托管">
-<a class="card-link" href="/a/captureflow-screen-recorder" id="read-captureflow-screen-recorder" data-open-reader data-reader-src="/read/captureflow-screen-recorder.e325ce1eb5c3.html" data-source-url="https://x.com/sardorml/status/2118616954085024133">
+<a class="card-link" href="/a/captureflow-screen-recorder" id="read-captureflow-screen-recorder" data-open-reader data-reader-src="/read/captureflow-screen-recorder.50a421baef9f.html" data-source-url="https://x.com/sardorml/status/2118616954085024133">
 <div class="cover" data-cover><div class="cover-fallback" aria-hidden="true"><span class="cover-word">Sardor</span></div><img src="/media/captureflow-screen-recorder-image-5129d6d002.jpg" alt="CaptureFlow 作者原帖配图" loading="lazy" decoding="async"  referrerpolicy="no-referrer"></div><div class="card-body"><div class="card-meta"><span>长帖 / Sardor</span><time datetime="2026-11-06">11.06</time></div>
 <h2 class="card-title">CaptureFlow：边录屏边上传，支持 Docker 自托管</h2><p class="card-dek">Chrome 扩展已上架，macOS 签名版仍待发布；Docker 使用 SQLite 和本地磁盘，也可部署到 Cloudflare Workers、D1、R2。</p><div class="card-end"><span>中文约 6 分钟</span><span class="card-read">阅读全文 <span class="card-arrow" aria-hidden="true">→</span></span></div></div>
 </a><a class="cover-error-link" href="https://x.com/sardorml/status/2118616954085024133" target="_blank" rel="noopener noreferrer">封面未能显示 · 去原文查看 ↗</a>
 </article>
 <article class="news-card card--text tone-sage" id="story-checkwash-test-weakening" data-kind="text" data-search="checkwash 用 Git diff 检查测试弱化，Alpha 版仍有漏检和误报 v0.11.0 支持 Claude Code 钩子和 CI 检查，默认只阻断 high；历史评测有明确的版本、样本与误报边界。 Nelson Chu kartg123451 技术深潜 代码审查 开源">
-<a class="card-link" href="/a/checkwash-test-weakening" id="read-checkwash-test-weakening" data-open-reader data-reader-src="/read/checkwash-test-weakening.1fab01757d73.html" data-source-url="https://x.com/kartg123451/status/2118550260104769565">
+<a class="card-link" href="/a/checkwash-test-weakening" id="read-checkwash-test-weakening" data-open-reader data-reader-src="/read/checkwash-test-weakening.74e47298bf1f.html" data-source-url="https://x.com/kartg123451/status/2118550260104769565">
 <div class="type-cover" aria-hidden="true"><span class="type-index">03 / VOICES</span><span class="cover-word">Nelson<span class="type-dot">.</span></span></div><div class="card-body"><div class="card-meta"><span>长帖 / Nelson Chu</span><time datetime="2026-11-06">11.06</time></div>
 <h2 class="card-title">checkwash 用 Git diff 检查测试弱化，Alpha 版仍有漏检和误报</h2><p class="card-dek">v0.11.0 支持 Claude Code 钩子和 CI 检查，默认只阻断 high；历史评测有明确的版本、样本与误报边界。</p><div class="card-end"><span>中文约 16 分钟</span><span class="card-read">阅读全文 <span class="card-arrow" aria-hidden="true">→</span></span></div></div>
 </a><a class="cover-error-link" href="https://x.com/kartg123451/status/2118550260104769565" target="_blank" rel="noopener noreferrer">封面未能显示 · 去原文查看 ↗</a>
@@ -398,73 +420,73 @@ body.sheet-open{overflow:hidden}
 </a><a class="cover-error-link" href="https://x.com/rauchg/status/2118440831355068671" target="_blank" rel="noopener noreferrer">封面未能显示 · 去原文查看 ↗</a>
 </article>
 <article class="news-card card--media" id="story-openai-gpt6-cyber" data-kind="video" data-search="OpenAI 发布 GPT-6 Cyber，先向部分 Daybreak Red 客户开放 OpenAI 称，Mozilla、Palo Alto Networks、Calif 和 Cisco 等公司的安全团队已在使用该模型。 OpenAI OpenAI OpenAI security GPT-6">
-<a class="card-link" href="/a/openai-gpt6-cyber" id="read-openai-gpt6-cyber" data-open-reader data-reader-src="/read/openai-gpt6-cyber.6320fe7f226c.html" data-source-url="https://x.com/OpenAI/status/2118390190246879554">
+<a class="card-link" href="/a/openai-gpt6-cyber" id="read-openai-gpt6-cyber" data-open-reader data-reader-src="/read/openai-gpt6-cyber.1305b6292325.html" data-source-url="https://x.com/OpenAI/status/2118390190246879554">
 <div class="cover" data-cover><div class="cover-fallback" aria-hidden="true"><span class="cover-word">OpenAI</span></div><img src="/media/openai-gpt6-cyber-poster-d795be1590.jpg" alt="原视频封面" loading="lazy" decoding="async"  referrerpolicy="no-referrer"><span class="cover-badge">▶ 长帖 / 视频</span></div><div class="card-body"><div class="card-meta"><span>长帖 / 视频 / OpenAI</span><time datetime="2026-11-06">11.06</time></div>
 <h2 class="card-title">OpenAI 发布 GPT-6 Cyber，先向部分 Daybreak Red 客户开放</h2><p class="card-dek">OpenAI 称，Mozilla、Palo Alto Networks、Calif 和 Cisco 等公司的安全团队已在使用该模型。</p><div class="card-end"><span>中文约 1 分钟</span><span class="card-read">阅读全文 <span class="card-arrow" aria-hidden="true">→</span></span></div></div>
 </a><a class="cover-error-link" href="https://x.com/OpenAI/status/2118390190246879554" target="_blank" rel="noopener noreferrer">封面未能显示 · 去原文查看 ↗</a>
 </article>
 <article class="news-card card--media" id="story-deepseek-super-agent-harness" data-kind="video" data-search="DeepSeek Super Agent：用插件组织 router 与 worker 的研究原型 同一模型在九套 harness 中的通过率和成本不同；Super Agent 目前聚焦 GitHub、飞书，安全问题尚未完全解决。 AI news / DeepSeek Super Agent explainer youtube DeepSeek harness agent">
-<a class="card-link" href="/a/deepseek-super-agent-harness" id="read-deepseek-super-agent-harness" data-open-reader data-reader-src="/read/deepseek-super-agent-harness.0e1d4c2463f1.html" data-source-url="https://www.youtube.com/watch?v=OrcsMi2-IcM">
+<a class="card-link" href="/a/deepseek-super-agent-harness" id="read-deepseek-super-agent-harness" data-open-reader data-reader-src="/read/deepseek-super-agent-harness.7bd749ea69c6.html" data-source-url="https://www.youtube.com/watch?v=OrcsMi2-IcM">
 <div class="cover" data-cover><div class="cover-fallback" aria-hidden="true"><span class="cover-word">youtube</span></div><img src="/media/deepseek-super-agent-harness-poster-32294b3993.jpg" alt="原视频封面" loading="lazy" decoding="async"  referrerpolicy="no-referrer"><span class="cover-badge">▶ 视频</span></div><div class="card-body"><div class="card-meta"><span>视频 / AI news / DeepSeek Super Agent explainer</span><time datetime="2026-11-05">11.05</time></div>
 <h2 class="card-title">DeepSeek Super Agent：用插件组织 router 与 worker 的研究原型</h2><p class="card-dek">同一模型在九套 harness 中的通过率和成本不同；Super Agent 目前聚焦 GitHub、飞书，安全问题尚未完全解决。</p><div class="card-end"><span>中文约 4 分钟</span><span class="card-read">阅读全文 <span class="card-arrow" aria-hidden="true">→</span></span></div></div>
 </a><a class="cover-error-link" href="https://www.youtube.com/watch?v=OrcsMi2-IcM" target="_blank" rel="noopener noreferrer">封面未能显示 · 去原文查看 ↗</a>
 </article>
 <article class="news-card card--media" id="story-tibo-dropbox-launch-video" data-kind="video" data-search="Tibo：Dropbox 一段屏录，让候补名单从 5000 人增至 75000 人 他回顾十八年前的发布视频，分析真实功能演示、目标受众与发布渠道如何配合。 Tibo tibo_maker indie launch video">
-<a class="card-link" href="/a/tibo-dropbox-launch-video" id="read-tibo-dropbox-launch-video" data-open-reader data-reader-src="/read/tibo-dropbox-launch-video.af2878e3ddf0.html" data-source-url="https://x.com/tibo_maker/status/2118289869428380138">
+<a class="card-link" href="/a/tibo-dropbox-launch-video" id="read-tibo-dropbox-launch-video" data-open-reader data-reader-src="/read/tibo-dropbox-launch-video.144287b4eb58.html" data-source-url="https://x.com/tibo_maker/status/2118289869428380138">
 <div class="cover" data-cover><div class="cover-fallback" aria-hidden="true"><span class="cover-word">Tibo</span></div><img src="/media/tibo-dropbox-launch-video-poster-839d50e043.jpg" alt="原视频封面" loading="lazy" decoding="async"  referrerpolicy="no-referrer"><span class="cover-badge">▶ 长帖 / 视频</span></div><div class="card-body"><div class="card-meta"><span>长帖 / 视频 / Tibo</span><time datetime="2026-11-05">11.05</time></div>
 <h2 class="card-title">Tibo：Dropbox 一段屏录，让候补名单从 5000 人增至 75000 人</h2><p class="card-dek">他回顾十八年前的发布视频，分析真实功能演示、目标受众与发布渠道如何配合。</p><div class="card-end"><span>中文约 1 分钟</span><span class="card-read">阅读全文 <span class="card-arrow" aria-hidden="true">→</span></span></div></div>
 </a><a class="cover-error-link" href="https://x.com/tibo_maker/status/2118289869428380138" target="_blank" rel="noopener noreferrer">封面未能显示 · 去原文查看 ↗</a>
 </article>
 <article class="news-card card--text tone-sage" id="story-anthropic-vault-claude" data-kind="text" data-search="Anthropic：用 Claude 解析细菌 vault 颗粒的首个三维结构 团队称，原本需要数周到数月的结构解析缩短到了几天；过程中也出现了需要纠正的错误。 Anthropic AnthropicAI Anthropic Claude science">
-<a class="card-link" href="/a/anthropic-vault-claude" id="read-anthropic-vault-claude" data-open-reader data-reader-src="/read/anthropic-vault-claude.068c9d7a42b8.html" data-source-url="https://x.com/AnthropicAI/status/2118073665296228863">
+<a class="card-link" href="/a/anthropic-vault-claude" id="read-anthropic-vault-claude" data-open-reader data-reader-src="/read/anthropic-vault-claude.88599b0ee064.html" data-source-url="https://x.com/AnthropicAI/status/2118073665296228863">
 <div class="type-cover" aria-hidden="true"><span class="type-index">09 / VOICES</span><span class="cover-word">Anthropic<span class="type-dot">.</span></span></div><div class="card-body"><div class="card-meta"><span>长帖 / Anthropic</span><time datetime="2026-11-05">11.05</time></div>
 <h2 class="card-title">Anthropic：用 Claude 解析细菌 vault 颗粒的首个三维结构</h2><p class="card-dek">团队称，原本需要数周到数月的结构解析缩短到了几天；过程中也出现了需要纠正的错误。</p><div class="card-end"><span>中文约 1 分钟</span><span class="card-read">阅读全文 <span class="card-arrow" aria-hidden="true">→</span></span></div></div>
 </a><a class="cover-error-link" href="https://x.com/AnthropicAI/status/2118073665296228863" target="_blank" rel="noopener noreferrer">封面未能显示 · 去原文查看 ↗</a>
 </article>
 <article class="news-card card--text tone-paper" id="story-sarah-guo-personal-software" data-kind="text" data-search="Sarah Guo 改变了看法：非工程师也想做自己的软件 她列了几种动机：动手做软件带来的力量感、没人替自己实现的工作流，以及想花几周修好的恼人问题。 Sarah Guo saranormous product personal software AI">
-<a class="card-link" href="/a/sarah-guo-personal-software" id="read-sarah-guo-personal-software" data-open-reader data-reader-src="/read/sarah-guo-personal-software.69c8582f446a.html" data-source-url="https://x.com/saranormous/status/2118052772637704376">
+<a class="card-link" href="/a/sarah-guo-personal-software" id="read-sarah-guo-personal-software" data-open-reader data-reader-src="/read/sarah-guo-personal-software.0c645c1d5acb.html" data-source-url="https://x.com/saranormous/status/2118052772637704376">
 <div class="type-cover" aria-hidden="true"><span class="type-index">10 / VOICES</span><span class="cover-word">Sarah<span class="type-dot">.</span></span></div><div class="card-body"><div class="card-meta"><span>长帖 / Sarah Guo</span><time datetime="2026-11-04">11.04</time></div>
 <h2 class="card-title">Sarah Guo 改变了看法：非工程师也想做自己的软件</h2><p class="card-dek">她列了几种动机：动手做软件带来的力量感、没人替自己实现的工作流，以及想花几周修好的恼人问题。</p><div class="card-end"><span>中文约 1 分钟</span><span class="card-read">阅读全文 <span class="card-arrow" aria-hidden="true">→</span></span></div></div>
 </a><a class="cover-error-link" href="https://x.com/saranormous/status/2118052772637704376" target="_blank" rel="noopener noreferrer">封面未能显示 · 去原文查看 ↗</a>
 </article>
 <article class="news-card card--text tone-ink" id="story-rauchg-vercel-security-review" data-kind="text" data-search="Rauch：Vercel 内部的安全审计 Agent 已对外开放 Rauch 称，仓库无论是否托管在 Vercel，都可以启用与内部安全 Agent 相同的能力。 Guillermo Rauch rauchg security agent Vercel">
-<a class="card-link" href="/a/rauchg-vercel-security-review" id="read-rauchg-vercel-security-review" data-open-reader data-reader-src="/read/rauchg-vercel-security-review.52681517e7f0.html" data-source-url="https://x.com/rauchg/status/2117734833824948373">
+<a class="card-link" href="/a/rauchg-vercel-security-review" id="read-rauchg-vercel-security-review" data-open-reader data-reader-src="/read/rauchg-vercel-security-review.f0d7963b82ce.html" data-source-url="https://x.com/rauchg/status/2117734833824948373">
 <div class="type-cover" aria-hidden="true"><span class="type-index">11 / VOICES</span><span class="cover-word">Guillermo<span class="type-dot">.</span></span></div><div class="card-body"><div class="card-meta"><span>长帖 / Guillermo Rauch</span><time datetime="2026-11-03">11.03</time></div>
 <h2 class="card-title">Rauch：Vercel 内部的安全审计 Agent 已对外开放</h2><p class="card-dek">Rauch 称，仓库无论是否托管在 Vercel，都可以启用与内部安全 Agent 相同的能力。</p><div class="card-end"><span>中文约 1 分钟</span><span class="card-read">阅读全文 <span class="card-arrow" aria-hidden="true">→</span></span></div></div>
 </a><a class="cover-error-link" href="https://x.com/rauchg/status/2117734833824948373" target="_blank" rel="noopener noreferrer">封面未能显示 · 去原文查看 ↗</a>
 </article>
 <article class="news-card card--text tone-sage" id="story-victor-slash-supersmb" data-kind="text" data-search="Slash 年化总收入达 5 亿美元，Victor 详述 SuperSMB 生意 Victor Cardenas 列出客户的年龄、支出与团队规模，解释 Slash 如何获客、设计产品和定价。 Victor Cardenas victorcardenas fintech startup AI native">
-<a class="card-link" href="/a/victor-slash-supersmb" id="read-victor-slash-supersmb" data-open-reader data-reader-src="/read/victor-slash-supersmb.b7996ebf3536.html" data-source-url="https://x.com/victorcardenas/status/2117729738160496778">
+<a class="card-link" href="/a/victor-slash-supersmb" id="read-victor-slash-supersmb" data-open-reader data-reader-src="/read/victor-slash-supersmb.e1011418e80b.html" data-source-url="https://x.com/victorcardenas/status/2117729738160496778">
 <div class="type-cover" aria-hidden="true"><span class="type-index">12 / VOICES</span><span class="cover-word">Victor<span class="type-dot">.</span></span></div><div class="card-body"><div class="card-meta"><span>X Article / Victor Cardenas</span><time datetime="2026-11-03">11.03</time></div>
 <h2 class="card-title">Slash 年化总收入达 5 亿美元，Victor 详述 SuperSMB 生意</h2><p class="card-dek">Victor Cardenas 列出客户的年龄、支出与团队规模，解释 Slash 如何获客、设计产品和定价。</p><div class="card-end"><span>中文约 7 分钟</span><span class="card-read">阅读全文 <span class="card-arrow" aria-hidden="true">→</span></span></div></div>
 </a><a class="cover-error-link" href="https://x.com/victorcardenas/status/2117729738160496778" target="_blank" rel="noopener noreferrer">封面未能显示 · 去原文查看 ↗</a>
 </article>
 <article class="news-card card--media" id="story-levelsio-300-month-expenses" data-kind="text" data-search="Levelsio：常规业务开销降到约 $300/月，不含 Photo AI 他称每月节省近 $34000；网站年度服务量为 2 万付费客户、2.52 亿访客、24 亿请求与 2.4 PB 带宽。 Pieter Levels levelsio indie cost Claude">
-<a class="card-link" href="/a/levelsio-300-month-expenses" id="read-levelsio-300-month-expenses" data-open-reader data-reader-src="/read/levelsio-300-month-expenses.1b28c6d14a9f.html" data-source-url="https://x.com/levelsio/status/2117694259558293692">
+<a class="card-link" href="/a/levelsio-300-month-expenses" id="read-levelsio-300-month-expenses" data-open-reader data-reader-src="/read/levelsio-300-month-expenses.777d200daf09.html" data-source-url="https://x.com/levelsio/status/2117694259558293692">
 <div class="cover" data-cover><div class="cover-fallback" aria-hidden="true"><span class="cover-word">$300</span></div><img src="/media/levelsio-300-month-expenses-image-6e1d7a11c2.jpg" alt="原帖配图" loading="lazy" decoding="async"  referrerpolicy="no-referrer"></div><div class="card-body"><div class="card-meta"><span>长帖 / Pieter Levels</span><time datetime="2026-11-03">11.03</time></div>
 <h2 class="card-title">Levelsio：常规业务开销降到约 $300/月，不含 Photo AI</h2><p class="card-dek">他称每月节省近 $34000；网站年度服务量为 2 万付费客户、2.52 亿访客、24 亿请求与 2.4 PB 带宽。</p><div class="card-end"><span>中文约 3 分钟</span><span class="card-read">阅读全文 <span class="card-arrow" aria-hidden="true">→</span></span></div></div>
 </a><a class="cover-error-link" href="https://x.com/levelsio/status/2117694259558293692" target="_blank" rel="noopener noreferrer">封面未能显示 · 去原文查看 ↗</a>
 </article>
 <article class="news-card card--text tone-ink" id="story-amasad-managed-cloud-agents" data-kind="text" data-search="Amjad：让受管云环境成为 AI Agent 的默认运行方式 Replit 建议把凭证、权限、网络和生产变更置于 Agent 控制之外，同时强调云托管本身不等于安全。 Amjad Masad amasad security enterprise Replit">
-<a class="card-link" href="/a/amasad-managed-cloud-agents" id="read-amasad-managed-cloud-agents" data-open-reader data-reader-src="/read/amasad-managed-cloud-agents.b382d14499f7.html" data-source-url="https://x.com/amasad/status/2117504072416890937">
+<a class="card-link" href="/a/amasad-managed-cloud-agents" id="read-amasad-managed-cloud-agents" data-open-reader data-reader-src="/read/amasad-managed-cloud-agents.c09df4c6f0f0.html" data-source-url="https://x.com/amasad/status/2117504072416890937">
 <div class="type-cover" aria-hidden="true"><span class="type-index">14 / VOICES</span><span class="cover-word">Amjad<span class="type-dot">.</span></span></div><div class="card-body"><div class="card-meta"><span>X Article / Amjad Masad</span><time datetime="2026-11-03">11.03</time></div>
 <h2 class="card-title">Amjad：让受管云环境成为 AI Agent 的默认运行方式</h2><p class="card-dek">Replit 建议把凭证、权限、网络和生产变更置于 Agent 控制之外，同时强调云托管本身不等于安全。</p><div class="card-end"><span>中文约 12 分钟</span><span class="card-read">阅读全文 <span class="card-arrow" aria-hidden="true">→</span></span></div></div>
 </a><a class="cover-error-link" href="https://x.com/amasad/status/2117504072416890937" target="_blank" rel="noopener noreferrer">封面未能显示 · 去原文查看 ↗</a>
 </article>
 <article class="news-card card--media" id="story-levelsio-bf1942-web" data-kind="video" data-search="Levelsio 用 Claude Code 将《战地 1942》试玩版移植到浏览器 他介绍了从 x86 反汇编、翻译成 C，到编译为 WebAssembly 和接入多人服务器的过程。 Pieter Levels levelsio Claude game WebAssembly">
-<a class="card-link" href="/a/levelsio-bf1942-web" id="read-levelsio-bf1942-web" data-open-reader data-reader-src="/read/levelsio-bf1942-web.f23190690e27.html" data-source-url="https://x.com/levelsio/status/2117374984192512391">
+<a class="card-link" href="/a/levelsio-bf1942-web" id="read-levelsio-bf1942-web" data-open-reader data-reader-src="/read/levelsio-bf1942-web.a46c71fbd8cc.html" data-source-url="https://x.com/levelsio/status/2117374984192512391">
 <div class="cover" data-cover><div class="cover-fallback" aria-hidden="true"><span class="cover-word">Pieter</span></div><img src="/media/levelsio-bf1942-web-poster-fdbc2233d7.jpg" alt="原视频封面" loading="lazy" decoding="async"  referrerpolicy="no-referrer"><span class="cover-badge">▶ 长帖 / 视频</span></div><div class="card-body"><div class="card-meta"><span>长帖 / 视频 / Pieter Levels</span><time datetime="2026-11-02">11.02</time></div>
 <h2 class="card-title">Levelsio 用 Claude Code 将《战地 1942》试玩版移植到浏览器</h2><p class="card-dek">他介绍了从 x86 反汇编、翻译成 C，到编译为 WebAssembly 和接入多人服务器的过程。</p><div class="card-end"><span>中文约 2 分钟</span><span class="card-read">阅读全文 <span class="card-arrow" aria-hidden="true">→</span></span></div></div>
 </a><a class="cover-error-link" href="https://x.com/levelsio/status/2117374984192512391" target="_blank" rel="noopener noreferrer">封面未能显示 · 去原文查看 ↗</a>
 </article>
 <article class="news-card card--media" id="story-karpathy-hackertube" data-kind="text" data-search="Karpathy 做了 HackerTube：从 4300 万条 HN 评论中找到 6454 个视频 他用 Opus 5.5 花了约两小时完成这个周末项目；推荐无需登录，底层数据也可下载。 Andrej Karpathy karpathy AI coding product HN">
-<a class="card-link" href="/a/karpathy-hackertube" id="read-karpathy-hackertube" data-open-reader data-reader-src="/read/karpathy-hackertube.ddf50325e5fa.html" data-source-url="https://x.com/karpathy/status/2116957135661945283">
+<a class="card-link" href="/a/karpathy-hackertube" id="read-karpathy-hackertube" data-open-reader data-reader-src="/read/karpathy-hackertube.7a533b4b2004.html" data-source-url="https://x.com/karpathy/status/2116957135661945283">
 <div class="cover" data-cover><div class="cover-fallback" aria-hidden="true"><span class="cover-word">Andrej</span></div><img src="/media/karpathy-hackertube-image-cca841bfb0.jpg" alt="原帖配图" loading="lazy" decoding="async"  referrerpolicy="no-referrer"></div><div class="card-body"><div class="card-meta"><span>长帖 / Andrej Karpathy</span><time datetime="2026-11-01">11.01</time></div>
 <h2 class="card-title">Karpathy 做了 HackerTube：从 4300 万条 HN 评论中找到 6454 个视频</h2><p class="card-dek">他用 Opus 5.5 花了约两小时完成这个周末项目；推荐无需登录，底层数据也可下载。</p><div class="card-end"><span>中文约 2 分钟</span><span class="card-read">阅读全文 <span class="card-arrow" aria-hidden="true">→</span></span></div></div>
 </a><a class="cover-error-link" href="https://x.com/karpathy/status/2116957135661945283" target="_blank" rel="noopener noreferrer">封面未能显示 · 去原文查看 ↗</a>
 </article>
 <article class="news-card card--text tone-ink" id="story-clocktower-astra-detection" data-kind="text" data-search="AI 玩《血染钟楼》26 局好人全胜：复盘发现它们怎样核对证词 一份 10 月 5 日的 372 局分析，经研究员 11 月 6 日讨论的 Clocktower 项目重新进入视野：先核对证词来历，再集体决定处决；26/26 的战绩也有猎手命中、对手差异和小样本的限制。 Clocktower 项目（Dwarkesh Patel） dwarkesh_sp AI 评测 多智能体 能力边界">
-<a class="card-link" href="/a/clocktower-astra-detection" id="read-clocktower-astra-detection" data-open-reader data-reader-src="/read/clocktower-astra-detection.7e88c6d0a135.html" data-source-url="https://github.com/dwarkeshsp/clocktower/blob/52155afe38a696283756f142bdb1565e07951ae1/docs/findings/why-astra-wins/detection.md">
+<a class="card-link" href="/a/clocktower-astra-detection" id="read-clocktower-astra-detection" data-open-reader data-reader-src="/read/clocktower-astra-detection.d52b0a44dd24.html" data-source-url="https://github.com/dwarkeshsp/clocktower/blob/52155afe38a696283756f142bdb1565e07951ae1/docs/findings/why-astra-wins/detection.md">
 <div class="type-cover" aria-hidden="true"><span class="type-index">17 / VOICES</span><span class="cover-word">Clocktower<span class="type-dot">.</span></span></div><div class="card-body"><div class="card-meta"><span>文章 / Clocktower 项目（Dwarkesh Patel）</span><time datetime="2026-10-05">10.05</time></div>
 <h2 class="card-title">AI 玩《血染钟楼》26 局好人全胜：复盘发现它们怎样核对证词</h2><p class="card-dek">一份 10 月 5 日的 372 局分析，经研究员 11 月 6 日讨论的 Clocktower 项目重新进入视野：先核对证词来历，再集体决定处决；26/26 的战绩也有猎手命中、对手差异和小样本的限制。</p><div class="card-end"><span>中文约 13 分钟</span><span class="card-read">阅读全文 <span class="card-arrow" aria-hidden="true">→</span></span></div></div>
 </a><a class="cover-error-link" href="https://github.com/dwarkeshsp/clocktower/blob/52155afe38a696283756f142bdb1565e07951ae1/docs/findings/why-astra-wins/detection.md" target="_blank" rel="noopener noreferrer">封面未能显示 · 去原文查看 ↗</a>

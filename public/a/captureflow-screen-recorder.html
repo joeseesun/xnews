@@ -25,7 +25,7 @@
 <link rel="alternate" type="application/rss+xml" title="X News" href="/feed.xml">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-7 -7 58 58'%3E%3Crect x='-7' y='-7' width='58' height='58' rx='5' fill='%231b1d18'/%3E%3Cpath fill='%23fffefa' d='M2 0h11l29 44H31zM32 0h10L26 18l-5-7zM17 26l5 7-10 11H2z'/%3E%3C/svg%3E">
 <script>try{var t=localStorage.getItem('xn.theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
-<style data-source="/static/app.7ac82213fe25.css">/* D · 影像刊 — see DESIGN.md. System fonts, real media, no left rail. */
+<style data-source="/static/app.b7cfdefd4a1d.css">/* D · 影像刊 — see DESIGN.md. System fonts, real media, no left rail. */
 :root {
   color-scheme:light;
   --paper:#fffefa; --ink:#1b1d18; --muted:#62685a; --rule:#d8dccf;
@@ -174,22 +174,44 @@ img{max-width:100%;height:auto}
 .reader-enhanced .section-heading{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);margin:0;padding:0}
 .original-title{font-size:1.1875rem;line-height:1.7;margin:0 0 22px;font-weight:500;overflow-wrap:anywhere}
 .completeness-note{font-size:0.875rem;line-height:1.85;color:var(--muted);background:var(--surface);border:1px solid var(--rule);padding:12px 16px;margin:0 0 24px}
-.prose{overflow-wrap:anywhere;text-wrap:pretty}
-.prose pre{max-width:100%;overflow-x:auto;padding:1rem;border:1px solid var(--rule);background:var(--surface);text-wrap:initial}
-.prose pre code{white-space:pre;font-size:.875rem}
-.prose table{display:block;max-width:100%;overflow-x:auto;border-collapse:collapse;margin:1.5em 0;font-size:.9375rem;line-height:1.7}
-.prose th,.prose td{padding:.6em .8em;border:1px solid var(--rule);text-align:left;min-width:8rem}
+.prose{min-width:0;font-size:1.125rem;line-height:1.95;overflow-wrap:anywhere;text-wrap:pretty}
+.prose pre{max-width:100%;overflow-x:auto;margin:1.5em 0;padding:1rem;border:1px solid var(--rule);background:var(--surface);font-size:.875rem;line-height:1.65;tab-size:4;white-space:pre;overflow-wrap:normal;text-wrap:initial}
+.prose pre code{display:block;width:max-content;min-width:100%;padding:0;border:0;border-radius:0;background:none;font-size:inherit;line-height:inherit;white-space:pre;overflow-wrap:normal}
+/* Keep wide source tables inside the reading column without compressing every cell. */
+.prose table{display:block;width:fit-content;max-width:100%;overflow-x:auto;border-collapse:collapse;margin:1.5em 0;font-size:.9375rem;line-height:1.65;tab-size:4;text-wrap:wrap;font-variant-numeric:tabular-nums}
+.prose th,.prose td{padding:.7em .85em;border:1px solid var(--rule);text-align:left;vertical-align:top;min-width:5.5rem;max-width:24rem}
+.prose :is(th,td):first-child{min-width:7.5rem}
 .prose th{font-weight:600;background:var(--surface)}
-.prose img{max-width:100%;height:auto}
-.prose p,.prose li{font-size:1.125rem;line-height:1.95;margin:0 0 1em}
+.prose :is(th,td)[align="left"]{text-align:left}
+.prose :is(th,td)[align="center"]{text-align:center}
+.prose :is(th,td)[align="right"]{text-align:right}
+.prose tbody tr:nth-child(even){background:color-mix(in srgb,var(--surface) 45%,transparent)}
+.prose caption{text-align:left;font-size:.875rem;line-height:1.6;color:var(--muted);padding-bottom:.65em}
+.prose img{max-width:100%;height:auto;vertical-align:middle}
+.prose p,.prose li{font-size:inherit;line-height:inherit;margin:0 0 1em}
+.prose :is(th,td) :is(p,li){font-size:inherit;line-height:inherit}
+.prose :is(th,td)>:last-child{margin-bottom:0}
 .prose h1,.prose h2,.prose h3{font-size:1.5625rem;font-weight:500;line-height:1.6;margin:1.8em 0 .7em}
+.prose h4,.prose h5,.prose h6{font-size:1.125rem;font-weight:600;line-height:1.65;margin:1.6em 0 .6em}
 .prose ul,.prose ol{padding-left:1.4em;margin:0 0 1.2em}
 .prose li{margin-bottom:.45em}
+.prose li>:is(ul,ol){margin:.45em 0 .6em}
+.prose li>p{margin-bottom:.6em}
+.prose li>:last-child{margin-bottom:0}
 .prose blockquote{margin:1.5em 0;padding:18px 22px;border:1px solid var(--rule);background:var(--surface)}
-.prose blockquote p{margin:0}
+.prose blockquote>:first-child{margin-top:0}
+.prose blockquote>:last-child{margin-bottom:0}
+.prose blockquote blockquote{margin:1em 0}
 .prose a{font-weight:500;text-decoration:underline;text-underline-offset:.22em}
 .prose hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
 .prose code{font-family:ui-monospace,monospace;font-size:.9em;background:var(--surface);padding:2px 4px;border-radius:3px;white-space:break-spaces}
+.prose details{margin:1.3em 0;padding:.8em 1em;border:1px solid var(--rule)}
+.prose summary{cursor:pointer;font-weight:600;line-height:1.6}
+.prose details[open]>summary{margin-bottom:.8em}
+.prose details>:last-child{margin-bottom:0}
+.prose kbd{font-family:ui-monospace,monospace;font-size:.85em;padding:.1em .35em;border:1px solid var(--rule);border-bottom-width:2px;border-radius:3px;background:var(--surface)}
+.prose sup,.prose sub{font-size:.75em;line-height:0;position:relative;vertical-align:baseline}
+.prose sup{top:-.5em}.prose sub{bottom:-.2em}
 .original-media{display:grid;gap:24px;margin:24px 0 28px}
 .media-figure{margin:0;min-width:0}
 .media-frame{background:var(--surface);border:1px solid var(--rule);overflow:hidden}
@@ -320,7 +342,7 @@ body.sheet-open{overflow:hidden}
  .reader-tabs a{font-size:0.875rem;padding:6px 10px}
  .reader-tabs .reader-source{font-size:0.8125rem!important;padding-inline-end:0}
  .reader-panel{margin-bottom:28px}
- .prose p,.prose li{font-size:1.0625rem;line-height:1.95}
+ .prose{font-size:1.0625rem;line-height:1.95}
  .prose h1,.prose h2,.prose h3{font-size:1.4375rem;line-height:1.6}
  .prose blockquote{padding:15px}
  .sheet-bar{gap:10px}
@@ -371,15 +393,15 @@ body.sheet-open{overflow:hidden}
 <h2>能录什么，在哪里使用</h2>
 <p>CaptureFlow 可以录制浏览器标签页、窗口或整个屏幕，并加入摄像头悬浮画面和麦克风声音。观看者可以在视频里发表情、留言，录制者能看到谁看过。截图也可以加箭头、文字和模糊遮挡，再用同样的链接方式分享。</p>
 <p>团队使用工作区管理内容，可设为公开、仅工作区成员可见或私密。托管服务按整个团队的存储量收费，不按席位收费；付费方案提供 100 GB、500 GB 或 1 TB 存储空间。作者说明，全部功能都包含在开源构建中，也可以部署到自己的 Cloudflare 账户，并把登录范围限制在公司内。</p>
-<p>Chrome 扩展已经在 <a href="https://chromewebstore.google.com/detail/lgpgeoelaokbigdljofhkgbfnfcnmcol" target="_blank" rel="noopener noreferrer">Chrome Web Store</a> 上架。macOS 应用目前可以从源码构建，签名发行版仍是即将推出的状态；网页管理台和观看页支持现代浏览器。托管版可以先<a href="https://captureflow.dev/login?mode=signup" target="_blank" rel="noopener noreferrer">注册免费账户</a>，再安装扩展，具体付费额度见<a href="https://captureflow.dev/pricing" target="_blank" rel="noopener noreferrer">价格页</a>。</p>
+<p>Chrome 扩展已经在 <a href="https://chromewebstore.google.com/detail/lgpgeoelaokbigdljofhkgbfnfcnmcol" rel="noopener noreferrer">Chrome Web Store</a> 上架。macOS 应用目前可以从源码构建，签名发行版仍是即将推出的状态；网页管理台和观看页支持现代浏览器。托管版可以先<a href="https://captureflow.dev/login?mode=signup" rel="noopener noreferrer">注册免费账户</a>，再安装扩展，具体付费额度见<a href="https://captureflow.dev/pricing" rel="noopener noreferrer">价格页</a>。</p>
 <p>在原帖评论里，@progerallworld 提出的用途是让 Agent 重现 Bug、录下步骤，再附上视频。Sardor 回复说，这正是他加入 MCP 时考虑的场景。随后他又补充，也可以让 Agent 为 GitHub Pull Request 录制演示，并附到 PR 描述里；安装扩展后，审阅者可以观看演示来理解改动。这是作者对用途的说明，本轮没有连接 MCP 或试录视频。</p>
 <h2>用 Docker 部署</h2>
 <p>README 给出的 Docker 启动方式很短：先执行 <code>cp .env.example .env</code>，设置 <code>APP_URL</code>，再执行 <code>docker compose up -d</code>。</p>
-<p>数据都保存在 <code>./data</code>：SQLite 数据库、磁盘上的录屏文件，以及第一次启动时生成的密钥。这条部署路线不需要 Cloudflare 账户。生成转写可以使用兼容 OpenAI 接口的 Whisper 服务；Compose 也提供 <code>--profile whisper</code> 来运行一个这样的服务。完整说明在 <a href="https://docs.captureflow.dev/self-hosting/docker" target="_blank" rel="noopener noreferrer">Docker 部署文档</a>。</p>
+<p>数据都保存在 <code>./data</code>：SQLite 数据库、磁盘上的录屏文件，以及第一次启动时生成的密钥。这条部署路线不需要 Cloudflare 账户。生成转写可以使用兼容 OpenAI 接口的 Whisper 服务；Compose 也提供 <code>--profile whisper</code> 来运行一个这样的服务。完整说明在 <a href="https://docs.captureflow.dev/self-hosting/docker" rel="noopener noreferrer">Docker 部署文档</a>。</p>
 <h2>部署到自己的 Cloudflare 账户</h2>
-<p>另一条路线使用 Cloudflare Workers、D1 和 R2。仓库提供了<a href="https://deploy.workers.cloudflare.com/?url=https://github.com/sardorml/captureflow" target="_blank" rel="noopener noreferrer">一键部署入口</a>，也列出了手动步骤。</p>
+<p>另一条路线使用 Cloudflare Workers、D1 和 R2。仓库提供了<a href="https://deploy.workers.cloudflare.com/?url=https://github.com/sardorml/captureflow" rel="noopener noreferrer">一键部署入口</a>，也列出了手动步骤。</p>
 <p>先运行 <code>pnpm --filter @captureflow/web exec wrangler d1 create captureflow</code> 创建数据库，再运行 <code>pnpm --filter @captureflow/web exec wrangler r2 bucket create captureflow-recordings</code> 创建存储桶。把数据库 ID 填入 <code>apps/web/wrangler.jsonc</code> 后，依次执行 <code>pnpm --filter @captureflow/web db:apply:remote</code> 和 <code>pnpm --filter @captureflow/web cf:deploy</code>。</p>
-<p><a href="https://github.com/sardorml/captureflow/blob/c5792345e7d5e47084c5e829b3f11c98a432c859/DEPLOY.md" target="_blank" rel="noopener noreferrer">DEPLOY.md</a> 说明了密钥、登录服务、自定义域名，以及如何让扩展和桌面应用连接自己的实例。部署在自己的域名下会作为自托管实例运行；如果要做成公司内部工具，还需要按照<a href="https://docs.captureflow.dev/self-hosting/configuration" target="_blank" rel="noopener noreferrer">配置文档</a>设置 <code>ALLOWED_EMAIL_DOMAINS</code>。仓库也链接了<a href="https://captureflow.dev/blog/self-hosted-screen-recorder" target="_blank" rel="noopener noreferrer">逐步自托管教程</a>和<a href="https://captureflow.dev/self-host-setup" target="_blank" rel="noopener noreferrer">代配置服务</a>。</p>
+<p><a href="https://github.com/sardorml/captureflow/blob/c5792345e7d5e47084c5e829b3f11c98a432c859/DEPLOY.md" rel="noopener noreferrer">DEPLOY.md</a> 说明了密钥、登录服务、自定义域名，以及如何让扩展和桌面应用连接自己的实例。部署在自己的域名下会作为自托管实例运行；如果要做成公司内部工具，还需要按照<a href="https://docs.captureflow.dev/self-hosting/configuration" rel="noopener noreferrer">配置文档</a>设置 <code>ALLOWED_EMAIL_DOMAINS</code>。仓库也链接了<a href="https://captureflow.dev/blog/self-hosted-screen-recorder" rel="noopener noreferrer">逐步自托管教程</a>和<a href="https://captureflow.dev/self-host-setup" rel="noopener noreferrer">代配置服务</a>。</p>
 <h2>本地开发和检查</h2>
 <p>开发环境需要 Node.js 24.13 或更新版本，以及 pnpm 10；README 提示用 <code>corepack enable</code> 启用。取得仓库并进入目录后，先执行 <code>pnpm install</code>。</p>
 <p>完整的取代码命令是 <code>git clone git@github.com:sardorml/captureflow.git</code>，接着执行 <code>cd captureflow</code>。<code>pnpm web</code> 启动网页管理台和官网，地址为 <code>http://localhost:3032</code>；<code>pnpm admin</code> 启动实例管理后台，地址为 <code>http://localhost:3034</code>。<code>pnpm extension</code> 会在一个新的 Chrome 配置环境中启动浏览器扩展；macOS 录屏应用的开发命令是 <code>pnpm --filter @captureflow/desktop dev</code>。</p>
@@ -398,10 +420,10 @@ body.sheet-open{overflow:hidden}
 </ul>
 <p>macOS 采集辅助程序以编译后的二进制文件形式存入仓库。修改 Swift 源码后，需要运行 <code>packages/engine/scripts/build-native.sh</code> 重新构建；加上 <code>--universal</code> 可以同时支持 arm64 和 x86_64。</p>
 <h2>文档、贡献和许可</h2>
-<p>项目的<a href="https://captureflow.dev" target="_blank" rel="noopener noreferrer">官网</a>、<a href="https://docs.captureflow.dev" target="_blank" rel="noopener noreferrer">文档</a>、<a href="https://docs.captureflow.dev/self-hosting/overview" target="_blank" rel="noopener noreferrer">自托管总览</a>、<a href="https://captureflow.dev/blog" target="_blank" rel="noopener noreferrer">博客</a>、<a href="https://captureflow.dev/faq" target="_blank" rel="noopener noreferrer">FAQ</a>、<a href="https://captureflow.dev/security" target="_blank" rel="noopener noreferrer">安全说明</a>、<a href="https://github.com/sardorml/captureflow/releases" target="_blank" rel="noopener noreferrer">发行记录</a>和 <a href="https://discord.gg/qzeBCaEeNq" target="_blank" rel="noopener noreferrer">Discord</a> 均由 README 提供入口。</p>
-<p>作者欢迎 Bug 报告、想法和 Pull Request，可以到<a href="https://github.com/sardorml/captureflow/issues/new" target="_blank" rel="noopener noreferrer">仓库 Issues</a>或<a href="https://captureflow.dev/suggest-feature" target="_blank" rel="noopener noreferrer">功能建议页</a>提交。贡献前需要阅读 <a href="https://github.com/sardorml/captureflow/blob/c5792345e7d5e47084c5e829b3f11c98a432c859/CONVENTIONS.md" target="_blank" rel="noopener noreferrer">CONVENTIONS.md</a>。发现安全问题应按照安全页说明私下报告，不要发到公开 Issue。</p>
-<p>项目采用 <a href="https://github.com/sardorml/captureflow/blob/c5792345e7d5e47084c5e829b3f11c98a432c859/LICENSE" target="_blank" rel="noopener noreferrer">AGPL-3.0-only</a>，例外是可复用的采集引擎 <code>packages/engine</code>，它采用 <a href="https://github.com/sardorml/captureflow/blob/c5792345e7d5e47084c5e829b3f11c98a432c859/packages/engine/LICENSE" target="_blank" rel="noopener noreferrer">MIT</a> 许可。桌面应用与浏览器扩展的组合构建，整体仍适用 AGPL-3.0-only。</p>
-<p>本文完整改写上述作者帖文、已取得的作者回复及固定版本 README；README 最近修改于 11 月 4 日，不能把 11 月 6 日的介绍帖当成当天发布新版本。文档文字按上游 AGPL-3.0-only 许可使用，<a href="https://xnews.qiaomu.ai/source-licenses/captureflow-AGPL-3.0.txt" target="_blank" rel="noopener noreferrer">许可全文</a>随站点提供；本站中文不是官方文档。</p>
+<p>项目的<a href="https://captureflow.dev" rel="noopener noreferrer">官网</a>、<a href="https://docs.captureflow.dev" rel="noopener noreferrer">文档</a>、<a href="https://docs.captureflow.dev/self-hosting/overview" rel="noopener noreferrer">自托管总览</a>、<a href="https://captureflow.dev/blog" rel="noopener noreferrer">博客</a>、<a href="https://captureflow.dev/faq" rel="noopener noreferrer">FAQ</a>、<a href="https://captureflow.dev/security" rel="noopener noreferrer">安全说明</a>、<a href="https://github.com/sardorml/captureflow/releases" rel="noopener noreferrer">发行记录</a>和 <a href="https://discord.gg/qzeBCaEeNq" rel="noopener noreferrer">Discord</a> 均由 README 提供入口。</p>
+<p>作者欢迎 Bug 报告、想法和 Pull Request，可以到<a href="https://github.com/sardorml/captureflow/issues/new" rel="noopener noreferrer">仓库 Issues</a>或<a href="https://captureflow.dev/suggest-feature" rel="noopener noreferrer">功能建议页</a>提交。贡献前需要阅读 <a href="https://github.com/sardorml/captureflow/blob/c5792345e7d5e47084c5e829b3f11c98a432c859/CONVENTIONS.md" rel="noopener noreferrer">CONVENTIONS.md</a>。发现安全问题应按照安全页说明私下报告，不要发到公开 Issue。</p>
+<p>项目采用 <a href="https://github.com/sardorml/captureflow/blob/c5792345e7d5e47084c5e829b3f11c98a432c859/LICENSE" rel="noopener noreferrer">AGPL-3.0-only</a>，例外是可复用的采集引擎 <code>packages/engine</code>，它采用 <a href="https://github.com/sardorml/captureflow/blob/c5792345e7d5e47084c5e829b3f11c98a432c859/packages/engine/LICENSE" rel="noopener noreferrer">MIT</a> 许可。桌面应用与浏览器扩展的组合构建，整体仍适用 AGPL-3.0-only。</p>
+<p>本文完整改写上述作者帖文、已取得的作者回复及固定版本 README；README 最近修改于 11 月 4 日，不能把 11 月 6 日的介绍帖当成当天发布新版本。文档文字按上游 AGPL-3.0-only 许可使用，<a href="https://xnews.qiaomu.ai/source-licenses/captureflow-AGPL-3.0.txt" rel="noopener noreferrer">许可全文</a>随站点提供；本站中文不是官方文档。</p>
 <section class="rewrite-source-media" aria-label="原文附带媒体"><h3 class="source-media-heading">原文附带媒体</h3><p class="completeness-note">来源附带的产品概览配图；未核验与中文具体段落的一一对应关系，集中保留于文末。</p><div class="original-media">
 <figure class="media-figure" data-media-id="x_2118616401619603456"><div class="media-frame"><img src="/media/captureflow-screen-recorder-image-5129d6d002.jpg" data-original-src="https://pbs.twimg.com/media/HWbWZHHaUAAm62F.jpg" alt="CaptureFlow 作者原帖配图" loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://x.com/sardorml/status/2118616954085024133" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
 <figure class="media-figure" data-media-id="captureflow_readme_hero"><div class="media-frame"><img src="https://raw.githubusercontent.com/sardorml/captureflow/c5792345e7d5e47084c5e829b3f11c98a432c859/.github/assets/readme-hero.png" data-original-src="https://raw.githubusercontent.com/sardorml/captureflow/c5792345e7d5e47084c5e829b3f11c98a432c859/.github/assets/readme-hero.png" alt="CaptureFlow: open-source screen recorder with shareable links, above the recordings dashboard" loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://x.com/sardorml/status/2118616954085024133" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
@@ -433,14 +455,14 @@ body.sheet-open{overflow:hidden}
 <div><a rel="noopener noreferrer"></a>
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/sardorml/captureflow/c5792345e7d5e47084c5e829b3f11c98a432c859/apps/web/public/brand-mark-light.svg">
-  <img src="https://raw.githubusercontent.com/sardorml/captureflow/c5792345e7d5e47084c5e829b3f11c98a432c859/apps/web/public/brand-mark-dark.svg" height="112" alt="CaptureFlow">
+  <img alt="CaptureFlow" decoding="async" height="112" loading="lazy" referrerpolicy="no-referrer" src="https://raw.githubusercontent.com/sardorml/captureflow/c5792345e7d5e47084c5e829b3f11c98a432c859/apps/web/public/brand-mark-dark.svg">
 </picture>
 <h1>CaptureFlow</h1>
 <p>Open-source screen recorder with instant share links, self-hostable on your own Cloudflare account.</p>
-<p><a href="https://github.com/sardorml/captureflow/actions/workflows/ci.yml" rel="noopener noreferrer"><img src="https://github.com/sardorml/captureflow/actions/workflows/ci.yml/badge.svg" alt="CI status"></a> <a href="https://github.com/sardorml/captureflow/blob/c5792345e7d5e47084c5e829b3f11c98a432c859/LICENSE" rel="noopener noreferrer"><img src="https://img.shields.io/badge/license-AGPL--3.0-2563EB.svg?style=flat-square" alt="License: AGPL-3.0"></a> <a href="https://chromewebstore.google.com/detail/lgpgeoelaokbigdljofhkgbfnfcnmcol" rel="noopener noreferrer"><img src="https://img.shields.io/chrome-web-store/v/lgpgeoelaokbigdljofhkgbfnfcnmcol?label=chrome%20web%20store&amp;color=2563EB&amp;style=flat-square" alt="Chrome Web Store"></a> <a href="https://github.com/sardorml/captureflow/stargazers" rel="noopener noreferrer"><img src="https://img.shields.io/github/stars/sardorml/captureflow?color=2563EB&amp;style=flat-square" alt="Stars"></a> <a href="https://discord.gg/qzeBCaEeNq" rel="noopener noreferrer"><img src="https://img.shields.io/badge/chat-discord-5865F2.svg?style=flat-square" alt="Discord"></a></p>
+<p><a href="https://github.com/sardorml/captureflow/actions/workflows/ci.yml" rel="noopener noreferrer"><img alt="CI status" decoding="async" loading="lazy" referrerpolicy="no-referrer" src="https://github.com/sardorml/captureflow/actions/workflows/ci.yml/badge.svg"></a> <a href="https://github.com/sardorml/captureflow/blob/c5792345e7d5e47084c5e829b3f11c98a432c859/LICENSE" rel="noopener noreferrer"><img alt="License: AGPL-3.0" decoding="async" loading="lazy" referrerpolicy="no-referrer" src="https://img.shields.io/badge/license-AGPL--3.0-2563EB.svg?style=flat-square"></a> <a href="https://chromewebstore.google.com/detail/lgpgeoelaokbigdljofhkgbfnfcnmcol" rel="noopener noreferrer"><img alt="Chrome Web Store" decoding="async" loading="lazy" referrerpolicy="no-referrer" src="https://img.shields.io/chrome-web-store/v/lgpgeoelaokbigdljofhkgbfnfcnmcol?label=chrome%20web%20store&amp;color=2563EB&amp;style=flat-square"></a> <a href="https://github.com/sardorml/captureflow/stargazers" rel="noopener noreferrer"><img alt="Stars" decoding="async" loading="lazy" referrerpolicy="no-referrer" src="https://img.shields.io/github/stars/sardorml/captureflow?color=2563EB&amp;style=flat-square"></a> <a href="https://discord.gg/qzeBCaEeNq" rel="noopener noreferrer"><img alt="Discord" decoding="async" loading="lazy" referrerpolicy="no-referrer" src="https://img.shields.io/badge/chat-discord-5865F2.svg?style=flat-square"></a></p>
 <p><a href="https://captureflow.dev" rel="noopener noreferrer">Website</a> · <a href="https://docs.captureflow.dev" rel="noopener noreferrer">Docs</a> · <a href="https://captureflow.dev/blog" rel="noopener noreferrer">Blog</a> · <a href="https://github.com/sardorml/captureflow/issues/new" rel="noopener noreferrer">Report Bug</a> · <a href="https://captureflow.dev/suggest-feature" rel="noopener noreferrer">Request Feature</a></p>
 </div>
-<p><a href="https://captureflow.dev" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/sardorml/captureflow/c5792345e7d5e47084c5e829b3f11c98a432c859/.github/assets/readme-hero.png" alt="CaptureFlow: open-source screen recorder with shareable links, above the recordings dashboard"></a></p>
+<p><a href="https://captureflow.dev" rel="noopener noreferrer"><img alt="CaptureFlow: open-source screen recorder with shareable links, above the recordings dashboard" decoding="async" loading="lazy" referrerpolicy="no-referrer" src="https://raw.githubusercontent.com/sardorml/captureflow/c5792345e7d5e47084c5e829b3f11c98a432c859/.github/assets/readme-hero.png"></a></p>
 <h2>✨ Features</h2>
 <ul>
 <li>🔗 The share link is ready the moment you stop: the upload runs while you record.</li>
@@ -453,7 +475,7 @@ body.sheet-open{overflow:hidden}
 <li>🔓 Every feature ships in the open-source build.</li>
 </ul>
 <h2>🖥 Where it runs</h2>
-<table>
+<table aria-label="数据表格，可横向滚动查看" tabindex="0">
 <thead>
 <tr>
 <th>Surface</th>
@@ -482,14 +504,14 @@ body.sheet-open{overflow:hidden}
 </ul>
 <h2>☁️ Self-hosting</h2>
 <h3>Docker</h3>
-<pre><code>cp .env.example .env    # set APP_URL
+<pre><code class="language-bash">cp .env.example .env    # set APP_URL
 docker compose up -d
 </code></pre>
 <p>Everything lives in <code>./data</code>: a SQLite database, the recordings on disk, and secrets generated on first start. You don't need a Cloudflare account. Transcripts can use any OpenAI-compatible Whisper server, including one compose runs for you with <code>--profile whisper</code>. See the <a href="https://docs.captureflow.dev/self-hosting/docker" rel="noopener noreferrer">Docker guide</a>.</p>
 <h3>Cloudflare</h3>
-<p><a href="https://deploy.workers.cloudflare.com/?url=https://github.com/sardorml/captureflow" rel="noopener noreferrer"><img src="https://deploy.workers.cloudflare.com/button" alt="Deploy to Cloudflare"></a></p>
+<p><a href="https://deploy.workers.cloudflare.com/?url=https://github.com/sardorml/captureflow" rel="noopener noreferrer"><img alt="Deploy to Cloudflare" decoding="async" loading="lazy" referrerpolicy="no-referrer" src="https://deploy.workers.cloudflare.com/button"></a></p>
 <p>Or manually:</p>
-<pre><code>pnpm --filter @captureflow/web exec wrangler d1 create captureflow
+<pre><code class="language-bash">pnpm --filter @captureflow/web exec wrangler d1 create captureflow
 pnpm --filter @captureflow/web exec wrangler r2 bucket create captureflow-recordings
 # paste the database id into apps/web/wrangler.jsonc, then:
 pnpm --filter @captureflow/web db:apply:remote
@@ -498,7 +520,7 @@ pnpm --filter @captureflow/web cf:deploy
 <p><a href="https://github.com/sardorml/captureflow/blob/c5792345e7d5e47084c5e829b3f11c98a432c859/DEPLOY.md" rel="noopener noreferrer"><code>DEPLOY.md</code></a> is the full runbook: secrets, sign-in providers, custom domains, and pointing the extension and desktop app at your own instance. A deployment on your own domain runs as a self-hosted instance; to make it a private company tool, set <code>ALLOWED_EMAIL_DOMAINS</code> as described in the <a href="https://docs.captureflow.dev/self-hosting/configuration" rel="noopener noreferrer">configuration docs</a>.</p>
 <h2>⌨️ Development</h2>
 <p>Requires Node.js 24.13 or newer and pnpm 10 (<code>corepack enable</code>).</p>
-<pre><code>git clone git@github.com:sardorml/captureflow.git
+<pre><code class="language-bash">git clone git@github.com:sardorml/captureflow.git
 cd captureflow
 pnpm install
 pnpm web                                  # dashboard and landing on http://localhost:3032
@@ -507,7 +529,7 @@ pnpm extension                            # browser extension, in a fresh Chrome
 pnpm --filter @captureflow/desktop dev    # macOS recorder
 </code></pre>
 <p>Checks:</p>
-<pre><code>pnpm typecheck
+<pre><code class="language-bash">pnpm typecheck
 pnpm --filter @captureflow/web test
 pnpm --filter @captureflow/extension test
 pnpm format
@@ -544,7 +566,7 @@ packages/
 <li><a href="https://github.com/sardorml/captureflow/releases" rel="noopener noreferrer">Releases</a></li>
 <li><a href="https://discord.gg/qzeBCaEeNq" rel="noopener noreferrer">Discord</a></li>
 </ul>
-<h2>🤝 Contributing <a href="https://github.com/sardorml/captureflow/pulls" rel="noopener noreferrer"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome"></a></h2>
+<h2>🤝 Contributing <a href="https://github.com/sardorml/captureflow/pulls" rel="noopener noreferrer"><img alt="PRs Welcome" decoding="async" loading="lazy" referrerpolicy="no-referrer" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square"></a></h2>
 <p>Bug reports, ideas and pull requests are all welcome. Open an <a href="https://github.com/sardorml/captureflow/issues/new" rel="noopener noreferrer">issue</a>, <a href="https://captureflow.dev/suggest-feature" rel="noopener noreferrer">suggest a feature</a>, or send a pull request. Read <a href="https://github.com/sardorml/captureflow/blob/c5792345e7d5e47084c5e829b3f11c98a432c859/CONVENTIONS.md" rel="noopener noreferrer"><code>CONVENTIONS.md</code></a> first: it's the standard every change follows.</p>
 <p>Found a security issue? Please report it privately as described on the <a href="https://captureflow.dev/security" rel="noopener noreferrer">security page</a>, not in a public issue.</p>
 <h2>📄 License</h2>

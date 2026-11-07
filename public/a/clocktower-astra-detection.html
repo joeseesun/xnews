@@ -23,7 +23,7 @@
 <link rel="alternate" type="application/rss+xml" title="X News" href="/feed.xml">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-7 -7 58 58'%3E%3Crect x='-7' y='-7' width='58' height='58' rx='5' fill='%231b1d18'/%3E%3Cpath fill='%23fffefa' d='M2 0h11l29 44H31zM32 0h10L26 18l-5-7zM17 26l5 7-10 11H2z'/%3E%3C/svg%3E">
 <script>try{var t=localStorage.getItem('xn.theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
-<style data-source="/static/app.7ac82213fe25.css">/* D · 影像刊 — see DESIGN.md. System fonts, real media, no left rail. */
+<style data-source="/static/app.b7cfdefd4a1d.css">/* D · 影像刊 — see DESIGN.md. System fonts, real media, no left rail. */
 :root {
   color-scheme:light;
   --paper:#fffefa; --ink:#1b1d18; --muted:#62685a; --rule:#d8dccf;
@@ -172,22 +172,44 @@ img{max-width:100%;height:auto}
 .reader-enhanced .section-heading{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);margin:0;padding:0}
 .original-title{font-size:1.1875rem;line-height:1.7;margin:0 0 22px;font-weight:500;overflow-wrap:anywhere}
 .completeness-note{font-size:0.875rem;line-height:1.85;color:var(--muted);background:var(--surface);border:1px solid var(--rule);padding:12px 16px;margin:0 0 24px}
-.prose{overflow-wrap:anywhere;text-wrap:pretty}
-.prose pre{max-width:100%;overflow-x:auto;padding:1rem;border:1px solid var(--rule);background:var(--surface);text-wrap:initial}
-.prose pre code{white-space:pre;font-size:.875rem}
-.prose table{display:block;max-width:100%;overflow-x:auto;border-collapse:collapse;margin:1.5em 0;font-size:.9375rem;line-height:1.7}
-.prose th,.prose td{padding:.6em .8em;border:1px solid var(--rule);text-align:left;min-width:8rem}
+.prose{min-width:0;font-size:1.125rem;line-height:1.95;overflow-wrap:anywhere;text-wrap:pretty}
+.prose pre{max-width:100%;overflow-x:auto;margin:1.5em 0;padding:1rem;border:1px solid var(--rule);background:var(--surface);font-size:.875rem;line-height:1.65;tab-size:4;white-space:pre;overflow-wrap:normal;text-wrap:initial}
+.prose pre code{display:block;width:max-content;min-width:100%;padding:0;border:0;border-radius:0;background:none;font-size:inherit;line-height:inherit;white-space:pre;overflow-wrap:normal}
+/* Keep wide source tables inside the reading column without compressing every cell. */
+.prose table{display:block;width:fit-content;max-width:100%;overflow-x:auto;border-collapse:collapse;margin:1.5em 0;font-size:.9375rem;line-height:1.65;tab-size:4;text-wrap:wrap;font-variant-numeric:tabular-nums}
+.prose th,.prose td{padding:.7em .85em;border:1px solid var(--rule);text-align:left;vertical-align:top;min-width:5.5rem;max-width:24rem}
+.prose :is(th,td):first-child{min-width:7.5rem}
 .prose th{font-weight:600;background:var(--surface)}
-.prose img{max-width:100%;height:auto}
-.prose p,.prose li{font-size:1.125rem;line-height:1.95;margin:0 0 1em}
+.prose :is(th,td)[align="left"]{text-align:left}
+.prose :is(th,td)[align="center"]{text-align:center}
+.prose :is(th,td)[align="right"]{text-align:right}
+.prose tbody tr:nth-child(even){background:color-mix(in srgb,var(--surface) 45%,transparent)}
+.prose caption{text-align:left;font-size:.875rem;line-height:1.6;color:var(--muted);padding-bottom:.65em}
+.prose img{max-width:100%;height:auto;vertical-align:middle}
+.prose p,.prose li{font-size:inherit;line-height:inherit;margin:0 0 1em}
+.prose :is(th,td) :is(p,li){font-size:inherit;line-height:inherit}
+.prose :is(th,td)>:last-child{margin-bottom:0}
 .prose h1,.prose h2,.prose h3{font-size:1.5625rem;font-weight:500;line-height:1.6;margin:1.8em 0 .7em}
+.prose h4,.prose h5,.prose h6{font-size:1.125rem;font-weight:600;line-height:1.65;margin:1.6em 0 .6em}
 .prose ul,.prose ol{padding-left:1.4em;margin:0 0 1.2em}
 .prose li{margin-bottom:.45em}
+.prose li>:is(ul,ol){margin:.45em 0 .6em}
+.prose li>p{margin-bottom:.6em}
+.prose li>:last-child{margin-bottom:0}
 .prose blockquote{margin:1.5em 0;padding:18px 22px;border:1px solid var(--rule);background:var(--surface)}
-.prose blockquote p{margin:0}
+.prose blockquote>:first-child{margin-top:0}
+.prose blockquote>:last-child{margin-bottom:0}
+.prose blockquote blockquote{margin:1em 0}
 .prose a{font-weight:500;text-decoration:underline;text-underline-offset:.22em}
 .prose hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
 .prose code{font-family:ui-monospace,monospace;font-size:.9em;background:var(--surface);padding:2px 4px;border-radius:3px;white-space:break-spaces}
+.prose details{margin:1.3em 0;padding:.8em 1em;border:1px solid var(--rule)}
+.prose summary{cursor:pointer;font-weight:600;line-height:1.6}
+.prose details[open]>summary{margin-bottom:.8em}
+.prose details>:last-child{margin-bottom:0}
+.prose kbd{font-family:ui-monospace,monospace;font-size:.85em;padding:.1em .35em;border:1px solid var(--rule);border-bottom-width:2px;border-radius:3px;background:var(--surface)}
+.prose sup,.prose sub{font-size:.75em;line-height:0;position:relative;vertical-align:baseline}
+.prose sup{top:-.5em}.prose sub{bottom:-.2em}
 .original-media{display:grid;gap:24px;margin:24px 0 28px}
 .media-figure{margin:0;min-width:0}
 .media-frame{background:var(--surface);border:1px solid var(--rule);overflow:hidden}
@@ -318,7 +340,7 @@ body.sheet-open{overflow:hidden}
  .reader-tabs a{font-size:0.875rem;padding:6px 10px}
  .reader-tabs .reader-source{font-size:0.8125rem!important;padding-inline-end:0}
  .reader-panel{margin-bottom:28px}
- .prose p,.prose li{font-size:1.0625rem;line-height:1.95}
+ .prose{font-size:1.0625rem;line-height:1.95}
  .prose h1,.prose h2,.prose h3{font-size:1.4375rem;line-height:1.6}
  .prose blockquote{padding:15px}
  .sheet-bar{gap:10px}
@@ -367,11 +389,64 @@ body.sheet-open{overflow:hidden}
 <nav class="reader-tabs" aria-label="文章版本与来源"><div data-tabs><a href="#rewrite" id="tab-rewrite" data-view="rewrite">乔木改写</a><a href="#original" id="tab-original" data-view="original">原文</a></div><a class="reader-source" href="https://github.com/dwarkeshsp/clocktower/blob/52155afe38a696283756f142bdb1565e07951ae1/docs/findings/why-astra-wins/detection.md" target="_blank" rel="noopener noreferrer">原文链接 ↗</a><div class="reading-position" hidden><progress max="100" value="0" aria-label="当前版本阅读进度"></progress><span data-reading-percent aria-hidden="true">0%</span></div></nav>
 <section class="reader-panel" id="rewrite" data-reader-panel="rewrite" aria-label="乔木改写"><h2 class="section-heading">乔木改写</h2><div class="prose"><p>Blair 先把自己的身份告诉了 Alex。Alex 随后声称，自己的线索恰好能与 Blair 的身份对上。扮演好人的 Astra 当场指出：身份已经泄露在前，后来的吻合不能算独立证据。当天，Alex 被处决；他正是恶魔。</p>
 <p>这段对话来自 Dwarkesh Patel 的 Clocktower 项目。项目让不同模型组队玩《血染钟楼》，再从对局记录中分析它们如何说谎、识破谎言和投票。本文完整转写其中一份关于 GPT-6 Astra 好人阵营的分析报告：它读了 26 局 Astra 担任好人的比赛，统计取自总计 372 局的 <code>events.jsonl</code> 和 <code>probes.jsonl</code>，并重点细读了对阵 Sol 6.1、GPT-5.6 Sol、Opus 5.5、Fable 5.1 的配对局和持续较久的对局。</p>
-<p>这份分析所属批次标注为 <strong>2026 年 10 月 5 日，v16 f2 与 v17 f3/f3b</strong>，并非今天新做的实验。11 月 6 日，OpenAI 研究员 <a href="https://x.com/polynoamial/status/2118514804189233568" target="_blank" rel="noopener noreferrer">Noam Brown</a> 在 Patel 发布项目后称赞了评测的方法设计，Anthropic 的 <a href="https://x.com/_sholtodouglas/status/2118597187722752120" target="_blank" rel="noopener noreferrer">Sholto Douglas</a> 随后转引讨论。这是两人的个人评论，不是两家公司对这份分析或其结论的官方背书。下文数字均保留这份报告的旧批次口径，不与后来公布的比赛总数混用。</p>
+<p>这份分析所属批次标注为 <strong>2026 年 10 月 5 日，v16 f2 与 v17 f3/f3b</strong>，并非今天新做的实验。11 月 6 日，OpenAI 研究员 <a href="https://x.com/polynoamial/status/2118514804189233568" rel="noopener noreferrer">Noam Brown</a> 在 Patel 发布项目后称赞了评测的方法设计，Anthropic 的 <a href="https://x.com/_sholtodouglas/status/2118597187722752120" rel="noopener noreferrer">Sholto Douglas</a> 随后转引讨论。这是两人的个人评论，不是两家公司对这份分析或其结论的官方背书。下文数字均保留这份报告的旧批次口径，不与后来公布的比赛总数混用。</p>
 <h2>26 场胜利，差别落在了处决和投票上</h2>
 <p>报告的判断是，Astra 找出恶魔的速度并没有比其他模型快很多；更突出的表现，是较少处决己方玩家，也不容易在已经选对处决目标后被劝走。这样的表现出现在整桌玩家之间，不只靠某一个特别强的席位。</p>
 <p>报告首先归纳了几种反复出现的做法：记录每项证词来自谁、何时说出，以及说话前是否已经听过相关结果；有人把证据说过头时，立即纠正其中不成立的前提；把反复改口、不断更换解释本身也计入判断。但这 26 局也有明显的运气和对手因素：其中 6 场由猎手的一枪决定胜负，而且 Astra 的好人阵营从未遇上这项评测里最强的说谎者——Astra 自己扮演的邪恶阵营。</p>
-<p>| 好人阵营所用模型 | 对局数 | 胜率 | 处决命中邪恶玩家的比例 | 每局处决的好人数 | 好人对好人被提名者投赞成票的比例 | | --- | --- | --- | --- | --- | --- | | Astra | 26 | 100% | 76%；不计贞洁者测试为 83% | 0.62 | 12% | | GPT-6.1 Sol | 35 | 91% | 65% | 1.00 | 14% | | GPT-5.6 Sol | 56 | 82% | 54% | 1.64 | 21% | | Fable 5.1 | 37 | 73% | 50% | 1.78 | 28% | | Opus 5.5 | 45 | 58% | 43% | 2.16 | 32% |</p>
+<table aria-label="数据表格，可横向滚动查看" tabindex="0">
+<thead>
+<tr>
+<th>好人阵营所用模型</th>
+<th>对局数</th>
+<th>胜率</th>
+<th>处决命中邪恶玩家的比例</th>
+<th>每局处决的好人数</th>
+<th>好人对好人被提名者投赞成票的比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Astra</td>
+<td>26</td>
+<td>100%</td>
+<td>76%；不计贞洁者测试为 83%</td>
+<td>0.62</td>
+<td>12%</td>
+</tr>
+<tr>
+<td>GPT-6.1 Sol</td>
+<td>35</td>
+<td>91%</td>
+<td>65%</td>
+<td>1.00</td>
+<td>14%</td>
+</tr>
+<tr>
+<td>GPT-5.6 Sol</td>
+<td>56</td>
+<td>82%</td>
+<td>54%</td>
+<td>1.64</td>
+<td>21%</td>
+</tr>
+<tr>
+<td>Fable 5.1</td>
+<td>37</td>
+<td>73%</td>
+<td>50%</td>
+<td>1.78</td>
+<td>28%</td>
+</tr>
+<tr>
+<td>Opus 5.5</td>
+<td>45</td>
+<td>58%</td>
+<td>43%</td>
+<td>2.16</td>
+<td>32%</td>
+</tr>
+</tbody>
+</table>
 <p>Astra 每局处决的邪恶玩家约 1.9 人，与其他模型接近。它更少把白天耗在处决好人上，因此更早结束比赛：26 场胜利中，18 场在第 3 天或之前拿到。</p>
 <p>逐席位的信念探测也显示出这个区别。在第 1 天提名时，Astra 好人席位给邪恶玩家估计的平均邪恶概率，比给好人估计的高 0.19；Sol 6.1 的差值是 0.16，其他好人模型平均为 0.06。这里已排除对阵 Astra 邪恶阵营的比赛。单个席位的判断优势，主要由这两个 OpenAI 模型共同占据；Astra 进一步拉开的差距，体现在群体决策中。</p>
 <p>固定邪恶阵营模型后，也能看到相似的结果：对 Opus 5.5，Astra 好人 9 战全胜，其他模型的好人胜率为 64%；对 Sol 6.1 是 4 战全胜，其他模型为 45%；对 GPT-5.6 Sol 是 5 战全胜，其他模型为 63%；对 Fable 5.1 是 2 战全胜，其他模型为 60%。这些比较的样本都不大。</p>
@@ -410,8 +485,8 @@ body.sheet-open{overflow:hidden}
 <p>样本量也有限：对大多数较旧模型，只有 1—2 局。26 战全胜主要由对 Opus 5.5 的 9 局、对 GPT-5.6 Sol 的 5 局、对 Sol 6.1 的 4 局构成。</p>
 <p>报告最后估计，运气和对手因素能解释其中一些单局胜利，可能涉及 26 场中的 6—8 场；原文对此保留了“可能”的限定。它仍把 76% 的处决命中邪恶玩家、对好人被提名者只投出 12% 的赞成票、每局约处决 0.6 名好人，视为明显领先其他模型的能力表现。这是项目报告对这一批游戏的解释，本文没有独立重跑对局，也不把 26/26 外推为真实玩家环境或其他任务中的必胜能力。</p>
 <hr>
-<p>来源范围：完整转写项目公开的 <a href="https://github.com/dwarkeshsp/clocktower/blob/52155afe38a696283756f142bdb1565e07951ae1/docs/findings/why-astra-wins/detection.md" target="_blank" rel="noopener noreferrer">detection.md</a>，该报告没有内嵌图片、视频或音频；文中的话语均来自报告摘引的模型对局记录，中文使用转述，不冒充逐字中文引语。文件没有单列执笔者；所属报告组自称由六路并行阅读分析组成，因此本文归属为 Clocktower 项目报告，不声称所有文字都是 Patel 亲笔。它也不是 <a href="https://www.dwarkesh.com/p/clocktower" target="_blank" rel="noopener noreferrer">Patel 后来的配套文章</a> 或视频的全文转写，未据此声称看过视频或验证播放。</p>
-<p>原报告与本中文转写遵循项目 <a href="https://github.com/dwarkeshsp/clocktower/blob/52155afe38a696283756f142bdb1565e07951ae1/LICENSE" target="_blank" rel="noopener noreferrer">MIT 许可</a>，版权 © 2026 Dwarkesh Patel；本页原文区同时保留完整许可声明。《血染钟楼》及相关角色的商标属于 The Pandemonium Institute，本评测是非官方爱好者项目，未获其背书。</p>
+<p>来源范围：完整转写项目公开的 <a href="https://github.com/dwarkeshsp/clocktower/blob/52155afe38a696283756f142bdb1565e07951ae1/docs/findings/why-astra-wins/detection.md" rel="noopener noreferrer">detection.md</a>，该报告没有内嵌图片、视频或音频；文中的话语均来自报告摘引的模型对局记录，中文使用转述，不冒充逐字中文引语。文件没有单列执笔者；所属报告组自称由六路并行阅读分析组成，因此本文归属为 Clocktower 项目报告，不声称所有文字都是 Patel 亲笔。它也不是 <a href="https://www.dwarkesh.com/p/clocktower" rel="noopener noreferrer">Patel 后来的配套文章</a> 或视频的全文转写，未据此声称看过视频或验证播放。</p>
+<p>原报告与本中文转写遵循项目 <a href="https://github.com/dwarkeshsp/clocktower/blob/52155afe38a696283756f142bdb1565e07951ae1/LICENSE" rel="noopener noreferrer">MIT 许可</a>，版权 © 2026 Dwarkesh Patel；本页原文区同时保留完整许可声明。《血染钟楼》及相关角色的商标属于 The Pandemonium Institute，本评测是非官方爱好者项目，未获其背书。</p>
 </div></section>
 <section class="reader-panel" id="original" data-reader-panel="original" aria-label="原文">
 <h2 class="section-heading">原文</h2><h3 class="original-title">Why GPT-6 Astra wins every game as good (detection)</h3>
@@ -434,7 +509,7 @@ explanations gets noted.</li>
 </ol>
 <p>It also gets real luck from Slayer shots (6 of 26 wins), and its opponents are never Astra-as-evil,
 the strongest deceiver in the eval.</p>
-<table>
+<table aria-label="数据表格，可横向滚动查看" tabindex="0">
 <thead>
 <tr>
 <th>good team</th>
