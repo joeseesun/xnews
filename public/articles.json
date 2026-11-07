@@ -1,5 +1,19 @@
 [
   {
+    "id": "anthropic-agent-memory-dreaming",
+    "date": "2026-11-06",
+    "title": "Anthropic：用 dreaming 整理智能体记忆，并在 CL-Bench 与宝可梦等任务上给出评测",
+    "dek": "Lance Martin 执笔的工程研究帖说明，会话空闲时回看日志可纠正错误笔记、构建 wiki，并报告具体分数与文件规模；文中也保留局限与开放问题。",
+    "url": "/a/anthropic-agent-memory-dreaming",
+    "source_url": "https://x.com/AnthropicAI/status/2118814753154064501",
+    "tags": [
+      "Anthropic",
+      "Claude",
+      "agent memory",
+      "engineering"
+    ]
+  },
+  {
     "id": "captureflow-screen-recorder",
     "date": "2026-11-06",
     "title": "CaptureFlow：边录屏边上传，支持 Docker 自托管",
