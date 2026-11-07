@@ -9,7 +9,13 @@
 - 新增 15 项 Markdown 回归，覆盖截图原数据及网页/阅读正文/RSS 一致性。**完整 84 项通过：59 Python + 25 Node reader state**，记录在 `.qa-ui/markdown/tests.log`。官方解析/净化依据：[markdown-it-py](https://markdown-it-py.readthedocs.io/en/latest/using.html)、[nh3](https://nh3.readthedocs.io/en/latest/)。
 - 已先合入 Grok Bot 最新内容提交 `b7c438e`；Anthropic 文稿及 15 张图的段落位置保留。本轮未修改 `content/articles/` 或 `src/media-manifest.json`。契约更新到 `content/SCHEMA.md`，RSS 协议仍为 v1。
 
-发布与线上回读结果在完成部署后追加。此次未创建临时 worktree；本地预览端口 33211 在交付前关闭。
+**发布及线上回读（18:25–18:32 CST）：**源码/生成文件提交 `fa2781f86843` 已推送 GitHub 并执行 `npm run deploy`。正式 Nginx 发布头、服务器 current 均为 `fa2781f86843`，previous 保留 `b7c438ef3cba`。首页、索引、CSS、Clocktower/CaptureFlow/Anthropic 的独立文章与指纹正文、完整 RSS 共 10 个资源正常 HTTPS 回读且逐字节匹配。RSS 有 17 项，17 项均有 v1 双版本。证据 `.qa-ui/markdown/live-resources.json`。
+
+正式 Chrome 从首页打开 Clocktower 阅读弹窗，改写与原文各有六列/六行（含表头）；版本切换、关闭返回、明暗主题均实测。截图 `.qa-ui/markdown/live-table.png`、`live-table-dark.png`。原主题已恢复。Umami property `31e0098c-6852-46b6-899c-11eed5ed16e1` 实时界面读回 18:30:01 的受控 `/__qa-markdown-20261107-fa2781f` 访问，入库已验证，证据 `umami-live.txt/png`。
+
+**Grok Bot 同步（18:35–18:36 CST）：**已向负责内容的「乔布斯」发送本次发布 SHA 和 Markdown/媒体锚点/部署约定；观察到「已更新 例行任务」记录，18:36:11 回复确认原有「X News 海外发现更新」任务已同步。时间、选材、私聊交付保持；此次未新增任务、抓取、改稿或再次部署。
+
+此次未创建临时 worktree；本地预览端口 33211 在交付前关闭。后续仅 QA 文档提交不改变已验收发布 `fa2781f86843`。
 
 ---
 
