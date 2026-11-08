@@ -14,6 +14,20 @@
     ]
   },
   {
+    "id": "anthropic-scientific-models",
+    "date": "2026-11-06",
+    "title": "霍奇金和赫胥黎用手摇计算器算了三周，AI 要交出的是哪些模型被排除了",
+    "dek": "图宾根大学的三位 AI for Science 资助研究者在 Anthropic 科学博客写道：AI 已经能写模型、拟合参数，但理解取决于看到哪些假设失败，以及哪些部分其实没被数据钉死。",
+    "url": "/a/anthropic-scientific-models",
+    "source_url": "https://x.com/AnthropicAI/status/2118792930211107115",
+    "tags": [
+      "Anthropic",
+      "scientific modeling",
+      "AI for Science",
+      "neuroscience"
+    ]
+  },
+  {
     "id": "captureflow-screen-recorder",
     "date": "2026-11-06",
     "title": "CaptureFlow：边录屏边上传，支持 Docker 自托管",

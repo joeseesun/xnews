@@ -150,6 +150,30 @@
       "height": 1155,
       "sha256": "b4345798385b3a4391ef2d7345e02166524c6cf120e0b103eb933cf9ca579dc7",
       "transformation": "Resize to maximum 1920 pixels and encode WebP quality 88"
+    },
+    {
+      "source_url": "https://www-cdn.anthropic.com/images/4zrzovbb/website/95722cd11571a417e198588facbe403a0ca1ee5f-1919x845.jpg",
+      "local_url": "/media/anthropic-scientific-models-media_fig_02-ee25d29780.webp",
+      "role": "image",
+      "article_id": "anthropic-scientific-models",
+      "content_type": "image/webp",
+      "bytes": 78924,
+      "width": 1919,
+      "height": 845,
+      "sha256": "ee25d29780dfa87a1d91b89df6c13061c6a30c4ae53fb03dc73818ac6e94a848",
+      "transformation": "Resize to maximum 1920 pixels and encode WebP quality 88"
+    },
+    {
+      "source_url": "https://www-cdn.anthropic.com/images/4zrzovbb/website/c736d611257af2ce00925a2d5767b71dcc70504d-1920x715.png",
+      "local_url": "/media/anthropic-scientific-models-media_fig_03-831567cce8.webp",
+      "role": "image",
+      "article_id": "anthropic-scientific-models",
+      "content_type": "image/webp",
+      "bytes": 68688,
+      "width": 1920,
+      "height": 715,
+      "sha256": "831567cce8156880d7438d58abb4e4313a51649d4abb69ba8c1d4b6dae0146d4",
+      "transformation": "Resize to maximum 1920 pixels and encode WebP quality 88"
     }
   ]
 }
