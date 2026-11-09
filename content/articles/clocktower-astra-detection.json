@@ -1,6 +1,7 @@
 {
   "id": "clocktower-astra-detection",
   "date": "2026-10-05",
+  "ingested_at": "2026-11-07T02:18:49+08:00",
   "source": {
     "type": "web",
     "url": "https://github.com/dwarkeshsp/clocktower/blob/52155afe38a696283756f142bdb1565e07951ae1/docs/findings/why-astra-wins/detection.md",

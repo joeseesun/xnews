@@ -27,7 +27,7 @@ class SearchMetadata(unittest.TestCase):
             node = next(n for n in data['@graph'] if n['@type'] == 'Article')
             self.assertEqual(node['headline'], a['title'])
             self.assertEqual(node['citation'], a['source']['url'])
-            self.assertEqual(node['datePublished'], a['date'])
+            self.assertEqual(node['datePublished'], a.get('ingested_at') or a['date'])
             self.assertEqual(node.get('dateModified'), a.get('updated_at'))
             self.assertIn('中文改写：', page)
             self.assertIn(a['source']['url'].replace('&', '&amp;'), page)

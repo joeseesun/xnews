@@ -15,6 +15,7 @@ Daily updates (parent routine, Asia/Shanghai 08:00) should **fetch with X tools 
   "id": "karpathy-hackertube",
   "date": "2026-11-01",
   "published_at": "2026-11-01T18:14:46+00:00",
+  "ingested_at": "2026-11-06T00:42:37+08:00",
   "source": {
     "type": "x_post | x_article | youtube | web",
     "url": "https://x.com/... or https://www.youtube.com/watch?v=...",
@@ -45,6 +46,14 @@ Daily updates (parent routine, Asia/Shanghai 08:00) should **fetch with X tools 
   ]
 }
 ```
+
+
+### Dates
+
+- `date` / `published_at`: **original source** calendar day and timestamp. Keep these when backfilling older English posts. RSS `pubDate` continues to use them.
+- `ingested_at`: **first time this article was published on X News** as an ISO-8601 timestamp with offset (prefer Asia/Shanghai, `+08:00`). Homepage, `/archive`, and RSS *item order* sort by this field descending. Set it once when the article is first committed for publication; ordinary copy edits must not change it, and rebuild time must never become the sort key.
+- Historical rows without a recorded site time were backfilled from the Git commit that first added `content/articles/<id>.json`. Do not invent dates. Missing or invalid `ingested_at` sorts after valid ones, then by `id`.
+- Do not reuse `updated_at` (optional correction marker in search metadata) as a homepage sort key.
 
 ### `original` (required)
 

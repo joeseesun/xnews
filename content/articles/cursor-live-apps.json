@@ -2,6 +2,7 @@
   "id": "cursor-live-apps",
   "date": "2026-11-06",
   "published_at": "2026-11-05T21:41:10+00:00",
+  "ingested_at": "2026-11-06T08:14:23+08:00",
   "source": {
     "type": "x_post",
     "url": "https://x.com/cursor_ai/status/2118458629091426304",
@@ -12,7 +13,11 @@
   },
   "title": "Cursor：用 Agent 构建线上 App，并通过链接分享",
   "dek": "描述需要的工具后，Cursor 会构建应用、设置数据库、运行安全检查并部署。",
-  "tags": ["Cursor", "Cloud Agent", "Apps"],
+  "tags": [
+    "Cursor",
+    "Cloud Agent",
+    "Apps"
+  ],
   "original": {
     "lang": "en",
     "title": "You can now build live apps in Cursor and share them with a link",

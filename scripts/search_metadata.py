@@ -23,14 +23,18 @@ def metadata(title, description, canonical, article=None, image=''):
         original = {'@type': 'CreativeWork', 'url': source['url'], 'name': source.get('title_en') or source.get('author') or article['title']}
         if article.get('published_at'):
             original['datePublished'] = article['published_at']
-        node = {'@type': 'Article', '@id': url + '#article', 'url': url, 'mainEntityOfPage': {'@id': url + '#page'}, 'headline': article['title'], 'description': description, 'inLanguage': 'zh-CN', 'datePublished': article['date'], 'author': {'@id': SITE + '/#publisher'}, 'publisher': {'@id': SITE + '/#publisher'}, 'isBasedOn': original, 'citation': source['url'], 'keywords': article.get('tags', [])}
+        site_published = article['date']
+        ingested = article.get('ingested_at')
+        if isinstance(ingested, str) and ingested.strip():
+            site_published = ingested
+        node = {'@type': 'Article', '@id': url + '#article', 'url': url, 'mainEntityOfPage': {'@id': url + '#page'}, 'headline': article['title'], 'description': description, 'inLanguage': 'zh-CN', 'datePublished': site_published, 'author': {'@id': SITE + '/#publisher'}, 'publisher': {'@id': SITE + '/#publisher'}, 'isBasedOn': original, 'citation': source['url'], 'keywords': article.get('tags', [])}
         if article.get('updated_at'):
             node['dateModified'] = article['updated_at']
         if image:
             node['image'] = [image]
         page['mainEntity'] = {'@id': url + '#article'}
         graph.append(node)
-        tags.append(f'<meta property="article:published_time" content="{html.escape(article["date"], quote=True)}">')
+        tags.append(f'<meta property="article:published_time" content="{html.escape(site_published, quote=True)}">')
     graph.append(page)
     data = json.dumps({'@context': 'https://schema.org', '@graph': graph}, ensure_ascii=False).replace('<', '\\u003c').replace('>', '\\u003e').replace('&', '\\u0026')
     tags.append('<script type="application/ld+json">' + data + '</script>')

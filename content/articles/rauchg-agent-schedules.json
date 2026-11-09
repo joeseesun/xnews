@@ -2,6 +2,7 @@
   "id": "rauchg-agent-schedules",
   "date": "2026-11-06",
   "published_at": "2026-11-05T20:30:27+00:00",
+  "ingested_at": "2026-11-06T08:14:23+08:00",
   "source": {
     "type": "x_post",
     "url": "https://x.com/rauchg/status/2118440831355068671",

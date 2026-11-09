@@ -2,6 +2,7 @@
   "id": "levelsio-300-month-expenses",
   "date": "2026-11-03",
   "published_at": "2026-11-03T19:03:50+00:00",
+  "ingested_at": "2026-11-06T00:42:37+08:00",
   "source": {
     "type": "x_post",
     "url": "https://x.com/levelsio/status/2117694259558293692",

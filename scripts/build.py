@@ -50,13 +50,36 @@ def md_to_html(md: str) -> str:
     return render_markdown(md)
 
 
+def parse_ingested_dt(a: dict) -> datetime | None:
+    """Site-first publication time. Missing/invalid values are sortable sentinels, not guessed dates."""
+    raw = a.get("ingested_at")
+    if not isinstance(raw, str) or not raw.strip():
+        return None
+    try:
+        return datetime.fromisoformat(raw.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+
+
+def ingested_sort_key(a: dict) -> tuple:
+    """Newest site ingest first; invalid/missing last; stable id tie-breaker."""
+    dt = parse_ingested_dt(a)
+    if dt is None:
+        # Predictable: undated items sink below dated ones, still stable by id.
+        return (1, datetime.min.replace(tzinfo=timezone.utc), a["id"])
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=TZ_SH)
+    return (0, -dt.timestamp(), a["id"])
+
+
 def load_articles() -> list[dict]:
     items = []
     for path in sorted(CONTENT.glob("*.json")):
         data = json.loads(path.read_text(encoding="utf-8"))
         data["_file"] = path.name
         items.append(data)
-    items.sort(key=lambda a: a.get("published_at") or a["date"], reverse=True)
+    # Homepage/archive/RSS item order follow first site ingest, never rebuild time.
+    items.sort(key=ingested_sort_key)
     return items
 
 
@@ -77,7 +100,27 @@ def fmt_date(date: str) -> str:
         return date
 
 
+def source_date(a: dict) -> str:
+    """Calendar day of the original source; never invent from ingest or build time."""
+    return a["date"]
+
+
+def ingested_date(a: dict) -> str:
+    """Asia/Shanghai calendar day of first site publication when recorded."""
+    dt = parse_ingested_dt(a)
+    if dt is None:
+        return source_date(a)
+    return dt.astimezone(TZ_SH).date().isoformat()
+
+
+def fmt_short_date(date: str) -> str:
+    if len(date) >= 10 and date[4] == "-" and date[7] == "-":
+        return date[5:].replace("-", ".")
+    return date
+
+
 def parse_dt(a: dict) -> datetime:
+    """RSS pubDate stays on the recorded original source timestamp."""
     raw = a.get("published_at") or f"{a['date']}T12:00:00+08:00"
     try:
         return datetime.fromisoformat(raw.replace("Z", "+00:00"))
@@ -416,7 +459,13 @@ def build_feed_items(articles: list[dict]) -> str:
         else:
             cover = f'<div class="type-cover" aria-hidden="true"><span class="type-index">{index + 1:02d} / VOICES</span><span class="cover-word">{word}<span class="type-dot">.</span></span></div>'
         search = html.escape(' '.join([a['title'], a.get('dek') or '', src.get('author') or '', src.get('handle') or '', ' '.join(a.get('tags') or [])]), quote=True)
-        card_body = f'''<div class="card-body"><div class="card-meta"><span>{html.escape(kind)} / {author}</span><time datetime="{html.escape(a['date'], quote=True)}">{html.escape(a['date'][5:].replace('-', '.'))}</time></div>
+        site_day = ingested_date(a)
+        orig_day = source_date(a)
+        if site_day != orig_day:
+            date_meta = f'<time datetime="{html.escape(site_day, quote=True)}">收录 {html.escape(fmt_short_date(site_day))}</time><span>原文 {html.escape(fmt_short_date(orig_day))}</span>'
+        else:
+            date_meta = f'<time datetime="{html.escape(site_day, quote=True)}">{html.escape(fmt_short_date(site_day))}</time>'
+        card_body = f'''<div class="card-body"><div class="card-meta"><span>{html.escape(kind)} / {author}</span>{date_meta}</div>
 <h2 class="card-title">{html.escape(a['title'])}</h2><p class="card-dek">{html.escape(a.get('dek') or '')}</p><div class="card-end"><span>中文约 {reading_minutes(a)} 分钟</span><span class="card-read">阅读全文 <span class="card-arrow" aria-hidden="true">→</span></span></div></div>'''
         # Lead with the headline, keeping source and visual reading order identical.
         card_content = card_body + cover if "is-featured" in classes else cover + card_body
@@ -437,7 +486,7 @@ def render_article(a: dict) -> str:
     related = f'<a href="{html.escape(src["related_url"], quote=True)}" target="_blank" rel="noopener noreferrer">相关链接 ↗</a>' if src.get("related_url") else ""
     return f'''<article class="article-reader" data-article-id="{html.escape(a['id'], quote=True)}">
 <a class="article-back" href="/">← 返回选刊</a>
-<header class="article-header"><p class="article-kicker">{html.escape(kicker)}</p><h1>{html.escape(a['title'])}</h1><p class="article-dek">{html.escape(a.get('dek') or '')}</p><div class="article-meta"><time datetime="{html.escape(a['date'], quote=True)}">{fmt_date(a['date'])}</time><span>原作者：{html.escape(src.get('author') or '')}</span><span>中文改写：<a href="/about">X News · 乔木</a></span><span>{' · '.join(html.escape(t) for t in a.get('tags') or [])}</span></div></header>
+<header class="article-header"><p class="article-kicker">{html.escape(kicker)}</p><h1>{html.escape(a['title'])}</h1><p class="article-dek">{html.escape(a.get('dek') or '')}</p><div class="article-meta"><time datetime="{html.escape(ingested_date(a), quote=True)}">本站收录 {fmt_date(ingested_date(a))}</time><span>原文发布 {fmt_date(source_date(a))}</span><span>原作者：{html.escape(src.get('author') or '')}</span><span>中文改写：<a href="/about">X News · 乔木</a></span><span>{' · '.join(html.escape(t) for t in a.get('tags') or [])}</span></div></header>
 <nav class="reader-tabs" aria-label="文章版本与来源"><div data-tabs><a href="#rewrite" id="tab-rewrite" data-view="rewrite">乔木改写</a><a href="#original" id="tab-original" data-view="original">原文</a></div><a class="reader-source" href="{source_url}" target="_blank" rel="noopener noreferrer">原文链接 ↗</a><div class="reading-position" hidden><progress max="100" value="0" aria-label="当前版本阅读进度"></progress><span data-reading-percent aria-hidden="true">0%</span></div></nav>
 <section class="reader-panel" id="rewrite" data-reader-panel="rewrite" aria-label="乔木改写"><h2 class="section-heading">乔木改写</h2><div class="prose">{render_rewrite(a)}</div></section>
 {render_original_section(a)}
@@ -638,17 +687,17 @@ def build() -> None:
         encoding="utf-8",
     )
 
-    latest = articles[0]["date"]
+    latest = ingested_date(articles[0])
     heading = f'''<section class="edition-line"><div><p class="edition-kicker">THE EDIT <span aria-hidden="true">/</span> 近期精选</p><h1 tabindex="-1">看见世界的新想法。</h1><p class="edition-description">创始人的思考，正在发生的 AI。长帖、文章与影像，一起读。</p></div><div class="edition-meta"><span class="edition-label">最新收录</span><time datetime="{html.escape(latest, quote=True)}">{html.escape(latest.replace('-', '.'))}</time><span class="edition-note">乔木选编 · 保留原文与媒体</span></div></section>'''
     home = heading + discovery_tools(articles) + f'<section class="news-grid" id="news-grid" data-news-grid aria-label="海外发现选刊">{build_feed_items(articles)}</section>' + discovery_empty()
     (PUBLIC / "index.html").write_text(
         shell(f"{SITE_NAME} · 海外发现", home, description=SITE_SUB, active="home", canonical="/"), encoding="utf-8",
     )
-    archive = f'''<section class="edition-line"><div><h1 tabindex="-1">全部文章</h1><p>按发布时间倒序，乔木改写与原文一起保留。</p></div><p class="edition-meta">共 {len(articles)} 篇</p></section>''' + discovery_tools(articles, archive=True) + f'<section class="news-grid" id="news-grid" data-news-grid aria-label="全部文章">{build_feed_items(articles)}</section>' + discovery_empty()
+    archive = f'''<section class="edition-line"><div><h1 tabindex="-1">全部文章</h1><p>按本站首次收录时间倒序，乔木改写与原文一起保留；原文发布日期单独标注。</p></div><p class="edition-meta">共 {len(articles)} 篇</p></section>''' + discovery_tools(articles, archive=True) + f'<section class="news-grid" id="news-grid" data-news-grid aria-label="全部文章">{build_feed_items(articles)}</section>' + discovery_empty()
     (PUBLIC / "archive.html").write_text(
         shell(f"全部文章 · {SITE_NAME}", archive, active="archive", canonical="/archive"), encoding="utf-8",
     )
-    about = f'''<article class="about-copy prose"><h1>关于 {SITE_NAME}</h1><p>从英文世界的创始人长帖、X Articles 与 AI 视频中，挑出值得读的内容，改写成乔木风格的中文。</p><p>每篇都保留已有原文、图片或视频，以及可直接打开的来源链接。中文是改写，不是逐字翻译；视频摘录不等于完整逐字稿，原作以来源页面为准。</p><p>中文选刊由 X News · 乔木整理，保留原作者署名和原始链接；文章日期为中文刊发日期，RSS 中的时间对应已记录的原作发布时间。发现遗漏或需要更正，可通过<a href="https://github.com/joeseesun/xnews/issues" target="_blank" rel="noopener noreferrer">项目问题页</a>反馈。</p><p>每日 08:00（中国标准时间，UTC+8）更新。你可以在网页阅读，也可以<a href="/feed.xml">订阅全文 RSS</a>；RSS 包含中文改写、已保存的原文和媒体，不只提供摘要。</p><p><a href="/archive">全部文章</a> · <a href="https://github.com/joeseesun/xnews" target="_blank" rel="noopener noreferrer">项目源码 ↗</a></p></article>'''
+    about = f'''<article class="about-copy prose"><h1>关于 {SITE_NAME}</h1><p>从英文世界的创始人长帖、X Articles 与 AI 视频中，挑出值得读的内容，改写成乔木风格的中文。</p><p>每篇都保留已有原文、图片或视频，以及可直接打开的来源链接。中文是改写，不是逐字翻译；视频摘录不等于完整逐字稿，原作以来源页面为准。</p><p>中文选刊由 X News · 乔木整理，保留原作者署名和原始链接；首页与往期按本站首次收录时间排序；页面会同时标明本站收录日与原文发布日。RSS 的 pubDate 仍对应已记录的原作发布时间，不因补录而改写。发现遗漏或需要更正，可通过<a href="https://github.com/joeseesun/xnews/issues" target="_blank" rel="noopener noreferrer">项目问题页</a>反馈。</p><p>每日 08:00（中国标准时间，UTC+8）更新。你可以在网页阅读，也可以<a href="/feed.xml">订阅全文 RSS</a>；RSS 包含中文改写、已保存的原文和媒体，不只提供摘要。</p><p><a href="/archive">全部文章</a> · <a href="https://github.com/joeseesun/xnews" target="_blank" rel="noopener noreferrer">项目源码 ↗</a></p></article>'''
     (PUBLIC / "about.html").write_text(shell(f"关于 · {SITE_NAME}", about, active="about", canonical="/about"), encoding="utf-8")
     (PUBLIC / "404.html").write_text(
         shell(f"未找到 · {SITE_NAME}", '<section class="empty-state"><p>404 / 未找到</p><h1>这篇内容不在这里。</h1><p>链接可能不完整，或内容已经移动。<a href="/">返回选刊</a>，或去<a href="/archive">全部文章</a>找找。</p></section>', active="", canonical="/404"), encoding="utf-8",
