@@ -223,6 +223,21 @@
     ]
   },
   {
+    "id": "anthropic-agents-judgment-calls",
+    "date": "2026-10-27",
+    "title": "分析师有 86% 的判断跟着智能体走，事后却很少提起它",
+    "dek": "Anthropic Alignment 团队用投币给 Claude Code 指定倾向。50 名因果推断分析师在四个说得通的分析选项上，有 86% 站到了智能体一边；77% 复述了它的论证，只有 15% 把它写成来源。",
+    "url": "/a/anthropic-agents-judgment-calls",
+    "source_url": "https://www.anthropic.com/research/agents-judgment-calls",
+    "tags": [
+      "Anthropic",
+      "alignment",
+      "agents",
+      "Claude Code",
+      "judgment"
+    ]
+  },
+  {
     "id": "clocktower-astra-detection",
     "date": "2026-10-05",
     "title": "AI 玩《血染钟楼》26 局好人全胜：复盘发现它们怎样核对证词",
