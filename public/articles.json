@@ -1,16 +1,17 @@
 [
   {
-    "id": "anthropic-agent-memory-dreaming",
-    "date": "2026-11-06",
-    "title": "Claude 写了 413 份笔记，只拿到 1 枚徽章：智能体记忆该怎么整理",
-    "dek": "413 份笔记只换来 1 枚徽章，10 份笔记却拿到 4 枚。Anthropic 用宝可梦、数据库与法律文档实验，拆解智能体怎样筛选经验、核对错误，并让下一次任务用上记忆。",
-    "url": "/a/anthropic-agent-memory-dreaming",
-    "source_url": "https://x.com/AnthropicAI/status/2118814753154064501",
+    "id": "anthropic-agents-judgment-calls",
+    "date": "2026-10-27",
+    "title": "分析师有 86% 的判断跟着智能体走，事后却很少提起它",
+    "dek": "Anthropic Alignment 团队用投币给 Claude Code 指定倾向。50 名因果推断分析师在四个说得通的分析选项上，有 86% 站到了智能体一边；77% 复述了它的论证，只有 15% 把它写成来源。",
+    "url": "/a/anthropic-agents-judgment-calls",
+    "source_url": "https://www.anthropic.com/research/agents-judgment-calls",
     "tags": [
       "Anthropic",
-      "Claude",
-      "agent memory",
-      "engineering"
+      "alignment",
+      "agents",
+      "Claude Code",
+      "judgment"
     ]
   },
   {
@@ -25,6 +26,33 @@
       "scientific modeling",
       "AI for Science",
       "neuroscience"
+    ]
+  },
+  {
+    "id": "anthropic-agent-memory-dreaming",
+    "date": "2026-11-06",
+    "title": "Claude 写了 413 份笔记，只拿到 1 枚徽章：智能体记忆该怎么整理",
+    "dek": "413 份笔记只换来 1 枚徽章，10 份笔记却拿到 4 枚。Anthropic 用宝可梦、数据库与法律文档实验，拆解智能体怎样筛选经验、核对错误，并让下一次任务用上记忆。",
+    "url": "/a/anthropic-agent-memory-dreaming",
+    "source_url": "https://x.com/AnthropicAI/status/2118814753154064501",
+    "tags": [
+      "Anthropic",
+      "Claude",
+      "agent memory",
+      "engineering"
+    ]
+  },
+  {
+    "id": "clocktower-astra-detection",
+    "date": "2026-10-05",
+    "title": "AI 玩《血染钟楼》26 局好人全胜：复盘发现它们怎样核对证词",
+    "dek": "一份 10 月 5 日的 372 局分析，经研究员 11 月 6 日讨论的 Clocktower 项目重新进入视野：先核对证词来历，再集体决定处决；26/26 的战绩也有猎手命中、对手差异和小样本的限制。",
+    "url": "/a/clocktower-astra-detection",
+    "source_url": "https://github.com/dwarkeshsp/clocktower/blob/52155afe38a696283756f142bdb1565e07951ae1/docs/findings/why-astra-wins/detection.md",
+    "tags": [
+      "AI 评测",
+      "多智能体",
+      "能力边界"
     ]
   },
   {
@@ -54,6 +82,19 @@
     ]
   },
   {
+    "id": "anthropic-vault-claude",
+    "date": "2026-11-05",
+    "title": "Anthropic：用 Claude 解析细菌 vault 颗粒的首个三维结构",
+    "dek": "团队称，原本需要数周到数月的结构解析缩短到了几天；过程中也出现了需要纠正的错误。",
+    "url": "/a/anthropic-vault-claude",
+    "source_url": "https://x.com/AnthropicAI/status/2118073665296228863",
+    "tags": [
+      "Anthropic",
+      "Claude",
+      "science"
+    ]
+  },
+  {
     "id": "cursor-live-apps",
     "date": "2026-11-06",
     "title": "Cursor：用 Agent 构建线上 App，并通过链接分享",
@@ -64,19 +105,6 @@
       "Cursor",
       "Cloud Agent",
       "Apps"
-    ]
-  },
-  {
-    "id": "rauchg-agent-schedules",
-    "date": "2026-11-06",
-    "title": "Rauch 谈 Agent 持续任务：Vercel Schedules 可在运行时定义",
-    "dek": "Muse 和 Instinct 会夜间整理记忆、早上提醒，并在一段时间没互动后主动发消息。",
-    "url": "/a/rauchg-agent-schedules",
-    "source_url": "https://x.com/rauchg/status/2118440831355068671",
-    "tags": [
-      "agent",
-      "Vercel",
-      "Schedules"
     ]
   },
   {
@@ -93,16 +121,16 @@
     ]
   },
   {
-    "id": "deepseek-super-agent-harness",
-    "date": "2026-11-05",
-    "title": "DeepSeek Super Agent：用插件组织 router 与 worker 的研究原型",
-    "dek": "同一模型在九套 harness 中的通过率和成本不同；Super Agent 目前聚焦 GitHub、飞书，安全问题尚未完全解决。",
-    "url": "/a/deepseek-super-agent-harness",
-    "source_url": "https://www.youtube.com/watch?v=OrcsMi2-IcM",
+    "id": "rauchg-agent-schedules",
+    "date": "2026-11-06",
+    "title": "Rauch 谈 Agent 持续任务：Vercel Schedules 可在运行时定义",
+    "dek": "Muse 和 Instinct 会夜间整理记忆、早上提醒，并在一段时间没互动后主动发消息。",
+    "url": "/a/rauchg-agent-schedules",
+    "source_url": "https://x.com/rauchg/status/2118440831355068671",
     "tags": [
-      "DeepSeek",
-      "harness",
-      "agent"
+      "agent",
+      "Vercel",
+      "Schedules"
     ]
   },
   {
@@ -119,71 +147,6 @@
     ]
   },
   {
-    "id": "anthropic-vault-claude",
-    "date": "2026-11-05",
-    "title": "Anthropic：用 Claude 解析细菌 vault 颗粒的首个三维结构",
-    "dek": "团队称，原本需要数周到数月的结构解析缩短到了几天；过程中也出现了需要纠正的错误。",
-    "url": "/a/anthropic-vault-claude",
-    "source_url": "https://x.com/AnthropicAI/status/2118073665296228863",
-    "tags": [
-      "Anthropic",
-      "Claude",
-      "science"
-    ]
-  },
-  {
-    "id": "sarah-guo-personal-software",
-    "date": "2026-11-04",
-    "title": "Sarah Guo 改变了看法：非工程师也想做自己的软件",
-    "dek": "她列了几种动机：动手做软件带来的力量感、没人替自己实现的工作流，以及想花几周修好的恼人问题。",
-    "url": "/a/sarah-guo-personal-software",
-    "source_url": "https://x.com/saranormous/status/2118052772637704376",
-    "tags": [
-      "product",
-      "personal software",
-      "AI"
-    ]
-  },
-  {
-    "id": "rauchg-vercel-security-review",
-    "date": "2026-11-03",
-    "title": "Rauch：Vercel 内部的安全审计 Agent 已对外开放",
-    "dek": "Rauch 称，仓库无论是否托管在 Vercel，都可以启用与内部安全 Agent 相同的能力。",
-    "url": "/a/rauchg-vercel-security-review",
-    "source_url": "https://x.com/rauchg/status/2117734833824948373",
-    "tags": [
-      "security",
-      "agent",
-      "Vercel"
-    ]
-  },
-  {
-    "id": "victor-slash-supersmb",
-    "date": "2026-11-03",
-    "title": "Slash 年化总收入达 5 亿美元，Victor 详述 SuperSMB 生意",
-    "dek": "Victor Cardenas 列出客户的年龄、支出与团队规模，解释 Slash 如何获客、设计产品和定价。",
-    "url": "/a/victor-slash-supersmb",
-    "source_url": "https://x.com/victorcardenas/status/2117729738160496778",
-    "tags": [
-      "fintech",
-      "startup",
-      "AI native"
-    ]
-  },
-  {
-    "id": "levelsio-300-month-expenses",
-    "date": "2026-11-03",
-    "title": "Levelsio：常规业务开销降到约 $300/月，不含 Photo AI",
-    "dek": "他称每月节省近 $34000；网站年度服务量为 2 万付费客户、2.52 亿访客、24 亿请求与 2.4 PB 带宽。",
-    "url": "/a/levelsio-300-month-expenses",
-    "source_url": "https://x.com/levelsio/status/2117694259558293692",
-    "tags": [
-      "indie",
-      "cost",
-      "Claude"
-    ]
-  },
-  {
     "id": "amasad-managed-cloud-agents",
     "date": "2026-11-03",
     "title": "Amjad：让受管云环境成为 AI Agent 的默认运行方式",
@@ -197,16 +160,16 @@
     ]
   },
   {
-    "id": "levelsio-bf1942-web",
-    "date": "2026-11-02",
-    "title": "Levelsio 用 Claude Code 将《战地 1942》试玩版移植到浏览器",
-    "dek": "他介绍了从 x86 反汇编、翻译成 C，到编译为 WebAssembly 和接入多人服务器的过程。",
-    "url": "/a/levelsio-bf1942-web",
-    "source_url": "https://x.com/levelsio/status/2117374984192512391",
+    "id": "deepseek-super-agent-harness",
+    "date": "2026-11-05",
+    "title": "DeepSeek Super Agent：用插件组织 router 与 worker 的研究原型",
+    "dek": "同一模型在九套 harness 中的通过率和成本不同；Super Agent 目前聚焦 GitHub、飞书，安全问题尚未完全解决。",
+    "url": "/a/deepseek-super-agent-harness",
+    "source_url": "https://www.youtube.com/watch?v=OrcsMi2-IcM",
     "tags": [
-      "Claude",
-      "game",
-      "WebAssembly"
+      "DeepSeek",
+      "harness",
+      "agent"
     ]
   },
   {
@@ -223,31 +186,68 @@
     ]
   },
   {
-    "id": "anthropic-agents-judgment-calls",
-    "date": "2026-10-27",
-    "title": "分析师有 86% 的判断跟着智能体走，事后却很少提起它",
-    "dek": "Anthropic Alignment 团队用投币给 Claude Code 指定倾向。50 名因果推断分析师在四个说得通的分析选项上，有 86% 站到了智能体一边；77% 复述了它的论证，只有 15% 把它写成来源。",
-    "url": "/a/anthropic-agents-judgment-calls",
-    "source_url": "https://www.anthropic.com/research/agents-judgment-calls",
+    "id": "levelsio-300-month-expenses",
+    "date": "2026-11-03",
+    "title": "Levelsio：常规业务开销降到约 $300/月，不含 Photo AI",
+    "dek": "他称每月节省近 $34000；网站年度服务量为 2 万付费客户、2.52 亿访客、24 亿请求与 2.4 PB 带宽。",
+    "url": "/a/levelsio-300-month-expenses",
+    "source_url": "https://x.com/levelsio/status/2117694259558293692",
     "tags": [
-      "Anthropic",
-      "alignment",
-      "agents",
-      "Claude Code",
-      "judgment"
+      "indie",
+      "cost",
+      "Claude"
     ]
   },
   {
-    "id": "clocktower-astra-detection",
-    "date": "2026-10-05",
-    "title": "AI 玩《血染钟楼》26 局好人全胜：复盘发现它们怎样核对证词",
-    "dek": "一份 10 月 5 日的 372 局分析，经研究员 11 月 6 日讨论的 Clocktower 项目重新进入视野：先核对证词来历，再集体决定处决；26/26 的战绩也有猎手命中、对手差异和小样本的限制。",
-    "url": "/a/clocktower-astra-detection",
-    "source_url": "https://github.com/dwarkeshsp/clocktower/blob/52155afe38a696283756f142bdb1565e07951ae1/docs/findings/why-astra-wins/detection.md",
+    "id": "levelsio-bf1942-web",
+    "date": "2026-11-02",
+    "title": "Levelsio 用 Claude Code 将《战地 1942》试玩版移植到浏览器",
+    "dek": "他介绍了从 x86 反汇编、翻译成 C，到编译为 WebAssembly 和接入多人服务器的过程。",
+    "url": "/a/levelsio-bf1942-web",
+    "source_url": "https://x.com/levelsio/status/2117374984192512391",
     "tags": [
-      "AI 评测",
-      "多智能体",
-      "能力边界"
+      "Claude",
+      "game",
+      "WebAssembly"
+    ]
+  },
+  {
+    "id": "rauchg-vercel-security-review",
+    "date": "2026-11-03",
+    "title": "Rauch：Vercel 内部的安全审计 Agent 已对外开放",
+    "dek": "Rauch 称，仓库无论是否托管在 Vercel，都可以启用与内部安全 Agent 相同的能力。",
+    "url": "/a/rauchg-vercel-security-review",
+    "source_url": "https://x.com/rauchg/status/2117734833824948373",
+    "tags": [
+      "security",
+      "agent",
+      "Vercel"
+    ]
+  },
+  {
+    "id": "sarah-guo-personal-software",
+    "date": "2026-11-04",
+    "title": "Sarah Guo 改变了看法：非工程师也想做自己的软件",
+    "dek": "她列了几种动机：动手做软件带来的力量感、没人替自己实现的工作流，以及想花几周修好的恼人问题。",
+    "url": "/a/sarah-guo-personal-software",
+    "source_url": "https://x.com/saranormous/status/2118052772637704376",
+    "tags": [
+      "product",
+      "personal software",
+      "AI"
+    ]
+  },
+  {
+    "id": "victor-slash-supersmb",
+    "date": "2026-11-03",
+    "title": "Slash 年化总收入达 5 亿美元，Victor 详述 SuperSMB 生意",
+    "dek": "Victor Cardenas 列出客户的年龄、支出与团队规模，解释 Slash 如何获客、设计产品和定价。",
+    "url": "/a/victor-slash-supersmb",
+    "source_url": "https://x.com/victorcardenas/status/2117729738160496778",
+    "tags": [
+      "fintech",
+      "startup",
+      "AI native"
     ]
   }
 ]

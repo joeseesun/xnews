@@ -1,0 +1,61 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>Levelsio：常规业务开销降到约 $300/月，不含 Photo AI · X News</title><meta name="robots" content="noindex"></head><body><article class="article-reader" data-article-id="levelsio-300-month-expenses">
+<a class="article-back" href="/">← 返回选刊</a>
+<header class="article-header"><p class="article-kicker">X · @levelsio / 长帖</p><h1>Levelsio：常规业务开销降到约 $300/月，不含 Photo AI</h1><p class="article-dek">他称每月节省近 $34000；网站年度服务量为 2 万付费客户、2.52 亿访客、24 亿请求与 2.4 PB 带宽。</p><div class="article-meta"><time datetime="2026-11-06">本站收录 2026年11月6日 · 周五</time><span>原文发布 2026年11月3日 · 周二</span><span>原作者：Pieter Levels</span><span>中文改写：<a href="/about">X News · 乔木</a></span><span>indie · cost · Claude</span></div></header>
+<nav class="reader-tabs" aria-label="文章版本与来源"><div data-tabs><a href="#rewrite" id="tab-rewrite" data-view="rewrite">乔木改写</a><a href="#original" id="tab-original" data-view="original">原文</a></div><a class="reader-source" href="https://x.com/levelsio/status/2117694259558293692" target="_blank" rel="noopener noreferrer">原文链接 ↗</a><div class="reading-position" hidden><progress max="100" value="0" aria-label="当前版本阅读进度"></progress><span data-reading-percent aria-hidden="true">0%</span></div></nav>
+<section class="reader-panel" id="rewrite" data-reader-panel="rewrite" aria-label="乔木改写"><h2 class="section-heading">乔木改写</h2><div class="prose"><p>Pieter Levels 更新了自己的业务开销：常规部分已降到约 $300/月。这些网站和 App 每年服务约 20000 名付费客户、2.52 亿访客，处理 24 亿次请求，消耗 2.4 PB 带宽。</p>
+<p>这个 $300/月的口径不包括 Photo AI。该项目的 GPU 费用约为 $7000/月，R2 存储约为 $800/月；把它算上，总开销约为 $8000/月。Levels 解释，Photo AI 单个项目的体量就远高于其他网站之和，因此在前面的数字中单独排除，但已经计入原帖图表。</p>
+<p>他认为 Claude Code 很擅长自主寻找节省成本的办法。这次列出的节省合计接近 $34000/月，具体包括：</p>
+<ul>
+<li>GPU：约省 $29000/月。Photo AI 改用更好、更便宜的视频模型；原先的视频成本一直很高，因为他长期没有更新相关模型。部分图片任务转到有 Google Cloud Credits 可用的 Google Cloud，另一些任务转到按市场成本销售 AI 模型的 Sume。GPU 账单由 $36000/月降至 $7000/月。</li>
+<li>服务器：约省 $3000/月。合并服务器，取消 DigitalOcean 和 Linode，将服务迁往 Hetzner。</li>
+<li>Backblaze B2 备份：他将这项节省记为约 $1100/月，并给出了账单从 $1200/月降到 $26/月的变化，称便宜了约 50 倍。此前保留了无限版本，没有限制的生命周期策略让服务器文件版本积累了十多年；现在改为保留 30 天。</li>
+<li>Cloudflare R2：约省 $400/月。为 Photo AI 的存储桶增加生命周期策略，让图片在 90 天后自动转入更便宜的 Infrequent Access。桶里已积累多年的照片，账单因此从 $1200/月降到 $800/月。</li>
+<li>域名：约省 $118/月。Claude 检查了他在 Cloudflare 的域名注册，找出许多不再使用、没有必要继续付费的域名。Levels 还认为，其中一些项目在他所说的后 AGI 世界里已没有太多保留意义；他特别提到，<code>.io</code> 域名续费已达 $50/年，数量一多就会累积成明显支出。</li>
+<li>Claude 订阅：约省 $100/月。Claude 分析了自己的订阅使用量，发现他用不到 Max 20x 套餐的上限，于是将套餐从 $200/月降到 $100/月。</li>
+</ul>
+<p>Levels 说，即便计入 Photo AI，他的总成本也比去年降低了约 90%，接近十年前刚开始做项目时的业务开销水平。</p>
+<p>他也谈到对这些节省的看法：AI 很擅长发现可以削减的成本，短期内对经济未必有利，但长期可能去掉多余开支，为更好的投资腾出资金。在他看来，成本会随时间悄悄增加，人们往往没意识到钱花到了哪里；AI 能帮助逐项梳理，个人生活的开销也一样。</p>
+<section class="rewrite-source-media" aria-label="原文附带媒体"><h3 class="source-media-heading">原文附带媒体</h3><p class="completeness-note">原文附带媒体；未核验其与具体段落的对应关系。</p><div class="original-media">
+<figure class="media-figure" data-media-id="m_641fcc1e874a8380"><div class="media-frame"><img src="/media/levelsio-300-month-expenses-image-6e1d7a11c2.jpg" data-original-src="https://pbs.twimg.com/media/HWOOvq5WoAAMsfw.jpg" alt="原帖配图" loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://x.com/levelsio/status/2117694259558293692" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section></div></section>
+<section class="reader-panel" id="original" data-reader-panel="original" aria-label="原文">
+<h2 class="section-heading">原文</h2><h3 class="original-title">Biz expenses down to ~$300/mo</h3>
+<div class="original-media">
+<figure class="media-figure" data-media-id="m_641fcc1e874a8380"><div class="media-frame"><img src="/media/levelsio-300-month-expenses-image-6e1d7a11c2.jpg" data-original-src="https://pbs.twimg.com/media/HWOOvq5WoAAMsfw.jpg" alt="原帖配图" loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://x.com/levelsio/status/2117694259558293692" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div>
+<div class="prose" lang="en"><p>💸 Update: My total biz expenses have now dropped to just ~$300/mo!</p>
+<p>This is to run all my websites/apps serving per year:</p>
+<ul>
+<li>20,000 paying customers</li>
+<li>252 million visitors</li>
+<li>2.4 billion requests</li>
+<li>2.4 petabyte (PB) in bandwidth</li>
+</ul>
+<p>(~$8,000/mo if you add the $7,000/mo GPU bill and $800/mo R2 storage I pay for Photo AI, I exclude it above because it's one project that's so much more expensive in size than all the other sites together, but included in the chart below)</p>
+<p>Claude Code helped me to find smart ways to save more money, AI is just really really really good at finding cost savings by itself, which is not so great for the economy short-term, but long term it trims all the fat and opens up spending for better investments I think</p>
+<p>Anyway here's what it saved me in money, almost $34,000/mo:</p>
+<ul>
+<li>
+<p>$29,000/mo - switched to better and cheaper video models on Photo AI, video was very expensive and since I didn't update it ever it stayed expensive, also routed some image jobs to Google Cloud where I have some Google Cloud Credits, and also routed some jobs to Sume which sells AI models at market cost, very cool! This made my GPU bill go from $36,000/mo to $7,000/mo</p>
+</li>
+<li>
+<p>$3,000/mo - consolidated my servers, cancelled Digital Ocean and Linode and moved everything to Hetzner saving about $3,000/mo</p>
+</li>
+<li>
+<p>$1100/mo - analyzed my Backblaze B2 server backups, I had infinite versioning and lifecycle policies, that's reduced now to 30 days, this literally pushed the bill from $1,200/mo to $26/mo, about 50x cheaper! I had essentially versions of files for all my servers for over a decade, crazy!</p>
+</li>
+<li>
+<p>$400/mo - similarly added Lifecycle Policies to my Cloudflare R2 bucket for Photo AI, pics are automatically put in cheaper Infrequent Access after 90 days, there was years of photos in there so this reduced the R2 bill from $1,200/mo to $800/mo</p>
+</li>
+<li>
+<p>$118/mo - Claude analyzed all my Cloudflare Domain registrations, lots of domains I didn't use and didn't make sense to keep paying for, lots of things that also don't really make sense anymore in a post-AGI world, renewals for .io TLD are now $50/year which adds up fast!</p>
+</li>
+<li>
+<p>$100/mo - Claude also analyzed my Claude subscription (yes!) and discovered I don't even use the Max 20x plan limits, so I downgraded from $200/mo to $100/mo</p>
+</li>
+</ul>
+<p>Even including Photo AI, I have now cut my costs by 90% from last year, getting me close to my biz expenses amount from a decade ago when I started building things</p>
+<p>Costs slowly creep up over the years and you don't realize all the things you're spending on but AI is nice to help you figure all that out (also in your personal life!)</p></div>
+</section>
+<footer class="source-box"><span>内容来自原作者；中文为乔木风格改写，非逐字翻译。</span><div><a href="https://x.com/levelsio/status/2117694259558293692" target="_blank" rel="noopener noreferrer">打开原文 ↗</a></div></footer>
+</article></body></html>

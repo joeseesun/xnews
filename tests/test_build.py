@@ -94,7 +94,48 @@ class BuildRegression(unittest.TestCase):
         expected = [{"id": a["id"], "date": a["date"], "title": a["title"], "dek": a.get("dek"), "url": "/a/" + a["id"], "source_url": a["source"]["url"], "tags": a.get("tags", [])} for a in self.articles]
         self.assertEqual(json.loads((self.public / "articles.json").read_text()), expected)
 
+    def test_homepage_orders_by_site_ingest_not_original_date(self):
+        ids = [a["id"] for a in self.articles]
+        self.assertEqual(ids[0], "anthropic-agents-judgment-calls")
+        judgment = next(a for a in self.articles if a["id"] == "anthropic-agents-judgment-calls")
+        self.assertTrue(judgment["ingested_at"].startswith("2026-11-09"))
+        self.assertEqual(judgment["date"], "2026-10-27")
+        self.assertTrue(judgment["published_at"].startswith("2026-10-27"))
+        # Newer original dates ingested earlier must still follow this backfill.
+        earlier = next(a for a in self.articles if a["id"] == "anthropic-scientific-models")
+        self.assertLess(ids.index("anthropic-agents-judgment-calls"), ids.index(earlier["id"]))
+        home = (self.public / "index.html").read_text()
+        self.assertIn('datetime="2026-11-09"', home)
+        self.assertIn("收录 11.09", home)
+        self.assertIn("原文 10.27", home)
+        page = (self.public / "a" / "anthropic-agents-judgment-calls.html").read_text()
+        self.assertIn("本站收录", page)
+        self.assertIn("原文发布", page)
+        self.assertIn("2026年11月9日", page)
+        self.assertIn("2026年10月27日", page)
+
+    def test_rss_keeps_original_pubdate_while_item_order_follows_ingest(self):
+        items = self.feed.findall("./channel/item")
+        self.assertEqual([item.findtext("guid") for item in items], [build.SITE_URL + "/a/" + a["id"] for a in self.articles])
+        judgment = next(item for item in items if item.findtext("guid").endswith("/anthropic-agents-judgment-calls"))
+        self.assertIn("27 Oct 2026", judgment.findtext("pubDate"))
+        # Editing copy must not invent a new ingest key during the build itself.
+        sample = copy.deepcopy(next(a for a in self.articles if a["id"] == "anthropic-agents-judgment-calls"))
+        sample["title"] = sample["title"] + "（校对）"
+        sample["body_md"] = sample["body_md"] + "\n\n校对备注。"
+        resorted = sorted([sample] + [a for a in self.articles if a["id"] != sample["id"]], key=build.ingested_sort_key)
+        self.assertEqual(resorted[0]["id"], "anthropic-agents-judgment-calls")
+        self.assertEqual(resorted[0]["ingested_at"], sample["ingested_at"])
+
+    def test_missing_or_invalid_ingested_at_sorts_predictably(self):
+        valid = {"id": "z-valid", "ingested_at": "2026-11-08T08:00:00+08:00"}
+        missing = {"id": "a-missing"}
+        bad = {"id": "b-bad", "ingested_at": "not-a-date"}
+        ordered = sorted([valid, missing, bad], key=build.ingested_sort_key)
+        self.assertEqual([a["id"] for a in ordered], ["z-valid", "a-missing", "b-bad"])
+
     def test_chronological_cards_and_source_only_covers(self):
+
         doc = Tags((self.public / "index.html").read_text())
         cards = [attrs for t, attrs in doc.tags if t == "a" and "data-open-reader" in attrs]
         self.assertEqual([a["href"] for a in cards], ["/a/" + a["id"] for a in self.articles])
