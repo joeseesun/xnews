@@ -1,5 +1,50 @@
 [
   {
+    "id": "anthropic-fermat-agent-teams",
+    "date": "2026-11-09",
+    "title": "1000 个 Fable 5.2 智能体用 28.7 小时重做了费马大定理的形式化证明",
+    "dek": "Anthropic 的玩具实验里，1000 个早期 Claude Fable 5.2 智能体没有 Prove2Me 平台，也没有研究员当场指挥，用通用工具和共享数据库重做了今年 9 月那份费马大定理形式化证明。输出 token 大约是当时的三分之一，写出的证明大约是七分之一长。",
+    "url": "/a/anthropic-fermat-agent-teams",
+    "source_url": "https://claude.dev/blog/safely-scaling-multi-agent-teams-with-fable-5-2/",
+    "tags": [
+      "Anthropic",
+      "Claude",
+      "Fable",
+      "agents",
+      "formal verification"
+    ]
+  },
+  {
+    "id": "emollick-fable-jagged-agi",
+    "date": "2026-11-09",
+    "title": "Fable 5.2 能改键盘、策划生意、重做奥登的课，作者仍称它是锯齿状的 AGI",
+    "dek": "沃顿教授 Ethan Mollick 在公开前试用 Claude Fable 5.2，测了硬件、生意、诗歌课、创业研究和四百多个三维世界。他认为它在许多数字任务上已经够得上人类专家，但往往看不见自己的作品太长、太重复，或不好玩。",
+    "url": "/a/emollick-fable-jagged-agi",
+    "source_url": "https://www.oneusefulthing.org/p/fable-52-and-jagged-agi",
+    "tags": [
+      "Claude",
+      "Fable",
+      "AGI",
+      "agents",
+      "Ethan Mollick"
+    ]
+  },
+  {
+    "id": "simonw-beep-locator",
+    "date": "2026-11-09",
+    "title": "用两台 iPad、一部手机和两台笔电，他把神秘蜂鸣定位到大约 40 厘米内",
+    "dek": "Simon Willison 不想翻完一屋子没拆的搬家纸箱，于是让 Claude Code 做了一套多设备声音定位系统。它最后在那一堆箱子里找到一只急着换电池的旧一氧化碳报警器。",
+    "url": "/a/simonw-beep-locator",
+    "source_url": "https://simonwillison.net/2026/Nov/9/mysterious-beeps/",
+    "tags": [
+      "Claude",
+      "Claude Code",
+      "Fable",
+      "agents",
+      "hardware"
+    ]
+  },
+  {
     "id": "anthropic-agents-judgment-calls",
     "date": "2026-10-27",
     "title": "分析师有 86% 的判断跟着智能体走，事后却很少提起它",

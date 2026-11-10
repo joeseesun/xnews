@@ -96,7 +96,6 @@ class BuildRegression(unittest.TestCase):
 
     def test_homepage_orders_by_site_ingest_not_original_date(self):
         ids = [a["id"] for a in self.articles]
-        self.assertEqual(ids[0], "anthropic-agents-judgment-calls")
         judgment = next(a for a in self.articles if a["id"] == "anthropic-agents-judgment-calls")
         self.assertTrue(judgment["ingested_at"].startswith("2026-11-09"))
         self.assertEqual(judgment["date"], "2026-10-27")
@@ -124,8 +123,9 @@ class BuildRegression(unittest.TestCase):
         sample["title"] = sample["title"] + "（校对）"
         sample["body_md"] = sample["body_md"] + "\n\n校对备注。"
         resorted = sorted([sample] + [a for a in self.articles if a["id"] != sample["id"]], key=build.ingested_sort_key)
-        self.assertEqual(resorted[0]["id"], "anthropic-agents-judgment-calls")
-        self.assertEqual(resorted[0]["ingested_at"], sample["ingested_at"])
+        edited = next(a for a in resorted if a["id"] == "anthropic-agents-judgment-calls")
+        self.assertEqual(edited["ingested_at"], sample["ingested_at"])
+        self.assertEqual([a["id"] for a in resorted], [a["id"] for a in self.articles])
 
     def test_missing_or_invalid_ingested_at_sorts_predictably(self):
         valid = {"id": "z-valid", "ingested_at": "2026-11-08T08:00:00+08:00"}

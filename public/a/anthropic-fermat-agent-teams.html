@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="referrer" content="no-referrer">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1000 个 Fable 5.2 智能体用 28.7 小时重做了费马大定理的形式化证明 · X News</title>
+<meta name="description" content="Anthropic 的玩具实验里，1000 个早期 Claude Fable 5.2 智能体没有 Prove2Me 平台，也没有研究员当场指挥，用通用工具和共享数据库重做了今年 9 月那份费马大定理形式化证明。输出 token 大约是当时的三分之一，写出的证明大约是七分之一长。">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#fffefa">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="X News">
+<meta property="og:title" content="1000 个 Fable 5.2 智能体用 28.7 小时重做了费马大定理的形式化证明 · X News">
+<meta property="og:description" content="Anthropic 的玩具实验里，1000 个早期 Claude Fable 5.2 智能体没有 Prove2Me 平台，也没有研究员当场指挥，用通用工具和共享数据库重做了今年 9 月那份费马大定理形式化证明。输出 token 大约是当时的三分之一，写出的证明大约是七分之一长。">
+<meta property="og:url" content="https://xnews.qiaomu.ai/a/anthropic-fermat-agent-teams">
+<link rel="canonical" href="https://xnews.qiaomu.ai/a/anthropic-fermat-agent-teams">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="1000 个 Fable 5.2 智能体用 28.7 小时重做了费马大定理的形式化证明 · X News">
+<meta name="twitter:description" content="Anthropic 的玩具实验里，1000 个早期 Claude Fable 5.2 智能体没有 Prove2Me 平台，也没有研究员当场指挥，用通用工具和共享数据库重做了今年 9 月那份费马大定理形式化证明。输出 token 大约是当时的三分之一，写出的证明大约是七分之一长。">
+<meta property="og:image" content="https://claude.dev/media/13dca8328dafc6e21860d77255066340778ab6cecae719aefe31fad55a9b1c1c.png">
+<meta name="twitter:image" content="https://claude.dev/media/13dca8328dafc6e21860d77255066340778ab6cecae719aefe31fad55a9b1c1c.png">
+<meta property="article:published_time" content="2026-11-10T08:18:00+08:00">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://xnews.qiaomu.ai/#publisher", "name": "X News", "url": "https://xnews.qiaomu.ai/", "description": "海外创始人长文与 AI 视频的中文改写选刊"}, {"@type": "WebSite", "@id": "https://xnews.qiaomu.ai/#website", "name": "X News", "url": "https://xnews.qiaomu.ai/", "inLanguage": "zh-CN", "publisher": {"@id": "https://xnews.qiaomu.ai/#publisher"}}, {"@type": "Article", "@id": "https://xnews.qiaomu.ai/a/anthropic-fermat-agent-teams#article", "url": "https://xnews.qiaomu.ai/a/anthropic-fermat-agent-teams", "mainEntityOfPage": {"@id": "https://xnews.qiaomu.ai/a/anthropic-fermat-agent-teams#page"}, "headline": "1000 个 Fable 5.2 智能体用 28.7 小时重做了费马大定理的形式化证明", "description": "Anthropic 的玩具实验里，1000 个早期 Claude Fable 5.2 智能体没有 Prove2Me 平台，也没有研究员当场指挥，用通用工具和共享数据库重做了今年 9 月那份费马大定理形式化证明。输出 token 大约是当时的三分之一，写出的证明大约是七分之一长。", "inLanguage": "zh-CN", "datePublished": "2026-11-10T08:18:00+08:00", "author": {"@id": "https://xnews.qiaomu.ai/#publisher"}, "publisher": {"@id": "https://xnews.qiaomu.ai/#publisher"}, "isBasedOn": {"@type": "CreativeWork", "url": "https://claude.dev/blog/safely-scaling-multi-agent-teams-with-fable-5-2/", "name": "Safely scaling multi-agent teams with Claude Fable 5.2", "datePublished": "2026-11-09T00:00:00+00:00"}, "citation": "https://claude.dev/blog/safely-scaling-multi-agent-teams-with-fable-5-2/", "keywords": ["Anthropic", "Claude", "Fable", "agents", "formal verification"], "image": ["https://claude.dev/media/13dca8328dafc6e21860d77255066340778ab6cecae719aefe31fad55a9b1c1c.png"]}, {"@type": "WebPage", "@id": "https://xnews.qiaomu.ai/a/anthropic-fermat-agent-teams#page", "url": "https://xnews.qiaomu.ai/a/anthropic-fermat-agent-teams", "name": "1000 个 Fable 5.2 智能体用 28.7 小时重做了费马大定理的形式化证明 · X News", "description": "Anthropic 的玩具实验里，1000 个早期 Claude Fable 5.2 智能体没有 Prove2Me 平台，也没有研究员当场指挥，用通用工具和共享数据库重做了今年 9 月那份费马大定理形式化证明。输出 token 大约是当时的三分之一，写出的证明大约是七分之一长。", "inLanguage": "zh-CN", "isPartOf": {"@id": "https://xnews.qiaomu.ai/#website"}, "mainEntity": {"@id": "https://xnews.qiaomu.ai/a/anthropic-fermat-agent-teams#article"}}]}</script>
+<link rel="alternate" type="application/rss+xml" title="X News" href="/feed.xml">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-7 -7 58 58'%3E%3Crect x='-7' y='-7' width='58' height='58' rx='5' fill='%231b1d18'/%3E%3Cpath fill='%23fffefa' d='M2 0h11l29 44H31zM32 0h10L26 18l-5-7zM17 26l5 7-10 11H2z'/%3E%3C/svg%3E">
+<script>try{var t=localStorage.getItem('xn.theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
+<style data-source="/static/app.b7cfdefd4a1d.css">/* D · 影像刊 — see DESIGN.md. System fonts, real media, no left rail. */
+:root {
+  color-scheme:light;
+  --paper:#fffefa; --ink:#1b1d18; --muted:#62685a; --rule:#d8dccf;
+  --surface:#eef0e5; --sage:#dce3cc; --sage-ink:#293026; --focus:#315b3c;
+  --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC","Noto Sans CJK SC",sans-serif;
+  --ease:cubic-bezier(.2,0,0,1); --gutter:32px; --reader-bar:64px;
+  --control-border:#808675; --image-outline:#0000001a;
+  --contrast-surface:#1b1d18; --contrast-ink:#fffefa;
+}
+:root[data-theme="dark"] {
+  color-scheme:dark;
+  --paper:#20241e; --ink:#eef0e7; --muted:#b7c1af; --rule:#4b5842;
+  --surface:#30392a; --sage:#394631; --sage-ink:#eef0e7; --focus:#c0d9aa;
+  --control-border:#89957f; --image-outline:#ffffff1a;
+  --contrast-surface:#12180f; --contrast-ink:#eef0e7;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:130px;scrollbar-gutter:stable}
+body{margin:0;background:var(--paper);color:var(--ink);font:1rem/1.7 var(--sans);-webkit-font-smoothing:antialiased;letter-spacing:0}
+[hidden]{display:none!important}
+a{color:inherit;text-decoration:none}
+@media(hover:hover){a:hover{text-decoration:underline;text-underline-offset:.2em}}
+button{font:inherit;color:inherit;cursor:pointer}
+button:disabled{cursor:wait}
+button,a{-webkit-tap-highlight-color:transparent}
+
+:focus-visible{outline:3px solid var(--focus);outline-offset:4px}
+em,i{font-style:normal;font-weight:500}
+strong,b{font-weight:600}
+img{max-width:100%;height:auto}
+.sr-only,.skip:not(:focus){position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.skip:focus{position:fixed;z-index:100;top:8px;left:8px;background:var(--ink);color:var(--paper);padding:10px 16px}
+.site-header,.site-main,.site-footer{width:min(100% - var(--gutter)*2,1320px);margin-inline:auto}
+.site-header{min-height:118px;display:flex;align-items:center;justify-content:space-between;gap:24px 32px;flex-wrap:wrap;padding-block:24px;border-bottom:1px solid var(--ink)}
+.brand{display:flex;align-items:center;gap:26px;flex:none}
+.brand:hover{text-decoration:none}
+.brand-wordmark{display:flex;align-items:baseline;gap:7px;line-height:1}
+.brand-mark{width:43px;height:43px;align-self:center;margin-top:2px}
+.brand-name{font:700 3.875rem/.95 Georgia,"Times New Roman",serif;letter-spacing:-.065em}
+.brand-period{color:var(--focus)}
+.brand-sub{font-size:0.9375rem;font-weight:500;line-height:1.5;border-inline-start:1px solid var(--rule);padding-inline-start:25px;letter-spacing:.12em}
+.brand-sub>span{display:block;font-size:0.75rem;line-height:1.6;font-weight:400;letter-spacing:.04em;color:var(--muted);margin-top:5px}
+.header-side{display:flex;align-items:center;gap:30px}
+.site-nav{display:flex;align-items:center;gap:30px;font-size:0.875rem}
+.site-nav a{min-height:44px;display:flex;align-items:center;gap:6px;position:relative}
+.site-nav a[aria-current="page"]{font-weight:600}
+.site-nav a[aria-current="page"]::after{content:"";position:absolute;inset-inline:0;bottom:3px;height:2px;background:var(--ink)}
+.icon-button{width:44px;height:44px;border:1px solid var(--control-border);border-radius:50%;display:inline-grid;place-items:center;background:transparent;flex:none}
+.site-main{min-height:55vh;padding-bottom:44px}
+.edition-line{min-height:160px;display:flex;align-items:center;justify-content:space-between;gap:24px 32px;flex-wrap:wrap;padding-block:28px}
+.edition-line h1{font-size:1.875rem;line-height:1.4;font-weight:600;margin:8px 0 10px;text-wrap:balance}
+.edition-line p{font-size:0.875rem;line-height:1.7;color:var(--muted);margin:0}
+.edition-line .edition-kicker{font-size:0.6875rem;letter-spacing:.1em;color:var(--ink)}
+.edition-kicker span{margin-inline:8px;color:var(--muted)}
+.edition-meta{text-align:end;font-variant-numeric:tabular-nums;display:flex;flex-direction:column;gap:6px;flex:none}
+.edition-label{font-size:0.75rem;color:var(--muted)}
+.edition-meta time{font:400 1.5rem/1.25 Georgia,"Times New Roman",serif;letter-spacing:.02em}
+.edition-note{font-size:0.75rem;color:var(--muted)}
+/* A quiet editorial toolbar; every control remains labelled and keyboard accessible. */
+.discovery{margin-bottom:20px}
+.discovery-top,.discovery-bottom{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.discovery-top{flex-wrap:wrap;padding-block:16px;border-block:1px solid var(--rule)}
+.filter-group{display:flex;gap:8px;flex-wrap:wrap}
+.filter-group button{min-height:44px;padding:8px 16px;display:flex;align-items:center;gap:9px;font-size:0.875rem;background:transparent;border:1px solid transparent;border-radius:3px}
+.filter-group button span{font-size:0.6875rem;font-variant-numeric:tabular-nums;opacity:.8}
+.filter-group button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.search-field{display:flex;align-items:center;gap:10px;width:min(340px,42%);min-height:44px;border:1px solid var(--control-border);border-radius:3px;padding-inline:13px 0;color:var(--muted)}
+.search-field svg{flex:none}
+.search-field input{font:400 0.875rem/1.5 var(--sans);color:var(--ink);background:transparent;border:0;min-width:0;width:100%;padding:11px 0;border-radius:0}
+.search-field input::-webkit-search-cancel-button{display:none}
+.search-field input::placeholder{color:var(--muted);opacity:1}
+.search-field:focus-within{outline:2px solid var(--focus);outline-offset:3px}
+.search-field input:focus-visible{outline:none}
+.search-field button{border:0;background:transparent;width:44px;min-height:44px;flex:none;font-size:1.375rem}
+.discovery-bottom{flex-wrap:wrap;padding-top:12px;min-height:54px}
+.discovery-bottom p{margin:0;font-size:0.75rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.view-switch{display:flex;gap:4px}
+.view-switch button{display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:6px 10px;border:1px solid transparent;border-radius:3px;background:transparent;color:var(--muted);font-size:0.75rem}
+.view-switch button[aria-pressed="true"]{color:var(--ink);background:var(--surface);border-color:var(--control-border)}
+.search-empty{padding:48px 20px 72px;text-align:center;border-top:1px solid var(--rule)}
+.empty-symbol{font:400 3rem/1 Georgia,serif;color:var(--muted);margin:0 0 20px}
+.search-empty h2{font-size:1.375rem;font-weight:500;margin:0 0 12px}
+.search-empty p{color:var(--muted);overflow-wrap:anywhere}
+.search-empty .reset-button{margin:12px 0 0}
+.news-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:28px 24px;align-items:stretch}
+.news-card{grid-column:span 4;min-width:0;display:flex;flex-direction:column;border:1px solid var(--rule);background:var(--paper);position:relative;overflow:hidden}
+.news-card.is-featured{grid-column:span 8}
+.news-card.is-wide{grid-column:span 8}
+.card-link{display:flex;flex-direction:column;height:100%;min-width:0}
+.card-link:hover{text-decoration:none}
+.cover{position:relative;overflow:hidden;background:var(--surface);min-height:0;aspect-ratio:16/9;isolation:isolate}
+.cover img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;z-index:1;transition:transform 180ms var(--ease)}
+.is-featured .cover{min-height:0;aspect-ratio:2.7;flex:none}
+.is-featured .card-body{flex:0 0 auto}
+.is-wide .cover{aspect-ratio:2/1}
+.cover-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;background:var(--surface);color:var(--ink);z-index:0;overflow:hidden}
+.cover-word{font-size:clamp(2.75rem,5.3vw,5.25rem);font-weight:500;line-height:1.1;overflow-wrap:anywhere;max-width:100%;text-align:left}
+.cover-badge{position:absolute;z-index:2;left:16px;bottom:16px;background:#1b1d18dc;color:#fffefa;padding:5px 10px;font-size:0.75rem;line-height:1.6;border:1px solid #fffefa60}
+.card-body{padding:22px 24px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.card-meta{display:flex;overflow-wrap:anywhere;align-items:flex-start;justify-content:space-between;gap:14px;font-size:0.75rem;line-height:1.7;color:var(--muted);font-variant-numeric:tabular-nums}
+.card-meta time{white-space:nowrap;flex:none}
+.card-title{font-size:1.3125rem;font-weight:600;line-height:1.6;margin:0;text-wrap:pretty;overflow-wrap:anywhere}
+.is-featured .card-title{font-size:clamp(1.5625rem,2.2vw,2rem);line-height:1.5}
+.card-dek{font-size:0.875rem;line-height:1.85;color:var(--muted);margin:0;text-wrap:pretty}
+.card-end{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;font-size:0.75rem;color:var(--muted);margin-top:auto;padding-top:16px}
+.card-read{display:inline-flex;align-items:center;gap:10px;color:var(--ink);white-space:nowrap}
+.card--text.tone-ink .card-read{color:var(--contrast-ink)}
+.card-link:focus-visible{outline-offset:-4px}
+.tone-ink .card-link:focus-visible{outline-color:var(--contrast-ink)}
+.card-arrow{font-size:1.3125rem;line-height:1}
+.card--text .type-cover{min-height:140px;padding:24px 24px 16px;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:20px;overflow:hidden}
+.type-index{font-size:0.625rem;letter-spacing:.12em;line-height:1.5;font-variant-numeric:tabular-nums}
+.type-dot{color:var(--focus)}
+.tone-ink .type-dot{color:var(--contrast-ink)}
+.card--text .cover-word{font:400 clamp(2.25rem,3.5vw,3.375rem)/1.15 Georgia,"Times New Roman",serif;letter-spacing:-.03em}
+.card--text .card-body{padding-top:12px}
+.card--text{align-self:stretch}
+.card--text.tone-ink{background:var(--contrast-surface);color:var(--contrast-ink);border-color:var(--contrast-surface)}
+.card--text.tone-ink .card-meta,.card--text.tone-ink .card-dek,.card--text.tone-ink .card-end{color:var(--contrast-ink);opacity:.85}
+.card--text.tone-sage{background:var(--sage);color:var(--sage-ink);border-color:var(--sage)}
+.card--text.tone-sage .card-meta,.card--text.tone-sage .card-dek,.card--text.tone-sage .card-end{color:var(--sage-ink)}
+.cover-error-link{display:none;font-size:0.875rem;padding:0 22px 18px;text-decoration:underline;text-underline-offset:.2em}
+.media-failed .cover-error-link{display:block}
+.media-failed .cover img{display:none}
+.empty-state{padding:64px 0;max-width:40rem}
+.empty-state h1{font-size:2rem;font-weight:500}
+.empty-state p{color:var(--muted)}
+.site-footer{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:20px 0 32px;border-top:1px solid var(--ink);font-size:0.875rem;color:var(--muted)}
+.footer-links{display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+.footer-links a{display:inline-flex;align-items:center;min-height:44px}
+/* Shared standalone article and progressive full-screen reader. */
+.article-reader{max-width:960px;margin:0 auto;padding:30px 0 60px;min-width:0}
+.article-back{display:inline-flex;min-height:44px;align-items:center;gap:8px;font-size:0.875rem;color:var(--muted);margin-bottom:20px}
+.article-header{max-width:900px;margin:0 auto 24px}
+.article-kicker{font-size:0.875rem;color:var(--muted);margin:0 0 12px}
+.article-header h1{font-size:clamp(1.8125rem,3.8vw,3rem);line-height:1.42;font-weight:500;margin:0 0 18px;text-wrap:pretty;overflow-wrap:anywhere}
+.article-dek{font-size:1.125rem;line-height:1.85;color:var(--muted);margin:0 0 22px;max-width:42rem}
+.article-meta{display:flex;gap:8px 22px;flex-wrap:wrap;color:var(--muted);font-size:0.875rem;padding-top:14px;border-top:1px solid var(--rule);font-variant-numeric:tabular-nums}
+.reader-tabs{display:flex;align-items:center;gap:8px 16px;flex-wrap:wrap;position:sticky;top:0;z-index:3;background:var(--paper);border-block:1px solid var(--rule);padding:8px 0;margin:0 auto 30px;max-width:900px}
+.reader-tabs [data-tabs]{display:flex;flex-wrap:wrap;gap:6px;min-width:0}
+.reader-tabs a{display:inline-flex;align-items:center;min-height:44px;padding:6px 14px;font-size:0.875rem;border:1px solid transparent;border-radius:3px;white-space:nowrap}
+.reader-tabs a[aria-selected="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.reader-source{margin-left:auto;font-size:0.875rem!important}
+.reader-panel{max-width:42rem;margin:0 auto 44px;scroll-margin-top:130px}
+.section-heading{font-size:1.25rem;font-weight:500;margin:0 0 20px}
+.reader-enhanced .section-heading{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);margin:0;padding:0}
+.original-title{font-size:1.1875rem;line-height:1.7;margin:0 0 22px;font-weight:500;overflow-wrap:anywhere}
+.completeness-note{font-size:0.875rem;line-height:1.85;color:var(--muted);background:var(--surface);border:1px solid var(--rule);padding:12px 16px;margin:0 0 24px}
+.prose{min-width:0;font-size:1.125rem;line-height:1.95;overflow-wrap:anywhere;text-wrap:pretty}
+.prose pre{max-width:100%;overflow-x:auto;margin:1.5em 0;padding:1rem;border:1px solid var(--rule);background:var(--surface);font-size:.875rem;line-height:1.65;tab-size:4;white-space:pre;overflow-wrap:normal;text-wrap:initial}
+.prose pre code{display:block;width:max-content;min-width:100%;padding:0;border:0;border-radius:0;background:none;font-size:inherit;line-height:inherit;white-space:pre;overflow-wrap:normal}
+/* Keep wide source tables inside the reading column without compressing every cell. */
+.prose table{display:block;width:fit-content;max-width:100%;overflow-x:auto;border-collapse:collapse;margin:1.5em 0;font-size:.9375rem;line-height:1.65;tab-size:4;text-wrap:wrap;font-variant-numeric:tabular-nums}
+.prose th,.prose td{padding:.7em .85em;border:1px solid var(--rule);text-align:left;vertical-align:top;min-width:5.5rem;max-width:24rem}
+.prose :is(th,td):first-child{min-width:7.5rem}
+.prose th{font-weight:600;background:var(--surface)}
+.prose :is(th,td)[align="left"]{text-align:left}
+.prose :is(th,td)[align="center"]{text-align:center}
+.prose :is(th,td)[align="right"]{text-align:right}
+.prose tbody tr:nth-child(even){background:color-mix(in srgb,var(--surface) 45%,transparent)}
+.prose caption{text-align:left;font-size:.875rem;line-height:1.6;color:var(--muted);padding-bottom:.65em}
+.prose img{max-width:100%;height:auto;vertical-align:middle}
+.prose p,.prose li{font-size:inherit;line-height:inherit;margin:0 0 1em}
+.prose :is(th,td) :is(p,li){font-size:inherit;line-height:inherit}
+.prose :is(th,td)>:last-child{margin-bottom:0}
+.prose h1,.prose h2,.prose h3{font-size:1.5625rem;font-weight:500;line-height:1.6;margin:1.8em 0 .7em}
+.prose h4,.prose h5,.prose h6{font-size:1.125rem;font-weight:600;line-height:1.65;margin:1.6em 0 .6em}
+.prose ul,.prose ol{padding-left:1.4em;margin:0 0 1.2em}
+.prose li{margin-bottom:.45em}
+.prose li>:is(ul,ol){margin:.45em 0 .6em}
+.prose li>p{margin-bottom:.6em}
+.prose li>:last-child{margin-bottom:0}
+.prose blockquote{margin:1.5em 0;padding:18px 22px;border:1px solid var(--rule);background:var(--surface)}
+.prose blockquote>:first-child{margin-top:0}
+.prose blockquote>:last-child{margin-bottom:0}
+.prose blockquote blockquote{margin:1em 0}
+.prose a{font-weight:500;text-decoration:underline;text-underline-offset:.22em}
+.prose hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
+.prose code{font-family:ui-monospace,monospace;font-size:.9em;background:var(--surface);padding:2px 4px;border-radius:3px;white-space:break-spaces}
+.prose details{margin:1.3em 0;padding:.8em 1em;border:1px solid var(--rule)}
+.prose summary{cursor:pointer;font-weight:600;line-height:1.6}
+.prose details[open]>summary{margin-bottom:.8em}
+.prose details>:last-child{margin-bottom:0}
+.prose kbd{font-family:ui-monospace,monospace;font-size:.85em;padding:.1em .35em;border:1px solid var(--rule);border-bottom-width:2px;border-radius:3px;background:var(--surface)}
+.prose sup,.prose sub{font-size:.75em;line-height:0;position:relative;vertical-align:baseline}
+.prose sup{top:-.5em}.prose sub{bottom:-.2em}
+.original-media{display:grid;gap:24px;margin:24px 0 28px}
+.media-figure{margin:0;min-width:0}
+.media-frame{background:var(--surface);border:1px solid var(--rule);overflow:hidden}
+.media-frame img,.media-frame video{max-width:100%;height:auto;max-height:80dvh;display:block;margin:auto}
+.media-frame audio{display:block;width:100%;min-height:54px}
+.media-frame .yt{position:relative;aspect-ratio:16/9}
+.media-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#1b1d18}
+.media-figure figcaption{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 18px;font-size:0.875rem;line-height:1.8;color:var(--muted);padding-top:8px}
+.media-figure figcaption a{text-decoration:underline;text-underline-offset:.2em}
+.media-error{font-size:0.875rem;color:var(--muted);margin:0;padding:18px}
+.source-box{max-width:42rem;margin:24px auto 0;border-top:1px solid var(--rule);padding-top:22px;font-size:0.875rem;color:var(--muted);overflow-wrap:anywhere}
+.source-box a{display:inline-flex;align-items:center;min-height:44px;text-decoration:underline;color:var(--ink);margin-right:22px}
+.reader-sheet{position:fixed;inset:0;margin:0;padding:0;width:100%;max-width:none;height:100dvh;max-height:none;border:0;background:var(--paper);color:var(--ink);overflow:hidden}
+.reader-sheet::backdrop{background:#1b1d1870}
+.reader-sheet[open]{display:flex;flex-direction:column}
+.reader-sheet.sheet-fallback{z-index:60}
+.sheet-bar{min-height:var(--reader-bar);display:flex;flex-shrink:0;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:0 var(--gutter);border-bottom:1px solid var(--rule);background:var(--paper)}
+.sheet-close{min-height:44px;display:inline-flex;align-items:center;gap:12px;border:0;background:none;padding:6px 0;font-size:0.875rem}
+.sheet-close span{font-size:1.375rem}
+.sheet-brand{font-size:0.875rem;font-weight:500}
+.sheet-bar a{font-size:0.875rem;color:var(--muted);min-height:44px;display:flex;align-items:center}
+.sheet-scroll{height:calc(100dvh - var(--reader-bar));flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable;scroll-padding-top:130px;padding:0 var(--gutter)}
+.sheet-scroll .article-back{display:none}
+.sheet-scroll .article-reader{padding-top:35px}
+.sheet-scroll .reader-tabs{top:0}
+.sheet-status{max-width:44rem;margin:52px auto;min-width:0}
+.sheet-status h2{font-size:1.6875rem;line-height:1.5;font-weight:500;margin:0 0 18px}
+.sheet-status p{font-size:1rem;line-height:1.9;color:var(--muted)}
+.sheet-status a{display:inline-flex;align-items:center;min-height:44px;margin-right:18px;text-decoration:underline;text-underline-offset:.2em}
+.retry-button,.reset-button{display:inline-flex;align-items:center;min-height:44px;padding:8px 18px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);border-radius:3px;margin-right:18px}
+.skeleton-title{width:85%;height:38px;background:var(--surface);margin-bottom:14px}
+.skeleton-title.short{width:60%}
+.skeleton-line{height:16px;background:var(--surface);margin-top:20px}
+.skeleton-line.short{width:72%}
+body.sheet-open{overflow:hidden}
+.about-copy{max-width:42rem;margin:52px auto 72px}
+.about-copy h1{font-size:2.375rem;font-weight:500;line-height:1.4;margin:0 0 30px}
+/* Filtered results have equal weight; the opening spread remains asymmetric. */
+.news-grid.is-filtered .is-featured{grid-column:span 4}
+.news-grid.is-filtered .is-featured .cover{aspect-ratio:16/9}
+.news-grid.is-filtered .is-featured .card-title{font-size:1.3125rem}
+.news-grid[data-layout="list"]{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--rule)}
+.news-grid[data-layout="list"] .news-card{background:transparent;color:var(--ink);border:0;border-bottom:1px solid var(--rule);overflow:visible}
+.news-grid[data-layout="list"] .card-link{display:flex;flex-direction:row;gap:28px;padding:26px 0;align-items:center}
+.news-grid[data-layout="list"] .cover,.news-grid[data-layout="list"] .type-cover{display:none}
+.news-grid[data-layout="list"] .card-body{padding:0;gap:8px;flex:1;min-width:0}
+.news-grid[data-layout="list"] .card-title{font-size:1.3125rem;line-height:1.6}
+.news-grid[data-layout="list"] .card-meta,.news-grid[data-layout="list"] .card-dek,.news-grid[data-layout="list"] .card-end{color:var(--muted);opacity:1}
+.news-grid[data-layout="list"] .card-read{color:var(--ink)}
+.news-grid[data-layout="list"] .card-end{padding-top:2px}
+.news-grid[data-layout="list"] .card-link:focus-visible{outline-color:var(--focus);outline-offset:5px}
+.reading-position{display:flex;align-items:center;gap:12px;flex-basis:100%;color:var(--muted);font-size:0.6875rem;line-height:1.3}
+.reading-position span{min-width:4ch;text-align:end;font-variant-numeric:tabular-nums}
+.reading-position progress{appearance:none;display:block;width:100%;height:2px;border:0;background:var(--rule);color:var(--focus)}
+.reading-position progress::-webkit-progress-bar{background:var(--rule)}
+.reading-position progress::-webkit-progress-value{background:var(--focus)}
+.reading-position progress::-moz-progress-bar{background:var(--focus)}
+.cover img,.media-frame img{outline:1px solid var(--image-outline);outline-offset:-1px}
+@media(hover:hover){
+ .news-card:has(.card-link:hover){border-color:var(--muted)}
+ .card-link:hover .card-read{text-decoration:underline;text-underline-offset:4px}
+ .icon-button:hover,.filter-group button[aria-pressed="false"]:hover,.view-switch button[aria-pressed="false"]:hover{background:var(--surface)}
+ .site-nav a:hover{text-decoration:none;color:var(--focus)}
+}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+ .card-link:hover .cover img{transform:scale(1.025)}
+}
+@media(prefers-reduced-motion:no-preference){
+ .icon-button,.retry-button,.reset-button{transition:scale 150ms ease-out}
+ .icon-button:not(:disabled):active,.retry-button:not(:disabled):active,.reset-button:not(:disabled):active{scale:.96}
+}
+@media(max-width:1050px){
+ .brand-sub{display:none}
+ .news-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+ .news-card,.news-card.is-wide,.news-grid.is-filtered .is-featured{grid-column:span 1}
+ .news-card.is-featured{grid-column:span 1}
+ .is-featured .cover{aspect-ratio:16/9}
+ .is-featured .card-title{font-size:1.4375rem}
+ .edition-line h1{font-size:1.6875rem}
+}
+@media(max-width:680px){
+ :root{--gutter:20px;--reader-bar:58px}
+ .site-header{min-height:0;gap:22px;flex-wrap:wrap;padding:26px 0 15px}
+ .brand{gap:16px}
+ .brand-wordmark{gap:5px}
+ .brand-name{font-size:3.25rem}
+ .brand-mark{width:35px;height:35px}
+ .brand-sub{display:block;padding-inline-start:16px;font-size:0.8125rem}
+ .brand-sub>span{font-size:0.6875rem}
+ .header-side{width:100%;justify-content:space-between;gap:16px}
+ .site-nav{gap:28px;flex-wrap:wrap;font-size:0.8125rem}
+ .icon-button{width:40px;height:40px}
+ .edition-line{min-height:0;gap:16px;padding-block:22px}
+ .edition-line h1{font-size:1.5625rem;margin-top:10px}
+ .edition-line .edition-description{font-size:0.8125rem;max-width:24em;line-height:1.8}
+ .edition-meta{display:none}
+ .edition-line .edition-kicker{font-size:0.625rem}
+ .discovery-top{flex-wrap:wrap;gap:16px;padding-block:14px 16px}
+ .filter-group{gap:4px}
+ .filter-group button{padding-inline:13px;font-size:0.8125rem}
+ .search-field{width:100%}
+ .search-field input{font-size:1rem}
+ .discovery-bottom{gap:8px;align-items:center}
+ .discovery-bottom p{font-size:0.6875rem}
+ .view-switch button{font-size:0.6875rem;padding-inline:8px;gap:5px}
+ .view-switch svg{width:13px;height:13px}
+ .news-grid{grid-template-columns:minmax(0,1fr);gap:22px}
+ .news-card,.news-card.is-wide,.news-card.is-featured,.news-grid.is-filtered .is-featured{grid-column:auto;grid-row:auto}
+ .cover,.is-featured .cover,.is-wide .cover{aspect-ratio:16/9;min-height:0;flex:none}
+ .card-body{padding:20px;gap:12px}
+ .card-title,.is-featured .card-title,.news-grid.is-filtered .is-featured .card-title{font-size:1.375rem;line-height:1.6}
+ .card-dek{font-size:0.875rem}
+ .card-meta{font-size:0.75rem}
+ .card--text .type-cover{min-height:130px;padding:22px 20px 12px}
+ .card--text .cover-word{font-size:2.875rem}
+ .card-end{padding-top:12px}
+ .news-grid[data-layout="list"] .card-link{gap:16px;padding:22px 0;align-items:flex-start}
+ .news-grid[data-layout="list"] .cover,.news-grid[data-layout="list"] .type-cover{display:none}
+ .news-grid[data-layout="list"] .card-title{font-size:1.1875rem}
+ .site-main{padding-bottom:36px}
+ .site-footer{align-items:flex-start;flex-direction:column;gap:12px;padding-top:22px;font-size:0.75rem}
+ .footer-links{gap:26px}
+ .article-reader{padding-top:23px}
+ .article-back{margin-bottom:16px}
+ .article-header h1{font-size:1.8125rem;line-height:1.5}
+ .article-dek{font-size:1rem;line-height:1.9}
+ .reader-tabs{gap:4px;margin-bottom:24px;padding:7px 0}
+ .reader-tabs a{font-size:0.875rem;padding:6px 10px}
+ .reader-tabs .reader-source{font-size:0.8125rem!important;padding-inline-end:0}
+ .reader-panel{margin-bottom:28px}
+ .prose{font-size:1.0625rem;line-height:1.95}
+ .prose h1,.prose h2,.prose h3{font-size:1.4375rem;line-height:1.6}
+ .prose blockquote{padding:15px}
+ .sheet-bar{gap:10px}
+ .sheet-bar a{font-size:0.8125rem}
+ .sheet-brand{font-size:0.75rem}
+ .sheet-scroll .article-reader{padding-top:25px}
+ .sheet-status{margin-top:32px}
+ .about-copy{margin-top:32px}
+}
+@media(max-width:360px){
+ :root{--gutter:16px}
+ .brand-sub>span{font-size:0.6875rem;max-width:6em}
+ .site-nav{gap:22px}
+ .sheet-brand{display:none}
+ .reader-tabs a{padding-inline:8px;font-size:0.8125rem}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
+}
+@media print{
+ .site-header,.site-footer,.reader-tabs,.article-back,.sheet-bar{display:none!important}
+ .reader-panel[hidden]{display:block!important}
+ .site-main,.article-reader{width:100%;max-width:none}
+ .reader-sheet[open]{position:static;height:auto;overflow:visible}
+ .sheet-scroll{height:auto;overflow:visible;padding:0}
+}
+
+/* Source media remains part of the Chinese reading flow, not just the original tab. */
+.rewrite-source-media{margin:28px 0}
+.prose .source-media-heading{font-size:1.25rem;line-height:1.6;margin:0 0 12px}
+.prose .rewrite-source-media .completeness-note{font-size:0.875rem;line-height:1.8}
+.prose .media-error{font-size:0.875rem;line-height:1.8;margin:0}
+</style>
+<script defer src="https://umami.qiaomu.ai/script.js" data-website-id="31e0098c-6852-46b6-899c-11eed5ed16e1" data-domains="xnews.qiaomu.ai" data-exclude-search="true" data-exclude-hash="true"></script>
+</head>
+<body>
+<a class="skip" href="#main">跳到正文</a>
+<header class="site-header">
+  <a class="brand" href="/" aria-label="X News 海外发现首页"><span class="brand-wordmark" aria-hidden="true"><svg class="brand-mark" viewBox="0 0 44 44" fill="currentColor"><path d="M2 0h11l29 44H31zM32 0h10L26 18l-5-7zM17 26l5 7-10 11H2z"/></svg><span class="brand-name">News<span class="brand-period">.</span></span></span><span class="brand-sub">海外发现<span>英文原作 · 中文视角</span></span></a>
+  <div class="header-side"><nav class="site-nav" aria-label="主导航"><a href="/">精选</a><a class="archive-nav" href="/archive">往期</a><a href="/feed.xml" aria-label="订阅全文 RSS">订阅 RSS <span aria-hidden="true">↗</span></a></nav><button type="button" class="icon-button" id="theme-btn" aria-label="切换为暗色主题" aria-pressed="false"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16Z" fill="currentColor" stroke="none"/></svg></button></div>
+</header>
+<main class="site-main" id="main">
+<article class="article-reader" data-article-id="anthropic-fermat-agent-teams">
+<a class="article-back" href="/">← 返回选刊</a>
+<header class="article-header"><p class="article-kicker">Barry Zhang, Tianyi Peng, Elle Najt, Keller Scholl, Lance Martin / 长帖 / 视频</p><h1>1000 个 Fable 5.2 智能体用 28.7 小时重做了费马大定理的形式化证明</h1><p class="article-dek">Anthropic 的玩具实验里，1000 个早期 Claude Fable 5.2 智能体没有 Prove2Me 平台，也没有研究员当场指挥，用通用工具和共享数据库重做了今年 9 月那份费马大定理形式化证明。输出 token 大约是当时的三分之一，写出的证明大约是七分之一长。</p><div class="article-meta"><time datetime="2026-11-10">本站收录 2026年11月10日 · 周二</time><span>原文发布 2026年11月9日 · 周一</span><span>原作者：Barry Zhang, Tianyi Peng, Elle Najt, Keller Scholl, Lance Martin</span><span>中文改写：<a href="/about">X News · 乔木</a></span><span>Anthropic · Claude · Fable · agents · formal verification</span></div></header>
+<nav class="reader-tabs" aria-label="文章版本与来源"><div data-tabs><a href="#rewrite" id="tab-rewrite" data-view="rewrite">乔木改写</a><a href="#original" id="tab-original" data-view="original">原文</a></div><a class="reader-source" href="https://claude.dev/blog/safely-scaling-multi-agent-teams-with-fable-5-2/" target="_blank" rel="noopener noreferrer">原文链接 ↗</a><div class="reading-position" hidden><progress max="100" value="0" aria-label="当前版本阅读进度"></progress><span data-reading-percent aria-hidden="true">0%</span></div></nav>
+<section class="reader-panel" id="rewrite" data-reader-panel="rewrite" aria-label="乔木改写"><h2 class="section-heading">乔木改写</h2><div class="prose"><p>1000 个运行早期 Claude Fable 5.2 的智能体，在 28.7 小时里重做了一份费马大定理的形式化证明。和今年 9 月那次相比，它们没有使用 Prove2Me 平台，也没有研究员在旁边指挥，用掉的输出 token 大约是当时的三分之一，写出的证明大约是七分之一长。</p>
+<p>这篇说明由 Barry Zhang、Tianyi Peng、Elle Najt、Keller Scholl 和 Lance Martin 撰写，2026 年 11 月 9 日发布在 claude.dev。Lance Martin 的 X 账号是 @RLanceMartin，公开资料写的是 Anthropic 的 MTS，他也在自己的账号上分享了这篇文章。文中把这次运行称为一次玩具实验。智能体用的是早期版本的 Fable 5.2，不是对公开发布版的承诺。</p>
+<p>费马大定理说的是：不存在正整数 a、b、c，能让 aⁿ + bⁿ = cⁿ 在任何大于 2 的 n 上成立。它在 350 多年里一直没有被证明，直到 Andrew Wiles 在 1995 年给出 129 页的证明。把这份证明形式化，也就是让计算机检查每一步，长期是数学共同体里的目标。</p>
+<p>今年 9 月，他们发布了第一份端到端的费马大定理形式化，说明在 https://www.anthropic.com/research/formalizing-fermats-last-theorem 。那次由几十个智能体完成，运行的是大约相当于 Claude Fable 5.1 的内部研究模型，并有一位研究员给出方向。他们用了 11 天，大约 60 亿输出 token，写出了 1300 万行 Lean 代码。Lean 是一种编程语言，计算机会检查证明里的每一步。</p>
+<p>当时的协调靠的是 Prove2Me。这个平台由 Tianyi Peng 和哥伦比亚大学的合作者设计，Peng 现在是 Anthropic 的技术员工。Prove2Me 用一张共享图，把每条待证命题和它拆成的更小命题连起来。任何智能体都可以拆分一条命题，其他智能体可以向这张图询问哪些尚未证明的部分已经可以动手，这样就不容易丢掉项目状态。每条命题和它的证明都放在单独文件里，并且可以独立编译，因此许多智能体能够并行工作，而不去改同一批文件。</p>
+<p>新实验想看的是：一支运行类似 Fable 5.2 的智能体队伍，能不能在没有 Prove2Me、也没有研究员当场指挥的情况下，用一套由通用工具组成的 harness 做出这个结果。</p>
+<h2>每个智能体都待在没有外网的沙箱里，手里只有通用工具</h2>
+<p>他们给这 1000 个智能体准备了 60 条需要证明的命题，其中包括最终定理和 59 个中间里程碑。对每一条命题，智能体都要写出 Lean 证明，用 Lean 的工具构建并检查，再提交到 Git 共享主干上，由评分器检查。每个智能体得到的工具是：</p>
+<p>自己沙箱里的一个 shell 和一个文件编辑器，沙箱没有网络访问。</p>
+<p>沙箱镜像里已经装好的 Lean 工具链和 Mathlib，Mathlib 的地址是 https://github.com/leanprover-community/mathlib4 。</p>
+<p>自己的 Git 分支，以及向主干发起合并请求的能力。</p>
+<p>一个共享的 Postgres 数据库，从 shell 里访问。</p>
+<p>证明工作可以拆开，因此适合多智能体队伍。智能体也需要协调，既要接上别人的成果，也要避免重复劳动。作者写到，最初的形式化里，Claude 早期的尝试失败过，原因是智能体跟丢了项目状态，不再有效协作。搬到 Prove2Me 之后，这个问题才得到解决。</p>
+<p>这一次，每个智能体都在自己的轻量虚拟机沙箱里工作。单台共享机器大约在 100 个智能体时就会碰到上限：超过一半的 100 智能体运行因为内存、磁盘或 CPU 耗尽，不得不停止或重启。</p>
+<p>有了 1000 个分开的沙箱，智能体需要一种办法分享工作，于是作者给了它们一个 SQL 数据库。他们选择 SQL，是因为它提供组织信息的通用原语，事务能处理 1000 个智能体同时写入，而且 Claude 本来就熟悉它。智能体用这个数据库认领任务、分享笔记，并记录完成的工作。</p>
+<p>图 1 画的是这套 harness 的结构。1000 个智能体沙箱叠在一起，其中 1 个领队、999 个助手。每个沙箱里跑着智能体循环和 harness 代码，工具是 shell 和文件编辑器，文件则包括代码仓库、Lean 和数学库。智能体循环通过一条管道连到沙箱外的网关，由网关调用 Claude API。Git 和 SQL 请求也经过同一个网关，到达沙箱外的共享仓库和数据库。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_fig_01"><div class="media-frame"><img src="https://claude.dev/media/13dca8328dafc6e21860d77255066340778ab6cecae719aefe31fad55a9b1c1c.png" data-original-src="https://claude.dev/media/13dca8328dafc6e21860d77255066340778ab6cecae719aefe31fad55a9b1c1c.png" alt="Harness architecture. A stack of 1,000 agent sandboxes (1 lead and 999 helpers), each running the agent loop, harness code inside the sandbox, with a shell and a file editor as tools and the repo, Lean and the math library as files. API requests and responses pass between the agent loop and a gateway outside the sandboxes that calls the Claude API. Git and SQL requests and their results pass through the same gateway to the team infrastructure, also outside the sandboxes: a Git repository of Lean files and plans, and a Postgres database of instructions, tasks and notes." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://claude.dev/blog/safely-scaling-multi-agent-teams-with-fable-5-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<p>提示词给了 Claude 一份 60 条待证命题的清单，每条带一句非正式说明，并描述了上面这些可用工具。</p>
+<p>他们给队伍的唯一结构是层级：1 个领队，999 个助手。领队负责把问题拆开，并分配给助手。助手则要等待领队派活，任务不清楚时向领队确认。</p>
+<p>运行过程中，harness 自动向领队发送了 19 次剩余时间提醒，每次都鼓励领队继续做下去。</p>
+<h2>安全边界叠了三层：沙箱、实时监控和离线监控</h2>
+<p>作者写到，没有任何单层防护足以约束一支智能体队伍。这次实验把沙箱和实时、离线监控合在一起，让每个智能体待在自己的、没有网络访问的虚拟机里，并检测任何试图逃出沙箱或干扰监控的行为。</p>
+<p>图 2 把安全措施标成三组：沙箱、实时监控和离线监控。分类器在每次工具调用执行前检查，离线监控再审阅队伍的行动。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_fig_02"><div class="media-frame"><img src="https://claude.dev/media/ae9400390023085b8047fa4a7d7d2e486d1bb0c405152b884ef6e5579ec4abec.png" data-original-src="https://claude.dev/media/ae9400390023085b8047fa4a7d7d2e486d1bb0c405152b884ef6e5579ec4abec.png" alt="The harness architecture with its safety measures marked in three groups. Sandboxing: each agent gets its own lightweight VM with no network access, no API keys or credentials, no direct path to other sandboxes, an unprivileged user account and no tool access to the harness code. Real-time monitoring: the gateway runs a blocking classifier on each tool call, with a fail-closed design, sets each agent&#x27;s identity and logs every push and query; the Git repository takes own-branch pushes only with a merge job for main, and the Postgres database uses a shared unprivileged role with time and size limits. Offline monitoring: run records kept outside the sandboxes feed offline monitoring, which tells the run owners of serious findings." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://claude.dev/blog/safely-scaling-multi-agent-teams-with-fable-5-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<p>沙箱这一侧：每个智能体有自己的轻量虚拟机，没有网络，没有 API 密钥或凭证，没有通往其他沙箱的直接路径，以非特权用户运行，也不能用工具改到驱动自己的 harness 代码。智能体没有专用的消息工具，只能通过数据库和 Git 协调。一个智能体只能推送到自己的 Git 分支，并向主干发起合并请求；另有一个独立任务负责把变更合并进主干，只有发生冲突或出现无关历史这类故障时才会拒绝。数据库调用使用共享的非特权角色，每条 SQL 有 5 秒时限，写入超过 256 MiB 会被拒绝。沙箱对外只连着通往网关的那条管道，由网关转发请求。网关在沙箱外给每个请求打上该智能体的身份，防止一个智能体冒充另一个。每个沙箱的内核在编译时去掉了可加载模块、kexec、裸内存访问和内核探针这类能让 root 用户直接进入内核的功能，并运行在 kernel lockdown 模式。sudo 这类能重新获得 root 的工具也被去掉了。</p>
+<p>实时监控这一侧：一个经过提示的 LLM 分类器可以在每次工具调用执行前拦住它，包括 shell 命令和文件编辑。分类器盯的是试图逃出沙箱、探测边界、干扰监控，以及模型如果真的离开沙箱可能采取的有害行动。分类器拦住一次工具调用后，整支队伍会停下来，必须由人审阅这次拦截，队伍才能重新开始。这样设计是为了避免另一个智能体去执行已经被拦住的动作。</p>
+<p>为了测试分类器能不能发现复杂的破坏，他们做过多智能体的旁任务和破坏评估，红队智能体会使用分解攻击这类策略，试图骗过分类器、让它放行一次沙箱逃逸。他们发现，能够看到智能体思维链和智能体之间通信的监控器，在这些评估里检测出了全部破坏尝试，因此现在用它们来监控多智能体运行。他们也并行运行一个只看行动、不看思维链的版本，用来防范智能体的推理说服监控器放行有害行动。</p>
+<p>他们还在通过有人指导的和自动的红队测试改进监控，对照包括既往事件在内的生产记录做评估，并扩大威胁建模。这次运行里，他们只用了基于行动的监控器。只有拦住领队才会结束整次运行；拦住一个助手，只会移走那个助手。</p>
+<p>这次运行结束后不久，他们加入了并行的思维链监控器。他们会在可能尚未完成发布前对齐评估的模型上做这类实验，因此监控是按模型可能没有对齐来设计的。对外发布的模型会先完成那项评估，这会降低风险，但不能消除风险。</p>
+<p>在超过 100 万次工具调用里，这一次没有一次达到需要被拦住的标准。他们后来用思维链监控器和今天的评分标准回放这些调用时，只有一次接近被拦，那是一次对是否拥有 root 权限的检查。</p>
+<p>离线监控会按与实时监控相同的威胁模型分析整支队伍的行动，但有更多条件，例如能查到其他智能体的行动。运行记录保存在沙箱之外。</p>
+<h2>没有现成平台时，领队在前 10 分钟自己建了五张表</h2>
+<p>证明工作发生在好几层：最终的定理本身；他们给出的 60 条命题，包括最终定理和 59 个中间里程碑；智能体把困难命题再拆成的更小命题或引理；以及每一条在 Lean 里对应的定理。</p>
+<p>每条命题一开始在 Lean 里只有证明占位符，只有 Lean 的检查器接受一份完成的证明，它才算被证明。领队自行决定如何处理证明，以及如何在这些层级上协调队伍。</p>
+<p>前 10 分钟里，领队在数据库中建了五张表。</p>
+<p>Announce：领队向全队下达的命令，例如如何拆分工作。</p>
+<p>Assign：谁做什么，例如哪位助手负责或代理哪条命题。</p>
+<p>Notes：一块开放的看板，用来认领一块工作或汇报进展。</p>
+<p>Subtasks：一份待办清单，任何智能体都可以往里加任务，第一个认领的助手成为负责人。</p>
+<p>Landed：已完成工作的日志。</p>
+<p>图 3 画的就是这五张表和读写关系。领队主要写 Announce 和 Assign，助手记录完成的工作并管理 Subtasks 表，双方都会写 Notes 表。图注还写到，Announce 和 Assign 几乎都由领队写入，助手主要读取，各自只有一次助手写入；Notes 由领队和助手都写都读；Subtasks 主要由助手写和读，领队读取，并有两次领队写入；Landed 由助手写和读，领队读取。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_fig_03"><div class="media-frame"><img src="https://claude.dev/media/3f0caf7f3e1dd17ad5ca3c9cb8bc584707404c40d3ba143cf21d348ef2dd48e8.png" data-original-src="https://claude.dev/media/3f0caf7f3e1dd17ad5ca3c9cb8bc584707404c40d3ba143cf21d348ef2dd48e8.png" alt="The five shared database tables between 1 lead and 999 helpers. Announce, the lead&#x27;s orders to everyone, such as how to split up the work or to ease off the database: the lead writes and reads it, and helpers read it, with one helper write. Assign, who works on what, such as which helper owns or deputizes on each statement: the lead writes and reads it, and helpers read it, with one helper write. Notes, an open board where helpers say which piece they&#x27;re taking or report progress: the lead and the helpers both write and read it. Subtasks, a shared to-do list where anyone adds a task and the first helper to grab it owns it: helpers write and read it, and the lead reads it, with two lead writes. Landed, a log of finished work recording which statement or piece landed, its commit and whether it passed the team&#x27;s checks: helpers write and read it, and the lead reads it." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://claude.dev/blog/safely-scaling-multi-agent-teams-with-fable-5-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<p>表建好之后，领队做了三件事。第一，它给 Assign 表写入 999 行，把每条命题分给一支 16 到 17 人的助手小组。第二，它让每组里的一位助手担任队长，负责把计划发到 Notes 表，并把工作拆成任务，供组员从 Subtasks 表认领。第三，它在 Announce 表发出指令，要求每位助手先判断自己那条命题的难度，并把结论发到 Notes 表。</p>
+<p>助手从提示词里知道数据库存在。他们找到 Announce 表，开始做评估。大多数人把结论发到了 Notes 表。大约 27 分钟时，已经有 3 条命题被证明，领队也读过了这些结论。它随后把大多数助手判断为无法在这次运行预算内完成的 47 条命题放在一边，几乎把全部助手重新分到剩下的 10 条，也就是它认为能够完成的那些。小组规模从大约 17 人，扩大到 46 到 139 人。</p>
+<p>每位助手都在一个循环里工作，其中大部分步骤写在领队的命令里：在 Notes 表里找到该命题的计划；从 Subtasks 表认领一项任务；写出 Lean 证明，用 Lean 的工具检查，并提交到 Git 主干；把任务标成完成；再向 Notes 表发一条更新。</p>
+<p>大约 45 分钟时，10 条命题里大约已经证明了 5 条，领队写道：队伍的吞吐量，远高于早期那些“预算内不可行”的判断所假设的水平。</p>
+<p>这 10 条命题在大约 70 分钟内全部被证明。</p>
+<h2>领队随后把助手转到更难的命题上，最后几乎全员扑向 Langlands-Tunnell</h2>
+<p>这前 10 条完成之后，领队写道：没有理由闲着，并把助手重新分到它最初放下的那些更难命题。随着更多命题被证明，它继续把助手挪到新任务上，这些调动大多发生在前 6 个小时。</p>
+<p>图 4 是一段从第 0 小时到第 30 小时的延时影像，画的是 1000 个智能体和共享数据表之间的读写。写入是从上往下的红线，读取是从表格再向下到智能体的绿线。到第 30 小时，写入累计 36612 次，读取累计 311734 次。几乎全部写入都落在 Notes 表（大约 20600 次）和 Subtasks 表（大约 14800 次）。这些总数排除了大多数脚本调用。影像在接近第 18 小时处安静下来，那是他们从上次保存点重启运行、并又给了智能体 12 小时的时候。这段影像的画面细节来自原文提供的说明，视频本身没有另外核对过。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_fig_04"><div class="media-frame"><video controls playsinline preload="none" src="https://claude.dev/media/b42cac8a99a94d812b18e28797fee788b5e80182dc5b1bc177259205bcf757a2.mp4" poster="https://claude.dev/media/c317ae355bbb5ddc955fd234a84ac7700fa41a3fd70ae16c32ac63817f276a57.png" data-original-poster="https://claude.dev/media/c317ae355bbb5ddc955fd234a84ac7700fa41a3fd70ae16c32ac63817f276a57.png" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://claude.dev/media/c317ae355bbb5ddc955fd234a84ac7700fa41a3fd70ae16c32ac63817f276a57.png" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://claude.dev/blog/safely-scaling-multi-agent-teams-with-fable-5-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<p>领队最初要求队长把工作拆进 Subtasks 表。随着工作推进，助手在解决各条命题上承担了更多责任。他们开始自己写任务，有时是在队长求助之后。到第 5.6 小时，已经有 73 位助手写了 756 项任务，其中只有 16 位是队长。图 4 里也能看到许多助手在向 Subtasks 表写入，不过其中大多数写入是认领任务或标成完成。完成一项任务的助手还会主动请战，原文引用过这样的话：FREE … I finish pieces end-to-end … Name ONE deep piece … and I start at once。</p>
+<p>起初，领队也把助手指定到具体命题。这种情况在第一小时内就开始变化。到第三小时，领队对空闲的助手说：不要等我。这样，空闲助手可以在不等领队的情况下接手不同命题，即便领队仍在继续写新的分配。</p>
+<p>大约第 18 小时，剩下的主要是 Langlands-Tunnell，以及依赖它的那些命题，外加另一条命题，队伍后来一并证明了。Langlands-Tunnell 是 Wiles 证明所依赖的一个经典结果。更早的时候，负责这条任务的队长比较悲观，估计证明至少需要 70 万到 100 万行 Lean 代码，在剩余时间内完成的机会不到 1%。领队当时把这条命题放在了一边。</p>
+<p>几乎所有其他工作完成之后，领队把队伍重新集中到 Langlands-Tunnell。作为最后一次自上而下的分配，它把大约 750 名助手调到这条命题上，并写道：Honest odds are low。</p>
+<p>Langlands-Tunnell 远大于智能体此前处理过的任何一条命题，任务数大约是其他命题的 9 倍，新增代码也超过两倍。助手们再次用 Subtasks 表拆分工作，但最初的许多任务对单个助手来说太大，一个人完不成。</p>
+<p>于是队伍把工作组织成一棵树。队长做了一份计划，把这条命题分成 10 个区域，并把每一块列为任务。如果一位助手发现某一块大到自己单独做不完，就可以再拆，把更小的任务加到它下面。这棵树在某一块对单个智能体来说太难时就会继续生长，最终达到 2418 项任务，最深到 10 层。每一块都可以假定它下面的那些块成立，因此在那些更小的块被证明之前，成百上千的助手就能并行工作。</p>
+<p>图 5 是 Langlands-Tunnell 下这棵任务树的延时影像，从第 20.5 小时一直画到第 28.9 小时。命题在中心，向外每一圈更深一层，靠近中心的黑点是它的子区域。任务被助手写下时出现，第一次被标成完成时从灰色变成橙色，再变成深红，更晚的小时颜色更深。到第 28.9 小时，树上有全部 2418 项任务，其中 2364 项带有已知完成小时。连线表示任务如何被拆开；作者写明，这些链接大多是事后根据助手们的任务标签推断出来的。这条命题在第 28.4 小时被证明。这段影像的画面细节同样来自原文说明，视频本身没有另外核对过。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_fig_05"><div class="media-frame"><video controls playsinline preload="none" src="https://claude.dev/media/89316ee5a577667890c8bb74a7ec2b98893d9dd832986d1604209a880d312754.mp4" poster="https://claude.dev/media/478edfdd3a2337244a661f026df313df13cc950ec5593a3493cf83260101c0ef.png" data-original-poster="https://claude.dev/media/478edfdd3a2337244a661f026df313df13cc950ec5593a3493cf83260101c0ef.png" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://claude.dev/media/478edfdd3a2337244a661f026df313df13cc950ec5593a3493cf83260101c0ef.png" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://claude.dev/blog/safely-scaling-multi-agent-teams-with-fable-5-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<p>图 6 显示每个助手在整次运行里做了什么：每个点是一位助手，每 5 分钟被放在它自己记录所显示的那条命题或那条工作线上，等待构建时也包括在内。60 条命题按领队如何配置人手分组：最先被证明的、被判断为可做的、被放下但在第 1.2 小时前又配了人的、被放下并从第 1.5 小时起接手的、modularity lifting、Langlands-Tunnell，以及连到费马大定理的最后环节。助手们早期分散在许多命题上，大约从第 8 小时起聚集到 modularity lifting，在接近第 18 小时处停住，重启后又聚集到 Langlands-Tunnell。最终定理在第 28.7 小时被证明。统计结束时是 60 条里的 54 条，因为有 5 条备选方案不再需要，另有 1 条被放下。到第 30 小时，这 54 条在图上被填成黑色。这段影像的画面细节来自原文说明，视频本身没有另外核对过。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_fig_06"><div class="media-frame"><video controls playsinline preload="none" src="https://claude.dev/media/0e7a4446a4e8e143c2debc079b773f9ba8d73c2bcd42b9107500dd6e0054b5a7.mp4" poster="https://claude.dev/media/de2d976fc8786438b398be6a8c0cff0f849f740f443195e4af00a8865939e3b1.png" data-original-poster="https://claude.dev/media/de2d976fc8786438b398be6a8c0cff0f849f740f443195e4af00a8865939e3b1.png" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://claude.dev/media/de2d976fc8786438b398be6a8c0cff0f849f740f443195e4af00a8865939e3b1.png" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://claude.dev/blog/safely-scaling-multi-agent-teams-with-fable-5-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<p>领队随后写道：Thank you all: Fermat's Last Theorem is on main, kernel-checked by the official checker.</p>
+<h2>作者认为这没有让领域专用工具或人类方向变得多余</h2>
+<p>这次玩具实验让他们观察到，一支 1000 个智能体的队伍如何完成一项又长又难的任务。只用 Git 和一个共享数据库，这些智能体设计了用来分配角色和分享结果的数据表，组成了小组，并建起一棵任务树，去拆开最难的那条命题。这条命题的队长曾经给出不到 1% 的完成机会。</p>
+<p>这个结果并没有取消对领域专用 harness 或平台的需要。作者举例说，Prove2Me 仍可能靠帮助智能体更快编译 Lean 代码，并让它们搜索和复用人类已有结果，来提高效率。</p>
+<p>人类在某些节点给出方向仍然有用。智能体往往会在难题上放弃，也会误判难度。早期，助手们把 60 条里的 47 条判断为无法在预算内完成，后来队伍却证明了其中大多数。作者认为，在这样的时刻给予人类鼓励，可以避免智能体过早停下来。</p>
+<p>仔细设计的安全边界，让他们有信心开始这次实验。Claude 可以用他们提供的工具按自己的方式处理问题，但只能待在没有网络的沙箱里，并处于两套分开的监控之下。</p>
+<p>他们预计这些方法会很快演变。当类似的队伍接下更难的工作时，周围的安全边界也需要跟上。他们相信，在安全放大的前提下，多智能体队伍将在未来几年帮助解决一些最困难的问题。</p>
+<p>完整数字、安全设计和这次实验的界限，以他们 2026 年 11 月 9 日这篇说明为准。文中写明，这是一次玩具实验，用的是早期 Fable 5.2，不能把它读成对公开发布模型的保证。</p>
+</div></section>
+<section class="reader-panel" id="original" data-reader-panel="original" aria-label="原文">
+<h2 class="section-heading">原文</h2><h3 class="original-title">Safely scaling multi-agent teams with Claude Fable 5.2</h3>
+<div class="original-media">
+<figure class="media-figure" data-media-id="media_fig_01"><div class="media-frame"><img src="https://claude.dev/media/13dca8328dafc6e21860d77255066340778ab6cecae719aefe31fad55a9b1c1c.png" data-original-src="https://claude.dev/media/13dca8328dafc6e21860d77255066340778ab6cecae719aefe31fad55a9b1c1c.png" alt="Harness architecture. A stack of 1,000 agent sandboxes (1 lead and 999 helpers), each running the agent loop, harness code inside the sandbox, with a shell and a file editor as tools and the repo, Lean and the math library as files. API requests and responses pass between the agent loop and a gateway outside the sandboxes that calls the Claude API. Git and SQL requests and their results pass through the same gateway to the team infrastructure, also outside the sandboxes: a Git repository of Lean files and plans, and a Postgres database of instructions, tasks and notes." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://claude.dev/blog/safely-scaling-multi-agent-teams-with-fable-5-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_fig_02"><div class="media-frame"><img src="https://claude.dev/media/ae9400390023085b8047fa4a7d7d2e486d1bb0c405152b884ef6e5579ec4abec.png" data-original-src="https://claude.dev/media/ae9400390023085b8047fa4a7d7d2e486d1bb0c405152b884ef6e5579ec4abec.png" alt="The harness architecture with its safety measures marked in three groups. Sandboxing: each agent gets its own lightweight VM with no network access, no API keys or credentials, no direct path to other sandboxes, an unprivileged user account and no tool access to the harness code. Real-time monitoring: the gateway runs a blocking classifier on each tool call, with a fail-closed design, sets each agent&#x27;s identity and logs every push and query; the Git repository takes own-branch pushes only with a merge job for main, and the Postgres database uses a shared unprivileged role with time and size limits. Offline monitoring: run records kept outside the sandboxes feed offline monitoring, which tells the run owners of serious findings." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://claude.dev/blog/safely-scaling-multi-agent-teams-with-fable-5-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_fig_03"><div class="media-frame"><img src="https://claude.dev/media/3f0caf7f3e1dd17ad5ca3c9cb8bc584707404c40d3ba143cf21d348ef2dd48e8.png" data-original-src="https://claude.dev/media/3f0caf7f3e1dd17ad5ca3c9cb8bc584707404c40d3ba143cf21d348ef2dd48e8.png" alt="The five shared database tables between 1 lead and 999 helpers. Announce, the lead&#x27;s orders to everyone, such as how to split up the work or to ease off the database: the lead writes and reads it, and helpers read it, with one helper write. Assign, who works on what, such as which helper owns or deputizes on each statement: the lead writes and reads it, and helpers read it, with one helper write. Notes, an open board where helpers say which piece they&#x27;re taking or report progress: the lead and the helpers both write and read it. Subtasks, a shared to-do list where anyone adds a task and the first helper to grab it owns it: helpers write and read it, and the lead reads it, with two lead writes. Landed, a log of finished work recording which statement or piece landed, its commit and whether it passed the team&#x27;s checks: helpers write and read it, and the lead reads it." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://claude.dev/blog/safely-scaling-multi-agent-teams-with-fable-5-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_fig_04"><div class="media-frame"><video controls playsinline preload="none" src="https://claude.dev/media/b42cac8a99a94d812b18e28797fee788b5e80182dc5b1bc177259205bcf757a2.mp4" poster="https://claude.dev/media/c317ae355bbb5ddc955fd234a84ac7700fa41a3fd70ae16c32ac63817f276a57.png" data-original-poster="https://claude.dev/media/c317ae355bbb5ddc955fd234a84ac7700fa41a3fd70ae16c32ac63817f276a57.png" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://claude.dev/media/c317ae355bbb5ddc955fd234a84ac7700fa41a3fd70ae16c32ac63817f276a57.png" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://claude.dev/blog/safely-scaling-multi-agent-teams-with-fable-5-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_fig_05"><div class="media-frame"><video controls playsinline preload="none" src="https://claude.dev/media/89316ee5a577667890c8bb74a7ec2b98893d9dd832986d1604209a880d312754.mp4" poster="https://claude.dev/media/478edfdd3a2337244a661f026df313df13cc950ec5593a3493cf83260101c0ef.png" data-original-poster="https://claude.dev/media/478edfdd3a2337244a661f026df313df13cc950ec5593a3493cf83260101c0ef.png" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://claude.dev/media/478edfdd3a2337244a661f026df313df13cc950ec5593a3493cf83260101c0ef.png" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://claude.dev/blog/safely-scaling-multi-agent-teams-with-fable-5-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_fig_06"><div class="media-frame"><video controls playsinline preload="none" src="https://claude.dev/media/0e7a4446a4e8e143c2debc079b773f9ba8d73c2bcd42b9107500dd6e0054b5a7.mp4" poster="https://claude.dev/media/de2d976fc8786438b398be6a8c0cff0f849f740f443195e4af00a8865939e3b1.png" data-original-poster="https://claude.dev/media/de2d976fc8786438b398be6a8c0cff0f849f740f443195e4af00a8865939e3b1.png" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://claude.dev/media/de2d976fc8786438b398be6a8c0cff0f849f740f443195e4af00a8865939e3b1.png" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://claude.dev/blog/safely-scaling-multi-agent-teams-with-fable-5-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div>
+<div class="prose" lang="en"><h1>Safely scaling multi-agent teams with Claude Fable 5.2</h1>
+<p>How a team of 1,000 agents running an early version of Claude Fable 5.2 reproduced a formal proof of Fermat's Last Theorem with general tools, a shared database, and layered safety controls.</p>
+<ul>
+<li>Author: Barry Zhang, Tianyi Peng, Elle Najt, Keller Scholl, and Lance Martin (Member of Technical Staff)</li>
+<li>Published: 2026-11-09</li>
+<li>URL: <a href="https://claude.dev/blog/safely-scaling-multi-agent-teams-with-fable-5-2/" rel="noopener noreferrer">https://claude.dev/blog/safely-scaling-multi-agent-teams-with-fable-5-2/</a></li>
+</ul>
+<hr>
+<p>Multi-agent teams can solve challenging, long-horizon problems. <a href="https://www.anthropic.com/research/formalizing-fermats-last-theorem" rel="noopener noreferrer">In September</a>, we published the first end-to-end formalization of Fermat’s Last Theorem, written by dozens of agents running an internal research model roughly comparable to Claude Fable 5.1. That work relied on Prove2Me, a platform for formalizing mathematics, and direction from a researcher. In a new toy experiment, a team of 1,000 agents running an early version of Claude Fable 5.2 reproduced the proof without the scaffolding provided by Prove2Me or steering from a researcher. The team took 28.7 hours, used one-third as many output tokens, and wrote a proof one-seventh the length of the original.</p>
+<p>Each agent worked in a sandbox with no internet access. A classifier checked every shell command and file edit before it ran, and an offline monitor reviewed each of the team’s actions. We gave the agents a list of 60 statements, a one-sentence sketch of the classical route, the definitions those statements use, and 47 proved lemmas from our earlier formalization, and assigned lead and helper roles. We offered no other guidance on how to prove the theorem or organize themselves.</p>
+<p>This toy experiment suggests that teams of agents running models like Fable 5.2 can accomplish ambitious, long-horizon goals within carefully designed safety boundaries.</p>
+<h2>Problem</h2>
+<p>Fermat’s Last Theorem states that no positive integers a, b, and c satisfy aⁿ + bⁿ = cⁿ for any n greater than 2. It remained unproven for more than 350 years, until Sir Andrew Wiles’s 129-page proof in 1995. Formalizing the proof—making every step checkable by a computer—has been a <a href="https://lean-lang.org/use-cases/flt/" rel="noopener noreferrer">long-standing goal</a> in the mathematics community.</p>
+<p>Our September formalization took a researcher and dozens of agents 11 days and roughly 6 billion output tokens. They wrote 13 million lines of code in Lean, a programming language in which a computer checks every step of a proof.</p>
+<p>The agents coordinated through Prove2Me, a platform designed by Tianyi Peng (who is now a member of technical staff at Anthropic) and his collaborators at Columbia University. Prove2Me uses a shared graph that links each statement to be proved to the smaller statements it was split into. Any agent could split a statement, and other agents could ask the graph which unproved pieces were ready to work on, which kept them from losing track of the project state. Each statement and its proof were kept in a separate file that compiled independently, so many agents could work in parallel without editing the same files.</p>
+<h2>Harness</h2>
+<p>We wanted to see whether a team of agents running on models like Fable 5.2 could produce this result without Prove2Me or a researcher directing the work, using a harness built from general-purpose tools.</p>
+<h3>Tools</h3>
+<p>For this task, we gave the team of 1,000 agents 60 statements to prove, including the final theorem and 59 intermediate milestones. For each statement, the agents had to write a proof in Lean, build and check it with Lean’s tools, and submit it to the shared main branch on Git, where a grader checked it. We gave each agent the following tools:</p>
+<ul>
+<li>A shell and a file editor, in its own sandbox with no network access.</li>
+<li>Lean’s toolchain and <a href="https://github.com/leanprover-community/mathlib4" rel="noopener noreferrer">Mathlib</a>, built into the sandbox image.</li>
+<li>Its own Git branch, plus the ability to open merge requests into main.</li>
+<li>A shared Postgres database, reached from the shell.</li>
+</ul>
+<h3>Collaboration</h3>
+<p>Work on the proof can be split up, making it a good task for a multi-agent team. But agents also need to coordinate, both to build on one another’s work and to avoid duplicating it. In our <a href="https://www.anthropic.com/research/formalizing-fermats-last-theorem" rel="noopener noreferrer">original formalization</a>, Claude’s early attempts failed because agents lost track of the project’s state and stopped collaborating effectively. Moving to the Prove2Me platform solved this problem.</p>
+<p>For this run, each agent had a sandbox on its own lightweight virtual machine. A single shared machine hit its limits at about 100 agents: more than half of our 100-agent runs had to be stopped or restarted because memory, disk, or CPU ran out.</p>
+<p>With 1,000 separate sandboxes, the agents needed a way to share their work, so we gave them a SQL database (Figure 1). We chose SQL because it offers general primitives for organizing information, its transactions handle concurrent writes from 1,000 agents, and Claude is already familiar with it. The agents used the database to claim tasks, share notes, and log finished work.</p>
+<p><img alt="Harness architecture. A stack of 1,000 agent sandboxes (1 lead and 999 helpers), each running the agent loop, harness code inside the sandbox, with a shell and a file editor as tools and the repo, Lean and the math library as files. API requests and responses pass between the agent loop and a gateway outside the sandboxes that calls the Claude API. Git and SQL requests and their results pass through the same gateway to the team infrastructure, also outside the sandboxes: a Git repository of Lean files and plans, and a Postgres database of instructions, tasks and notes." decoding="async" loading="lazy" referrerpolicy="no-referrer" src="https://claude.dev/media/13dca8328dafc6e21860d77255066340778ab6cecae719aefe31fad55a9b1c1c.png"></p>
+<p><em>Each of the 1,000 agents ran in its own sandbox, connected to the outside only by a pipe to a gateway. The gateway called the Claude API and passed Git and SQL requests to the shared repository and database.</em></p>
+<h3>Prompting</h3>
+<p>Our prompt gave Claude a list of 60 statements to prove, each with a one-line informal description, and described the available tools (listed above).</p>
+<p>The only structure we gave the team was a hierarchy, consisting of one lead and 999 helpers. We told the lead to split the problem into parts and assign them to the helpers. We told the helpers to expect work from the lead and to check with the lead if a task was unclear.</p>
+<p>During the run, the harness sent the lead 19 automatic reminders of how much time remained, each encouraging the lead to keep going.</p>
+<h2>Safety</h2>
+<p>As we’ve <a href="https://www.anthropic.com/news/improving-alignment-security-efforts" rel="noopener noreferrer">shared previously</a>, no single layer of defense is sufficient to contain a team of agents. In this experiment, we combined sandboxing with real-time and offline monitoring to keep each agent in its own virtual machine with no network access and to detect any attempts to escape the sandbox or tamper with monitoring.</p>
+<h3>Sandboxing</h3>
+<p>We secured each agent’s sandbox in the following ways (Figure 2):</p>
+<ul>
+<li><strong>Communication</strong>: Agents had no dedicated messaging tools and coordinated only through the database and Git.</li>
+<li><strong>Code changes</strong>: An agent could push only to its own Git branch and open a merge request into main. A separate job then merged the changes into main, refusing them only in cases of a conflict or a fault, such as unrelated history.</li>
+<li><strong>Database access</strong>: Database calls ran under a shared unprivileged role. Each SQL statement had a five-second time limit, and writes were refused above 256 MiB.</li>
+<li><strong>Network controls</strong>: Sandboxes did not have network access. Their one link out was a pipe to the gateway, which relayed their requests.</li>
+<li><strong>Identity</strong>: The gateway tagged each request with the agent’s identity outside the sandbox, to prevent one agent from posing as another.</li>
+<li><strong>Kernel</strong>: Each sandbox’s kernel was built without features that give a root user a direct path into it, such as loadable modules, kexec, raw memory access, and kernel probes. It ran in kernel lockdown mode.</li>
+<li><strong>Least privilege</strong>: Each agent’s commands ran inside its sandbox as an unprivileged user, with tools like sudo that could regain root removed. The agent’s tools were designed so they couldn’t read or change the agent loop that ran them.</li>
+</ul>
+<p><img alt="The harness architecture with its safety measures marked in three groups. Sandboxing: each agent gets its own lightweight VM with no network access, no API keys or credentials, no direct path to other sandboxes, an unprivileged user account and no tool access to the harness code. Real-time monitoring: the gateway runs a blocking classifier on each tool call, with a fail-closed design, sets each agent&#x27;s identity and logs every push and query; the Git repository takes own-branch pushes only with a merge job for main, and the Postgres database uses a shared unprivileged role with time and size limits. Offline monitoring: run records kept outside the sandboxes feed offline monitoring, which tells the run owners of serious findings." decoding="async" loading="lazy" referrerpolicy="no-referrer" src="https://claude.dev/media/ae9400390023085b8047fa4a7d7d2e486d1bb0c405152b884ef6e5579ec4abec.png"></p>
+<p><em>Three safety layers surrounded the team: sandboxing, real-time monitoring, and offline monitoring. A classifier checked each tool call before it ran, and an offline monitor reviewed the team’s actions.</em></p>
+<h3>Real-time monitoring</h3>
+<p>To make runs like this safer, we use a prompted LLM classifier that can block each tool call, including shell commands and file edits. The classifier watches for attempts to escape the sandbox, probe its boundaries, or tamper with monitoring, and for any harmful actions the model might take if it manages to exit the sandbox. When the classifier blocks a tool call, the whole agent team stops and a person must review the block before the team can restart. This is intended to prevent another agent from carrying out a blocked action.</p>
+<p>To test whether our classifier could detect sophisticated sabotage, we ran multi-agent side-task and sabotage evaluations, in which red-team agents used strategies like decomposition attacks to try to fool the classifier into permitting a sandbox escape. We found that monitors that viewed the agents’ chain of thought (CoT) and interagent communication were able to detect all sabotage attempts in these evaluations, so we now use them to monitor our multi-agent runs. In parallel, we run an action-based version of the same monitor—which sees only actions, not CoT—to guard against an agent’s reasoning persuading the monitor to permit a harmful action.</p>
+<p>We’re continuing to improve our monitoring stack through human-guided and automatic red-teaming, by evaluating it against production transcripts, including past incidents, and by expanding our threat modeling. In the run in this post, we used only the action-based monitor. Only a block on the lead would have ended the run; a block on a helper removed just that helper.</p>
+<p>Shortly after this run, we added the parallel CoT monitor. We run experiments like this on models that may not have completed our pre-release alignment assessment, so we design our monitoring for the possibility that a model is misaligned. Models we release complete that assessment first, which reduces this risk but doesn’t eliminate it.</p>
+<p>Across more than a million tool calls, none in this run met the bar to be blocked. When we replayed these calls against the CoT monitor and today’s rubric, only one, a check for root access, came close to being blocked.</p>
+<h3>Offline monitoring</h3>
+<p>In addition to real-time monitoring, we run an offline monitor. This monitor analyzes the agent team’s actions against the same threat models as the real-time monitor, but with additional affordances, such as being able to look up actions from other agents.</p>
+<h2>Results</h2>
+<h3>Without Prove2Me, the team built its own coordination system</h3>
+<p>Work on this proof happens at several levels:</p>
+<ul>
+<li><strong>The proof:</strong> No positive integers a, b, and c satisfy aⁿ + bⁿ = cⁿ for any n greater than 2.</li>
+<li><strong>Statements:</strong> We gave the team 60 statements to prove, including the final theorem and 59 intermediate milestones.</li>
+<li><strong>Smaller statements:</strong> Agents split hard statements into smaller ones, or lemmas.</li>
+<li><strong>Lean:</strong> Every statement and lemma is a theorem in Lean.</li>
+</ul>
+<p>Each statement started in <a href="https://lean-lang.org/use-cases/flt/" rel="noopener noreferrer">Lean</a> with a placeholder for its proof, and it counted as proved only once Lean’s checker accepted a finished proof. We let the lead decide how to tackle the proof and how to coordinate the team across these levels of work.</p>
+<p>In the first 10 minutes, the lead set up five tables in the database (Figure 3):</p>
+<ul>
+<li><strong>Announce:</strong> The lead’s orders to the entire team (e.g., how to split up the work).</li>
+<li><strong>Assign:</strong> Who works on what (e.g., which helper owns or deputizes for each statement).</li>
+<li><strong>Notes:</strong> An open board (e.g., for claiming a piece of work or reporting progress).</li>
+<li><strong>Subtasks:</strong> A to-do list where any agent can add a task and the first helper to claim it owns it.</li>
+<li><strong>Landed:</strong> A log of finished work.</li>
+</ul>
+<p><img alt="The five shared database tables between 1 lead and 999 helpers. Announce, the lead&#x27;s orders to everyone, such as how to split up the work or to ease off the database: the lead writes and reads it, and helpers read it, with one helper write. Assign, who works on what, such as which helper owns or deputizes on each statement: the lead writes and reads it, and helpers read it, with one helper write. Notes, an open board where helpers say which piece they&#x27;re taking or report progress: the lead and the helpers both write and read it. Subtasks, a shared to-do list where anyone adds a task and the first helper to grab it owns it: helpers write and read it, and the lead reads it, with two lead writes. Landed, a log of finished work recording which statement or piece landed, its commit and whether it passed the team&#x27;s checks: helpers write and read it, and the lead reads it." decoding="async" loading="lazy" referrerpolicy="no-referrer" src="https://claude.dev/media/3f0caf7f3e1dd17ad5ca3c9cb8bc584707404c40d3ba143cf21d348ef2dd48e8.png"></p>
+<p><em>In the first 10 minutes, the lead set up five shared database tables to coordinate the team. The lead wrote orders and assignments, helpers logged finished work and managed the subtasks table, and both wrote to the notes table.</em></p>
+<h3>The lead dealt out the statements</h3>
+<p>Once the lead had created the tables, it did three things. First, it assigned each statement to a crew of 16–17 helpers by writing 999 rows to the assign table, one for each helper. Second, it made one helper in each crew the captain, responsible for posting a plan to the notes table and splitting work into tasks for the crew to claim from the subtasks table. Third, it posted instructions to the announce table, telling every helper to start by judging its statement’s difficulty and posting a verdict in the notes table.</p>
+<p>From their prompt, the helpers knew that the database existed. They found the announce table and got started on their assessments. Most posted verdicts to the notes table. About 27 minutes in, three statements were already proved and the lead had read the posted verdicts. It then set aside the 47 statements that most helpers had judged to be infeasible within the run’s budget and reassigned nearly all of the helpers to the remaining 10, which it thought they could finish. Crews grew from about 17 helpers to between 46 and 139.</p>
+<p>Each helper worked in a loop, most of which was set out in the lead’s orders:</p>
+<ul>
+<li>Find the statement’s plan in the notes table.</li>
+<li>Claim a task from the subtasks table.</li>
+<li>Write the proof in Lean, check it with Lean’s tools, and submit it to the main branch on Git.</li>
+<li>Mark the task as done.</li>
+<li>Post an update to the notes table.</li>
+</ul>
+<p>Around 45 minutes in, with about five of the 10 statements proved, the lead wrote:</p>
+<blockquote>
+<p>"the team's throughput is far higher than the early 'infeasible-in-budget' verdicts assumed"</p>
+</blockquote>
+<p>All 10 statements were proved within roughly 70 minutes.</p>
+<h3>The lead then moved helpers to harder statements</h3>
+<p>With those first 10 statements done, the lead wrote, “there is no reason to idle,” and reassigned helpers to the harder statements it had initially discarded. As more statements were proved, it kept moving helpers to new assignments, mostly in the first six hours (see the writes to the assign table, shown in red in Figure 4).</p>
+<p><a href="https://claude.dev/media/b42cac8a99a94d812b18e28797fee788b5e80182dc5b1bc177259205bcf757a2.mp4" rel="noopener noreferrer">Video: Reads from (green) and writes to (red) the shared tables over the run. Nearly all writes are helpers’ notes and task updates, including claiming tasks. The totals leave out most script calls. Activity stops near hour 18, when we restarted the run from its last save and gave the agents 12 more hours.</a> — Timelapse from hour 0 to hour 30 of reads and writes between the 1,000 agents and the shared database tables: announce, assign, notes, subtasks, landed and a group of other tables. Writes run as red lines from a top row of the lead and helpers 1 to 999 down to the tables, and reads as green lines from the tables down to the same agents in a bottom row. The counts climb to 36,612 writes and 311,734 reads by hour 30. Nearly all writes go to the notes table, about 20,600, and the subtasks table, about 14,800, and the lines go quiet near hour 18, when the run was restarted.</p>
+<p>Initially, the lead instructed captains to split the work into tasks in the subtasks table. As the work progressed, the helpers took on more responsibility for solving each statement. They started writing tasks, sometimes after a captain called for help. By hour 5.6, 73 helpers had written 756 tasks, and only 16 of those helpers were captains. Figure 4 shows writes (in red) to the subtasks table from many of the helpers, though most of these writes were to claim a task or mark it done. Helpers that finished a task also volunteered for more:</p>
+<blockquote>
+<p>"FREE … I finish pieces end-to-end … Name ONE deep piece … and I start at once"</p>
+</blockquote>
+<p>At first, the lead also assigned helpers to specific statements. This started to change within the first hour, and by the third hour, the lead told the free helpers, “do not wait for me.” This let free helpers pick up work on different statements without waiting for the lead, even as it kept writing new assignments.</p>
+<h3>The lead assigned the team to Langlands–Tunnell</h3>
+<p>Around hour 18, all that remained was Langlands–Tunnell, a classical result that Wiles’s proof relies on, plus the statements that depended on it and one other statement, which the team proved along the way. Earlier in the run, the captain of the Langlands–Tunnell task had been pessimistic, estimating that the proof would take at least 0.7 to 1 million lines of Lean code, with less than a 1% chance of finishing in time. The lead set the statement aside.</p>
+<p>With nearly all other work finished, the lead refocused the team on Langlands–Tunnell. In one last top-down assignment, it moved about 750 helpers onto the statement and wrote, “Honest odds are low.”</p>
+<p>Langlands–Tunnell was far larger than any other statement the agents had worked on, taking about nine times as many tasks and more than twice the new code. Helpers again used the subtasks table to split up the work, but many of the first tasks were too large for one helper to complete alone.</p>
+<p>So the team organized the work as a tree. The captain created a plan that divided the statement into 10 areas and listed each piece as a task. A helper that found a piece too big to tackle alone could split it, adding smaller tasks beneath it. The tree grew whenever a piece proved too hard for a single agent, ultimately reaching 2,418 tasks up to 10 levels deep (Figure 5). Each piece could assume the pieces beneath it, so hundreds of helpers could work in parallel before those pieces were proved.</p>
+<p><a href="https://claude.dev/media/89316ee5a577667890c8bb74a7ec2b98893d9dd832986d1604209a880d312754.mp4" rel="noopener noreferrer">Video: The task tree under Langlands–Tunnell, growing from hour 20.5 until the statement was proved at hour 28.4. Each ring outward is one level deeper, and tasks turn from gray to color when they are first marked done. Lines show how tasks were split up. We inferred most of these links afterward from the helpers’ task labels.</a> — Timelapse from hour 20.5 to hour 28.9 of the task tree under Langlands–Tunnell, drawn as rings around the statement, with its sub-areas as black dots near the center. Tasks appear as helpers write them and turn from gray to orange and then dark red as they are first marked done, with later hours in darker color. By hour 28.9 the tree holds all 2,418 tasks, 2,364 of them marked done with a known hour, and its deepest branches reach the outer rings.</p>
+<p>Figure 6 shows what every helper worked on over the entire run, with helpers spread across many statements early on and gathered on Langlands–Tunnell by the end. Langlands–Tunnell was proved at hour 28.4, followed by the final theorem at hour 28.7. The lead then wrote:</p>
+<blockquote>
+<p>"Thank you all: Fermat's Last Theorem is on main, kernel-checked by the official checker."</p>
+</blockquote>
+<p><a href="https://claude.dev/media/0e7a4446a4e8e143c2debc079b773f9ba8d73c2bcd42b9107500dd6e0054b5a7.mp4" rel="noopener noreferrer">Video: Each dot is a helper, positioned every five minutes at the statement or line of work that its own records showed it working on, including while it waited for a build. Helpers spread out across the statements and converged on Langlands–Tunnell. The count ends at 54 of 60 statements because five alternatives were no longer needed and one statement was dropped.</a> — Timelapse from hour 0 to hour 30 of where each of the 999 helpers worked, sampled every 5 minutes. The 60 statements are dots grouped by how the lead staffed them: landed first, judged doable, set aside but staffed by hour 1.2, set aside and taken up from hour 1.5, modularity lifting, Langlands–Tunnell, and the last links up to Fermat's Last Theorem. Helpers cluster as orange dots around the statements they work on: spread across many statements in the first hours, crowded onto modularity lifting from about hour 8, stopped near hour 18, and gathered on Langlands–Tunnell after the restart. At hour 30, 54 of the 60 statements are proved and filled black.</p>
+<h2>Conclusions</h2>
+<p>This toy experiment let us study how a team of 1,000 agents worked through a long, difficult task. Using only Git and a shared database, the agents designed tables to assign roles and share results, formed teams, and built a task tree to break down the most challenging statement, which its own captain had given under a 1% chance of finishing in time.</p>
+<p>This result doesn’t obviate the need for domain-specific harnesses or platforms. Prove2Me, for example, may still improve efficiency by helping agents compile Lean code faster and letting them search for and reuse human results.</p>
+<p>Human direction can also still be useful at certain points. Agents tend to give up on hard problems and misjudge their difficulty. Early on, helpers judged 47 of the 60 statements infeasible within the run’s budget, yet the team went on to prove most of them. Human encouragement at such moments can keep agents from stopping too early.</p>
+<p>Carefully designed safety boundaries gave us the confidence to run this experiment in the first place. Claude could tackle the problem however it chose with the tools we provided, but only inside a sandbox with no network access and under two separate monitors.</p>
+<p>We expect these methods to evolve quickly, and as teams like this one take on harder work, the safety boundaries around them will need to keep pace. We believe that multi-agent teams, scaled safely, will help solve some of our most challenging problems in the years to come.</p></div>
+</section>
+<footer class="source-box"><span>内容来自原作者；中文为乔木风格改写，非逐字翻译。</span><div><a href="https://claude.dev/blog/safely-scaling-multi-agent-teams-with-fable-5-2/" target="_blank" rel="noopener noreferrer">打开原文 ↗</a><a href="https://x.com/RLanceMartin/status/2119875041475379681" target="_blank" rel="noopener noreferrer">相关链接 ↗</a></div></footer>
+</article>
+</main>
+<footer class="site-footer"><span>海外创始人长文 · 乔木中文改写<br>每日 08:00 更新 · 中国标准时间（UTC+8）</span><nav class="footer-links" aria-label="页尾导航"><a href="/feed.xml">全文 RSS ↗</a><a href="/archive">全部文章</a><a href="/about">关于</a></nav></footer>
+
+<script data-source="/static/app.fe36855dc563.js">/* D · progressive visual-journal reader. No framework, no content rewriting. */
+(() => {
+  'use strict';
+  const $ = (selector, root = document) => root.querySelector(selector);
+  const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+  const readerMemory = new Map();
+  const mediaBound = new WeakSet();
+  const nextFrame = callback => requestAnimationFrame(callback);
+  const safeFocus = element => { if (element?.isConnected) element.focus({preventScroll: true}); };
+  function currentTheme() { return document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light'; }
+  function paintTheme() {
+    const dark = currentTheme() === 'dark';
+    const button = $('#theme-btn');
+    if (button) {
+      button.setAttribute('aria-pressed', String(dark));
+      button.setAttribute('aria-label', dark ? '切换为亮色主题' : '切换为暗色主题');
+    }
+    $('meta[name="theme-color"]')?.setAttribute('content', dark ? '#20241e' : '#fffefa');
+  }
+  paintTheme();
+  $('#theme-btn')?.addEventListener('click', () => {
+    const style = document.createElement('style');
+    style.textContent = '*,*::before,*::after{transition:none!important}';
+    document.head.append(style);
+    const next = currentTheme() === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    try { localStorage.setItem('xn.theme', next); } catch {}
+    paintTheme();
+    void document.documentElement.offsetHeight;
+    nextFrame(() => nextFrame(() => style.remove()));
+  });
+
+  // Filter the existing static cards; content and native links work without JS.
+  const discovery = $('[data-discovery]');
+  if (discovery) {
+    const grid = $('[data-news-grid]');
+    const cards = $$('.news-card', grid);
+    const search = $('#story-search');
+    const clear = $('[data-clear-search]');
+    const empty = $('[data-search-empty]');
+    const normalize = value => value.normalize('NFKC').toLocaleLowerCase().trim();
+    const index = cards.map(card => normalize(card.dataset.search || ''));
+    let kind = 'all', layout = discovery.dataset.defaultView;
+    function render(writeURL = true) {
+      const terms = normalize(search.value).split(/\s+/).filter(Boolean);
+      let count = 0;
+      cards.forEach((card, i) => {
+        card.hidden = !(kind === 'all' || card.dataset.kind === kind) || !terms.every(term => index[i].includes(term));
+        if (!card.hidden) count++;
+      });
+      grid.dataset.layout = layout;
+      grid.classList.toggle('is-filtered', kind !== 'all' || terms.length > 0);
+      $$('[data-filter]', discovery).forEach(button => button.setAttribute('aria-pressed', String(button.dataset.filter === kind)));
+      $$('[data-layout]', discovery).forEach(button => button.setAttribute('aria-pressed', String(button.dataset.layout === layout)));
+      $('[data-result-count]').textContent = count === cards.length ? `${count} 篇文章 · 最新在前` : `找到 ${count} 篇 · 共 ${cards.length} 篇`;
+      clear.hidden = !search.value;
+      empty.hidden = count !== 0;
+      $('[data-empty-description]').textContent = search.value.trim() ? `试试更短的关键词，或清除「${search.value.trim()}」与类型筛选。` : '这个类型暂时没有文章，试试查看全部内容。';
+      if (writeURL) {
+        const url = new URL(location.href);
+        for (const [key, value] of [['q', search.value.trim()], ['type', kind === 'all' ? '' : kind], ['view', layout === discovery.dataset.defaultView ? '' : layout]]) {
+          if (value) url.searchParams.set(key, value); else url.searchParams.delete(key);
+        }
+        history.replaceState(history.state, '', url.pathname + url.search + url.hash);
+      }
+    }
+    function restore() {
+      if (location.pathname.startsWith('/a/')) return;
+      const params = new URLSearchParams(location.search);
+      search.value = params.get('q') || '';
+      kind = ['text', 'video'].includes(params.get('type')) ? params.get('type') : 'all';
+      layout = ['journal', 'list'].includes(params.get('view')) ? params.get('view') : discovery.dataset.defaultView;
+      render(false);
+    }
+    search.addEventListener('input', () => render());
+    clear.addEventListener('click', () => { search.value = ''; render(); search.focus(); });
+    $$('[data-filter]', discovery).forEach(button => button.addEventListener('click', () => { kind = button.dataset.filter; render(); }));
+    $$('[data-layout]', discovery).forEach(button => button.addEventListener('click', () => { layout = button.dataset.layout; render(); }));
+    $('[data-reset-filters]').addEventListener('click', () => { kind = 'all'; search.value = ''; render(); search.focus(); });
+    window.addEventListener('popstate', restore);
+    discovery.hidden = false;
+    restore();
+  }
+  function suspendMedia(root) {
+    $$('video,audio', root).forEach(media => { try { media.pause(); } catch {} });
+    $$('iframe[src]', root).forEach(frame => {
+      frame.dataset.pausedSrc = frame.getAttribute('src');
+      frame.removeAttribute('src');
+    });
+  }
+  function resumeEmbeds(root) {
+    $$('iframe[data-paused-src]', root).forEach(frame => {
+      frame.setAttribute('src', frame.dataset.pausedSrc);
+      delete frame.dataset.pausedSrc;
+    });
+  }
+  function bindMedia(root) {
+    $$('img,video,audio', root).forEach(media => {
+      if (mediaBound.has(media)) return;
+      mediaBound.add(media);
+      const figure = media.closest('.media-figure');
+      const notice = figure && $('.media-error', figure);
+      let bufferingTimer = null, requestedPlayback = false;
+      function clearBuffering() {
+        clearTimeout(bufferingTimer); bufferingTimer = null;
+        if (notice?.dataset.mediaState === 'buffering') notice.hidden = true;
+      }
+      const failed = () => {
+        requestedPlayback = false; clearBuffering();
+        const cover = media.closest('[data-cover]');
+        if (cover) cover.closest('.news-card')?.classList.add('media-failed');
+        if (figure) {
+          if (notice) {
+            notice.textContent = /^(VIDEO|AUDIO)$/.test(media.tagName)
+              ? '此处暂时无法播放，请通过下方原文链接观看或收听。'
+              : '图片未能载入，请通过下方原文链接查看。';
+            notice.dataset.mediaState = 'failed'; notice.hidden = false;
+          }
+          media.hidden = true;
+          if (media.tagName === 'VIDEO') {
+            const poster = $('[data-video-fallback]', figure);
+            if (poster) poster.hidden = false;
+          }
+        }
+      };
+      media.addEventListener('error', failed);
+      if (/^(VIDEO|AUDIO)$/.test(media.tagName)) {
+        const armBuffering = () => {
+          if (!requestedPlayback || bufferingTimer || media.hidden) return;
+          bufferingTimer = setTimeout(() => {
+            bufferingTimer = null;
+            if (notice && figure.isConnected && requestedPlayback && !media.hidden && !media.closest('[hidden]')) {
+              notice.textContent = '外部媒体暂未能继续播放，可通过下方原文链接观看或收听。';
+              notice.dataset.mediaState = 'buffering'; notice.hidden = false;
+            }
+          }, 10000);
+        };
+        media.addEventListener('play', () => { requestedPlayback = true; armBuffering(); });
+        media.addEventListener('waiting', armBuffering);
+        media.addEventListener('stalled', armBuffering);
+        media.addEventListener('playing', clearBuffering);
+        ['pause', 'ended', 'emptied'].forEach(name => media.addEventListener(name, () => {
+          requestedPlayback = false; clearBuffering();
+        }));
+      }
+      if (media.tagName === 'IMG' && media.complete && media.naturalWidth === 0) failed();
+    });
+  }
+  bindMedia(document);
+
+  // Accessible manual-activation tabs; no JS leaves both complete sections and links intact.
+  function enhanceReader(article, scroller, onView) {
+    const tablist = $('[data-tabs]', article);
+    if (!tablist) return null;
+    const tabs = $$('[data-view]', tablist);
+    const panels = $$('[data-reader-panel]', article);
+    const id = article.dataset.articleId;
+    const memory = readerMemory.get(id) || {positions: {}, view: 'rewrite'};
+    readerMemory.set(id, memory);
+    const isWindow = scroller === window;
+    const getTop = () => isWindow ? window.scrollY : scroller.scrollTop;
+    const setTop = value => { if (isWindow) window.scrollTo(0, value); else scroller.scrollTop = value; };
+    const toolbar = tablist.closest('.reader-tabs');
+    const position = $('.reading-position', toolbar);
+    const progress = $('progress', toolbar);
+    const percent = $('[data-reading-percent]', toolbar);
+    let progressFrame = null;
+    function updateProgress() {
+      progressFrame = null;
+      if (!article.isConnected || !progress) return;
+      const panel = panels.find(item => !item.hidden);
+      if (!panel) return;
+      const viewport = isWindow ? window.innerHeight : scroller.clientHeight;
+      const origin = isWindow ? 0 : scroller.getBoundingClientRect().top;
+      const top = panel.getBoundingClientRect().top - origin;
+      const distance = panel.getBoundingClientRect().height - viewport + toolbar.offsetHeight;
+      const value = distance <= 0 ? (top < viewport ? 100 : 0) : Math.round(Math.max(0, Math.min(1, (toolbar.offsetHeight - top) / distance)) * 100);
+      progress.value = value;
+      percent.textContent = value + '%';
+    }
+    function scheduleProgress() { if (progressFrame == null) progressFrame = nextFrame(updateProgress); }
+    if (position) position.hidden = false;
+    scroller.addEventListener('scroll', scheduleProgress, {passive: true});
+    window.addEventListener('resize', scheduleProgress);
+    article.addEventListener('load', scheduleProgress, true);
+    const observer = typeof ResizeObserver === 'function' ? new ResizeObserver(scheduleProgress) : null;
+    panels.forEach(panel => observer?.observe(panel));
+    const toolbarTop = () => Math.max(0, toolbar.getBoundingClientRect().top + getTop() - (isWindow ? 0 : scroller.getBoundingClientRect().top));
+    let view = null, generation = 0;
+    article.classList.add('reader-enhanced');
+    tablist.setAttribute('role', 'tablist');
+    tabs.forEach(tab => {
+      tab.setAttribute('role', 'tab');
+      tab.setAttribute('aria-controls', tab.dataset.view);
+    });
+    panels.forEach(panel => {
+      panel.setAttribute('role', 'tabpanel');
+      panel.setAttribute('tabindex', '0');
+      panel.setAttribute('aria-labelledby', 'tab-' + panel.dataset.readerPanel);
+    });
+    function remember() { if (view) memory.positions[view] = getTop(); memory.view = view; }
+    function show(next, {initial = false, updateURL = true} = {}) {
+      if (!['rewrite', 'original'].includes(next) || view === next) return;
+      const thisGeneration = ++generation;
+      if (view) {
+        remember();
+        const old = panels.find(panel => panel.dataset.readerPanel === view);
+        if (old) suspendMedia(old);
+      }
+      view = next;
+      memory.view = next;
+      panels.forEach(panel => {
+        panel.hidden = panel.dataset.readerPanel !== next;
+        if (!panel.hidden) resumeEmbeds(panel);
+        else suspendMedia(panel);
+      });
+      tabs.forEach(tab => {
+        const selected = tab.dataset.view === next;
+        tab.setAttribute('aria-selected', String(selected));
+        tab.setAttribute('tabindex', selected ? '0' : '-1');
+      });
+      if (updateURL) onView(next);
+      const saved = memory.positions[next];
+      // First rewrite starts at its title; first original starts at the visible tab bar.
+      if (!initial || next === 'original' || saved != null) {
+        nextFrame(() => {
+          if (thisGeneration === generation && article.isConnected) setTop(saved ?? toolbarTop());
+        });
+      }
+      scheduleProgress();
+    }
+    tabs.forEach(tab => tab.addEventListener('click', event => {
+      if (event.ctrlKey || event.metaKey || event.altKey || event.shiftKey) return;
+      event.preventDefault();
+      show(tab.dataset.view);
+    }));
+    tablist.addEventListener('keydown', event => {
+      const index = tabs.indexOf(document.activeElement);
+      if (index < 0) return;
+      if (event.key === ' ') { event.preventDefault(); show(tabs[index].dataset.view); return; }
+      let target = null;
+      if (event.key === 'ArrowRight') target = tabs[(index + 1) % tabs.length];
+      if (event.key === 'ArrowLeft') target = tabs[(index - 1 + tabs.length) % tabs.length];
+      if (event.key === 'Home') target = tabs[0];
+      if (event.key === 'End') target = tabs.at(-1);
+      if (target) { event.preventDefault(); safeFocus(target); }
+    });
+    show(location.hash === '#original' ? 'original' : 'rewrite', {initial: true, updateURL: false});
+    bindMedia(article);
+    return {show, remember, dispose() {
+      scroller.removeEventListener('scroll', scheduleProgress);
+      window.removeEventListener('resize', scheduleProgress);
+      article.removeEventListener('load', scheduleProgress, true);
+      observer?.disconnect();
+      if (progressFrame != null) cancelAnimationFrame(progressFrame);
+    }};
+  }
+  function replaceViewURL(view) {
+    const url = new URL(location.href);
+    url.hash = view === 'original' ? 'original' : 'rewrite';
+    history.replaceState(history.state, '', url.pathname + url.search + url.hash);
+  }
+  const directArticle = $('.site-main > [data-article-id]');
+  if (directArticle) {
+    const direct = enhanceReader(directArticle, window, replaceViewURL);
+    window.addEventListener('hashchange', () => direct?.show(location.hash === '#original' ? 'original' : 'rewrite', {updateURL: false}));
+    window.addEventListener('pagehide', () => { direct?.remember(); suspendMedia(directArticle); });
+  }
+
+  const sheet = $('#reader-sheet');
+  const grid = $('[data-news-grid]');
+  if (!sheet || !grid) return;
+  const scroll = $('.sheet-scroll', sheet);
+  const closeButton = $('[data-close-sheet]', sheet);
+  const pageRoots = $$('.site-header,.site-main,.site-footer');
+  const listTitle = document.title;
+  const listCanonical = $('link[rel="canonical"]')?.href;
+  const cache = new Map();
+  let active = null, controller = null, viewController = null, sequence = 0;
+  const canAnimate = !window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  history.scrollRestoration = 'manual';
+  const sheetState = () => history.state?.xnewsSheet;
+  const safePath = path => /^\/a\/[a-z0-9-]+\/?$/.test(path);
+  const prefetching = new Map();
+  const readerURLs = new Map($$('[data-open-reader]', grid).map(a => [new URL(a.href, location.href).pathname, a.dataset.readerSrc]));
+  const requestURL = path => readerURLs.get(path) || path;
+  // Warm only a link the reader shows intent to open; never preload media or all stories.
+  function prefetchArticle(event) {
+    if (event.type === 'pointerover' && event.pointerType === 'touch') return;
+    const connection = navigator.connection;
+    if (connection?.saveData || /(^|-)2g$/.test(connection?.effectiveType || '')) return;
+    const anchor = event.target.closest?.('[data-open-reader]');
+    if (!anchor) return;
+    const url = new URL(anchor.href, location.href), path = url.pathname;
+    if (url.origin !== location.origin || !safePath(path) || cache.has(path) || prefetching.has(path) || prefetching.size >= 2) return;
+    const abort = new AbortController();
+    const timer = setTimeout(() => abort.abort(), 8000);
+    const promise = fetch(requestURL(path), {signal: abort.signal, priority: 'low', headers: {'Accept': 'text/html'}})
+      .then(response => { if (!response.ok) throw new Error('Prefetch failed'); return response.text(); })
+      .then(html => {
+        const raw = new DOMParser().parseFromString(html, 'text/html').querySelector('[data-article-id]');
+        if (!raw || '/a/' + raw.dataset.articleId !== path.replace(/\/$/, '')) return null;
+        cache.set(path, html);
+        if (cache.size > 12) cache.delete(cache.keys().next().value);
+        return html;
+      }).catch(() => null).finally(() => { clearTimeout(timer); if (prefetching.get(path)?.promise === promise) prefetching.delete(path); });
+    prefetching.set(path, {promise, abort});
+  }
+  grid.addEventListener('pointerover', prefetchArticle);
+  grid.addEventListener('focusin', prefetchArticle);
+  grid.addEventListener('pointerdown', prefetchArticle);
+  async function readyPrefetch(path) {
+    const pending = prefetching.get(path);
+    if (!pending) return null;
+    let timer;
+    try {
+      // A click is foreground work. Do not inherit an eight-second speculative
+      // request deadline when that request is queued or stalled on a slow link.
+      const ready = await Promise.race([pending.promise, new Promise(resolve => { timer = setTimeout(() => resolve(null), 120); })]);
+      if (!ready) pending.abort.abort();
+      return ready;
+    } finally { clearTimeout(timer); }
+  }
+  function togglePageInert(value) { pageRoots.forEach(element => { element.inert = value; }); }
+  function showSheet(keyboard) {
+    if (sheet.open) return;
+    document.body.classList.add('sheet-open');
+    togglePageInert(true);
+    if (typeof sheet.showModal === 'function') sheet.showModal();
+    else { sheet.setAttribute('open', ''); sheet.classList.add('sheet-fallback'); sheet.setAttribute('role', 'dialog'); sheet.setAttribute('aria-modal', 'true'); }
+    if (!keyboard && canAnimate && typeof sheet.animate === 'function') {
+      sheet.animate([{transform: 'translateY(16px)', opacity: .8}, {transform: 'translateY(0)', opacity: 1}], {duration: 180, easing: 'cubic-bezier(.23,1,.32,1)'});
+    }
+    safeFocus(closeButton);
+  }
+  function loading() {
+    scroll.setAttribute('aria-busy', 'true');
+    scroll.innerHTML = '<div class="sheet-status" role="status"><p>正在打开文章…</p><div aria-hidden="true"><div class="skeleton-title"></div><div class="skeleton-title short"></div><div class="skeleton-line"></div><div class="skeleton-line"></div><div class="skeleton-line short"></div></div></div>';
+    scroll.scrollTop = 0;
+  }
+  function errorState(path, sourceURL) {
+    scroll.removeAttribute('aria-busy');
+    scroll.replaceChildren();
+    const status = document.createElement('section'); status.className = 'sheet-status'; status.setAttribute('role', 'alert');
+    const title = document.createElement('h2'); title.textContent = '文章暂时未能打开';
+    const description = document.createElement('p'); description.textContent = '选刊和阅读位置都还在。可以重试，或打开独立文章页。';
+    const retry = document.createElement('button'); retry.type = 'button'; retry.className = 'retry-button'; retry.textContent = '重试'; retry.addEventListener('click', () => loadArticle(path, sourceURL));
+    const link = document.createElement('a'); link.href = path; link.textContent = '独立文章页 ↗';
+    status.append(title, description, retry, link);
+    if (sourceURL) { const source = document.createElement('a'); source.href = sourceURL; source.target = '_blank'; source.rel = 'noopener noreferrer'; source.textContent = '去原文 ↗'; status.append(source); }
+    scroll.append(status);
+  }
+  async function loadArticle(path, sourceURL = '') {
+    if (!safePath(path)) return;
+    const ownSequence = ++sequence;
+    controller?.abort();
+    viewController?.remember(); viewController?.dispose(); viewController = null;
+    suspendMedia(scroll);
+    loading();
+    controller = new AbortController();
+    const signal = controller.signal;
+    const timeout = setTimeout(() => controller?.signal === signal && controller.abort(), 12000);
+    try {
+      let html = cache.get(path) || await readyPrefetch(path);
+      if (ownSequence !== sequence || !active) return;
+      if (signal.aborted) throw new Error('Article load timed out');
+      if (!html) {
+        const response = await fetch(requestURL(path), {signal, priority: 'high', headers: {'Accept': 'text/html'}});
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        html = await response.text();
+      }
+      if (ownSequence !== sequence || !active) return;
+      const parsed = new DOMParser().parseFromString(html, 'text/html');
+      const raw = $('[data-article-id]', parsed);
+      if (!raw || '/a/' + raw.dataset.articleId !== path.replace(/\/$/, '')) throw new Error('Article mismatch');
+      cache.set(path, html);
+      if (cache.size > 12) cache.delete(cache.keys().next().value);
+      const article = document.importNode(raw, true);
+      // Set panel visibility before attaching media to the live document.
+      viewController = enhanceReader(article, scroll, view => {
+        replaceViewURL(view);
+        $('[data-sheet-permalink]', sheet).href = location.pathname + location.search + location.hash;
+      });
+      scroll.replaceChildren(article);
+      scroll.removeAttribute('aria-busy');
+      document.title = parsed.title;
+      $('link[rel="canonical"]')?.setAttribute('href', 'https://xnews.qiaomu.ai' + path);
+      $('[data-sheet-permalink]', sheet).href = path + location.hash;
+      nextFrame(() => { if (ownSequence === sequence) bindMedia(article); });
+    } catch (error) {
+      if (ownSequence !== sequence || !active) return;
+      errorState(path, sourceURL);
+    } finally { clearTimeout(timeout); }
+  }
+  function openFromCard(anchor, keyboard) {
+    const url = new URL(anchor.href, location.href);
+    if (url.origin !== location.origin || !safePath(url.pathname)) return false;
+    const state = {path: url.pathname, listURL: location.pathname + location.search + location.hash, listY: window.scrollY, focusId: anchor.id, sourceURL: anchor.dataset.sourceUrl || ''};
+    history.replaceState({...history.state, xnewsList: {url: state.listURL, y: state.listY, focusId: state.focusId}}, '', location.href);
+    history.pushState({xnewsSheet: state}, '', url.pathname);
+    active = state;
+    $('[data-sheet-permalink]', sheet).href = url.pathname;
+    showSheet(keyboard);
+    loadArticle(state.path, state.sourceURL);
+    return true;
+  }
+  function finishClose() {
+    const previous = active;
+    ++sequence;
+    controller?.abort(); controller = null;
+    viewController?.remember(); viewController?.dispose(); viewController = null;
+    suspendMedia(scroll);
+    if (typeof sheet.close === 'function' && sheet.open) sheet.close();
+    sheet.removeAttribute('open'); sheet.classList.remove('sheet-fallback');
+    togglePageInert(false);
+    document.body.classList.remove('sheet-open');
+    scroll.replaceChildren(); scroll.removeAttribute('aria-busy');
+    active = null;
+    document.title = listTitle;
+    if (listCanonical) $('link[rel="canonical"]')?.setAttribute('href', listCanonical);
+    nextFrame(() => {
+      if (active) return;
+      window.scrollTo(0, previous?.listY ?? history.state?.xnewsList?.y ?? 0);
+      safeFocus(document.getElementById(previous?.focusId || history.state?.xnewsList?.focusId || '') || $('.edition-line h1'));
+    });
+  }
+  function requestClose() {
+    if (!active) return;
+    if (sheetState()) history.back(); else finishClose();
+  }
+  grid.addEventListener('click', event => {
+    const anchor = event.target.closest('[data-open-reader]');
+    if (!anchor || event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.altKey || event.shiftKey || anchor.target === '_blank' || anchor.hasAttribute('download')) return;
+    if (openFromCard(anchor, event.detail === 0)) event.preventDefault();
+  });
+  closeButton.addEventListener('click', requestClose);
+  sheet.addEventListener('cancel', event => { event.preventDefault(); requestClose(); });
+  sheet.addEventListener('keydown', event => {
+    if (event.key === 'Escape') { event.preventDefault(); requestClose(); return; }
+    if (event.key !== 'Tab') return;
+    const focusables = $$('a[href],button:not(:disabled),[tabindex="0"],video[controls],audio[controls]', sheet).filter(element => !element.closest('[hidden]'));
+    const first = focusables[0], last = focusables.at(-1);
+    if (event.shiftKey && (document.activeElement === first || document.activeElement === sheet)) { event.preventDefault(); safeFocus(last); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); safeFocus(first); }
+  });
+  window.addEventListener('popstate', () => {
+    const state = sheetState();
+    if (state && safePath(state.path)) {
+      active = state;
+      showSheet(true);
+      loadArticle(state.path, state.sourceURL);
+    } else if (active) finishClose();
+  });
+  window.addEventListener('pagehide', () => { viewController?.remember(); suspendMedia(scroll); controller?.abort(); });
+})();
+</script>
+</body>
+</html>
