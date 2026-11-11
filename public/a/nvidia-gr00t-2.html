@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="referrer" content="no-referrer">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>目标机器人没练过的50个任务，5条演示后GR00T 2的成功率从40%到95% · X News</title>
+<meta name="description" content="NVIDIA的GR00T 2同时预测未来视频和机器人动作。官方写到，在目标机器人未见过的50个任务上，零样本成功率是40%，5条演示并在一块RTX 5090上微调30分钟后到95%。模型权重和代码被标为12月发布。">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#fffefa">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="X News">
+<meta property="og:title" content="目标机器人没练过的50个任务，5条演示后GR00T 2的成功率从40%到95% · X News">
+<meta property="og:description" content="NVIDIA的GR00T 2同时预测未来视频和机器人动作。官方写到，在目标机器人未见过的50个任务上，零样本成功率是40%，5条演示并在一块RTX 5090上微调30分钟后到95%。模型权重和代码被标为12月发布。">
+<meta property="og:url" content="https://xnews.qiaomu.ai/a/nvidia-gr00t-2">
+<link rel="canonical" href="https://xnews.qiaomu.ai/a/nvidia-gr00t-2">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="目标机器人没练过的50个任务，5条演示后GR00T 2的成功率从40%到95% · X News">
+<meta name="twitter:description" content="NVIDIA的GR00T 2同时预测未来视频和机器人动作。官方写到，在目标机器人未见过的50个任务上，零样本成功率是40%，5条演示并在一块RTX 5090上微调30分钟后到95%。模型权重和代码被标为12月发布。">
+<meta property="og:image" content="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/hero_flip.jpg">
+<meta name="twitter:image" content="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/hero_flip.jpg">
+<meta property="article:published_time" content="2026-11-11T08:25:00+08:00">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://xnews.qiaomu.ai/#publisher", "name": "X News", "url": "https://xnews.qiaomu.ai/", "description": "海外创始人长文与 AI 视频的中文改写选刊"}, {"@type": "WebSite", "@id": "https://xnews.qiaomu.ai/#website", "name": "X News", "url": "https://xnews.qiaomu.ai/", "inLanguage": "zh-CN", "publisher": {"@id": "https://xnews.qiaomu.ai/#publisher"}}, {"@type": "Article", "@id": "https://xnews.qiaomu.ai/a/nvidia-gr00t-2#article", "url": "https://xnews.qiaomu.ai/a/nvidia-gr00t-2", "mainEntityOfPage": {"@id": "https://xnews.qiaomu.ai/a/nvidia-gr00t-2#page"}, "headline": "目标机器人没练过的50个任务，5条演示后GR00T 2的成功率从40%到95%", "description": "NVIDIA的GR00T 2同时预测未来视频和机器人动作。官方写到，在目标机器人未见过的50个任务上，零样本成功率是40%，5条演示并在一块RTX 5090上微调30分钟后到95%。模型权重和代码被标为12月发布。", "inLanguage": "zh-CN", "datePublished": "2026-11-11T08:25:00+08:00", "author": {"@id": "https://xnews.qiaomu.ai/#publisher"}, "publisher": {"@id": "https://xnews.qiaomu.ai/#publisher"}, "isBasedOn": {"@type": "CreativeWork", "url": "https://research.nvidia.com/labs/gear/gr00t-2/", "name": "GR00T 2: Scaling Robot Foundation Models for Generalization, Dexterity, and Adaptation", "datePublished": "2026-11-09T00:00:00+00:00"}, "citation": "https://research.nvidia.com/labs/gear/gr00t-2/", "keywords": ["NVIDIA", "GR00T 2", "robotics", "Jim Fan", "Yuke Zhu"], "image": ["https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/hero_flip.jpg"]}, {"@type": "WebPage", "@id": "https://xnews.qiaomu.ai/a/nvidia-gr00t-2#page", "url": "https://xnews.qiaomu.ai/a/nvidia-gr00t-2", "name": "目标机器人没练过的50个任务，5条演示后GR00T 2的成功率从40%到95% · X News", "description": "NVIDIA的GR00T 2同时预测未来视频和机器人动作。官方写到，在目标机器人未见过的50个任务上，零样本成功率是40%，5条演示并在一块RTX 5090上微调30分钟后到95%。模型权重和代码被标为12月发布。", "inLanguage": "zh-CN", "isPartOf": {"@id": "https://xnews.qiaomu.ai/#website"}, "mainEntity": {"@id": "https://xnews.qiaomu.ai/a/nvidia-gr00t-2#article"}}]}</script>
+<link rel="alternate" type="application/rss+xml" title="X News" href="/feed.xml">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-7 -7 58 58'%3E%3Crect x='-7' y='-7' width='58' height='58' rx='5' fill='%231b1d18'/%3E%3Cpath fill='%23fffefa' d='M2 0h11l29 44H31zM32 0h10L26 18l-5-7zM17 26l5 7-10 11H2z'/%3E%3C/svg%3E">
+<script>try{var t=localStorage.getItem('xn.theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
+<style data-source="/static/app.b7cfdefd4a1d.css">/* D · 影像刊 — see DESIGN.md. System fonts, real media, no left rail. */
+:root {
+  color-scheme:light;
+  --paper:#fffefa; --ink:#1b1d18; --muted:#62685a; --rule:#d8dccf;
+  --surface:#eef0e5; --sage:#dce3cc; --sage-ink:#293026; --focus:#315b3c;
+  --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC","Noto Sans CJK SC",sans-serif;
+  --ease:cubic-bezier(.2,0,0,1); --gutter:32px; --reader-bar:64px;
+  --control-border:#808675; --image-outline:#0000001a;
+  --contrast-surface:#1b1d18; --contrast-ink:#fffefa;
+}
+:root[data-theme="dark"] {
+  color-scheme:dark;
+  --paper:#20241e; --ink:#eef0e7; --muted:#b7c1af; --rule:#4b5842;
+  --surface:#30392a; --sage:#394631; --sage-ink:#eef0e7; --focus:#c0d9aa;
+  --control-border:#89957f; --image-outline:#ffffff1a;
+  --contrast-surface:#12180f; --contrast-ink:#eef0e7;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:130px;scrollbar-gutter:stable}
+body{margin:0;background:var(--paper);color:var(--ink);font:1rem/1.7 var(--sans);-webkit-font-smoothing:antialiased;letter-spacing:0}
+[hidden]{display:none!important}
+a{color:inherit;text-decoration:none}
+@media(hover:hover){a:hover{text-decoration:underline;text-underline-offset:.2em}}
+button{font:inherit;color:inherit;cursor:pointer}
+button:disabled{cursor:wait}
+button,a{-webkit-tap-highlight-color:transparent}
+
+:focus-visible{outline:3px solid var(--focus);outline-offset:4px}
+em,i{font-style:normal;font-weight:500}
+strong,b{font-weight:600}
+img{max-width:100%;height:auto}
+.sr-only,.skip:not(:focus){position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.skip:focus{position:fixed;z-index:100;top:8px;left:8px;background:var(--ink);color:var(--paper);padding:10px 16px}
+.site-header,.site-main,.site-footer{width:min(100% - var(--gutter)*2,1320px);margin-inline:auto}
+.site-header{min-height:118px;display:flex;align-items:center;justify-content:space-between;gap:24px 32px;flex-wrap:wrap;padding-block:24px;border-bottom:1px solid var(--ink)}
+.brand{display:flex;align-items:center;gap:26px;flex:none}
+.brand:hover{text-decoration:none}
+.brand-wordmark{display:flex;align-items:baseline;gap:7px;line-height:1}
+.brand-mark{width:43px;height:43px;align-self:center;margin-top:2px}
+.brand-name{font:700 3.875rem/.95 Georgia,"Times New Roman",serif;letter-spacing:-.065em}
+.brand-period{color:var(--focus)}
+.brand-sub{font-size:0.9375rem;font-weight:500;line-height:1.5;border-inline-start:1px solid var(--rule);padding-inline-start:25px;letter-spacing:.12em}
+.brand-sub>span{display:block;font-size:0.75rem;line-height:1.6;font-weight:400;letter-spacing:.04em;color:var(--muted);margin-top:5px}
+.header-side{display:flex;align-items:center;gap:30px}
+.site-nav{display:flex;align-items:center;gap:30px;font-size:0.875rem}
+.site-nav a{min-height:44px;display:flex;align-items:center;gap:6px;position:relative}
+.site-nav a[aria-current="page"]{font-weight:600}
+.site-nav a[aria-current="page"]::after{content:"";position:absolute;inset-inline:0;bottom:3px;height:2px;background:var(--ink)}
+.icon-button{width:44px;height:44px;border:1px solid var(--control-border);border-radius:50%;display:inline-grid;place-items:center;background:transparent;flex:none}
+.site-main{min-height:55vh;padding-bottom:44px}
+.edition-line{min-height:160px;display:flex;align-items:center;justify-content:space-between;gap:24px 32px;flex-wrap:wrap;padding-block:28px}
+.edition-line h1{font-size:1.875rem;line-height:1.4;font-weight:600;margin:8px 0 10px;text-wrap:balance}
+.edition-line p{font-size:0.875rem;line-height:1.7;color:var(--muted);margin:0}
+.edition-line .edition-kicker{font-size:0.6875rem;letter-spacing:.1em;color:var(--ink)}
+.edition-kicker span{margin-inline:8px;color:var(--muted)}
+.edition-meta{text-align:end;font-variant-numeric:tabular-nums;display:flex;flex-direction:column;gap:6px;flex:none}
+.edition-label{font-size:0.75rem;color:var(--muted)}
+.edition-meta time{font:400 1.5rem/1.25 Georgia,"Times New Roman",serif;letter-spacing:.02em}
+.edition-note{font-size:0.75rem;color:var(--muted)}
+/* A quiet editorial toolbar; every control remains labelled and keyboard accessible. */
+.discovery{margin-bottom:20px}
+.discovery-top,.discovery-bottom{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.discovery-top{flex-wrap:wrap;padding-block:16px;border-block:1px solid var(--rule)}
+.filter-group{display:flex;gap:8px;flex-wrap:wrap}
+.filter-group button{min-height:44px;padding:8px 16px;display:flex;align-items:center;gap:9px;font-size:0.875rem;background:transparent;border:1px solid transparent;border-radius:3px}
+.filter-group button span{font-size:0.6875rem;font-variant-numeric:tabular-nums;opacity:.8}
+.filter-group button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.search-field{display:flex;align-items:center;gap:10px;width:min(340px,42%);min-height:44px;border:1px solid var(--control-border);border-radius:3px;padding-inline:13px 0;color:var(--muted)}
+.search-field svg{flex:none}
+.search-field input{font:400 0.875rem/1.5 var(--sans);color:var(--ink);background:transparent;border:0;min-width:0;width:100%;padding:11px 0;border-radius:0}
+.search-field input::-webkit-search-cancel-button{display:none}
+.search-field input::placeholder{color:var(--muted);opacity:1}
+.search-field:focus-within{outline:2px solid var(--focus);outline-offset:3px}
+.search-field input:focus-visible{outline:none}
+.search-field button{border:0;background:transparent;width:44px;min-height:44px;flex:none;font-size:1.375rem}
+.discovery-bottom{flex-wrap:wrap;padding-top:12px;min-height:54px}
+.discovery-bottom p{margin:0;font-size:0.75rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.view-switch{display:flex;gap:4px}
+.view-switch button{display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:6px 10px;border:1px solid transparent;border-radius:3px;background:transparent;color:var(--muted);font-size:0.75rem}
+.view-switch button[aria-pressed="true"]{color:var(--ink);background:var(--surface);border-color:var(--control-border)}
+.search-empty{padding:48px 20px 72px;text-align:center;border-top:1px solid var(--rule)}
+.empty-symbol{font:400 3rem/1 Georgia,serif;color:var(--muted);margin:0 0 20px}
+.search-empty h2{font-size:1.375rem;font-weight:500;margin:0 0 12px}
+.search-empty p{color:var(--muted);overflow-wrap:anywhere}
+.search-empty .reset-button{margin:12px 0 0}
+.news-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:28px 24px;align-items:stretch}
+.news-card{grid-column:span 4;min-width:0;display:flex;flex-direction:column;border:1px solid var(--rule);background:var(--paper);position:relative;overflow:hidden}
+.news-card.is-featured{grid-column:span 8}
+.news-card.is-wide{grid-column:span 8}
+.card-link{display:flex;flex-direction:column;height:100%;min-width:0}
+.card-link:hover{text-decoration:none}
+.cover{position:relative;overflow:hidden;background:var(--surface);min-height:0;aspect-ratio:16/9;isolation:isolate}
+.cover img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;z-index:1;transition:transform 180ms var(--ease)}
+.is-featured .cover{min-height:0;aspect-ratio:2.7;flex:none}
+.is-featured .card-body{flex:0 0 auto}
+.is-wide .cover{aspect-ratio:2/1}
+.cover-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;background:var(--surface);color:var(--ink);z-index:0;overflow:hidden}
+.cover-word{font-size:clamp(2.75rem,5.3vw,5.25rem);font-weight:500;line-height:1.1;overflow-wrap:anywhere;max-width:100%;text-align:left}
+.cover-badge{position:absolute;z-index:2;left:16px;bottom:16px;background:#1b1d18dc;color:#fffefa;padding:5px 10px;font-size:0.75rem;line-height:1.6;border:1px solid #fffefa60}
+.card-body{padding:22px 24px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.card-meta{display:flex;overflow-wrap:anywhere;align-items:flex-start;justify-content:space-between;gap:14px;font-size:0.75rem;line-height:1.7;color:var(--muted);font-variant-numeric:tabular-nums}
+.card-meta time{white-space:nowrap;flex:none}
+.card-title{font-size:1.3125rem;font-weight:600;line-height:1.6;margin:0;text-wrap:pretty;overflow-wrap:anywhere}
+.is-featured .card-title{font-size:clamp(1.5625rem,2.2vw,2rem);line-height:1.5}
+.card-dek{font-size:0.875rem;line-height:1.85;color:var(--muted);margin:0;text-wrap:pretty}
+.card-end{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;font-size:0.75rem;color:var(--muted);margin-top:auto;padding-top:16px}
+.card-read{display:inline-flex;align-items:center;gap:10px;color:var(--ink);white-space:nowrap}
+.card--text.tone-ink .card-read{color:var(--contrast-ink)}
+.card-link:focus-visible{outline-offset:-4px}
+.tone-ink .card-link:focus-visible{outline-color:var(--contrast-ink)}
+.card-arrow{font-size:1.3125rem;line-height:1}
+.card--text .type-cover{min-height:140px;padding:24px 24px 16px;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:20px;overflow:hidden}
+.type-index{font-size:0.625rem;letter-spacing:.12em;line-height:1.5;font-variant-numeric:tabular-nums}
+.type-dot{color:var(--focus)}
+.tone-ink .type-dot{color:var(--contrast-ink)}
+.card--text .cover-word{font:400 clamp(2.25rem,3.5vw,3.375rem)/1.15 Georgia,"Times New Roman",serif;letter-spacing:-.03em}
+.card--text .card-body{padding-top:12px}
+.card--text{align-self:stretch}
+.card--text.tone-ink{background:var(--contrast-surface);color:var(--contrast-ink);border-color:var(--contrast-surface)}
+.card--text.tone-ink .card-meta,.card--text.tone-ink .card-dek,.card--text.tone-ink .card-end{color:var(--contrast-ink);opacity:.85}
+.card--text.tone-sage{background:var(--sage);color:var(--sage-ink);border-color:var(--sage)}
+.card--text.tone-sage .card-meta,.card--text.tone-sage .card-dek,.card--text.tone-sage .card-end{color:var(--sage-ink)}
+.cover-error-link{display:none;font-size:0.875rem;padding:0 22px 18px;text-decoration:underline;text-underline-offset:.2em}
+.media-failed .cover-error-link{display:block}
+.media-failed .cover img{display:none}
+.empty-state{padding:64px 0;max-width:40rem}
+.empty-state h1{font-size:2rem;font-weight:500}
+.empty-state p{color:var(--muted)}
+.site-footer{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:20px 0 32px;border-top:1px solid var(--ink);font-size:0.875rem;color:var(--muted)}
+.footer-links{display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+.footer-links a{display:inline-flex;align-items:center;min-height:44px}
+/* Shared standalone article and progressive full-screen reader. */
+.article-reader{max-width:960px;margin:0 auto;padding:30px 0 60px;min-width:0}
+.article-back{display:inline-flex;min-height:44px;align-items:center;gap:8px;font-size:0.875rem;color:var(--muted);margin-bottom:20px}
+.article-header{max-width:900px;margin:0 auto 24px}
+.article-kicker{font-size:0.875rem;color:var(--muted);margin:0 0 12px}
+.article-header h1{font-size:clamp(1.8125rem,3.8vw,3rem);line-height:1.42;font-weight:500;margin:0 0 18px;text-wrap:pretty;overflow-wrap:anywhere}
+.article-dek{font-size:1.125rem;line-height:1.85;color:var(--muted);margin:0 0 22px;max-width:42rem}
+.article-meta{display:flex;gap:8px 22px;flex-wrap:wrap;color:var(--muted);font-size:0.875rem;padding-top:14px;border-top:1px solid var(--rule);font-variant-numeric:tabular-nums}
+.reader-tabs{display:flex;align-items:center;gap:8px 16px;flex-wrap:wrap;position:sticky;top:0;z-index:3;background:var(--paper);border-block:1px solid var(--rule);padding:8px 0;margin:0 auto 30px;max-width:900px}
+.reader-tabs [data-tabs]{display:flex;flex-wrap:wrap;gap:6px;min-width:0}
+.reader-tabs a{display:inline-flex;align-items:center;min-height:44px;padding:6px 14px;font-size:0.875rem;border:1px solid transparent;border-radius:3px;white-space:nowrap}
+.reader-tabs a[aria-selected="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.reader-source{margin-left:auto;font-size:0.875rem!important}
+.reader-panel{max-width:42rem;margin:0 auto 44px;scroll-margin-top:130px}
+.section-heading{font-size:1.25rem;font-weight:500;margin:0 0 20px}
+.reader-enhanced .section-heading{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);margin:0;padding:0}
+.original-title{font-size:1.1875rem;line-height:1.7;margin:0 0 22px;font-weight:500;overflow-wrap:anywhere}
+.completeness-note{font-size:0.875rem;line-height:1.85;color:var(--muted);background:var(--surface);border:1px solid var(--rule);padding:12px 16px;margin:0 0 24px}
+.prose{min-width:0;font-size:1.125rem;line-height:1.95;overflow-wrap:anywhere;text-wrap:pretty}
+.prose pre{max-width:100%;overflow-x:auto;margin:1.5em 0;padding:1rem;border:1px solid var(--rule);background:var(--surface);font-size:.875rem;line-height:1.65;tab-size:4;white-space:pre;overflow-wrap:normal;text-wrap:initial}
+.prose pre code{display:block;width:max-content;min-width:100%;padding:0;border:0;border-radius:0;background:none;font-size:inherit;line-height:inherit;white-space:pre;overflow-wrap:normal}
+/* Keep wide source tables inside the reading column without compressing every cell. */
+.prose table{display:block;width:fit-content;max-width:100%;overflow-x:auto;border-collapse:collapse;margin:1.5em 0;font-size:.9375rem;line-height:1.65;tab-size:4;text-wrap:wrap;font-variant-numeric:tabular-nums}
+.prose th,.prose td{padding:.7em .85em;border:1px solid var(--rule);text-align:left;vertical-align:top;min-width:5.5rem;max-width:24rem}
+.prose :is(th,td):first-child{min-width:7.5rem}
+.prose th{font-weight:600;background:var(--surface)}
+.prose :is(th,td)[align="left"]{text-align:left}
+.prose :is(th,td)[align="center"]{text-align:center}
+.prose :is(th,td)[align="right"]{text-align:right}
+.prose tbody tr:nth-child(even){background:color-mix(in srgb,var(--surface) 45%,transparent)}
+.prose caption{text-align:left;font-size:.875rem;line-height:1.6;color:var(--muted);padding-bottom:.65em}
+.prose img{max-width:100%;height:auto;vertical-align:middle}
+.prose p,.prose li{font-size:inherit;line-height:inherit;margin:0 0 1em}
+.prose :is(th,td) :is(p,li){font-size:inherit;line-height:inherit}
+.prose :is(th,td)>:last-child{margin-bottom:0}
+.prose h1,.prose h2,.prose h3{font-size:1.5625rem;font-weight:500;line-height:1.6;margin:1.8em 0 .7em}
+.prose h4,.prose h5,.prose h6{font-size:1.125rem;font-weight:600;line-height:1.65;margin:1.6em 0 .6em}
+.prose ul,.prose ol{padding-left:1.4em;margin:0 0 1.2em}
+.prose li{margin-bottom:.45em}
+.prose li>:is(ul,ol){margin:.45em 0 .6em}
+.prose li>p{margin-bottom:.6em}
+.prose li>:last-child{margin-bottom:0}
+.prose blockquote{margin:1.5em 0;padding:18px 22px;border:1px solid var(--rule);background:var(--surface)}
+.prose blockquote>:first-child{margin-top:0}
+.prose blockquote>:last-child{margin-bottom:0}
+.prose blockquote blockquote{margin:1em 0}
+.prose a{font-weight:500;text-decoration:underline;text-underline-offset:.22em}
+.prose hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
+.prose code{font-family:ui-monospace,monospace;font-size:.9em;background:var(--surface);padding:2px 4px;border-radius:3px;white-space:break-spaces}
+.prose details{margin:1.3em 0;padding:.8em 1em;border:1px solid var(--rule)}
+.prose summary{cursor:pointer;font-weight:600;line-height:1.6}
+.prose details[open]>summary{margin-bottom:.8em}
+.prose details>:last-child{margin-bottom:0}
+.prose kbd{font-family:ui-monospace,monospace;font-size:.85em;padding:.1em .35em;border:1px solid var(--rule);border-bottom-width:2px;border-radius:3px;background:var(--surface)}
+.prose sup,.prose sub{font-size:.75em;line-height:0;position:relative;vertical-align:baseline}
+.prose sup{top:-.5em}.prose sub{bottom:-.2em}
+.original-media{display:grid;gap:24px;margin:24px 0 28px}
+.media-figure{margin:0;min-width:0}
+.media-frame{background:var(--surface);border:1px solid var(--rule);overflow:hidden}
+.media-frame img,.media-frame video{max-width:100%;height:auto;max-height:80dvh;display:block;margin:auto}
+.media-frame audio{display:block;width:100%;min-height:54px}
+.media-frame .yt{position:relative;aspect-ratio:16/9}
+.media-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#1b1d18}
+.media-figure figcaption{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 18px;font-size:0.875rem;line-height:1.8;color:var(--muted);padding-top:8px}
+.media-figure figcaption a{text-decoration:underline;text-underline-offset:.2em}
+.media-error{font-size:0.875rem;color:var(--muted);margin:0;padding:18px}
+.source-box{max-width:42rem;margin:24px auto 0;border-top:1px solid var(--rule);padding-top:22px;font-size:0.875rem;color:var(--muted);overflow-wrap:anywhere}
+.source-box a{display:inline-flex;align-items:center;min-height:44px;text-decoration:underline;color:var(--ink);margin-right:22px}
+.reader-sheet{position:fixed;inset:0;margin:0;padding:0;width:100%;max-width:none;height:100dvh;max-height:none;border:0;background:var(--paper);color:var(--ink);overflow:hidden}
+.reader-sheet::backdrop{background:#1b1d1870}
+.reader-sheet[open]{display:flex;flex-direction:column}
+.reader-sheet.sheet-fallback{z-index:60}
+.sheet-bar{min-height:var(--reader-bar);display:flex;flex-shrink:0;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:0 var(--gutter);border-bottom:1px solid var(--rule);background:var(--paper)}
+.sheet-close{min-height:44px;display:inline-flex;align-items:center;gap:12px;border:0;background:none;padding:6px 0;font-size:0.875rem}
+.sheet-close span{font-size:1.375rem}
+.sheet-brand{font-size:0.875rem;font-weight:500}
+.sheet-bar a{font-size:0.875rem;color:var(--muted);min-height:44px;display:flex;align-items:center}
+.sheet-scroll{height:calc(100dvh - var(--reader-bar));flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable;scroll-padding-top:130px;padding:0 var(--gutter)}
+.sheet-scroll .article-back{display:none}
+.sheet-scroll .article-reader{padding-top:35px}
+.sheet-scroll .reader-tabs{top:0}
+.sheet-status{max-width:44rem;margin:52px auto;min-width:0}
+.sheet-status h2{font-size:1.6875rem;line-height:1.5;font-weight:500;margin:0 0 18px}
+.sheet-status p{font-size:1rem;line-height:1.9;color:var(--muted)}
+.sheet-status a{display:inline-flex;align-items:center;min-height:44px;margin-right:18px;text-decoration:underline;text-underline-offset:.2em}
+.retry-button,.reset-button{display:inline-flex;align-items:center;min-height:44px;padding:8px 18px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);border-radius:3px;margin-right:18px}
+.skeleton-title{width:85%;height:38px;background:var(--surface);margin-bottom:14px}
+.skeleton-title.short{width:60%}
+.skeleton-line{height:16px;background:var(--surface);margin-top:20px}
+.skeleton-line.short{width:72%}
+body.sheet-open{overflow:hidden}
+.about-copy{max-width:42rem;margin:52px auto 72px}
+.about-copy h1{font-size:2.375rem;font-weight:500;line-height:1.4;margin:0 0 30px}
+/* Filtered results have equal weight; the opening spread remains asymmetric. */
+.news-grid.is-filtered .is-featured{grid-column:span 4}
+.news-grid.is-filtered .is-featured .cover{aspect-ratio:16/9}
+.news-grid.is-filtered .is-featured .card-title{font-size:1.3125rem}
+.news-grid[data-layout="list"]{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--rule)}
+.news-grid[data-layout="list"] .news-card{background:transparent;color:var(--ink);border:0;border-bottom:1px solid var(--rule);overflow:visible}
+.news-grid[data-layout="list"] .card-link{display:flex;flex-direction:row;gap:28px;padding:26px 0;align-items:center}
+.news-grid[data-layout="list"] .cover,.news-grid[data-layout="list"] .type-cover{display:none}
+.news-grid[data-layout="list"] .card-body{padding:0;gap:8px;flex:1;min-width:0}
+.news-grid[data-layout="list"] .card-title{font-size:1.3125rem;line-height:1.6}
+.news-grid[data-layout="list"] .card-meta,.news-grid[data-layout="list"] .card-dek,.news-grid[data-layout="list"] .card-end{color:var(--muted);opacity:1}
+.news-grid[data-layout="list"] .card-read{color:var(--ink)}
+.news-grid[data-layout="list"] .card-end{padding-top:2px}
+.news-grid[data-layout="list"] .card-link:focus-visible{outline-color:var(--focus);outline-offset:5px}
+.reading-position{display:flex;align-items:center;gap:12px;flex-basis:100%;color:var(--muted);font-size:0.6875rem;line-height:1.3}
+.reading-position span{min-width:4ch;text-align:end;font-variant-numeric:tabular-nums}
+.reading-position progress{appearance:none;display:block;width:100%;height:2px;border:0;background:var(--rule);color:var(--focus)}
+.reading-position progress::-webkit-progress-bar{background:var(--rule)}
+.reading-position progress::-webkit-progress-value{background:var(--focus)}
+.reading-position progress::-moz-progress-bar{background:var(--focus)}
+.cover img,.media-frame img{outline:1px solid var(--image-outline);outline-offset:-1px}
+@media(hover:hover){
+ .news-card:has(.card-link:hover){border-color:var(--muted)}
+ .card-link:hover .card-read{text-decoration:underline;text-underline-offset:4px}
+ .icon-button:hover,.filter-group button[aria-pressed="false"]:hover,.view-switch button[aria-pressed="false"]:hover{background:var(--surface)}
+ .site-nav a:hover{text-decoration:none;color:var(--focus)}
+}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+ .card-link:hover .cover img{transform:scale(1.025)}
+}
+@media(prefers-reduced-motion:no-preference){
+ .icon-button,.retry-button,.reset-button{transition:scale 150ms ease-out}
+ .icon-button:not(:disabled):active,.retry-button:not(:disabled):active,.reset-button:not(:disabled):active{scale:.96}
+}
+@media(max-width:1050px){
+ .brand-sub{display:none}
+ .news-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+ .news-card,.news-card.is-wide,.news-grid.is-filtered .is-featured{grid-column:span 1}
+ .news-card.is-featured{grid-column:span 1}
+ .is-featured .cover{aspect-ratio:16/9}
+ .is-featured .card-title{font-size:1.4375rem}
+ .edition-line h1{font-size:1.6875rem}
+}
+@media(max-width:680px){
+ :root{--gutter:20px;--reader-bar:58px}
+ .site-header{min-height:0;gap:22px;flex-wrap:wrap;padding:26px 0 15px}
+ .brand{gap:16px}
+ .brand-wordmark{gap:5px}
+ .brand-name{font-size:3.25rem}
+ .brand-mark{width:35px;height:35px}
+ .brand-sub{display:block;padding-inline-start:16px;font-size:0.8125rem}
+ .brand-sub>span{font-size:0.6875rem}
+ .header-side{width:100%;justify-content:space-between;gap:16px}
+ .site-nav{gap:28px;flex-wrap:wrap;font-size:0.8125rem}
+ .icon-button{width:40px;height:40px}
+ .edition-line{min-height:0;gap:16px;padding-block:22px}
+ .edition-line h1{font-size:1.5625rem;margin-top:10px}
+ .edition-line .edition-description{font-size:0.8125rem;max-width:24em;line-height:1.8}
+ .edition-meta{display:none}
+ .edition-line .edition-kicker{font-size:0.625rem}
+ .discovery-top{flex-wrap:wrap;gap:16px;padding-block:14px 16px}
+ .filter-group{gap:4px}
+ .filter-group button{padding-inline:13px;font-size:0.8125rem}
+ .search-field{width:100%}
+ .search-field input{font-size:1rem}
+ .discovery-bottom{gap:8px;align-items:center}
+ .discovery-bottom p{font-size:0.6875rem}
+ .view-switch button{font-size:0.6875rem;padding-inline:8px;gap:5px}
+ .view-switch svg{width:13px;height:13px}
+ .news-grid{grid-template-columns:minmax(0,1fr);gap:22px}
+ .news-card,.news-card.is-wide,.news-card.is-featured,.news-grid.is-filtered .is-featured{grid-column:auto;grid-row:auto}
+ .cover,.is-featured .cover,.is-wide .cover{aspect-ratio:16/9;min-height:0;flex:none}
+ .card-body{padding:20px;gap:12px}
+ .card-title,.is-featured .card-title,.news-grid.is-filtered .is-featured .card-title{font-size:1.375rem;line-height:1.6}
+ .card-dek{font-size:0.875rem}
+ .card-meta{font-size:0.75rem}
+ .card--text .type-cover{min-height:130px;padding:22px 20px 12px}
+ .card--text .cover-word{font-size:2.875rem}
+ .card-end{padding-top:12px}
+ .news-grid[data-layout="list"] .card-link{gap:16px;padding:22px 0;align-items:flex-start}
+ .news-grid[data-layout="list"] .cover,.news-grid[data-layout="list"] .type-cover{display:none}
+ .news-grid[data-layout="list"] .card-title{font-size:1.1875rem}
+ .site-main{padding-bottom:36px}
+ .site-footer{align-items:flex-start;flex-direction:column;gap:12px;padding-top:22px;font-size:0.75rem}
+ .footer-links{gap:26px}
+ .article-reader{padding-top:23px}
+ .article-back{margin-bottom:16px}
+ .article-header h1{font-size:1.8125rem;line-height:1.5}
+ .article-dek{font-size:1rem;line-height:1.9}
+ .reader-tabs{gap:4px;margin-bottom:24px;padding:7px 0}
+ .reader-tabs a{font-size:0.875rem;padding:6px 10px}
+ .reader-tabs .reader-source{font-size:0.8125rem!important;padding-inline-end:0}
+ .reader-panel{margin-bottom:28px}
+ .prose{font-size:1.0625rem;line-height:1.95}
+ .prose h1,.prose h2,.prose h3{font-size:1.4375rem;line-height:1.6}
+ .prose blockquote{padding:15px}
+ .sheet-bar{gap:10px}
+ .sheet-bar a{font-size:0.8125rem}
+ .sheet-brand{font-size:0.75rem}
+ .sheet-scroll .article-reader{padding-top:25px}
+ .sheet-status{margin-top:32px}
+ .about-copy{margin-top:32px}
+}
+@media(max-width:360px){
+ :root{--gutter:16px}
+ .brand-sub>span{font-size:0.6875rem;max-width:6em}
+ .site-nav{gap:22px}
+ .sheet-brand{display:none}
+ .reader-tabs a{padding-inline:8px;font-size:0.8125rem}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
+}
+@media print{
+ .site-header,.site-footer,.reader-tabs,.article-back,.sheet-bar{display:none!important}
+ .reader-panel[hidden]{display:block!important}
+ .site-main,.article-reader{width:100%;max-width:none}
+ .reader-sheet[open]{position:static;height:auto;overflow:visible}
+ .sheet-scroll{height:auto;overflow:visible;padding:0}
+}
+
+/* Source media remains part of the Chinese reading flow, not just the original tab. */
+.rewrite-source-media{margin:28px 0}
+.prose .source-media-heading{font-size:1.25rem;line-height:1.6;margin:0 0 12px}
+.prose .rewrite-source-media .completeness-note{font-size:0.875rem;line-height:1.8}
+.prose .media-error{font-size:0.875rem;line-height:1.8;margin:0}
+</style>
+<script defer src="https://umami.qiaomu.ai/script.js" data-website-id="31e0098c-6852-46b6-899c-11eed5ed16e1" data-domains="xnews.qiaomu.ai" data-exclude-search="true" data-exclude-hash="true"></script>
+</head>
+<body>
+<a class="skip" href="#main">跳到正文</a>
+<header class="site-header">
+  <a class="brand" href="/" aria-label="X News 海外发现首页"><span class="brand-wordmark" aria-hidden="true"><svg class="brand-mark" viewBox="0 0 44 44" fill="currentColor"><path d="M2 0h11l29 44H31zM32 0h10L26 18l-5-7zM17 26l5 7-10 11H2z"/></svg><span class="brand-name">News<span class="brand-period">.</span></span></span><span class="brand-sub">海外发现<span>英文原作 · 中文视角</span></span></a>
+  <div class="header-side"><nav class="site-nav" aria-label="主导航"><a href="/">精选</a><a class="archive-nav" href="/archive">往期</a><a href="/feed.xml" aria-label="订阅全文 RSS">订阅 RSS <span aria-hidden="true">↗</span></a></nav><button type="button" class="icon-button" id="theme-btn" aria-label="切换为暗色主题" aria-pressed="false"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16Z" fill="currentColor" stroke="none"/></svg></button></div>
+</header>
+<main class="site-main" id="main">
+<article class="article-reader" data-article-id="nvidia-gr00t-2">
+<a class="article-back" href="/">← 返回选刊</a>
+<header class="article-header"><p class="article-kicker">NVIDIA et al. / 长帖 / 视频</p><h1>目标机器人没练过的50个任务，5条演示后GR00T 2的成功率从40%到95%</h1><p class="article-dek">NVIDIA的GR00T 2同时预测未来视频和机器人动作。官方写到，在目标机器人未见过的50个任务上，零样本成功率是40%，5条演示并在一块RTX 5090上微调30分钟后到95%。模型权重和代码被标为12月发布。</p><div class="article-meta"><time datetime="2026-11-11">本站收录 2026年11月11日 · 周三</time><span>原文发布 2026年11月9日 · 周一</span><span>原作者：NVIDIA et al.</span><span>中文改写：<a href="/about">X News · 乔木</a></span><span>NVIDIA · GR00T 2 · robotics · Jim Fan · Yuke Zhu</span></div></header>
+<nav class="reader-tabs" aria-label="文章版本与来源"><div data-tabs><a href="#rewrite" id="tab-rewrite" data-view="rewrite">乔木改写</a><a href="#original" id="tab-original" data-view="original">原文</a></div><a class="reader-source" href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">原文链接 ↗</a><div class="reading-position" hidden><progress max="100" value="0" aria-label="当前版本阅读进度"></progress><span data-reading-percent aria-hidden="true">0%</span></div></nav>
+<section class="reader-panel" id="rewrite" data-reader-panel="rewrite" aria-label="乔木改写"><h2 class="section-heading">乔木改写</h2><div class="prose"><p>在目标机器人从未练习过、只在人类视频或其他机器人数据里出现过的50个任务上，NVIDIA的GR00T 2零样本成功率是40%。每项再给5条演示，机器人数据总共不到3分钟，在一块RTX 5090上做30分钟LoRA微调后，成功率到95%。</p>
+<p>官方页面顶部的视频说明是：一只灵巧机械手把GR00T 1的方块翻成GR00T 2。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_hero"><div class="media-frame"><video controls playsinline preload="none" src="https://research.nvidia.com/labs/gear/gr00t-2/assets/video/hero_flip.mp4" poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/hero_flip.jpg" data-original-poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/hero_flip.jpg" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/hero_flip.jpg" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<p>这篇由NVIDIA等作者署名的介绍，发布在GEAR实验室站点上，日期只写了2026年11月。页面同时给出白皮书，并把代码按钮标成12月可用。NVIDIA机器人总监、GEAR联合负责人Jim Fan的账号是@DrJimFan，他在2026年11月10日发了介绍帖。得州大学计算机副教授、同样联合负责GEAR的Yuke Zhu，账号是@yukez，个人简介写明观点属于他自己；他在11月9日发了更完整的分帖，并链到了同一页面。</p>
+<p>GR00T 2被写成新一代基础世界-动作模型，也就是WAM。它同时预测未来视频和机器人动作，既学习物理交互会怎样展开，也学习产生这些交互的动作。同一套模型可以跑在平行夹爪、灵巧手和人形机器人上。作者认为，学习预测世界，而不只是在世界里行动，带来了三项新能力。</p>
+<p>介绍区还有一段显微镜演示，官方说明是1倍速、未经剪辑的自主运行回放：两只22自由度的Sharpa手准备载玻片，并对准显微镜。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_microscope"><div class="media-frame"><video controls playsinline preload="none" src="https://research.nvidia.com/labs/gear/gr00t-2/assets/video/dex_microscope_hold.mp4" poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dex_microscope_hold.jpg" data-original-poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dex_microscope_hold.jpg" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dex_microscope_hold.jpg" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<h2>先预测世界会怎样，再发出动作</h2>
+<p>第一项被称为X-适应性的出现。只由人类演示，或只用手持和可穿戴设备演示过的技能，可以转到从未练习过这些技能的机器人上。</p>
+<p>在人类到机器人这条路上，任务只由人演示、从未在机器人上演示过时，一台有两只五指手的机器人，把滤纸放入实验室漏斗并用洗瓶润湿，成功率为65%。</p>
+<p>在手持UMI夹爪到YAM这条路上，演示只用与机器人自身不同的手持UMI夹爪完成。YAM臂把玩具自卸卡车从头到尾装完的成功率是60%，这是一项最长可达4分钟的长程任务。</p>
+<p>在可穿戴手到机器人手这条路上，演示只用DexUMI，这是一副镜像机器人手指的可穿戴手。由此，一台双手机器人能做长程灵巧工作，例如准备香蕉酸奶并舀格兰诺拉麦片当早餐，也能做更动态的任务，例如划火柴点灯。</p>
+<p>第二项是快速适应和智能体控制。GR00T 2能在许多新任务上零样本完成，并在少量演示后掌握它们。因为它预测自己正在朝向的结果，推理模型也可以指挥它。</p>
+<p>第三项是GR00T 2 Turbo的全身移动操作。Turbo被写成面向速度的GR00T 2。更小的Transformer和更紧凑的视频表示，使它轻到可以在Unitree G1人形机器人本机上运行，并在行走、弯腰、伸手和搬运时驱动全身。</p>
+<p>在G1自带的Jetson Thor上，每次预测耗时124毫秒。通过名为SONIC的全身控制器，Turbo在全部48次试验里完成了舀起并递出爆米花，并在93%的试验里清理一张放有多种物体的桌子。</p>
+<p>模型结构上，一个扩散Transformer同时对未来视频和机器人动作做去噪。预测场景将如何变化，让GR00T 2能从人类视频里学习物理；再由面向不同机器人的小型头部，把计划转成各自身体的电机指令。</p>
+<p>GR00T 2读取最近的视频、指令和机器人状态，同时去噪出未来视频和一段动作块，执行后再重复。官方结构图用的是Dexter上的卡车装配运行回放，也就是Tianji机器人加Sharpa手，分辨率是模型自己的320×224。历史面板是模型当时真实看到的0.8秒；未来面板是它在那一时刻为三个镜头生成的视频，不是真实录像。三个镜头分别是头部、左腕和右腕，历史窗口也是最近0.8秒。</p>
+<h2>人类视频占预训练的大头，10万小时已经公开</h2>
+<p>预训练用的是同一组三类数据：402,730小时人类工作第一人称视频，10,184小时手持UMI夹爪演示，覆盖2,897项任务，以及23,500小时机器人遥操作。机器人数据覆盖平行夹爪臂YAM和Franka，灵巧手Sharpa和Wuji，以及Unitree G1人形机器人。人类视频来自他们的第一人称Human-1M数据集，其中10万小时以Human-1M-100K的形式公开在Hugging Face，地址是 https://huggingface.co/datasets/nvidia/PhysicalAI-Human-1M-100K ，浏览入口是 https://huggingface.co/spaces/nvidia/PhysicalAI-Human-1M-Explorer 。</p>
+<p>23,500小时遥操作的拆分是：YAM 15,146小时，YAM上的ABC-130k 3,591小时，Sharpa手 2,890小时，Tianji臂上的Wuji手 1,256小时，DROID也就是Franka 350小时，Unitree G1 275小时。</p>
+<p>人类视频是这组数据里最大的一块。为了衡量它随规模增加对机器人的帮助，他们在不用人类视频、以及使用其中1%、10%、100%的设置下，预训练了四个模型，再在72项下游Dexter任务上评估，既看视频运行回放，也看真实机器人。任务进度在每一步都上升：视频运行回放从64%到77%，真实机器人从50%到70%。真实机器人图的横轴是预训练中人类视频占比，使用对数刻度；误差棒是72项任务多次运行的1个标准差。</p>
+<h2>机器人自己没演示过的任务，也可以从人和手持设备迁过去</h2>
+<p>所谓X-Adapt，就是交叉适应：用人类视频和其他机器人的数据，为一台新机器人学习技能，而目标机器人自己不必演示过该任务。官方用三种路径展示：从人到灵巧机器人，从手持夹爪到机械臂，从可穿戴手到机器人手。</p>
+<p>页面上有三组对照静帧。上排是GR00T 2学习所用的演示，下排是它在从未见过该任务演示的机器人上执行同一任务：一个人把滤纸放入漏斗，Dexter做同样的事；一个人用手持UMI夹爪把传送带上的包裹分进两个箱子，YAM在同一条传送带上把包裹分进两个箱子；一个戴着DexUMI外骨骼的人舀格兰诺拉，一只机器人手也在舀格兰诺拉。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_img_filter_human"><div class="media-frame"><img src="https://research.nvidia.com/labs/gear/gr00t-2/assets/img/xa_human_demo.jpg" data-original-src="https://research.nvidia.com/labs/gear/gr00t-2/assets/img/xa_human_demo.jpg" alt="A person sets up filter paper in a funnel" loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_img_filter_robot"><div class="media-frame"><img src="https://research.nvidia.com/labs/gear/gr00t-2/assets/img/xa_human_robot.jpg" data-original-src="https://research.nvidia.com/labs/gear/gr00t-2/assets/img/xa_human_robot.jpg" alt="Dexter sets up filter paper in a funnel" loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_img_umi_human"><div class="media-frame"><img src="https://research.nvidia.com/labs/gear/gr00t-2/assets/img/xa_umi_demo.jpg?v=3" data-original-src="https://research.nvidia.com/labs/gear/gr00t-2/assets/img/xa_umi_demo.jpg?v=3" alt="A person with a handheld UMI gripper sorts packages from a conveyor belt into two bins" loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_img_umi_yam"><div class="media-frame"><img src="https://research.nvidia.com/labs/gear/gr00t-2/assets/img/xa_umi_yam.jpg?v=3" data-original-src="https://research.nvidia.com/labs/gear/gr00t-2/assets/img/xa_umi_yam.jpg?v=3" alt="YAM sorts packages from the same conveyor belt into the two bins" loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_img_dexumi_human"><div class="media-frame"><img src="https://research.nvidia.com/labs/gear/gr00t-2/assets/img/xa_dexumi_demo.jpg" data-original-src="https://research.nvidia.com/labs/gear/gr00t-2/assets/img/xa_dexumi_demo.jpg" alt="A person wearing the DexUMI exoskeleton scoops granola" loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_img_dexumi_robot"><div class="media-frame"><img src="https://research.nvidia.com/labs/gear/gr00t-2/assets/img/xa_dexumi_robot.jpg" data-original-src="https://research.nvidia.com/labs/gear/gr00t-2/assets/img/xa_dexumi_robot.jpg" alt="A robot hand scoops granola" loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<p>在没有遥操作的人类到机器人设置里，每项化学实验任务都只由戴手套、并佩戴头部和手腕相机的人来演示。与任务无关的玩耍数据，则用来教Dexter认识自己身体的外观和运动。官方视频说明是：滤纸准备，先给出训练用的人类演示，再给出GR00T 2在Dexter上的自主执行。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_xadapt_filter"><div class="media-frame"><video controls playsinline preload="none" src="https://research.nvidia.com/labs/gear/gr00t-2/assets/video/xadapt_h2r_filter.mp4" poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/xadapt_h2r_filter.jpg" data-original-poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/xadapt_h2r_filter.jpg" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/xadapt_h2r_filter.jpg" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<p>在Dexter上，每项任务试验20次。页面写到，只从人类演示学习、没有任何遥操作时，GR00T 2在全部四项任务上都取得了成功。对比图里还有GR00T 1.7，以及没有跨本体预训练的GR00T 2。</p>
+<p>传送带分拣与抛送、玩具自卸卡车装配，以及NIST板拆解，都只用手持GEAR UMI夹爪演示。YAM只提供与任务无关的遥操作数据，没有任何这些任务的演示。传送带分拣与抛送按50件物品被分对的比例计算：GR00T 2是86%，GR00T 1.7是28%，π0.5是0%。官方为这条任务分别提供了人类演示视频和YAM自主执行视频。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_umi_human"><div class="media-frame"><video controls playsinline preload="none" src="https://research.nvidia.com/labs/gear/gr00t-2/assets/video/xadapt_umi_toss_human.mp4" poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/xadapt_umi_toss_human.jpg" data-original-poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/xadapt_umi_toss_human.jpg" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/xadapt_umi_toss_human.jpg" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_umi_robot"><div class="media-frame"><video controls playsinline preload="none" src="https://research.nvidia.com/labs/gear/gr00t-2/assets/video/xadapt_umi_toss_robot.mp4" poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/xadapt_umi_toss_robot.jpg" data-original-poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/xadapt_umi_toss_robot.jpg" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/xadapt_umi_toss_robot.jpg" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<p>GEAR DexUMI是一副关节与机器人手匹配的可穿戴外骨骼，因此人在上面做的动作可以直接映射到机器人。只凭DexUMI演示，GR00T 2在一台带两只XHAND1手的Tianji机器人上，学习了三项双手任务：准备香蕉酸奶并舀格兰诺拉，这是早餐任务的两半；以及划火柴点着烧瓶下的灯，再把火柴在水里熄灭。硬件说明在 https://research.nvidia.com/labs/gear/hardware-prototypes/ 。官方分别提供了早餐和划火柴的演示视频，以及对应的机器人自主执行视频。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_breakfast_human"><div class="media-frame"><video controls playsinline preload="none" src="https://research.nvidia.com/labs/gear/gr00t-2/assets/video/dexumi_breakfast_human_full.mp4" poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexumi_breakfast_human_full.jpg" data-original-poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexumi_breakfast_human_full.jpg" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexumi_breakfast_human_full.jpg" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_breakfast_robot"><div class="media-frame"><video controls playsinline preload="none" src="https://research.nvidia.com/labs/gear/gr00t-2/assets/video/dexumi_breakfast_robot.mp4" poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexumi_breakfast_robot.jpg" data-original-poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexumi_breakfast_robot.jpg" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexumi_breakfast_robot.jpg" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_strike_human"><div class="media-frame"><video controls playsinline preload="none" src="https://research.nvidia.com/labs/gear/gr00t-2/assets/video/dexumi_strike_human.mp4" poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexumi_strike_human.jpg" data-original-poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexumi_strike_human.jpg" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexumi_strike_human.jpg" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_strike_robot"><div class="media-frame"><video controls playsinline preload="none" src="https://research.nvidia.com/labs/gear/gr00t-2/assets/video/dexumi_strike_robot.mp4" poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexumi_strike_robot.jpg" data-original-poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexumi_strike_robot.jpg" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexumi_strike_robot.jpg" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<h2>少样本适应能补上执行精度，智能体则负责从杂乱桌面里恢复</h2>
+<p>在灵巧性部分，只需每项任务少量遥操作数据做后训练，GR00T 2就能用Dexter的两只22自由度Sharpa手，完成长程、高灵巧任务：给包裹贴标、更换零件、装配玩具，以及从头到尾做化学实验流程。其中一项“制作运输标签”的对比是：GR00T 2为60%，GR00T 2 Turbo为60%，GR00T 1.7为5%，π0.5为0%。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_label"><div class="media-frame"><video controls playsinline preload="none" src="https://research.nvidia.com/labs/gear/gr00t-2/assets/video/dexd_ship_cm.mp4" poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexd_ship_cm.jpg" data-original-poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexd_ship_cm.jpg" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexd_ship_cm.jpg" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<p>在最少后训练的情况下，两只22自由度Sharpa手把GB300内存模块装到位的成功率是85%，装配玩具卡车是65%。官方写到，此前的模型做不了这些任务。</p>
+<p>还有一条从人到仿真再到真实的路径。他们从一条人类用锤子的演示出发，在仿真里重建任务，并用强化学习继续打磨这项技能。GR00T 2从这些仿真数据中学习，并直接迁移到带Sharpa手的真实机器人上。对应视频的说明是人类演示。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_hammer"><div class="media-frame"><video controls playsinline preload="none" src="https://research.nvidia.com/labs/gear/gr00t-2/assets/video/dexsonic_human.mp4" poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexsonic_human.jpg" data-original-poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexsonic_human.jpg" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexsonic_human.jpg" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<p>在快速适应部分，GR00T 2在每项任务的小数据集上大约后训练六个epoch，从而用几小时演示学会该任务。更具体的零样本和少样本测试，用的是50项只出现在其他机器人数据或人类视频、从未出现在目标机器人自身数据中的任务，目标机器人是带两只Sharpa手的双手系统。</p>
+<p>只根据指令、完全零样本时，GR00T 2在40%的试验里成功，并在50项任务中的40项上至少成功一次。作者说，大多数失败来自执行而不是意图：步骤和顺序是对的，只是某一步精度不够。少量机器人数据就能补上这个缺口。每项任务1条演示，成功率升到71%；5条演示，也就是每项不到3分钟的机器人数据，成功率升到95%，其中37项任务在每次试验中都成功。每次适应都是在一块RTX 5090上做30分钟LoRA微调。官方汇集视频的说明是：这50项任务机器人都未见过，每段都是GR00T 2自主运行，50项任务的平均成功率从零样本40%，升到1条演示71%，再升到5条演示95%。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_fifty"><div class="media-frame"><video controls playsinline preload="none" src="https://research.nvidia.com/labs/gear/gr00t-2/assets/video/dexter50_reel.mp4?v=2" poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexter50_reel.jpg?v=2" data-original-poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexter50_reel.jpg?v=2" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexter50_reel.jpg?v=2" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<p>YAM上的后训练包含六项长程装配和插入任务，每项大约六个epoch，每项每个模型试验20次。页面用图表报告了各模型对比，这篇改写没有把未在正文里写出的逐项表格数字补进去。</p>
+<p>在真实机器人上的强化学习，只由任务级成功信号驱动，把三项接触丰富的插入任务，从监督后训练后的40%到76%，提升到GRPO诱导的自我模仿下的88%到96%。其中“固定管道接头”一项的对比是：GRPO诱导的自我模仿88%，GRPO 86%，残差强化学习76%，监督微调66%。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_pipe"><div class="media-frame"><video controls playsinline preload="none" src="https://research.nvidia.com/labs/gear/gr00t-2/assets/video/rl_screw_pipe_v10.mp4" poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/rl_screw_pipe_v10.jpg" data-original-poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/rl_screw_pipe_v10.jpg" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/rl_screw_pipe_v10.jpg" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<p>在智能体控制里，一个前沿推理智能体和GR00T 2分担任务。智能体决定做什么：把长任务拆成步骤、检查进度并写代码。GR00T 2决定怎么做，执行那些很难写成脚本的、接触丰富的操作。通过WAM API，智能体可以把GR00T 2当工具来调用，也可以在它的相机画面上标记目标来引导。</p>
+<p>这个智能体被称作系统2。它在观察、推理、行动、验证的循环里，把GR00T 2当作工具，同时使用获取相机图像、机器人状态，以及代码即策略技能的工具。在真实机器人上，大部分操作由GR00T 2完成。智能体在旁边看，零件掉落或进度停滞时，它会用ASPIRE学到的代码即策略技能修好场景，再把控制权交回去。在仿真里，智能体则运行一个任务级程序，在每个操作步骤调用GR00T 2。一些装配任务的恢复技能也是先在仿真里开发，再迁到真实机器人。</p>
+<p>每次装配试验都先把全部零件倒在桌上，因此起点是后训练数据里没有的杂乱布局。加上智能体后，GR00T 2装配玩具飞机、玩具拖拉机和Hot Wheels小车的成绩，分别是100次里的98、97和97次。同一套后训练策略在没有智能体时是71到84次，仅监督后训练则是23到69次。三个玩具合计300次试验中成功了292次。玩具飞机是100次里成功98次，仅监督微调时是69次。官方视频说明是：每段都是连续会话，左上角是智能体的推理，底部是播放速度和回合计数。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_plane"><div class="media-frame"><video controls playsinline preload="none" src="https://research.nvidia.com/labs/gear/gr00t-2/assets/video/agentic_assembly_plane.mp4" poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/agentic_assembly_plane.jpg" data-original-poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/agentic_assembly_plane.jpg" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/agentic_assembly_plane.jpg" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<p>智能体还会把真实强化学习得到的技能，组成更长的任务：把5根以太网线依次插入网络交换机，或把5个充电器插进人用手指出的插座。代码即策略负责定位、抓住并摆到位，GR00T 2做精度要求最高的插入，智能体负责安排步骤、检查每次插入，并在需要时调用恢复技能。把监督策略换成强化学习训练的GR00T 2后，完整任务成功率从插线的20次里12次提高到19次，从插充电器的20次里2次提高到20次。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_cables"><div class="media-frame"><video controls playsinline preload="none" src="https://research.nvidia.com/labs/gear/gr00t-2/assets/video/agentic_five_cables.mp4" poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/agentic_five_cables.jpg" data-original-poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/agentic_five_cables.jpg" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/agentic_five_cables.jpg" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<p>视觉引导要解决的是，语言指令在杂乱场景里，常说不清目标物体、目的地或该用哪只手臂。规划器会在GR00T 2的相机画面上，标出目标物体的抓取点和目的地的释放点，并用颜色区分该由哪只手臂来做。GR00T 2生成其余动作：靠近、抓住、搬运和放下。每一步之后，规划器再看一遍，决定继续、重试还是停止。训练不需要新数据：这些标记是从已有演示里的夹爪和手部状态提取的，而且同一模型仍然可以只跟随语言。</p>
+<p>其中一项演示是汉诺塔：在YAM上，规划器选择每一步，并标出环和它要去的柱子。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_hanoi"><div class="media-frame"><video controls playsinline preload="none" src="https://research.nvidia.com/labs/gear/gr00t-2/assets/video/agentic_hanoi.mp4" poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/agentic_hanoi.jpg" data-original-poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/agentic_hanoi.jpg" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/agentic_hanoi.jpg" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<p>两台机器人用同一套协议，比较三种设置：只给任务指令，只给规划器的分步指令，以及分步指令加上标记。在关于把什么移到哪里的短程指令上，视觉引导也就是分步指令加标记，把YAM的成功率从40%提到92%，把Dexter从30%提到70%；若只有规划器的分步指令，则分别是66%和33%。在关于如何移动的指令上，例如动作类型或抓取类型，提升较小，YAM从44%到59%。YAM每项设置有90次“是什么、到哪里”试验和54次“怎么做”试验；Dexter每项设置64次，全部是“是什么、到哪里”。</p>
+<p>这些单步提升在长程任务里会累积。在YAM上，没有标记时，即便有规划器的分步指令，GR00T 2也完成不了任何一轮垃圾分类或板件拆解；加上标记后，分别完成了20次里的17次，以及10次里的3次。在Dexter上，标记能让垃圾分类放入更多物品，但很少能完成整项任务，作者把这写成当前系统的限度。标记也不能传达物体的最终朝向，以及抓取和释放之间的动作，例如倾倒或擦拭，这些仍要靠语言。评估用了每项设置20次垃圾分类和10次NIST板拆解。</p>
+<h2>Turbo把世界-动作模型做到机载，但也在部分任务上落后完整版</h2>
+<p>Turbo在Unitree G1上运行，并通过潜在全身指令驱动SONIC全身控制器。页面视频展示它递送爆米花、清理洒出物，以及在办公食堂捡垃圾。爆米花递送的说明是：1倍速、未经剪辑的自主rollout，先把爆米花舀进托盘上的杯子，再走到休息区让人取走。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_popcorn"><div class="media-frame"><video controls playsinline preload="none" src="https://research.nvidia.com/labs/gear/gr00t-2/assets/video/g1_popcorn_delivery.mp4" poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/g1_popcorn_delivery.jpg" data-original-poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/g1_popcorn_delivery.jpg" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/g1_popcorn_delivery.jpg" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<p>Turbo降低世界-动作建模成本的方式有两个：一个更小的、参数量为20亿的联合视频-动作Transformer，以及一个更高压缩、利用视频冗余的视频编码器。它仍然联合预测未来观察和动作，动作视野相同，也是下面G1机载结果所用的模型。在其他本体上，它也仍有竞争力。在YAM上，固定管道接头达到90%，把导线插入断路器达到100%，这两项都高于GR00T 2。在其余四项YAM任务，以及Dexter后训练图中六项里的五项上，它落后于GR00T 2，第六项持平。</p>
+<p>这些更小的模块，加上所有配置共享的推理优化，使机载执行成为可能。相对同一检查点的eager BF16执行，优化把中位预测延迟降低了66%到86%，也就是2.9到7.2倍。优化后，G1上的一次Turbo预测在RTX 5090上是38毫秒，在机载Jetson Thor上是124毫秒。它大约每秒规划一次1.6秒的全身运动token块，由SONIC以50赫兹执行。</p>
+<p>页面把这套分工写成：推理模型选择任务和目标；GR00T 2 Turbo想象并做计划；SONIC把潜在全身token转成关节目标。除推理模型外，其余都在机载运行。标注是：GR00T 2 Turbo在NVIDIA Jetson AGX Thor上，SONIC在Jetson Orin NX上；Unitree G1的关节PD控制是1千赫兹。</p>
+<p>真实G1任务包括舀出并递送爆米花、清理洒出物，以及清理一张放有多种物体的桌子，都在同一台人形机器人上，覆盖双手工具使用、全身伸达和长程清理。成功率图里，爆米花是48次试验，其他每项任务是30次。</p>
+<p>加入仿真数据后，GR00T 2 Turbo的分布外成功率从6.7%升到63.3%，GR00T 1.7升到40.0%。对比保持真实数据不变，其中一组加上仿真回合。对应视频的说明是：在Isaac Lab里，G1从一张杂乱的桌子上捡起王冠。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_crown"><div class="media-frame"><video controls playsinline preload="none" src="https://research.nvidia.com/labs/gear/gr00t-2/assets/video/g1_crown_sim.mp4" poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/g1_crown_sim.jpg" data-original-poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/g1_crown_sim.jpg" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/g1_crown_sim.jpg" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<p>他们还做了一套智能体驱动的真实到仿真流程，用来重建高保真数字孪生，供策略评估和开发。任务集覆盖刚体和关节物体、可变形材料、高精度装配，以及粒子，交互包括但不限于滑动、推和舀。智能体使用真实机器人视频、三维扫描和照片等输入，并借助SimFoundry重建场景和资产，包括几何、外观和碰撞。重建环境会通过回放已有演示、稳定性测试等自动检验，再加上人类专家给智能体的反馈来修改完善。SimFoundry的地址是 https://research.nvidia.com/labs/gear/simfoundry/ 。总览视频展示了一批从真实任务重建到仿真中的例子。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_overview"><div class="media-frame"><video controls playsinline preload="none" src="https://research.nvidia.com/labs/gear/gr00t-2/assets/video/real_world_to_simulation_polished.mp4" poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/real_world_to_simulation_polished.jpg" data-original-poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/real_world_to_simulation_polished.jpg" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/real_world_to_simulation_polished.jpg" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<p>这些高保真数字孪生里的策略评估，与真实世界评估有很强相关，因而被用来加快GR00T 2的开发。数据加载和处理流水线的改动，会先用小规模训练和闭环仿真测试，再进入预训练；推理设置也会先在仿真里筛选，再做机器人试验。在25项YAM基准上，14个GR00T 2策略的配对任务成功率，Pearson相关系数是0.92，Spearman是0.89，MMRV是0.055；中心化后的Elo，Pearson是0.93，Spearman是0.90。每个字母对应同一策略在两张图中的位置。成功率图的虚线是y等于x，Elo图则是最小二乘拟合，因为仿真和真实的Elo尺度不同。</p>
+<p>如果只看官方页面，今天能直接拿到的是项目说明、白皮书，以及已经公开的Human-1M-100K数据和数据采集硬件设计。代码在页面上被标成12月可用。</p>
+<p>Jim Fan在自己的介绍帖里还写了几句页面正文没有逐字重复的话，需要单独归给他。他把GR00T 2称作目前最先进、开放的System One机器人模型，称它可以完全在机器人本机计算上运行、不接外部计算，并且“每一份权重都归你”。他把能力概括为：长程任务可把灵巧操作和全身控制接到20步以上、5分钟以上，例如做化学实验或从头到尾装配模型飞机；X-Adapt可以从人类可穿戴设备和仿真等更容易获得的数据适应，并零样本部署到多种真实机器人；统一认知则是与前沿智能体的原生集成，用于物理推理、错误恢复和安全监控。他列出的“开源自助餐”包括：模型权重和X-Adapt配方将在12月发布；智能体框架、仿真引擎、标注引擎、硬件设计和10万小时训练数据今天已经可用。他把这10万小时比成大约11年经验。这些是他的公开表述，其中今天已开放的数据和硬件，与页面链接一致；权重和配方的12月时间表，以他和页面“代码12月可用”的表述为准，仍需等到实际发布时核验。</p>
+<p>Yuke Zhu的分帖把数据称作Data Pyramid，也就是数据金字塔：40万小时以上的第一人称人类视频、1万小时UMI演示、2.35万小时机器人遥操作，并强调机器人要学的东西不必主要来自机器人数据。他把自己最感兴趣的能力写成X-Adapt，并展示了一个人只戴他们的内部设备做早餐、机器人仅从这些没有机器人参与的演示中学习的例子。他也写到Turbo可在带NVIDIA Jetson Thor的人形机器人上机载运行，驱动行走、弯腰、伸手和搬运，包括递爆米花、擦洒出物和清理桌子，并再次说明GR00T 2的代码将在12月到来。这些与页面数字相符的部分可以互相对照，但仍是他的个人介绍帖，不是机构结论的另一份原文。</p>
+<p>这些数字都来自NVIDIA官方页面和两位GEAR联合负责人的公开介绍，任务、本体、试验次数和分母并不相同，不宜直接并成一个总成功率。若要在自己的机器人上复现，需要等到12月的代码发布，并先从已经公开的数据、硬件设计和白皮书核对范围与限制。</p>
+</div></section>
+<section class="reader-panel" id="original" data-reader-panel="original" aria-label="原文">
+<h2 class="section-heading">原文</h2><h3 class="original-title">GR00T 2: Scaling Robot Foundation Models for Generalization, Dexterity, and Adaptation</h3>
+<div class="original-media">
+<figure class="media-figure" data-media-id="media_hero"><div class="media-frame"><video controls playsinline preload="none" src="https://research.nvidia.com/labs/gear/gr00t-2/assets/video/hero_flip.mp4" poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/hero_flip.jpg" data-original-poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/hero_flip.jpg" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/hero_flip.jpg" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_microscope"><div class="media-frame"><video controls playsinline preload="none" src="https://research.nvidia.com/labs/gear/gr00t-2/assets/video/dex_microscope_hold.mp4" poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dex_microscope_hold.jpg" data-original-poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dex_microscope_hold.jpg" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dex_microscope_hold.jpg" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_img_filter_human"><div class="media-frame"><img src="https://research.nvidia.com/labs/gear/gr00t-2/assets/img/xa_human_demo.jpg" data-original-src="https://research.nvidia.com/labs/gear/gr00t-2/assets/img/xa_human_demo.jpg" alt="A person sets up filter paper in a funnel" loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_img_filter_robot"><div class="media-frame"><img src="https://research.nvidia.com/labs/gear/gr00t-2/assets/img/xa_human_robot.jpg" data-original-src="https://research.nvidia.com/labs/gear/gr00t-2/assets/img/xa_human_robot.jpg" alt="Dexter sets up filter paper in a funnel" loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_img_umi_human"><div class="media-frame"><img src="https://research.nvidia.com/labs/gear/gr00t-2/assets/img/xa_umi_demo.jpg?v=3" data-original-src="https://research.nvidia.com/labs/gear/gr00t-2/assets/img/xa_umi_demo.jpg?v=3" alt="A person with a handheld UMI gripper sorts packages from a conveyor belt into two bins" loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_img_umi_yam"><div class="media-frame"><img src="https://research.nvidia.com/labs/gear/gr00t-2/assets/img/xa_umi_yam.jpg?v=3" data-original-src="https://research.nvidia.com/labs/gear/gr00t-2/assets/img/xa_umi_yam.jpg?v=3" alt="YAM sorts packages from the same conveyor belt into the two bins" loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_img_dexumi_human"><div class="media-frame"><img src="https://research.nvidia.com/labs/gear/gr00t-2/assets/img/xa_dexumi_demo.jpg" data-original-src="https://research.nvidia.com/labs/gear/gr00t-2/assets/img/xa_dexumi_demo.jpg" alt="A person wearing the DexUMI exoskeleton scoops granola" loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_img_dexumi_robot"><div class="media-frame"><img src="https://research.nvidia.com/labs/gear/gr00t-2/assets/img/xa_dexumi_robot.jpg" data-original-src="https://research.nvidia.com/labs/gear/gr00t-2/assets/img/xa_dexumi_robot.jpg" alt="A robot hand scoops granola" loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_xadapt_filter"><div class="media-frame"><video controls playsinline preload="none" src="https://research.nvidia.com/labs/gear/gr00t-2/assets/video/xadapt_h2r_filter.mp4" poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/xadapt_h2r_filter.jpg" data-original-poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/xadapt_h2r_filter.jpg" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/xadapt_h2r_filter.jpg" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_umi_human"><div class="media-frame"><video controls playsinline preload="none" src="https://research.nvidia.com/labs/gear/gr00t-2/assets/video/xadapt_umi_toss_human.mp4" poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/xadapt_umi_toss_human.jpg" data-original-poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/xadapt_umi_toss_human.jpg" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/xadapt_umi_toss_human.jpg" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_umi_robot"><div class="media-frame"><video controls playsinline preload="none" src="https://research.nvidia.com/labs/gear/gr00t-2/assets/video/xadapt_umi_toss_robot.mp4" poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/xadapt_umi_toss_robot.jpg" data-original-poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/xadapt_umi_toss_robot.jpg" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/xadapt_umi_toss_robot.jpg" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_breakfast_human"><div class="media-frame"><video controls playsinline preload="none" src="https://research.nvidia.com/labs/gear/gr00t-2/assets/video/dexumi_breakfast_human_full.mp4" poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexumi_breakfast_human_full.jpg" data-original-poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexumi_breakfast_human_full.jpg" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexumi_breakfast_human_full.jpg" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_breakfast_robot"><div class="media-frame"><video controls playsinline preload="none" src="https://research.nvidia.com/labs/gear/gr00t-2/assets/video/dexumi_breakfast_robot.mp4" poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexumi_breakfast_robot.jpg" data-original-poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexumi_breakfast_robot.jpg" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexumi_breakfast_robot.jpg" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_strike_human"><div class="media-frame"><video controls playsinline preload="none" src="https://research.nvidia.com/labs/gear/gr00t-2/assets/video/dexumi_strike_human.mp4" poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexumi_strike_human.jpg" data-original-poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexumi_strike_human.jpg" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexumi_strike_human.jpg" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_strike_robot"><div class="media-frame"><video controls playsinline preload="none" src="https://research.nvidia.com/labs/gear/gr00t-2/assets/video/dexumi_strike_robot.mp4" poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexumi_strike_robot.jpg" data-original-poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexumi_strike_robot.jpg" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexumi_strike_robot.jpg" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_label"><div class="media-frame"><video controls playsinline preload="none" src="https://research.nvidia.com/labs/gear/gr00t-2/assets/video/dexd_ship_cm.mp4" poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexd_ship_cm.jpg" data-original-poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexd_ship_cm.jpg" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexd_ship_cm.jpg" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_hammer"><div class="media-frame"><video controls playsinline preload="none" src="https://research.nvidia.com/labs/gear/gr00t-2/assets/video/dexsonic_human.mp4" poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexsonic_human.jpg" data-original-poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexsonic_human.jpg" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexsonic_human.jpg" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_fifty"><div class="media-frame"><video controls playsinline preload="none" src="https://research.nvidia.com/labs/gear/gr00t-2/assets/video/dexter50_reel.mp4?v=2" poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexter50_reel.jpg?v=2" data-original-poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexter50_reel.jpg?v=2" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/dexter50_reel.jpg?v=2" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_pipe"><div class="media-frame"><video controls playsinline preload="none" src="https://research.nvidia.com/labs/gear/gr00t-2/assets/video/rl_screw_pipe_v10.mp4" poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/rl_screw_pipe_v10.jpg" data-original-poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/rl_screw_pipe_v10.jpg" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/rl_screw_pipe_v10.jpg" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_plane"><div class="media-frame"><video controls playsinline preload="none" src="https://research.nvidia.com/labs/gear/gr00t-2/assets/video/agentic_assembly_plane.mp4" poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/agentic_assembly_plane.jpg" data-original-poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/agentic_assembly_plane.jpg" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/agentic_assembly_plane.jpg" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_cables"><div class="media-frame"><video controls playsinline preload="none" src="https://research.nvidia.com/labs/gear/gr00t-2/assets/video/agentic_five_cables.mp4" poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/agentic_five_cables.jpg" data-original-poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/agentic_five_cables.jpg" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/agentic_five_cables.jpg" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_hanoi"><div class="media-frame"><video controls playsinline preload="none" src="https://research.nvidia.com/labs/gear/gr00t-2/assets/video/agentic_hanoi.mp4" poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/agentic_hanoi.jpg" data-original-poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/agentic_hanoi.jpg" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/agentic_hanoi.jpg" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_popcorn"><div class="media-frame"><video controls playsinline preload="none" src="https://research.nvidia.com/labs/gear/gr00t-2/assets/video/g1_popcorn_delivery.mp4" poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/g1_popcorn_delivery.jpg" data-original-poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/g1_popcorn_delivery.jpg" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/g1_popcorn_delivery.jpg" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_crown"><div class="media-frame"><video controls playsinline preload="none" src="https://research.nvidia.com/labs/gear/gr00t-2/assets/video/g1_crown_sim.mp4" poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/g1_crown_sim.jpg" data-original-poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/g1_crown_sim.jpg" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/g1_crown_sim.jpg" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_overview"><div class="media-frame"><video controls playsinline preload="none" src="https://research.nvidia.com/labs/gear/gr00t-2/assets/video/real_world_to_simulation_polished.mp4" poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/real_world_to_simulation_polished.jpg" data-original-poster="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/real_world_to_simulation_polished.jpg" aria-label="原帖视频"></video><img class="video-poster-fallback" data-video-fallback src="https://research.nvidia.com/labs/gear/gr00t-2/assets/poster/real_world_to_simulation_polished.jpg" alt="原视频封面" loading="lazy" hidden><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖视频 · 外部播放</span><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div>
+<div class="prose" lang="en"><h1>GR00T 2</h1>
+<p>Scaling robot foundation models for generalization, dexterity, and adaptation.</p>
+<p>November 2026<br>
+Authors: NVIDIA et al.<br>
+URL: <a href="https://research.nvidia.com/labs/gear/gr00t-2/" rel="noopener noreferrer">https://research.nvidia.com/labs/gear/gr00t-2/</a><br>
+Paper: <a href="https://research.nvidia.com/labs/gear/gr00t-2/assets/gr00t2_whitepaper.pdf" rel="noopener noreferrer">https://research.nvidia.com/labs/gear/gr00t-2/assets/gr00t2_whitepaper.pdf</a><br>
+Code: Available in December (as stated on the official page)</p>
+<h2>Introducing GR00T 2</h2>
+<p>We introduce GR00T 2, a new generation of foundation world-action models (WAMs). GR00T 2 predicts future video and robot actions together, learning how physical interactions unfold along with the actions that produce them. The models run on parallel grippers, dexterous hands, and humanoids. Learning to predict the world, not just act in it, unlocks three new capabilities.</p>
+<p>Hero video official label: "A dexterous robot hand turns the GR00T 1 block into GR00T 2."</p>
+<p>Video official label: "Microscope · autonomous rollout at 1× speed: two 22-DoF Sharpa hands prepare a slide and focus the microscope."</p>
+<h3>01 Emergence of X-Adaptability</h3>
+<p>Skills shown only by humans, or with handheld and wearable devices, carry over to robots that never practiced them.</p>
+<ul>
+<li>Human → robot. Shown the task only by humans, never on the robot, a robot with two five-fingered hands lines a lab funnel with filter paper and wets it with a wash bottle in 65% of trials.</li>
+<li>Handheld UMI gripper → YAM. Shown only with a handheld UMI gripper, a different gripper from the robot's own, the YAM arm assembles a toy dump truck end to end in 60% of trials, a long-horizon task that takes up to 4 minutes.</li>
+<li>Wearable hand → robot hand. Shown only with DexUMI, a wearable hand that mirrors the robot's fingers, a two-handed robot handles long-horizon dexterous work, such as preparing banana yogurt and scooping granola for breakfast, and highly dynamic tasks like striking a match to light a lamp.</li>
+</ul>
+<h3>02 Fast Adaptation and Agentic Control</h3>
+<p>GR00T 2 performs many new tasks zero-shot and masters them from a handful of demonstrations. Because it predicts the outcome it is acting toward, a reasoning model can also direct it.</p>
+<ul>
+<li>Zero-shot generalization and few-shot adaptation. On 50 tasks never seen on the target robot, only in human video or on other robots, GR00T 2 succeeds 40% of the time zero-shot. Five demonstrations per task, under 3 minutes of robot data, raise that to 95% after a 30-minute fine-tune on a single RTX 5090.</li>
+<li>Dexterity. With minimal post-training, GR00T 2 performs long-horizon, highly dexterous tasks with two 22-DoF Sharpa hands, such as seating GB300 memory modules (85%) and assembling a toy truck (65%). Previous models could not do these tasks.</li>
+<li>Self-improvement. Reinforcement learning on the real robot lifts three contact-rich insertion tasks to 88–96% success.</li>
+<li>Agentic control. With a reasoning model calling GR00T 2 through the WAM API, YAM completes 97 or more of 100 back-to-back assemblies of each of three toys, recovering from stalls and errors along the way.</li>
+<li>Visual steering. When a reasoning model gives step instructions and marks where to grasp and release on GR00T 2's camera view, YAM follows what-and-where instructions 92% of the time, up from 40% with the task instruction alone, and finishes 17 of 20 long-horizon trash-sorting runs.</li>
+</ul>
+<h3>03 Whole-Body Loco-Manipulation with GR00T 2 Turbo</h3>
+<p>GR00T 2 Turbo is GR00T 2 built for speed. A smaller transformer and a more compact video representation make it light enough to run on the Unitree G1 humanoid itself, steering the robot's whole body as it walks, bends, reaches, and carries.</p>
+<ul>
+<li>Real time on the robot. Each prediction takes 124 ms on the G1's own Jetson Thor.</li>
+<li>Whole-body skills. Through the SONIC whole-body controller, Turbo scoops and serves popcorn in all 48 trials and clears a table of diverse objects in 93% of trials.</li>
+</ul>
+<h2>Model Architecture</h2>
+<p>One diffusion transformer denoises future video and robot actions together. Predicting how the scene should change lets GR00T 2 learn physics from human video; small per-robot heads turn the plan into motor commands for each body.</p>
+<p>GR00T 2 reads recent video (3 cameras, last 0.8 s: head, left wrist, right wrist), the instruction and the robot state, denoises future video and an action chunk together, executes the chunk, and repeats. The official architecture figure shows a rollout of truck assembly on Dexter (Tianji robot + Sharpa hands) at the model's own 320×224 resolution. The history panel is the real 0.8 s the model saw. The future panel is video that GR00T 2 generated from that moment for all three cameras, not the real footage.</p>
+<h2>Pretraining Data: Humans, Handheld Grippers, and Robots</h2>
+<p>GR00T 2 is pretrained on one mixture of three kinds of data: 402,730 hours of egocentric video of people at work, 10,184 hours of demonstrations with a handheld UMI gripper across 2,897 tasks, and 23,500 hours of robot teleoperation. The robot data spans parallel-gripper arms (YAM and Franka), dexterous hands (Sharpa and Wuji), and the Unitree G1 humanoid. The human video comes from our egocentric Human-1M dataset, and 100,000 hours of it are openly available as <a href="https://huggingface.co/datasets/nvidia/PhysicalAI-Human-1M-100K" rel="noopener noreferrer">Human-1M-100K</a> on Hugging Face, which you can browse in the <a href="https://huggingface.co/spaces/nvidia/PhysicalAI-Human-1M-Explorer" rel="noopener noreferrer">Human-1M Dataset Explorer</a>.</p>
+<p>Robot teleoperation breakdown: YAM 15,146 h; ABC-130k on YAM 3,591 h; Sharpa hands 2,890 h; Wuji hands on Tianji arms 1,256 h; DROID (Franka) 350 h; Unitree G1 275 h.</p>
+<h2>Scaling Human Video in Pretraining</h2>
+<p>Human video is by far the largest part of the mixture. To measure how much it helps the robot as it scales, we pretrain four models on none, 1%, 10%, and 100% of the human video, then evaluate each on 72 downstream Dexter tasks, both as video rollouts and on the real robot. Task progress rises at every step, from 64% to 77% in video rollouts and from 50% to 70% on the robot. The real-robot chart uses a log scale for the share of human video in pretraining; error bars are 1 SD across repeated runs, 72 tasks.</p>
+<h2>X-Adaptability: Learn from Humans, Run on Other Robots</h2>
+<p>GR00T 2 uses human video and data from other robots to learn skills for a new robot. The target robot does not need to have demonstrated the task itself. We call this cross-adaptation, or X-Adapt, and show it three ways: from humans to a dexterous robot, from a handheld gripper to a robot arm, and from a wearable hand to a robot hand.</p>
+<p>Official stills on the page compare demonstrations with robot rollouts: a person sets up filter paper in a funnel, and Dexter does the same; a person with a handheld UMI gripper sorts packages from a conveyor belt into two bins, and YAM sorts packages from the same conveyor belt into the two bins; a person wearing the DexUMI exoskeleton scoops granola, and a robot hand scoops granola. Caption: "Top: the demonstration GR00T 2 learns from. Bottom: GR00T 2 performing the same task on a robot that never saw a demonstration of it."</p>
+<h3>Human → Robot, with No Teleoperation</h3>
+<p>Each chemistry-lab task is demonstrated only by people wearing gloves and head and wrist cameras. Task-agnostic play data teach Dexter how its own body looks and moves. Video label: "Filter-paper setup: the human demonstration used for training, then GR00T 2 on Dexter, autonomous." The page reports success with zero teleoperated demonstrations on Dexter, 20 trials per task, and says that learning from human demonstrations alone, with no teleoperation, GR00T 2 succeeds on all four tasks. The chart compares GR00T 1.7, GR00T 2 without cross-embodiment pretraining, and GR00T 2.</p>
+<h3>UMI → YAM: From a Handheld Gripper to a Robot Arm</h3>
+<p>Conveyor sorting and tossing, the toy dump-truck assembly and the NIST board disassembly are demonstrated only with a handheld <a href="https://research.nvidia.com/labs/gear/hardware-prototypes/GEAR_UMI/index.html" rel="noopener noreferrer">GEAR UMI</a> gripper. YAM contributes only task-agnostic teleoperation data, with no demonstration of any of these tasks. Conveyor sorting &amp; tossing, share of the 50 items sorted: GR00T 2 86%, GR00T 1.7 28%, π0.5 0%.</p>
+<h3>DexUMI → Dexterous Hand: From a Wearable Hand to a Robot Hand</h3>
+<p><a href="https://research.nvidia.com/labs/gear/hardware-prototypes/GEAR_DexUMI/index.html" rel="noopener noreferrer">GEAR DexUMI</a> is a wearable exoskeleton that matches a robot hand's joints, so what a person does with it maps directly onto the robot. From DexUMI demonstrations alone, GR00T 2 learns three bimanual tasks on a Tianji robot with two XHAND1 hands: preparing banana yogurt and scooping granola, the two halves of a breakfast task, and striking a match to light a lamp under a flask before putting the match out in water. For more information on GEAR Hardware, see the <a href="https://research.nvidia.com/labs/gear/hardware-prototypes/" rel="noopener noreferrer">open-source hardware website</a>.</p>
+<h2>Dexterity: Fine Motor Control for Five-Fingered Hands</h2>
+<p>With only a small amount of teleoperation data per task, post-training lets GR00T 2 perform long-horizon dexterous tasks with Dexter's two 22-DoF Sharpa hands: labeling packages, swapping parts, assembling toys, and running chemistry-lab procedures end to end. One reported comparison for "Make shipping label" is GR00T 2 60%, GR00T 2 Turbo 60%, GR00T 1.7 5%, π0.5 0%.</p>
+<h3>Human → Sim → Real: From One Human Demo to In-Hand Tool Use</h3>
+<p>Starting from a single human demonstration of using a hammer, we reconstruct the task in simulation and refine the skill with reinforcement learning. GR00T 2 learns from that simulation data and transfers directly to a real robot with Sharpa hands.</p>
+<h2>Fast Adaptation: A New Task from a Few Demonstrations</h2>
+<p>Post-trained for about six epochs on a small dataset per task, GR00T 2 learns each task from a few hours of demonstrations.</p>
+<h3>Zero-Shot Generalization, Few-Shot Mastery</h3>
+<p>We test this on 50 tasks that appear in other robots' data or in human video but never in the target robot's own data: a bimanual robot with two Sharpa hands.</p>
+<p>Zero-shot, from the instruction alone, GR00T 2 succeeds in 40% of trials, and on 40 of the 50 tasks it succeeds at least once. Most misses come from execution, not intent: GR00T 2 does the right steps in the right order, and a single step falls short on precision. A little robot data closes that gap. One demonstration per task lifts success to 71%, and five, under 3 minutes of robot data, lift it to 95%, with 37 of the 50 tasks succeeding in every trial. Each adaptation is a 30-minute LoRA fine-tune on a single RTX 5090.</p>
+<p>Official reel label: "50 tasks the robot had never seen, each clip GR00T 2 running autonomously; mean success over the 50 tasks rises from 40% zero-shot to 71% with one demonstration and 95% with five."</p>
+<h3>YAM Post-Training</h3>
+<p>Six long-horizon assembly and insertion tasks on YAM, each post-trained for about six epochs. Success is reported with 20 trials per task and model.</p>
+<h3>Contact-Rich Skills with Real-World RL</h3>
+<p>Reinforcement learning on the real robot, driven only by task-level success signals, lifts all three contact-rich tasks: from 40–76% success after supervised post-training to 88–96% with GRPO-induced self-imitation. One video is labeled "Fixed-pipe fittings," with a comparison of GRPO-induced self-imitation 88%, GRPO 86%, Residual RL 76%, and SFT 66%.</p>
+<h2>Agentic GR00T 2: Control and Steering</h2>
+<p>A frontier reasoning agent and GR00T 2 handle complementary parts of a task. The agent decides what to do: it breaks a long task into steps, checks progress, and writes code. GR00T 2 decides how, performing the contact-rich manipulation that is hard to script. Through the WAM API, the agent can control GR00T 2 as a tool and steer it by marking targets on its camera view.</p>
+<h3>Agentic Control: 97 or More Successes out of 100 Assembly Trials</h3>
+<p>The agent runs as System 2 (S2). In an observe–reason–act–verify loop, it calls GR00T 2 as a tool alongside tools for camera images, robot state, and code-as-policy (CaP) skills. On real robots, GR00T 2 performs most of the manipulation. The agent watches it, and when a part drops or progress stalls, it repairs the scene with a CaP skill learned with ASPIRE and hands control back. In simulation, the agent instead runs a task-level program that calls GR00T 2 for each manipulation step. We also used simulation to develop recovery skills for some assembly tasks and then transferred them to the real robot.</p>
+<p>Each assembly trial starts by dumping all parts onto the table, so every trial begins from a cluttered layout that does not appear in the post-training data. With the agent, GR00T 2 assembles the toy plane, the toy tractor, and the Hot Wheels car in 98, 97, and 97 of 100 trials. The same post-trained policy without the agent succeeds in 71–84, and supervised post-training alone in 23–69. Official video note: "Each video is one continuous session. Top left: the agent's reasoning. Bottom: playback speed and episode count."</p>
+<p>Across all three toys, 292 of 300 assembly trials succeeded. 98 of 100 toy-plane trials succeeded, up from 69 with SFT alone.</p>
+<p>The agent also composes the skills from real-world RL into longer tasks: inserting five Ethernet cables into a network switch, or plugging five chargers into the outlets a person points at. CaP localizes, grasps, and positions each part; GR00T 2 performs the precision-critical insertion; and the agent sequences the steps, verifies each insertion, and calls a CaP recovery when needed. Replacing the supervised policy with the RL-trained GR00T 2 raises full-task success from 12 to 19 of 20 runs on cables and from 2 to 20 of 20 on chargers.</p>
+<h3>Visual Steering: Showing GR00T 2 Where to Act</h3>
+<p>A language instruction can leave the target object, its destination, or the acting arm unclear, especially in clutter. With visual steering, the planner marks a grasp point on the target object and a release point at its destination on GR00T 2's camera view, colored by the arm that should act. GR00T 2 generates the rest of the motion: approach, grasp, transport, and release. After each step, the planner looks again and decides whether to continue, retry, or stop. Training needs no new data: the marks are extracted from the gripper and hand states in existing demonstrations, and the same model still follows language alone.</p>
+<p>The Tower of Hanoi video is described as: on YAM, the planner chooses each move and marks the ring and its target peg.</p>
+<p>Both robots are evaluated with the same protocol, in three settings: GR00T 2 given only the task instruction, the planner's step instructions, or the step instructions together with marks. On short-horizon instructions about what to move and where, visual steering (step instructions plus marks) raises success from 40% to 92% on YAM and from 30% to 70% on Dexter, whereas the planner's step instructions alone reach 66% and 33%. On instructions about how to move, such as the action type or the grasp type, the gain is smaller: 44% to 59% on YAM. YAM: 90 what-and-where and 54 how trials per setting. Dexter: 64 trials per setting, all what-and-where.</p>
+<p>Over long horizons, these single-step gains compound. On YAM, GR00T 2 without marks completes no trash-sorting or board-disassembly episode, even with the planner's step instructions; with marks, it completes 17 of 20 and 3 of 10. On Dexter, the marks place more items in trash sorting but rarely complete the full task, which is the current limit of the system. Marks also convey neither an object's final orientation nor the motion between grasp and release, such as pouring or wiping; those still come from language. Evaluation used 20 trash-sorting and 10 NIST board-disassembly episodes per setting.</p>
+<h2>GR00T 2 Turbo: Whole-Body Loco-Manipulation</h2>
+<p>A humanoid must place its hands precisely while staying balanced as its whole body moves, often quickly. With its lower prediction cost, GR00T 2 Turbo runs onboard a Unitree G1 and steers the SONIC whole-body controller through latent whole-body commands. The videos below show it serving and delivering popcorn, cleaning up a spill, and picking up trash in an office cafeteria. Popcorn delivery is labeled as an uncut autonomous rollout at 1× speed: scooping popcorn into the cups on its tray, then walking to a lounge where people take them.</p>
+<h3>GR00T 2 Turbo: Efficient World-Action Modeling</h3>
+<p>GR00T 2 Turbo lowers the cost of world-action modeling in two ways: a smaller joint video–action transformer (2B parameters) and a higher-compression video encoder that exploits redundancy in video. It still predicts future observations and actions jointly, with the same action horizon, and it is the model behind the onboard G1 results below. Turbo also remains competitive on other embodiments. On YAM it reaches 90% on fixed-pipe fittings and 100% on inserting a wire into a breaker, ahead of GR00T 2 on both. It trails GR00T 2 on the other four YAM tasks and on five of the six Dexter tasks in the post-training charts above, tying on the sixth.</p>
+<h3>Fast Enough to Run on the Robot</h3>
+<p>Turbo's smaller transformer and compact video representation, together with inference optimizations shared by every configuration below, make onboard execution possible. The optimizations cut median prediction latency by 66–86% (2.9–7.2×) relative to eager BF16 execution of the same checkpoint. Optimized, a Turbo prediction for G1 takes 38 ms on an RTX 5090 and 124 ms onboard Jetson Thor, where it plans 1.6 s chunks of whole-body motion tokens about once per second; SONIC executes them at 50 Hz.</p>
+<h3>Think Slow, Move Fast</h3>
+<p>A reasoning model chooses the task; GR00T 2 Turbo imagines and plans; SONIC turns latent whole-body tokens into joint targets. Everything but the reasoning model runs onboard. The page labels this stack: onboard, GR00T 2 Turbo on NVIDIA Jetson AGX Thor, SONIC on Jetson Orin NX; the reasoning model picks the task and the target; the WAM API goes to GR00T 2 Turbo; SONIC runs at 50 Hz; the Unitree G1 joint PD control runs at 1 kHz.</p>
+<h3>Real-World G1 Tasks</h3>
+<p>Scooping and serving popcorn, cleaning up a spill, and clearing a table of diverse objects, all on the same humanoid: bimanual tool use, whole-body reach, and long-horizon clean-up. The G1 success-rate chart uses 48 trials for popcorn and 30 for each other task.</p>
+<h3>Sim → Real: World-Action Models Use Simulation Better</h3>
+<p>With simulated data added, GR00T 2 Turbo's out-of-distribution success rises from 6.7% to 63.3%. GR00T 1.7 rises to 40.0%. The comparison keeps the same real data; one arm adds simulated episodes. A simulation video is labeled as the G1 picking up the crown from a cluttered table in Isaac Lab.</p>
+<h2>Simulation for Evaluation and Development</h2>
+<p>We developed an agentic real-to-sim workflow that recreates high-fidelity digital twins of real-world tasks and use these simulation environments for policy evaluation and development. The task set spans rigid and articulated objects, deformable materials, high-precision assembly, and particles with diverse interactions including, but not limited to, sliding, pushing and scooping.</p>
+<h3>Real-to-Sim Reconstruction</h3>
+<p>Agent-assisted workflows build the environments. Agents take inputs such as real robot videos, 3D scans, and photographs and use tools from <a href="https://research.nvidia.com/labs/gear/simfoundry/" rel="noopener noreferrer">SimFoundry</a> to reconstruct the scene and assets, including geometry, appearance, and collision modeling. Reconstructed environments are validated through a combination of automated tests (replaying existing demonstrations and stability tests) and human expert feedback given to the agent for refinement.</p>
+<h3>Simulation Tracks Real-World Performance</h3>
+<p>Policy evaluations in these high-fidelity digital twins proved to have strong correlations with real-world evaluations, allowing them to accelerate GR00T 2 development. Changes to the data loading and processing pipeline were tested with small-scale training and closed-loop simulation before adoption in pretraining. Inference settings were screened in simulation before robot tests.</p>
+<p>Matched-task success rate: Pearson 0.92, Spearman 0.89, MMRV 0.055. Elo (centered): Pearson 0.93, Spearman 0.90. These compare real-world (x) vs. simulated (y) performance for 14 GR00T 2 policies on the 25-task YAM benchmark. Each letter marks the same policy in both plots. Elo scores are centered within comparison groups. The dashed line is y = x for success rate and a least-squares fit for Elo, whose simulated and real scales differ.</p>
+<h2>Citation</h2>
+<pre><code class="language-bibtex">@techreport{nvidia2026gr00t2,
+  title       = {{GR00T 2}: Scaling Robot Foundation Models for
+                 Generalization, Dexterity, and Adaptation},
+  author      = {{NVIDIA et al.}},
+  institution = {NVIDIA},
+  type        = {Whitepaper},
+  year        = {2026},
+  url         = {https://research.nvidia.com/labs/gear/gr00t-2/assets/gr00t2_whitepaper.pdf}
+}
+</code></pre>
+<p>Interactive charts on the official page are rendered in the browser and are not reproduced here as static tables. This saved original is based on the public project page text, captions, and media, not a full transcription of every video.</p></div>
+</section>
+<footer class="source-box"><span>内容来自原作者；中文为乔木风格改写，非逐字翻译。</span><div><a href="https://research.nvidia.com/labs/gear/gr00t-2/" target="_blank" rel="noopener noreferrer">打开原文 ↗</a><a href="https://x.com/DrJimFan/status/2120186651741655428" target="_blank" rel="noopener noreferrer">相关链接 ↗</a></div></footer>
+</article>
+</main>
+<footer class="site-footer"><span>海外创始人长文 · 乔木中文改写<br>每日 08:00 更新 · 中国标准时间（UTC+8）</span><nav class="footer-links" aria-label="页尾导航"><a href="/feed.xml">全文 RSS ↗</a><a href="/archive">全部文章</a><a href="/about">关于</a></nav></footer>
+
+<script data-source="/static/app.fe36855dc563.js">/* D · progressive visual-journal reader. No framework, no content rewriting. */
+(() => {
+  'use strict';
+  const $ = (selector, root = document) => root.querySelector(selector);
+  const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+  const readerMemory = new Map();
+  const mediaBound = new WeakSet();
+  const nextFrame = callback => requestAnimationFrame(callback);
+  const safeFocus = element => { if (element?.isConnected) element.focus({preventScroll: true}); };
+  function currentTheme() { return document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light'; }
+  function paintTheme() {
+    const dark = currentTheme() === 'dark';
+    const button = $('#theme-btn');
+    if (button) {
+      button.setAttribute('aria-pressed', String(dark));
+      button.setAttribute('aria-label', dark ? '切换为亮色主题' : '切换为暗色主题');
+    }
+    $('meta[name="theme-color"]')?.setAttribute('content', dark ? '#20241e' : '#fffefa');
+  }
+  paintTheme();
+  $('#theme-btn')?.addEventListener('click', () => {
+    const style = document.createElement('style');
+    style.textContent = '*,*::before,*::after{transition:none!important}';
+    document.head.append(style);
+    const next = currentTheme() === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    try { localStorage.setItem('xn.theme', next); } catch {}
+    paintTheme();
+    void document.documentElement.offsetHeight;
+    nextFrame(() => nextFrame(() => style.remove()));
+  });
+
+  // Filter the existing static cards; content and native links work without JS.
+  const discovery = $('[data-discovery]');
+  if (discovery) {
+    const grid = $('[data-news-grid]');
+    const cards = $$('.news-card', grid);
+    const search = $('#story-search');
+    const clear = $('[data-clear-search]');
+    const empty = $('[data-search-empty]');
+    const normalize = value => value.normalize('NFKC').toLocaleLowerCase().trim();
+    const index = cards.map(card => normalize(card.dataset.search || ''));
+    let kind = 'all', layout = discovery.dataset.defaultView;
+    function render(writeURL = true) {
+      const terms = normalize(search.value).split(/\s+/).filter(Boolean);
+      let count = 0;
+      cards.forEach((card, i) => {
+        card.hidden = !(kind === 'all' || card.dataset.kind === kind) || !terms.every(term => index[i].includes(term));
+        if (!card.hidden) count++;
+      });
+      grid.dataset.layout = layout;
+      grid.classList.toggle('is-filtered', kind !== 'all' || terms.length > 0);
+      $$('[data-filter]', discovery).forEach(button => button.setAttribute('aria-pressed', String(button.dataset.filter === kind)));
+      $$('[data-layout]', discovery).forEach(button => button.setAttribute('aria-pressed', String(button.dataset.layout === layout)));
+      $('[data-result-count]').textContent = count === cards.length ? `${count} 篇文章 · 最新在前` : `找到 ${count} 篇 · 共 ${cards.length} 篇`;
+      clear.hidden = !search.value;
+      empty.hidden = count !== 0;
+      $('[data-empty-description]').textContent = search.value.trim() ? `试试更短的关键词，或清除「${search.value.trim()}」与类型筛选。` : '这个类型暂时没有文章，试试查看全部内容。';
+      if (writeURL) {
+        const url = new URL(location.href);
+        for (const [key, value] of [['q', search.value.trim()], ['type', kind === 'all' ? '' : kind], ['view', layout === discovery.dataset.defaultView ? '' : layout]]) {
+          if (value) url.searchParams.set(key, value); else url.searchParams.delete(key);
+        }
+        history.replaceState(history.state, '', url.pathname + url.search + url.hash);
+      }
+    }
+    function restore() {
+      if (location.pathname.startsWith('/a/')) return;
+      const params = new URLSearchParams(location.search);
+      search.value = params.get('q') || '';
+      kind = ['text', 'video'].includes(params.get('type')) ? params.get('type') : 'all';
+      layout = ['journal', 'list'].includes(params.get('view')) ? params.get('view') : discovery.dataset.defaultView;
+      render(false);
+    }
+    search.addEventListener('input', () => render());
+    clear.addEventListener('click', () => { search.value = ''; render(); search.focus(); });
+    $$('[data-filter]', discovery).forEach(button => button.addEventListener('click', () => { kind = button.dataset.filter; render(); }));
+    $$('[data-layout]', discovery).forEach(button => button.addEventListener('click', () => { layout = button.dataset.layout; render(); }));
+    $('[data-reset-filters]').addEventListener('click', () => { kind = 'all'; search.value = ''; render(); search.focus(); });
+    window.addEventListener('popstate', restore);
+    discovery.hidden = false;
+    restore();
+  }
+  function suspendMedia(root) {
+    $$('video,audio', root).forEach(media => { try { media.pause(); } catch {} });
+    $$('iframe[src]', root).forEach(frame => {
+      frame.dataset.pausedSrc = frame.getAttribute('src');
+      frame.removeAttribute('src');
+    });
+  }
+  function resumeEmbeds(root) {
+    $$('iframe[data-paused-src]', root).forEach(frame => {
+      frame.setAttribute('src', frame.dataset.pausedSrc);
+      delete frame.dataset.pausedSrc;
+    });
+  }
+  function bindMedia(root) {
+    $$('img,video,audio', root).forEach(media => {
+      if (mediaBound.has(media)) return;
+      mediaBound.add(media);
+      const figure = media.closest('.media-figure');
+      const notice = figure && $('.media-error', figure);
+      let bufferingTimer = null, requestedPlayback = false;
+      function clearBuffering() {
+        clearTimeout(bufferingTimer); bufferingTimer = null;
+        if (notice?.dataset.mediaState === 'buffering') notice.hidden = true;
+      }
+      const failed = () => {
+        requestedPlayback = false; clearBuffering();
+        const cover = media.closest('[data-cover]');
+        if (cover) cover.closest('.news-card')?.classList.add('media-failed');
+        if (figure) {
+          if (notice) {
+            notice.textContent = /^(VIDEO|AUDIO)$/.test(media.tagName)
+              ? '此处暂时无法播放，请通过下方原文链接观看或收听。'
+              : '图片未能载入，请通过下方原文链接查看。';
+            notice.dataset.mediaState = 'failed'; notice.hidden = false;
+          }
+          media.hidden = true;
+          if (media.tagName === 'VIDEO') {
+            const poster = $('[data-video-fallback]', figure);
+            if (poster) poster.hidden = false;
+          }
+        }
+      };
+      media.addEventListener('error', failed);
+      if (/^(VIDEO|AUDIO)$/.test(media.tagName)) {
+        const armBuffering = () => {
+          if (!requestedPlayback || bufferingTimer || media.hidden) return;
+          bufferingTimer = setTimeout(() => {
+            bufferingTimer = null;
+            if (notice && figure.isConnected && requestedPlayback && !media.hidden && !media.closest('[hidden]')) {
+              notice.textContent = '外部媒体暂未能继续播放，可通过下方原文链接观看或收听。';
+              notice.dataset.mediaState = 'buffering'; notice.hidden = false;
+            }
+          }, 10000);
+        };
+        media.addEventListener('play', () => { requestedPlayback = true; armBuffering(); });
+        media.addEventListener('waiting', armBuffering);
+        media.addEventListener('stalled', armBuffering);
+        media.addEventListener('playing', clearBuffering);
+        ['pause', 'ended', 'emptied'].forEach(name => media.addEventListener(name, () => {
+          requestedPlayback = false; clearBuffering();
+        }));
+      }
+      if (media.tagName === 'IMG' && media.complete && media.naturalWidth === 0) failed();
+    });
+  }
+  bindMedia(document);
+
+  // Accessible manual-activation tabs; no JS leaves both complete sections and links intact.
+  function enhanceReader(article, scroller, onView) {
+    const tablist = $('[data-tabs]', article);
+    if (!tablist) return null;
+    const tabs = $$('[data-view]', tablist);
+    const panels = $$('[data-reader-panel]', article);
+    const id = article.dataset.articleId;
+    const memory = readerMemory.get(id) || {positions: {}, view: 'rewrite'};
+    readerMemory.set(id, memory);
+    const isWindow = scroller === window;
+    const getTop = () => isWindow ? window.scrollY : scroller.scrollTop;
+    const setTop = value => { if (isWindow) window.scrollTo(0, value); else scroller.scrollTop = value; };
+    const toolbar = tablist.closest('.reader-tabs');
+    const position = $('.reading-position', toolbar);
+    const progress = $('progress', toolbar);
+    const percent = $('[data-reading-percent]', toolbar);
+    let progressFrame = null;
+    function updateProgress() {
+      progressFrame = null;
+      if (!article.isConnected || !progress) return;
+      const panel = panels.find(item => !item.hidden);
+      if (!panel) return;
+      const viewport = isWindow ? window.innerHeight : scroller.clientHeight;
+      const origin = isWindow ? 0 : scroller.getBoundingClientRect().top;
+      const top = panel.getBoundingClientRect().top - origin;
+      const distance = panel.getBoundingClientRect().height - viewport + toolbar.offsetHeight;
+      const value = distance <= 0 ? (top < viewport ? 100 : 0) : Math.round(Math.max(0, Math.min(1, (toolbar.offsetHeight - top) / distance)) * 100);
+      progress.value = value;
+      percent.textContent = value + '%';
+    }
+    function scheduleProgress() { if (progressFrame == null) progressFrame = nextFrame(updateProgress); }
+    if (position) position.hidden = false;
+    scroller.addEventListener('scroll', scheduleProgress, {passive: true});
+    window.addEventListener('resize', scheduleProgress);
+    article.addEventListener('load', scheduleProgress, true);
+    const observer = typeof ResizeObserver === 'function' ? new ResizeObserver(scheduleProgress) : null;
+    panels.forEach(panel => observer?.observe(panel));
+    const toolbarTop = () => Math.max(0, toolbar.getBoundingClientRect().top + getTop() - (isWindow ? 0 : scroller.getBoundingClientRect().top));
+    let view = null, generation = 0;
+    article.classList.add('reader-enhanced');
+    tablist.setAttribute('role', 'tablist');
+    tabs.forEach(tab => {
+      tab.setAttribute('role', 'tab');
+      tab.setAttribute('aria-controls', tab.dataset.view);
+    });
+    panels.forEach(panel => {
+      panel.setAttribute('role', 'tabpanel');
+      panel.setAttribute('tabindex', '0');
+      panel.setAttribute('aria-labelledby', 'tab-' + panel.dataset.readerPanel);
+    });
+    function remember() { if (view) memory.positions[view] = getTop(); memory.view = view; }
+    function show(next, {initial = false, updateURL = true} = {}) {
+      if (!['rewrite', 'original'].includes(next) || view === next) return;
+      const thisGeneration = ++generation;
+      if (view) {
+        remember();
+        const old = panels.find(panel => panel.dataset.readerPanel === view);
+        if (old) suspendMedia(old);
+      }
+      view = next;
+      memory.view = next;
+      panels.forEach(panel => {
+        panel.hidden = panel.dataset.readerPanel !== next;
+        if (!panel.hidden) resumeEmbeds(panel);
+        else suspendMedia(panel);
+      });
+      tabs.forEach(tab => {
+        const selected = tab.dataset.view === next;
+        tab.setAttribute('aria-selected', String(selected));
+        tab.setAttribute('tabindex', selected ? '0' : '-1');
+      });
+      if (updateURL) onView(next);
+      const saved = memory.positions[next];
+      // First rewrite starts at its title; first original starts at the visible tab bar.
+      if (!initial || next === 'original' || saved != null) {
+        nextFrame(() => {
+          if (thisGeneration === generation && article.isConnected) setTop(saved ?? toolbarTop());
+        });
+      }
+      scheduleProgress();
+    }
+    tabs.forEach(tab => tab.addEventListener('click', event => {
+      if (event.ctrlKey || event.metaKey || event.altKey || event.shiftKey) return;
+      event.preventDefault();
+      show(tab.dataset.view);
+    }));
+    tablist.addEventListener('keydown', event => {
+      const index = tabs.indexOf(document.activeElement);
+      if (index < 0) return;
+      if (event.key === ' ') { event.preventDefault(); show(tabs[index].dataset.view); return; }
+      let target = null;
+      if (event.key === 'ArrowRight') target = tabs[(index + 1) % tabs.length];
+      if (event.key === 'ArrowLeft') target = tabs[(index - 1 + tabs.length) % tabs.length];
+      if (event.key === 'Home') target = tabs[0];
+      if (event.key === 'End') target = tabs.at(-1);
+      if (target) { event.preventDefault(); safeFocus(target); }
+    });
+    show(location.hash === '#original' ? 'original' : 'rewrite', {initial: true, updateURL: false});
+    bindMedia(article);
+    return {show, remember, dispose() {
+      scroller.removeEventListener('scroll', scheduleProgress);
+      window.removeEventListener('resize', scheduleProgress);
+      article.removeEventListener('load', scheduleProgress, true);
+      observer?.disconnect();
+      if (progressFrame != null) cancelAnimationFrame(progressFrame);
+    }};
+  }
+  function replaceViewURL(view) {
+    const url = new URL(location.href);
+    url.hash = view === 'original' ? 'original' : 'rewrite';
+    history.replaceState(history.state, '', url.pathname + url.search + url.hash);
+  }
+  const directArticle = $('.site-main > [data-article-id]');
+  if (directArticle) {
+    const direct = enhanceReader(directArticle, window, replaceViewURL);
+    window.addEventListener('hashchange', () => direct?.show(location.hash === '#original' ? 'original' : 'rewrite', {updateURL: false}));
+    window.addEventListener('pagehide', () => { direct?.remember(); suspendMedia(directArticle); });
+  }
+
+  const sheet = $('#reader-sheet');
+  const grid = $('[data-news-grid]');
+  if (!sheet || !grid) return;
+  const scroll = $('.sheet-scroll', sheet);
+  const closeButton = $('[data-close-sheet]', sheet);
+  const pageRoots = $$('.site-header,.site-main,.site-footer');
+  const listTitle = document.title;
+  const listCanonical = $('link[rel="canonical"]')?.href;
+  const cache = new Map();
+  let active = null, controller = null, viewController = null, sequence = 0;
+  const canAnimate = !window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  history.scrollRestoration = 'manual';
+  const sheetState = () => history.state?.xnewsSheet;
+  const safePath = path => /^\/a\/[a-z0-9-]+\/?$/.test(path);
+  const prefetching = new Map();
+  const readerURLs = new Map($$('[data-open-reader]', grid).map(a => [new URL(a.href, location.href).pathname, a.dataset.readerSrc]));
+  const requestURL = path => readerURLs.get(path) || path;
+  // Warm only a link the reader shows intent to open; never preload media or all stories.
+  function prefetchArticle(event) {
+    if (event.type === 'pointerover' && event.pointerType === 'touch') return;
+    const connection = navigator.connection;
+    if (connection?.saveData || /(^|-)2g$/.test(connection?.effectiveType || '')) return;
+    const anchor = event.target.closest?.('[data-open-reader]');
+    if (!anchor) return;
+    const url = new URL(anchor.href, location.href), path = url.pathname;
+    if (url.origin !== location.origin || !safePath(path) || cache.has(path) || prefetching.has(path) || prefetching.size >= 2) return;
+    const abort = new AbortController();
+    const timer = setTimeout(() => abort.abort(), 8000);
+    const promise = fetch(requestURL(path), {signal: abort.signal, priority: 'low', headers: {'Accept': 'text/html'}})
+      .then(response => { if (!response.ok) throw new Error('Prefetch failed'); return response.text(); })
+      .then(html => {
+        const raw = new DOMParser().parseFromString(html, 'text/html').querySelector('[data-article-id]');
+        if (!raw || '/a/' + raw.dataset.articleId !== path.replace(/\/$/, '')) return null;
+        cache.set(path, html);
+        if (cache.size > 12) cache.delete(cache.keys().next().value);
+        return html;
+      }).catch(() => null).finally(() => { clearTimeout(timer); if (prefetching.get(path)?.promise === promise) prefetching.delete(path); });
+    prefetching.set(path, {promise, abort});
+  }
+  grid.addEventListener('pointerover', prefetchArticle);
+  grid.addEventListener('focusin', prefetchArticle);
+  grid.addEventListener('pointerdown', prefetchArticle);
+  async function readyPrefetch(path) {
+    const pending = prefetching.get(path);
+    if (!pending) return null;
+    let timer;
+    try {
+      // A click is foreground work. Do not inherit an eight-second speculative
+      // request deadline when that request is queued or stalled on a slow link.
+      const ready = await Promise.race([pending.promise, new Promise(resolve => { timer = setTimeout(() => resolve(null), 120); })]);
+      if (!ready) pending.abort.abort();
+      return ready;
+    } finally { clearTimeout(timer); }
+  }
+  function togglePageInert(value) { pageRoots.forEach(element => { element.inert = value; }); }
+  function showSheet(keyboard) {
+    if (sheet.open) return;
+    document.body.classList.add('sheet-open');
+    togglePageInert(true);
+    if (typeof sheet.showModal === 'function') sheet.showModal();
+    else { sheet.setAttribute('open', ''); sheet.classList.add('sheet-fallback'); sheet.setAttribute('role', 'dialog'); sheet.setAttribute('aria-modal', 'true'); }
+    if (!keyboard && canAnimate && typeof sheet.animate === 'function') {
+      sheet.animate([{transform: 'translateY(16px)', opacity: .8}, {transform: 'translateY(0)', opacity: 1}], {duration: 180, easing: 'cubic-bezier(.23,1,.32,1)'});
+    }
+    safeFocus(closeButton);
+  }
+  function loading() {
+    scroll.setAttribute('aria-busy', 'true');
+    scroll.innerHTML = '<div class="sheet-status" role="status"><p>正在打开文章…</p><div aria-hidden="true"><div class="skeleton-title"></div><div class="skeleton-title short"></div><div class="skeleton-line"></div><div class="skeleton-line"></div><div class="skeleton-line short"></div></div></div>';
+    scroll.scrollTop = 0;
+  }
+  function errorState(path, sourceURL) {
+    scroll.removeAttribute('aria-busy');
+    scroll.replaceChildren();
+    const status = document.createElement('section'); status.className = 'sheet-status'; status.setAttribute('role', 'alert');
+    const title = document.createElement('h2'); title.textContent = '文章暂时未能打开';
+    const description = document.createElement('p'); description.textContent = '选刊和阅读位置都还在。可以重试，或打开独立文章页。';
+    const retry = document.createElement('button'); retry.type = 'button'; retry.className = 'retry-button'; retry.textContent = '重试'; retry.addEventListener('click', () => loadArticle(path, sourceURL));
+    const link = document.createElement('a'); link.href = path; link.textContent = '独立文章页 ↗';
+    status.append(title, description, retry, link);
+    if (sourceURL) { const source = document.createElement('a'); source.href = sourceURL; source.target = '_blank'; source.rel = 'noopener noreferrer'; source.textContent = '去原文 ↗'; status.append(source); }
+    scroll.append(status);
+  }
+  async function loadArticle(path, sourceURL = '') {
+    if (!safePath(path)) return;
+    const ownSequence = ++sequence;
+    controller?.abort();
+    viewController?.remember(); viewController?.dispose(); viewController = null;
+    suspendMedia(scroll);
+    loading();
+    controller = new AbortController();
+    const signal = controller.signal;
+    const timeout = setTimeout(() => controller?.signal === signal && controller.abort(), 12000);
+    try {
+      let html = cache.get(path) || await readyPrefetch(path);
+      if (ownSequence !== sequence || !active) return;
+      if (signal.aborted) throw new Error('Article load timed out');
+      if (!html) {
+        const response = await fetch(requestURL(path), {signal, priority: 'high', headers: {'Accept': 'text/html'}});
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        html = await response.text();
+      }
+      if (ownSequence !== sequence || !active) return;
+      const parsed = new DOMParser().parseFromString(html, 'text/html');
+      const raw = $('[data-article-id]', parsed);
+      if (!raw || '/a/' + raw.dataset.articleId !== path.replace(/\/$/, '')) throw new Error('Article mismatch');
+      cache.set(path, html);
+      if (cache.size > 12) cache.delete(cache.keys().next().value);
+      const article = document.importNode(raw, true);
+      // Set panel visibility before attaching media to the live document.
+      viewController = enhanceReader(article, scroll, view => {
+        replaceViewURL(view);
+        $('[data-sheet-permalink]', sheet).href = location.pathname + location.search + location.hash;
+      });
+      scroll.replaceChildren(article);
+      scroll.removeAttribute('aria-busy');
+      document.title = parsed.title;
+      $('link[rel="canonical"]')?.setAttribute('href', 'https://xnews.qiaomu.ai' + path);
+      $('[data-sheet-permalink]', sheet).href = path + location.hash;
+      nextFrame(() => { if (ownSequence === sequence) bindMedia(article); });
+    } catch (error) {
+      if (ownSequence !== sequence || !active) return;
+      errorState(path, sourceURL);
+    } finally { clearTimeout(timeout); }
+  }
+  function openFromCard(anchor, keyboard) {
+    const url = new URL(anchor.href, location.href);
+    if (url.origin !== location.origin || !safePath(url.pathname)) return false;
+    const state = {path: url.pathname, listURL: location.pathname + location.search + location.hash, listY: window.scrollY, focusId: anchor.id, sourceURL: anchor.dataset.sourceUrl || ''};
+    history.replaceState({...history.state, xnewsList: {url: state.listURL, y: state.listY, focusId: state.focusId}}, '', location.href);
+    history.pushState({xnewsSheet: state}, '', url.pathname);
+    active = state;
+    $('[data-sheet-permalink]', sheet).href = url.pathname;
+    showSheet(keyboard);
+    loadArticle(state.path, state.sourceURL);
+    return true;
+  }
+  function finishClose() {
+    const previous = active;
+    ++sequence;
+    controller?.abort(); controller = null;
+    viewController?.remember(); viewController?.dispose(); viewController = null;
+    suspendMedia(scroll);
+    if (typeof sheet.close === 'function' && sheet.open) sheet.close();
+    sheet.removeAttribute('open'); sheet.classList.remove('sheet-fallback');
+    togglePageInert(false);
+    document.body.classList.remove('sheet-open');
+    scroll.replaceChildren(); scroll.removeAttribute('aria-busy');
+    active = null;
+    document.title = listTitle;
+    if (listCanonical) $('link[rel="canonical"]')?.setAttribute('href', listCanonical);
+    nextFrame(() => {
+      if (active) return;
+      window.scrollTo(0, previous?.listY ?? history.state?.xnewsList?.y ?? 0);
+      safeFocus(document.getElementById(previous?.focusId || history.state?.xnewsList?.focusId || '') || $('.edition-line h1'));
+    });
+  }
+  function requestClose() {
+    if (!active) return;
+    if (sheetState()) history.back(); else finishClose();
+  }
+  grid.addEventListener('click', event => {
+    const anchor = event.target.closest('[data-open-reader]');
+    if (!anchor || event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.altKey || event.shiftKey || anchor.target === '_blank' || anchor.hasAttribute('download')) return;
+    if (openFromCard(anchor, event.detail === 0)) event.preventDefault();
+  });
+  closeButton.addEventListener('click', requestClose);
+  sheet.addEventListener('cancel', event => { event.preventDefault(); requestClose(); });
+  sheet.addEventListener('keydown', event => {
+    if (event.key === 'Escape') { event.preventDefault(); requestClose(); return; }
+    if (event.key !== 'Tab') return;
+    const focusables = $$('a[href],button:not(:disabled),[tabindex="0"],video[controls],audio[controls]', sheet).filter(element => !element.closest('[hidden]'));
+    const first = focusables[0], last = focusables.at(-1);
+    if (event.shiftKey && (document.activeElement === first || document.activeElement === sheet)) { event.preventDefault(); safeFocus(last); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); safeFocus(first); }
+  });
+  window.addEventListener('popstate', () => {
+    const state = sheetState();
+    if (state && safePath(state.path)) {
+      active = state;
+      showSheet(true);
+      loadArticle(state.path, state.sourceURL);
+    } else if (active) finishClose();
+  });
+  window.addEventListener('pagehide', () => { viewController?.remember(); suspendMedia(scroll); controller?.abort(); });
+})();
+</script>
+</body>
+</html>

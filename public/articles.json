@@ -1,5 +1,50 @@
 [
   {
+    "id": "deepmind-alphaproof-code",
+    "date": "2026-11-10",
+    "title": "四周里写出超过600万行Lean，DeepMind把验证做到了Signal的设备代码",
+    "dek": "Google DeepMind研究人员用AlphaProof Code，在四周内生成超过600万行Lean证明，去核验Signal协议真正编译到设备上的代码。他们把这称为一种广泛部署的密码协议实现第一次被验证到这种深度。",
+    "url": "/a/deepmind-alphaproof-code",
+    "source_url": "https://deepmind.google/blog/introducing-alphaproof-code/",
+    "tags": [
+      "Google DeepMind",
+      "AlphaProof",
+      "Signal",
+      "formal verification",
+      "Gemini Carbon"
+    ]
+  },
+  {
+    "id": "gemini-4-carbon-now-available",
+    "date": "2026-11-10",
+    "title": "Gemini 4 Carbon今天开放，Google仍把Argon留给大多数工程任务",
+    "dek": "Gemini 4 Carbon对开发者、企业和Ultra用户开放。官方仍把Argon作为大多数软件工程和知识工作的选择，并把Carbon留给更长、更难的任务。导入价与Argon相同，2026年11月30日后将调整。",
+    "url": "/a/gemini-4-carbon-now-available",
+    "source_url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-carbon-now-available/",
+    "tags": [
+      "Google",
+      "Gemini",
+      "Gemini 4 Carbon",
+      "Antigravity",
+      "cybersecurity"
+    ]
+  },
+  {
+    "id": "nvidia-gr00t-2",
+    "date": "2026-11-09",
+    "title": "目标机器人没练过的50个任务，5条演示后GR00T 2的成功率从40%到95%",
+    "dek": "NVIDIA的GR00T 2同时预测未来视频和机器人动作。官方写到，在目标机器人未见过的50个任务上，零样本成功率是40%，5条演示并在一块RTX 5090上微调30分钟后到95%。模型权重和代码被标为12月发布。",
+    "url": "/a/nvidia-gr00t-2",
+    "source_url": "https://research.nvidia.com/labs/gear/gr00t-2/",
+    "tags": [
+      "NVIDIA",
+      "GR00T 2",
+      "robotics",
+      "Jim Fan",
+      "Yuke Zhu"
+    ]
+  },
+  {
     "id": "anthropic-fermat-agent-teams",
     "date": "2026-11-09",
     "title": "1000 个 Fable 5.2 智能体用 28.7 小时重做了费马大定理的形式化证明",
