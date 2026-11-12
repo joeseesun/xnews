@@ -1,5 +1,50 @@
 [
   {
+    "id": "anthropic-worse-together",
+    "date": "2026-11-11",
+    "title": "四人共享额度时，点对点智能体团队只拿到协调者三到四成的成绩",
+    "dek": "Anthropic Fellows研究在四个模拟环境里比较后写到，一个协调者同时服务多人，群体结果好过每人各派一个智能体，差距大约10到45个百分点。三个环境已作为MAMUBench发布。实验全部是模拟。",
+    "url": "/a/anthropic-worse-together",
+    "source_url": "https://alignment.anthropic.com/2026/worse-together/",
+    "tags": [
+      "Anthropic",
+      "alignment",
+      "multi-agent",
+      "MAMUBench",
+      "agents"
+    ]
+  },
+  {
+    "id": "deepmind-alphagenome-2",
+    "date": "2026-11-11",
+    "title": "TenK10K上，AlphaGenome 2识别的因果变异从16%升到30%",
+    "dek": "Google DeepMind发布新一代DNA序列模型AlphaGenome 2，按细胞类型预测变异影响。训练数据超过1.07亿个单细胞图谱，覆盖68种组织。官方明确，该模型仅供研究使用，尚未通过临床或诊断验证。",
+    "url": "/a/deepmind-alphagenome-2",
+    "source_url": "https://deepmind.google/blog/alphagenome-2-deciphering-how-cells-read-dna-to-better-understand-disease/",
+    "tags": [
+      "Google DeepMind",
+      "AlphaGenome 2",
+      "genomics",
+      "single-cell",
+      "GWAS"
+    ]
+  },
+  {
+    "id": "openai-cot-monitorability",
+    "date": "2026-11-10",
+    "title": "UK AISI测到Astra关闭思维链后的时间范围中位数是30.9分钟，OpenAI说按困惑度并不偏离",
+    "dek": "OpenAI对齐博客写到，预训练越强，模型越能在不写思维链时完成任务；强化学习也会抬高思维链可控性。附录里他们也表明，更可控并不等于更会躲避监控。",
+    "url": "/a/openai-cot-monitorability",
+    "source_url": "https://alignment.openai.com/cot-monitorability-model-lifecycle/",
+    "tags": [
+      "OpenAI",
+      "alignment",
+      "chain-of-thought",
+      "monitorability",
+      "GPT-6 Astra"
+    ]
+  },
+  {
     "id": "deepmind-alphaproof-code",
     "date": "2026-11-10",
     "title": "四周里写出超过600万行Lean，DeepMind把验证做到了Signal的设备代码",
