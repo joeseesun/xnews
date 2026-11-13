@@ -1,5 +1,50 @@
 [
   {
+    "id": "gemini-4-hydrogen",
+    "date": "2026-11-12",
+    "title": "默认高思考档上，Hydrogen在智能指数上是51，Argon是50",
+    "dek": "Gemini 4 Hydrogen面向日常编码和智能体执行开放，完成任务的速度是3.8 Flash的2.5倍。整段100万token上下文的价格是每百万输入1.50美元、输出7.50美元。难任务官方仍交给Carbon和Argon。",
+    "url": "/a/gemini-4-hydrogen",
+    "source_url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/",
+    "tags": [
+      "Google",
+      "Gemini",
+      "Gemini 4 Hydrogen",
+      "Antigravity",
+      "Orchestrator"
+    ]
+  },
+  {
+    "id": "gemini-decisions-api",
+    "date": "2026-11-11",
+    "title": "一次最多1000道题，Gemini Decision 1不写回答，只给出判断",
+    "dek": "新接口在一次前向计算里给是非、选择和量表打分，端到端150到250毫秒。输入每百万token 0.10美元，输出不计费，并可处理文本、图片、音频、视频和PDF。",
+    "url": "/a/gemini-decisions-api",
+    "source_url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/",
+    "tags": [
+      "Google",
+      "Gemini",
+      "Decisions API",
+      "Gemini Decision 1",
+      "developer tools"
+    ]
+  },
+  {
+    "id": "openai-fuzzy-robustness",
+    "date": "2026-11-12",
+    "title": "固定越狱集上，Astra在网络安全里有91.5%的回答被判安全，Sol是59%",
+    "dek": "OpenAI用自动红队和worst@n标准生成训练数据，并写到这套方法已被用于GPT-6 Astra和Sol。这些数字测的是模型层，不含上线后的额外防护。",
+    "url": "/a/openai-fuzzy-robustness",
+    "source_url": "https://alignment.openai.com/fuzzy-robustness/",
+    "tags": [
+      "OpenAI",
+      "alignment",
+      "red teaming",
+      "GPT-6 Astra",
+      "safety"
+    ]
+  },
+  {
     "id": "anthropic-worse-together",
     "date": "2026-11-11",
     "title": "四人共享额度时，点对点智能体团队只拿到协调者三到四成的成绩",
