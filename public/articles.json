@@ -1,5 +1,33 @@
 [
   {
+    "id": "emollick-satbench",
+    "date": "2026-11-14",
+    "title": "只算独立跑分，SatBench里做到85分的基准是24%，含实验室自报则是63%",
+    "dek": "沃顿的Ethan Mollick用Brian Zhou的Benchmark Almanac，把实验室发布会最常引用的基准当成一套大考。数据截至2026年11月14日。按默认口径，173项里有109项已经到了85分；只算独立跑分则是24%。",
+    "url": "/a/emollick-satbench",
+    "source_url": "https://github.com/emollick/satbench/tree/1ccb73eb36fe5204c6fbbf1e154f258c3de99bfe",
+    "tags": [
+      "benchmarks",
+      "Ethan Mollick",
+      "SatBench",
+      "evaluations"
+    ]
+  },
+  {
+    "id": "openai-chatgpt-wallet",
+    "date": "2026-11-13",
+    "title": "ChatGPT Wallet先向美国Pro用户开放，智能体付钱时拿不到真实卡号",
+    "dek": "OpenAI与美国运通、万事达和Visa合作推出ChatGPT Wallet。每笔购买都要用户做安全验证，支付网络会生成支付令牌，商户和智能体都拿不到真实卡信息。目前只在dots里，面向年满18岁、持有合格美国发卡的ChatGPT Pro用户。",
+    "url": "/a/openai-chatgpt-wallet",
+    "source_url": "https://openai.com/index/introducing-chatgpt-wallet/",
+    "tags": [
+      "OpenAI",
+      "ChatGPT Wallet",
+      "payments",
+      "agents"
+    ]
+  },
+  {
     "id": "anthropic-safety-evaluations",
     "date": "2026-11-13",
     "title": "Fable 5.1在多轮安全评估上，API和claude.ai最多差了34个百分点",
