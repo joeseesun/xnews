@@ -1,5 +1,35 @@
 [
   {
+    "id": "openai-gpt-6-2-astra-sol",
+    "date": "2026-11-17",
+    "title": "GPT-6.2 Astra在Agents’ Last Exam上比上一代高5.2分，成本不到三分之一",
+    "dek": "OpenAI在2026年11月17日发布GPT-6.2 Astra和Sol。Astra的输入和输出价格比GPT-6 Astra低20%，也是官方对外发布的首个达到AI自我改进高门槛的模型。",
+    "url": "/a/openai-gpt-6-2-astra-sol",
+    "source_url": "https://openai.com/index/introducing-gpt-6-2-astra-sol/",
+    "tags": [
+      "OpenAI",
+      "GPT-6.2",
+      "Astra",
+      "Sol",
+      "system card"
+    ]
+  },
+  {
+    "id": "anthropic-fold-subagents",
+    "date": "2026-10-22",
+    "title": "多家企业对比里，单一智能体加技能常常比子智能体拆分质量更好、也更便宜",
+    "dek": "Anthropic Applied AI团队在2026年10月22日的说明里建议，先做端到端评测，再把子智能体一次折进一个到主循环。Ethan Mollick在11月17日推荐了这篇文章。",
+    "url": "/a/anthropic-fold-subagents",
+    "source_url": "https://claude.com/resources/articles/building-agents-when-to-fold-subagents-into-your-main-agent-loop",
+    "tags": [
+      "Anthropic",
+      "agents",
+      "subagents",
+      "skills",
+      "Claude"
+    ]
+  },
+  {
     "id": "openai-embedded-assessments",
     "date": "2026-11-16",
     "title": "四家独立机构将进入OpenAI内部，查看检查点、代码、训练数据和监控系统",

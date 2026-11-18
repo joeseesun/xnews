@@ -1,0 +1,169 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>多家企业对比里，单一智能体加技能常常比子智能体拆分质量更好、也更便宜 · X News</title><meta name="robots" content="noindex"></head><body><article class="article-reader" data-article-id="anthropic-fold-subagents">
+<a class="article-back" href="/">← 返回选刊</a>
+<header class="article-header"><p class="article-kicker">Diane Sarkis / Anthropic Applied AI / 文章</p><h1>多家企业对比里，单一智能体加技能常常比子智能体拆分质量更好、也更便宜</h1><p class="article-dek">Anthropic Applied AI团队在2026年10月22日的说明里建议，先做端到端评测，再把子智能体一次折进一个到主循环。Ethan Mollick在11月17日推荐了这篇文章。</p><div class="article-meta"><time datetime="2026-11-18">本站收录 2026年11月18日 · 周三</time><span>原文发布 2026年10月22日 · 周四</span><span>原作者：Diane Sarkis / Anthropic Applied AI</span><span>中文改写：<a href="/about">X News · 乔木</a></span><span>Anthropic · agents · subagents · skills · Claude</span></div></header>
+<nav class="reader-tabs" aria-label="文章版本与来源"><div data-tabs><a href="#rewrite" id="tab-rewrite" data-view="rewrite">乔木改写</a><a href="#original" id="tab-original" data-view="original">原文</a></div><a class="reader-source" href="https://claude.com/resources/articles/building-agents-when-to-fold-subagents-into-your-main-agent-loop" target="_blank" rel="noopener noreferrer">原文链接 ↗</a><div class="reading-position" hidden><progress max="100" value="0" aria-label="当前版本阅读进度"></progress><span data-reading-percent aria-hidden="true">0%</span></div></nav>
+<section class="reader-panel" id="rewrite" data-reader-panel="rewrite" aria-label="乔木改写"><h2 class="section-heading">乔木改写</h2><div class="prose"><p>在几家企业部署的对比里，Anthropic的Applied AI团队发现，一个带着技能的单一智能体，质量常常超过“一个提示包打天下”，也超过拆成许多子智能体的方案，而且单次任务的成本和时延往往更低。</p>
+<p>这篇说明发布于2026年10月22日。页面抓取信息把作者署名为Anthropic Applied AI团队的Diane Sarkis，正文以团队的“我们”来叙述。2026年11月17日，沃顿商学院教授Ethan Mollick转发了它，并写道：这既说得对，也是对许多公司正在搭建的“智能体方案”和harness的批评。在他看来，与其让不同团队铺开一大堆专门子智能体，常常用一个智能体把事情做完，结果更好，也更便宜。下面的判断和数字，都来自Anthropic原文，Mollick的评论只作为发现入口。</p>
+<p>子智能体并没有被写成过时。它们仍然适合核验、并行工作，以及把权限模块化。Anthropic写，他们自己用Claude Platform搭建的许多智能体也在用这一套，比如他们的多智能体研究系统。</p>
+<p>需要保留子智能体的情况，原文列了三条：单一智能体循环因为上下文膨胀，已经测到了可度量的性能下降；多项任务需要并行处理，并且用完就可以丢掉的新上下文窗口；或者单一智能体很难选出合适的工具，系统提示里又有相互冲突的指令。他们也写，在研究前沿，子智能体仍然有位置。</p>
+<p>他们真正反对的，是另一种常见做法：每个团队或每类问题都配一个子智能体，智能体架构变成了组织架构的复印件。原文把它写成康威定律在起作用。</p>
+<h2>先拆给各团队，再在上面加调度器，会立刻带来复杂度</h2>
+<p>公司常常希望做一个智能体，把多个产品和能力收进同一个面向客户的界面。典型路径是：各能力由不同团队负责，于是先让每个团队做自己的智能体，再由中央平台团队在上面做调度器。形态可能是调度器加子智能体，也可能是一个主智能体把其他智能体当作MCP工具来调用。</p>
+<p>这看起来最简单，但会马上带来几类麻烦。上下文管理上，要决定智能体之间交换什么，来回传递时又经常丢掉细节。子智能体还会铺开：每个团队都上线自己的子智能体，最后可能有几百个重叠的子智能体，没有统一标准，也没有明确的负责人。系统提示会被每个团队加一句，变成互相冲突、语气也不统一的“弗兰肯提示”。评测也同样碎：人人都加上只对自己子任务优化过的题目，没有人维护整套评测，管理层看到的是被稀释、过度局部化的分数。时延也会被架构本身抬高。有一位客户把自己的多智能体harness和单一智能体循环做了对比，后者的运行时间大约快了<strong>1倍</strong>，也就是用时大约只有前者的一半。</p>
+<p>原文还举了一家公司的例子：面向客户的智能体里有十来个专家子智能体，既难保持稳定的品牌体验，又增加了伤害用户体验的时延。</p>
+<p>他们也常看到一套熟悉的设计演进：意图分类器、固定的多步推理流水线、用户分群桶、分开的推荐分支，再在顶上加一个多智能体调度器。在这些案子里，反馈往往是：这些结构做的，是模型已经不再需要别人代劳的工作。一个清楚的系统提示、四五套薄的数据工具，再加上明确的输出护栏，往往就能覆盖大部分用途。</p>
+<p>文中第一张图把这两种结构并排放在一起。左边标成“常见模式”，是模型周围的5层结构：多智能体调度器、意图分类器、固定的多步推理流水线、用户分群桶和推荐分支，请求从上到下走到答案。右边标成“我们常常建议的做法”，是1个循环：一个清楚的系统提示、模型、四五套薄的数据工具，以及明确的输出护栏。这是官网配的示意图，抓取到的是动图中的这一帧。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_five_layers"><div class="media-frame"><img src="https://assets.claude.com/a7cb2cf08bfcef461166310c0c55f28b72c33b0d.gif" data-original-src="https://assets.claude.com/a7cb2cf08bfcef461166310c0c55f28b72c33b0d.gif" alt="Official Anthropic animated diagram comparing a common five-layer multi-agent structure around the model with a recommended single agent loop that uses one system prompt, four to five thin data tools, and firm output guardrails." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://claude.com/resources/articles/building-agents-when-to-fold-subagents-into-your-main-agent-loop" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<h2>他们建议改成逐步展开上下文和工具的单一循环</h2>
+<p>调度器加子智能体，用来协调跨团队做出来的专家，仍然说得通。但原文认为，很多时候更有效的做法，是通过技能逐步展开上下文，再通过工具搜索逐步展开工具。也就是说，智能体先只看到技能和工具的短描述，要用到时才完整加载。</p>
+<p>这样设计，原文给了三个理由。</p>
+<p>更长运行的智能体里，共享上下文往往能给出更好的答案。他们希望几个不同任务的结果，都留在主上下文窗口里。已经看到前面每一步结果的智能体，可以把这些结果连起来，输出更丰富，洞察也更好，这优于子智能体交回来的一组摘要，上下文窗口也更少，损耗型交接也更少。</p>
+<p>逐步展开可以防止上下文膨胀。团队因此可以做一个能完成很多类任务的单一智能体，而不必把全部上下文立刻塞进很长的系统提示。这消掉了过去把工作拆给子智能体的主要理由。他们写，为了给更强的模型让路，Claude Code的系统提示减少了超过<strong>80%</strong>，其中也包括与逐步展开技能和工具有关的删减。</p>
+<p>模型本身也更强了。从Opus 4.5开始，模型能在单一循环里管理的事情，已经超出许多团队原先的预期。Opus 5.5和Fable 5.1无法关闭思考，较新的模型也越来越会边做边讲述进度、检查自己的工作，这让一部分harness元件变得多余。每个新模型，都让你把更多决策从harness移到模型自己手里。更简单的循环，也更容易迁到下一个模型。在他们帮助客户做的迁移里，卡住新模型发挥的，常常正是那些僵硬的多智能体结构。</p>
+<p>单一循环需要纪律：系统提示要仔细管理，技能和工具描述要在该触发时触发，上下文窗口、记忆和笔记也要有意识地处理。端到端质量和系统提示，应该由一个中央团队来负责，每个新工具和评测上线前都要先过审。把这个中央团队保持得比较小，迭代会更快，大组织里的协调成本也会更低。</p>
+<p>如果还是走多智能体路线，原文建议从可能够用的最简单模式起步，比如生成-核验，或调度器加子智能体。拆分边界时，要按上下文来切：给每个子智能体一块几乎不依赖系统其余部分的工作，并让它交回一份紧凑结果。适合这样做的，包括彼此独立的研究路径、接口干净的独立组件，或黑盒核验。如果按问题类型来拆，智能体就会陷入“传话游戏”，每次交接都会损失保真度。</p>
+<p>第二张图对照了这两种拆法。按问题类型拆时，智能体1写功能，交接给智能体2写测试，再交接给智能体3做代码审查；图注写，每次交接都会丢掉上下文，写测试的智能体并不知道实现决策是怎么做出来的。按上下文拆时，一个智能体同时写功能和测试，因为它已经有上下文，再交给只负责跑测试并回报结果的核验器。图注写，只跑测试和报告结果的核验器，并不需要实现层面的上下文。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_split_by_context"><div class="media-frame"><img src="https://assets.claude.com/cd4b9c4417d5ba31776e8aa79e204966c08c6a43.png" data-original-src="https://assets.claude.com/cd4b9c4417d5ba31776e8aa79e204966c08c6a43.png" alt="Official Anthropic diagram comparing agents split by problem type, where feature writing, test writing, and review are handed off in sequence, with a split-by-context design in which one agent writes the feature and its tests before a verifier only runs the tests." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://claude.com/resources/articles/building-agents-when-to-fold-subagents-into-your-main-agent-loop" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<h2>已经上线的子智能体，可以一次折进一个</h2>
+<p>许多团队已经有了调度器和一组生产环境里的专家智能体。原文给出的单一循环目标是：一个模型和一个上下文窗口，跑开放式的工具循环，由harness设置轮次和成本预算、写入门等限制。每一轮，模型会发出一批工具调用，harness并行执行，再把原始结果返回给同一个模型，由它决定下一步是再调一批工具、向用户提问，还是给出答案。循环在模型给出答案或碰到预算时停止，答案之后也可以再跑一道目标或核验检查。模型和写计划的是同一个，它在第一轮把计划写进上下文，并在结果到达后修改。这是和“调度器加专家智能体”最大的不同：写计划的模型也是执行计划的模型，因此可以在中途改计划。</p>
+<p>他们建议先做任务完成评测，不要只看局部子任务分。即使只有10个黄金示例，也足够起步。可以先按评分标准给智能体的最终回复打分，用来跟踪回答质量。还在用调度器时，也应跟踪路由是否选对了子智能体。子智能体被折进去之后，改查智能体是否加载了正确的技能、调用了正确的工具。内部有一种做法是给重要事件打时间戳，方便以后重放，做成针对性评测。</p>
+<p>往单一循环演进时，可以把子智能体折成工具和技能，具体方式包括合并领域子智能体、把它们当工具调用，或用技能和工具替换它们。合并前先做一套小的端到端评测，并从共享上下文最多、用量最大的子智能体开始折。适合合并的，是那些彼此的输出会串起来、碰到同一批数据，或经常被一起调用的专家。比如，如果生产流量里有相当比例是一个专家后面紧跟另一个，这就是一对耦合很紧的组合，适合并成一个领域智能体。</p>
+<p>在前述三条保留条件仍然成立、因而要留下某个子智能体时，可以让主智能体把它当作工具来调用，这样主智能体还能继续和用户说话。他们只建议在子智能体需要直接和用户交谈时，才做完全交接。其余情况都可以做成主循环里的技能加工具。这一步不用重写子智能体，也能先拿到任务完成评测的基线。不过有些问题还会留下：每个专家仍有自己的提示、上下文、负责团队和评测；每次调用交回的仍是有损耗的摘要；每次调用都是一层嵌套的模型循环，会增加时延。</p>
+<p>把子智能体折进主智能体时，一次折一个：把它的提示做成技能，把API调用做成MCP工具，再比较有它和没有它时的评测表现，然后决定留下还是去掉。比较时不要只看最终分数，还要看哪些任务翻了盘。他们在一个示例客服智能体上测过：把一个子智能体折进另一个后，时延下降了，但一个原本能通过的流程却坏了。主智能体拿着订单查询工具，自己直接回答了，没有向物流专家询问送达日期。</p>
+<p>每次改动前，评测里都要覆盖生产环境中一起运行的每条智能体链，以及智能体不得打破的每条规则，而且每道题要跑不止一次。上面这次失败，只在两次运行里的一次出现。</p>
+<p>第三张图把三条路径并排放在一起：合并共享上下文的子智能体，让数量变少；主智能体把子智能体当工具调用，自己继续对话；把子智能体的提示做成技能，把API调用做成工具。抓取到的是这张动图中的说明帧。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_fold_paths"><div class="media-frame"><img src="https://assets.claude.com/ed6bd97496ffdab88763806d9e14f1ec61ed9255.gif" data-original-src="https://assets.claude.com/ed6bd97496ffdab88763806d9e14f1ec61ed9255.gif" alt="Official Anthropic animated diagram of three migration paths: merge subagents that share context, call remaining subagents as tools from the main agent, and fold subagent prompts into skills and API calls into tools." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://claude.com/resources/articles/building-agents-when-to-fold-subagents-into-your-main-agent-loop" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<h2>多个团队可以继续贡献，但所有权要从智能体转到技能和工具</h2>
+<p>领域推理可以从知识库、技能和MCP工具里取。各团队的所有权，可以从“拥有一个智能体”转到“拥有技能和工具”，由一个小的中央团队继续掌握系统提示和端到端质量，并在新技能、工具和评测上线前先过审。</p>
+<p>工具适合智能体需要采取行动、从系统里读取实时数据，或按固定形状返回结果的时候。迁移过程中，也可以继续用工具来调用尚未折进去的子智能体。他们建议按用户意图给工具分组，不要做成一个API一个工具，因为系统提示里的工具定义一旦超过<strong>30到50</strong>个，工具选择往往就会变差。可以使用延迟加载的工具搜索，少设置硬性前置条件，把必要的检查放进工具里。比如Y依赖X的输出，就由Y的工具去检查，并返回一条模型能执行的说明。按用户区分的权限也可以同样处理：每个工具检查当前用户能看或能做什么，并返回模型能读懂的直白拒绝，这样一个循环就能服务访问权限不同的用户，而不必按权限级别再拆智能体。</p>
+<p>技能适合智能体需要知道一个团队怎么做事的时候，也就是过去写在专家子智能体提示里的步骤、规则和判断。他们把技能库的维护交回给写技能的人，并由Claude承担较重的编写、测试和清理。为了防止技能铺开，可以让各团队指定负责人，保证技能写得清楚、彼此有区分，并带着相应评测上线。文中提到<code>/skill-creator</code>可以用来写形态正确的新技能，并审计已有技能；<code>/skill-doctor</code>可以看到每个技能的成本和实际使用频率，再删掉不再有用的部分。</p>
+<p>知识库适合智能体只是偶尔需要的参考材料。政策、指标定义、产品规格这类事实，可以放在模型会调用的搜索或查询工具后面，也可以作为参考文件放进技能。不要用代码把这些上下文检索出来，再贴进提示里。</p>
+<p>他们最近发布了一组Claude API技能，并把这些技能串成一个迁移工具包，用来评估和把多智能体系统迁到单一智能体循环，其中也包括可以先在模拟系统上试用的演示。工具包仓库在GitHub上的anthropics/single-agent-loop-kit。文中点名的命令包括<code>/claude-api build-eval</code>、<code>/claude-api prompt-audit</code>、<code>/claude-api hillclimb</code>和<code>/claude-api cost-optimize</code>，分别用于建立端到端评测、找出为旧模型写的过时指令、对照评测做迭代，以及给缓存、token和模型选择做一项一项的成本优化。这里只保留原文里对工具包用途的说明，不把仓库说明写成全文手册。</p>
+<p>原文最后的原则是：模型变强之后，最佳用法也会变，因此某一种架构本身没有“量一量、一次只改一件事、留下经得住检验的部分”这一原则重要。模型更强、智能体跑得更久之后，更多子智能体可以变成技能和工具。不必一次搬完。先做一套小的端到端评测，折进去一个子智能体，只有折进去的版本分数更差时才把它留下，然后再做下一个。</p>
+</div></section>
+<section class="reader-panel" id="original" data-reader-panel="original" aria-label="原文">
+<h2 class="section-heading">原文</h2><h3 class="original-title">Building agents: When to fold subagents into your main agent loop</h3>
+<div class="original-media">
+<figure class="media-figure" data-media-id="media_five_layers"><div class="media-frame"><img src="https://assets.claude.com/a7cb2cf08bfcef461166310c0c55f28b72c33b0d.gif" data-original-src="https://assets.claude.com/a7cb2cf08bfcef461166310c0c55f28b72c33b0d.gif" alt="Official Anthropic animated diagram comparing a common five-layer multi-agent structure around the model with a recommended single agent loop that uses one system prompt, four to five thin data tools, and firm output guardrails." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://claude.com/resources/articles/building-agents-when-to-fold-subagents-into-your-main-agent-loop" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_split_by_context"><div class="media-frame"><img src="https://assets.claude.com/cd4b9c4417d5ba31776e8aa79e204966c08c6a43.png" data-original-src="https://assets.claude.com/cd4b9c4417d5ba31776e8aa79e204966c08c6a43.png" alt="Official Anthropic diagram comparing agents split by problem type, where feature writing, test writing, and review are handed off in sequence, with a split-by-context design in which one agent writes the feature and its tests before a verifier only runs the tests." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://claude.com/resources/articles/building-agents-when-to-fold-subagents-into-your-main-agent-loop" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_fold_paths"><div class="media-frame"><img src="https://assets.claude.com/ed6bd97496ffdab88763806d9e14f1ec61ed9255.gif" data-original-src="https://assets.claude.com/ed6bd97496ffdab88763806d9e14f1ec61ed9255.gif" alt="Official Anthropic animated diagram of three migration paths: merge subagents that share context, call remaining subagents as tools from the main agent, and fold subagent prompts into skills and API calls into tools." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://claude.com/resources/articles/building-agents-when-to-fold-subagents-into-your-main-agent-loop" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div>
+<div class="prose" lang="en"><h1>Building agents: When to fold subagents into your main agent loop</h1>
+<p>October 22, 2026</p>
+<p><em>If you’ve built an agent in Claude Platform that includes multiple subagents, see which may make sense to fold into the main agent loop using our <a href="https://github.com/anthropics/single-agent-loop-kit" rel="noopener noreferrer">migration kit</a>. It runs a guided workflow to identify your patterns, evaluate alternatives, and verify the best approach. It includes a demo that you can try on a mock system before running on your agent.</em></p>
+<p>Subagents – agents with their own context window, tools, and instructions, <a href="https://claude.com/resources/articles/multi-agent-coordination-patterns" rel="noopener noreferrer">orchestrated by a coordinator</a> – are a core component of agent design. They are effective at verification, parallel work, and modular permissioning. We use them in many of our own agents that we build using Claude Platform, for example our <a href="https://www.anthropic.com/engineering/multi-agent-research-system" rel="noopener noreferrer">multi-agent research system</a>.</p>
+<p>However, recently the Applied AI team has found a pattern of enterprise agent deployments that have benefited from folding routers, planners, and domain subagents into the main agent loop. In <a href="https://claude.com/resources/articles/the-anatomy-of-effective-commerce-agents#:~:text=In%20our%20comparisons%20across%20several%20enterprise%20deployments,latency%20per%20task" rel="noopener noreferrer">our comparisons across several enterprise deployments</a>, <a href="https://claude.com/resources/articles/building-agents-with-skills-equipping-agents-for-specialized-work" rel="noopener noreferrer">a single agent with skills</a> frequently outperformed both the one-prompt-for-everything design and the subagent design on quality, and often at a lower cost and latency per task.</p>
+<p>For example, one company found the dozen specialist subagents within its customer-facing agent made a consistent on-brand experience difficult to maintain and added latency that hurt the user experience.</p>
+<p>We also often see proposed agent designs that follow a familiar progression: an intent classifier, a fixed multi-step reasoning pipeline, user-segment buckets, separate recommendation branches, and a multi-agent orchestrator on top.</p>
+<p>In these cases feedback is often that most of this structure was doing work the model no longer needed done for it, and that one clear system prompt, 4-5 thin data tools, and firm output guardrails would cover most of the use case.</p>
+<p>subagent design</p>
+<p>To be clear, subagents still have their place, including at the research frontier. Use them when:</p>
+<ul>
+<li>A single agent loop hits measurable performance degradation from context bloat, or</li>
+<li>Multiple tasks need to be tackled in parallel with fresh context windows that can be discarded once the task is done, or</li>
+<li>A single agent struggles to select appropriate tools or there are conflicting instructions in the system prompt.</li>
+</ul>
+<p>But too often we see enterprises give each team or problem type its own subagent, with the agent architecture becoming a copy of their org chart (Conway’s law at work).</p>
+<p>This post explains when to consider folding subagents into your main agent loop with best practices we’ve learned from building agents in large organizations.</p>
+<h2>Agent building failure modes for large organizations</h2>
+<p>Companies often want to build an agent that unites multiple products and capabilities into a single customer interface.</p>
+<p>Typically, each capability is owned by a separate team, so companies start by letting each individual team build their own agent, then a central platform team builds an orchestrator on top. This can take on several structures including orchestrator-subagent or a single agent with specific agents exposed as MCP tools.</p>
+<p>This looks like the simplest solution but introduces immediate complexity around:</p>
+<ul>
+<li><strong>Context management:</strong> You need to decide what context is exchanged between agents and often lose details in the back and forth.</li>
+<li><strong>Subagent sprawl</strong>: Every team ships its own subagent, so companies end up with hundreds of overlapping subagents with no enforced standards and no specific owner.</li>
+<li><strong>The Frankenprompt</strong>: Every team adds a sentence to the system prompt, resulting in conflicting rules and no consistent voice.</li>
+<li><strong>Unvetted, overly localized evals</strong>: Everyone adds their own evals that are overly optimized for their subtask. No one owns or maintains the whole set, and leadership makes decisions based on watered-down, overly localized scores.</li>
+<li><strong>Latency</strong>: Multi-agent architectural complexity adds latency. One customer that evaluated their multi-agent harness against a single agent loop saw a roughly 2x faster runtime with the latter.</li>
+</ul>
+<h2>Using an agent loop with progressive disclosure</h2>
+<p>The orchestrator-subagent design described above is a reasonable approach to coordinating specialists built across teams, but often a more effective approach can be <strong>progressively disclosing context via skills</strong> and <strong>progressively disclosing tools via tool search</strong>. In other words, the agent sees short descriptions of the skills and tools, which are fully loaded only when needed.</p>
+<p>There are three reasons why this approach can make sense:</p>
+<ul>
+<li><strong>Shared context produces better answers:</strong> for longer-running agents, we want the context from several different tasks to sit in the main context window. An agent that has seen the result of each earlier step can connect them, which leads to richer outputs and better insights than a set of summaries handed back by subagents. It also means <a href="https://claude.com/resources/articles/building-multi-agent-systems-when-and-how-to-use-them" rel="noopener noreferrer">fewer context windows and fewer lossy handoffs</a>.</li>
+<li><strong>Progressive disclosure prevents context bloat:</strong> this techniqueallows teams to build single agents that can accomplish a wide variety of tasks without requiring all of the context to be immediately loaded into one long system prompt. This removes the main reason teams previously split work across subagents. In fact, we <a href="https://claude.dev/blog/the-new-rules-of-context-engineering-for-claude-5-generation-models/" rel="noopener noreferrer">reduced Claude Code’s system prompt for more advanced models by over 80%</a> which included cuts related to progressively disclosing skills and tools.</li>
+<li><strong>Models are more capable:</strong> starting with Opus 4.5, models became capable of managing far more in a single loop than most teams expected. You cannot turn off thinking on Opus 5.5, and Fable 5.1, and recent models increasingly narrate their progress and check their work as they go, which makes some harness elements redundant. Each new model lets you move more of the decision-making out of the harness and into the model itself. A simpler loop is also easier to move to the next model; in migrations we have helped customers with, rigid multi-agent structures were often what stopped the new model from doing more of the work.</li>
+</ul>
+<p>The single agent loop design requires discipline: a carefully managed system prompt, skill and tool descriptions that trigger at the right times, and deliberate handling of context windows, memory, and note-taking. This article goes deeper into migration and design considerations in subsequent sections.</p>
+<p>One central team should own end-to-end quality and the system prompt, vetting every new tool and eval before it ships. Keeping that central team small helps iteration move quickly and lowers coordination cost across a large org.</p>
+<p>If you go the multi-agent route, start with the simplest pattern (generator-verifier, orchestrator-subagent, or other) that could work. Decompose boundaries effectively by <strong>dividing by context: give each subagent a piece of work that needs little from the rest of the system and have it hand back a compact result</strong> (good candidates are independent research paths, separate components with clean interfaces, or black-box verification). When agents are split by problem type, they engage in a "telephone game,"passing information back and forth with each handoff degrading fidelity.</p>
+<p>subagents split by problem</p>
+<h2>How to fold subagents into the main agent loop</h2>
+<p>Many teams already have an orchestrator and a set of specialist agents in production. The following is the single loop design we'd suggest working toward:</p>
+<ul>
+<li>One model and one context window running an open-ended tool loop, with limits (turn and cost budgets, write gates) set in the harness.</li>
+<li>Each turn, the model emits a batch of tool calls. The harness runs them in parallel and returns raw results to the same model, which decides the next step: another batch, a question to the user, or an answer.</li>
+<li>The loop stops when the model answers or hits a <a href="https://platform.claude.com/docs/en/build-with-claude/task-budgets" rel="noopener noreferrer">budget</a>. A goal or verifier check can optionally run after the answer.</li>
+<li>The model writes its plan in context on the first turn and revises it as results arrive. This is the main change from the orchestrator and specialist agents setup: the model that writes the plan is also the one carrying it out, so it can change the plan mid-turn.</li>
+<li>Context still gets loaded, and is managed by the agent itself:
+<ul>
+<li>A code step that rewrites the plan from a catalog of rules is no longer needed, since the model decides each step.
+<ul>
+<li>Ordering and domain procedure move into <strong>skills.</strong></li>
+<li>Hard limits (validation, approval gates) and anything else that comes up mid-conversation (e.g. memory lookup) move into the <strong>tools.</strong></li>
+<li>Code can still be used to load anything cheap and almost always relevant (e.g. an entity resolution step), and to handle any mechanical parts (payload construction, stream parsing, resuming a clarification) inside tools the loop calls.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>This single loop design also helps with the end state many teams are working toward (an agent that understands a user's high-level goals and acts on their behalf), since it keeps everything the agent has learned in one context.</p>
+<p>The suggestions below are how a team could get from a multi-agent system to a single agent loop in stages, and how several teams can keep contributing to that agent along the way.</p>
+<h3>Task-completion evals</h3>
+<p>The first step is to create an eval set that can help you determine whether you should fold a subagent into the main agent loop. The eval structure we’ve seen work is one shared end-to-end set owned by a central team with smaller eval sets shipped with each skill by the team that owns it. Even a set of 10 golden examples is enough to start.</p>
+<p>Grading the agent's final message against a rubric is a good starting point for tracking answer quality. While you still have an orchestrator, you should also track routing accuracy (did it pick the right subagent?). Once a subagent is folded in, check instead whether the agent loaded the right skill or called the right tool. Working toward task-completion evals over time is helpful as this matters most when comparing architectures.</p>
+<p>This can be complex in environments where internal systems are difficult to replay and user engagement is difficult to simulate. One approach that has worked for us internally is to record timestamps on important events, so they can be replayed later to run as targeted evals.</p>
+<h3>Reducing subagents over time</h3>
+<p>Evolving toward a single agent loop involves folding the subagents into tools and skills. This can be done by merging domain subagents, calling them as tools, or replacing them with skills and tools.</p>
+<p>folding in subagents</p>
+<h3>Combining domain agents</h3>
+<p>Build a small end-to-end eval before the first merge. Then <strong>fold in by shared context starting with subagents that have the most use.</strong></p>
+<p><a href="https://claude.com/resources/articles/building-multi-agent-systems-when-and-how-to-use-them" rel="noopener noreferrer">Merge specialists</a> that chain on each other's output, touch the same data, or are often called together. For example, if a significant share of production traffic is one specialist followed by a second, that is a tightly coupled pair, which makes it a candidate to merge into one domain agent.</p>
+<h3>Subagents called as tools</h3>
+<p>When one of the three conditions above applies and you keep a subagent, it can be effective to have the main agent call subagents as tools so it can continue holding the conversation with the user.</p>
+<p>We’d only recommend a full handoff, where the subagent takes over the conversation, when it needs to talk to the user directly. Everything else can be a skill plus tools in the main loop.</p>
+<p>This will allow you to define a <a href="https://claude.com/resources/articles/structured-outputs-on-the-claude-developer-platform" rel="noopener noreferrer">shared response schema</a> for subagents, verify the conclusion against real data with the main agent, and trim the input to any final synthesis step. This is a good first step, as you don’t need to <strong>rewrite</strong> the subagents. It also gives you a <strong>baseline</strong> on the task-completion eval before deciding to fold any subagents into the main agent.</p>
+<p>However, some failure modes will remain:</p>
+<ul>
+<li>Each specialist has its own prompt, context, owner team, and evals</li>
+<li>Each call still hands back a lossy summary</li>
+<li>Every call is a nested model loop that adds latency</li>
+</ul>
+<h3>Folding subagents into the main agent via skills and tools</h3>
+<p>Fold subagents into the main agent one at a time by turning each one’s prompts into skills and API calls into MCP tools. Compare eval performance with and without the subagent. Then decide which to keep.</p>
+<p>When you compare, don’t just examine the final score, take a look at which tasks flipped. When we tested this on a sample support agent, folding one subagent into another lowered latency, but also broke a process that had been passing. The main agent was holding the order lookup tool and answering on its own, without asking the shipping specialist for the delivery date.</p>
+<p>Before each change, make sure your eval has a task for every chain of agents that runs together in production and for every rule the agent must not break, and run each task more than once, since a break like this one only showed up in one run out of two.</p>
+<h2>How several teams can contribute to a single agent</h2>
+<p>Domain reasoning can be retrieved from knowledge bases, skills, and MCP tools. Individual teams can shift their ownership from agents to skills and tools, with one small central team keeping ownership of the system prompt and end-to-end quality. This involves vetting new skills, tools, and evals before they ship.</p>
+<h3>MCP tools</h3>
+<p>Tools are the right fit when the agent needs to take an action, read live data from a system, or return a result in a fixed shape. You can also use tools as a way to keep calling subagents while you migrate. We recommend tools grouped by user intent (not one tool per API) because once you exceed 30-50 tool definitions in the system prompt, tool choice tends to degrade.</p>
+<p>Use <a href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-search-tool" rel="noopener noreferrer">tool search</a> with deferred loading, limit hard preconditions, and move any needed ones into the tools. For example, if Y needs X's output, Y's tool checks for it and returns an instruction the model can act on. Per-user permissions work the same way. Each tool checks what the calling user may see or do and returns a plain refusal the model can read, so one loop can serve users with different access without a separate agent per permission level.</p>
+<h3>Skills</h3>
+<p>Skills are the right fit when the agent needs to know how a team does work, like the steps, rules, and judgment calls a specialist subagent's prompt used to hold.</p>
+<p>Our approach to growing skill libraries is to give the maintenance work back to the people writing the skills. Claude can do the heavy lifting with skills that can build, test, and prune other skills.</p>
+<p>To prevent skill sprawl, you can have DRIs per team own their skills and make sure they are well crafted, distinct, and shipped with appropriate evals.</p>
+<ul>
+<li><strong>/skill-creator</strong> allows you to author new skills that start well-formed, and audit existing ones to trim, deduplicate, and restructure them.</li>
+<li><strong>/skill-doctor</strong> allows you to see what each skill in your library costs and how often it’s actually used, and delete dead weight.</li>
+</ul>
+<h3>Knowledge bases</h3>
+<p>Knowledge bases are the right fit for reference material the agent only needs some of the time. Facts and reference material (policies, metric definitions, product specs) can sit behind a search or lookup tool the model calls, or ship as reference files inside a skill. Avoid having <a href="https://claude.com/resources/articles/seeing-like-an-agent" rel="noopener noreferrer">code retrieve and paste this context into prompts</a>.</p>
+<h2>Tools to accelerate this work</h2>
+<p>We recently <a href="https://code.claude.com/docs/en/commands" rel="noopener noreferrer">released</a> a set of Claude API skills that can help with most of the work mentioned above. Our <a href="https://github.com/anthropics/single-agent-loop-kit" rel="noopener noreferrer">migration kit</a> chains these skills together in one guided workflow for assessing and moving multi-agent systems to a single agent loop. It includes a demo you can try before running it on the real thing:</p>
+<ul>
+<li><strong>/claude-api build-eval:</strong> can help create a first end-to-end set owned by the central team or small evals each team ships with its skill</li>
+<li><strong>/claude-api prompt-audit:</strong> can flag instructions written for older models in your prompts, skills, and tool descriptions and propose fixes as a diff. This can be run on your system prompts to find any rules that were added for an earlier model and are now making the agent slower or more rigid. Each team's DRI can also run it on their own skills and tool descriptions.</li>
+<li><strong>/claude-api hillclimb:</strong> can iteratively improve an app against an existing eval. This can be used for the "folded in vs kept" comparison (after folding one subagent into a skill plus tools, let it iterate on the skill and tool descriptions and see if the folded version matches or beats the subagent), as well as your system prompt.</li>
+<li><strong>/claude-api cost-optimize:</strong> profiles where your calls go and proposes savings from options such as prompt caching, trimming unneeded input and output tokens, effort, and model choice, one change at a time. This can help bring cost and latency down on a given design.</li>
+</ul>
+<p>As models evolve, our understanding of how to best use them and guidance around best practice evolve as well. That makes any one architecture less important than the principle behind it: measure, change one thing at a time, and keep what holds up.</p>
+<p>This is one of those cases. As models get more capable and agents get longer running, more of your subagents can be skills and tools. You don’t have to make that move in one step, though. Build a small end-to-end eval, fold in one subagent, and keep it as a subagent only if the folded version scores worse, then rinse and repeat.</p></div>
+</section>
+<footer class="source-box"><span>内容来自原作者；中文为乔木风格改写，非逐字翻译。</span><div><a href="https://claude.com/resources/articles/building-agents-when-to-fold-subagents-into-your-main-agent-loop" target="_blank" rel="noopener noreferrer">打开原文 ↗</a><a href="https://x.com/emollick/status/2122664990624641421" target="_blank" rel="noopener noreferrer">相关链接 ↗</a></div></footer>
+</article></body></html>
