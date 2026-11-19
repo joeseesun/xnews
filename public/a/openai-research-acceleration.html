@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="referrer" content="no-referrer">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>从3月到10月，两到四小时的研究任务，智能体独立完成率从23%升到46% · X News</title>
+<meta name="description" content="OpenAI用内部测量更新研究加速报告。用量和并发都在上升，但按任务类型拆开并不均匀；安全和对齐的记录工作周增加了77%。官方提醒不要把这些趋势直接外推。">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#fffefa">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="X News">
+<meta property="og:title" content="从3月到10月，两到四小时的研究任务，智能体独立完成率从23%升到46% · X News">
+<meta property="og:description" content="OpenAI用内部测量更新研究加速报告。用量和并发都在上升，但按任务类型拆开并不均匀；安全和对齐的记录工作周增加了77%。官方提醒不要把这些趋势直接外推。">
+<meta property="og:url" content="https://xnews.qiaomu.ai/a/openai-research-acceleration">
+<link rel="canonical" href="https://xnews.qiaomu.ai/a/openai-research-acceleration">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="从3月到10月，两到四小时的研究任务，智能体独立完成率从23%升到46% · X News">
+<meta name="twitter:description" content="OpenAI用内部测量更新研究加速报告。用量和并发都在上升，但按任务类型拆开并不均匀；安全和对齐的记录工作周增加了77%。官方提醒不要把这些趋势直接外推。">
+<meta property="og:image" content="https://images.ctfassets.net/kftzwdyauwt9/2YS8yWiGpKflhlEnAkcLU/f51ead4391706f6c3198f0d61a0f147a/research-acceleration-the-jagged-frontier-social.png">
+<meta name="twitter:image" content="https://images.ctfassets.net/kftzwdyauwt9/2YS8yWiGpKflhlEnAkcLU/f51ead4391706f6c3198f0d61a0f147a/research-acceleration-the-jagged-frontier-social.png">
+<meta property="article:published_time" content="2026-11-19T08:21:00+08:00">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://xnews.qiaomu.ai/#publisher", "name": "X News", "url": "https://xnews.qiaomu.ai/", "description": "海外创始人长文与 AI 视频的中文改写选刊"}, {"@type": "WebSite", "@id": "https://xnews.qiaomu.ai/#website", "name": "X News", "url": "https://xnews.qiaomu.ai/", "inLanguage": "zh-CN", "publisher": {"@id": "https://xnews.qiaomu.ai/#publisher"}}, {"@type": "Article", "@id": "https://xnews.qiaomu.ai/a/openai-research-acceleration#article", "url": "https://xnews.qiaomu.ai/a/openai-research-acceleration", "mainEntityOfPage": {"@id": "https://xnews.qiaomu.ai/a/openai-research-acceleration#page"}, "headline": "从3月到10月，两到四小时的研究任务，智能体独立完成率从23%升到46%", "description": "OpenAI用内部测量更新研究加速报告。用量和并发都在上升，但按任务类型拆开并不均匀；安全和对齐的记录工作周增加了77%。官方提醒不要把这些趋势直接外推。", "inLanguage": "zh-CN", "datePublished": "2026-11-19T08:21:00+08:00", "author": {"@id": "https://xnews.qiaomu.ai/#publisher"}, "publisher": {"@id": "https://xnews.qiaomu.ai/#publisher"}, "isBasedOn": {"@type": "CreativeWork", "url": "https://openai.com/index/research-acceleration-jagged-frontier/", "name": "Research acceleration: The jagged frontier", "datePublished": "2026-11-18T23:07:23+00:00"}, "citation": "https://openai.com/index/research-acceleration-jagged-frontier/", "keywords": ["OpenAI", "research acceleration", "coding agents", "RSI", "safety"], "image": ["https://images.ctfassets.net/kftzwdyauwt9/2YS8yWiGpKflhlEnAkcLU/f51ead4391706f6c3198f0d61a0f147a/research-acceleration-the-jagged-frontier-social.png"]}, {"@type": "WebPage", "@id": "https://xnews.qiaomu.ai/a/openai-research-acceleration#page", "url": "https://xnews.qiaomu.ai/a/openai-research-acceleration", "name": "从3月到10月，两到四小时的研究任务，智能体独立完成率从23%升到46% · X News", "description": "OpenAI用内部测量更新研究加速报告。用量和并发都在上升，但按任务类型拆开并不均匀；安全和对齐的记录工作周增加了77%。官方提醒不要把这些趋势直接外推。", "inLanguage": "zh-CN", "isPartOf": {"@id": "https://xnews.qiaomu.ai/#website"}, "mainEntity": {"@id": "https://xnews.qiaomu.ai/a/openai-research-acceleration#article"}}]}</script>
+<link rel="alternate" type="application/rss+xml" title="X News" href="/feed.xml">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-7 -7 58 58'%3E%3Crect x='-7' y='-7' width='58' height='58' rx='5' fill='%231b1d18'/%3E%3Cpath fill='%23fffefa' d='M2 0h11l29 44H31zM32 0h10L26 18l-5-7zM17 26l5 7-10 11H2z'/%3E%3C/svg%3E">
+<script>try{var t=localStorage.getItem('xn.theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
+<style data-source="/static/app.b7cfdefd4a1d.css">/* D · 影像刊 — see DESIGN.md. System fonts, real media, no left rail. */
+:root {
+  color-scheme:light;
+  --paper:#fffefa; --ink:#1b1d18; --muted:#62685a; --rule:#d8dccf;
+  --surface:#eef0e5; --sage:#dce3cc; --sage-ink:#293026; --focus:#315b3c;
+  --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC","Noto Sans CJK SC",sans-serif;
+  --ease:cubic-bezier(.2,0,0,1); --gutter:32px; --reader-bar:64px;
+  --control-border:#808675; --image-outline:#0000001a;
+  --contrast-surface:#1b1d18; --contrast-ink:#fffefa;
+}
+:root[data-theme="dark"] {
+  color-scheme:dark;
+  --paper:#20241e; --ink:#eef0e7; --muted:#b7c1af; --rule:#4b5842;
+  --surface:#30392a; --sage:#394631; --sage-ink:#eef0e7; --focus:#c0d9aa;
+  --control-border:#89957f; --image-outline:#ffffff1a;
+  --contrast-surface:#12180f; --contrast-ink:#eef0e7;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:130px;scrollbar-gutter:stable}
+body{margin:0;background:var(--paper);color:var(--ink);font:1rem/1.7 var(--sans);-webkit-font-smoothing:antialiased;letter-spacing:0}
+[hidden]{display:none!important}
+a{color:inherit;text-decoration:none}
+@media(hover:hover){a:hover{text-decoration:underline;text-underline-offset:.2em}}
+button{font:inherit;color:inherit;cursor:pointer}
+button:disabled{cursor:wait}
+button,a{-webkit-tap-highlight-color:transparent}
+
+:focus-visible{outline:3px solid var(--focus);outline-offset:4px}
+em,i{font-style:normal;font-weight:500}
+strong,b{font-weight:600}
+img{max-width:100%;height:auto}
+.sr-only,.skip:not(:focus){position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.skip:focus{position:fixed;z-index:100;top:8px;left:8px;background:var(--ink);color:var(--paper);padding:10px 16px}
+.site-header,.site-main,.site-footer{width:min(100% - var(--gutter)*2,1320px);margin-inline:auto}
+.site-header{min-height:118px;display:flex;align-items:center;justify-content:space-between;gap:24px 32px;flex-wrap:wrap;padding-block:24px;border-bottom:1px solid var(--ink)}
+.brand{display:flex;align-items:center;gap:26px;flex:none}
+.brand:hover{text-decoration:none}
+.brand-wordmark{display:flex;align-items:baseline;gap:7px;line-height:1}
+.brand-mark{width:43px;height:43px;align-self:center;margin-top:2px}
+.brand-name{font:700 3.875rem/.95 Georgia,"Times New Roman",serif;letter-spacing:-.065em}
+.brand-period{color:var(--focus)}
+.brand-sub{font-size:0.9375rem;font-weight:500;line-height:1.5;border-inline-start:1px solid var(--rule);padding-inline-start:25px;letter-spacing:.12em}
+.brand-sub>span{display:block;font-size:0.75rem;line-height:1.6;font-weight:400;letter-spacing:.04em;color:var(--muted);margin-top:5px}
+.header-side{display:flex;align-items:center;gap:30px}
+.site-nav{display:flex;align-items:center;gap:30px;font-size:0.875rem}
+.site-nav a{min-height:44px;display:flex;align-items:center;gap:6px;position:relative}
+.site-nav a[aria-current="page"]{font-weight:600}
+.site-nav a[aria-current="page"]::after{content:"";position:absolute;inset-inline:0;bottom:3px;height:2px;background:var(--ink)}
+.icon-button{width:44px;height:44px;border:1px solid var(--control-border);border-radius:50%;display:inline-grid;place-items:center;background:transparent;flex:none}
+.site-main{min-height:55vh;padding-bottom:44px}
+.edition-line{min-height:160px;display:flex;align-items:center;justify-content:space-between;gap:24px 32px;flex-wrap:wrap;padding-block:28px}
+.edition-line h1{font-size:1.875rem;line-height:1.4;font-weight:600;margin:8px 0 10px;text-wrap:balance}
+.edition-line p{font-size:0.875rem;line-height:1.7;color:var(--muted);margin:0}
+.edition-line .edition-kicker{font-size:0.6875rem;letter-spacing:.1em;color:var(--ink)}
+.edition-kicker span{margin-inline:8px;color:var(--muted)}
+.edition-meta{text-align:end;font-variant-numeric:tabular-nums;display:flex;flex-direction:column;gap:6px;flex:none}
+.edition-label{font-size:0.75rem;color:var(--muted)}
+.edition-meta time{font:400 1.5rem/1.25 Georgia,"Times New Roman",serif;letter-spacing:.02em}
+.edition-note{font-size:0.75rem;color:var(--muted)}
+/* A quiet editorial toolbar; every control remains labelled and keyboard accessible. */
+.discovery{margin-bottom:20px}
+.discovery-top,.discovery-bottom{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.discovery-top{flex-wrap:wrap;padding-block:16px;border-block:1px solid var(--rule)}
+.filter-group{display:flex;gap:8px;flex-wrap:wrap}
+.filter-group button{min-height:44px;padding:8px 16px;display:flex;align-items:center;gap:9px;font-size:0.875rem;background:transparent;border:1px solid transparent;border-radius:3px}
+.filter-group button span{font-size:0.6875rem;font-variant-numeric:tabular-nums;opacity:.8}
+.filter-group button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.search-field{display:flex;align-items:center;gap:10px;width:min(340px,42%);min-height:44px;border:1px solid var(--control-border);border-radius:3px;padding-inline:13px 0;color:var(--muted)}
+.search-field svg{flex:none}
+.search-field input{font:400 0.875rem/1.5 var(--sans);color:var(--ink);background:transparent;border:0;min-width:0;width:100%;padding:11px 0;border-radius:0}
+.search-field input::-webkit-search-cancel-button{display:none}
+.search-field input::placeholder{color:var(--muted);opacity:1}
+.search-field:focus-within{outline:2px solid var(--focus);outline-offset:3px}
+.search-field input:focus-visible{outline:none}
+.search-field button{border:0;background:transparent;width:44px;min-height:44px;flex:none;font-size:1.375rem}
+.discovery-bottom{flex-wrap:wrap;padding-top:12px;min-height:54px}
+.discovery-bottom p{margin:0;font-size:0.75rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.view-switch{display:flex;gap:4px}
+.view-switch button{display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:6px 10px;border:1px solid transparent;border-radius:3px;background:transparent;color:var(--muted);font-size:0.75rem}
+.view-switch button[aria-pressed="true"]{color:var(--ink);background:var(--surface);border-color:var(--control-border)}
+.search-empty{padding:48px 20px 72px;text-align:center;border-top:1px solid var(--rule)}
+.empty-symbol{font:400 3rem/1 Georgia,serif;color:var(--muted);margin:0 0 20px}
+.search-empty h2{font-size:1.375rem;font-weight:500;margin:0 0 12px}
+.search-empty p{color:var(--muted);overflow-wrap:anywhere}
+.search-empty .reset-button{margin:12px 0 0}
+.news-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:28px 24px;align-items:stretch}
+.news-card{grid-column:span 4;min-width:0;display:flex;flex-direction:column;border:1px solid var(--rule);background:var(--paper);position:relative;overflow:hidden}
+.news-card.is-featured{grid-column:span 8}
+.news-card.is-wide{grid-column:span 8}
+.card-link{display:flex;flex-direction:column;height:100%;min-width:0}
+.card-link:hover{text-decoration:none}
+.cover{position:relative;overflow:hidden;background:var(--surface);min-height:0;aspect-ratio:16/9;isolation:isolate}
+.cover img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;z-index:1;transition:transform 180ms var(--ease)}
+.is-featured .cover{min-height:0;aspect-ratio:2.7;flex:none}
+.is-featured .card-body{flex:0 0 auto}
+.is-wide .cover{aspect-ratio:2/1}
+.cover-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;background:var(--surface);color:var(--ink);z-index:0;overflow:hidden}
+.cover-word{font-size:clamp(2.75rem,5.3vw,5.25rem);font-weight:500;line-height:1.1;overflow-wrap:anywhere;max-width:100%;text-align:left}
+.cover-badge{position:absolute;z-index:2;left:16px;bottom:16px;background:#1b1d18dc;color:#fffefa;padding:5px 10px;font-size:0.75rem;line-height:1.6;border:1px solid #fffefa60}
+.card-body{padding:22px 24px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.card-meta{display:flex;overflow-wrap:anywhere;align-items:flex-start;justify-content:space-between;gap:14px;font-size:0.75rem;line-height:1.7;color:var(--muted);font-variant-numeric:tabular-nums}
+.card-meta time{white-space:nowrap;flex:none}
+.card-title{font-size:1.3125rem;font-weight:600;line-height:1.6;margin:0;text-wrap:pretty;overflow-wrap:anywhere}
+.is-featured .card-title{font-size:clamp(1.5625rem,2.2vw,2rem);line-height:1.5}
+.card-dek{font-size:0.875rem;line-height:1.85;color:var(--muted);margin:0;text-wrap:pretty}
+.card-end{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;font-size:0.75rem;color:var(--muted);margin-top:auto;padding-top:16px}
+.card-read{display:inline-flex;align-items:center;gap:10px;color:var(--ink);white-space:nowrap}
+.card--text.tone-ink .card-read{color:var(--contrast-ink)}
+.card-link:focus-visible{outline-offset:-4px}
+.tone-ink .card-link:focus-visible{outline-color:var(--contrast-ink)}
+.card-arrow{font-size:1.3125rem;line-height:1}
+.card--text .type-cover{min-height:140px;padding:24px 24px 16px;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:20px;overflow:hidden}
+.type-index{font-size:0.625rem;letter-spacing:.12em;line-height:1.5;font-variant-numeric:tabular-nums}
+.type-dot{color:var(--focus)}
+.tone-ink .type-dot{color:var(--contrast-ink)}
+.card--text .cover-word{font:400 clamp(2.25rem,3.5vw,3.375rem)/1.15 Georgia,"Times New Roman",serif;letter-spacing:-.03em}
+.card--text .card-body{padding-top:12px}
+.card--text{align-self:stretch}
+.card--text.tone-ink{background:var(--contrast-surface);color:var(--contrast-ink);border-color:var(--contrast-surface)}
+.card--text.tone-ink .card-meta,.card--text.tone-ink .card-dek,.card--text.tone-ink .card-end{color:var(--contrast-ink);opacity:.85}
+.card--text.tone-sage{background:var(--sage);color:var(--sage-ink);border-color:var(--sage)}
+.card--text.tone-sage .card-meta,.card--text.tone-sage .card-dek,.card--text.tone-sage .card-end{color:var(--sage-ink)}
+.cover-error-link{display:none;font-size:0.875rem;padding:0 22px 18px;text-decoration:underline;text-underline-offset:.2em}
+.media-failed .cover-error-link{display:block}
+.media-failed .cover img{display:none}
+.empty-state{padding:64px 0;max-width:40rem}
+.empty-state h1{font-size:2rem;font-weight:500}
+.empty-state p{color:var(--muted)}
+.site-footer{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:20px 0 32px;border-top:1px solid var(--ink);font-size:0.875rem;color:var(--muted)}
+.footer-links{display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+.footer-links a{display:inline-flex;align-items:center;min-height:44px}
+/* Shared standalone article and progressive full-screen reader. */
+.article-reader{max-width:960px;margin:0 auto;padding:30px 0 60px;min-width:0}
+.article-back{display:inline-flex;min-height:44px;align-items:center;gap:8px;font-size:0.875rem;color:var(--muted);margin-bottom:20px}
+.article-header{max-width:900px;margin:0 auto 24px}
+.article-kicker{font-size:0.875rem;color:var(--muted);margin:0 0 12px}
+.article-header h1{font-size:clamp(1.8125rem,3.8vw,3rem);line-height:1.42;font-weight:500;margin:0 0 18px;text-wrap:pretty;overflow-wrap:anywhere}
+.article-dek{font-size:1.125rem;line-height:1.85;color:var(--muted);margin:0 0 22px;max-width:42rem}
+.article-meta{display:flex;gap:8px 22px;flex-wrap:wrap;color:var(--muted);font-size:0.875rem;padding-top:14px;border-top:1px solid var(--rule);font-variant-numeric:tabular-nums}
+.reader-tabs{display:flex;align-items:center;gap:8px 16px;flex-wrap:wrap;position:sticky;top:0;z-index:3;background:var(--paper);border-block:1px solid var(--rule);padding:8px 0;margin:0 auto 30px;max-width:900px}
+.reader-tabs [data-tabs]{display:flex;flex-wrap:wrap;gap:6px;min-width:0}
+.reader-tabs a{display:inline-flex;align-items:center;min-height:44px;padding:6px 14px;font-size:0.875rem;border:1px solid transparent;border-radius:3px;white-space:nowrap}
+.reader-tabs a[aria-selected="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.reader-source{margin-left:auto;font-size:0.875rem!important}
+.reader-panel{max-width:42rem;margin:0 auto 44px;scroll-margin-top:130px}
+.section-heading{font-size:1.25rem;font-weight:500;margin:0 0 20px}
+.reader-enhanced .section-heading{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);margin:0;padding:0}
+.original-title{font-size:1.1875rem;line-height:1.7;margin:0 0 22px;font-weight:500;overflow-wrap:anywhere}
+.completeness-note{font-size:0.875rem;line-height:1.85;color:var(--muted);background:var(--surface);border:1px solid var(--rule);padding:12px 16px;margin:0 0 24px}
+.prose{min-width:0;font-size:1.125rem;line-height:1.95;overflow-wrap:anywhere;text-wrap:pretty}
+.prose pre{max-width:100%;overflow-x:auto;margin:1.5em 0;padding:1rem;border:1px solid var(--rule);background:var(--surface);font-size:.875rem;line-height:1.65;tab-size:4;white-space:pre;overflow-wrap:normal;text-wrap:initial}
+.prose pre code{display:block;width:max-content;min-width:100%;padding:0;border:0;border-radius:0;background:none;font-size:inherit;line-height:inherit;white-space:pre;overflow-wrap:normal}
+/* Keep wide source tables inside the reading column without compressing every cell. */
+.prose table{display:block;width:fit-content;max-width:100%;overflow-x:auto;border-collapse:collapse;margin:1.5em 0;font-size:.9375rem;line-height:1.65;tab-size:4;text-wrap:wrap;font-variant-numeric:tabular-nums}
+.prose th,.prose td{padding:.7em .85em;border:1px solid var(--rule);text-align:left;vertical-align:top;min-width:5.5rem;max-width:24rem}
+.prose :is(th,td):first-child{min-width:7.5rem}
+.prose th{font-weight:600;background:var(--surface)}
+.prose :is(th,td)[align="left"]{text-align:left}
+.prose :is(th,td)[align="center"]{text-align:center}
+.prose :is(th,td)[align="right"]{text-align:right}
+.prose tbody tr:nth-child(even){background:color-mix(in srgb,var(--surface) 45%,transparent)}
+.prose caption{text-align:left;font-size:.875rem;line-height:1.6;color:var(--muted);padding-bottom:.65em}
+.prose img{max-width:100%;height:auto;vertical-align:middle}
+.prose p,.prose li{font-size:inherit;line-height:inherit;margin:0 0 1em}
+.prose :is(th,td) :is(p,li){font-size:inherit;line-height:inherit}
+.prose :is(th,td)>:last-child{margin-bottom:0}
+.prose h1,.prose h2,.prose h3{font-size:1.5625rem;font-weight:500;line-height:1.6;margin:1.8em 0 .7em}
+.prose h4,.prose h5,.prose h6{font-size:1.125rem;font-weight:600;line-height:1.65;margin:1.6em 0 .6em}
+.prose ul,.prose ol{padding-left:1.4em;margin:0 0 1.2em}
+.prose li{margin-bottom:.45em}
+.prose li>:is(ul,ol){margin:.45em 0 .6em}
+.prose li>p{margin-bottom:.6em}
+.prose li>:last-child{margin-bottom:0}
+.prose blockquote{margin:1.5em 0;padding:18px 22px;border:1px solid var(--rule);background:var(--surface)}
+.prose blockquote>:first-child{margin-top:0}
+.prose blockquote>:last-child{margin-bottom:0}
+.prose blockquote blockquote{margin:1em 0}
+.prose a{font-weight:500;text-decoration:underline;text-underline-offset:.22em}
+.prose hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
+.prose code{font-family:ui-monospace,monospace;font-size:.9em;background:var(--surface);padding:2px 4px;border-radius:3px;white-space:break-spaces}
+.prose details{margin:1.3em 0;padding:.8em 1em;border:1px solid var(--rule)}
+.prose summary{cursor:pointer;font-weight:600;line-height:1.6}
+.prose details[open]>summary{margin-bottom:.8em}
+.prose details>:last-child{margin-bottom:0}
+.prose kbd{font-family:ui-monospace,monospace;font-size:.85em;padding:.1em .35em;border:1px solid var(--rule);border-bottom-width:2px;border-radius:3px;background:var(--surface)}
+.prose sup,.prose sub{font-size:.75em;line-height:0;position:relative;vertical-align:baseline}
+.prose sup{top:-.5em}.prose sub{bottom:-.2em}
+.original-media{display:grid;gap:24px;margin:24px 0 28px}
+.media-figure{margin:0;min-width:0}
+.media-frame{background:var(--surface);border:1px solid var(--rule);overflow:hidden}
+.media-frame img,.media-frame video{max-width:100%;height:auto;max-height:80dvh;display:block;margin:auto}
+.media-frame audio{display:block;width:100%;min-height:54px}
+.media-frame .yt{position:relative;aspect-ratio:16/9}
+.media-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#1b1d18}
+.media-figure figcaption{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 18px;font-size:0.875rem;line-height:1.8;color:var(--muted);padding-top:8px}
+.media-figure figcaption a{text-decoration:underline;text-underline-offset:.2em}
+.media-error{font-size:0.875rem;color:var(--muted);margin:0;padding:18px}
+.source-box{max-width:42rem;margin:24px auto 0;border-top:1px solid var(--rule);padding-top:22px;font-size:0.875rem;color:var(--muted);overflow-wrap:anywhere}
+.source-box a{display:inline-flex;align-items:center;min-height:44px;text-decoration:underline;color:var(--ink);margin-right:22px}
+.reader-sheet{position:fixed;inset:0;margin:0;padding:0;width:100%;max-width:none;height:100dvh;max-height:none;border:0;background:var(--paper);color:var(--ink);overflow:hidden}
+.reader-sheet::backdrop{background:#1b1d1870}
+.reader-sheet[open]{display:flex;flex-direction:column}
+.reader-sheet.sheet-fallback{z-index:60}
+.sheet-bar{min-height:var(--reader-bar);display:flex;flex-shrink:0;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:0 var(--gutter);border-bottom:1px solid var(--rule);background:var(--paper)}
+.sheet-close{min-height:44px;display:inline-flex;align-items:center;gap:12px;border:0;background:none;padding:6px 0;font-size:0.875rem}
+.sheet-close span{font-size:1.375rem}
+.sheet-brand{font-size:0.875rem;font-weight:500}
+.sheet-bar a{font-size:0.875rem;color:var(--muted);min-height:44px;display:flex;align-items:center}
+.sheet-scroll{height:calc(100dvh - var(--reader-bar));flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable;scroll-padding-top:130px;padding:0 var(--gutter)}
+.sheet-scroll .article-back{display:none}
+.sheet-scroll .article-reader{padding-top:35px}
+.sheet-scroll .reader-tabs{top:0}
+.sheet-status{max-width:44rem;margin:52px auto;min-width:0}
+.sheet-status h2{font-size:1.6875rem;line-height:1.5;font-weight:500;margin:0 0 18px}
+.sheet-status p{font-size:1rem;line-height:1.9;color:var(--muted)}
+.sheet-status a{display:inline-flex;align-items:center;min-height:44px;margin-right:18px;text-decoration:underline;text-underline-offset:.2em}
+.retry-button,.reset-button{display:inline-flex;align-items:center;min-height:44px;padding:8px 18px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);border-radius:3px;margin-right:18px}
+.skeleton-title{width:85%;height:38px;background:var(--surface);margin-bottom:14px}
+.skeleton-title.short{width:60%}
+.skeleton-line{height:16px;background:var(--surface);margin-top:20px}
+.skeleton-line.short{width:72%}
+body.sheet-open{overflow:hidden}
+.about-copy{max-width:42rem;margin:52px auto 72px}
+.about-copy h1{font-size:2.375rem;font-weight:500;line-height:1.4;margin:0 0 30px}
+/* Filtered results have equal weight; the opening spread remains asymmetric. */
+.news-grid.is-filtered .is-featured{grid-column:span 4}
+.news-grid.is-filtered .is-featured .cover{aspect-ratio:16/9}
+.news-grid.is-filtered .is-featured .card-title{font-size:1.3125rem}
+.news-grid[data-layout="list"]{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--rule)}
+.news-grid[data-layout="list"] .news-card{background:transparent;color:var(--ink);border:0;border-bottom:1px solid var(--rule);overflow:visible}
+.news-grid[data-layout="list"] .card-link{display:flex;flex-direction:row;gap:28px;padding:26px 0;align-items:center}
+.news-grid[data-layout="list"] .cover,.news-grid[data-layout="list"] .type-cover{display:none}
+.news-grid[data-layout="list"] .card-body{padding:0;gap:8px;flex:1;min-width:0}
+.news-grid[data-layout="list"] .card-title{font-size:1.3125rem;line-height:1.6}
+.news-grid[data-layout="list"] .card-meta,.news-grid[data-layout="list"] .card-dek,.news-grid[data-layout="list"] .card-end{color:var(--muted);opacity:1}
+.news-grid[data-layout="list"] .card-read{color:var(--ink)}
+.news-grid[data-layout="list"] .card-end{padding-top:2px}
+.news-grid[data-layout="list"] .card-link:focus-visible{outline-color:var(--focus);outline-offset:5px}
+.reading-position{display:flex;align-items:center;gap:12px;flex-basis:100%;color:var(--muted);font-size:0.6875rem;line-height:1.3}
+.reading-position span{min-width:4ch;text-align:end;font-variant-numeric:tabular-nums}
+.reading-position progress{appearance:none;display:block;width:100%;height:2px;border:0;background:var(--rule);color:var(--focus)}
+.reading-position progress::-webkit-progress-bar{background:var(--rule)}
+.reading-position progress::-webkit-progress-value{background:var(--focus)}
+.reading-position progress::-moz-progress-bar{background:var(--focus)}
+.cover img,.media-frame img{outline:1px solid var(--image-outline);outline-offset:-1px}
+@media(hover:hover){
+ .news-card:has(.card-link:hover){border-color:var(--muted)}
+ .card-link:hover .card-read{text-decoration:underline;text-underline-offset:4px}
+ .icon-button:hover,.filter-group button[aria-pressed="false"]:hover,.view-switch button[aria-pressed="false"]:hover{background:var(--surface)}
+ .site-nav a:hover{text-decoration:none;color:var(--focus)}
+}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+ .card-link:hover .cover img{transform:scale(1.025)}
+}
+@media(prefers-reduced-motion:no-preference){
+ .icon-button,.retry-button,.reset-button{transition:scale 150ms ease-out}
+ .icon-button:not(:disabled):active,.retry-button:not(:disabled):active,.reset-button:not(:disabled):active{scale:.96}
+}
+@media(max-width:1050px){
+ .brand-sub{display:none}
+ .news-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+ .news-card,.news-card.is-wide,.news-grid.is-filtered .is-featured{grid-column:span 1}
+ .news-card.is-featured{grid-column:span 1}
+ .is-featured .cover{aspect-ratio:16/9}
+ .is-featured .card-title{font-size:1.4375rem}
+ .edition-line h1{font-size:1.6875rem}
+}
+@media(max-width:680px){
+ :root{--gutter:20px;--reader-bar:58px}
+ .site-header{min-height:0;gap:22px;flex-wrap:wrap;padding:26px 0 15px}
+ .brand{gap:16px}
+ .brand-wordmark{gap:5px}
+ .brand-name{font-size:3.25rem}
+ .brand-mark{width:35px;height:35px}
+ .brand-sub{display:block;padding-inline-start:16px;font-size:0.8125rem}
+ .brand-sub>span{font-size:0.6875rem}
+ .header-side{width:100%;justify-content:space-between;gap:16px}
+ .site-nav{gap:28px;flex-wrap:wrap;font-size:0.8125rem}
+ .icon-button{width:40px;height:40px}
+ .edition-line{min-height:0;gap:16px;padding-block:22px}
+ .edition-line h1{font-size:1.5625rem;margin-top:10px}
+ .edition-line .edition-description{font-size:0.8125rem;max-width:24em;line-height:1.8}
+ .edition-meta{display:none}
+ .edition-line .edition-kicker{font-size:0.625rem}
+ .discovery-top{flex-wrap:wrap;gap:16px;padding-block:14px 16px}
+ .filter-group{gap:4px}
+ .filter-group button{padding-inline:13px;font-size:0.8125rem}
+ .search-field{width:100%}
+ .search-field input{font-size:1rem}
+ .discovery-bottom{gap:8px;align-items:center}
+ .discovery-bottom p{font-size:0.6875rem}
+ .view-switch button{font-size:0.6875rem;padding-inline:8px;gap:5px}
+ .view-switch svg{width:13px;height:13px}
+ .news-grid{grid-template-columns:minmax(0,1fr);gap:22px}
+ .news-card,.news-card.is-wide,.news-card.is-featured,.news-grid.is-filtered .is-featured{grid-column:auto;grid-row:auto}
+ .cover,.is-featured .cover,.is-wide .cover{aspect-ratio:16/9;min-height:0;flex:none}
+ .card-body{padding:20px;gap:12px}
+ .card-title,.is-featured .card-title,.news-grid.is-filtered .is-featured .card-title{font-size:1.375rem;line-height:1.6}
+ .card-dek{font-size:0.875rem}
+ .card-meta{font-size:0.75rem}
+ .card--text .type-cover{min-height:130px;padding:22px 20px 12px}
+ .card--text .cover-word{font-size:2.875rem}
+ .card-end{padding-top:12px}
+ .news-grid[data-layout="list"] .card-link{gap:16px;padding:22px 0;align-items:flex-start}
+ .news-grid[data-layout="list"] .cover,.news-grid[data-layout="list"] .type-cover{display:none}
+ .news-grid[data-layout="list"] .card-title{font-size:1.1875rem}
+ .site-main{padding-bottom:36px}
+ .site-footer{align-items:flex-start;flex-direction:column;gap:12px;padding-top:22px;font-size:0.75rem}
+ .footer-links{gap:26px}
+ .article-reader{padding-top:23px}
+ .article-back{margin-bottom:16px}
+ .article-header h1{font-size:1.8125rem;line-height:1.5}
+ .article-dek{font-size:1rem;line-height:1.9}
+ .reader-tabs{gap:4px;margin-bottom:24px;padding:7px 0}
+ .reader-tabs a{font-size:0.875rem;padding:6px 10px}
+ .reader-tabs .reader-source{font-size:0.8125rem!important;padding-inline-end:0}
+ .reader-panel{margin-bottom:28px}
+ .prose{font-size:1.0625rem;line-height:1.95}
+ .prose h1,.prose h2,.prose h3{font-size:1.4375rem;line-height:1.6}
+ .prose blockquote{padding:15px}
+ .sheet-bar{gap:10px}
+ .sheet-bar a{font-size:0.8125rem}
+ .sheet-brand{font-size:0.75rem}
+ .sheet-scroll .article-reader{padding-top:25px}
+ .sheet-status{margin-top:32px}
+ .about-copy{margin-top:32px}
+}
+@media(max-width:360px){
+ :root{--gutter:16px}
+ .brand-sub>span{font-size:0.6875rem;max-width:6em}
+ .site-nav{gap:22px}
+ .sheet-brand{display:none}
+ .reader-tabs a{padding-inline:8px;font-size:0.8125rem}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
+}
+@media print{
+ .site-header,.site-footer,.reader-tabs,.article-back,.sheet-bar{display:none!important}
+ .reader-panel[hidden]{display:block!important}
+ .site-main,.article-reader{width:100%;max-width:none}
+ .reader-sheet[open]{position:static;height:auto;overflow:visible}
+ .sheet-scroll{height:auto;overflow:visible;padding:0}
+}
+
+/* Source media remains part of the Chinese reading flow, not just the original tab. */
+.rewrite-source-media{margin:28px 0}
+.prose .source-media-heading{font-size:1.25rem;line-height:1.6;margin:0 0 12px}
+.prose .rewrite-source-media .completeness-note{font-size:0.875rem;line-height:1.8}
+.prose .media-error{font-size:0.875rem;line-height:1.8;margin:0}
+</style>
+<script defer src="https://umami.qiaomu.ai/script.js" data-website-id="31e0098c-6852-46b6-899c-11eed5ed16e1" data-domains="xnews.qiaomu.ai" data-exclude-search="true" data-exclude-hash="true"></script>
+</head>
+<body>
+<a class="skip" href="#main">跳到正文</a>
+<header class="site-header">
+  <a class="brand" href="/" aria-label="X News 海外发现首页"><span class="brand-wordmark" aria-hidden="true"><svg class="brand-mark" viewBox="0 0 44 44" fill="currentColor"><path d="M2 0h11l29 44H31zM32 0h10L26 18l-5-7zM17 26l5 7-10 11H2z"/></svg><span class="brand-name">News<span class="brand-period">.</span></span></span><span class="brand-sub">海外发现<span>英文原作 · 中文视角</span></span></a>
+  <div class="header-side"><nav class="site-nav" aria-label="主导航"><a href="/">精选</a><a class="archive-nav" href="/archive">往期</a><a href="/feed.xml" aria-label="订阅全文 RSS">订阅 RSS <span aria-hidden="true">↗</span></a></nav><button type="button" class="icon-button" id="theme-btn" aria-label="切换为暗色主题" aria-pressed="false"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16Z" fill="currentColor" stroke="none"/></svg></button></div>
+</header>
+<main class="site-main" id="main">
+<article class="article-reader" data-article-id="openai-research-acceleration">
+<a class="article-back" href="/">← 返回选刊</a>
+<header class="article-header"><p class="article-kicker">OpenAI / 文章</p><h1>从3月到10月，两到四小时的研究任务，智能体独立完成率从23%升到46%</h1><p class="article-dek">OpenAI用内部测量更新研究加速报告。用量和并发都在上升，但按任务类型拆开并不均匀；安全和对齐的记录工作周增加了77%。官方提醒不要把这些趋势直接外推。</p><div class="article-meta"><time datetime="2026-11-19">本站收录 2026年11月19日 · 周四</time><span>原文发布 2026年11月18日 · 周三</span><span>原作者：OpenAI</span><span>中文改写：<a href="/about">X News · 乔木</a></span><span>OpenAI · research acceleration · coding agents · RSI · safety</span></div></header>
+<nav class="reader-tabs" aria-label="文章版本与来源"><div data-tabs><a href="#rewrite" id="tab-rewrite" data-view="rewrite">乔木改写</a><a href="#original" id="tab-original" data-view="original">原文</a></div><a class="reader-source" href="https://openai.com/index/research-acceleration-jagged-frontier/" target="_blank" rel="noopener noreferrer">原文链接 ↗</a><div class="reading-position" hidden><progress max="100" value="0" aria-label="当前版本阅读进度"></progress><span data-reading-percent aria-hidden="true">0%</span></div></nav>
+<section class="reader-panel" id="rewrite" data-reader-panel="rewrite" aria-label="乔木改写"><h2 class="section-heading">乔木改写</h2><div class="prose"><p>从2026年3月到10月，在OpenAI内部估计需要两到四小时人力的研究任务上，智能体独立完成的成功率从<strong>23%<strong>升到</strong>46%</strong>；四到八小时的任务，从<strong>13%<strong>升到</strong>35%</strong>。</p>
+<p>同一份报告把这个变化写成「锯齿状」。按任务类型拆开看，2026年8月1日到10月18日，监控训练运行是否出问题的独立成功率是<strong>79%</strong>，启动训练运行是<strong>35%</strong>，给推理和在线服务栈写代码是<strong>25%</strong>。按工作类别看，Communicate是<strong>69%</strong>，Analyze是<strong>58%</strong>，Build是<strong>43%</strong>；回答技术问题是<strong>72%</strong>，搭建评估、强化学习和智能体环境是<strong>29%</strong>。官方的写法是：抬升并不均匀，人仍然处在研究循环的核心位置。</p>
+<p>这是OpenAI在2026年11月18日发布的研究报告《Research acceleration: The jagged frontier》，用来更新他们9月那篇研究加速报告。文章写，实验室应当被要求追踪并公开递归自我改进的指标，也就是AI加速未来AI系统开发的过程；同时又写明，公开这些指标不应被读成他们打算追求完全的递归自我改进。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_social_card"><div class="media-frame"><img src="https://images.ctfassets.net/kftzwdyauwt9/2YS8yWiGpKflhlEnAkcLU/f51ead4391706f6c3198f0d61a0f147a/research-acceleration-the-jagged-frontier-social.png" data-original-src="https://images.ctfassets.net/kftzwdyauwt9/2YS8yWiGpKflhlEnAkcLU/f51ead4391706f6c3198f0d61a0f147a/research-acceleration-the-jagged-frontier-social.png" alt="OpenAI social card for the report Research acceleration: The jagged frontier" loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://openai.com/index/research-acceleration-jagged-frontier/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<p><strong>按标价计算，中位数研究者一天要用掉2400美元</strong></p>
+<p>报告把编码智能体当作研究投入来追踪。按API标价，10月中位数研究者每天的智能体用量大约是<strong>2400美元</strong>，比9月的<strong>1500美元</strong>高<strong>62%</strong>；第90百分位是每天约<strong>23000美元</strong>，比9月的<strong>11000美元</strong>高<strong>105%</strong>。官方说，这个上升同时包含使用变多、模型更贵、模型行为和智能体框架变化。注释还写，OpenAI研究者目前没有智能体编码配额。</p>
+<p>同一条注释记录了一次会干扰花费统计的内部改动。8月21日，公司内部临时上线了框架效率改进，输入token用量明显下降，记录到的内部token花费被压得很低。这个改动后来因为跟花费无关的原因，从9月10日开始在内部部署里逐步撤回，之后花费又迅速上去。</p>
+<p>他们另外定义了「智能体工作日」：每8小时智能体使用算1个工作日。这个指标看的是墙上时钟，不反映模型变强或价格变化。人均智能体工作日从<strong>0.5</strong>升到<strong>5.7</strong>，大约是11倍，预训练和后训练团队增加最多。这两类团队平均大约是每位研究者每个日历日8个工作日；扩展和基础设施大约是4个。官方提醒，这个指标一般只统计交互式使用，可能低估自动化。</p>
+<p>到10月中旬，超过三分之二被纳入统计的研究者，日峰值平均至少同时跑<strong>4个</strong>智能体；超过<strong>10%<strong>平均至少同时跑</strong>16个</strong>。</p>
+<p>他们还拿智能体的API等价花费，去比研究者的非股权薪酬。2026年9月，研究组织里智能体使用的API等价价值大约是非股权薪酬的两倍，预训练和后训练高于其他部分。股权一般占研究者目标薪酬的<strong>70%到80%</strong>，没有计入这个比例。尽管如此，内部部署（内部Codex、ChatGPT和API用量合计）只占全部研究算力的<strong>2%</strong>。</p>
+<p><strong>安全和对齐方向的人力增加最多</strong></p>
+<p>报告统计了2026年1月到9月研究者在公司公开Slack、拉取请求和内部文档里的贡献，并按研究领域拆开。即便人没有正式换组，也会按实际时间计入。按这个口径，安全和对齐的记录工作周从1月到9月增加了<strong>77%</strong>，是各大研究领域里绝对增量最大的；后文也写成几乎翻倍。增长来自新招聘，也来自已有研究者把工作转过来，覆盖对齐评估、可监控性和奖励黑客等。官方说，一个明显拐点出现在7月Hugging Face事件之后，以及他们随后为前沿训练完善安全论证的工作。他们也提醒，领域划分并不干净，尤其是后训练与安全和对齐之间，定义以后还可能改。</p>
+<p>一份8月下旬到9月上旬、面向<strong>101名</strong>研究员工的调查，问的是：假如团队未来3个月失去所有强于GPT-5.2的编码智能体，你愿意拿什么换回来。中位数回答是：团队编制的<strong>40%</strong>，或当前团队算力的<strong>30%</strong>；若把同样的问题放到2027年1月，考虑到他们对模型还会变强的预期，中位数变成算力的<strong>50%</strong>。他们还报告，如果只准使用GitHub Copilot加ChatGPT，完成与过去一个月同等价值的工作，中位数需要3个月。官方同时写，自评可能不准，抽样也是临时设计的。</p>
+<p>10月下旬另一次调查问：日常工作里，更想用最新内部模型，还是同时得到一名中级人类研究工程师和2024年模型（例如o1-preview）的帮助。<strong>28人</strong>里有<strong>27人</strong>选择或倾向最新内部模型。剩下那人没有在题目给出的两个选项里做选择，而是说会选GPT-6 Astra，而不是「人加旧模型」那个选项。</p>
+<p><strong>想法主要还是人提出来的，智能体的口味并不好</strong></p>
+<p>为了追踪研究品味会不会成为递归自我改进的瓶颈，他们请预训练、后训练和安全监控三个方向里各1到4名关键贡献者，为GPT-6 Astra和GPT-6.2 Astra各指出1到3个最重要的想法。两次发布里，后训练和安全监控的研究者都说，就他们所知，这些想法是人提出的，模型帮着实现。预训练研究者对GPT-6 Astra的判断也是如此；到了GPT-6.2 Astra，他们描述的是在和Codex的对话里发展想法。</p>
+<p>他们还访谈了10名来自预训练、后训练和安全的研究者。材料里保留了不少原话，口径是智能体仍有明显缺陷：研究想法、代码质量、数据质量和写作的口味都差；很难一次提出自己解不了的、表述清楚的问题；同一类数据点反复生成会很像。工作流仍然需要人盯着，否则会出现低质量输出和空转，比如启动实验效率低、在不必要的步骤里打转、写出被称作「AI slop」的拉取请求、做出不能用的数据产物，以及分析假设不成立。访谈也提到，扫描和生成大规模内容时抬升很大，例如从成千上万个样本里诊断实验问题、标出值得警惕的模型行为、建设和质检新数据集。</p>
+<p>产出指标方面，他们沿用9月报告里的代码行数和实验数量，并把展示改成28天滚动平均。到10月18日结束的四周里，每位活跃实验者记录到的实验数平均是2025年基线的<strong>1.68倍</strong>。他们还用OECI画出20个公开的OpenAI模型和28个其他模型的前沿：自2025年8月以来，OpenAI模型的OECI前沿每年上升<strong>16.4分</strong>，对比Epoch观察到的、自2024年底以来每年约<strong>14分</strong>的趋势。趋势线拟合的是9次创纪录的OpenAI发布，竖线是90%自助法区间。</p>
+<p>官方在结尾写，这些历史趋势和指标里有大量人机协作，不一定能预测未来由AI驱动的进展。他们还提到，最近曾在数学上看到前沿模型突然且迅速的突破，并在监控深度学习里会不会出现类似情况。接下来他们希望补充的方向包括：能力研究与安全研究的差异化加速、不必等完整模型周期就能察觉抬升的领先指标，以及整体能力趋势和加速对这些趋势的影响。</p>
+<p>读这份报告，更值得带走的是测量口径和它自己写下的限制：任务桶会随智能体变强而改变，花费统计会被框架改动打断，调查是自评，领域划分还会改。不要把这些曲线直接外推成未来的自我改进速度。原文里还有方法和图表，OpenAI官网该页目前对普通抓取返回了Cloudflare验证页，文中的官方配图除一张社交卡片外未能在这次归档中取出，数字都以正文为准。</p>
+</div></section>
+<section class="reader-panel" id="original" data-reader-panel="original" aria-label="原文">
+<h2 class="section-heading">原文</h2><h3 class="original-title">Research acceleration: The jagged frontier</h3>
+<div class="original-media">
+<figure class="media-figure" data-media-id="media_social_card"><div class="media-frame"><img src="https://images.ctfassets.net/kftzwdyauwt9/2YS8yWiGpKflhlEnAkcLU/f51ead4391706f6c3198f0d61a0f147a/research-acceleration-the-jagged-frontier-social.png" data-original-src="https://images.ctfassets.net/kftzwdyauwt9/2YS8yWiGpKflhlEnAkcLU/f51ead4391706f6c3198f0d61a0f147a/research-acceleration-the-jagged-frontier-social.png" alt="OpenAI social card for the report Research acceleration: The jagged frontier" loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://openai.com/index/research-acceleration-jagged-frontier/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div>
+<div class="prose" lang="en"><p>November 18, 2026</p>
+<h1>Research acceleration: The jagged frontier</h1>
+<p><img alt="OpenAI social card for the report Research acceleration: The jagged frontier" decoding="async" loading="lazy" referrerpolicy="no-referrer" src="https://images.ctfassets.net/kftzwdyauwt9/2YS8yWiGpKflhlEnAkcLU/f51ead4391706f6c3198f0d61a0f147a/research-acceleration-the-jagged-frontier-social.png"></p>
+<h2>Introduction</h2>
+<p>Over the course of this year, AI systems have become increasingly capable, potentially increasing their ability to contribute to AI research and development themselves. Today, we’re providing an update on the state of research acceleration at OpenAI, based on internal measurements of how coding agents have accelerated and changed the AI development cycle.</p>
+<h2>Our biggest takeaways:</h2>
+<ul>
+<li>Agents now complete nearly half of two-to-four-hour research tasks on their own. But humans are still central to AI development. From March to October, estimated success rose from 23% to 46% for tasks estimated to require two to four hours of human work, and rose from 13% to 35% for tasks estimated to require four to eight hours. But the kind of work matters. For example, in a task-level breakdown, the autonomous agent success rate was 79% for monitoring training runs, 35% for launching training runs, and 25% for writing code for inference and serving stacks. Overall, uplift is jagged, and humans remain a core part of the AI research loop.</li>
+<li>Agent use is surging, and the heaviest users are pulling further ahead. At API list prices, the median researcher’s daily usage reached $2,400 in October, up 62% from September. At the 90th percentile it reached $23,000, up 105% from September. A survey gives us another indication of how much researchers value these tools. Asked what they would trade to keep frontier coding agents for three months, the median answers were 30% of team compute or, in a separate question, 40% of team headcount.</li>
+<li>Researchers are devoting increasing human effort to Safety and Alignment, which saw the largest absolute increase in documented research efforts across all of OpenAI’s major research areas. Safety and Alignment’s documented workweeks increased by 77% from January to September due to both new hires and existing researchers shifting towards these workstreams. Growth picked up significantly following our response to the Hugging Face incident⁠ in July 2026.</li>
+</ul>
+<p>This report builds on our September blog post on research acceleration at OpenAI⁠, adding new quantitative and qualitative measures of (1) AI uplift across research domains and (2) how humans remain involved in the research process. Overall, we believe this update provides a broader, though still partial, picture of how research at OpenAI is changing.</p>
+<p>We are sharing this work because, as we wrote in our frontier policy blueprint⁠⁠ and reiterated in our first research acceleration report⁠, we believe that AI labs should be required to track and publicly report indicators of recursive self-improvement (RSI)—the process by which AI accelerates the development of future AI systems.</p>
+<p>As capabilities improve and dramatic AI-driven research acceleration becomes increasingly possible, we will need to solve novel technical and governance issues to maintain human oversight and safely scale AI systems⁠. Transparency about indicators of RSI is therefore essential to inform a public discussion of the capabilities, risks, and required safeguards for increasingly powerful AI; however, our reporting should not be read as an intention to pursue full RSI. We have been heartened to see that several other organizations have recently contributed to the growing body of work measuring AI R&amp;D acceleration 1. Our hope is that this expanded report will help sustain and advance these shared measurement norms across the industry.</p>
+<p>We structure this report in three sections, each focused on a different aspect of AI research:</p>
+<ol>
+<li>The inputs to AI research (we focus on coding agents; other inputs include data, human labor, and compute)</li>
+<li>The process by which researchers convert those inputs into model capabilities (AI research)</li>
+<li>The outputs we see from the AI research process (improvements in model capabilities).</li>
+</ol>
+<p>We believe organizing the results in this way provides a useful framework for reasoning about how AI is used in research and how that use might contribute to improvements in model capabilities.</p>
+<h2>Inputs</h2>
+<p>AI research uses several inputs, including data, AI tools (e.g., coding agents), human labor, and compute. In this report, we focus on AI tools as an input to research. Specifically, we document how the intensity of coding-agent use varies across teams and changes over time. Further, while we do not directly report changes in labor costs, we examine how the share of spending on research labor has changed relative to spending on other factors over time.</p>
+<h3>Internal agent usage</h3>
+<p>Since our first report⁠, agentic AI usage within the research organization has continued to increase exponentially. At API list prices, the median researcher now uses around $2,400 USD per day on agentic AI tools, and the 90th percentile researcher now around $23,000 USD per day, up 62% and 105% respectively from $1,500 and $11,000 in September. 2 This trend in increased agentic usage captures a wide variety of changes including increased activity, shifts to more expensive models, and changes to model behavior and agentic harnesses.</p>
+<h4>Agent workdays</h4>
+<p>We next turn to the average number of “agent workdays” per researcher per day, where we define every eight hours of agent use as one agent workday. In contrast to agentic spend, agent workdays better capture the amount of “wall clock time” agents spend working, but do not account for changes in model capabilities or pricing.</p>
+<p>Overall, agent workdays per researcher have risen from 0.5 agent workdays per researcher to 5.7 agent workdays per researcher, an elevenfold increase, with the largest increase in teams focused on pretraining and posttraining. On those teams, agent runtime averaged roughly eight workdays per researcher per calendar day. In scaling and infrastructure, the average was roughly four. We note that this workday metric generally includes interactive use only, so it may undercount automations.</p>
+<h4>Concurrent agent use</h4>
+<p>Our September analysis⁠ highlighted increasing use of concurrent agents by researchers, including subagents and multiple sessions. We extend this analysis further in time and provide more granular bucketing. By mid-October, more than two-thirds of included researchers averaged a daily peak of at least four agents working concurrently and more than 10% averaged at least sixteen concurrent agents.</p>
+<h3>Internal agent usage relative to human labor costs</h3>
+<p>We next compare monthly API-equivalent spending on agentic AI use with monthly non-equity compensation for human researchers. We track this ratio to see how the allocation between agent and human labor changes as models become more capable. Although the ratio we report excludes equity, which generally accounts for 70 to 80% of target compensation for researchers at OpenAI, we believe it still provides a partial yet informative view of this spending allocation.</p>
+<p>As of September 2026, the API-equivalent value of agentic AI use in OpenAI’s research organization was about twice its non-equity compensation, with higher ratios in pretraining and posttraining than in other parts of the research organization. Despite this, internal deployment, which combines internal Codex, ChatGPT, and API usage, accounts for only 2% of total research compute.</p>
+<p>Labor costs include salary, overtime, bonuses, benefits, and employer taxes. Equity, which generally accounts for 70 to 80% of target compensation for researchers, is excluded.</p>
+<h3>Where researchers allocate their time</h3>
+<p>Finally, we examine how researchers allocate their time across research areas. We first collected individual-level contributions from researchers in the form of company-public Slack posts, pull requests, and internal documents from January through September 2026. We then used classifiers to group these contributions into research areas, and each researcher-week was divided equally across that researcher’s verified projects for the week. This provides a proxy for where researchers were directing their attention.</p>
+<p>Importantly, unlike our other analyses, the “research area” we classify here does not correspond to formal reporting lines. For example, a researcher on a posttraining team who spends half their time on infrastructure improvements would be estimated as contributing half a workweek to Scaling / Infrastructure Contributions and half to Posttraining Contributions. This allows us to create a robust measurement of where researchers are actively spending time even if they do not formally shift teams.</p>
+<p>We find that the amount of researcher time dedicated to each of the areas we identify has grown over the course of 2026. Notably, using this methodology, we find that Safety &amp; Alignment saw the largest absolute increase across any research area, almost doubling in documented workweek contributions since the start of the year due to a combination of new hires and existing researchers shifting their focus toward safety projects. This research area covers workstreams such as alignment evals, monitorability, and reward hacking research. A notable inflection point that we measure in the growth of Safety &amp; Alignment coincides with the aftermath of the Hugging Face incident⁠ in July, and OpenAI’s subsequent work to develop and improve safety cases for frontier AI training⁠.</p>
+<p>We note that the distinction between research areas, and especially posttraining versus safety and alignment, is nontrivial and we may iterate on the definition over time. The methods section below describes examples of high-level workstreams.</p>
+<h2>Process</h2>
+<p>To better understand how agent use might affect research productivity, we next examine how the process of conducting AI research at OpenAI is changing. The productivity gains from new technologies depend in part on how work is reorganized around them. As agents improve, researchers may change which tasks they delegate to AI, how they oversee and coordinate agents’ work, and which projects they pursue. Below, we report both quantitative and qualitative measures of how AI is changing the process of conducting AI research at OpenAI. Together, these different types of data contribute to a (partial) view of how researchers are reorganizing their work around agents and how researchers remain in the loop today.</p>
+<h3>Measures of research activity</h3>
+<h4>Tasks delegated to models and success rates</h4>
+<p>Our September analysis⁠ showed that agents became more likely to complete tasks successfully without human intervention, including tasks estimated to require several hours of human work. Using an updated methodology (see the methods section below), we find that this trend has generally continued. Importantly, as agents have become more capable, researchers may also have changed the types of tasks delegated within each duration bucket. As a result, changes in zero-intervention success rates within these buckets may reflect both capability improvements and researchers’ changing choices about when and how to use agents.</p>
+<p>Alongside these trends by estimated duration, we also examine how success varies across the different types of tasks researchers might choose to delegate. We report estimated success rates by category and task, using the O*NET AI R&amp;D taxonomy⁠(opens in a new window) developed by Epoch AI. Unsurprisingly, our results suggest that models are not equally good across all task categories: for instance, from August 1, 2026 through October 18, 2026, estimated success rates without human intervention was higher for Communicate (69%) and Analyze (58%) than for Build (43%). Similarly at the task level, estimated success rates were higher for tasks such as monitoring runs for issues (79%) and answering technical questions (72%), whereas they were lower for writing code for inference and serving stacks (25%) and building evaluation, reinforcement-learning, and agent environments (29%). So long as model performance on AI R&amp;D-related tasks is heterogeneous, lower-performing categories and tasks could become bottlenecks to high overall uplift.</p>
+<h4>What tasks researchers use agents for</h4>
+<p>Our September analysis⁠ reported how research employee AI use was split across output tokens using the same O*NET AI R&amp;D taxonomy⁠(opens in a new window). Below, we report how often researchers used coding agents for individual tasks. This puts relatively higher weight on short tasks such as answering technical questions compared to token-intensive tasks such as launching and monitoring a training run or implementing a complex feature.</p>
+<h3>Researchers’ perspectives on AI use</h3>
+<p>We next turn to researchers’ own assessments of how AI is changing their work. Through surveys and interviews, we examine how researchers value coding agents, how they come up with research ideas, and how they have adapted their workflows.</p>
+<h4>Self-reported value of coding agents</h4>
+<p>From late August to early September 2026, we conducted a survey of 101 research staff to understand AI uplift, centered around the following hypothetical: “Suppose your team’s access to all coding agents better than GPT-5.2 was revoked for the next 3 months. How much would you trade to restore frontier coding agents?” The median researcher reported being willing to trade:</p>
+<ul>
+<li>40% of team headcount</li>
+<li>30% of current team compute</li>
+<li>50% of team compute if the question were asked in January 2027 (given their expectation of how models would improve by 2027)</li>
+</ul>
+<p>Researchers also reported that their team would need a median of three months to complete work of equal value to their last month of work if they were not allowed to use coding agents (i.e., if they were only allowed to use GitHub Copilot + ChatGPT). While it is important to note potential issues with the accuracy of self-reports, as well as the ad-hoc nature of our survey sampling strategy, these results are consistent with researchers attributing significant value to AI uplift in their work.</p>
+<p>Bars show the weighted share of answers in each range. Dashed lines mark the weighted medians.</p>
+<p>In a separate survey in late October, we also asked whether respondents expected to be more productive in their daily work with our latest internal model or with help from both a mid-career human research engineer and a 2024 model such as o1-preview. 27 of the 28 respondents chose or leaned toward the latest internal model. The remaining respondent did not choose between the two options as posed and said they would pick GPT-6 Astra over the human-assisted option.</p>
+<h4>Where big ideas come from</h4>
+<p>We are also interested in tracking progress in AI-driven idea generation, since the ability to develop and vet conceptual research ideas (research taste) may be a bottleneck for recursive self-improvement. To measure this, we asked one to four researchers who made key contributions in each of three areas (pretraining, posttraining, and safety monitoring) to name one to three ideas they considered most important to the GPT-6 Astra and GPT-6.2 Astra releases. We then asked how those ideas originated and what role, if any, AI played in developing them.</p>
+<p>For both releases, posttraining and safety monitoring researchers said that, to their knowledge, people came up with all the ideas they named, and models helped implement them. Pretraining researchers likewise attributed the ideas they identified for GPT-6 Astra entirely to people.</p>
+<p>For GPT-6.2 Astra, pretraining researchers described developing ideas in conversation with Codex. One credited Codex with identifying key insights as they worked through an idea together. Another said the main idea was theirs, but it only started working well after Codex suggested a change.</p>
+<h4>Changes in research workflows</h4>
+<p>Lastly, to capture qualitative evidence on workflow changes, we also interviewed ten researchers from pretraining, posttraining, and safety on how they used agents. Across these interviews, five main themes emerged, which we summarize below:</p>
+<ul>
+<li>
+<p>Researchers use agents to implement code and debug and oversee experiments:</p>
+</li>
+<li>
+<p>“I once ported an open-source eval where it was much more involved to get studies and ablations on 'is this a good eval'. It might have been a week and a half or two to really get to the point of “Can we use this or not?” Whereas now, depending on the eval, zero to running it is a day, maybe a few days.” —Researcher 7, safety, working on evaluations</p>
+</li>
+<li>
+<p>Agents have poor taste in research ideas, code quality, data quality, and writing:</p>
+</li>
+<li>
+<p>“The model generally can’t one-shot come up with well-posed problems that it cannot solve itself. And if you ask the model to generate a data point a hundred times, it’ll generate similar data points each time.” —Researcher 2, safety, working on reinforcement learning environments</p>
+</li>
+<li>
+<p>Workflows require close human involvement to avoid low-quality outputs and wasted cycles: agents struggled to launch experiments efficiently, rabbit-holed on unnecessary steps, wrote “AI slop” PRs, produced unusable data artifacts, and made invalid analysis assumptions.</p>
+</li>
+<li>
+<p>“I've tried saying, ‘Just make this task like this other task,’ and been burned too many times when it's not quite right and I need to make edits. Now I say, ‘Go make one. I'll review it and make edits. Then go do the rest.’” —Researcher 1, posttraining, working on evaluations</p>
+</li>
+<li>
+<p>Researchers expected significant improvements in current bottleneck areas:</p>
+</li>
+<li>
+<p>“I do think I have more taste in terms of the ideas. But I have no confidence that will continue to be true for any significant period of time.” —Researcher 8, pretraining, working on architecture and data</p>
+</li>
+<li>
+<p>Researchers see large uplift from scanning and generating content at scale: researchers used models to scan thousands of samples to diagnose issues in experiments, flag concerning instances of model behavior, and build and QC new datasets.</p>
+</li>
+<li>
+<p>“One thing I did recently was look through all of our data… I had it do a couple of rounds and calibrated what it was giving me. … It gave me a really nice, giant sheet with everything organized. … Without AI, this would have been super painful.” —Researcher 3, posttraining, working on data quality</p>
+</li>
+</ul>
+<h2>Outputs</h2>
+<p>Beyond changes in research inputs and workflows, we also want to understand whether AI use is accelerating research progress. To inform this question, we present three measures. Two of them—lines of code and the number of research experiments—were included in our September analysis⁠. These measures are straightforward to track, but increases in these measures of research activity do not necessarily imply faster research progress. We therefore also introduce OpenAI ECI, an OpenAI-specific internal version of the Epoch Capabilities Index, which is one methodology to track changes in model capabilities as a more direct measure of research outcomes.</p>
+<h3>Lines of code changed</h3>
+<p>We first report how many lines of code are changed per active contributor over time. This measure has continued to increase sharply during 2026 relative to the pre-2025 average. Note that we have made several methodological updates since our September analysis⁠. We now show a 28-day trailing average instead of quarterly averages, providing a more detailed view of changes over time. We have also revised the criteria for which code changes we include (in particular excluding tests), as described in Methods .</p>
+<h3>Research experiments</h3>
+<p>As in our September report⁠, we also track the number of experiments run per active experimenter over time. Over the four weeks ending October 18, logged experiments per active experimenter averaged 1.68 times the 2025 baseline.</p>
+<h3>OpenAI ECI</h3>
+<p>Lastly, we report progress on a metric meant to capture advancements in the capabilities of our models. The Epoch Capabilities Index⁠(opens in a new window) is widely used to measure the progress trend in general AI capabilities. The methodology behind OpenAI ECI (OECI) is very similar to Epoch’s methodology, but OECI uses a combination of public benchmarks and OpenAI internal benchmarks. Here, we graph the OECI of 20 publicly released OpenAI models and 28 other models.</p>
+<p>We find that the OECI frontier for OpenAI models has increased by 16.4 points per year since August 2025, compared to a trend that Epoch observed of 14 points per year⁠(opens in a new window) since late 2024. Note that OpenAI models score higher relative to competitors on OECI than they do on Epoch’s ECI, likely due to differences in the benchmark mixture.</p>
+<p>We plan to continue monitoring OpenAI ECI and other top-level capability metrics to determine whether capabilities progress is accelerating due to RSI.</p>
+<p>Vertical lines are 90% bootstrap intervals. The trendline is fit on the 9 record-setting OpenAI releases.</p>
+<h2>Conclusion</h2>
+<p>Overall, our findings extend the picture from our September report⁠: researchers are using agents more intensively, delegating more work, and adapting their workflows around models’ capabilities and limitations. However, this uplift isn’t uniform across all research workflows, and agents today still have significant flaws.</p>
+<p>We note that the historical trends and metrics we report (which involve significant human-AI collaboration) may not be predictive of future AI-driven progress. For instance, we recently saw sudden and rapid breakthroughs in mathematics⁠ produced by frontier models. As our models become increasingly autonomous and capable for research, we are monitoring for similarly rapid breakthroughs in deep learning.</p>
+<p>Importantly, as AI becomes better at improving itself, competitive pressures and governance challenges will increase, and a key task⁠ will be to ensure humanity remains a part of the process. We hope releasing this data will inform discussions on pacing model capabilities and the governance of recursive self-improvement.</p>
+<p>Going forward, we will continue to refine the methods underlying the metrics reported here. We also hope to expand our reporting to provide additional information in a number of areas, including, but not limited to:</p>
+<ol>
+<li>Differential acceleration of capabilities vs. safety research</li>
+<li>Leading indicators of research acceleration (i.e., detecting increases in uplift without needing to complete a full cycle of model development and evaluation)</li>
+<li>Trends in overall capabilities over time, and the effect of AI acceleration of research on those trends</li>
+</ol>
+<h2>Citation</h2>
+<p>author = {{OpenAI}},</p>
+<p>title = {Research acceleration: The jagged frontier},</p>
+<p>institution = {OpenAI},</p>
+<p>5</p>
+<p>type = {Research report},</p>
+<p>6</p>
+<p>year = {2026},</p>
+<p>7</p>
+<p>url = {https://openai.com/index/research-acceleration-jagged-frontier/}</p>
+<h2>Footnotes</h2>
+<ol>
+<li>1</li>
+</ol>
+<p>While the science of empirically measuring AI R&amp;D acceleration is relatively young, it is rapidly growing across the research frontier. So far, Anthropic has independently released three⁠(opens in a new window) separate⁠(opens in a new window) reports⁠(opens in a new window) documenting how internal model deployments have accelerated the AI research process. Section 3.4.2 of the Gemini 4 Argon Safety and Security Report⁠(opens in a new window) outlines empirically the growing share of AI-written code internally at Google DeepMind. In collaboration with Anthropic, METR released an acceleration report⁠(opens in a new window) estimating the amount that internal Claude models have accelerated the capabilities frontier.
+2. 2</p>
+<p>We note that OpenAI researchers do not currently have agentic coding quotas.</p>
+<p>On August 21st, OpenAI internally deployed a temporary harness efficiency improvement. We found that this internal deployment coincided with a sharp decrease in input token utilization, which appears to have severely depressed the documented amount of internal token spend. This harness change was gradually reverted across internal deployments for reasons unrelated to spend starting on September 10th, and we find that token spend rapidly increases afterwards.</p></div>
+</section>
+<footer class="source-box"><span>内容来自原作者；中文为乔木风格改写，非逐字翻译。</span><div><a href="https://openai.com/index/research-acceleration-jagged-frontier/" target="_blank" rel="noopener noreferrer">打开原文 ↗</a><a href="https://x.com/OpenAI/status/2123191365983248653" target="_blank" rel="noopener noreferrer">相关链接 ↗</a></div></footer>
+</article>
+</main>
+<footer class="site-footer"><span>海外创始人长文 · 乔木中文改写<br>每日 08:00 更新 · 中国标准时间（UTC+8）</span><nav class="footer-links" aria-label="页尾导航"><a href="/feed.xml">全文 RSS ↗</a><a href="/archive">全部文章</a><a href="/about">关于</a></nav></footer>
+
+<script data-source="/static/app.fe36855dc563.js">/* D · progressive visual-journal reader. No framework, no content rewriting. */
+(() => {
+  'use strict';
+  const $ = (selector, root = document) => root.querySelector(selector);
+  const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+  const readerMemory = new Map();
+  const mediaBound = new WeakSet();
+  const nextFrame = callback => requestAnimationFrame(callback);
+  const safeFocus = element => { if (element?.isConnected) element.focus({preventScroll: true}); };
+  function currentTheme() { return document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light'; }
+  function paintTheme() {
+    const dark = currentTheme() === 'dark';
+    const button = $('#theme-btn');
+    if (button) {
+      button.setAttribute('aria-pressed', String(dark));
+      button.setAttribute('aria-label', dark ? '切换为亮色主题' : '切换为暗色主题');
+    }
+    $('meta[name="theme-color"]')?.setAttribute('content', dark ? '#20241e' : '#fffefa');
+  }
+  paintTheme();
+  $('#theme-btn')?.addEventListener('click', () => {
+    const style = document.createElement('style');
+    style.textContent = '*,*::before,*::after{transition:none!important}';
+    document.head.append(style);
+    const next = currentTheme() === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    try { localStorage.setItem('xn.theme', next); } catch {}
+    paintTheme();
+    void document.documentElement.offsetHeight;
+    nextFrame(() => nextFrame(() => style.remove()));
+  });
+
+  // Filter the existing static cards; content and native links work without JS.
+  const discovery = $('[data-discovery]');
+  if (discovery) {
+    const grid = $('[data-news-grid]');
+    const cards = $$('.news-card', grid);
+    const search = $('#story-search');
+    const clear = $('[data-clear-search]');
+    const empty = $('[data-search-empty]');
+    const normalize = value => value.normalize('NFKC').toLocaleLowerCase().trim();
+    const index = cards.map(card => normalize(card.dataset.search || ''));
+    let kind = 'all', layout = discovery.dataset.defaultView;
+    function render(writeURL = true) {
+      const terms = normalize(search.value).split(/\s+/).filter(Boolean);
+      let count = 0;
+      cards.forEach((card, i) => {
+        card.hidden = !(kind === 'all' || card.dataset.kind === kind) || !terms.every(term => index[i].includes(term));
+        if (!card.hidden) count++;
+      });
+      grid.dataset.layout = layout;
+      grid.classList.toggle('is-filtered', kind !== 'all' || terms.length > 0);
+      $$('[data-filter]', discovery).forEach(button => button.setAttribute('aria-pressed', String(button.dataset.filter === kind)));
+      $$('[data-layout]', discovery).forEach(button => button.setAttribute('aria-pressed', String(button.dataset.layout === layout)));
+      $('[data-result-count]').textContent = count === cards.length ? `${count} 篇文章 · 最新在前` : `找到 ${count} 篇 · 共 ${cards.length} 篇`;
+      clear.hidden = !search.value;
+      empty.hidden = count !== 0;
+      $('[data-empty-description]').textContent = search.value.trim() ? `试试更短的关键词，或清除「${search.value.trim()}」与类型筛选。` : '这个类型暂时没有文章，试试查看全部内容。';
+      if (writeURL) {
+        const url = new URL(location.href);
+        for (const [key, value] of [['q', search.value.trim()], ['type', kind === 'all' ? '' : kind], ['view', layout === discovery.dataset.defaultView ? '' : layout]]) {
+          if (value) url.searchParams.set(key, value); else url.searchParams.delete(key);
+        }
+        history.replaceState(history.state, '', url.pathname + url.search + url.hash);
+      }
+    }
+    function restore() {
+      if (location.pathname.startsWith('/a/')) return;
+      const params = new URLSearchParams(location.search);
+      search.value = params.get('q') || '';
+      kind = ['text', 'video'].includes(params.get('type')) ? params.get('type') : 'all';
+      layout = ['journal', 'list'].includes(params.get('view')) ? params.get('view') : discovery.dataset.defaultView;
+      render(false);
+    }
+    search.addEventListener('input', () => render());
+    clear.addEventListener('click', () => { search.value = ''; render(); search.focus(); });
+    $$('[data-filter]', discovery).forEach(button => button.addEventListener('click', () => { kind = button.dataset.filter; render(); }));
+    $$('[data-layout]', discovery).forEach(button => button.addEventListener('click', () => { layout = button.dataset.layout; render(); }));
+    $('[data-reset-filters]').addEventListener('click', () => { kind = 'all'; search.value = ''; render(); search.focus(); });
+    window.addEventListener('popstate', restore);
+    discovery.hidden = false;
+    restore();
+  }
+  function suspendMedia(root) {
+    $$('video,audio', root).forEach(media => { try { media.pause(); } catch {} });
+    $$('iframe[src]', root).forEach(frame => {
+      frame.dataset.pausedSrc = frame.getAttribute('src');
+      frame.removeAttribute('src');
+    });
+  }
+  function resumeEmbeds(root) {
+    $$('iframe[data-paused-src]', root).forEach(frame => {
+      frame.setAttribute('src', frame.dataset.pausedSrc);
+      delete frame.dataset.pausedSrc;
+    });
+  }
+  function bindMedia(root) {
+    $$('img,video,audio', root).forEach(media => {
+      if (mediaBound.has(media)) return;
+      mediaBound.add(media);
+      const figure = media.closest('.media-figure');
+      const notice = figure && $('.media-error', figure);
+      let bufferingTimer = null, requestedPlayback = false;
+      function clearBuffering() {
+        clearTimeout(bufferingTimer); bufferingTimer = null;
+        if (notice?.dataset.mediaState === 'buffering') notice.hidden = true;
+      }
+      const failed = () => {
+        requestedPlayback = false; clearBuffering();
+        const cover = media.closest('[data-cover]');
+        if (cover) cover.closest('.news-card')?.classList.add('media-failed');
+        if (figure) {
+          if (notice) {
+            notice.textContent = /^(VIDEO|AUDIO)$/.test(media.tagName)
+              ? '此处暂时无法播放，请通过下方原文链接观看或收听。'
+              : '图片未能载入，请通过下方原文链接查看。';
+            notice.dataset.mediaState = 'failed'; notice.hidden = false;
+          }
+          media.hidden = true;
+          if (media.tagName === 'VIDEO') {
+            const poster = $('[data-video-fallback]', figure);
+            if (poster) poster.hidden = false;
+          }
+        }
+      };
+      media.addEventListener('error', failed);
+      if (/^(VIDEO|AUDIO)$/.test(media.tagName)) {
+        const armBuffering = () => {
+          if (!requestedPlayback || bufferingTimer || media.hidden) return;
+          bufferingTimer = setTimeout(() => {
+            bufferingTimer = null;
+            if (notice && figure.isConnected && requestedPlayback && !media.hidden && !media.closest('[hidden]')) {
+              notice.textContent = '外部媒体暂未能继续播放，可通过下方原文链接观看或收听。';
+              notice.dataset.mediaState = 'buffering'; notice.hidden = false;
+            }
+          }, 10000);
+        };
+        media.addEventListener('play', () => { requestedPlayback = true; armBuffering(); });
+        media.addEventListener('waiting', armBuffering);
+        media.addEventListener('stalled', armBuffering);
+        media.addEventListener('playing', clearBuffering);
+        ['pause', 'ended', 'emptied'].forEach(name => media.addEventListener(name, () => {
+          requestedPlayback = false; clearBuffering();
+        }));
+      }
+      if (media.tagName === 'IMG' && media.complete && media.naturalWidth === 0) failed();
+    });
+  }
+  bindMedia(document);
+
+  // Accessible manual-activation tabs; no JS leaves both complete sections and links intact.
+  function enhanceReader(article, scroller, onView) {
+    const tablist = $('[data-tabs]', article);
+    if (!tablist) return null;
+    const tabs = $$('[data-view]', tablist);
+    const panels = $$('[data-reader-panel]', article);
+    const id = article.dataset.articleId;
+    const memory = readerMemory.get(id) || {positions: {}, view: 'rewrite'};
+    readerMemory.set(id, memory);
+    const isWindow = scroller === window;
+    const getTop = () => isWindow ? window.scrollY : scroller.scrollTop;
+    const setTop = value => { if (isWindow) window.scrollTo(0, value); else scroller.scrollTop = value; };
+    const toolbar = tablist.closest('.reader-tabs');
+    const position = $('.reading-position', toolbar);
+    const progress = $('progress', toolbar);
+    const percent = $('[data-reading-percent]', toolbar);
+    let progressFrame = null;
+    function updateProgress() {
+      progressFrame = null;
+      if (!article.isConnected || !progress) return;
+      const panel = panels.find(item => !item.hidden);
+      if (!panel) return;
+      const viewport = isWindow ? window.innerHeight : scroller.clientHeight;
+      const origin = isWindow ? 0 : scroller.getBoundingClientRect().top;
+      const top = panel.getBoundingClientRect().top - origin;
+      const distance = panel.getBoundingClientRect().height - viewport + toolbar.offsetHeight;
+      const value = distance <= 0 ? (top < viewport ? 100 : 0) : Math.round(Math.max(0, Math.min(1, (toolbar.offsetHeight - top) / distance)) * 100);
+      progress.value = value;
+      percent.textContent = value + '%';
+    }
+    function scheduleProgress() { if (progressFrame == null) progressFrame = nextFrame(updateProgress); }
+    if (position) position.hidden = false;
+    scroller.addEventListener('scroll', scheduleProgress, {passive: true});
+    window.addEventListener('resize', scheduleProgress);
+    article.addEventListener('load', scheduleProgress, true);
+    const observer = typeof ResizeObserver === 'function' ? new ResizeObserver(scheduleProgress) : null;
+    panels.forEach(panel => observer?.observe(panel));
+    const toolbarTop = () => Math.max(0, toolbar.getBoundingClientRect().top + getTop() - (isWindow ? 0 : scroller.getBoundingClientRect().top));
+    let view = null, generation = 0;
+    article.classList.add('reader-enhanced');
+    tablist.setAttribute('role', 'tablist');
+    tabs.forEach(tab => {
+      tab.setAttribute('role', 'tab');
+      tab.setAttribute('aria-controls', tab.dataset.view);
+    });
+    panels.forEach(panel => {
+      panel.setAttribute('role', 'tabpanel');
+      panel.setAttribute('tabindex', '0');
+      panel.setAttribute('aria-labelledby', 'tab-' + panel.dataset.readerPanel);
+    });
+    function remember() { if (view) memory.positions[view] = getTop(); memory.view = view; }
+    function show(next, {initial = false, updateURL = true} = {}) {
+      if (!['rewrite', 'original'].includes(next) || view === next) return;
+      const thisGeneration = ++generation;
+      if (view) {
+        remember();
+        const old = panels.find(panel => panel.dataset.readerPanel === view);
+        if (old) suspendMedia(old);
+      }
+      view = next;
+      memory.view = next;
+      panels.forEach(panel => {
+        panel.hidden = panel.dataset.readerPanel !== next;
+        if (!panel.hidden) resumeEmbeds(panel);
+        else suspendMedia(panel);
+      });
+      tabs.forEach(tab => {
+        const selected = tab.dataset.view === next;
+        tab.setAttribute('aria-selected', String(selected));
+        tab.setAttribute('tabindex', selected ? '0' : '-1');
+      });
+      if (updateURL) onView(next);
+      const saved = memory.positions[next];
+      // First rewrite starts at its title; first original starts at the visible tab bar.
+      if (!initial || next === 'original' || saved != null) {
+        nextFrame(() => {
+          if (thisGeneration === generation && article.isConnected) setTop(saved ?? toolbarTop());
+        });
+      }
+      scheduleProgress();
+    }
+    tabs.forEach(tab => tab.addEventListener('click', event => {
+      if (event.ctrlKey || event.metaKey || event.altKey || event.shiftKey) return;
+      event.preventDefault();
+      show(tab.dataset.view);
+    }));
+    tablist.addEventListener('keydown', event => {
+      const index = tabs.indexOf(document.activeElement);
+      if (index < 0) return;
+      if (event.key === ' ') { event.preventDefault(); show(tabs[index].dataset.view); return; }
+      let target = null;
+      if (event.key === 'ArrowRight') target = tabs[(index + 1) % tabs.length];
+      if (event.key === 'ArrowLeft') target = tabs[(index - 1 + tabs.length) % tabs.length];
+      if (event.key === 'Home') target = tabs[0];
+      if (event.key === 'End') target = tabs.at(-1);
+      if (target) { event.preventDefault(); safeFocus(target); }
+    });
+    show(location.hash === '#original' ? 'original' : 'rewrite', {initial: true, updateURL: false});
+    bindMedia(article);
+    return {show, remember, dispose() {
+      scroller.removeEventListener('scroll', scheduleProgress);
+      window.removeEventListener('resize', scheduleProgress);
+      article.removeEventListener('load', scheduleProgress, true);
+      observer?.disconnect();
+      if (progressFrame != null) cancelAnimationFrame(progressFrame);
+    }};
+  }
+  function replaceViewURL(view) {
+    const url = new URL(location.href);
+    url.hash = view === 'original' ? 'original' : 'rewrite';
+    history.replaceState(history.state, '', url.pathname + url.search + url.hash);
+  }
+  const directArticle = $('.site-main > [data-article-id]');
+  if (directArticle) {
+    const direct = enhanceReader(directArticle, window, replaceViewURL);
+    window.addEventListener('hashchange', () => direct?.show(location.hash === '#original' ? 'original' : 'rewrite', {updateURL: false}));
+    window.addEventListener('pagehide', () => { direct?.remember(); suspendMedia(directArticle); });
+  }
+
+  const sheet = $('#reader-sheet');
+  const grid = $('[data-news-grid]');
+  if (!sheet || !grid) return;
+  const scroll = $('.sheet-scroll', sheet);
+  const closeButton = $('[data-close-sheet]', sheet);
+  const pageRoots = $$('.site-header,.site-main,.site-footer');
+  const listTitle = document.title;
+  const listCanonical = $('link[rel="canonical"]')?.href;
+  const cache = new Map();
+  let active = null, controller = null, viewController = null, sequence = 0;
+  const canAnimate = !window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  history.scrollRestoration = 'manual';
+  const sheetState = () => history.state?.xnewsSheet;
+  const safePath = path => /^\/a\/[a-z0-9-]+\/?$/.test(path);
+  const prefetching = new Map();
+  const readerURLs = new Map($$('[data-open-reader]', grid).map(a => [new URL(a.href, location.href).pathname, a.dataset.readerSrc]));
+  const requestURL = path => readerURLs.get(path) || path;
+  // Warm only a link the reader shows intent to open; never preload media or all stories.
+  function prefetchArticle(event) {
+    if (event.type === 'pointerover' && event.pointerType === 'touch') return;
+    const connection = navigator.connection;
+    if (connection?.saveData || /(^|-)2g$/.test(connection?.effectiveType || '')) return;
+    const anchor = event.target.closest?.('[data-open-reader]');
+    if (!anchor) return;
+    const url = new URL(anchor.href, location.href), path = url.pathname;
+    if (url.origin !== location.origin || !safePath(path) || cache.has(path) || prefetching.has(path) || prefetching.size >= 2) return;
+    const abort = new AbortController();
+    const timer = setTimeout(() => abort.abort(), 8000);
+    const promise = fetch(requestURL(path), {signal: abort.signal, priority: 'low', headers: {'Accept': 'text/html'}})
+      .then(response => { if (!response.ok) throw new Error('Prefetch failed'); return response.text(); })
+      .then(html => {
+        const raw = new DOMParser().parseFromString(html, 'text/html').querySelector('[data-article-id]');
+        if (!raw || '/a/' + raw.dataset.articleId !== path.replace(/\/$/, '')) return null;
+        cache.set(path, html);
+        if (cache.size > 12) cache.delete(cache.keys().next().value);
+        return html;
+      }).catch(() => null).finally(() => { clearTimeout(timer); if (prefetching.get(path)?.promise === promise) prefetching.delete(path); });
+    prefetching.set(path, {promise, abort});
+  }
+  grid.addEventListener('pointerover', prefetchArticle);
+  grid.addEventListener('focusin', prefetchArticle);
+  grid.addEventListener('pointerdown', prefetchArticle);
+  async function readyPrefetch(path) {
+    const pending = prefetching.get(path);
+    if (!pending) return null;
+    let timer;
+    try {
+      // A click is foreground work. Do not inherit an eight-second speculative
+      // request deadline when that request is queued or stalled on a slow link.
+      const ready = await Promise.race([pending.promise, new Promise(resolve => { timer = setTimeout(() => resolve(null), 120); })]);
+      if (!ready) pending.abort.abort();
+      return ready;
+    } finally { clearTimeout(timer); }
+  }
+  function togglePageInert(value) { pageRoots.forEach(element => { element.inert = value; }); }
+  function showSheet(keyboard) {
+    if (sheet.open) return;
+    document.body.classList.add('sheet-open');
+    togglePageInert(true);
+    if (typeof sheet.showModal === 'function') sheet.showModal();
+    else { sheet.setAttribute('open', ''); sheet.classList.add('sheet-fallback'); sheet.setAttribute('role', 'dialog'); sheet.setAttribute('aria-modal', 'true'); }
+    if (!keyboard && canAnimate && typeof sheet.animate === 'function') {
+      sheet.animate([{transform: 'translateY(16px)', opacity: .8}, {transform: 'translateY(0)', opacity: 1}], {duration: 180, easing: 'cubic-bezier(.23,1,.32,1)'});
+    }
+    safeFocus(closeButton);
+  }
+  function loading() {
+    scroll.setAttribute('aria-busy', 'true');
+    scroll.innerHTML = '<div class="sheet-status" role="status"><p>正在打开文章…</p><div aria-hidden="true"><div class="skeleton-title"></div><div class="skeleton-title short"></div><div class="skeleton-line"></div><div class="skeleton-line"></div><div class="skeleton-line short"></div></div></div>';
+    scroll.scrollTop = 0;
+  }
+  function errorState(path, sourceURL) {
+    scroll.removeAttribute('aria-busy');
+    scroll.replaceChildren();
+    const status = document.createElement('section'); status.className = 'sheet-status'; status.setAttribute('role', 'alert');
+    const title = document.createElement('h2'); title.textContent = '文章暂时未能打开';
+    const description = document.createElement('p'); description.textContent = '选刊和阅读位置都还在。可以重试，或打开独立文章页。';
+    const retry = document.createElement('button'); retry.type = 'button'; retry.className = 'retry-button'; retry.textContent = '重试'; retry.addEventListener('click', () => loadArticle(path, sourceURL));
+    const link = document.createElement('a'); link.href = path; link.textContent = '独立文章页 ↗';
+    status.append(title, description, retry, link);
+    if (sourceURL) { const source = document.createElement('a'); source.href = sourceURL; source.target = '_blank'; source.rel = 'noopener noreferrer'; source.textContent = '去原文 ↗'; status.append(source); }
+    scroll.append(status);
+  }
+  async function loadArticle(path, sourceURL = '') {
+    if (!safePath(path)) return;
+    const ownSequence = ++sequence;
+    controller?.abort();
+    viewController?.remember(); viewController?.dispose(); viewController = null;
+    suspendMedia(scroll);
+    loading();
+    controller = new AbortController();
+    const signal = controller.signal;
+    const timeout = setTimeout(() => controller?.signal === signal && controller.abort(), 12000);
+    try {
+      let html = cache.get(path) || await readyPrefetch(path);
+      if (ownSequence !== sequence || !active) return;
+      if (signal.aborted) throw new Error('Article load timed out');
+      if (!html) {
+        const response = await fetch(requestURL(path), {signal, priority: 'high', headers: {'Accept': 'text/html'}});
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        html = await response.text();
+      }
+      if (ownSequence !== sequence || !active) return;
+      const parsed = new DOMParser().parseFromString(html, 'text/html');
+      const raw = $('[data-article-id]', parsed);
+      if (!raw || '/a/' + raw.dataset.articleId !== path.replace(/\/$/, '')) throw new Error('Article mismatch');
+      cache.set(path, html);
+      if (cache.size > 12) cache.delete(cache.keys().next().value);
+      const article = document.importNode(raw, true);
+      // Set panel visibility before attaching media to the live document.
+      viewController = enhanceReader(article, scroll, view => {
+        replaceViewURL(view);
+        $('[data-sheet-permalink]', sheet).href = location.pathname + location.search + location.hash;
+      });
+      scroll.replaceChildren(article);
+      scroll.removeAttribute('aria-busy');
+      document.title = parsed.title;
+      $('link[rel="canonical"]')?.setAttribute('href', 'https://xnews.qiaomu.ai' + path);
+      $('[data-sheet-permalink]', sheet).href = path + location.hash;
+      nextFrame(() => { if (ownSequence === sequence) bindMedia(article); });
+    } catch (error) {
+      if (ownSequence !== sequence || !active) return;
+      errorState(path, sourceURL);
+    } finally { clearTimeout(timeout); }
+  }
+  function openFromCard(anchor, keyboard) {
+    const url = new URL(anchor.href, location.href);
+    if (url.origin !== location.origin || !safePath(url.pathname)) return false;
+    const state = {path: url.pathname, listURL: location.pathname + location.search + location.hash, listY: window.scrollY, focusId: anchor.id, sourceURL: anchor.dataset.sourceUrl || ''};
+    history.replaceState({...history.state, xnewsList: {url: state.listURL, y: state.listY, focusId: state.focusId}}, '', location.href);
+    history.pushState({xnewsSheet: state}, '', url.pathname);
+    active = state;
+    $('[data-sheet-permalink]', sheet).href = url.pathname;
+    showSheet(keyboard);
+    loadArticle(state.path, state.sourceURL);
+    return true;
+  }
+  function finishClose() {
+    const previous = active;
+    ++sequence;
+    controller?.abort(); controller = null;
+    viewController?.remember(); viewController?.dispose(); viewController = null;
+    suspendMedia(scroll);
+    if (typeof sheet.close === 'function' && sheet.open) sheet.close();
+    sheet.removeAttribute('open'); sheet.classList.remove('sheet-fallback');
+    togglePageInert(false);
+    document.body.classList.remove('sheet-open');
+    scroll.replaceChildren(); scroll.removeAttribute('aria-busy');
+    active = null;
+    document.title = listTitle;
+    if (listCanonical) $('link[rel="canonical"]')?.setAttribute('href', listCanonical);
+    nextFrame(() => {
+      if (active) return;
+      window.scrollTo(0, previous?.listY ?? history.state?.xnewsList?.y ?? 0);
+      safeFocus(document.getElementById(previous?.focusId || history.state?.xnewsList?.focusId || '') || $('.edition-line h1'));
+    });
+  }
+  function requestClose() {
+    if (!active) return;
+    if (sheetState()) history.back(); else finishClose();
+  }
+  grid.addEventListener('click', event => {
+    const anchor = event.target.closest('[data-open-reader]');
+    if (!anchor || event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.altKey || event.shiftKey || anchor.target === '_blank' || anchor.hasAttribute('download')) return;
+    if (openFromCard(anchor, event.detail === 0)) event.preventDefault();
+  });
+  closeButton.addEventListener('click', requestClose);
+  sheet.addEventListener('cancel', event => { event.preventDefault(); requestClose(); });
+  sheet.addEventListener('keydown', event => {
+    if (event.key === 'Escape') { event.preventDefault(); requestClose(); return; }
+    if (event.key !== 'Tab') return;
+    const focusables = $$('a[href],button:not(:disabled),[tabindex="0"],video[controls],audio[controls]', sheet).filter(element => !element.closest('[hidden]'));
+    const first = focusables[0], last = focusables.at(-1);
+    if (event.shiftKey && (document.activeElement === first || document.activeElement === sheet)) { event.preventDefault(); safeFocus(last); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); safeFocus(first); }
+  });
+  window.addEventListener('popstate', () => {
+    const state = sheetState();
+    if (state && safePath(state.path)) {
+      active = state;
+      showSheet(true);
+      loadArticle(state.path, state.sourceURL);
+    } else if (active) finishClose();
+  });
+  window.addEventListener('pagehide', () => { viewController?.remember(); suspendMedia(scroll); controller?.abort(); });
+})();
+</script>
+</body>
+</html>
