@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="referrer" content="no-referrer">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>三个多月里，回归工作流跟了1700多起调查，定位了600多起根因 · X News</title>
+<meta name="description" content="OpenAI的Performance Factory用云端Codex调查性能回退并起草修复，合并与否仍由工程师决定。人工抽查100条根因建议，70%被评为准确。">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#fffefa">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="X News">
+<meta property="og:title" content="三个多月里，回归工作流跟了1700多起调查，定位了600多起根因 · X News">
+<meta property="og:description" content="OpenAI的Performance Factory用云端Codex调查性能回退并起草修复，合并与否仍由工程师决定。人工抽查100条根因建议，70%被评为准确。">
+<meta property="og:url" content="https://xnews.qiaomu.ai/a/openai-performance-factory">
+<link rel="canonical" href="https://xnews.qiaomu.ai/a/openai-performance-factory">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="三个多月里，回归工作流跟了1700多起调查，定位了600多起根因 · X News">
+<meta name="twitter:description" content="OpenAI的Performance Factory用云端Codex调查性能回退并起草修复，合并与否仍由工程师决定。人工抽查100条根因建议，70%被评为准确。">
+<meta property="og:image" content="https://images.ctfassets.net/kftzwdyauwt9/581rKVIvguLraKii21zIgr/83deca5cdcec639b656a9a5ec1954f4b/performance-factory-evolution-light.png">
+<meta name="twitter:image" content="https://images.ctfassets.net/kftzwdyauwt9/581rKVIvguLraKii21zIgr/83deca5cdcec639b656a9a5ec1954f4b/performance-factory-evolution-light.png">
+<meta property="article:published_time" content="2026-11-20T08:50:00+08:00">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://xnews.qiaomu.ai/#publisher", "name": "X News", "url": "https://xnews.qiaomu.ai/", "description": "海外创始人长文与 AI 视频的中文改写选刊"}, {"@type": "WebSite", "@id": "https://xnews.qiaomu.ai/#website", "name": "X News", "url": "https://xnews.qiaomu.ai/", "inLanguage": "zh-CN", "publisher": {"@id": "https://xnews.qiaomu.ai/#publisher"}}, {"@type": "Article", "@id": "https://xnews.qiaomu.ai/a/openai-performance-factory#article", "url": "https://xnews.qiaomu.ai/a/openai-performance-factory", "mainEntityOfPage": {"@id": "https://xnews.qiaomu.ai/a/openai-performance-factory#page"}, "headline": "三个多月里，回归工作流跟了1700多起调查，定位了600多起根因", "description": "OpenAI的Performance Factory用云端Codex调查性能回退并起草修复，合并与否仍由工程师决定。人工抽查100条根因建议，70%被评为准确。", "inLanguage": "zh-CN", "datePublished": "2026-11-20T08:50:00+08:00", "author": {"@id": "https://xnews.qiaomu.ai/#publisher"}, "publisher": {"@id": "https://xnews.qiaomu.ai/#publisher"}, "isBasedOn": {"@type": "CreativeWork", "url": "https://openai.com/index/how-openai-performance-factory-keeps-chatgpt-fast/", "name": "How OpenAI’s Performance Factory keeps ChatGPT fast", "datePublished": "2026-11-19T17:42:03+00:00"}, "citation": "https://openai.com/index/how-openai-performance-factory-keeps-chatgpt-fast/", "keywords": ["OpenAI", "Codex", "Performance Factory", "agents", "engineering"], "image": ["https://images.ctfassets.net/kftzwdyauwt9/581rKVIvguLraKii21zIgr/83deca5cdcec639b656a9a5ec1954f4b/performance-factory-evolution-light.png"]}, {"@type": "WebPage", "@id": "https://xnews.qiaomu.ai/a/openai-performance-factory#page", "url": "https://xnews.qiaomu.ai/a/openai-performance-factory", "name": "三个多月里，回归工作流跟了1700多起调查，定位了600多起根因 · X News", "description": "OpenAI的Performance Factory用云端Codex调查性能回退并起草修复，合并与否仍由工程师决定。人工抽查100条根因建议，70%被评为准确。", "inLanguage": "zh-CN", "isPartOf": {"@id": "https://xnews.qiaomu.ai/#website"}, "mainEntity": {"@id": "https://xnews.qiaomu.ai/a/openai-performance-factory#article"}}]}</script>
+<link rel="alternate" type="application/rss+xml" title="X News" href="/feed.xml">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-7 -7 58 58'%3E%3Crect x='-7' y='-7' width='58' height='58' rx='5' fill='%231b1d18'/%3E%3Cpath fill='%23fffefa' d='M2 0h11l29 44H31zM32 0h10L26 18l-5-7zM17 26l5 7-10 11H2z'/%3E%3C/svg%3E">
+<script>try{var t=localStorage.getItem('xn.theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
+<style data-source="/static/app.b7cfdefd4a1d.css">/* D · 影像刊 — see DESIGN.md. System fonts, real media, no left rail. */
+:root {
+  color-scheme:light;
+  --paper:#fffefa; --ink:#1b1d18; --muted:#62685a; --rule:#d8dccf;
+  --surface:#eef0e5; --sage:#dce3cc; --sage-ink:#293026; --focus:#315b3c;
+  --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC","Noto Sans CJK SC",sans-serif;
+  --ease:cubic-bezier(.2,0,0,1); --gutter:32px; --reader-bar:64px;
+  --control-border:#808675; --image-outline:#0000001a;
+  --contrast-surface:#1b1d18; --contrast-ink:#fffefa;
+}
+:root[data-theme="dark"] {
+  color-scheme:dark;
+  --paper:#20241e; --ink:#eef0e7; --muted:#b7c1af; --rule:#4b5842;
+  --surface:#30392a; --sage:#394631; --sage-ink:#eef0e7; --focus:#c0d9aa;
+  --control-border:#89957f; --image-outline:#ffffff1a;
+  --contrast-surface:#12180f; --contrast-ink:#eef0e7;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:130px;scrollbar-gutter:stable}
+body{margin:0;background:var(--paper);color:var(--ink);font:1rem/1.7 var(--sans);-webkit-font-smoothing:antialiased;letter-spacing:0}
+[hidden]{display:none!important}
+a{color:inherit;text-decoration:none}
+@media(hover:hover){a:hover{text-decoration:underline;text-underline-offset:.2em}}
+button{font:inherit;color:inherit;cursor:pointer}
+button:disabled{cursor:wait}
+button,a{-webkit-tap-highlight-color:transparent}
+
+:focus-visible{outline:3px solid var(--focus);outline-offset:4px}
+em,i{font-style:normal;font-weight:500}
+strong,b{font-weight:600}
+img{max-width:100%;height:auto}
+.sr-only,.skip:not(:focus){position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.skip:focus{position:fixed;z-index:100;top:8px;left:8px;background:var(--ink);color:var(--paper);padding:10px 16px}
+.site-header,.site-main,.site-footer{width:min(100% - var(--gutter)*2,1320px);margin-inline:auto}
+.site-header{min-height:118px;display:flex;align-items:center;justify-content:space-between;gap:24px 32px;flex-wrap:wrap;padding-block:24px;border-bottom:1px solid var(--ink)}
+.brand{display:flex;align-items:center;gap:26px;flex:none}
+.brand:hover{text-decoration:none}
+.brand-wordmark{display:flex;align-items:baseline;gap:7px;line-height:1}
+.brand-mark{width:43px;height:43px;align-self:center;margin-top:2px}
+.brand-name{font:700 3.875rem/.95 Georgia,"Times New Roman",serif;letter-spacing:-.065em}
+.brand-period{color:var(--focus)}
+.brand-sub{font-size:0.9375rem;font-weight:500;line-height:1.5;border-inline-start:1px solid var(--rule);padding-inline-start:25px;letter-spacing:.12em}
+.brand-sub>span{display:block;font-size:0.75rem;line-height:1.6;font-weight:400;letter-spacing:.04em;color:var(--muted);margin-top:5px}
+.header-side{display:flex;align-items:center;gap:30px}
+.site-nav{display:flex;align-items:center;gap:30px;font-size:0.875rem}
+.site-nav a{min-height:44px;display:flex;align-items:center;gap:6px;position:relative}
+.site-nav a[aria-current="page"]{font-weight:600}
+.site-nav a[aria-current="page"]::after{content:"";position:absolute;inset-inline:0;bottom:3px;height:2px;background:var(--ink)}
+.icon-button{width:44px;height:44px;border:1px solid var(--control-border);border-radius:50%;display:inline-grid;place-items:center;background:transparent;flex:none}
+.site-main{min-height:55vh;padding-bottom:44px}
+.edition-line{min-height:160px;display:flex;align-items:center;justify-content:space-between;gap:24px 32px;flex-wrap:wrap;padding-block:28px}
+.edition-line h1{font-size:1.875rem;line-height:1.4;font-weight:600;margin:8px 0 10px;text-wrap:balance}
+.edition-line p{font-size:0.875rem;line-height:1.7;color:var(--muted);margin:0}
+.edition-line .edition-kicker{font-size:0.6875rem;letter-spacing:.1em;color:var(--ink)}
+.edition-kicker span{margin-inline:8px;color:var(--muted)}
+.edition-meta{text-align:end;font-variant-numeric:tabular-nums;display:flex;flex-direction:column;gap:6px;flex:none}
+.edition-label{font-size:0.75rem;color:var(--muted)}
+.edition-meta time{font:400 1.5rem/1.25 Georgia,"Times New Roman",serif;letter-spacing:.02em}
+.edition-note{font-size:0.75rem;color:var(--muted)}
+/* A quiet editorial toolbar; every control remains labelled and keyboard accessible. */
+.discovery{margin-bottom:20px}
+.discovery-top,.discovery-bottom{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.discovery-top{flex-wrap:wrap;padding-block:16px;border-block:1px solid var(--rule)}
+.filter-group{display:flex;gap:8px;flex-wrap:wrap}
+.filter-group button{min-height:44px;padding:8px 16px;display:flex;align-items:center;gap:9px;font-size:0.875rem;background:transparent;border:1px solid transparent;border-radius:3px}
+.filter-group button span{font-size:0.6875rem;font-variant-numeric:tabular-nums;opacity:.8}
+.filter-group button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.search-field{display:flex;align-items:center;gap:10px;width:min(340px,42%);min-height:44px;border:1px solid var(--control-border);border-radius:3px;padding-inline:13px 0;color:var(--muted)}
+.search-field svg{flex:none}
+.search-field input{font:400 0.875rem/1.5 var(--sans);color:var(--ink);background:transparent;border:0;min-width:0;width:100%;padding:11px 0;border-radius:0}
+.search-field input::-webkit-search-cancel-button{display:none}
+.search-field input::placeholder{color:var(--muted);opacity:1}
+.search-field:focus-within{outline:2px solid var(--focus);outline-offset:3px}
+.search-field input:focus-visible{outline:none}
+.search-field button{border:0;background:transparent;width:44px;min-height:44px;flex:none;font-size:1.375rem}
+.discovery-bottom{flex-wrap:wrap;padding-top:12px;min-height:54px}
+.discovery-bottom p{margin:0;font-size:0.75rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.view-switch{display:flex;gap:4px}
+.view-switch button{display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:6px 10px;border:1px solid transparent;border-radius:3px;background:transparent;color:var(--muted);font-size:0.75rem}
+.view-switch button[aria-pressed="true"]{color:var(--ink);background:var(--surface);border-color:var(--control-border)}
+.search-empty{padding:48px 20px 72px;text-align:center;border-top:1px solid var(--rule)}
+.empty-symbol{font:400 3rem/1 Georgia,serif;color:var(--muted);margin:0 0 20px}
+.search-empty h2{font-size:1.375rem;font-weight:500;margin:0 0 12px}
+.search-empty p{color:var(--muted);overflow-wrap:anywhere}
+.search-empty .reset-button{margin:12px 0 0}
+.news-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:28px 24px;align-items:stretch}
+.news-card{grid-column:span 4;min-width:0;display:flex;flex-direction:column;border:1px solid var(--rule);background:var(--paper);position:relative;overflow:hidden}
+.news-card.is-featured{grid-column:span 8}
+.news-card.is-wide{grid-column:span 8}
+.card-link{display:flex;flex-direction:column;height:100%;min-width:0}
+.card-link:hover{text-decoration:none}
+.cover{position:relative;overflow:hidden;background:var(--surface);min-height:0;aspect-ratio:16/9;isolation:isolate}
+.cover img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;z-index:1;transition:transform 180ms var(--ease)}
+.is-featured .cover{min-height:0;aspect-ratio:2.7;flex:none}
+.is-featured .card-body{flex:0 0 auto}
+.is-wide .cover{aspect-ratio:2/1}
+.cover-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;background:var(--surface);color:var(--ink);z-index:0;overflow:hidden}
+.cover-word{font-size:clamp(2.75rem,5.3vw,5.25rem);font-weight:500;line-height:1.1;overflow-wrap:anywhere;max-width:100%;text-align:left}
+.cover-badge{position:absolute;z-index:2;left:16px;bottom:16px;background:#1b1d18dc;color:#fffefa;padding:5px 10px;font-size:0.75rem;line-height:1.6;border:1px solid #fffefa60}
+.card-body{padding:22px 24px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.card-meta{display:flex;overflow-wrap:anywhere;align-items:flex-start;justify-content:space-between;gap:14px;font-size:0.75rem;line-height:1.7;color:var(--muted);font-variant-numeric:tabular-nums}
+.card-meta time{white-space:nowrap;flex:none}
+.card-title{font-size:1.3125rem;font-weight:600;line-height:1.6;margin:0;text-wrap:pretty;overflow-wrap:anywhere}
+.is-featured .card-title{font-size:clamp(1.5625rem,2.2vw,2rem);line-height:1.5}
+.card-dek{font-size:0.875rem;line-height:1.85;color:var(--muted);margin:0;text-wrap:pretty}
+.card-end{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;font-size:0.75rem;color:var(--muted);margin-top:auto;padding-top:16px}
+.card-read{display:inline-flex;align-items:center;gap:10px;color:var(--ink);white-space:nowrap}
+.card--text.tone-ink .card-read{color:var(--contrast-ink)}
+.card-link:focus-visible{outline-offset:-4px}
+.tone-ink .card-link:focus-visible{outline-color:var(--contrast-ink)}
+.card-arrow{font-size:1.3125rem;line-height:1}
+.card--text .type-cover{min-height:140px;padding:24px 24px 16px;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:20px;overflow:hidden}
+.type-index{font-size:0.625rem;letter-spacing:.12em;line-height:1.5;font-variant-numeric:tabular-nums}
+.type-dot{color:var(--focus)}
+.tone-ink .type-dot{color:var(--contrast-ink)}
+.card--text .cover-word{font:400 clamp(2.25rem,3.5vw,3.375rem)/1.15 Georgia,"Times New Roman",serif;letter-spacing:-.03em}
+.card--text .card-body{padding-top:12px}
+.card--text{align-self:stretch}
+.card--text.tone-ink{background:var(--contrast-surface);color:var(--contrast-ink);border-color:var(--contrast-surface)}
+.card--text.tone-ink .card-meta,.card--text.tone-ink .card-dek,.card--text.tone-ink .card-end{color:var(--contrast-ink);opacity:.85}
+.card--text.tone-sage{background:var(--sage);color:var(--sage-ink);border-color:var(--sage)}
+.card--text.tone-sage .card-meta,.card--text.tone-sage .card-dek,.card--text.tone-sage .card-end{color:var(--sage-ink)}
+.cover-error-link{display:none;font-size:0.875rem;padding:0 22px 18px;text-decoration:underline;text-underline-offset:.2em}
+.media-failed .cover-error-link{display:block}
+.media-failed .cover img{display:none}
+.empty-state{padding:64px 0;max-width:40rem}
+.empty-state h1{font-size:2rem;font-weight:500}
+.empty-state p{color:var(--muted)}
+.site-footer{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:20px 0 32px;border-top:1px solid var(--ink);font-size:0.875rem;color:var(--muted)}
+.footer-links{display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+.footer-links a{display:inline-flex;align-items:center;min-height:44px}
+/* Shared standalone article and progressive full-screen reader. */
+.article-reader{max-width:960px;margin:0 auto;padding:30px 0 60px;min-width:0}
+.article-back{display:inline-flex;min-height:44px;align-items:center;gap:8px;font-size:0.875rem;color:var(--muted);margin-bottom:20px}
+.article-header{max-width:900px;margin:0 auto 24px}
+.article-kicker{font-size:0.875rem;color:var(--muted);margin:0 0 12px}
+.article-header h1{font-size:clamp(1.8125rem,3.8vw,3rem);line-height:1.42;font-weight:500;margin:0 0 18px;text-wrap:pretty;overflow-wrap:anywhere}
+.article-dek{font-size:1.125rem;line-height:1.85;color:var(--muted);margin:0 0 22px;max-width:42rem}
+.article-meta{display:flex;gap:8px 22px;flex-wrap:wrap;color:var(--muted);font-size:0.875rem;padding-top:14px;border-top:1px solid var(--rule);font-variant-numeric:tabular-nums}
+.reader-tabs{display:flex;align-items:center;gap:8px 16px;flex-wrap:wrap;position:sticky;top:0;z-index:3;background:var(--paper);border-block:1px solid var(--rule);padding:8px 0;margin:0 auto 30px;max-width:900px}
+.reader-tabs [data-tabs]{display:flex;flex-wrap:wrap;gap:6px;min-width:0}
+.reader-tabs a{display:inline-flex;align-items:center;min-height:44px;padding:6px 14px;font-size:0.875rem;border:1px solid transparent;border-radius:3px;white-space:nowrap}
+.reader-tabs a[aria-selected="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.reader-source{margin-left:auto;font-size:0.875rem!important}
+.reader-panel{max-width:42rem;margin:0 auto 44px;scroll-margin-top:130px}
+.section-heading{font-size:1.25rem;font-weight:500;margin:0 0 20px}
+.reader-enhanced .section-heading{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);margin:0;padding:0}
+.original-title{font-size:1.1875rem;line-height:1.7;margin:0 0 22px;font-weight:500;overflow-wrap:anywhere}
+.completeness-note{font-size:0.875rem;line-height:1.85;color:var(--muted);background:var(--surface);border:1px solid var(--rule);padding:12px 16px;margin:0 0 24px}
+.prose{min-width:0;font-size:1.125rem;line-height:1.95;overflow-wrap:anywhere;text-wrap:pretty}
+.prose pre{max-width:100%;overflow-x:auto;margin:1.5em 0;padding:1rem;border:1px solid var(--rule);background:var(--surface);font-size:.875rem;line-height:1.65;tab-size:4;white-space:pre;overflow-wrap:normal;text-wrap:initial}
+.prose pre code{display:block;width:max-content;min-width:100%;padding:0;border:0;border-radius:0;background:none;font-size:inherit;line-height:inherit;white-space:pre;overflow-wrap:normal}
+/* Keep wide source tables inside the reading column without compressing every cell. */
+.prose table{display:block;width:fit-content;max-width:100%;overflow-x:auto;border-collapse:collapse;margin:1.5em 0;font-size:.9375rem;line-height:1.65;tab-size:4;text-wrap:wrap;font-variant-numeric:tabular-nums}
+.prose th,.prose td{padding:.7em .85em;border:1px solid var(--rule);text-align:left;vertical-align:top;min-width:5.5rem;max-width:24rem}
+.prose :is(th,td):first-child{min-width:7.5rem}
+.prose th{font-weight:600;background:var(--surface)}
+.prose :is(th,td)[align="left"]{text-align:left}
+.prose :is(th,td)[align="center"]{text-align:center}
+.prose :is(th,td)[align="right"]{text-align:right}
+.prose tbody tr:nth-child(even){background:color-mix(in srgb,var(--surface) 45%,transparent)}
+.prose caption{text-align:left;font-size:.875rem;line-height:1.6;color:var(--muted);padding-bottom:.65em}
+.prose img{max-width:100%;height:auto;vertical-align:middle}
+.prose p,.prose li{font-size:inherit;line-height:inherit;margin:0 0 1em}
+.prose :is(th,td) :is(p,li){font-size:inherit;line-height:inherit}
+.prose :is(th,td)>:last-child{margin-bottom:0}
+.prose h1,.prose h2,.prose h3{font-size:1.5625rem;font-weight:500;line-height:1.6;margin:1.8em 0 .7em}
+.prose h4,.prose h5,.prose h6{font-size:1.125rem;font-weight:600;line-height:1.65;margin:1.6em 0 .6em}
+.prose ul,.prose ol{padding-left:1.4em;margin:0 0 1.2em}
+.prose li{margin-bottom:.45em}
+.prose li>:is(ul,ol){margin:.45em 0 .6em}
+.prose li>p{margin-bottom:.6em}
+.prose li>:last-child{margin-bottom:0}
+.prose blockquote{margin:1.5em 0;padding:18px 22px;border:1px solid var(--rule);background:var(--surface)}
+.prose blockquote>:first-child{margin-top:0}
+.prose blockquote>:last-child{margin-bottom:0}
+.prose blockquote blockquote{margin:1em 0}
+.prose a{font-weight:500;text-decoration:underline;text-underline-offset:.22em}
+.prose hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
+.prose code{font-family:ui-monospace,monospace;font-size:.9em;background:var(--surface);padding:2px 4px;border-radius:3px;white-space:break-spaces}
+.prose details{margin:1.3em 0;padding:.8em 1em;border:1px solid var(--rule)}
+.prose summary{cursor:pointer;font-weight:600;line-height:1.6}
+.prose details[open]>summary{margin-bottom:.8em}
+.prose details>:last-child{margin-bottom:0}
+.prose kbd{font-family:ui-monospace,monospace;font-size:.85em;padding:.1em .35em;border:1px solid var(--rule);border-bottom-width:2px;border-radius:3px;background:var(--surface)}
+.prose sup,.prose sub{font-size:.75em;line-height:0;position:relative;vertical-align:baseline}
+.prose sup{top:-.5em}.prose sub{bottom:-.2em}
+.original-media{display:grid;gap:24px;margin:24px 0 28px}
+.media-figure{margin:0;min-width:0}
+.media-frame{background:var(--surface);border:1px solid var(--rule);overflow:hidden}
+.media-frame img,.media-frame video{max-width:100%;height:auto;max-height:80dvh;display:block;margin:auto}
+.media-frame audio{display:block;width:100%;min-height:54px}
+.media-frame .yt{position:relative;aspect-ratio:16/9}
+.media-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#1b1d18}
+.media-figure figcaption{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 18px;font-size:0.875rem;line-height:1.8;color:var(--muted);padding-top:8px}
+.media-figure figcaption a{text-decoration:underline;text-underline-offset:.2em}
+.media-error{font-size:0.875rem;color:var(--muted);margin:0;padding:18px}
+.source-box{max-width:42rem;margin:24px auto 0;border-top:1px solid var(--rule);padding-top:22px;font-size:0.875rem;color:var(--muted);overflow-wrap:anywhere}
+.source-box a{display:inline-flex;align-items:center;min-height:44px;text-decoration:underline;color:var(--ink);margin-right:22px}
+.reader-sheet{position:fixed;inset:0;margin:0;padding:0;width:100%;max-width:none;height:100dvh;max-height:none;border:0;background:var(--paper);color:var(--ink);overflow:hidden}
+.reader-sheet::backdrop{background:#1b1d1870}
+.reader-sheet[open]{display:flex;flex-direction:column}
+.reader-sheet.sheet-fallback{z-index:60}
+.sheet-bar{min-height:var(--reader-bar);display:flex;flex-shrink:0;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:0 var(--gutter);border-bottom:1px solid var(--rule);background:var(--paper)}
+.sheet-close{min-height:44px;display:inline-flex;align-items:center;gap:12px;border:0;background:none;padding:6px 0;font-size:0.875rem}
+.sheet-close span{font-size:1.375rem}
+.sheet-brand{font-size:0.875rem;font-weight:500}
+.sheet-bar a{font-size:0.875rem;color:var(--muted);min-height:44px;display:flex;align-items:center}
+.sheet-scroll{height:calc(100dvh - var(--reader-bar));flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable;scroll-padding-top:130px;padding:0 var(--gutter)}
+.sheet-scroll .article-back{display:none}
+.sheet-scroll .article-reader{padding-top:35px}
+.sheet-scroll .reader-tabs{top:0}
+.sheet-status{max-width:44rem;margin:52px auto;min-width:0}
+.sheet-status h2{font-size:1.6875rem;line-height:1.5;font-weight:500;margin:0 0 18px}
+.sheet-status p{font-size:1rem;line-height:1.9;color:var(--muted)}
+.sheet-status a{display:inline-flex;align-items:center;min-height:44px;margin-right:18px;text-decoration:underline;text-underline-offset:.2em}
+.retry-button,.reset-button{display:inline-flex;align-items:center;min-height:44px;padding:8px 18px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);border-radius:3px;margin-right:18px}
+.skeleton-title{width:85%;height:38px;background:var(--surface);margin-bottom:14px}
+.skeleton-title.short{width:60%}
+.skeleton-line{height:16px;background:var(--surface);margin-top:20px}
+.skeleton-line.short{width:72%}
+body.sheet-open{overflow:hidden}
+.about-copy{max-width:42rem;margin:52px auto 72px}
+.about-copy h1{font-size:2.375rem;font-weight:500;line-height:1.4;margin:0 0 30px}
+/* Filtered results have equal weight; the opening spread remains asymmetric. */
+.news-grid.is-filtered .is-featured{grid-column:span 4}
+.news-grid.is-filtered .is-featured .cover{aspect-ratio:16/9}
+.news-grid.is-filtered .is-featured .card-title{font-size:1.3125rem}
+.news-grid[data-layout="list"]{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--rule)}
+.news-grid[data-layout="list"] .news-card{background:transparent;color:var(--ink);border:0;border-bottom:1px solid var(--rule);overflow:visible}
+.news-grid[data-layout="list"] .card-link{display:flex;flex-direction:row;gap:28px;padding:26px 0;align-items:center}
+.news-grid[data-layout="list"] .cover,.news-grid[data-layout="list"] .type-cover{display:none}
+.news-grid[data-layout="list"] .card-body{padding:0;gap:8px;flex:1;min-width:0}
+.news-grid[data-layout="list"] .card-title{font-size:1.3125rem;line-height:1.6}
+.news-grid[data-layout="list"] .card-meta,.news-grid[data-layout="list"] .card-dek,.news-grid[data-layout="list"] .card-end{color:var(--muted);opacity:1}
+.news-grid[data-layout="list"] .card-read{color:var(--ink)}
+.news-grid[data-layout="list"] .card-end{padding-top:2px}
+.news-grid[data-layout="list"] .card-link:focus-visible{outline-color:var(--focus);outline-offset:5px}
+.reading-position{display:flex;align-items:center;gap:12px;flex-basis:100%;color:var(--muted);font-size:0.6875rem;line-height:1.3}
+.reading-position span{min-width:4ch;text-align:end;font-variant-numeric:tabular-nums}
+.reading-position progress{appearance:none;display:block;width:100%;height:2px;border:0;background:var(--rule);color:var(--focus)}
+.reading-position progress::-webkit-progress-bar{background:var(--rule)}
+.reading-position progress::-webkit-progress-value{background:var(--focus)}
+.reading-position progress::-moz-progress-bar{background:var(--focus)}
+.cover img,.media-frame img{outline:1px solid var(--image-outline);outline-offset:-1px}
+@media(hover:hover){
+ .news-card:has(.card-link:hover){border-color:var(--muted)}
+ .card-link:hover .card-read{text-decoration:underline;text-underline-offset:4px}
+ .icon-button:hover,.filter-group button[aria-pressed="false"]:hover,.view-switch button[aria-pressed="false"]:hover{background:var(--surface)}
+ .site-nav a:hover{text-decoration:none;color:var(--focus)}
+}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+ .card-link:hover .cover img{transform:scale(1.025)}
+}
+@media(prefers-reduced-motion:no-preference){
+ .icon-button,.retry-button,.reset-button{transition:scale 150ms ease-out}
+ .icon-button:not(:disabled):active,.retry-button:not(:disabled):active,.reset-button:not(:disabled):active{scale:.96}
+}
+@media(max-width:1050px){
+ .brand-sub{display:none}
+ .news-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+ .news-card,.news-card.is-wide,.news-grid.is-filtered .is-featured{grid-column:span 1}
+ .news-card.is-featured{grid-column:span 1}
+ .is-featured .cover{aspect-ratio:16/9}
+ .is-featured .card-title{font-size:1.4375rem}
+ .edition-line h1{font-size:1.6875rem}
+}
+@media(max-width:680px){
+ :root{--gutter:20px;--reader-bar:58px}
+ .site-header{min-height:0;gap:22px;flex-wrap:wrap;padding:26px 0 15px}
+ .brand{gap:16px}
+ .brand-wordmark{gap:5px}
+ .brand-name{font-size:3.25rem}
+ .brand-mark{width:35px;height:35px}
+ .brand-sub{display:block;padding-inline-start:16px;font-size:0.8125rem}
+ .brand-sub>span{font-size:0.6875rem}
+ .header-side{width:100%;justify-content:space-between;gap:16px}
+ .site-nav{gap:28px;flex-wrap:wrap;font-size:0.8125rem}
+ .icon-button{width:40px;height:40px}
+ .edition-line{min-height:0;gap:16px;padding-block:22px}
+ .edition-line h1{font-size:1.5625rem;margin-top:10px}
+ .edition-line .edition-description{font-size:0.8125rem;max-width:24em;line-height:1.8}
+ .edition-meta{display:none}
+ .edition-line .edition-kicker{font-size:0.625rem}
+ .discovery-top{flex-wrap:wrap;gap:16px;padding-block:14px 16px}
+ .filter-group{gap:4px}
+ .filter-group button{padding-inline:13px;font-size:0.8125rem}
+ .search-field{width:100%}
+ .search-field input{font-size:1rem}
+ .discovery-bottom{gap:8px;align-items:center}
+ .discovery-bottom p{font-size:0.6875rem}
+ .view-switch button{font-size:0.6875rem;padding-inline:8px;gap:5px}
+ .view-switch svg{width:13px;height:13px}
+ .news-grid{grid-template-columns:minmax(0,1fr);gap:22px}
+ .news-card,.news-card.is-wide,.news-card.is-featured,.news-grid.is-filtered .is-featured{grid-column:auto;grid-row:auto}
+ .cover,.is-featured .cover,.is-wide .cover{aspect-ratio:16/9;min-height:0;flex:none}
+ .card-body{padding:20px;gap:12px}
+ .card-title,.is-featured .card-title,.news-grid.is-filtered .is-featured .card-title{font-size:1.375rem;line-height:1.6}
+ .card-dek{font-size:0.875rem}
+ .card-meta{font-size:0.75rem}
+ .card--text .type-cover{min-height:130px;padding:22px 20px 12px}
+ .card--text .cover-word{font-size:2.875rem}
+ .card-end{padding-top:12px}
+ .news-grid[data-layout="list"] .card-link{gap:16px;padding:22px 0;align-items:flex-start}
+ .news-grid[data-layout="list"] .cover,.news-grid[data-layout="list"] .type-cover{display:none}
+ .news-grid[data-layout="list"] .card-title{font-size:1.1875rem}
+ .site-main{padding-bottom:36px}
+ .site-footer{align-items:flex-start;flex-direction:column;gap:12px;padding-top:22px;font-size:0.75rem}
+ .footer-links{gap:26px}
+ .article-reader{padding-top:23px}
+ .article-back{margin-bottom:16px}
+ .article-header h1{font-size:1.8125rem;line-height:1.5}
+ .article-dek{font-size:1rem;line-height:1.9}
+ .reader-tabs{gap:4px;margin-bottom:24px;padding:7px 0}
+ .reader-tabs a{font-size:0.875rem;padding:6px 10px}
+ .reader-tabs .reader-source{font-size:0.8125rem!important;padding-inline-end:0}
+ .reader-panel{margin-bottom:28px}
+ .prose{font-size:1.0625rem;line-height:1.95}
+ .prose h1,.prose h2,.prose h3{font-size:1.4375rem;line-height:1.6}
+ .prose blockquote{padding:15px}
+ .sheet-bar{gap:10px}
+ .sheet-bar a{font-size:0.8125rem}
+ .sheet-brand{font-size:0.75rem}
+ .sheet-scroll .article-reader{padding-top:25px}
+ .sheet-status{margin-top:32px}
+ .about-copy{margin-top:32px}
+}
+@media(max-width:360px){
+ :root{--gutter:16px}
+ .brand-sub>span{font-size:0.6875rem;max-width:6em}
+ .site-nav{gap:22px}
+ .sheet-brand{display:none}
+ .reader-tabs a{padding-inline:8px;font-size:0.8125rem}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
+}
+@media print{
+ .site-header,.site-footer,.reader-tabs,.article-back,.sheet-bar{display:none!important}
+ .reader-panel[hidden]{display:block!important}
+ .site-main,.article-reader{width:100%;max-width:none}
+ .reader-sheet[open]{position:static;height:auto;overflow:visible}
+ .sheet-scroll{height:auto;overflow:visible;padding:0}
+}
+
+/* Source media remains part of the Chinese reading flow, not just the original tab. */
+.rewrite-source-media{margin:28px 0}
+.prose .source-media-heading{font-size:1.25rem;line-height:1.6;margin:0 0 12px}
+.prose .rewrite-source-media .completeness-note{font-size:0.875rem;line-height:1.8}
+.prose .media-error{font-size:0.875rem;line-height:1.8;margin:0}
+</style>
+<script defer src="https://umami.qiaomu.ai/script.js" data-website-id="31e0098c-6852-46b6-899c-11eed5ed16e1" data-domains="xnews.qiaomu.ai" data-exclude-search="true" data-exclude-hash="true"></script>
+</head>
+<body>
+<a class="skip" href="#main">跳到正文</a>
+<header class="site-header">
+  <a class="brand" href="/" aria-label="X News 海外发现首页"><span class="brand-wordmark" aria-hidden="true"><svg class="brand-mark" viewBox="0 0 44 44" fill="currentColor"><path d="M2 0h11l29 44H31zM32 0h10L26 18l-5-7zM17 26l5 7-10 11H2z"/></svg><span class="brand-name">News<span class="brand-period">.</span></span></span><span class="brand-sub">海外发现<span>英文原作 · 中文视角</span></span></a>
+  <div class="header-side"><nav class="site-nav" aria-label="主导航"><a href="/">精选</a><a class="archive-nav" href="/archive">往期</a><a href="/feed.xml" aria-label="订阅全文 RSS">订阅 RSS <span aria-hidden="true">↗</span></a></nav><button type="button" class="icon-button" id="theme-btn" aria-label="切换为暗色主题" aria-pressed="false"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16Z" fill="currentColor" stroke="none"/></svg></button></div>
+</header>
+<main class="site-main" id="main">
+<article class="article-reader" data-article-id="openai-performance-factory">
+<a class="article-back" href="/">← 返回选刊</a>
+<header class="article-header"><p class="article-kicker">Okay Zed and Cyrus Forbes / 文章</p><h1>三个多月里，回归工作流跟了1700多起调查，定位了600多起根因</h1><p class="article-dek">OpenAI的Performance Factory用云端Codex调查性能回退并起草修复，合并与否仍由工程师决定。人工抽查100条根因建议，70%被评为准确。</p><div class="article-meta"><time datetime="2026-11-20">本站收录 2026年11月20日 · 周五</time><span>原文发布 2026年11月19日 · 周四</span><span>原作者：Okay Zed and Cyrus Forbes</span><span>中文改写：<a href="/about">X News · 乔木</a></span><span>OpenAI · Codex · Performance Factory · agents · engineering</span></div></header>
+<nav class="reader-tabs" aria-label="文章版本与来源"><div data-tabs><a href="#rewrite" id="tab-rewrite" data-view="rewrite">乔木改写</a><a href="#original" id="tab-original" data-view="original">原文</a></div><a class="reader-source" href="https://openai.com/index/how-openai-performance-factory-keeps-chatgpt-fast/" target="_blank" rel="noopener noreferrer">原文链接 ↗</a><div class="reading-position" hidden><progress max="100" value="0" aria-label="当前版本阅读进度"></progress><span data-reading-percent aria-hidden="true">0%</span></div></nav>
+<section class="reader-panel" id="rewrite" data-reader-panel="rewrite" aria-label="乔木改写"><h2 class="section-heading">乔木改写</h2><div class="prose"><p>三个多月里，OpenAI的回归工作流跟了<strong>1700</strong>多起性能调查，把其中<strong>600</strong>多起定位到了根因。按这篇2026年11月19日的工程博客来算，大约每天<strong>17</strong>起自动调查。</p>
+<p>写这篇文章的是OpenAI技术员工Okay Zed和Cyrus Forbes。他们把这套系统叫做Performance Factory。它在云端运行，用Codex和公司的模型去查找、处理性能回退。工作流会在告警触发后打开任务，由智能体调查并起草修复，再交给工程师审阅；部署之后，另一个智能体再检查性能有没有回到基线。</p>
+<p>查到根因是一回事，把修复做对是另一回事。官方写，真正难的是后面这一步。</p>
+<p><strong>从手动查日志，到告警直接在云端启动Codex</strong></p>
+<p>团队把更多性能工作交给Codex之后，工作方式一步步发生了变化。两位作者写，其他服务团队如果要在别的领域采用智能体工作流，也可以参考这个过程。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_evolution"><div class="media-frame"><img src="https://images.ctfassets.net/kftzwdyauwt9/581rKVIvguLraKii21zIgr/83deca5cdcec639b656a9a5ec1954f4b/performance-factory-evolution-light.png" data-original-src="https://images.ctfassets.net/kftzwdyauwt9/581rKVIvguLraKii21zIgr/83deca5cdcec639b656a9a5ec1954f4b/performance-factory-evolution-light.png" alt="The evolution of performance engineering: manual work, reusable tools, engineers working with Codex, engineers dispatching tasks, systems dispatching tasks, and a factory of agents coordinating automated workflows." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://openai.com/index/how-openai-performance-factory-keeps-chatgpt-fast/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<p>在Codex出现之前，工程师要自己看指标和日志，对比追踪，调试正在跑的机器，并读代码来查一次变慢。同样的问题如果反复出现，比如ChatGPT首个token延迟回退，他们就会做更专门的工具。时间一长，性能工具积累到了<strong>30</strong>多种。</p>
+<p>有了Codex当搭档之后，工程师可以问「为什么这次变慢了」，即使对系统不熟，也可以一起查。Codex能搜大型代码库，找相关指标和追踪，顺着服务之间的调用往下走，并做相应的性能分析。不过，调查过程仍要人来把握：该用哪些性能工具、下一步往哪引，还是工程师在定。</p>
+<p>为了再往前走一步，他们把性能团队的调查过程写成一个共享技能，叫做<code>perf-forensics</code>。它告诉Codex有哪些工具、什么时候该用，以及遇到变慢该从哪些角度下手：变慢是从什么时候开始的，影响到了哪些请求，部署或配置变更能不能解释这件事。</p>
+<p>他们用过去的回退做评测，反复改这个技能。对关注的那些回退类型，比如ChatGPT延迟和可用性下降，已经可以只把告警交给Codex，在一轮里拿到诊断，不必逐步人肉带路。</p>
+<p>再往后，工程师开始觉得自己像告警和Codex之间的传话人：告警一来，就把内容连同对应技能贴进Codex，再把结果贴回Slack。</p>
+<p>于是调查被搬到了云端，告警可以自动启动一轮Codex。Codex会在Slack线程里贴出调查结果，但自动化到这条回复就停了。工程师还得接过诊断、写出修复，并在部署后确认有没有用。告警一多，连判断哪些回退该先看，都要在Slack线程里翻。</p>
+<p>他们因此做了Performance Factory，用来跑端到端的性能工程工作流。系统会跟踪每个进行中的任务下一步需要什么，并在这一步就绪时派出智能体。任务自己保存状态和结论，工作可以在智能体和工程师之间交接，代码评审或部署之后也能接着做。一次回退从调查告警开始，到在生产里确认恢复结束。常见的优化也可以做成定期在各服务上跑的工作流。一个工作流如果发现了优化机会，还可以在另一个工作流里打开任务，去测试并实现它。</p>
+<p><strong>任务服务、调度循环、云端Codex，以及会把智能体叫醒的订阅</strong></p>
+<p>Performance Factory有四个部分：可配置工作流的任务跟踪、把就绪工作分给智能体的调度循环、在云端运行Codex的API，以及在情况变化时叫醒智能体的订阅，比如GitHub上出现了评审意见，或一次部署已经完成。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_architecture"><div class="media-frame"><img src="https://images.ctfassets.net/kftzwdyauwt9/4GVsirng1kgJ1GzSsQ9Iof/f21a0b8682d456132be1ef8e1b9ce0ed/performance-factory-orchestrator-architecture-light.png" data-original-src="https://images.ctfassets.net/kftzwdyauwt9/4GVsirng1kgJ1GzSsQ9Iof/f21a0b8682d456132be1ef8e1b9ce0ed/performance-factory-orchestrator-architecture-light.png" alt="Performance Factory orchestration workflow: alerts, engineers, and other agents create tasks; the task service sends ready tasks to a dispatch loop, which starts Codex turns in the cloud. Agents record progress, while subscriptions wake waiting tasks after PR comments or deployments." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://openai.com/index/how-openai-performance-factory-keeps-chatgpt-fast/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<p>任务服务里，工程师用配置文件和Markdown提示词定义工作流。配置列出任务可能经过的状态、允许的转换，以及哪些步骤需要工程师。各个步骤该做什么，则写在分开的提示词里。一个代码修改任务里，通常会有配置文件，再配上实现和评审用的Markdown提示。</p>
+<p>所有工作流都可以在界面里看到。工程师能看哪些任务还开着，跟上进度，也可以把任务交给更熟悉情况、或更能接下一步的同事。</p>
+<p>调度循环会定期检查哪些任务已经可以进入下一步，然后按当前状态的说明启动一轮Codex。智能体把进展写回任务，如果这一步做完了，就把任务推到下一个状态。</p>
+<p>任务一旦分出去，智能体需要一个能工作的环境，而且要能用上工程师常用的那些工具。他们做了一个内部API，在云端程序化地启动Codex轮次。这个轮次跑在公司网络内部的环境里，能够访问代码仓库，以及指标、日志、追踪、CPU画像和内存快照等可观测工具。</p>
+<p>智能体以服务身份运行，这样可以限制权限，也能分清哪些动作来自性能智能体。把工作放到云端，就可以并行跑调查，不必等某位工程师的笔记本开着，也不必手动管理一台台云开发机。</p>
+<p>有些工作必须等人，或等一次部署；这段时间里，智能体不必一直挂着。任务可以订阅事件，比如拉取请求上的评审意见，或失败的持续集成检查。事件一到，任务重新变为就绪，调度循环再派智能体接着做。</p>
+<p><strong>回归工作流：从告警到确认恢复</strong></p>
+<p>他们在Performance Factory里做的第一个工作流，就是查找、定位并处理回退，名字叫做Regression Workflow。一次性能回退会经过「需要调查」「已定位根因」「已提出修复」「已解决」这几个阶段。自动化工作流按同样的阶段往前推。</p>
+<p>配置好的性能告警一触发，工作流就打开一个任务。任务把状态和关键结论记在任何一个智能体的上下文之外，这样其他智能体或工程师都能接手前。工程师可以在Slack或回归工作流界面里跟随进度、补充背景、审阅拟议的改动。修复部署之后，智能体会检查性能是否回到原来的状态，再决定要不要把任务标成已解决。</p>
+<p>原文页上还有一张可交互的回归工作流示意图，按检测、查找根因、提出修复、工程师审阅并部署、验证恢复、已解决这六个阶段展开。这次没能把这张组合示意图存成一张单独的静态图，步骤本身已写在正文里，图可以在原文页查看。</p>
+<p>定位根因是第一件大事。智能体先弄清哪些指标变差了、是从什么时候开始变的，以及影响到了哪些服务请求。<code>perf-forensics</code>技能给Codex提供性能工程师在用的工具，以及处理这些问题的剧本。</p>
+<p>告警往往是在指标越过阈值时才响，回退却可能早几个小时就开始了。智能体会往回看数据，找出指标第一次变差的时间，再比较不同组请求：是同类请求真的变慢了，还是本来就慢的请求变多了。这两种情况，指向的原因不一样。</p>
+<p>知道该在何时何地查看之后，智能体会检查部署和功能开关变化，再去读相关代码。它会核对这次变更何时真正到达了受影响的请求，并用日志或追踪来检验，这些代码能不能解释看到的现象。</p>
+<p><strong>对抗审查会把站不住的诊断打回去</strong></p>
+<p>早期，智能体有时会停在第一个说得通的解释上，而其中一些诊断后来被证明是错的。为了抓住这类错误，他们加了一道对抗审查：另开一轮Codex，专门试图推翻已提出的诊断。审查者会复核假设，并检验反事实。如果一次放量造成了变慢，那么没被放量覆盖的同类请求是否仍然健康？如果把嫌疑变更回滚了，受影响的指标有没有恢复？</p>
+<p>有一次调查里，智能体把失败的ChatGPT对话追到了图片下载出错，并标记原因已找到。负责审查的Codex注意到，负责定位文件的内部服务其实已经恢复，图片请求却还在失败。这个诊断解释不了仍在持续的失败，于是审查方重新打开调查，并记下还需要搞清楚的事情。</p>
+<p>他们把更大的工作拆成更聚焦的Codex轮次，效果不错。在一次对<strong>100</strong>条根因建议的人工审阅里，**70%**被评为准确，**30%**还需要再加工，或者没有把因果关系完全立住。在回归工作流里，调查回退、质疑诊断、提出修复，是由不同轮次分开做的，用互相制约来提高准确率。</p>
+<p>诊断通过对抗审查后，工作流会让Codex实现修复并打开拉取请求。工程师审阅这个请求，再决定是否合并。每个任务都有一份自动生成的报告，汇总回退、影响、根因和拟议修复，并配上指标时间序列、CPU火焰图和追踪，方便工程师快速查看证据。工程师可以直接改这个请求，也可以按诊断自己写修复。如果他们在请求上留言，工作流会叫醒智能体去处理这些意见。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_task_report"><div class="media-frame"><img src="https://images.ctfassets.net/kftzwdyauwt9/5w8KpwlFR3tNfJbAStImkG/ee5f1df65a302cb09dde0a7d52d09138/performance-factory-worker-startup-report.png" data-original-src="https://images.ctfassets.net/kftzwdyauwt9/5w8KpwlFR3tNfJbAStImkG/ee5f1df65a302cb09dde0a7d52d09138/performance-factory-worker-startup-report.png" alt="Performance Factory report showing worker startup time more than doubling, with impact and recovery, root cause, and proposed fix." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://openai.com/index/how-openai-performance-factory-keeps-chatgpt-fast/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<p>工程师把修复部署之后，工作流会叫醒智能体，检查性能有没有回到此前的基线。如果恢复了，任务就被标成已解决。如果只恢复了一部分，智能体会结束原来的回退，再为剩下的变慢打开一个新任务，因为原因可能已经不同。如果没有任何改善，智能体会记下发生了什么，并把回退送回调查。</p>
+<p>把修复做对，比找到原因更难。他们见过智能体提出的改动比需要的更复杂，或引入了新问题。和根因步骤类似，他们也对每个拟议修复加了对抗审查，检查它是否针对根因，并帮助发现缺陷或意外后果。有些修复还涉及更高层的架构决定。比如加缓存可能让性能变好，但会引入过期数据。这类改动更需要熟悉该服务的工程师来权衡取舍。</p>
+<p>他们正在用这些案例做评估和改进循环：比较智能体提出的修复和工程师最终合并的改动，看提案短在哪里，再据此做评测、改进工作流。他们也在做合成性能测试，让智能体在请工程师审阅之前，就能测量拟议修复并改一版。他们还在探索，能否用其他智能体评审工具识别低风险改动，并在将来让这些修复在没有人介入的情况下发出去。这仍是正在探索的方向，不是已经上线的做法。</p>
+<p><strong>工程师的注意力要留在决策上，智能体自己也要被监控</strong></p>
+<p>Codex调查的原始输出，可能是一面很难读的字墙。要看懂智能体在主张什么，还得自己去找图，核对数据是否撑得住。他们希望工程师把注意力花在决策上，而不是花在复原智能体刚做过的工作上。</p>
+<p>智能体能调查的回退，比团队来得及读完的更多。第一版界面里堆满了发现，仍要有人决定哪些信息重要。同一次回退，也可能在告警、监控和频道里变成好几起事件。现在的工作流会把相关事件连起来，按团队关心的指标分组，并按估计影响排序。工程师可以专心补充背景、权衡取舍，以及决定什么该发布。</p>
+<p>更新调查技能或升级模型，可能让智能体在一些案例上诊断得更好，在另一些案例上变得更差，所以改动前需要先测。他们把两件事分开评估：智能体调查得怎么样，以及它的摘要对工程师是否有用。</p>
+<p>调查评估是拿过去的生产事故做回测。这些事故被做成可重复跑的测试集。Codex智能体尝试调查并处理事故，再拿它的行为和当年的实际处理记录对比。每个案例都从新的调查智能体和原始信号开始，并去掉可能直接泄露答案的细节。</p>
+<p>历史测试要小心。指标和追踪会过期，恢复之后才收集到的证据，也可能把原因直接暴露出来。测试只有在清楚调查者当时能看到什么证据时才有用。智能体可以在设定限度内检查代码、查询生产遥测，但不能使用以前调查留下的记忆，不能读事故报告，也不能看此前运行的结果。他们事后还会检查记录，看有没有可能把测试作废的信息。</p>
+<p>评分包括问题何时开始、影响有多大、哪些请求被影响到，以及智能体如何用证据排列可能原因，并说明还有哪些不确定。智能体可能把时间点找对，却把原因归到错误的一次部署上，所以这两项是分开打分的。</p>
+<p>对交给工程师的摘要，他们用已保存任务的快照来评估。这类回测特别合适，因为做摘要并不依赖会过期的外部指标或追踪。另一套评分会检查：一个不熟悉该系统的工程师，能否看懂发生了什么、为什么重要，有用的图有没有留下，以及下一步建议有没有被证据撑住。</p>
+<p>智能体本身也要被监控。性能分析器坏了，或少了某个权限，都可能让它无法验证变慢的原因。这类故障在最终报告里不容易看出来，所以他们每天会跑一个智能体，翻最近运行的消息和日志，查找工具失败和访问错误。</p>
+<p>他们也用Performance Factory来做自修复。同一种工具错误如果挡住了好几起调查，智能体就会开一个任务来修它。原因清楚时，智能体会提出修复，由工程师审阅并决定是否合并。这类改动合并之后，他们还会用评测检查，智能体是否已经迈过了此前卡住的那一步。</p>
+<p><strong>下一步想在告警响起之前就发现变慢</strong></p>
+<p>回归工作流只是这种「智能体工厂」模式的一个例子：任务按明确的状态往前走，智能体在下一步就绪时推进，单独的审查者质疑结论，需要判断时再由工程师接手。其他工作流可以复用同一套机制，只换状态、说明和事件。</p>
+<p>Performance Factory还可以在工作流之间协调，让一个工作流里的智能体为另一个工作流创建任务。</p>
+<p>原文在这段旁边放了一段约19秒的演示视频，说明智能体如何在不同工作流之间创建任务。这段视频嵌在原文页上，这次没有单独转存。</p>
+<p>目前，回归工作流是在告警响起后才启动。他们正在做更主动的办法，让系统在没有告警时也能发现变慢或优化机会。设想是：智能体利用已经在收集的细粒度性能数据，对比不同版本的CPU和内存画像、堆转储和请求追踪，也许会注意到某类请求的CPU有一点升高，然后在回归工作流里打开任务，去追原因、实现修复，并提交给工程师审阅。</p>
+<p>对已经知道该看什么的情况，他们想把已知信号写成更多工作流。官方举了服务规格调整这个技能为例，它帮助智能体发现自动扩缩容设置让副本跑得比服务需要的更多。一旦能识别这类模式，他们希望在所有服务上定期跑相应的工作流。Performance Factory想做到的是：工程师从一次变慢里学到的东西，几个月后在另一个服务里，也能影响下一次调查和修复。</p>
+<p>博客结尾写，下一次你觉得ChatGPT变慢，很有可能Performance Factory已经在查原因了。今天的瓶颈，也许是在等工程师审阅并合并修复。他们已经在探索智能体能否自己做这一步。这是官方对下一步的设想，不是对读者的操作建议。对要做类似系统的团队，这篇里比较能直接拿走的，是把调查、对抗审查和修复拆开，先用历史事故做回测，并且不要把自动调查理解成自动上线。</p>
+</div></section>
+<section class="reader-panel" id="original" data-reader-panel="original" aria-label="原文">
+<h2 class="section-heading">原文</h2><h3 class="original-title">How OpenAI’s Performance Factory keeps ChatGPT fast</h3>
+<div class="original-media">
+<figure class="media-figure" data-media-id="media_evolution"><div class="media-frame"><img src="https://images.ctfassets.net/kftzwdyauwt9/581rKVIvguLraKii21zIgr/83deca5cdcec639b656a9a5ec1954f4b/performance-factory-evolution-light.png" data-original-src="https://images.ctfassets.net/kftzwdyauwt9/581rKVIvguLraKii21zIgr/83deca5cdcec639b656a9a5ec1954f4b/performance-factory-evolution-light.png" alt="The evolution of performance engineering: manual work, reusable tools, engineers working with Codex, engineers dispatching tasks, systems dispatching tasks, and a factory of agents coordinating automated workflows." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://openai.com/index/how-openai-performance-factory-keeps-chatgpt-fast/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_architecture"><div class="media-frame"><img src="https://images.ctfassets.net/kftzwdyauwt9/4GVsirng1kgJ1GzSsQ9Iof/f21a0b8682d456132be1ef8e1b9ce0ed/performance-factory-orchestrator-architecture-light.png" data-original-src="https://images.ctfassets.net/kftzwdyauwt9/4GVsirng1kgJ1GzSsQ9Iof/f21a0b8682d456132be1ef8e1b9ce0ed/performance-factory-orchestrator-architecture-light.png" alt="Performance Factory orchestration workflow: alerts, engineers, and other agents create tasks; the task service sends ready tasks to a dispatch loop, which starts Codex turns in the cloud. Agents record progress, while subscriptions wake waiting tasks after PR comments or deployments." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://openai.com/index/how-openai-performance-factory-keeps-chatgpt-fast/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_task_report"><div class="media-frame"><img src="https://images.ctfassets.net/kftzwdyauwt9/5w8KpwlFR3tNfJbAStImkG/ee5f1df65a302cb09dde0a7d52d09138/performance-factory-worker-startup-report.png" data-original-src="https://images.ctfassets.net/kftzwdyauwt9/5w8KpwlFR3tNfJbAStImkG/ee5f1df65a302cb09dde0a7d52d09138/performance-factory-worker-startup-report.png" alt="Performance Factory report showing worker startup time more than doubling, with impact and recovery, root cause, and proposed fix." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://openai.com/index/how-openai-performance-factory-keeps-chatgpt-fast/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div>
+<div class="prose" lang="en"><h1>How OpenAI’s Performance Factory keeps ChatGPT fast</h1>
+<p>November 19, 2026</p>
+<p>Our Codex-powered system automates finding and fixing performance issues.</p>
+<p>By Okay Zed and Cyrus Forbes, Members of Technical Staff</p>
+<p>The staggering pace of agentic development has made traditional approaches to performance engineering unsustainable. To keep up, we built the Performance Factory, an autonomous system that uses the full capabilities of Codex and our models to find and fix regressions at an unprecedented speed. The Performance Factory, which runs in the cloud and automates investigating and resolving performance problems, enables us to keep pace with the ambition of our roadmap.</p>
+<p>In the Performance Factory, our engineers define workflows for recurring jobs and write instructions for the Codex agents that carry them out. In particular, the Regression Workflow opens a task when a performance alert fires. An agent investigates the slowdown, records its findings in the task, and proposes a fix for an engineer to review. After deployment, another agent picks up the same task to check whether performance has returned to baseline. From investigating to authoring the fix to verifying mitigation, this first workflow in the Performance Factory has automated the entire process of fixing regressions. In just over three months, the Regression Workflow tracked more than 1,700 investigations and root caused over 600 cases. That’s 17 automated investigations every day.</p>
+<p>Here, we’ll share how our use of Codex evolved into what’s now the Performance Factory, walk through our first running workflow, and share early lessons from building and running agent workflows in production.</p>
+<h2>The path from manual investigations to automated workflows</h2>
+<p>As we used Codex for more of our performance work, we noticed a progression in how our team worked. We hope other service teams can learn from our process as they adopt agentic workflows in other domains.</p>
+<p><img alt="The evolution of performance engineering: manual work, reusable tools, engineers working with Codex, engineers dispatching tasks, systems dispatching tasks, and a factory of agents coordinating automated workflows." decoding="async" loading="lazy" referrerpolicy="no-referrer" src="https://images.ctfassets.net/kftzwdyauwt9/581rKVIvguLraKii21zIgr/83deca5cdcec639b656a9a5ec1954f4b/performance-factory-evolution-light.png"></p>
+<p>Software work evolves from manual labor to partnering with machines to agent factories.</p>
+<ol>
+<li>
+<p>Pre-Codex. Before Codex, engineers manually examined metrics and logs, compared traces, debugged live machines, and read code to investigate a slowdown. This work was time consuming, and knowing where to look often required deep knowledge of the service. Relevant signals were easy to miss. When we encountered the same kinds of problems repeatedly—like regressions in ChatGPT’s first token latency—we built advanced tools, like CPU and allocation profilers, to make those investigations easier. Over time, we accumulated more than 30 performance tools.</p>
+</li>
+<li>
+<p>Codex as a partner. Once we had Codex as a partner, engineers could ask, “Why did this get slower?” and work with Codex to investigate, even in an unfamiliar system. Codex could search large codebases, find relevant metrics and traces, follow interactions across services, and do appropriate profiling to piece together what had happened. But engineers still had to steer the process, knowing which performance tools to use and how to guide the investigation. Difficult investigations were more debuggable for more people, with less expertise and time required.</p>
+</li>
+<li>
+<p>Reusable skills. To automate further, we captured our performance team’s investigation process in a shared skill called <code>perf-forensics</code>. It tells Codex which tools are available, when to use them, and how to work through a slowdown so Codex can try to resolve the problem from a few angles:</p>
+</li>
+</ol>
+<ul>
+<li>Find when the slowdown began</li>
+<li>Identify the affected requests</li>
+<li>Investigate whether deployments or configuration changes could explain it</li>
+</ul>
+<p>We tested and refined the <code>perf-forensics</code> skill using evals based on past regressions. For the types of regressions we focused on (for example, ChatGPT latency and availability drops), we could now give Codex an alert and get back a diagnosis in a single run, without guiding it through each step.</p>
+<ol start="4">
+<li>
+<p>The human proxy. As we added and refined perf-related Codex skills like <code>perf-forensics</code>, we started to feel like a proxy between our alerts and Codex. An alert would fire, and an engineer would simply copy and paste it into Codex with the right skill, then paste the findings back into Slack.</p>
+</li>
+<li>
+<p>Automated investigations. Next, we moved investigations to the cloud so an alert could start a Codex session automatically. Codex investigated the slowdown and posted its findings in the Slack thread, but the automation ended with that reply. An engineer still had to pick up the diagnosis, develop a fix, and check whether it worked after deployment. As alerts accumulated, even figuring out which regressions needed attention meant sifting through Slack threads.</p>
+</li>
+<li>
+<p>The factory. We built the Performance Factory to run end-to-end agentic performance engineering workflows. It tracks what each active task needs next and assigns an agent when that step is ready. Each task keeps its state and findings, so work can pass between agents and engineers and resume after a code review or deployment. For a regression, the work starts with investigating an alert and ends with verifying recovery in production. We can turn common optimizations into workflows that run regularly across our services. A workflow that spots a potential optimization can open a task in another workflow to test and implement it.</p>
+</li>
+</ol>
+<h2>The Performance Factory system’s four parts</h2>
+<p>The Performance Factory is made up of four components: a task tracker with configurable workflows, a dispatch loop that assigns ready work to agents, an API that runs Codex in the cloud, and subscriptions that wake agents when something changes (such as a GitHub review comment posting or a deployment completing).</p>
+<p><img alt="Performance Factory orchestration workflow: alerts, engineers, and other agents create tasks; the task service sends ready tasks to a dispatch loop, which starts Codex turns in the cloud. Agents record progress, while subscriptions wake waiting tasks after PR comments or deployments." decoding="async" loading="lazy" referrerpolicy="no-referrer" src="https://images.ctfassets.net/kftzwdyauwt9/4GVsirng1kgJ1GzSsQ9Iof/f21a0b8682d456132be1ef8e1b9ce0ed/performance-factory-orchestrator-architecture-light.png"></p>
+<p>Performance Factory consists of a task service, dispatch loop, cloud execution, and subscriptions.</p>
+<h3>Task service with configurable workflows</h3>
+<p>The task service is where engineers define workflows by adding configuration files and prompts for the agents to follow, written in Markdown. The configuration lists the states a task can move through, the allowed transitions, and which steps need an engineer. Separate prompts tell agents what to do at each step.</p>
+<h4></h4>
+<pre><code>code-change/
+├── config.toml
+└── work/
+    ├── implementing.md
+    └── reviewing.md
+</code></pre>
+<p>A code change task contains a configuration file, along with Markdown prompts for implementing and reviewing.</p>
+<p>Each piece of work becomes a task in a workflow, and all workflows are visible in a UI. Engineers can see what’s open, follow progress, and share a task with a teammate who might have more context or be able to help with the next step.</p>
+<h3>Dispatch loop that assigns work</h3>
+<p>A dispatch loop periodically checks which tasks are ready for the next step. It assigns an agent to each task by starting a Codex turn with the instructions for the task’s current state. The agent records its progress on the task and moves it to the next state if it completes the step.</p>
+<h3>Codex in the cloud</h3>
+<p>Once a task is assigned, the agent needs a place to do the work, with access to the same tools an engineer would use. We built an internal API to programmatically invoke a Codex turn in the cloud. The Codex turn runs on an environment inside our network, with access to our code repositories and the observability tools our engineers use, such as metrics, logs, traces, CPU profiles, and memory snapshots.</p>
+<p>The agent runs under a service identity, so we can scope its permissions and see which actions came from our performance agents. Moving agentic work to the cloud lets us run work in parallel without relying on engineers’ laptops being open or manually managing individual cloud development boxes.</p>
+<h3>Subscriptions that wake the agent when something changes</h3>
+<p>Some work has to wait for a person or a deployment; an agent shouldn’t have to keep running in the meantime. When a task needs to wait, it can subscribe to events like review comments or failed CI checks on a GitHub pull request to get notified when it’s time to pick the work back up. When an incoming event matches the subscription, the task becomes ready again and the dispatch loop can then assign an agent to continue the work.</p>
+<h2>The first workflow: from alert to recovery</h2>
+<p>Finding, root causing, and solving regressions is the first workflow we built inside the Performance Factory. We call it the Regression Workflow. A performance regression moves through several stages: needs investigation, root caused, fix proposed, and resolved, so we built the automated workflow to reflect and move a task through those same stages.</p>
+<p>When one of its configured performance alerts fires, the Regression Workflow opens a task that agents pick up and move across these stages. The task records its status and key findings outside of any one agent’s context so that other agents or engineers can pick up the work. Engineers can follow the work in Slack or the Regression Workflow UI, add context, and review proposed changes. After a fix is deployed, an agent checks whether the performance has recovered to its original state before resolving the task.</p>
+<h3>Performance Factory regression workflow</h3>
+<p>The original page includes an interactive Regression Workflow diagram. Its steps are: (1) Detected, by the system; (2) Find root cause, by an agent; (3) Propose fix, by an agent; (4) Review and deploy, by an engineer; (5) Verify recovery, by an agent; (6) Resolved. If the system is still regressed after verification, the task goes back to investigation.</p>
+<p>The Regression Workflow’s steps include finding the root cause, proposing a fix, reviewing and deploying, and verifying recovery.</p>
+<h3>Agents find the root cause</h3>
+<p>Finding the root cause (or causes) is the first major step in the workflow. The agent starts by figuring out which metrics got worse, when they started to change, and which service requests were affected. The <code>perf-forensics</code> skill gives Codex access to the tools our performance engineers use and a playbook for working through those questions.</p>
+<p>An alert fires when a metric crosses a threshold, but the regression may have started hours earlier. The agent looks back through the data to find when the metric first got worse. It then compares groups of requests: did similar requests actually get slower, or were we serving more requests that were already slow? Those findings point to different causes.</p>
+<p>Once it knows when and where to look, the agent examines deployments and feature flag changes, then reads the relevant code. It checks when a change actually reached the affected requests and uses logs or traces to test whether the code could explain what happened.</p>
+<h3>Adversarial review strengthens the diagnosis</h3>
+<p>Early on, agents sometimes stopped at the first plausible explanation they found, and some of those diagnoses turned out to be wrong. To catch these mistakes, we added an adversarial review: a separate Codex session that tries to disprove the proposed diagnosis. The reviewer rechecks the assumptions and tests counterfactuals. If a rollout caused the slowdown, did similar requests that weren’t exposed stay healthy? If the suspected change was rolled back, did the affected metric recover?</p>
+<p>In one investigation, an agent traced failing ChatGPT conversations to errors in image downloads and marked the cause as found. The Codex reviewer noticed that the internal service responsible for locating files had already recovered while image requests were still failing. The diagnosis did not explain the continuing failures, so the AI reviewer reopened the investigation and recorded what still needed to be established.</p>
+<p>We’ve had success breaking larger jobs into focused Codex turns. In a manual review of 100 root cause suggestions, we graded 70% as accurate, with 30% needing further refinement or not fully establishing causality. In the Regression Workflow, different turns investigate regressions, challenge diagnoses, and propose fixes to increase accuracy numbers through checks and balances.</p>
+<h3>Fixing the regression is the hard part</h3>
+<p>Once the diagnosis passes adversarial review, the workflow asks Codex to implement a fix and open a pull request. An engineer reviews the PR and decides whether to merge it. We’ve put a significant amount of work into making this handoff as easy as possible. Each task has a report with an automatically generated summary of the regression, its impact, the root cause, and the proposed fix. We’ve tuned these summaries to be easy to scan, including metrics time series, CPU flame graphs, and traces to help engineers quickly understand the findings and inspect the evidence. Engineers can edit the PR directly or use the diagnosis to write their own fix. If they leave comments on the PR, the workflow wakes an agent to address them.</p>
+<p><img alt="Performance Factory report showing worker startup time more than doubling, with impact and recovery, root cause, and proposed fix." decoding="async" loading="lazy" referrerpolicy="no-referrer" src="https://images.ctfassets.net/kftzwdyauwt9/5w8KpwlFR3tNfJbAStImkG/ee5f1df65a302cb09dde0a7d52d09138/performance-factory-worker-startup-report.png"></p>
+<p>An example task report for a regression shows key details, root cause, and proposed fix.</p>
+<p>After an engineer deploys the fix, the workflow wakes an agent to check whether performance has returned to its earlier baseline. If it has, the agent marks the task as resolved. If performance has only partially recovered, the agent resolves the original regression and opens a new task for the remaining slowdown, which may have a different cause. If there’s no improvement, the agent records what happened and sends the regression back for investigation.</p>
+<p>Getting fixes right has been harder than finding the cause. For example, we’ve seen cases where the agent-proposed changes are more complicated than necessary or introduce new issues. Similar to the root cause step, we added an adversarial review of each proposed fix to check whether they address the root cause and help catch bugs or unintended consequences. Some fixes also require higher level architectural decisions. For example, adding a cache might improve performance but introduce stale data. Changes like these benefit from guidance from an engineer who knows the service and can weigh the tradeoffs.</p>
+<p>We’re building an evaluation and improvement loop using these cases. By comparing the fixes agents propose with the changes engineers ultimately merge, we can better understand where proposals fall short, build evals, and improve the workflow. We’re also working on using synthetic performance tests so agents can measure proposed fixes and revise them before asking an engineer for review. We’re also exploring how agents could use our other agentic review tools to identify low-risk changes and eventually ship those fixes without a human in the loop.</p>
+<h2>What we learned</h2>
+<p>Building and running the Performance Factory has taught us a lot about developing and operating agent workflows in production. Here are some lessons for teams building their own agentic workflows.</p>
+<h3>Protect engineers’ attention</h3>
+<p>The raw output from a Codex investigation can be a wall of text that’s hard to parse. It takes effort to figure out what the agent is claiming and track down the graphs to see whether the data backs it up. We want engineers to spend their attention on decisions rather than reconstructing the agent’s work.</p>
+<p>Agents can investigate more regressions than a team has time to read about. Our first version gave engineers a UI full of findings, but someone still had to decide which information mattered. One regression can also appear as several incidents across alerts, monitors, and channels. The workflow now links related incidents, groups them by the metrics teams care about, and ranks their estimated impact. Engineers can focus on adding context, weighing tradeoffs, and deciding what to ship.</p>
+<h3>Evaluate changes to your agents</h3>
+<p>Updating an investigation skill or upgrading the model can make the agent better at diagnosing some cases and worse at others, so we need to test their impact before updating them. We test two things separately: 1) how well the agent investigates and 2) how useful its summaries are to engineers.</p>
+<h4>Evaluating investigations</h4>
+<p>For investigations, we backtest against past production incidents. We turn those incidents into a suite of test cases we can rerun when we change the skill. A Codex agent attempts to investigate and resolve the incident, and we compare the agent’s behavior to the actual past resolution data. Each case starts with a fresh Codex investigator and the original signal, stripped of details that might give away the answer.</p>
+<p>Historical tests need care. Metrics and traces expire, while evidence collected after recovery can give away the cause. A test is only useful if we understand what evidence the investigator could see. The agent can inspect code and query production telemetry within set limits. It cannot use saved memories (notes from earlier investigations), read the incident writeup, or see results from previous runs. We also inspect its transcript afterward for information that might have spoiled the test.</p>
+<p>We score when the problem began, how large it was, and which requests were affected. We also evaluate how the agent uses evidence to rank possible causes and explain what remains uncertain. An agent can get the timing right and still blame the wrong deployment, so we score those separately.</p>
+<h4>Evaluating agent-to-engineer handoffs</h4>
+<p>We evaluate task summaries using snapshots of saved tasks. These make particularly good backtests because summarization does not depend on external metrics or traces that expire. A separate grader checks whether an engineer unfamiliar with the system can understand what happened and why it matters, whether useful charts were kept, and whether the proposed next step is supported by the evidence.</p>
+<h3>Turn recurring failures into self-repair</h3>
+<p>Lastly, our agents need monitoring just as much as the services they investigate. A broken profiler or a missing permission can keep an agent from verifying what caused a slowdown. Those failures can be hard to spot in the final report, so we run an agent every day to look through messages and logs from recent runs for tool failures and access errors.</p>
+<p>We use the Performance Factory to self-repair and fix the problems this check uncovers. When the same tool error blocks several investigations, the agent creates a task to fix it. If the cause is clear, an agent proposes a fix, and an engineer reviews the change and decides whether to merge it. After merging changes like this, we also use evals to check whether agents can get past the step that previously blocked them.</p>
+<h2>What’s next: broader applications, proactive monitoring</h2>
+<p>The Regression Workflow is just one instance of the agent factory pattern that moves tasks through explicit states. Agents advance the task when more work is ready; separate reviewers challenge the conclusions; engineers step in when the next decision requires judgment. Other workflows can reuse the same machinery with different states, instructions, and events.</p>
+<p>The original page includes a roughly 19-second video at this point, with the caption: “From one workflow to many. The Performance Factory can coordinate agents across workflows, with agents in one workflow creating tasks for another.” The in-page embed is on the original article; it was not separately archived here.</p>
+<p>Currently, our Regression Workflow starts when an alert fires. However, we’re working on more proactive ways for the Performance Factory to find slowdowns and optimizations even when no alert fires. We want agents to use the large amount of fine-grained performance data we already collect to spot regressions our alerts miss or discover optimizations. By comparing different kinds of data (batches of CPU and memory profiles, heap dumps, and request traces across releases), an agent might notice a small increase in CPU for a given request. It can then open a task in the Regression Workflow to trace the increase to its cause, implement a fix, and open a PR for an engineer to review.</p>
+<p>In cases where we already know what to look for, we’re working to encode known signals into more Performance Factory workflows. Our service rightsizing skill, for example, helps agents spot autoscaling settings that keep more replicas running than a service needs. When we learn to recognize a pattern like that, we want to build and regularly run a workflow for it across all our services, constantly optimizing in a rapidly changing environment. With the Performance Factory, what an engineer learns from one slowdown can shape how we investigate and fix the next one, even months later in a different service.</p>
+<p>Next time you’re using ChatGPT and notice a slowdown, there’s a good chance the Performance Factory is already figuring out why. Today, the bottleneck may be waiting for an engineer to review and merge the fix. We’re already exploring whether agents can do this themselves. As product development keeps accelerating with Codex, performance systems need to become increasingly autonomous and self-improving to keep up. Codex already helps us build ChatGPT faster. Now it’s helping us keep ChatGPT fast.</p>
+<h2>Authors</h2>
+<p>Okay Zed, Cyrus Forbes</p>
+<h2>Acknowledgements</h2>
+<p>Special thanks to the team that built the Performance Factory, as well as our post contributors Brendan Gregg, Pieter Hooimeijer, Nick Cooper, and Louis Brandy.</p></div>
+</section>
+<footer class="source-box"><span>内容来自原作者；中文为乔木风格改写，非逐字翻译。</span><div><a href="https://openai.com/index/how-openai-performance-factory-keeps-chatgpt-fast/" target="_blank" rel="noopener noreferrer">打开原文 ↗</a></div></footer>
+</article>
+</main>
+<footer class="site-footer"><span>海外创始人长文 · 乔木中文改写<br>每日 08:00 更新 · 中国标准时间（UTC+8）</span><nav class="footer-links" aria-label="页尾导航"><a href="/feed.xml">全文 RSS ↗</a><a href="/archive">全部文章</a><a href="/about">关于</a></nav></footer>
+
+<script data-source="/static/app.fe36855dc563.js">/* D · progressive visual-journal reader. No framework, no content rewriting. */
+(() => {
+  'use strict';
+  const $ = (selector, root = document) => root.querySelector(selector);
+  const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+  const readerMemory = new Map();
+  const mediaBound = new WeakSet();
+  const nextFrame = callback => requestAnimationFrame(callback);
+  const safeFocus = element => { if (element?.isConnected) element.focus({preventScroll: true}); };
+  function currentTheme() { return document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light'; }
+  function paintTheme() {
+    const dark = currentTheme() === 'dark';
+    const button = $('#theme-btn');
+    if (button) {
+      button.setAttribute('aria-pressed', String(dark));
+      button.setAttribute('aria-label', dark ? '切换为亮色主题' : '切换为暗色主题');
+    }
+    $('meta[name="theme-color"]')?.setAttribute('content', dark ? '#20241e' : '#fffefa');
+  }
+  paintTheme();
+  $('#theme-btn')?.addEventListener('click', () => {
+    const style = document.createElement('style');
+    style.textContent = '*,*::before,*::after{transition:none!important}';
+    document.head.append(style);
+    const next = currentTheme() === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    try { localStorage.setItem('xn.theme', next); } catch {}
+    paintTheme();
+    void document.documentElement.offsetHeight;
+    nextFrame(() => nextFrame(() => style.remove()));
+  });
+
+  // Filter the existing static cards; content and native links work without JS.
+  const discovery = $('[data-discovery]');
+  if (discovery) {
+    const grid = $('[data-news-grid]');
+    const cards = $$('.news-card', grid);
+    const search = $('#story-search');
+    const clear = $('[data-clear-search]');
+    const empty = $('[data-search-empty]');
+    const normalize = value => value.normalize('NFKC').toLocaleLowerCase().trim();
+    const index = cards.map(card => normalize(card.dataset.search || ''));
+    let kind = 'all', layout = discovery.dataset.defaultView;
+    function render(writeURL = true) {
+      const terms = normalize(search.value).split(/\s+/).filter(Boolean);
+      let count = 0;
+      cards.forEach((card, i) => {
+        card.hidden = !(kind === 'all' || card.dataset.kind === kind) || !terms.every(term => index[i].includes(term));
+        if (!card.hidden) count++;
+      });
+      grid.dataset.layout = layout;
+      grid.classList.toggle('is-filtered', kind !== 'all' || terms.length > 0);
+      $$('[data-filter]', discovery).forEach(button => button.setAttribute('aria-pressed', String(button.dataset.filter === kind)));
+      $$('[data-layout]', discovery).forEach(button => button.setAttribute('aria-pressed', String(button.dataset.layout === layout)));
+      $('[data-result-count]').textContent = count === cards.length ? `${count} 篇文章 · 最新在前` : `找到 ${count} 篇 · 共 ${cards.length} 篇`;
+      clear.hidden = !search.value;
+      empty.hidden = count !== 0;
+      $('[data-empty-description]').textContent = search.value.trim() ? `试试更短的关键词，或清除「${search.value.trim()}」与类型筛选。` : '这个类型暂时没有文章，试试查看全部内容。';
+      if (writeURL) {
+        const url = new URL(location.href);
+        for (const [key, value] of [['q', search.value.trim()], ['type', kind === 'all' ? '' : kind], ['view', layout === discovery.dataset.defaultView ? '' : layout]]) {
+          if (value) url.searchParams.set(key, value); else url.searchParams.delete(key);
+        }
+        history.replaceState(history.state, '', url.pathname + url.search + url.hash);
+      }
+    }
+    function restore() {
+      if (location.pathname.startsWith('/a/')) return;
+      const params = new URLSearchParams(location.search);
+      search.value = params.get('q') || '';
+      kind = ['text', 'video'].includes(params.get('type')) ? params.get('type') : 'all';
+      layout = ['journal', 'list'].includes(params.get('view')) ? params.get('view') : discovery.dataset.defaultView;
+      render(false);
+    }
+    search.addEventListener('input', () => render());
+    clear.addEventListener('click', () => { search.value = ''; render(); search.focus(); });
+    $$('[data-filter]', discovery).forEach(button => button.addEventListener('click', () => { kind = button.dataset.filter; render(); }));
+    $$('[data-layout]', discovery).forEach(button => button.addEventListener('click', () => { layout = button.dataset.layout; render(); }));
+    $('[data-reset-filters]').addEventListener('click', () => { kind = 'all'; search.value = ''; render(); search.focus(); });
+    window.addEventListener('popstate', restore);
+    discovery.hidden = false;
+    restore();
+  }
+  function suspendMedia(root) {
+    $$('video,audio', root).forEach(media => { try { media.pause(); } catch {} });
+    $$('iframe[src]', root).forEach(frame => {
+      frame.dataset.pausedSrc = frame.getAttribute('src');
+      frame.removeAttribute('src');
+    });
+  }
+  function resumeEmbeds(root) {
+    $$('iframe[data-paused-src]', root).forEach(frame => {
+      frame.setAttribute('src', frame.dataset.pausedSrc);
+      delete frame.dataset.pausedSrc;
+    });
+  }
+  function bindMedia(root) {
+    $$('img,video,audio', root).forEach(media => {
+      if (mediaBound.has(media)) return;
+      mediaBound.add(media);
+      const figure = media.closest('.media-figure');
+      const notice = figure && $('.media-error', figure);
+      let bufferingTimer = null, requestedPlayback = false;
+      function clearBuffering() {
+        clearTimeout(bufferingTimer); bufferingTimer = null;
+        if (notice?.dataset.mediaState === 'buffering') notice.hidden = true;
+      }
+      const failed = () => {
+        requestedPlayback = false; clearBuffering();
+        const cover = media.closest('[data-cover]');
+        if (cover) cover.closest('.news-card')?.classList.add('media-failed');
+        if (figure) {
+          if (notice) {
+            notice.textContent = /^(VIDEO|AUDIO)$/.test(media.tagName)
+              ? '此处暂时无法播放，请通过下方原文链接观看或收听。'
+              : '图片未能载入，请通过下方原文链接查看。';
+            notice.dataset.mediaState = 'failed'; notice.hidden = false;
+          }
+          media.hidden = true;
+          if (media.tagName === 'VIDEO') {
+            const poster = $('[data-video-fallback]', figure);
+            if (poster) poster.hidden = false;
+          }
+        }
+      };
+      media.addEventListener('error', failed);
+      if (/^(VIDEO|AUDIO)$/.test(media.tagName)) {
+        const armBuffering = () => {
+          if (!requestedPlayback || bufferingTimer || media.hidden) return;
+          bufferingTimer = setTimeout(() => {
+            bufferingTimer = null;
+            if (notice && figure.isConnected && requestedPlayback && !media.hidden && !media.closest('[hidden]')) {
+              notice.textContent = '外部媒体暂未能继续播放，可通过下方原文链接观看或收听。';
+              notice.dataset.mediaState = 'buffering'; notice.hidden = false;
+            }
+          }, 10000);
+        };
+        media.addEventListener('play', () => { requestedPlayback = true; armBuffering(); });
+        media.addEventListener('waiting', armBuffering);
+        media.addEventListener('stalled', armBuffering);
+        media.addEventListener('playing', clearBuffering);
+        ['pause', 'ended', 'emptied'].forEach(name => media.addEventListener(name, () => {
+          requestedPlayback = false; clearBuffering();
+        }));
+      }
+      if (media.tagName === 'IMG' && media.complete && media.naturalWidth === 0) failed();
+    });
+  }
+  bindMedia(document);
+
+  // Accessible manual-activation tabs; no JS leaves both complete sections and links intact.
+  function enhanceReader(article, scroller, onView) {
+    const tablist = $('[data-tabs]', article);
+    if (!tablist) return null;
+    const tabs = $$('[data-view]', tablist);
+    const panels = $$('[data-reader-panel]', article);
+    const id = article.dataset.articleId;
+    const memory = readerMemory.get(id) || {positions: {}, view: 'rewrite'};
+    readerMemory.set(id, memory);
+    const isWindow = scroller === window;
+    const getTop = () => isWindow ? window.scrollY : scroller.scrollTop;
+    const setTop = value => { if (isWindow) window.scrollTo(0, value); else scroller.scrollTop = value; };
+    const toolbar = tablist.closest('.reader-tabs');
+    const position = $('.reading-position', toolbar);
+    const progress = $('progress', toolbar);
+    const percent = $('[data-reading-percent]', toolbar);
+    let progressFrame = null;
+    function updateProgress() {
+      progressFrame = null;
+      if (!article.isConnected || !progress) return;
+      const panel = panels.find(item => !item.hidden);
+      if (!panel) return;
+      const viewport = isWindow ? window.innerHeight : scroller.clientHeight;
+      const origin = isWindow ? 0 : scroller.getBoundingClientRect().top;
+      const top = panel.getBoundingClientRect().top - origin;
+      const distance = panel.getBoundingClientRect().height - viewport + toolbar.offsetHeight;
+      const value = distance <= 0 ? (top < viewport ? 100 : 0) : Math.round(Math.max(0, Math.min(1, (toolbar.offsetHeight - top) / distance)) * 100);
+      progress.value = value;
+      percent.textContent = value + '%';
+    }
+    function scheduleProgress() { if (progressFrame == null) progressFrame = nextFrame(updateProgress); }
+    if (position) position.hidden = false;
+    scroller.addEventListener('scroll', scheduleProgress, {passive: true});
+    window.addEventListener('resize', scheduleProgress);
+    article.addEventListener('load', scheduleProgress, true);
+    const observer = typeof ResizeObserver === 'function' ? new ResizeObserver(scheduleProgress) : null;
+    panels.forEach(panel => observer?.observe(panel));
+    const toolbarTop = () => Math.max(0, toolbar.getBoundingClientRect().top + getTop() - (isWindow ? 0 : scroller.getBoundingClientRect().top));
+    let view = null, generation = 0;
+    article.classList.add('reader-enhanced');
+    tablist.setAttribute('role', 'tablist');
+    tabs.forEach(tab => {
+      tab.setAttribute('role', 'tab');
+      tab.setAttribute('aria-controls', tab.dataset.view);
+    });
+    panels.forEach(panel => {
+      panel.setAttribute('role', 'tabpanel');
+      panel.setAttribute('tabindex', '0');
+      panel.setAttribute('aria-labelledby', 'tab-' + panel.dataset.readerPanel);
+    });
+    function remember() { if (view) memory.positions[view] = getTop(); memory.view = view; }
+    function show(next, {initial = false, updateURL = true} = {}) {
+      if (!['rewrite', 'original'].includes(next) || view === next) return;
+      const thisGeneration = ++generation;
+      if (view) {
+        remember();
+        const old = panels.find(panel => panel.dataset.readerPanel === view);
+        if (old) suspendMedia(old);
+      }
+      view = next;
+      memory.view = next;
+      panels.forEach(panel => {
+        panel.hidden = panel.dataset.readerPanel !== next;
+        if (!panel.hidden) resumeEmbeds(panel);
+        else suspendMedia(panel);
+      });
+      tabs.forEach(tab => {
+        const selected = tab.dataset.view === next;
+        tab.setAttribute('aria-selected', String(selected));
+        tab.setAttribute('tabindex', selected ? '0' : '-1');
+      });
+      if (updateURL) onView(next);
+      const saved = memory.positions[next];
+      // First rewrite starts at its title; first original starts at the visible tab bar.
+      if (!initial || next === 'original' || saved != null) {
+        nextFrame(() => {
+          if (thisGeneration === generation && article.isConnected) setTop(saved ?? toolbarTop());
+        });
+      }
+      scheduleProgress();
+    }
+    tabs.forEach(tab => tab.addEventListener('click', event => {
+      if (event.ctrlKey || event.metaKey || event.altKey || event.shiftKey) return;
+      event.preventDefault();
+      show(tab.dataset.view);
+    }));
+    tablist.addEventListener('keydown', event => {
+      const index = tabs.indexOf(document.activeElement);
+      if (index < 0) return;
+      if (event.key === ' ') { event.preventDefault(); show(tabs[index].dataset.view); return; }
+      let target = null;
+      if (event.key === 'ArrowRight') target = tabs[(index + 1) % tabs.length];
+      if (event.key === 'ArrowLeft') target = tabs[(index - 1 + tabs.length) % tabs.length];
+      if (event.key === 'Home') target = tabs[0];
+      if (event.key === 'End') target = tabs.at(-1);
+      if (target) { event.preventDefault(); safeFocus(target); }
+    });
+    show(location.hash === '#original' ? 'original' : 'rewrite', {initial: true, updateURL: false});
+    bindMedia(article);
+    return {show, remember, dispose() {
+      scroller.removeEventListener('scroll', scheduleProgress);
+      window.removeEventListener('resize', scheduleProgress);
+      article.removeEventListener('load', scheduleProgress, true);
+      observer?.disconnect();
+      if (progressFrame != null) cancelAnimationFrame(progressFrame);
+    }};
+  }
+  function replaceViewURL(view) {
+    const url = new URL(location.href);
+    url.hash = view === 'original' ? 'original' : 'rewrite';
+    history.replaceState(history.state, '', url.pathname + url.search + url.hash);
+  }
+  const directArticle = $('.site-main > [data-article-id]');
+  if (directArticle) {
+    const direct = enhanceReader(directArticle, window, replaceViewURL);
+    window.addEventListener('hashchange', () => direct?.show(location.hash === '#original' ? 'original' : 'rewrite', {updateURL: false}));
+    window.addEventListener('pagehide', () => { direct?.remember(); suspendMedia(directArticle); });
+  }
+
+  const sheet = $('#reader-sheet');
+  const grid = $('[data-news-grid]');
+  if (!sheet || !grid) return;
+  const scroll = $('.sheet-scroll', sheet);
+  const closeButton = $('[data-close-sheet]', sheet);
+  const pageRoots = $$('.site-header,.site-main,.site-footer');
+  const listTitle = document.title;
+  const listCanonical = $('link[rel="canonical"]')?.href;
+  const cache = new Map();
+  let active = null, controller = null, viewController = null, sequence = 0;
+  const canAnimate = !window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  history.scrollRestoration = 'manual';
+  const sheetState = () => history.state?.xnewsSheet;
+  const safePath = path => /^\/a\/[a-z0-9-]+\/?$/.test(path);
+  const prefetching = new Map();
+  const readerURLs = new Map($$('[data-open-reader]', grid).map(a => [new URL(a.href, location.href).pathname, a.dataset.readerSrc]));
+  const requestURL = path => readerURLs.get(path) || path;
+  // Warm only a link the reader shows intent to open; never preload media or all stories.
+  function prefetchArticle(event) {
+    if (event.type === 'pointerover' && event.pointerType === 'touch') return;
+    const connection = navigator.connection;
+    if (connection?.saveData || /(^|-)2g$/.test(connection?.effectiveType || '')) return;
+    const anchor = event.target.closest?.('[data-open-reader]');
+    if (!anchor) return;
+    const url = new URL(anchor.href, location.href), path = url.pathname;
+    if (url.origin !== location.origin || !safePath(path) || cache.has(path) || prefetching.has(path) || prefetching.size >= 2) return;
+    const abort = new AbortController();
+    const timer = setTimeout(() => abort.abort(), 8000);
+    const promise = fetch(requestURL(path), {signal: abort.signal, priority: 'low', headers: {'Accept': 'text/html'}})
+      .then(response => { if (!response.ok) throw new Error('Prefetch failed'); return response.text(); })
+      .then(html => {
+        const raw = new DOMParser().parseFromString(html, 'text/html').querySelector('[data-article-id]');
+        if (!raw || '/a/' + raw.dataset.articleId !== path.replace(/\/$/, '')) return null;
+        cache.set(path, html);
+        if (cache.size > 12) cache.delete(cache.keys().next().value);
+        return html;
+      }).catch(() => null).finally(() => { clearTimeout(timer); if (prefetching.get(path)?.promise === promise) prefetching.delete(path); });
+    prefetching.set(path, {promise, abort});
+  }
+  grid.addEventListener('pointerover', prefetchArticle);
+  grid.addEventListener('focusin', prefetchArticle);
+  grid.addEventListener('pointerdown', prefetchArticle);
+  async function readyPrefetch(path) {
+    const pending = prefetching.get(path);
+    if (!pending) return null;
+    let timer;
+    try {
+      // A click is foreground work. Do not inherit an eight-second speculative
+      // request deadline when that request is queued or stalled on a slow link.
+      const ready = await Promise.race([pending.promise, new Promise(resolve => { timer = setTimeout(() => resolve(null), 120); })]);
+      if (!ready) pending.abort.abort();
+      return ready;
+    } finally { clearTimeout(timer); }
+  }
+  function togglePageInert(value) { pageRoots.forEach(element => { element.inert = value; }); }
+  function showSheet(keyboard) {
+    if (sheet.open) return;
+    document.body.classList.add('sheet-open');
+    togglePageInert(true);
+    if (typeof sheet.showModal === 'function') sheet.showModal();
+    else { sheet.setAttribute('open', ''); sheet.classList.add('sheet-fallback'); sheet.setAttribute('role', 'dialog'); sheet.setAttribute('aria-modal', 'true'); }
+    if (!keyboard && canAnimate && typeof sheet.animate === 'function') {
+      sheet.animate([{transform: 'translateY(16px)', opacity: .8}, {transform: 'translateY(0)', opacity: 1}], {duration: 180, easing: 'cubic-bezier(.23,1,.32,1)'});
+    }
+    safeFocus(closeButton);
+  }
+  function loading() {
+    scroll.setAttribute('aria-busy', 'true');
+    scroll.innerHTML = '<div class="sheet-status" role="status"><p>正在打开文章…</p><div aria-hidden="true"><div class="skeleton-title"></div><div class="skeleton-title short"></div><div class="skeleton-line"></div><div class="skeleton-line"></div><div class="skeleton-line short"></div></div></div>';
+    scroll.scrollTop = 0;
+  }
+  function errorState(path, sourceURL) {
+    scroll.removeAttribute('aria-busy');
+    scroll.replaceChildren();
+    const status = document.createElement('section'); status.className = 'sheet-status'; status.setAttribute('role', 'alert');
+    const title = document.createElement('h2'); title.textContent = '文章暂时未能打开';
+    const description = document.createElement('p'); description.textContent = '选刊和阅读位置都还在。可以重试，或打开独立文章页。';
+    const retry = document.createElement('button'); retry.type = 'button'; retry.className = 'retry-button'; retry.textContent = '重试'; retry.addEventListener('click', () => loadArticle(path, sourceURL));
+    const link = document.createElement('a'); link.href = path; link.textContent = '独立文章页 ↗';
+    status.append(title, description, retry, link);
+    if (sourceURL) { const source = document.createElement('a'); source.href = sourceURL; source.target = '_blank'; source.rel = 'noopener noreferrer'; source.textContent = '去原文 ↗'; status.append(source); }
+    scroll.append(status);
+  }
+  async function loadArticle(path, sourceURL = '') {
+    if (!safePath(path)) return;
+    const ownSequence = ++sequence;
+    controller?.abort();
+    viewController?.remember(); viewController?.dispose(); viewController = null;
+    suspendMedia(scroll);
+    loading();
+    controller = new AbortController();
+    const signal = controller.signal;
+    const timeout = setTimeout(() => controller?.signal === signal && controller.abort(), 12000);
+    try {
+      let html = cache.get(path) || await readyPrefetch(path);
+      if (ownSequence !== sequence || !active) return;
+      if (signal.aborted) throw new Error('Article load timed out');
+      if (!html) {
+        const response = await fetch(requestURL(path), {signal, priority: 'high', headers: {'Accept': 'text/html'}});
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        html = await response.text();
+      }
+      if (ownSequence !== sequence || !active) return;
+      const parsed = new DOMParser().parseFromString(html, 'text/html');
+      const raw = $('[data-article-id]', parsed);
+      if (!raw || '/a/' + raw.dataset.articleId !== path.replace(/\/$/, '')) throw new Error('Article mismatch');
+      cache.set(path, html);
+      if (cache.size > 12) cache.delete(cache.keys().next().value);
+      const article = document.importNode(raw, true);
+      // Set panel visibility before attaching media to the live document.
+      viewController = enhanceReader(article, scroll, view => {
+        replaceViewURL(view);
+        $('[data-sheet-permalink]', sheet).href = location.pathname + location.search + location.hash;
+      });
+      scroll.replaceChildren(article);
+      scroll.removeAttribute('aria-busy');
+      document.title = parsed.title;
+      $('link[rel="canonical"]')?.setAttribute('href', 'https://xnews.qiaomu.ai' + path);
+      $('[data-sheet-permalink]', sheet).href = path + location.hash;
+      nextFrame(() => { if (ownSequence === sequence) bindMedia(article); });
+    } catch (error) {
+      if (ownSequence !== sequence || !active) return;
+      errorState(path, sourceURL);
+    } finally { clearTimeout(timeout); }
+  }
+  function openFromCard(anchor, keyboard) {
+    const url = new URL(anchor.href, location.href);
+    if (url.origin !== location.origin || !safePath(url.pathname)) return false;
+    const state = {path: url.pathname, listURL: location.pathname + location.search + location.hash, listY: window.scrollY, focusId: anchor.id, sourceURL: anchor.dataset.sourceUrl || ''};
+    history.replaceState({...history.state, xnewsList: {url: state.listURL, y: state.listY, focusId: state.focusId}}, '', location.href);
+    history.pushState({xnewsSheet: state}, '', url.pathname);
+    active = state;
+    $('[data-sheet-permalink]', sheet).href = url.pathname;
+    showSheet(keyboard);
+    loadArticle(state.path, state.sourceURL);
+    return true;
+  }
+  function finishClose() {
+    const previous = active;
+    ++sequence;
+    controller?.abort(); controller = null;
+    viewController?.remember(); viewController?.dispose(); viewController = null;
+    suspendMedia(scroll);
+    if (typeof sheet.close === 'function' && sheet.open) sheet.close();
+    sheet.removeAttribute('open'); sheet.classList.remove('sheet-fallback');
+    togglePageInert(false);
+    document.body.classList.remove('sheet-open');
+    scroll.replaceChildren(); scroll.removeAttribute('aria-busy');
+    active = null;
+    document.title = listTitle;
+    if (listCanonical) $('link[rel="canonical"]')?.setAttribute('href', listCanonical);
+    nextFrame(() => {
+      if (active) return;
+      window.scrollTo(0, previous?.listY ?? history.state?.xnewsList?.y ?? 0);
+      safeFocus(document.getElementById(previous?.focusId || history.state?.xnewsList?.focusId || '') || $('.edition-line h1'));
+    });
+  }
+  function requestClose() {
+    if (!active) return;
+    if (sheetState()) history.back(); else finishClose();
+  }
+  grid.addEventListener('click', event => {
+    const anchor = event.target.closest('[data-open-reader]');
+    if (!anchor || event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.altKey || event.shiftKey || anchor.target === '_blank' || anchor.hasAttribute('download')) return;
+    if (openFromCard(anchor, event.detail === 0)) event.preventDefault();
+  });
+  closeButton.addEventListener('click', requestClose);
+  sheet.addEventListener('cancel', event => { event.preventDefault(); requestClose(); });
+  sheet.addEventListener('keydown', event => {
+    if (event.key === 'Escape') { event.preventDefault(); requestClose(); return; }
+    if (event.key !== 'Tab') return;
+    const focusables = $$('a[href],button:not(:disabled),[tabindex="0"],video[controls],audio[controls]', sheet).filter(element => !element.closest('[hidden]'));
+    const first = focusables[0], last = focusables.at(-1);
+    if (event.shiftKey && (document.activeElement === first || document.activeElement === sheet)) { event.preventDefault(); safeFocus(last); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); safeFocus(first); }
+  });
+  window.addEventListener('popstate', () => {
+    const state = sheetState();
+    if (state && safePath(state.path)) {
+      active = state;
+      showSheet(true);
+      loadArticle(state.path, state.sourceURL);
+    } else if (active) finishClose();
+  });
+  window.addEventListener('pagehide', () => { viewController?.remember(); suspendMedia(scroll); controller?.abort(); });
+})();
+</script>
+</body>
+</html>

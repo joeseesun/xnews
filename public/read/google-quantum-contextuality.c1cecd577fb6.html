@@ -1,0 +1,157 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>在Willow上，魔方游戏赢了98.30%，经典上限是88.89% · X News</title><meta name="robots" content="noindex"></head><body><article class="article-reader" data-article-id="google-quantum-contextuality">
+<a class="article-back" href="/">← 返回选刊</a>
+<header class="article-header"><p class="article-kicker">Shashwat Kumar and Rodrigo Cortiñas / 文章</p><h1>在Willow上，魔方游戏赢了98.30%，经典上限是88.89%</h1><p class="article-dek">Google Quantum AI把语境性测到了105个量子比特。105个比特那一项对照的是推测的经典上限，成功概率从大约1降到0.6。</p><div class="article-meta"><time datetime="2026-11-20">本站收录 2026年11月20日 · 周五</time><span>原文发布 2026年11月19日 · 周四</span><span>原作者：Shashwat Kumar and Rodrigo Cortiñas</span><span>中文改写：<a href="/about">X News · 乔木</a></span><span>Google Quantum AI · Willow · contextuality · Science · quantum computing</span></div></header>
+<nav class="reader-tabs" aria-label="文章版本与来源"><div data-tabs><a href="#rewrite" id="tab-rewrite" data-view="rewrite">乔木改写</a><a href="#original" id="tab-original" data-view="original">原文</a></div><a class="reader-source" href="https://research.google/blog/a-game-you-cannot-win-unless-you-have-a-quantum-computer/" target="_blank" rel="noopener noreferrer">原文链接 ↗</a><div class="reading-position" hidden><progress max="100" value="0" aria-label="当前版本阅读进度"></progress><span data-reading-percent aria-hidden="true">0%</span></div></nav>
+<section class="reader-panel" id="rewrite" data-reader-panel="rewrite" aria-label="乔木改写"><h2 class="section-heading">乔木改写</h2><div class="prose"><p>在3×3的格子里，每格只能填+1或-1。三条横行相乘都要得+1，三条纵列相乘都要得-1。横行加起来，-1的个数该是偶数；纵列加起来，又该是奇数。这样的表不存在。</p>
+<p>把这道题改成游戏，每轮只给Alice一行、给Bob一列，两人不能商量，交会格里填的数字必须一样才算赢。事先写好的任何一张表，九局里至少要输一局，也就是最多赢<strong>88.89%</strong>。</p>
+<p>2026年11月19日，Google Quantum AI研究员Shashwat Kumar和Rodrigo Cortiñas在Google Research博客里写，他们把这个游戏放到了Willow超导处理器上。九种走法各打了<strong>10万</strong>次，量子比特赢了<strong>98.30%</strong>（0.9830±0.0001），大约六十局里才输一局。</p>
+<p>同一天，这篇论文登上了《Science》封面。论文标题是《Quantum-classical separation in bounded-resource tasks arising from measurement contextuality》，地址是https://www.science.org/doi/10.1126/science.aec3042。官方还把它做到了最多<strong>105</strong>个量子比特的任务上。</p>
+<p><strong>不是事先写好的答案表</strong></p>
+<p>博客把原因写在一个词上：量子语境性。爱因斯坦曾经问，没人看的时候月亮还在不在，意思是物理量不该依赖有没有人去测。语境性是可以拿来做实验的说法：对量子系统，答案可以是不在。你测到什么，取决于同时还做了哪些彼此相容的测量。</p>
+<p>Alice和Bob并不是去查一张事先写好、其实并不存在的表。答案是在测量时才出现的，量子关联把两人在交会格上的结果绑得比任何经典规则更紧。</p>
+<p>纠缠通常被说成量子计算的关键材料。作者写，越来越多的理论认为，语境性才是让某些量子算法超过经典对手的更深层资源。此前，它几乎只在少数几个粒子的小系统里被演示过。它能不能在真正的量子计算机那种多体系统里活下来，并且还有用，一直是个未决的问题。</p>
+<p>他们在Willow上跑的，就是常说的魔方游戏。Alice和Bob各拿两个量子比特，共享两对纠缠的贝尔对，再按事先约好的设置去测自己那一行或那一列，得到±1。</p>
+<p>最好的经典策略九局里至少输一局。硬件有噪声，所以也到不了每局都赢，大约六十局里会输一局。但差距是明确的，也具有统计显著性：这些量子比特的配合，比任何事先写好的表所允许的程度都更好。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_magic_square"><div class="media-frame"><img src="https://storage.googleapis.com/gweb-research2023-media/original_images/QuantumContextuality1-MagicSquareGame.png" data-original-src="https://storage.googleapis.com/gweb-research2023-media/original_images/QuantumContextuality1-MagicSquareGame.png" alt="Diagram of the quantum magic square game showing Alice and Bob measuring shared entangled Bell pairs to fill intersecting row and column cells, alongside a bar chart comparing the 98.3% hardware win rate against the 88.9% classical bound." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://research.google/blog/a-game-you-cannot-win-unless-you-have-a-quantum-computer/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<p><strong>把语境性收成一个数：χ=5.590</strong></p>
+<p>接下来，他们想测量一台机器有多「语境」。用的是和贝尔检验密切相关的Bell-Kochen-Specker不等式。它把一组关联收成一个数χ。按上面游戏里的行积和列积来写，就是χ=R1+R2+R3-C1-C2-C3：</p>
+<table aria-label="数据表格，可横向滚动查看" tabindex="0">
+<thead>
+<tr>
+<th>+1</th>
+<th>+1</th>
+<th>+1</th>
+<th>R1 = (+1)<em>(+1)</em>(+1) = +1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>+1</td>
+<td>−1</td>
+<td>−1</td>
+<td>R2 = (+1)<em>(−1)</em>(−1) = +1</td>
+</tr>
+<tr>
+<td>−1</td>
+<td>+1</td>
+<td>−1</td>
+<td>R3 = (−1)<em>(+1)</em>(−1) = +1</td>
+</tr>
+<tr>
+<td>C1 = (+1)<em>(+1)</em>(−1) = −1</td>
+<td>C2 = (+1)<em>(−1)</em>(+1) = −1</td>
+<td>C3 = (+1)<em>(−1)</em>(−1) = +1</td>
+<td>χ = 4</td>
+</tr>
+</tbody>
+</table>
+<p>在测量结果事先就定好的宇宙里，χ必须满足χ≤4，只能取-4、0和4。量子力学允许到6，那只有所有R都是+1、所有C都是-1才会出现。和多数这类检验不同，它不依赖量子比特怎么制备，测的是机器的性质，不是某个精心挑出来的输入。</p>
+<p>要测χ，每一行和每一列都必须在同一对量子比特上依次测完，还不能把它们打乱。他们加了一个辅助量子比特，把每次结果接过去再测辅助比特，主量子比特留着继续用。一行测了<strong>540</strong>次，这个过程重复了<strong>1000</strong>遍。</p>
+<p>测到的结果是<strong>χ=5.590±0.008</strong>。它清楚超过经典上限4，离量子上限6大约还差<strong>7%</strong>。博客的说法是：语境性就在这台机器里，而且有这么多。</p>
+<p><strong>71个玩家，以及105个量子比特上的浅层电路</strong></p>
+<p>两个量子比特是一回事。量子效应脆弱，每多一个比特，噪声都可能把它冲掉。有用的量子计算需要许多量子比特一起工作，所以问题变成：语境性能不能在更大规模上活下来。</p>
+<p>在GHZ宇称游戏里，N个玩家共享一个纠缠的GHZ态，也就是全部为0和全部为1的叠加。每人拿到一个一比特问题，再各自给出一个比特答案，过程中不能交流。所有答案的宇称，要和问题规定的规则对上才算赢。随机猜大约赢一半。最好的经典方案好不了多少：三个玩家时是<strong>75%</strong>，人一多，就会朝**50%**缩。共享GHZ态则可以每局都赢。</p>
+<p>他们最多用了<strong>71</strong>个玩家，一人一个量子比特。噪声让他们到不了100%，而且会随量子比特增多而变大，领先幅度在收窄，但全程都留在经典上限之上。他们还在<strong>45</strong>个量子比特上验证了真正的纠缠，比许多早期GHZ实验的全部规模还大。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_ghz_parity"><div class="media-frame"><img src="https://storage.googleapis.com/gweb-research2023-media/original_images/QuantumContextuality2-GHZParityGame.png" data-original-src="https://storage.googleapis.com/gweb-research2023-media/original_images/QuantumContextuality2-GHZParityGame.png" alt="Schematic of an N-player GHZ parity game and plot of win probability from 3 to 71 qubits, showing superconducting hardware results remaining consistently above the classical bound as system size increases." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://research.google/blog/a-game-you-cannot-win-unless-you-have-a-quantum-computer/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<p>同一套物理，也把浅层量子电路和浅层经典电路分开。2018年有一个标志性定理：寻找隐藏线性函数这个问题，可以被一个深度固定的量子电路解决，而任何深度固定的经典电路都做不到。这篇定理发表在《Science》上，地址是https://www.science.org/doi/10.1126/science.aar3106。这种量子优势的来源，可以追溯到语境性。</p>
+<p>这里的「深度固定」很要紧。问题变大，电路不会跟着变深。每个输出比特只走固定步数，信息只能传很短的一段，经典的每个输出因此只能「看见」输入里附近的一小块。量子电路里，纠缠已经事先铺好，就没有这个限制。</p>
+<p>这套算法此前没有在真实硬件上大规模跑过。他们按理论给出的浅层电路方法，在最多<strong>105</strong>个量子比特的网格上求解隐藏线性函数，成功概率仍高于二分之一。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_hidden_linear"><div class="media-frame"><img src="https://storage.googleapis.com/gweb-research2023-media/original_images/QuantumContextuality3-HiddenLinearFunction.png" data-original-src="https://storage.googleapis.com/gweb-research2023-media/original_images/QuantumContextuality3-HiddenLinearFunction.png" alt="Diagram of a shallow quantum circuit encoding a 2D hidden linear function problem on a processor grid alongside a plot showing success probability remaining above the 0.5 classical bound up to 105 qubits." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://research.google/blog/a-game-you-cannot-win-unless-you-have-a-quantum-computer/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<p>系统变大以后，噪声会把成功概率从大约<strong>1</strong>降到最大规模时的<strong>0.6</strong>，但仍然留在博客所称的「推测的经典上限」之上。这里的对照不是无条件的量子优势证明，官方自己用了「conjectured classical bound」这个说法。</p>
+<p><strong>物理给的天花板，不会因为你过线了就再抬高</strong></p>
+<p>做这些实验时，还出现了一个用得上的副产品。这些任务要求许多量子比特同时、精确地达成一致。跑着跑着，他们看到了系统里细微的相干误差：量子态会被稍微转偏，而这种偏差在常规的随机电路基准里，常常被平均到看不见。</p>
+<p>博客因此给语境性加了第二层用处：它不只是计算资源，也可以当一把尺。</p>
+<p>多数基准问的是，一台处理器能不能跨过某条经典线。这些任务给出的天花板是物理本身规定的：χ=6，赢率为1，完美的语境份额。机器实际做到的位置，和自然允许的上限之间的距离，就成了一个客观分数。经典的过线标准不会因此变得更松，这根天花板也不会移动。量子处理器越好，这样的基准分辨得越细。博客认为，这对化学和材料科学里的分子模拟尤其有意义，因为它测的是处理器跑结构化算法的能力，细小误差不容易藏住。</p>
+<p>下一步，作者把它连回一个快一百年的争论：没人看的时候，物理系统是否总是在那里。对他们的量子比特，结论是清楚的：并不是我们测量的每样东西，都有预先存在、等着被看到的值。理论把语境性和错误纠正量子计算机跑完整算法所需的「魔术态」联系起来，他们的团队最近已经用魔术态培养的方法制备过这类态，相关说明在https://blog.google/innovation-and-ai/models-and-research/quantum-computing/magic-state-cultivation-quantum-computing/。</p>
+<p>这项工作由Google Quantum AI团队和学术合作者一起完成。想看实验细节，可以从研究博客读到论文页https://www.science.org/doi/10.1126/science.aec3042，预印本在https://arxiv.org/abs/2512.02284。读图时要注意，105个量子比特那一项对照的是推测的经典上限，不是已经封闭的经典不可能证明。</p>
+</div></section>
+<section class="reader-panel" id="original" data-reader-panel="original" aria-label="原文">
+<h2 class="section-heading">原文</h2><h3 class="original-title">A game you cannot win unless you have a quantum computer</h3>
+<div class="original-media">
+<figure class="media-figure" data-media-id="media_magic_square"><div class="media-frame"><img src="https://storage.googleapis.com/gweb-research2023-media/original_images/QuantumContextuality1-MagicSquareGame.png" data-original-src="https://storage.googleapis.com/gweb-research2023-media/original_images/QuantumContextuality1-MagicSquareGame.png" alt="Diagram of the quantum magic square game showing Alice and Bob measuring shared entangled Bell pairs to fill intersecting row and column cells, alongside a bar chart comparing the 98.3% hardware win rate against the 88.9% classical bound." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://research.google/blog/a-game-you-cannot-win-unless-you-have-a-quantum-computer/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_ghz_parity"><div class="media-frame"><img src="https://storage.googleapis.com/gweb-research2023-media/original_images/QuantumContextuality2-GHZParityGame.png" data-original-src="https://storage.googleapis.com/gweb-research2023-media/original_images/QuantumContextuality2-GHZParityGame.png" alt="Schematic of an N-player GHZ parity game and plot of win probability from 3 to 71 qubits, showing superconducting hardware results remaining consistently above the classical bound as system size increases." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://research.google/blog/a-game-you-cannot-win-unless-you-have-a-quantum-computer/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_hidden_linear"><div class="media-frame"><img src="https://storage.googleapis.com/gweb-research2023-media/original_images/QuantumContextuality3-HiddenLinearFunction.png" data-original-src="https://storage.googleapis.com/gweb-research2023-media/original_images/QuantumContextuality3-HiddenLinearFunction.png" alt="Diagram of a shallow quantum circuit encoding a 2D hidden linear function problem on a processor grid alongside a plot showing success probability remaining above the 0.5 classical bound up to 105 qubits." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://research.google/blog/a-game-you-cannot-win-unless-you-have-a-quantum-computer/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div>
+<div class="prose" lang="en"><h1>A game you cannot win unless you have a quantum computer</h1>
+<p>November 19, 2026</p>
+<p>Shashwat Kumar and Rodrigo Cortiñas, Research Scientists, Google Quantum AI, Google Research</p>
+<p>On a superconducting processor, we turned one of quantum mechanics’ strangest features into something you can measure, benchmark, and put to work across systems as large as 105 qubits.</p>
+<p>Here is a Sunday paper-style puzzle you can try right now. Draw a 3×3 grid. Fill every cell with either +1 or −1, subject to two rules: each row must multiply to +1, and each column must multiply to −1.</p>
+<p>Go ahead. We’ll wait…</p>
+<p>You didn’t manage it, right? There is an elegant reason for that. For a row to multiply to +1, it needs an even number of −1s. For a column to multiply to −1, it needs an odd number. Add up the rows and you learn the grid contains an even number of −1s. Add up the columns and you learn it contains an odd number. Well…That’s impossible!</p>
+<p>The grid would have to be two contradictory things at once. No such table exists; it is a paradox.</p>
+<p>Now turn the puzzle into a game: Each round, Alice is handed a row and Bob a column. Without talking, Alice fills her row by the row rule and Bob fills his column by the column rule. They win if they put the same number in the square where their row and column intersect. Any plan made in advance is just a pre-written table, meaning at best they will win 8 out of 9 rounds. This changes if they use a quantum computer. It won't fill in the impossible grid, but in principle, it lets them win every round.</p>
+<p>The reason is a property called <a href="https://en.wikipedia.org/wiki/Quantum_contextuality" rel="noopener noreferrer">quantum contextuality</a>, arguably the strangest feature of quantum mechanics. Einstein once famously asked whether the moon is there when nobody looks, his way of insisting that physical properties ought to exist whether or not anyone measures them. For quantum systems, contextuality is the precise, experimentally testable statement that the answer can be no: you cannot assign fixed, pre-existing values to everything you might measure.</p>
+<p>What a measurement yields can depend on which other compatible measurements you make alongside it (i.e., on its context). This is not only a deep philosophical statement, but more so, cutting-edge science and the basis of a new technology. And in the game above, Alice and Bob can use it to engineer a solution. Their answers are not looked up in a hidden table written in advance; the table does not exist. Their answers come into being as they measure, and quantum correlations stitch them together more tightly than any classical rulebook permits.</p>
+<p>Entanglement usually gets top billing as the “magic ingredient” of quantum computing. But a growing body of theory suggests contextuality is the deeper resource, the thing that actually powers certain quantum algorithms past their classical counterparts. The catch is that, until recently, contextuality had been demonstrated almost exclusively in small systems of a few particles. Whether it survives, and stays useful, in the many-body systems that real quantum computers are made of was an open question.</p>
+<p>That is the question we set out to answer. In "<a href="https://www.science.org/doi/10.1126/science.aec3042" rel="noopener noreferrer">Quantum-classical separation in bounded-resource tasks arising from measurement contextuality</a>," published in <a href="https://www.science.org/" rel="noopener noreferrer">Science</a>, we demonstrate and measure contextuality on our superconducting quantum processors. Our qubits win the magic square game 98.3% of the time, exceed the classical limit on a contextuality test, and outperform classical strategies in tasks spanning up to 105 qubits. Along the way, these tasks proved to be a sensitive new benchmark for quantum hardware, catching subtle errors that random-circuit tests miss.</p>
+<h2>Beating the classical bound</h2>
+<p>We ran what is commonly called <a href="https://en.wikipedia.org/wiki/Quantum_pseudo-telepathy" rel="noopener noreferrer">the magic square game</a> on our <a href="http://blog.google/innovation-and-ai/technology/research/google-willow-quantum-chip/" rel="noopener noreferrer">Willow</a> quantum processor. Alice and Bob each hold two qubits, sharing two entangled <a href="https://en.wikipedia.org/wiki/Bell_state" rel="noopener noreferrer">Bell pairs</a> instead of a pre-written table, and measure them using preset settings for their assigned row or column to get their ±1 entries.</p>
+<p>The best conceivable classical strategy loses at least one round in nine, winning at most 88.89% of the time. When we played all nine versions of the game 100,000 times apiece, our qubits lost roughly one in sixty, winning 98.30% of them (0.9830 ± 0.0001).</p>
+<p>The gap is meaningful and statistically significant: our qubits coordinated better than any pre-written table allows. That's because no cell has a value fixed in advance. Each answer takes shape only when it is measured alongside the rest of its row or column (its context), and shared entanglement makes Alice's and Bob's answers for the shared cell agree.</p>
+<p><img alt="Diagram of the quantum magic square game showing Alice and Bob measuring shared entangled Bell pairs to fill intersecting row and column cells, alongside a bar chart comparing the 98.3% hardware win rate against the 88.9% classical bound." decoding="async" loading="lazy" referrerpolicy="no-referrer" src="https://storage.googleapis.com/gweb-research2023-media/original_images/QuantumContextuality1-MagicSquareGame.png"></p>
+<p>With shared entanglement and a prearranged measurement plan, Alice and Bob can in principle agree at the intersection in every round. On our hardware, noise causes about one loss in 60.</p>
+<h2>Putting a number on contextuality</h2>
+<p>The magic square game demonstrated the potential power of contextuality, so next we set out to measure how contextual a machine is. We used a <a href="https://en.wikipedia.org/wiki/Kochen%E2%80%93Specker_theorem" rel="noopener noreferrer">Bell–Kochen–Specker inequality</a>, closely related to the famous <a href="https://en.wikipedia.org/wiki/Bell_test" rel="noopener noreferrer">Bell test</a> which showed that entangled particles like the Bell pairs above can't carry answers fixed in advance. Our inequality bundles a set of correlations into a single number, χ. In terms of the rows and columns from the game above it reads, χ = R1 + R2 + R3 − C1 − C2 − C3, where R and C represent the products of the rows and columns Alice and Bob had to calculate earlier:</p>
+<table aria-label="数据表格，可横向滚动查看" tabindex="0">
+<thead>
+<tr>
+<th>+1</th>
+<th>+1</th>
+<th>+1</th>
+<th>R1 = (+1)<em>(+1)</em>(+1) = +1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>+1</td>
+<td>−1</td>
+<td>−1</td>
+<td>R2 = (+1)<em>(−1)</em>(−1) = +1</td>
+</tr>
+<tr>
+<td>−1</td>
+<td>+1</td>
+<td>−1</td>
+<td>R3 = (−1)<em>(+1)</em>(−1) = +1</td>
+</tr>
+<tr>
+<td>C1 = (+1)<em>(+1)</em>(−1) = −1</td>
+<td>C2 = (+1)<em>(−1)</em>(+1) = −1</td>
+<td>C3 = (+1)<em>(−1)</em>(−1) = +1</td>
+<td>χ = 4</td>
+</tr>
+</tbody>
+</table>
+<p>Any universe where measurement outcomes are predetermined must obey χ ≤ 4 (try a few tables and you will see that χ can only take values -4, 0, and 4). Quantum mechanics permits values up to 6, which can only happen if all Rs = +1 and all Cs = -1. And unlike most such tests, this one is state-independent: it doesn’t matter how you prepare the qubits, which makes it a property of the machine rather than of a carefully chosen input.</p>
+<p>Measuring χ is demanding: every row and column must be measured on the same two qubits, one after another, without disturbing them. We did this with an extra helper qubit (an "ancilla") that picks up each result and is measured instead, leaving the two main qubits intact. We ran 540 measurements in a row, repeated 1,000 times.</p>
+<p>We measured χ = 5.590 ± 0.008.</p>
+<p>Comfortably past the classical bound of 4 and only 7% away from the quantum limit. A number that says: the contextuality is in this machine in this quantity.</p>
+<h2>Does it survive at scale?</h2>
+<p>Two qubits are one thing, but quantum effects are fragile, and every added qubit brings noise that can wash them out. Useful quantum computing needs many qubits working together, so the question is whether contextuality survives at scale.</p>
+<p>In the <a href="https://arxiv.org/pdf/quant-ph/0407221" rel="noopener noreferrer">GHZ parity game</a>, N players share one entangled <a href="https://en.wikipedia.org/wiki/Greenberger%E2%80%93Horne%E2%80%93Zeilinger_state" rel="noopener noreferrer">GHZ state</a> (a superposition of all qubits being 0 and all being 1). Each player gets a one-bit question and answers with one bit, without communicating. They win if the parity (even or odd) of all the answers matches a rule set by the questions. Random guessing wins half the time, and the best classical plan does only a bit better: 75% for three players, shrinking toward 50% as players are added. A shared GHZ state wins every time. We played with up to 71 players, one per qubit. Noise keeps us below 100% and grows with each added qubit, so our lead narrows, but we stay above the classical bound throughout. We also verified genuine entanglement across 45 qubits, more than the full size of many earlier GHZ experiments.</p>
+<p><img alt="Schematic of an N-player GHZ parity game and plot of win probability from 3 to 71 qubits, showing superconducting hardware results remaining consistently above the classical bound as system size increases." decoding="async" loading="lazy" referrerpolicy="no-referrer" src="https://storage.googleapis.com/gweb-research2023-media/original_images/QuantumContextuality2-GHZParityGame.png"></p>
+<p>Each player measures their qubit in a basis set by their question bit. Despite hardware noise, the measured win rate stays above the best classical strategy by many standard deviations, up to 71 players.</p>
+<p>Beyond multiplayer games, the same physics separates shallow quantum and classical circuits. In 2018, <a href="https://www.science.org/doi/10.1126/science.aar3106" rel="noopener noreferrer">a landmark theorem</a> proved that a specific problem, finding a <a href="https://en.wikipedia.org/wiki/Hidden_linear_function_problem" rel="noopener noreferrer">hidden linear function</a>, can be solved by a <a href="https://en.wikipedia.org/wiki/Circuit_complexity" rel="noopener noreferrer">constant depth</a> quantum circuit, and that no classical circuit of constant depth can. The source of this quantum advantage traces back to contextuality.</p>
+<p>In this proof, constant depth matters. It means the circuit doesn’t get deeper as the problem gets bigger. Because every output bit is computed in a fixed number of steps, information has time to travel only a short distance. Each classical output can therefore only “see” a small neighborhood of the input, like a rumor that must cross a city in three minutes. Quantum circuits, with entanglement already laid down, are not so limited.</p>
+<p>That algorithm had never been run at scale on real hardware. We ran it, solving hidden-linear-function instances on grids of up to 105 qubits, with success probabilities above one-half, using exactly the shallow-circuit recipe the theory prescribes.</p>
+<p><img alt="Diagram of a shallow quantum circuit encoding a 2D hidden linear function problem on a processor grid alongside a plot showing success probability remaining above the 0.5 classical bound up to 105 qubits." decoding="async" loading="lazy" referrerpolicy="no-referrer" src="https://storage.googleapis.com/gweb-research2023-media/original_images/QuantumContextuality3-HiddenLinearFunction.png"></p>
+<p>By applying a few layers of gates, we can encode a hidden linear function problem on our processor. As the system size grows, noise degrades the probability of success from ~1 to 0.6 when reaching maximum processor size, still staying above the conjectured classical bound.</p>
+<h2>The unexpected dividend: A better ruler</h2>
+<p>While running these experiments, something useful happened along the way. These tasks demand that many qubits agree simultaneously and exactly. Running them surfaced subtle coherent errors in our system, the kind that rotates a quantum state slightly off-target, which conventional random-circuit benchmarks tend to average away into invisibility.</p>
+<p>That suggests a second use for contextuality: not just as a computational resource, but as a ruler.</p>
+<p>Most benchmarks ask whether a processor can clear some classical bar. These tasks instead give hardware a ceiling set by physics itself: χ = 6, a win probability of 1, a perfect contextual fraction. The distance between what a machine achieves and what nature permits becomes an objective, meaningful score. And unlike classical bars that get easier to clear, this ceiling never moves. The better our quantum processors get, the more precisely such a benchmark discriminates. This is particularly relevant for real-world applications, such as simulations of molecules for chemistry and materials science, because it measures a processor’s ability to run structured algorithms, where subtle errors can’t hide.</p>
+<h2>What comes next</h2>
+<p>A nearly century-old argument about whether physical systems always exist when nobody looks turns out to have a measurable test. For our qubits, the verdict is clear: not everything we measure can have pre-existing values waiting to be observed. <a href="https://www.nature.com/articles/nature13460" rel="noopener noreferrer">Theory links contextuality</a> to the "magic states" that error-corrected quantum computers need to run full algorithms, which our team recently prepared using <a href="https://blog.google/innovation-and-ai/models-and-research/quantum-computing/magic-state-cultivation-quantum-computing/" rel="noopener noreferrer">magic state cultivation</a>.</p>
+<p>Measuring contextuality across many qubits lets us probe an open question in physics and computer science on real hardware: what gives quantum computers their edge.</p>
+<h2>Acknowledgements</h2>
+<p>This work was carried out by the Google Quantum AI team together with our academic collaborators. We thank everyone who built and maintained the hardware, control electronics, cryogenics and software that made these experiments possible.</p></div>
+</section>
+<footer class="source-box"><span>内容来自原作者；中文为乔木风格改写，非逐字翻译。</span><div><a href="https://research.google/blog/a-game-you-cannot-win-unless-you-have-a-quantum-computer/" target="_blank" rel="noopener noreferrer">打开原文 ↗</a><a href="https://www.science.org/doi/10.1126/science.aec3042" target="_blank" rel="noopener noreferrer">相关链接 ↗</a></div></footer>
+</article></body></html>

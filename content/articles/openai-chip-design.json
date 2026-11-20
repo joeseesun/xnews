@@ -1,0 +1,82 @@
+{
+  "id": "openai-chip-design",
+  "date": "2026-11-18",
+  "published_at": "2026-11-18T17:05:52+00:00",
+  "ingested_at": "2026-11-20T08:50:00+08:00",
+  "source": {
+    "type": "web",
+    "url": "https://openai.com/index/advancing-chip-design-with-our-models/",
+    "author": "OpenAI",
+    "handle": "OpenAI",
+    "title_en": "Advancing chip design with OpenAI models",
+    "related_url": "https://openai.com/index/jalapeno-first-results/"
+  },
+  "title": "在已优化多年的旗舰GPU IP上，OpenAI的模型又找出最多14%的PPA改进",
+  "dek": "官方称，部分改动已进入AMD送去制造的设计。从规格书重新设计时分数更高，其中一部分原因是模型可以省掉性能计数器这类功能。",
+  "tags": [
+    "OpenAI",
+    "AMD",
+    "Jalapeño",
+    "chip design",
+    "RISC-V"
+  ],
+  "original": {
+    "lang": "en",
+    "title": "Advancing chip design with OpenAI models",
+    "markdown_base_url": "https://openai.com/index/advancing-chip-design-with-our-models/",
+    "text_md": "# Advancing chip design with OpenAI models\n\nNovember 18, 2026\n\nOpenAI’s models are quickly improving the chips that power AI. In [August](https://openai.com/index/jalapeno-first-results/), we shared how OpenAI engineers used our frontier models to accelerate the development of our first custom inference chip, Jalapeño. Here, we look more closely at the expert-level design improvements behind the Jalapeño gains and how we’re applying the same approach to deliver significant gains on third-party hardware with AMD.\n\nTo measure our model’s ability at end to end chip design tasks, we evaluated successive generations on two open-source processor designs with interesting findings. And to ground capability development in trusted evaluators, we’re working with Synopsys to integrate frontier intelligence with the electronic design automation (EDA) tools that engineers already use to design and verify chips.\n\n## Improving Jalapeño’s compute blocks\n\nWe started using GPT‑o3 mini to help design Jalapeño in early 2025. Even that early model found ways to make nontrivial PPA improvements, such as:\n\nIn the vector unit, which manages and executes parallel computing tasks, the savings came from floating-point adders and multipliers, conversion functions, reduction logic, and the special-function unit. The models explored both alternative logic implementations and how to divide computations across pipeline stages, finding opportunities to share hardware and reduce intermediate storage.\n\nIn the matrix unit, an arithmetic component, improvements accumulated across floating-point adders, multipliers, and low-precision dot-product circuits. One multiplier redesign used about 15% less cell area in synthesis while reducing latency from two clock cycles to one. A separate adder redesign reduced cell area by about 15% while retaining its two-cycle latency. Further improvements to dot-product logic and pipeline organization contributed additional savings across the block.\n\nAcross the broader Jalapeño design effort, the team estimates that model proposed changes reduced standard-cell area by about 13% in the vector unit and 10% in the matrix unit. These optimizations were silicon proven during [Jalapeño’s silicon bring-up](https://openai.com/index/jalapeno-first-results/).\n\n## Our collaboration with AMD\n\nWe have partnered with AMD on PPA improvements and seen up to 14% improvement relative to heavily optimized baselines on the flagship GPU IP. Our model identified further improvements by rewriting the code that describes the chip’s circuits (SystemVerilog RTL). This represents roughly a year of progress achieved in less than 5 months–unprecedented results at the frontier of chip design. AMD has already included some of these changes in a recent design it sent for manufacturing, and added others to its production design files for use in future versions.\n\nWe’ve observed the model reason about RTL at the level of an expert microarchitect. The model can rewrite circuits that perform calculations, control operations, or move data. It used Synopsys tools to verify that each rewrite preserved the block’s behavior and to evaluate the trade-offs in power, performance, and area.\n\nAMD also verified single-digit percentage gains in PPA across key blocks of its upcoming next-generation flagship CPU using designs written by our model. Looking ahead, we expect further PPA improvements on top of GPU and CPU relative to the most optimized baseline.\n\n## Optimizing RISC-V cores\n\nOur results on Jalapeño and AMD’s chips show that models can make improvements in production designs. To measure the progression in chip design capabilities from one model generation to the next, we tested each model on two open-source 32-bit RISC-V cores. PicoRV32 is a compact core designed for reprogrammable chips called FPGAs. OpenTitan uses Ibex as the embedded processor in its security chip. Each is a complete processor core for embedded, microcontroller class workloads.\n\nWe gave each model the original hardware description for each core and asked it to increase throughput (the number of instructions the core can execute per second). For example, a change might let a core finish an instruction in fewer clock cycles but make each cycle take longer. Measuring throughput captures both effects.\n\nWe checked each design’s outputs in simulation. Designs scored zero if they failed a check or used more than 16 times the original core’s area. For designs that passed, we measured instructions per clock cycle on workloads hidden from the models. We took the geometric mean across those workloads and multiplied it by the maximum clock frequency estimated with Yosys. That gave us an estimate of instructions per second. For each core, we assigned the best throughput we observed under the same constraints a score of 1.0. The charts show the average score across runs, including those that scored zero.\n\nWith a comparable budget of about 112,000 tokens per run, GPT‑6.2 Astra had the highest average score on both cores. GPT‑6.1 Sol also outscored GPT‑5.6 Sol on both.\n\n![Chart titled PicoRV32 · RTL optimization. Mean normalized reward versus weighted token cost (0.125 prefill) for GPT-6.2 Astra, GPT-6 Astra, GPT-6.1 Sol, GPT-5.6 Sol, and GPT-5.5, with error bars. Official static image from OpenAI's announcement of this article; the blog page renders the same chart as an interactive SVG.](https://pbs.twimg.com/media/HXbDvvnakAAzZqh.jpg)\n\nOn the existing PicoRV32 core, GPT‑6.2 Astra has the highest mean score at the larger comparable budgets. Around 112,000 tokens, its score is about twice GPT‑6 Astra’s.\n\n![Chart titled Ibex · RTL optimization. Mean normalized reward versus weighted token cost (0.125 prefill) for GPT-6.2 Astra, GPT-6 Astra, GPT-6.1 Sol, GPT-5.6 Sol, and GPT-5.5, with error bars. Official static image from OpenAI's announcement of this article; the blog page renders the same chart as an interactive SVG.](https://pbs.twimg.com/media/HXbDvvBbkAA_huj.jpg)\n\nOn the existing Ibex core, GPT‑6.2 Astra’s mean score continues to climb across the higher budgets it reaches. GPT‑6 Astra and GPT‑6.1 Sol are closer together.\n\n## Designing a RISC-V core from a specification\n\nFor the second task, we gave each model written requirements and templates from the open-source code showing how the core connects to the rest of the system. The model chose how data would move through the core and how to divide the work into stages. For each core, we kept the correctness checks, memory and cache settings, and throughput objectives the same as in the RTL optimization task.\n\nAt about 112,000 tokens per run, all five models scored higher when they designed a core from written requirements than when they tried to improve the existing design. That held for both PicoRV32 and Ibex. GPT‑6.2 Astra gained more on Ibex than on PicoRV32. The full evaluation included 9,881 scored runs across both tasks, both cores, and all token budgets.\n\n![Chart titled PicoRV32 · Specification to RTL. Mean normalized reward versus weighted token cost (0.125 prefill) for GPT-6.2 Astra, GPT-6 Astra, GPT-6.1 Sol, GPT-5.6 Sol, and GPT-5.5, with error bars. Official static image from OpenAI's announcement of this article; the blog page renders the same chart as an interactive SVG.](https://pbs.twimg.com/media/HXbDvufasAA5M5N.jpg)\n\nStarting from a PicoRV32 specification, GPT‑6.2 Astra passes a mean score of 0.7 near 112,000 tokens and scores higher at the next two observed budgets.\n\n![Chart titled Ibex · Specification to RTL. Mean normalized reward versus weighted token cost (0.125 prefill) for GPT-6.2 Astra, GPT-6 Astra, GPT-6.1 Sol, GPT-5.6 Sol, and GPT-5.5, with error bars. Official static image from OpenAI's announcement of this article; the blog page renders the same chart as an interactive SVG.](https://pbs.twimg.com/media/HXbDvvybIAAlN65.jpg)\n\nOn Ibex, GPT‑6.2 Astra averages about 0.75 near 112,000 tokens when designing from a specification. Its curve stays above the others at larger shared budgets.\n\nStarting from written requirements gives the models room to omit features found in the original cores, such as performance counters and additional instructions. Those features may do little to improve throughput on the test workloads, which could explain part of the score advantage. Requiring those features, setting a tighter limit on circuit area, and checking timing after physical synthesis would make the test more representative of production chip design.\n\n## What’s next\n\nWe have demonstrated that our models can explore new processor architectures in RISC-V evals and contributed net new improvements on top of sophisticated production designs such as Jalapeño and AMD’s next generation flagship GPU and CPU. To ground model development in trusted evaluators and broaden the design challenges addressed, we’re partnering with Synopsys to train [GPT‑Synopsys](https://investor.synopsys.com/news/news-details/2026/OpenAI-and-Synopsys-Announce-GPT-Synopsys-Frontier-Intelligence-to-Revolutionize-Chip-Design/default.aspx), a new model, to use Synopsys electronic design automation (EDA) tools the way expert chip designers do.\n",
+    "media": [
+      {
+        "id": "media_picorv32_rtl",
+        "type": "image",
+        "url": "https://pbs.twimg.com/media/HXbDvvnakAAzZqh.jpg",
+        "alt": "Chart titled PicoRV32 · RTL optimization. Mean normalized reward versus weighted token cost (0.125 prefill) for GPT-6.2 Astra, GPT-6 Astra, GPT-6.1 Sol, GPT-5.6 Sol, and GPT-5.5, with error bars."
+      },
+      {
+        "id": "media_ibex_rtl",
+        "type": "image",
+        "url": "https://pbs.twimg.com/media/HXbDvvBbkAA_huj.jpg",
+        "alt": "Chart titled Ibex · RTL optimization. Mean normalized reward versus weighted token cost (0.125 prefill) for GPT-6.2 Astra, GPT-6 Astra, GPT-6.1 Sol, GPT-5.6 Sol, and GPT-5.5, with error bars."
+      },
+      {
+        "id": "media_picorv32_spec",
+        "type": "image",
+        "url": "https://pbs.twimg.com/media/HXbDvufasAA5M5N.jpg",
+        "alt": "Chart titled PicoRV32 · Specification to RTL. Mean normalized reward versus weighted token cost (0.125 prefill) for GPT-6.2 Astra, GPT-6 Astra, GPT-6.1 Sol, GPT-5.6 Sol, and GPT-5.5, with error bars."
+      },
+      {
+        "id": "media_ibex_spec",
+        "type": "image",
+        "url": "https://pbs.twimg.com/media/HXbDvvybIAAlN65.jpg",
+        "alt": "Chart titled Ibex · Specification to RTL. Mean normalized reward versus weighted token cost (0.125 prefill) for GPT-6.2 Astra, GPT-6 Astra, GPT-6.1 Sol, GPT-5.6 Sol, and GPT-5.5, with error bars."
+      }
+    ]
+  },
+  "body_md": "已经让工程师优化了多年的旗舰GPU设计，还能再挤出多少来？\n\nOpenAI在2026年11月18日的文章里写，他们和AMD合作，在旗舰GPU IP上看到了最多**14%**的PPA改进，对照的是「已经被充分优化的基线」。PPA指功耗、性能和面积。官方说，这大约相当于一年的进展，是在不到**5**个月里做完的，并称这样的结果在芯片设计的前沿很少见。\n\n同一篇文章还写，AMD已经把其中一部分改动放进了最近送去制造的设计，另外一些则写进了生产设计文件，留给后续版本用。这些数字和进度判断，都来自OpenAI自己的报告。\n\n他们把同一套方法，也用在了自家第一款定制推理芯片Jalapeño上。\n\n**Jalapeño的计算块里，模型改的是加法器、乘法器和流水线怎么切**\n\nOpenAI说，他们从2025年初就开始用GPT-o3 mini帮助设计Jalapeño。即便是那么早的模型，也已经能找出有实质意义的PPA改进。\n\n在负责并行计算的向量单元里，节省来自浮点加法器和乘法器、转换函数、归约逻辑，以及特殊功能单元。模型既试了不同的逻辑实现，也试了如何把计算分到各个流水线级，从而找到共享硬件、减少中间存储的机会。\n\n在矩阵单元里，改进是在浮点加法器、乘法器和低精度点积电路上一点点累加的。其中一个乘法器的重新设计，综合后大约少用**15%**的单元面积，同时把延迟从两个时钟周期降到一个。另一个加法器的重新设计，单元面积也大约少了**15%**，但仍然保持两个周期的延迟。点积逻辑和流水线组织上的改动，又给整个块带来了额外节省。\n\n把Jalapeño设计工作放在一起看，团队估计，模型提出的改动让向量单元的标准单元面积少了约**13%**，矩阵单元少了约**10%**。官方写，这些优化在Jalapeño的硅片启动过程中得到了硅上验证。今年8月，OpenAI已经单独写过Jalapeño的早期结果，地址是https://openai.com/index/jalapeno-first-results/。\n\n**模型按专家微架构师的方式改写RTL，再用Synopsys工具核对行为**\n\n和AMD的合作里，模型是靠改写描述电路的代码，也就是SystemVerilog RTL，来找出进一步改进的。OpenAI观察到，模型能在专家微架构师的层面上推理RTL，改写做计算、做控制或搬数据的电路。它用Synopsys的工具检查每一次改写是否保持了该模块的行为，并评估功耗、性能和面积上的取舍。\n\nOpenAI还写，AMD在下一代旗舰CPU的关键模块上，也验证了模型写出的设计能带来个位数百分比的PPA收益。往后，他们预期在已经充分优化的基线之上，GPU和CPU都还能再有PPA改进。\n\n**用两个开源RISC-V核，看一代模型和下一代差在哪里**\n\nJalapeño和AMD的结果显示，模型能在生产设计里做出改进。为了比较不同代模型在芯片设计任务上的进展，他们又在两个开源的32位RISC-V核上做了评测。PicoRV32是为FPGA这类可重编程芯片设计的紧凑内核。OpenTitan则把Ibex用作安全芯片里的嵌入式处理器。两者都是面向嵌入式、微控制器类负载的完整处理器核。\n\n每个模型都拿到原来的硬件描述，任务是提高吞吐量，也就是内核每秒能执行的指令数。比如，某个改动可能让一条指令少用几个时钟周期，但每个周期变得更长。用吞吐量可以把这两种效果一起算进去。\n\n他们在仿真里检查每个设计的输出。如果检查失败，或面积超过原内核的**16**倍，这个设计得0分。通过检查的设计，会在模型看不到的负载上测量每周期指令数，再取这些负载的几何平均，乘以Yosys估计的最高时钟频率，得到每秒指令数的估计。对每个内核，他们把同样约束下观察到的最好吞吐量定为**1.0**。图上画的是各次运行的平均分数，0分的运行也算进去。\n\n在大约**11.2万**个token的可比预算下，GPT-6.2 Astra在两个内核上都拿到了最高平均分。GPT-6.1 Sol在两个内核上也超过了GPT-5.6 Sol。\n\n在现成的PicoRV32上，更大的可比预算里，仍是GPT-6.2 Astra平均分最高。在约11.2万token附近，它的分数大约是GPT-6 Astra的两倍。\n\n在现成的Ibex上，GPT-6.2 Astra的平均分在它能用到的更高预算上继续往上走。GPT-6 Astra和GPT-6.1 Sol则靠得更近。\n\n**从规格书从头设计，分数更高，但也少了原内核里的一些功能**\n\n第二项任务里，模型拿到的是书面要求和开源代码里的模板，用来看这个核如何接到系统的其余部分。数据怎么在核里流动、工作怎么切成流水线级，由模型自己决定。正确性检查、内存和缓存设置，以及吞吐量目标，都和改写现成RTL的任务相同。\n\n大约11.2万token每次运行时，五个模型从书面要求设计内核的分数，都高于去改进现成设计，PicoRV32和Ibex都是如此。GPT-6.2 Astra在Ibex上的提升，比在PicoRV32上更明显。全部评测包括两项任务、两个内核和所有token预算，一共打分**9881**次。\n\n从PicoRV32的规格出发，GPT-6.2 Astra在约11.2万token附近跨过平均分**0.7**，并在接下来两个观察到的预算上更高。\n\n在Ibex上，从规格设计时，GPT-6.2 Astra在约11.2万token附近平均大约是**0.75**。在更大的共享预算上，它的曲线也留在其他模型上面。\n\n从书面要求起步，模型可以省掉原内核里的一些功能，比如性能计数器和额外指令。这些功能对测试负载上的吞吐量可能帮助不大，而这可能解释了分数优势的一部分。官方自己写，如果把这些功能规定为必须保留，再把电路面积限制收得更紧，并在物理综合之后检查时序，这项测试会更接近生产芯片设计。\n\n**下一步是和Synopsys一起训练会用EDA工具的模型**\n\nOpenAI的结论是，模型已经能在RISC-V评测里探索新的处理器结构，也在Jalapeño和AMD下一代旗舰GPU、CPU这类复杂的生产设计上，贡献了净的新改进。为了把模型训练放在受信任的评估工具上，并扩大所处理的设计问题，他们正和Synopsys合作训练一个名为GPT-Synopsys的新模型，目标是让它像专家芯片设计师那样使用Synopsys的电子设计自动化工具。\n\n读这些结果时，有两条边界值得单独看。第一，旗舰GPU上最多14%的PPA、以及硅上验证过的Jalapeño面积变化，都是OpenAI的报告，对照的是已经优化过的基线，不是「新芯片整体快了14%」。第二，从规格书设计得分更高，并不自动等于更适合投产，因为模型可以不实现性能测试计数器这类原内核功能。官方已经把更严的面积限制和物理综合后的时序检查，写成了让评测更接近真实设计的条件。\n",
+  "rewrite_media": [
+    {
+      "media_id": "media_picorv32_rtl",
+      "placement": "after_paragraph",
+      "after_md": "在现成的PicoRV32上，更大的可比预算里，仍是GPT-6.2 Astra平均分最高。在约11.2万token附近，它的分数大约是GPT-6 Astra的两倍。",
+      "evidence": "source_position_verified"
+    },
+    {
+      "media_id": "media_ibex_rtl",
+      "placement": "after_paragraph",
+      "after_md": "在现成的Ibex上，GPT-6.2 Astra的平均分在它能用到的更高预算上继续往上走。GPT-6 Astra和GPT-6.1 Sol则靠得更近。",
+      "evidence": "source_position_verified"
+    },
+    {
+      "media_id": "media_picorv32_spec",
+      "placement": "after_paragraph",
+      "after_md": "从PicoRV32的规格出发，GPT-6.2 Astra在约11.2万token附近跨过平均分**0.7**，并在接下来两个观察到的预算上更高。",
+      "evidence": "source_position_verified"
+    },
+    {
+      "media_id": "media_ibex_spec",
+      "placement": "after_paragraph",
+      "after_md": "在Ibex上，从规格设计时，GPT-6.2 Astra在约11.2万token附近平均大约是**0.75**。在更大的共享预算上，它的曲线也留在其他模型上面。",
+      "evidence": "source_position_verified"
+    }
+  ]
+}
