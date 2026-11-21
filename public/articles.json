@@ -1,5 +1,35 @@
 [
   {
+    "id": "openai-adversarial-distillation",
+    "date": "2026-11-20",
+    "title": "提取受保护推理的成功率，从54.0%降到了0.2%",
+    "dek": "OpenAI用自适应黑盒红队测试GPT-6.2 Astra的更新防护，并报告完整推理轨迹比摘要更容易把网络安全能力传给学生模型。评测是内部进行的。",
+    "url": "/a/openai-adversarial-distillation",
+    "source_url": "https://openai.com/index/combatting-adversarial-distillation/",
+    "tags": [
+      "OpenAI",
+      "distillation",
+      "safety",
+      "cybersecurity",
+      "chain-of-thought"
+    ]
+  },
+  {
+    "id": "openai-medchembench",
+    "date": "2026-11-20",
+    "title": "在xhigh档上，GPT-6.2 Astra的MedChemBench得分是84.5%，GPT-5.6 Sol是58.2%",
+    "dek": "这份基准有99道题，来自117篇论文和专利，包含761个分子结构。GPT-6 Astra在结构重建上拿到95.4%，选择化合物和预测数值大约只拿到一半。官方写，这不能证明模型能发现新药或改进实验室决策。",
+    "url": "/a/openai-medchembench",
+    "source_url": "https://openai.com/index/introducing-medchembench/",
+    "tags": [
+      "OpenAI",
+      "MedChemBench",
+      "medicinal chemistry",
+      "benchmark",
+      "drug discovery"
+    ]
+  },
+  {
     "id": "google-quantum-contextuality",
     "date": "2026-11-19",
     "title": "在Willow上，魔方游戏赢了98.30%，经典上限是88.89%",
