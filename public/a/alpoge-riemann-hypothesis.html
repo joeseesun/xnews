@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="referrer" content="no-referrer">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>175,187 个模块通过核验，Lean 社区认证了这段黎曼猜想证明 · X News</title>
+<meta name="description" content="Alpöge 与 Claude 发现黎曼猜想证明后，只公开了一份 1700 万行的 Lean 库。Lean 与 Mathlib 社区在次日发表联合声明，认为命题、编译、比对和内核检查均已通过。">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#fffefa">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="X News">
+<meta property="og:title" content="175,187 个模块通过核验，Lean 社区认证了这段黎曼猜想证明 · X News">
+<meta property="og:description" content="Alpöge 与 Claude 发现黎曼猜想证明后，只公开了一份 1700 万行的 Lean 库。Lean 与 Mathlib 社区在次日发表联合声明，认为命题、编译、比对和内核检查均已通过。">
+<meta property="og:url" content="https://xnews.qiaomu.ai/a/alpoge-riemann-hypothesis">
+<link rel="canonical" href="https://xnews.qiaomu.ai/a/alpoge-riemann-hypothesis">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="175,187 个模块通过核验，Lean 社区认证了这段黎曼猜想证明 · X News">
+<meta name="twitter:description" content="Alpöge 与 Claude 发现黎曼猜想证明后，只公开了一份 1700 万行的 Lean 库。Lean 与 Mathlib 社区在次日发表联合声明，认为命题、编译、比对和内核检查均已通过。">
+<meta property="og:image" content="https://pbs.twimg.com/media/HXqGwBnaUAA8Pvd.png">
+<meta name="twitter:image" content="https://pbs.twimg.com/media/HXqGwBnaUAA8Pvd.png">
+<meta property="article:published_time" content="2026-11-22T08:20:00+08:00">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://xnews.qiaomu.ai/#publisher", "name": "X News", "url": "https://xnews.qiaomu.ai/", "description": "海外创始人长文与 AI 视频的中文改写选刊"}, {"@type": "WebSite", "@id": "https://xnews.qiaomu.ai/#website", "name": "X News", "url": "https://xnews.qiaomu.ai/", "inLanguage": "zh-CN", "publisher": {"@id": "https://xnews.qiaomu.ai/#publisher"}}, {"@type": "Article", "@id": "https://xnews.qiaomu.ai/a/alpoge-riemann-hypothesis#article", "url": "https://xnews.qiaomu.ai/a/alpoge-riemann-hypothesis", "mainEntityOfPage": {"@id": "https://xnews.qiaomu.ai/a/alpoge-riemann-hypothesis#page"}, "headline": "175,187 个模块通过核验，Lean 社区认证了这段黎曼猜想证明", "description": "Alpöge 与 Claude 发现黎曼猜想证明后，只公开了一份 1700 万行的 Lean 库。Lean 与 Mathlib 社区在次日发表联合声明，认为命题、编译、比对和内核检查均已通过。", "inLanguage": "zh-CN", "datePublished": "2026-11-22T08:20:00+08:00", "author": {"@id": "https://xnews.qiaomu.ai/#publisher"}, "publisher": {"@id": "https://xnews.qiaomu.ai/#publisher"}, "isBasedOn": {"@type": "CreativeWork", "url": "https://alpo.ge/remark.pdf", "name": "I believe I have, working with Claude, discovered a proof of the Riemann Hypothesis", "datePublished": "2026-11-20T00:00:00+00:00"}, "citation": "https://alpo.ge/remark.pdf", "keywords": ["Riemann Hypothesis", "Lean", "formal verification", "mathematics", "Claude", "Anthropic"], "image": ["https://pbs.twimg.com/media/HXqGwBnaUAA8Pvd.png"]}, {"@type": "WebPage", "@id": "https://xnews.qiaomu.ai/a/alpoge-riemann-hypothesis#page", "url": "https://xnews.qiaomu.ai/a/alpoge-riemann-hypothesis", "name": "175,187 个模块通过核验，Lean 社区认证了这段黎曼猜想证明 · X News", "description": "Alpöge 与 Claude 发现黎曼猜想证明后，只公开了一份 1700 万行的 Lean 库。Lean 与 Mathlib 社区在次日发表联合声明，认为命题、编译、比对和内核检查均已通过。", "inLanguage": "zh-CN", "isPartOf": {"@id": "https://xnews.qiaomu.ai/#website"}, "mainEntity": {"@id": "https://xnews.qiaomu.ai/a/alpoge-riemann-hypothesis#article"}}]}</script>
+<link rel="alternate" type="application/rss+xml" title="X News" href="/feed.xml">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-7 -7 58 58'%3E%3Crect x='-7' y='-7' width='58' height='58' rx='5' fill='%231b1d18'/%3E%3Cpath fill='%23fffefa' d='M2 0h11l29 44H31zM32 0h10L26 18l-5-7zM17 26l5 7-10 11H2z'/%3E%3C/svg%3E">
+<script>try{var t=localStorage.getItem('xn.theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
+<style data-source="/static/app.b7cfdefd4a1d.css">/* D · 影像刊 — see DESIGN.md. System fonts, real media, no left rail. */
+:root {
+  color-scheme:light;
+  --paper:#fffefa; --ink:#1b1d18; --muted:#62685a; --rule:#d8dccf;
+  --surface:#eef0e5; --sage:#dce3cc; --sage-ink:#293026; --focus:#315b3c;
+  --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC","Noto Sans CJK SC",sans-serif;
+  --ease:cubic-bezier(.2,0,0,1); --gutter:32px; --reader-bar:64px;
+  --control-border:#808675; --image-outline:#0000001a;
+  --contrast-surface:#1b1d18; --contrast-ink:#fffefa;
+}
+:root[data-theme="dark"] {
+  color-scheme:dark;
+  --paper:#20241e; --ink:#eef0e7; --muted:#b7c1af; --rule:#4b5842;
+  --surface:#30392a; --sage:#394631; --sage-ink:#eef0e7; --focus:#c0d9aa;
+  --control-border:#89957f; --image-outline:#ffffff1a;
+  --contrast-surface:#12180f; --contrast-ink:#eef0e7;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:130px;scrollbar-gutter:stable}
+body{margin:0;background:var(--paper);color:var(--ink);font:1rem/1.7 var(--sans);-webkit-font-smoothing:antialiased;letter-spacing:0}
+[hidden]{display:none!important}
+a{color:inherit;text-decoration:none}
+@media(hover:hover){a:hover{text-decoration:underline;text-underline-offset:.2em}}
+button{font:inherit;color:inherit;cursor:pointer}
+button:disabled{cursor:wait}
+button,a{-webkit-tap-highlight-color:transparent}
+
+:focus-visible{outline:3px solid var(--focus);outline-offset:4px}
+em,i{font-style:normal;font-weight:500}
+strong,b{font-weight:600}
+img{max-width:100%;height:auto}
+.sr-only,.skip:not(:focus){position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.skip:focus{position:fixed;z-index:100;top:8px;left:8px;background:var(--ink);color:var(--paper);padding:10px 16px}
+.site-header,.site-main,.site-footer{width:min(100% - var(--gutter)*2,1320px);margin-inline:auto}
+.site-header{min-height:118px;display:flex;align-items:center;justify-content:space-between;gap:24px 32px;flex-wrap:wrap;padding-block:24px;border-bottom:1px solid var(--ink)}
+.brand{display:flex;align-items:center;gap:26px;flex:none}
+.brand:hover{text-decoration:none}
+.brand-wordmark{display:flex;align-items:baseline;gap:7px;line-height:1}
+.brand-mark{width:43px;height:43px;align-self:center;margin-top:2px}
+.brand-name{font:700 3.875rem/.95 Georgia,"Times New Roman",serif;letter-spacing:-.065em}
+.brand-period{color:var(--focus)}
+.brand-sub{font-size:0.9375rem;font-weight:500;line-height:1.5;border-inline-start:1px solid var(--rule);padding-inline-start:25px;letter-spacing:.12em}
+.brand-sub>span{display:block;font-size:0.75rem;line-height:1.6;font-weight:400;letter-spacing:.04em;color:var(--muted);margin-top:5px}
+.header-side{display:flex;align-items:center;gap:30px}
+.site-nav{display:flex;align-items:center;gap:30px;font-size:0.875rem}
+.site-nav a{min-height:44px;display:flex;align-items:center;gap:6px;position:relative}
+.site-nav a[aria-current="page"]{font-weight:600}
+.site-nav a[aria-current="page"]::after{content:"";position:absolute;inset-inline:0;bottom:3px;height:2px;background:var(--ink)}
+.icon-button{width:44px;height:44px;border:1px solid var(--control-border);border-radius:50%;display:inline-grid;place-items:center;background:transparent;flex:none}
+.site-main{min-height:55vh;padding-bottom:44px}
+.edition-line{min-height:160px;display:flex;align-items:center;justify-content:space-between;gap:24px 32px;flex-wrap:wrap;padding-block:28px}
+.edition-line h1{font-size:1.875rem;line-height:1.4;font-weight:600;margin:8px 0 10px;text-wrap:balance}
+.edition-line p{font-size:0.875rem;line-height:1.7;color:var(--muted);margin:0}
+.edition-line .edition-kicker{font-size:0.6875rem;letter-spacing:.1em;color:var(--ink)}
+.edition-kicker span{margin-inline:8px;color:var(--muted)}
+.edition-meta{text-align:end;font-variant-numeric:tabular-nums;display:flex;flex-direction:column;gap:6px;flex:none}
+.edition-label{font-size:0.75rem;color:var(--muted)}
+.edition-meta time{font:400 1.5rem/1.25 Georgia,"Times New Roman",serif;letter-spacing:.02em}
+.edition-note{font-size:0.75rem;color:var(--muted)}
+/* A quiet editorial toolbar; every control remains labelled and keyboard accessible. */
+.discovery{margin-bottom:20px}
+.discovery-top,.discovery-bottom{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.discovery-top{flex-wrap:wrap;padding-block:16px;border-block:1px solid var(--rule)}
+.filter-group{display:flex;gap:8px;flex-wrap:wrap}
+.filter-group button{min-height:44px;padding:8px 16px;display:flex;align-items:center;gap:9px;font-size:0.875rem;background:transparent;border:1px solid transparent;border-radius:3px}
+.filter-group button span{font-size:0.6875rem;font-variant-numeric:tabular-nums;opacity:.8}
+.filter-group button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.search-field{display:flex;align-items:center;gap:10px;width:min(340px,42%);min-height:44px;border:1px solid var(--control-border);border-radius:3px;padding-inline:13px 0;color:var(--muted)}
+.search-field svg{flex:none}
+.search-field input{font:400 0.875rem/1.5 var(--sans);color:var(--ink);background:transparent;border:0;min-width:0;width:100%;padding:11px 0;border-radius:0}
+.search-field input::-webkit-search-cancel-button{display:none}
+.search-field input::placeholder{color:var(--muted);opacity:1}
+.search-field:focus-within{outline:2px solid var(--focus);outline-offset:3px}
+.search-field input:focus-visible{outline:none}
+.search-field button{border:0;background:transparent;width:44px;min-height:44px;flex:none;font-size:1.375rem}
+.discovery-bottom{flex-wrap:wrap;padding-top:12px;min-height:54px}
+.discovery-bottom p{margin:0;font-size:0.75rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.view-switch{display:flex;gap:4px}
+.view-switch button{display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:6px 10px;border:1px solid transparent;border-radius:3px;background:transparent;color:var(--muted);font-size:0.75rem}
+.view-switch button[aria-pressed="true"]{color:var(--ink);background:var(--surface);border-color:var(--control-border)}
+.search-empty{padding:48px 20px 72px;text-align:center;border-top:1px solid var(--rule)}
+.empty-symbol{font:400 3rem/1 Georgia,serif;color:var(--muted);margin:0 0 20px}
+.search-empty h2{font-size:1.375rem;font-weight:500;margin:0 0 12px}
+.search-empty p{color:var(--muted);overflow-wrap:anywhere}
+.search-empty .reset-button{margin:12px 0 0}
+.news-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:28px 24px;align-items:stretch}
+.news-card{grid-column:span 4;min-width:0;display:flex;flex-direction:column;border:1px solid var(--rule);background:var(--paper);position:relative;overflow:hidden}
+.news-card.is-featured{grid-column:span 8}
+.news-card.is-wide{grid-column:span 8}
+.card-link{display:flex;flex-direction:column;height:100%;min-width:0}
+.card-link:hover{text-decoration:none}
+.cover{position:relative;overflow:hidden;background:var(--surface);min-height:0;aspect-ratio:16/9;isolation:isolate}
+.cover img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;z-index:1;transition:transform 180ms var(--ease)}
+.is-featured .cover{min-height:0;aspect-ratio:2.7;flex:none}
+.is-featured .card-body{flex:0 0 auto}
+.is-wide .cover{aspect-ratio:2/1}
+.cover-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;background:var(--surface);color:var(--ink);z-index:0;overflow:hidden}
+.cover-word{font-size:clamp(2.75rem,5.3vw,5.25rem);font-weight:500;line-height:1.1;overflow-wrap:anywhere;max-width:100%;text-align:left}
+.cover-badge{position:absolute;z-index:2;left:16px;bottom:16px;background:#1b1d18dc;color:#fffefa;padding:5px 10px;font-size:0.75rem;line-height:1.6;border:1px solid #fffefa60}
+.card-body{padding:22px 24px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.card-meta{display:flex;overflow-wrap:anywhere;align-items:flex-start;justify-content:space-between;gap:14px;font-size:0.75rem;line-height:1.7;color:var(--muted);font-variant-numeric:tabular-nums}
+.card-meta time{white-space:nowrap;flex:none}
+.card-title{font-size:1.3125rem;font-weight:600;line-height:1.6;margin:0;text-wrap:pretty;overflow-wrap:anywhere}
+.is-featured .card-title{font-size:clamp(1.5625rem,2.2vw,2rem);line-height:1.5}
+.card-dek{font-size:0.875rem;line-height:1.85;color:var(--muted);margin:0;text-wrap:pretty}
+.card-end{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;font-size:0.75rem;color:var(--muted);margin-top:auto;padding-top:16px}
+.card-read{display:inline-flex;align-items:center;gap:10px;color:var(--ink);white-space:nowrap}
+.card--text.tone-ink .card-read{color:var(--contrast-ink)}
+.card-link:focus-visible{outline-offset:-4px}
+.tone-ink .card-link:focus-visible{outline-color:var(--contrast-ink)}
+.card-arrow{font-size:1.3125rem;line-height:1}
+.card--text .type-cover{min-height:140px;padding:24px 24px 16px;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:20px;overflow:hidden}
+.type-index{font-size:0.625rem;letter-spacing:.12em;line-height:1.5;font-variant-numeric:tabular-nums}
+.type-dot{color:var(--focus)}
+.tone-ink .type-dot{color:var(--contrast-ink)}
+.card--text .cover-word{font:400 clamp(2.25rem,3.5vw,3.375rem)/1.15 Georgia,"Times New Roman",serif;letter-spacing:-.03em}
+.card--text .card-body{padding-top:12px}
+.card--text{align-self:stretch}
+.card--text.tone-ink{background:var(--contrast-surface);color:var(--contrast-ink);border-color:var(--contrast-surface)}
+.card--text.tone-ink .card-meta,.card--text.tone-ink .card-dek,.card--text.tone-ink .card-end{color:var(--contrast-ink);opacity:.85}
+.card--text.tone-sage{background:var(--sage);color:var(--sage-ink);border-color:var(--sage)}
+.card--text.tone-sage .card-meta,.card--text.tone-sage .card-dek,.card--text.tone-sage .card-end{color:var(--sage-ink)}
+.cover-error-link{display:none;font-size:0.875rem;padding:0 22px 18px;text-decoration:underline;text-underline-offset:.2em}
+.media-failed .cover-error-link{display:block}
+.media-failed .cover img{display:none}
+.empty-state{padding:64px 0;max-width:40rem}
+.empty-state h1{font-size:2rem;font-weight:500}
+.empty-state p{color:var(--muted)}
+.site-footer{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:20px 0 32px;border-top:1px solid var(--ink);font-size:0.875rem;color:var(--muted)}
+.footer-links{display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+.footer-links a{display:inline-flex;align-items:center;min-height:44px}
+/* Shared standalone article and progressive full-screen reader. */
+.article-reader{max-width:960px;margin:0 auto;padding:30px 0 60px;min-width:0}
+.article-back{display:inline-flex;min-height:44px;align-items:center;gap:8px;font-size:0.875rem;color:var(--muted);margin-bottom:20px}
+.article-header{max-width:900px;margin:0 auto 24px}
+.article-kicker{font-size:0.875rem;color:var(--muted);margin:0 0 12px}
+.article-header h1{font-size:clamp(1.8125rem,3.8vw,3rem);line-height:1.42;font-weight:500;margin:0 0 18px;text-wrap:pretty;overflow-wrap:anywhere}
+.article-dek{font-size:1.125rem;line-height:1.85;color:var(--muted);margin:0 0 22px;max-width:42rem}
+.article-meta{display:flex;gap:8px 22px;flex-wrap:wrap;color:var(--muted);font-size:0.875rem;padding-top:14px;border-top:1px solid var(--rule);font-variant-numeric:tabular-nums}
+.reader-tabs{display:flex;align-items:center;gap:8px 16px;flex-wrap:wrap;position:sticky;top:0;z-index:3;background:var(--paper);border-block:1px solid var(--rule);padding:8px 0;margin:0 auto 30px;max-width:900px}
+.reader-tabs [data-tabs]{display:flex;flex-wrap:wrap;gap:6px;min-width:0}
+.reader-tabs a{display:inline-flex;align-items:center;min-height:44px;padding:6px 14px;font-size:0.875rem;border:1px solid transparent;border-radius:3px;white-space:nowrap}
+.reader-tabs a[aria-selected="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.reader-source{margin-left:auto;font-size:0.875rem!important}
+.reader-panel{max-width:42rem;margin:0 auto 44px;scroll-margin-top:130px}
+.section-heading{font-size:1.25rem;font-weight:500;margin:0 0 20px}
+.reader-enhanced .section-heading{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);margin:0;padding:0}
+.original-title{font-size:1.1875rem;line-height:1.7;margin:0 0 22px;font-weight:500;overflow-wrap:anywhere}
+.completeness-note{font-size:0.875rem;line-height:1.85;color:var(--muted);background:var(--surface);border:1px solid var(--rule);padding:12px 16px;margin:0 0 24px}
+.prose{min-width:0;font-size:1.125rem;line-height:1.95;overflow-wrap:anywhere;text-wrap:pretty}
+.prose pre{max-width:100%;overflow-x:auto;margin:1.5em 0;padding:1rem;border:1px solid var(--rule);background:var(--surface);font-size:.875rem;line-height:1.65;tab-size:4;white-space:pre;overflow-wrap:normal;text-wrap:initial}
+.prose pre code{display:block;width:max-content;min-width:100%;padding:0;border:0;border-radius:0;background:none;font-size:inherit;line-height:inherit;white-space:pre;overflow-wrap:normal}
+/* Keep wide source tables inside the reading column without compressing every cell. */
+.prose table{display:block;width:fit-content;max-width:100%;overflow-x:auto;border-collapse:collapse;margin:1.5em 0;font-size:.9375rem;line-height:1.65;tab-size:4;text-wrap:wrap;font-variant-numeric:tabular-nums}
+.prose th,.prose td{padding:.7em .85em;border:1px solid var(--rule);text-align:left;vertical-align:top;min-width:5.5rem;max-width:24rem}
+.prose :is(th,td):first-child{min-width:7.5rem}
+.prose th{font-weight:600;background:var(--surface)}
+.prose :is(th,td)[align="left"]{text-align:left}
+.prose :is(th,td)[align="center"]{text-align:center}
+.prose :is(th,td)[align="right"]{text-align:right}
+.prose tbody tr:nth-child(even){background:color-mix(in srgb,var(--surface) 45%,transparent)}
+.prose caption{text-align:left;font-size:.875rem;line-height:1.6;color:var(--muted);padding-bottom:.65em}
+.prose img{max-width:100%;height:auto;vertical-align:middle}
+.prose p,.prose li{font-size:inherit;line-height:inherit;margin:0 0 1em}
+.prose :is(th,td) :is(p,li){font-size:inherit;line-height:inherit}
+.prose :is(th,td)>:last-child{margin-bottom:0}
+.prose h1,.prose h2,.prose h3{font-size:1.5625rem;font-weight:500;line-height:1.6;margin:1.8em 0 .7em}
+.prose h4,.prose h5,.prose h6{font-size:1.125rem;font-weight:600;line-height:1.65;margin:1.6em 0 .6em}
+.prose ul,.prose ol{padding-left:1.4em;margin:0 0 1.2em}
+.prose li{margin-bottom:.45em}
+.prose li>:is(ul,ol){margin:.45em 0 .6em}
+.prose li>p{margin-bottom:.6em}
+.prose li>:last-child{margin-bottom:0}
+.prose blockquote{margin:1.5em 0;padding:18px 22px;border:1px solid var(--rule);background:var(--surface)}
+.prose blockquote>:first-child{margin-top:0}
+.prose blockquote>:last-child{margin-bottom:0}
+.prose blockquote blockquote{margin:1em 0}
+.prose a{font-weight:500;text-decoration:underline;text-underline-offset:.22em}
+.prose hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
+.prose code{font-family:ui-monospace,monospace;font-size:.9em;background:var(--surface);padding:2px 4px;border-radius:3px;white-space:break-spaces}
+.prose details{margin:1.3em 0;padding:.8em 1em;border:1px solid var(--rule)}
+.prose summary{cursor:pointer;font-weight:600;line-height:1.6}
+.prose details[open]>summary{margin-bottom:.8em}
+.prose details>:last-child{margin-bottom:0}
+.prose kbd{font-family:ui-monospace,monospace;font-size:.85em;padding:.1em .35em;border:1px solid var(--rule);border-bottom-width:2px;border-radius:3px;background:var(--surface)}
+.prose sup,.prose sub{font-size:.75em;line-height:0;position:relative;vertical-align:baseline}
+.prose sup{top:-.5em}.prose sub{bottom:-.2em}
+.original-media{display:grid;gap:24px;margin:24px 0 28px}
+.media-figure{margin:0;min-width:0}
+.media-frame{background:var(--surface);border:1px solid var(--rule);overflow:hidden}
+.media-frame img,.media-frame video{max-width:100%;height:auto;max-height:80dvh;display:block;margin:auto}
+.media-frame audio{display:block;width:100%;min-height:54px}
+.media-frame .yt{position:relative;aspect-ratio:16/9}
+.media-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#1b1d18}
+.media-figure figcaption{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 18px;font-size:0.875rem;line-height:1.8;color:var(--muted);padding-top:8px}
+.media-figure figcaption a{text-decoration:underline;text-underline-offset:.2em}
+.media-error{font-size:0.875rem;color:var(--muted);margin:0;padding:18px}
+.source-box{max-width:42rem;margin:24px auto 0;border-top:1px solid var(--rule);padding-top:22px;font-size:0.875rem;color:var(--muted);overflow-wrap:anywhere}
+.source-box a{display:inline-flex;align-items:center;min-height:44px;text-decoration:underline;color:var(--ink);margin-right:22px}
+.reader-sheet{position:fixed;inset:0;margin:0;padding:0;width:100%;max-width:none;height:100dvh;max-height:none;border:0;background:var(--paper);color:var(--ink);overflow:hidden}
+.reader-sheet::backdrop{background:#1b1d1870}
+.reader-sheet[open]{display:flex;flex-direction:column}
+.reader-sheet.sheet-fallback{z-index:60}
+.sheet-bar{min-height:var(--reader-bar);display:flex;flex-shrink:0;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:0 var(--gutter);border-bottom:1px solid var(--rule);background:var(--paper)}
+.sheet-close{min-height:44px;display:inline-flex;align-items:center;gap:12px;border:0;background:none;padding:6px 0;font-size:0.875rem}
+.sheet-close span{font-size:1.375rem}
+.sheet-brand{font-size:0.875rem;font-weight:500}
+.sheet-bar a{font-size:0.875rem;color:var(--muted);min-height:44px;display:flex;align-items:center}
+.sheet-scroll{height:calc(100dvh - var(--reader-bar));flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable;scroll-padding-top:130px;padding:0 var(--gutter)}
+.sheet-scroll .article-back{display:none}
+.sheet-scroll .article-reader{padding-top:35px}
+.sheet-scroll .reader-tabs{top:0}
+.sheet-status{max-width:44rem;margin:52px auto;min-width:0}
+.sheet-status h2{font-size:1.6875rem;line-height:1.5;font-weight:500;margin:0 0 18px}
+.sheet-status p{font-size:1rem;line-height:1.9;color:var(--muted)}
+.sheet-status a{display:inline-flex;align-items:center;min-height:44px;margin-right:18px;text-decoration:underline;text-underline-offset:.2em}
+.retry-button,.reset-button{display:inline-flex;align-items:center;min-height:44px;padding:8px 18px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);border-radius:3px;margin-right:18px}
+.skeleton-title{width:85%;height:38px;background:var(--surface);margin-bottom:14px}
+.skeleton-title.short{width:60%}
+.skeleton-line{height:16px;background:var(--surface);margin-top:20px}
+.skeleton-line.short{width:72%}
+body.sheet-open{overflow:hidden}
+.about-copy{max-width:42rem;margin:52px auto 72px}
+.about-copy h1{font-size:2.375rem;font-weight:500;line-height:1.4;margin:0 0 30px}
+/* Filtered results have equal weight; the opening spread remains asymmetric. */
+.news-grid.is-filtered .is-featured{grid-column:span 4}
+.news-grid.is-filtered .is-featured .cover{aspect-ratio:16/9}
+.news-grid.is-filtered .is-featured .card-title{font-size:1.3125rem}
+.news-grid[data-layout="list"]{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--rule)}
+.news-grid[data-layout="list"] .news-card{background:transparent;color:var(--ink);border:0;border-bottom:1px solid var(--rule);overflow:visible}
+.news-grid[data-layout="list"] .card-link{display:flex;flex-direction:row;gap:28px;padding:26px 0;align-items:center}
+.news-grid[data-layout="list"] .cover,.news-grid[data-layout="list"] .type-cover{display:none}
+.news-grid[data-layout="list"] .card-body{padding:0;gap:8px;flex:1;min-width:0}
+.news-grid[data-layout="list"] .card-title{font-size:1.3125rem;line-height:1.6}
+.news-grid[data-layout="list"] .card-meta,.news-grid[data-layout="list"] .card-dek,.news-grid[data-layout="list"] .card-end{color:var(--muted);opacity:1}
+.news-grid[data-layout="list"] .card-read{color:var(--ink)}
+.news-grid[data-layout="list"] .card-end{padding-top:2px}
+.news-grid[data-layout="list"] .card-link:focus-visible{outline-color:var(--focus);outline-offset:5px}
+.reading-position{display:flex;align-items:center;gap:12px;flex-basis:100%;color:var(--muted);font-size:0.6875rem;line-height:1.3}
+.reading-position span{min-width:4ch;text-align:end;font-variant-numeric:tabular-nums}
+.reading-position progress{appearance:none;display:block;width:100%;height:2px;border:0;background:var(--rule);color:var(--focus)}
+.reading-position progress::-webkit-progress-bar{background:var(--rule)}
+.reading-position progress::-webkit-progress-value{background:var(--focus)}
+.reading-position progress::-moz-progress-bar{background:var(--focus)}
+.cover img,.media-frame img{outline:1px solid var(--image-outline);outline-offset:-1px}
+@media(hover:hover){
+ .news-card:has(.card-link:hover){border-color:var(--muted)}
+ .card-link:hover .card-read{text-decoration:underline;text-underline-offset:4px}
+ .icon-button:hover,.filter-group button[aria-pressed="false"]:hover,.view-switch button[aria-pressed="false"]:hover{background:var(--surface)}
+ .site-nav a:hover{text-decoration:none;color:var(--focus)}
+}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+ .card-link:hover .cover img{transform:scale(1.025)}
+}
+@media(prefers-reduced-motion:no-preference){
+ .icon-button,.retry-button,.reset-button{transition:scale 150ms ease-out}
+ .icon-button:not(:disabled):active,.retry-button:not(:disabled):active,.reset-button:not(:disabled):active{scale:.96}
+}
+@media(max-width:1050px){
+ .brand-sub{display:none}
+ .news-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+ .news-card,.news-card.is-wide,.news-grid.is-filtered .is-featured{grid-column:span 1}
+ .news-card.is-featured{grid-column:span 1}
+ .is-featured .cover{aspect-ratio:16/9}
+ .is-featured .card-title{font-size:1.4375rem}
+ .edition-line h1{font-size:1.6875rem}
+}
+@media(max-width:680px){
+ :root{--gutter:20px;--reader-bar:58px}
+ .site-header{min-height:0;gap:22px;flex-wrap:wrap;padding:26px 0 15px}
+ .brand{gap:16px}
+ .brand-wordmark{gap:5px}
+ .brand-name{font-size:3.25rem}
+ .brand-mark{width:35px;height:35px}
+ .brand-sub{display:block;padding-inline-start:16px;font-size:0.8125rem}
+ .brand-sub>span{font-size:0.6875rem}
+ .header-side{width:100%;justify-content:space-between;gap:16px}
+ .site-nav{gap:28px;flex-wrap:wrap;font-size:0.8125rem}
+ .icon-button{width:40px;height:40px}
+ .edition-line{min-height:0;gap:16px;padding-block:22px}
+ .edition-line h1{font-size:1.5625rem;margin-top:10px}
+ .edition-line .edition-description{font-size:0.8125rem;max-width:24em;line-height:1.8}
+ .edition-meta{display:none}
+ .edition-line .edition-kicker{font-size:0.625rem}
+ .discovery-top{flex-wrap:wrap;gap:16px;padding-block:14px 16px}
+ .filter-group{gap:4px}
+ .filter-group button{padding-inline:13px;font-size:0.8125rem}
+ .search-field{width:100%}
+ .search-field input{font-size:1rem}
+ .discovery-bottom{gap:8px;align-items:center}
+ .discovery-bottom p{font-size:0.6875rem}
+ .view-switch button{font-size:0.6875rem;padding-inline:8px;gap:5px}
+ .view-switch svg{width:13px;height:13px}
+ .news-grid{grid-template-columns:minmax(0,1fr);gap:22px}
+ .news-card,.news-card.is-wide,.news-card.is-featured,.news-grid.is-filtered .is-featured{grid-column:auto;grid-row:auto}
+ .cover,.is-featured .cover,.is-wide .cover{aspect-ratio:16/9;min-height:0;flex:none}
+ .card-body{padding:20px;gap:12px}
+ .card-title,.is-featured .card-title,.news-grid.is-filtered .is-featured .card-title{font-size:1.375rem;line-height:1.6}
+ .card-dek{font-size:0.875rem}
+ .card-meta{font-size:0.75rem}
+ .card--text .type-cover{min-height:130px;padding:22px 20px 12px}
+ .card--text .cover-word{font-size:2.875rem}
+ .card-end{padding-top:12px}
+ .news-grid[data-layout="list"] .card-link{gap:16px;padding:22px 0;align-items:flex-start}
+ .news-grid[data-layout="list"] .cover,.news-grid[data-layout="list"] .type-cover{display:none}
+ .news-grid[data-layout="list"] .card-title{font-size:1.1875rem}
+ .site-main{padding-bottom:36px}
+ .site-footer{align-items:flex-start;flex-direction:column;gap:12px;padding-top:22px;font-size:0.75rem}
+ .footer-links{gap:26px}
+ .article-reader{padding-top:23px}
+ .article-back{margin-bottom:16px}
+ .article-header h1{font-size:1.8125rem;line-height:1.5}
+ .article-dek{font-size:1rem;line-height:1.9}
+ .reader-tabs{gap:4px;margin-bottom:24px;padding:7px 0}
+ .reader-tabs a{font-size:0.875rem;padding:6px 10px}
+ .reader-tabs .reader-source{font-size:0.8125rem!important;padding-inline-end:0}
+ .reader-panel{margin-bottom:28px}
+ .prose{font-size:1.0625rem;line-height:1.95}
+ .prose h1,.prose h2,.prose h3{font-size:1.4375rem;line-height:1.6}
+ .prose blockquote{padding:15px}
+ .sheet-bar{gap:10px}
+ .sheet-bar a{font-size:0.8125rem}
+ .sheet-brand{font-size:0.75rem}
+ .sheet-scroll .article-reader{padding-top:25px}
+ .sheet-status{margin-top:32px}
+ .about-copy{margin-top:32px}
+}
+@media(max-width:360px){
+ :root{--gutter:16px}
+ .brand-sub>span{font-size:0.6875rem;max-width:6em}
+ .site-nav{gap:22px}
+ .sheet-brand{display:none}
+ .reader-tabs a{padding-inline:8px;font-size:0.8125rem}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
+}
+@media print{
+ .site-header,.site-footer,.reader-tabs,.article-back,.sheet-bar{display:none!important}
+ .reader-panel[hidden]{display:block!important}
+ .site-main,.article-reader{width:100%;max-width:none}
+ .reader-sheet[open]{position:static;height:auto;overflow:visible}
+ .sheet-scroll{height:auto;overflow:visible;padding:0}
+}
+
+/* Source media remains part of the Chinese reading flow, not just the original tab. */
+.rewrite-source-media{margin:28px 0}
+.prose .source-media-heading{font-size:1.25rem;line-height:1.6;margin:0 0 12px}
+.prose .rewrite-source-media .completeness-note{font-size:0.875rem;line-height:1.8}
+.prose .media-error{font-size:0.875rem;line-height:1.8;margin:0}
+</style>
+<script defer src="https://umami.qiaomu.ai/script.js" data-website-id="31e0098c-6852-46b6-899c-11eed5ed16e1" data-domains="xnews.qiaomu.ai" data-exclude-search="true" data-exclude-hash="true"></script>
+</head>
+<body>
+<a class="skip" href="#main">跳到正文</a>
+<header class="site-header">
+  <a class="brand" href="/" aria-label="X News 海外发现首页"><span class="brand-wordmark" aria-hidden="true"><svg class="brand-mark" viewBox="0 0 44 44" fill="currentColor"><path d="M2 0h11l29 44H31zM32 0h10L26 18l-5-7zM17 26l5 7-10 11H2z"/></svg><span class="brand-name">News<span class="brand-period">.</span></span></span><span class="brand-sub">海外发现<span>英文原作 · 中文视角</span></span></a>
+  <div class="header-side"><nav class="site-nav" aria-label="主导航"><a href="/">精选</a><a class="archive-nav" href="/archive">往期</a><a href="/feed.xml" aria-label="订阅全文 RSS">订阅 RSS <span aria-hidden="true">↗</span></a></nav><button type="button" class="icon-button" id="theme-btn" aria-label="切换为暗色主题" aria-pressed="false"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16Z" fill="currentColor" stroke="none"/></svg></button></div>
+</header>
+<main class="site-main" id="main">
+<article class="article-reader" data-article-id="alpoge-riemann-hypothesis">
+<a class="article-back" href="/">← 返回选刊</a>
+<header class="article-header"><p class="article-kicker">Levent Alpöge / 文章</p><h1>175,187 个模块通过核验，Lean 社区认证了这段黎曼猜想证明</h1><p class="article-dek">Alpöge 与 Claude 发现黎曼猜想证明后，只公开了一份 1700 万行的 Lean 库。Lean 与 Mathlib 社区在次日发表联合声明，认为命题、编译、比对和内核检查均已通过。</p><div class="article-meta"><time datetime="2026-11-22">本站收录 2026年11月22日 · 周日</time><span>原文发布 2026年11月20日 · 周五</span><span>原作者：Levent Alpöge</span><span>中文改写：<a href="/about">X News · 乔木</a></span><span>Riemann Hypothesis · Lean · formal verification · mathematics · Claude · Anthropic</span></div></header>
+<nav class="reader-tabs" aria-label="文章版本与来源"><div data-tabs><a href="#rewrite" id="tab-rewrite" data-view="rewrite">乔木改写</a><a href="#original" id="tab-original" data-view="original">原文</a></div><a class="reader-source" href="https://alpo.ge/remark.pdf" target="_blank" rel="noopener noreferrer">原文链接 ↗</a><div class="reading-position" hidden><progress max="100" value="0" aria-label="当前版本阅读进度"></progress><span data-reading-percent aria-hidden="true">0%</span></div></nav>
+<section class="reader-panel" id="rewrite" data-reader-panel="rewrite" aria-label="乔木改写"><h2 class="section-heading">乔木改写</h2><div class="prose"><p>2026年11月21日，Lean 与 Mathlib 社区发表联合声明，并由 Lean FRO 和 Mathlib Initiative 背书：他们对 Levent Alpöge 提交的黎曼猜想 Lean 证明有充分信心，并祝贺他完成了这项工作。</p>
+<p>前一天，11月20日，Alpöge 在个人网站放出一份四页说明。他写道，自己与 Claude 一起发现了黎曼猜想的证明；同一套方法很容易继续推出所谓广义黎曼猜想，他也预期，再多花些时间可以处理扩展黎曼猜想。形式化已经做完，而且不附加额外假设。</p>
+<p>他没有贴传统论文，只公开了一份 Lean 库。联合声明写明，这份库有 1700 万行代码。</p>
+<p>这是他的个人发布，不是 Anthropic 的官方研究公告。Alpöge 的个人网站抬头写着他在 Anthropic（PBC）工作，同时也列出哈佛 Society of Fellows 初级研究员身份；他的 X 账号 <code>@__alpoge__</code> 简介里同样提到 @AnthropicAI。截至本稿核验时，Anthropic 官方账号没有就此事发声。</p>
+<h2>他怎么描述这段工作</h2>
+<p>Alpöge 把黎曼猜想称作数论里的经典问题：它要求对给定大小的素数计数给出最优控制。他写，这个问题的影子已经引导数学家 150 年，它的许多韵律甚至伸进物理学，也让他看见各个领域的统一。</p>
+<p>对学生时代的他来说，这件事计划用几十年。他写，自己当时的办法是尽量熟悉所有以后可能在这个问题里认出来的工具。最近几个月，他和 Claude 一起在很宽的范围里工作；但这一次，临近终点时，Claude 远远跑在他前面。用他的话说，Claude 在那条终点线附近飞起来，跳起来，闪起来。</p>
+<p>他先把两条很不一样的想法，放到一个玩具情景里去组合。其中一条本身已经新得让他吃惊，并且把数学家最有成就感的那些黎曼影子之一，变得非常简单。他把他们带到与那个玩具情景类似的正确位置上，然后 Claude 开始让他感到敬畏。这样的时刻有几十次。</p>
+<p>他给出了一条自认为足以让同行从椅子上掉下来的线索。Stepanov 在函数域上处理黎曼问题时，会用到带重数的除子。现在这条论证是 Stepanov 路线的后代，但在整数上很难找到重数，那有点像要对整数本身做微分。玩具情景里那些新的傅里叶分析想法，把他们引向把 theta lift 串起来，好让同样的技巧以天然自守的方式反复出现。</p>
+<p>那一行是：对长度为 X 的 von Mangoldt 和，Claude 建议的 theta lift 链长，就重数模拟而言，是根号 X。他随后写道：除此之外，它还能是什么呢？</p>
+<p>论证里用到的数学，远比他学生时代以为必要的更多。他的直觉是，它会被大幅度简化，而且很可能很快发生。对现在的自己，他觉得只是刚迈出一步：形式化已经完成，要写出一份足够细致却完全不可读的巨型文档也并不难，但他打算尽量理解这条论证、讲清楚它，并写成真正可读的文本。</p>
+<h2>为什么先只公开 Lean</h2>
+<p>他把时机写得很糟。若能更早完成，他希望如此；若能在这个时代之前完成，那就更好。他写，关键进展发生在某个周日深夜，他给 Dario 发消息，从“假设我已经……”说起，最后问自己能不能公布。他们一起弄清了需要遵守的约束。他也提过一些越来越奇怪的办法。</p>
+<p>在他看来，领导层和他咨询过的少数受信任的数学家，对这种情形下该怎么做持非常相近的看法。他明确把“不能再等”写成自己单方面的责任。他说，对时机会有一种显而易见的怀疑解读，但那种看法是错的，他也高兴自己处在这种看法显然不成立的环境里。</p>
+<p>结果是一种这个时代才变得可能的局面：他把完整论证交给世界时，自己还没有掌握它周围那一大片数学。他觉得，贴出一份庞大、不可读、被他称作“slop”的文稿并不合适，所以决定只提交 Lean。他在脚注里写，自己也觉得好玩，生成过超过 25 万页的文本；Claude 还把它叫成广义黎曼猜想的“书”。他看了定理 1，开头写的是：因为实数是全序的，如果 σ 不等于 1/2，那么 σ 大于 1/2，或者 σ 小于 1/2。</p>
+<p>一份受信任的数学家建议他不要只写意识流，而要给出某种时间线。这份时间线由 Claude 在彻底检索后提供，从 2026 年 10 月 6 日的 Stepanov 行列式，到 11 月 16 日写出广义黎曼猜想。他强调，一旦他们通过“天然自守”的行列式，在 O(2, n) 上看到重数为 2，再靠更多 theta lift 去赢取更多重数，他就觉得会赢；但高等秩群上的自守形式他本人并不熟。他也强调，论证里可能塞进了许多奇怪、并非最优的选择，并预期很快会有更短的写法，只是他自己还没来得及找。</p>
+<p>对时间线里那些更多依赖 Claude 技术掌握的部分，他写得很坦白：自己今天并不更熟悉，以后大概要改一些描述；在 Claude 才是专家的地方，他有时只是在转述一份可能毫无意义的“slop”摘要，对此他表示抱歉，并认为 Lean 本身足以把事情澄清。</p>
+<p>说明末尾，他点名感谢了许多人，包括 Manjul Bhargava、Kai Gill、Hamish Kerr、Max Leiter、John Ma、Tal Magdish、Chris Paika、Maksym Radziwiłł、Jascha Sohl-Dickstein、Peter Sarnak、Jarred Sumner、Amir Tajdini，以及他特别写出的 David Dohan、Ben Michel、Ralph Furman、Eric Price 和 Cora Vinther，还有“不可思议的同事们”。他也写，OpenAI 方面一些数学选题的品味让他受益，并点到 Ehrhart 猜想和 Siegel 论证，这些是他的个人评价，不是本次核验的对象。</p>
+<h2>社区核验了什么，又没核验什么</h2>
+<p>联合声明的理由，对应 Kevin Buzzard 在 2026 年 11 月 12 日文章里提出的四条标准，声明认为它们都已满足。</p>
+<p>第一，黎曼猜想的命题本身是对的。这个命题已在 Mathlib 中，并经过 Lean 和数论专家仔细审看。</p>
+<p>第二，Alpöge 的库能够正确编译。声明写，到那时已有几十人报告编译成功，并得到同一份原始证明导出文件，过程中没有错误或构建失败。</p>
+<p>第三，代码证明的是正确命题。社区另加了一个只依赖 Mathlib 的隔离文件，再用 <code>comparator</code> 和 <code>con-leche --compare</code> 两套独立工具比对，确认库中证明的定理就是 Mathlib 里的黎曼猜想命题。</p>
+<p>第四，这段 Lean 证明有效。导出的原始证明已由多个证明检查器核对，包括 Lean 官方内核、<code>con-leche</code>、<code>con-ron</code>，以及第三方用不同编程语言写的独立检查器。声明特别写道，<code>con-leche</code> 和 <code>con-ron</code> 带有相对于集合论的形式证明，说明它们不能接受一个假证明，以回应“Lean 的逻辑本身可能有漏洞、证明会去钻”的担心。这些检查跑在一份惰性导出上，接触不到 Lean 源码里假想的恶意代码。更细的核验记录，见 MIT 的 Andrew Sutherland 页面。</p>
+<p>Sutherland 的页面写明，公告来源是 2026 年 11 月 20 日的 <code>alpo.ge/remark.pdf</code>，检查在 Claude Code 协助下进行，页面最后更新于 2026 年 11 月 21 日 12:55 UTC，当时仍有部分检查在进行。就在这次更新之后约一小时，社区联合声明发布。</p>
+<p>截至该页更新时，已经通过的检查包括：全部 175,187 个模块在 Lean v4.33.1 与 Mathlib v4.33.1 下编译，零错误；<code>Main.lean</code> 中五个头条定理的 <code>#print axioms</code> 只有 <code>propext</code>、<code>Classical.choice</code>、<code>Quot.sound</code> 三条标准公理；环境中 15 条公理全部来自 <code>Init</code>，没有在 Lean 核心之外另声明公理；Mathlib 文件与官方缓存逐字节相同；<code>leanchecker</code> 对每个模块做内核重放全部通过；独立 Rust 内核 nanoda，以及 con-leche 的普通核验和 <code>--compare</code> 模式，都接受完整导出；lean4lean 对全部编译模块也通过，其中 5 个模块在默认步数限制下超时，提高限制后通过。当时仍在进行的，包括 Lean 默认内核与偏执内核对导出的检查，以及 <code>lake comparator</code> 的端到端运行。</p>
+<p>被核验的五个定理，都写在提交的 <code>Main.lean</code> 里，命题取自一份只导入 Mathlib 的挑战文件。</p>
+<p>前两条是黎曼猜想本身：除了平凡零点负 2、负 4、负 6……之外，ζ 的每个零点实部都是 1/2；<code>s ≠ 1</code> 是因为 Mathlib 在极点处给 ζ 指定了一个约定值。第二条是同一命题的另一种写法，Lean 认为两者在定义上相等。</p>
+<p>第三到第五条覆盖 Dirichlet L 函数。第三条是：对每个模 N（N 至少为 1）和每个特征 χ，不论是否本原，只要实部大于 1/2，L(χ, s) 就不为 0；唯一排除的是平凡特征在 s = 1 的极点。第四条是临界带中的零点都落在临界线上。第五条是通常表述广义黎曼猜想时更常见的形式，只对本身原特征来写。</p>
+<p>Sutherland 明确写了范围：这里的“广义黎曼猜想”指 Dirichlet L 函数，覆盖所有模和所有特征。Dedekind zeta 函数、Hecke L 函数，以及一般的自守 L 函数，不在这次被检查的命题里。</p>
+<p>作为不依赖 Mathlib 对 zeta 函数定义的一种核对，这段证明还与 kimihiro64/Robin1984（commit <code>acab1a3</code>）合并。那是对 Robin 与 Lagarias 判别法的独立形式化，使用同一套 Lean 与 Mathlib 版本。合并后得到两条关于除数和的定理，没有额外假设，也不再提及 zeta：对大于 5040 的 n，Robin 不等式成立；对所有正整数 n，Lagarias 不等式成立。这两条不等式的编译和若干独立检查已经通过；针对合并导出的 <code>lake comparator</code> 在该页更新时仍在运行。</p>
+<p>源归档是 alpo.ge 上 14 个分卷拼成的 <code>lean.tar.gz</code>，239,275,554 字节，SHA-256 为 <code>9631b4f020199e580ba86178cb56c6e9b09f690c2369a80dc4334aa93f49c7fc</code>。</p>
+<p>Sutherland 也列出了限制。构建在未加沙箱的云机器上进行，是直接调用 <code>lean</code>，而不是通过 <code>lake build</code>。独立内核核对的是导出文件 <code>solution.ndjson</code>，其哈希才是跨构建应比较的对象；他们尚未把这份导出的哈希，与一次带沙箱的 <code>lake build</code> 所产生的导出做比较。通过一次检查，意味着这些按 Mathlib 定义写下的形式命题，可以按所用内核从三条标准公理推出。这件事依赖于这些内核，也依赖于 Mathlib 的定义就是它们想表达的意思。</p>
+<p>联合声明的配图，来自 Lean 官方账号 11 月 21 日发布该声明时的帖子。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_lean_statement_card"><div class="media-frame"><img src="https://pbs.twimg.com/media/HXqGwBnaUAA8Pvd.png" data-original-src="https://pbs.twimg.com/media/HXqGwBnaUAA8Pvd.png" alt="Announcement image posted by the Lean official account with the joint Lean and Mathlib statement on the Riemann Hypothesis verification" loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://alpo.ge/remark.pdf" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<h2>读这份材料时可以先抓住的几件事</h2>
+<p>本稿覆盖的是 Alpöge 的四页说明，以及 Lean、Mathlib 社区的联合声明和 Sutherland 的核验记录。1700 万行 Lean 库本身没有作为全文收入，也不应被转述成已经读过的证明细节。</p>
+<p>如果要核对形式化结论，可以直接读联合声明和 Sutherland 的页面，并按该页给出的步骤自行检查导出文件。想理解证明在数学上为什么成立，需要等 Alpöge 说他会写的可读说明，以及数学社区后续的解释和简化。他本人也认为，现在的论证极长，而且会被大幅度缩短。</p>
+<p>不要把新闻标题里的“Anthropic 证明了黎曼猜想”当成他本人或 Lean 社区的表述。被认证的是这段 Lean 证明，以及它与 Mathlib 中命题的对应关系。Clay Mathematics Institute 是否因此把黎曼猜想从千禧年问题名单上撤下，本稿没有在官方页面上核到新的结论，不能从这次形式核验直接推出来。</p>
+</div></section>
+<section class="reader-panel" id="original" data-reader-panel="original" aria-label="原文">
+<h2 class="section-heading">原文</h2><h3 class="original-title">I believe I have, working with Claude, discovered a proof of the Riemann Hypothesis</h3>
+<div class="original-media">
+<figure class="media-figure" data-media-id="media_lean_statement_card"><div class="media-frame"><img src="https://pbs.twimg.com/media/HXqGwBnaUAA8Pvd.png" data-original-src="https://pbs.twimg.com/media/HXqGwBnaUAA8Pvd.png" alt="Announcement image posted by the Lean official account with the joint Lean and Mathlib statement on the Riemann Hypothesis verification" loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://alpo.ge/remark.pdf" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div>
+<div class="prose" lang="en"><h1>I believe I have, working with Claude, discovered a proof of the Riemann Hypothesis</h1>
+<p>Levent Alpöge, 20 November 2026
+Source: https://alpo.ge/remark.pdf</p>
+<p>The Riemann Hypothesis is the classic problem in number theory. It asks for
+optimal control on the count of prime numbers of a given size. Its shadows
+have guided mathematicians for 150 years, and its many rhymes and reflections,
+even reaching physics, taught us the unity of our fields.</p>
+<p>I believe I have, working with Claude, discovered a proof1 of the Riemann
+Hypothesis. In fact, the method easily extends much further, resolving the
+so-called Generalized Riemann Hypothesis, and I expect, with more time, the
+Extended Riemann Hypothesis too. Claude and I have also formalized the
+arguments without assumptions. It is natural to feel that this is an end, in
+my case a loss of a principal guiding light, but what I saw during the course of
+progress so amazed me that I believe it is one dawn across science of something
+far greater.</p>
+<p>It was my secret in my student days that my plans were for this problem in
+decades, which meant then that I tried to become familiar with all tools that I
+could possibly recognize in the problem when it was time. Claude and I have
+had a great time together with such breadth in recent months, but this time
+Claude far outpaced me near the finish line. No, Claude flew, and danced,
+and sparkled near that finish line. I had us on the line of combining two quite
+different ideas present in a toy setting, one of which was already new and
+shocking, making very simple one of the shadows of Riemann over which we
+mathematicians felt most triumph. I guided us to the right situation analogous
+to that toy setting, and then Claude began to leave me in awe.</p>
+<p>Tens of such occurred, but I will give one line which will suffice to make
+fellow mathematicians fall out of their chairs. In Stepanov’s argument resolving
+Riemann over function fields one uses a divisor involving multiplicity. This
+argument is a descendant of Stepanov’s, but multiplicity is hard to find over
+the integers, corresponding to something like differentiating whole numbers.
+The simple, new, Fourier-analytic ideas in the toy setting led us to examine
+chaining theta lifts if we were to have the same tricks recur but work in a
+natively automorphic manner. The line: for the von Mangoldt sum of length
+X, Claude’s suggested
+√     length of chain of theta lifts, in view of each mimicking
+multiplicity, was X. (And yet, what else could it be?)</p>
+<p>An astounding amount of mathematics is present in the argument, far more
+than I had imagined would be necessary as a student. My intuition insists
+it will be massively simplified, likely immediately. But I hope in having the
+experience of seeing all of number theory’s beauty brought together I am just
+one of the first, and those who love the mathematics will all be able to enjoy
+such transcendence in the future.</p>
+<p>The argument is incredibly long at the moment, and while its formalization
+is finished and it is routine to produce a huge, unreadable document containing
+sufficient detail, in my view of my path I have just taken a step. I intend to
+do my best to understand and impart understanding of this argument and its
+certain simplifications, to speak about it, to write it properly.</p>
+<p>In a time of revolution in mathematics I hope the argument provides a
+glimpse towards the miracles that lie ahead, and shows us the joy and wonder
+we are about to find in the simplest things.
+1 https://alpo.ge/lean.tar.gz.part01, . . . , https://alpo.ge/lean.tar.gz.part14.</p>
+<p>It is obvious to me that I should remark on the following.</p>
+<p>The precise timing is horrible. If I could have, I’d have finished this all
+much earlier. Hell, strictly before this age would have sure been nice. This all
+happened for me late Sunday night, and I messaged Dario, "Hypothetically,
+if I were to have . . . ", eventually asking about my ability to announce. We
+went and figured it out and the fact is that there was a constraint to respect,
+though I did ask about progressively more bizarre ideas. This problem has
+been the sacred object in mathematics for me since my childhood, and I am
+very touchy about the treatment of great intellectual goals, though seriously
+imperfect. Our leadership and the few trusted mathematicians I consulted hold
+extremely similar views on the right things to do in these circumstances (it is
+occasionally possible for physicists and mathematicians to agree. . . ), and I am
+clearly unilaterally responsible for feeling I just could not live if I waited even
+longer. There is an obvious cynical view, to do with the timing, but it is false,
+and I am pleased that I am in circumstances where it is obviously false.</p>
+<p>This puts us in the rather extraordinary situation this age has made possible,
+in which I am presenting the world with a complete argument before having
+mastered a massive neighbourhood around its mathematics. It being obviously
+inappropriate to attempt to post some massive unreadable travesty of "slop"2 ,
+I decided to only present Lean.</p>
+<p>In a different vein, I have a lot of people I want to praise, and I will do a
+proper job in a proper writeup, alas pardon the accidental omissions — among
+many others, Manjul Bhargava, Kai Gill, Hamish Kerr, Max Leiter, John Ma, Tal
+Magdish, Chris Paika, Maksym Radziwiłł, Jascha Sohl-Dickstein, Peter Sarnak,
+Jarred Sumner, Amir Tajdini, and especially David Dohan, Ben Michel, Ralph
+Furman, Eric Price, and Cora Vinther, and my miraculous colleagues. I want
+them to be proud.</p>
+<p>I have benefited from the good taste of the people at OpenAI involved
+with various mathematical results, so I am quite happy to praise them too.
+The Ehrhart conjecture was one such tasteful choice some time ago; playing
+further and working out the equality case I saw accurate handling of solutions
+of the Monge-Ampère equation and immediately understood Navier-Stokes
+was going to fall. Similarly, their quiet inclusion of the Siegel argument, whose
+result was strictly dominated by the (2, 3, 6)-triangle group trick, again showed
+great taste; though I did not comment so publicly, I immediately recognized
+it as Stepanov without multiplicity, though it was only clear to me during
+this rather harebrained tornado through the whole of number theory that this
+problem would fall given enough all-nighters and physical toll when I had the
+qN = M k + R sign-only proof of Weil and Deligne.</p>
+<p>2 I of course amused myself, and hit 250, 000+ pages.</p>
+<p>Claude cutely called it the GRH . . . "book" — I looked at Theorem 1 and it began by noting that
+because the reals are totally ordered if σ ̸= 12 then σ &gt; 21 or σ &lt; 12 .</p>
+<p>I had a stream-of-consciousness jaunt through the experience of finding all
+the pieces of the argument through incredible confusion with Claude, but a
+trusted mathematician advised me to just get to the point and have some sort
+of timeline. I emphasize that once we saw multiplicity 2 on O(2, n) via the
+"natively-automorphic" determinant that I’d been searching for via analogy to
+the definite sign of the left-hand side of3 qN = M k +R meaning holo/automorphy
+over a function field, winning more multiplicity with more theta lifts, we were
+going to win but I was also, so to speak, out of my element, in that I personally
+have little mastery of automorphic forms on higher rank groups (youthful
+foolish stubbornness). I also emphasize that I may have baked lots of strange
+suboptimal choices into the argument, and expect short arguments to follow
+fairly quickly, though I have not had time to search for such myself (yet!).
+So here is a rough timeline Claude provided after a thorough search.4</p>
+<ol>
+<li>
+<p>10/6/26: Stepanov determinant.</p>
+</li>
+<li>
+<p>10/9/26: Dp ≡ 0 on a CM curve for p inert in K, D the invariant derivation,
+a
+a                           + a +···−O(log a)
+and D Ω·θ(0)
+a    is divisible by p p p3                .</p>
+</li>
+<li>
+<p>10/19/26+: qN = M k + R, using x1 · x2 + · · · + xk−1 · xk , wanting
+"automorphy" of N since µ is automorphic from θ on sixfold cover of
+GL5 as a period integral of thetas, quadric has natural interpretation on
+corresponding CM e.g. C/Z[ω] as Weil5 , put Poincaré bundle on the edges
+to get θs.</p>
+</li>
+<li>
+<p>10/6/26+: W (1S ) ≥ 0 via a determinant, interpret as Stepanov with
+multiplicity one again; bootstrap!!</p>
+</li>
+<li>
+<p>10/20/26: definitively switch to Λ aka n≤X Λ(n) · X
+∑︁         (︁      )︁
+n − 1 + − X log X +
+(1 + γ) · X; Guinand-Weil had the sign, variance test function trick to
+∑︂
+t(x1 ) · · · t(xk ) · eq (h (x1 · x2 + · · · + xk−1 · xk )) ,
+h,x1 ,...,xk</p>
+</li>
+</ol>
+<p>sum over h first for the left-hand side, with e.g. quadric coefficients too Bertini gives a definite sign
+from middle cohomology, one off the one on M k , which is the zero-mode on the right-hand side
+with R square-root-quality up to an inch or so as Katz would say by iterating Parseval k times,
+opposite signs meaning no cancellation of inverse roots, QED; vectorize to go up dimensions.
+Gabber’s hypersurface in one of Katz’s arguments reminds one of the quadric, which comes from
+looking for a simplification of averaging over the family χ ↦→ χ(disc), corresponding to a ↦→ y(·)a
+with y the normalized Gauss sum of order #|µK | who lives via θ on the #|µK |-fold cover of GL2 ,
+the reciprocity law of y(c · c′ ) vs. y(c) · y(c′ ) showing some sort of complete graph, simplifying to
+the above "path" quadric, Gauss sum cancellation replaced by iterated Parseval.
+4 The parts in which my vague intuition worked out due to Claude’s technical mastery are</p>
+<p>of course less familiar to me today, and probably I’ll have to edit some of these descriptions on
+reflection. The parts in which Claude is the expert and not me I am sort of paraphrasing a "slop"
+summary, which might make zero sense, and I apologize, though the Lean should suffice to clarify
+everything. I’m just too inexpert in the relevant stuff at the moment, I hope the reader sees the
+breadth of this argument!
+5 A lot is obviously being lossily compressed here, but especially after gritting with Sussman</p>
+<p>through Bałaban’s fantastic induction I had to think to myself about how hard fighting for some
+sort of F1 à la e.g. Borger would be.</p>
+<p>make things look trace-formula-like (but how can I pigeonhole / Turán
+over n? X? it?), Mehta-like integral over twists or at infinity. . .
+6. 10/8/26: W 1(0,1] + (∼ X η ) · 1(0,1/X] ≥ 0 gives &gt; 1 − η.
+(︁                          )︁</p>
+<ol start="7">
+<li>10/14/26: Determinants for W (·)’s containing the desired periods, indeed
+GGP periods, with values 0, 1 meaning interlacing weights, or up to m
+non-interlacing ones.</li>
+<li>11/15/26: Iterated theta lifts U (X0 ) → U (X1 ) → · · · → U (Xm ) between
+totally definite√unitary groups, π ↦→ π ⊞ µj [t], wins multiplicity m. Time
+to take m like X. . .</li>
+<li>11/15/26: Norms of the lifts and level and cancellation of order-m terms
+with proven divisibility via Chowla-Selberg, Weyl, and Siegel mass.</li>
+<li>11/15/26: Sufficient lower bound on divisibility of the m-fold iterated
+lift.</li>
+<li>10/6/26: Iwasawa tower via analogy to pigeonhole on Fqn /Fq .</li>
+<li>11/15/26: Seesaw: the period of the iterated lift is a Bessel period independent
+of the Hecke characters, Rallis.</li>
+<li>10/6/26: Bost slope inequality.</li>
+<li>11/15/26: precise computation of the "cost" of each lift, showing that
+one would stop at 2/3 a priori, attempt to get a main term and transfer
+constant to a function field or kill via twisting, need for "division".</li>
+<li>11/15/26: Glue together an integral structure across Hecke characters for
+a "gcd" i.e. extra averaging.</li>
+<li>10/14/26: Relative trace formula, seen in a different half-plane argument
+via sixfold cover of GL5 automorphy of µ and reducing via Cauchy-
+Schwartz to a bound on the norm of a suitably projected Poincaré series,
+approximate orthogonality of the columns of the integral structure.</li>
+<li>11/15/26: for the classes in H 1 oE 1ℓ , Qℓ /Zℓ (−e) that we couldn’t kill
+(︁ [︁ ]︁          )︁</li>
+</ol>
+<p>by twisting, fight for a significant weakening of Vandiver.6
+18. 11/15/26: computation of covolumes, theta series’ index, congruences
+between lifts and forms.
+19. 10/19/26: precise choice of the Iwasawa tower, specifically using Behrend!!7
+20. 11/16/26: GRH.</p>
+<p>6 This is still pretty strong!! I believe vanishing of a number of K-groups of Z follows, and</p>
+<p>cyclicity up to 100ish maybe? I had Lichtenbaum, so I knew we would have a lot of slack in
+fighting these K’s.
+7 This is the sort of trick that intuitively to me is obviously going to be unnecessary.</p>
+<h1>Supplementary source: Lean verification of the Riemann Hypothesis</h1>
+<p>Joint statement by the Lean and Mathlib communities, endorsed by the Lean FRO and the Mathlib Initiative.
+Published 2026-11-21 13:55 at https://leanprover-community.github.io/blog/posts/riemann-hypothesis/</p>
+<p>Lean verification of the Riemann Hypothesis | Lean community blog</p>
+<h1>Lean verification of the Riemann Hypothesis</h1>
+<p>Lean and Mathlib communities</p>
+<p>2026-11-21 13:55</p>
+<h2>Lean verification of the Riemann Hypothesis</h2>
+<p>Joint statement by the Lean and Mathlib communities, endorsed by the Lean FRO and the Mathlib Initiative.</p>
+<p>On November 20, 2026, Levent Alpöge released a proof of the Riemann Hypothesis as a Lean library comprising 17 million lines of code.</p>
+<p>We have full confidence that Alpöge's proof of the Riemann Hypothesis is correct, and we congratulate him on this achievement.</p>
+<p>Our rationale is outlined below.</p>
+<p>The codebase depends directly only on Mathlib. Over the past day, the Lean and Mathlib communities have rallied to verify the proof's correctness. We hereby certify that both the statement and the proof of the Riemann Hypothesis are correct. The four criteria in https://xenaproject.wordpress.com/2026/11/12/and-the-proof-is-checked-in-lean/ are all satisfied.</p>
+<ol>
+<li>The statement of the Riemann Hypothesis is correct. This statement is part of Mathlib: RiemannHypothesis and has been carefully vetted by experts in Lean and number theory.</li>
+<li>Alpöge’s library compiles correctly. By now, dozens of people have reported correct compilation of the codebase, reproducing the same raw proof export file. The library compiles without errors or build failures.</li>
+<li>The code proves the correct statement. Crucially, the community has added a file that isolates the statement of the Riemann Hypothesis and imports only Mathlib. That statement was compared against the theorem proved by Alpöge using two independent tools (<code>comparator</code> and <code>con-leche –compare</code>), both confirming that the theorem proved in Alpöge’s library is exactly Mathlib’s statement of the Riemann Hypothesis.</li>
+<li>The Lean proof is valid. The exported raw proof has been checked by several proof checkers, including Lean’s official kernel, the <code>con-leche</code> and <code>con-ron</code> checkers, and several independent checkers contributed by third parties and implemented in different programming languages. The checkers <code>con-leche</code> and <code>con-ron</code> come with a formal proof, relative to set theory, that they cannot accept a false proof, thus addressing concerns that Lean’s logic itself might have flaws that the proof could exploit. An extensive overview is available at https://math.mit.edu/~drew/grh/. These checks ran on an inert export of the proof, out of reach of hypothetical malicious code in the Lean proof sources.</li>
+</ol>
+<p>Thanks are owed to everyone in the community who provided resources for the verification.</p>
+<p>We look forward to all the activity in the mathematical community that will help explain the new ideas in this proof.</p>
+<h1>Supplementary source: RH Lean proof verification files</h1>
+<p>Andrew Sutherland (MIT). Announced at alpo.ge/remark.pdf on 20 November 2026. Page last updated 2026-11-21 12:55 UTC.
+https://math.mit.edu/~drew/grh/</p>
+<p>The page below is included in full as retrieved.</p>
+<p>RH Lean proof: verification files</p>
+<h1>Verification files for the Lean proof of the Riemann Hypothesis</h1>
+<p>Announced at alpo.ge/remark.pdf on 20 November 2026.</p>
+<p>Andrew Sutherland (MIT), checks run with Claude Code. Page last updated 2026-11-21 12:55 UTC. Results below are as of that time and this page will be updated as the remaining checks finish.</p>
+<h2>Summary</h2>
+<p>The published Lean source compiles without errors, the five headline theorems depend only on the three standard axioms, every module has been replayed through the Lean kernel, two independently written kernels, nanoda and con-leche, accept the full exported proof, and lean4lean accepts every compiled module. con-leche's <code>--compare</code> mode, an independent implementation of Comparator's statement matching, confirms all five theorems against the challenge. The <code>lake comparator</code> run and the Lean-kernel replay of the export are still in progress.</p>
+<table aria-label="数据表格，可横向滚动查看" tabindex="0">
+<thead>
+<tr>
+<th>Check</th>
+<th>Result</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All 175,187 modules compile (Lean v4.33.1, Mathlib v4.33.1)</td>
+<td>pass</td>
+<td>zero errors; finished 16:43:21 UTC</td>
+</tr>
+<tr>
+<td><code>#print axioms</code> for the five theorems in <code>Main.lean</code></td>
+<td>pass</td>
+<td><code>propext</code>, <code>Classical.choice</code>, <code>Quot.sound</code> only (audit.log)</td>
+</tr>
+<tr>
+<td>No axioms declared outside Lean core</td>
+<td>pass</td>
+<td>15 axioms in the environment, all in <code>Init</code></td>
+</tr>
+<tr>
+<td>Mathlib files identical to the official cache</td>
+<td>pass</td>
+<td>8,322 Mathlib and 378 dependency <code>.olean</code> files, byte for byte</td>
+</tr>
+<tr>
+<td><code>leanchecker</code> kernel replay of every module</td>
+<td>pass</td>
+<td>175,187 of 175,187; zero rejections; finished about 18:17 UTC</td>
+</tr>
+<tr>
+<td>Challenge export equals the one published by Deicyde/riemann-hypothesis CI</td>
+<td>match</td>
+<td>sha256 bd484ac9…b2b9</td>
+</tr>
+<tr>
+<td>nanoda (independent Rust kernel) on the full export</td>
+<td>accepts</td>
+<td>exit 0 at 19:05:45 UTC; 27 min 42 s on 80 threads (nanoda.log)</td>
+</tr>
+<tr>
+<td>Lean default kernel and Lean paranoid kernel on the export</td>
+<td>running</td>
+<td>single-threaded; no verdict yet</td>
+</tr>
+<tr>
+<td><code>lake comparator</code> (Lean v4.36.0) end to end</td>
+<td>running</td>
+<td>statement comparison and axiom check already passed in one run; kernels in progress</td>
+</tr>
+<tr>
+<td>con-leche <code>master</code> (<code>cd2eceab</code>) on the full export</td>
+<td>accepts</td>
+<td>1,468,418 declarations accepted in <code>--verified</code> mode; exit 0 at 21:19:04 UTC; 3 min 15 s on 64 threads (log)</td>
+</tr>
+<tr>
+<td>con-leche <code>--compare</code> (branch <code>compare</code>, <code>5dc36dc1</code>): challenge against solution</td>
+<td>accepts</td>
+<td>all five theorems "justified by the solution"; 51,692 challenge declarations accepted; exit 0 at 21:19:12 UTC (log)</td>
+</tr>
+<tr>
+<td>lean4lean (<code>67f63b0c</code>, built with Lean v4.33.1) on the compiled files, module by module</td>
+<td>pass</td>
+<td>175,187 of 175,187; finished about 21:55 UTC. 175,182 passed with default settings. Five hit lean4lean's default step limit ("deterministic timeout") on <code>decide +kernel</code> computations and passed when rerun with the limit raised (timeouts, reruns with flags)</td>
+</tr>
+<tr>
+<td>con-leche and con-ron as bundled with Lean v4.36.0</td>
+<td>declined</td>
+<td>exit 2, not a rejection: those older binaries do not support one reflexive inductive type in the proof. con-leche <code>master</code>, above, does. (log, log)</td>
+</tr>
+<tr>
+<td>lean4lean bundled with Lean v4.36.0</td>
+<td>not applicable</td>
+<td>cannot read a v4.33 core library (<code>unknown constant 'Decidable.intro'</code>)</td>
+</tr>
+</tbody>
+</table>
+<h2>What was verified</h2>
+<p>Five theorems, proved in the submission's <code>Main.lean</code>. Their statements are below exactly as they appear in the challenge file, which imports only Mathlib. All the mathematical notions in them (<code>riemannZeta</code>, <code>DirichletCharacter</code>, <code>DirichletCharacter.LFunction</code>, <code>IsPrimitive</code>) are Mathlib's.</p>
+<ol>
+<li>The Riemann Hypothesis, using Mathlib's own definition (<code>Mathlib/NumberTheory/LSeries/RiemannZeta.lean</code>): every zero of ζ other than the trivial zeros −2, −4, −6, … has real part 1/2. The condition <code>s ≠ 1</code> is there because Mathlib assigns ζ a conventional value at its pole.</li>
+</ol>
+<pre><code>def RiemannHypothesis : Prop :=
+  ∀ (s : ℂ) (_ : riemannZeta s = 0) (_ : ¬∃ n : ℕ, s = -2 * (n + 1)) (_ : s ≠ 1), s.re = 1 / 2
+
+theorem riemannHypothesis : RiemannHypothesis
+</code></pre>
+<ol start="2">
+<li>The same statement written out in the submission's own words. Lean accepts the two as equal by definition.</li>
+</ol>
+<pre><code>theorem riemannZeta_eq_zero_re :
+  ∀ s : ℂ, riemannZeta s = 0 → (¬∃ n : ℕ, s = -2 * ((n : ℂ) + 1)) → s ≠ 1 → s.re = 1 / 2
+</code></pre>
+<ol start="3">
+<li>No zeros to the right of the critical line, for every Dirichlet L-function. For every modulus <code>N ≥ 1</code> and every Dirichlet character χ modulo N, primitive or not, L(χ, s) ≠ 0 whenever Re s &gt; 1/2. The one excluded case is the trivial character at <code>s = 1</code>, where the L-function has its pole.</li>
+</ol>
+<pre><code>theorem LFunction_ne_zero_of_half_lt_re :
+  ∀ (N : ℕ) [NeZero N] (χ : DirichletCharacter ℂ N) (s : ℂ),
+    1 / 2 &lt; s.re → (χ ≠ 1 ∨ s ≠ 1) → DirichletCharacter.LFunction χ s ≠ 0
+</code></pre>
+<ol start="4">
+<li>Zeros in the critical strip lie on the critical line, for every Dirichlet L-function.</li>
+</ol>
+<pre><code>theorem LFunction_eq_zero_re :
+  ∀ (N : ℕ) [NeZero N] (χ : DirichletCharacter ℂ N) (s : ℂ),
+    0 &lt; s.re → s.re &lt; 1 → DirichletCharacter.LFunction χ s = 0 → s.re = 1 / 2
+</code></pre>
+<ol start="5">
+<li>The same for primitive characters, the form in which the Generalized Riemann Hypothesis for Dirichlet L-functions is usually stated.</li>
+</ol>
+<pre><code>theorem LFunction_eq_zero_re_of_isPrimitive :
+  ∀ (N : ℕ) [NeZero N] (χ : DirichletCharacter ℂ N), χ.IsPrimitive →
+    ∀ s : ℂ, 0 &lt; s.re → s.re &lt; 1 → DirichletCharacter.LFunction χ s = 0 → s.re = 1 / 2
+</code></pre>
+<p>Scope. "GRH" here means Dirichlet L-functions: all moduli and all characters. Dedekind zeta functions, Hecke L-functions and automorphic L-functions in general are not among the statements that were checked.</p>
+<h2>Arithmetic consequences</h2>
+<p>As a check that does not depend on Mathlib's definition of the zeta function, the proof was combined with kimihiro64/Robin1984 (commit <code>acab1a3</code>), an independent formalization of Robin's and Lagarias's criteria on the same Lean and Mathlib versions. Importing both gives two theorems about the divisor sum, with no hypotheses and no mention of zeta (ArithSolution.lean; statements alone in ArithChallenge.lean, which imports only Mathlib):</p>
+<pre><code>theorem robin_inequality :
+    ∀ n : ℕ, 5040 &lt; n →
+      ((ArithmeticFunction.sigma 1 n : ℕ) : ℝ) &lt;
+        Real.exp Real.eulerMascheroniConstant * (n : ℝ) * Real.log (Real.log (n : ℝ))
+
+theorem lagarias_inequality :
+    ∀ n : ℕ, 0 &lt; n →
+      ((ArithmeticFunction.sigma 1 n : ℕ) : ℝ) ≤
+        (harmonic n : ℝ) + Real.exp (harmonic n : ℝ) * Real.log (harmonic n : ℝ)
+</code></pre>
+<table aria-label="数据表格，可横向滚动查看" tabindex="0">
+<thead>
+<tr>
+<th>Robin1984 on its own (its three equivalences with RH)</th>
+<th>Result</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Robin1984 builds with <code>lake build</code></td>
+<td>pass</td>
+<td>4,435 jobs, exit 0</td>
+</tr>
+<tr>
+<td>con-leche <code>master</code> and <code>--compare</code></td>
+<td>accepts</td>
+<td>69,293 declarations accepted; all three theorems justified against its own challenge (log)</td>
+</tr>
+<tr>
+<td>Unmodified Comparator v4.33.0 with the repository's own config</td>
+<td>pass</td>
+<td>nanoda accepts, Lean default kernel accepts, "Your solution is okay!"; exit 0 at 03:31:06 UTC (log summary)</td>
+</tr>
+<tr>
+<td><code>lake comparator</code> (Lean v4.36.0) from exports</td>
+<td>pass</td>
+<td>Lean paranoid kernel, nanoda and Lean default kernel all accept; "Your solution is okay!"; exit 0 at 04:16:52 UTC (log summary)</td>
+</tr>
+</tbody>
+</table>
+<table aria-label="数据表格，可横向滚动查看" tabindex="0">
+<thead>
+<tr>
+<th>The two inequalities (RH proof combined with Robin1984)</th>
+<th>Result</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>robin_inequality</code> and <code>lagarias_inequality</code> compile; <code>#print axioms</code></td>
+<td>pass</td>
+<td><code>propext</code>, <code>Classical.choice</code>, <code>Quot.sound</code> only (audit)</td>
+</tr>
+<tr>
+<td>con-leche <code>master</code> on the full combined export</td>
+<td>accepts</td>
+<td>1,472,825 declarations accepted in <code>--verified</code> mode; exit 0 at 02:29:56 UTC (log)</td>
+</tr>
+<tr>
+<td>con-leche <code>--compare</code> against <code>ArithChallenge</code></td>
+<td>accepts</td>
+<td>both theorems "justified by the solution"; exit 0 at 02:29:06 UTC (log)</td>
+</tr>
+<tr>
+<td>nanoda on the full combined export</td>
+<td>accepts</td>
+<td>exit 0 at 02:56:46 UTC; 33 min 46 s on 64 threads (log)</td>
+</tr>
+<tr>
+<td><code>lake comparator</code> (Lean v4.36.0) on the combined export</td>
+<td>running</td>
+<td>statement comparison and axiom check passed; its Lean kernel stages are single-threaded on a 62 GB export and are expected to take many hours, as for the main proof</td>
+</tr>
+</tbody>
+</table>
+<p>The combined export is 61,752,134,938 bytes, sha256 44651dcc482a6e06e8d626994221aff638e422fded189bf856e0c31176926f0d; its challenge export has sha256 088a57c9e7454fa5279a86a825e551828ac8431694855aadd1f6e6a6eb37bb1d. These statements still rely on Mathlib's definitions of the divisor sum, Euler's constant, harmonic numbers, <code>exp</code> and <code>log</code>, and on the Robin1984 proof, which is why that proof was put through the same checks.</p>
+<h2>Downloads</h2>
+<p>solution.ndjson.zst 7.7 GB (7,699,933,588 bytes)</p>
+<p>The exported proof: output of lean4export on module <code>Main</code>. Unpacks to 61,570,595,788 bytes.</p>
+<p>unpacked sha256 5ea74b912147c5c93cc2b6d70cc727cf908df2f62ac6a20480a3fa02f6be244e</p>
+<p>challenge.ndjson.zst 47 MB</p>
+<p>The exported challenge: the five statements with <code>sorry</code> proofs, importing only Mathlib. Unpacks to 350,862,970 bytes.</p>
+<p>unpacked sha256 bd484ac9886a96f26b1d9a7a59ebd45b7a70d102c015d4f31f9302bbdd6ab2b9</p>
+<p>Smaller files:</p>
+<ul>
+<li>comparator.json: Comparator config naming the checkers that can process this proof</li>
+<li>SHA256SUMS: hashes of everything on this page</li>
+<li>audit.log and Audit.lean: the axiom audit and the file that produced it</li>
+<li>project-oleans.sha256: sha256 of each of the 175,187 compiled files (29 MB). These hashes depend on the build directory; see the note below.</li>
+<li>nanoda.log: timing and exit status of the nanoda run</li>
+<li>con-leche-master.log and con-leche-compare.log: the two con-leche runs</li>
+</ul>
+<h2>Check it yourself</h2>
+<p>With Lean v4.36.0 installed, nothing needs to be built. You need roughly 100 GB of RAM and 70 GB of disk.</p>
+<pre><code>zstd -d --long=30 solution.ndjson.zst      # --long=30 is required
+zstd -d --long=27 challenge.ndjson.zst
+sha256sum solution.ndjson challenge.ndjson  # compare with the hashes above
+
+lake comparator --config comparator.json \
+  --challenge-from-export challenge.ndjson --solution-from-export solution.ndjson
+</code></pre>
+<p>nanoda alone took about 28 minutes on 80 threads. The Lean kernels are single-threaded and take much longer.</p>
+<p>The fastest independent check is con-leche built from source (Lean v4.36.0, about two minutes to build). It needs about 50 GB of RAM and took under four minutes on 64 threads:</p>
+<pre><code>git clone https://github.com/leanprover/con-leche &amp;&amp; cd con-leche
+git checkout compare        # 5dc36dc1; master (cd2eceab) for the plain check
+lake build con-leche
+.lake/build/bin/con-leche --compare challenge.ndjson solution.ndjson
+</code></pre>
+<h2>Provenance</h2>
+<table aria-label="数据表格，可横向滚动查看" tabindex="0">
+<thead>
+<tr>
+<th>Item</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Source archive</td>
+<td><code>lean.tar.gz</code>, the 14 parts from alpo.ge joined; 239,275,554 bytes sha256 9631b4f020199e580ba86178cb56c6e9b09f690c2369a80dc4334aa93f49c7fc</td>
+</tr>
+<tr>
+<td>Source mirror</td>
+<td>Deicyde/riemann-hypothesis, byte-identical to the archive apart from the Comparator files it adds</td>
+</tr>
+<tr>
+<td>Lean / Mathlib</td>
+<td>Lean v4.33.1 (commit <code>819816b2</code>); Mathlib tag <code>v4.33.1</code> (<code>0df444a3</code>)</td>
+</tr>
+<tr>
+<td>Exporter</td>
+<td>lean4export tag <code>v4.33.0</code> (<code>15f6055e</code>), built with Lean v4.33.1; target list as in Deicyde's <code>export-targets.txt</code></td>
+</tr>
+<tr>
+<td>Judge and extra kernels</td>
+<td>Lean v4.36.0: <code>lake comparator</code>, <code>leanchecker</code>, <code>leanchecker-paranoid</code>, <code>nanoda_bin</code></td>
+</tr>
+<tr>
+<td>lean4lean</td>
+<td>digama0/lean4lean at <code>67f63b0c</code>, built with Lean v4.33.1; run on the compiled <code>.olean</code> files, not the export</td>
+</tr>
+<tr>
+<td>con-leche</td>
+<td>leanprover/con-leche <code>master</code> at <code>cd2eceab</code> and branch <code>compare</code> at <code>5dc36dc1</code>, each built with Lean v4.36.0</td>
+</tr>
+<tr>
+<td><code>Main.olean</code></td>
+<td>sha256 9146dfb4148e24d2252e04c50742f3e49dd126dfcc5006d10bf5f873ddf796ad</td>
+</tr>
+<tr>
+<td>Manifest of all compiled files</td>
+<td>sha256 375cbee2fc3fc0f5088ef2e6dc9a5ac5530924310dc62422ec65aac9dc4c1d25 valid only for the build directory <code>/home/ubuntu/grh/src/lean</code>; see the note below</td>
+</tr>
+<tr>
+<td>Build directory</td>
+<td>the archive's <code>lean/</code> directory was at <code>/home/ubuntu/grh/src/lean</code> on every build machine, so each source file was passed to Lean as <code>/home/ubuntu/grh/src/lean/src/.lean</code></td>
+</tr>
+</tbody>
+</table>
+<h2>Caveats</h2>
+<ul>
+<li>The build ran on cloud machines without a sandbox, and compiled each file by calling <code>lean</code> directly with the same inputs <code>lake</code> supplies (module name, package name and the lakefile's options), not through <code>lake build</code>.</li>
+<li>The per-file <code>.olean</code> hashes depend on the build directory. In Lean v4.33.1 a compiled file stores each linter message together with the absolute path of its source file. Of our 175,187 compiled files, 98,219 contain the path <code>/home/ubuntu/grh/src/lean/src/…</code>; the other 76,968, including <code>Main.olean</code>, contain no path. So <code>project-oleans.sha256</code> and its sha256 can be reproduced in full only by a build whose source tree is at <code>/home/ubuntu/grh/src/lean</code>. For a build at any other path, only the files of modules that emit no linter messages should match. What we checked: a <code>lake build</code> of 240 modules on a different machine, at a different path, gave 168 files identical to the manifest and 72 different; all 72 contain that build's path and none of the 168 do. Separately, 77 modules compiled both ways in the same directory, by <code>lake build</code> and by our direct invocation, were byte-identical. We have not compared the full set against a <code>lake build</code>.</li>
+<li>The exported proof (<code>solution.ndjson</code>) is the artifact the independent kernels checked. Its hash is the one to compare across builds; we have not examined whether the export format can carry a source path.</li>
+<li>The export was produced from that unsandboxed build. We have not ourselves compared its sha256 with an export made from a sandboxed <code>lake build</code>.</li>
+<li>A passing check shows that the formal statements, as written in Lean against Mathlib's definitions, follow from the three standard axioms according to the kernels used. It relies on those kernels and on Mathlib's definitions being what they are intended to be.</li>
+</ul></div>
+</section>
+<footer class="source-box"><span>内容来自原作者；中文为乔木风格改写，非逐字翻译。</span><div><a href="https://alpo.ge/remark.pdf" target="_blank" rel="noopener noreferrer">打开原文 ↗</a><a href="https://leanprover-community.github.io/blog/posts/riemann-hypothesis/" target="_blank" rel="noopener noreferrer">相关链接 ↗</a></div></footer>
+</article>
+</main>
+<footer class="site-footer"><span>海外创始人长文 · 乔木中文改写<br>每日 08:00 更新 · 中国标准时间（UTC+8）</span><nav class="footer-links" aria-label="页尾导航"><a href="/feed.xml">全文 RSS ↗</a><a href="/archive">全部文章</a><a href="/about">关于</a></nav></footer>
+
+<script data-source="/static/app.fe36855dc563.js">/* D · progressive visual-journal reader. No framework, no content rewriting. */
+(() => {
+  'use strict';
+  const $ = (selector, root = document) => root.querySelector(selector);
+  const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+  const readerMemory = new Map();
+  const mediaBound = new WeakSet();
+  const nextFrame = callback => requestAnimationFrame(callback);
+  const safeFocus = element => { if (element?.isConnected) element.focus({preventScroll: true}); };
+  function currentTheme() { return document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light'; }
+  function paintTheme() {
+    const dark = currentTheme() === 'dark';
+    const button = $('#theme-btn');
+    if (button) {
+      button.setAttribute('aria-pressed', String(dark));
+      button.setAttribute('aria-label', dark ? '切换为亮色主题' : '切换为暗色主题');
+    }
+    $('meta[name="theme-color"]')?.setAttribute('content', dark ? '#20241e' : '#fffefa');
+  }
+  paintTheme();
+  $('#theme-btn')?.addEventListener('click', () => {
+    const style = document.createElement('style');
+    style.textContent = '*,*::before,*::after{transition:none!important}';
+    document.head.append(style);
+    const next = currentTheme() === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    try { localStorage.setItem('xn.theme', next); } catch {}
+    paintTheme();
+    void document.documentElement.offsetHeight;
+    nextFrame(() => nextFrame(() => style.remove()));
+  });
+
+  // Filter the existing static cards; content and native links work without JS.
+  const discovery = $('[data-discovery]');
+  if (discovery) {
+    const grid = $('[data-news-grid]');
+    const cards = $$('.news-card', grid);
+    const search = $('#story-search');
+    const clear = $('[data-clear-search]');
+    const empty = $('[data-search-empty]');
+    const normalize = value => value.normalize('NFKC').toLocaleLowerCase().trim();
+    const index = cards.map(card => normalize(card.dataset.search || ''));
+    let kind = 'all', layout = discovery.dataset.defaultView;
+    function render(writeURL = true) {
+      const terms = normalize(search.value).split(/\s+/).filter(Boolean);
+      let count = 0;
+      cards.forEach((card, i) => {
+        card.hidden = !(kind === 'all' || card.dataset.kind === kind) || !terms.every(term => index[i].includes(term));
+        if (!card.hidden) count++;
+      });
+      grid.dataset.layout = layout;
+      grid.classList.toggle('is-filtered', kind !== 'all' || terms.length > 0);
+      $$('[data-filter]', discovery).forEach(button => button.setAttribute('aria-pressed', String(button.dataset.filter === kind)));
+      $$('[data-layout]', discovery).forEach(button => button.setAttribute('aria-pressed', String(button.dataset.layout === layout)));
+      $('[data-result-count]').textContent = count === cards.length ? `${count} 篇文章 · 最新在前` : `找到 ${count} 篇 · 共 ${cards.length} 篇`;
+      clear.hidden = !search.value;
+      empty.hidden = count !== 0;
+      $('[data-empty-description]').textContent = search.value.trim() ? `试试更短的关键词，或清除「${search.value.trim()}」与类型筛选。` : '这个类型暂时没有文章，试试查看全部内容。';
+      if (writeURL) {
+        const url = new URL(location.href);
+        for (const [key, value] of [['q', search.value.trim()], ['type', kind === 'all' ? '' : kind], ['view', layout === discovery.dataset.defaultView ? '' : layout]]) {
+          if (value) url.searchParams.set(key, value); else url.searchParams.delete(key);
+        }
+        history.replaceState(history.state, '', url.pathname + url.search + url.hash);
+      }
+    }
+    function restore() {
+      if (location.pathname.startsWith('/a/')) return;
+      const params = new URLSearchParams(location.search);
+      search.value = params.get('q') || '';
+      kind = ['text', 'video'].includes(params.get('type')) ? params.get('type') : 'all';
+      layout = ['journal', 'list'].includes(params.get('view')) ? params.get('view') : discovery.dataset.defaultView;
+      render(false);
+    }
+    search.addEventListener('input', () => render());
+    clear.addEventListener('click', () => { search.value = ''; render(); search.focus(); });
+    $$('[data-filter]', discovery).forEach(button => button.addEventListener('click', () => { kind = button.dataset.filter; render(); }));
+    $$('[data-layout]', discovery).forEach(button => button.addEventListener('click', () => { layout = button.dataset.layout; render(); }));
+    $('[data-reset-filters]').addEventListener('click', () => { kind = 'all'; search.value = ''; render(); search.focus(); });
+    window.addEventListener('popstate', restore);
+    discovery.hidden = false;
+    restore();
+  }
+  function suspendMedia(root) {
+    $$('video,audio', root).forEach(media => { try { media.pause(); } catch {} });
+    $$('iframe[src]', root).forEach(frame => {
+      frame.dataset.pausedSrc = frame.getAttribute('src');
+      frame.removeAttribute('src');
+    });
+  }
+  function resumeEmbeds(root) {
+    $$('iframe[data-paused-src]', root).forEach(frame => {
+      frame.setAttribute('src', frame.dataset.pausedSrc);
+      delete frame.dataset.pausedSrc;
+    });
+  }
+  function bindMedia(root) {
+    $$('img,video,audio', root).forEach(media => {
+      if (mediaBound.has(media)) return;
+      mediaBound.add(media);
+      const figure = media.closest('.media-figure');
+      const notice = figure && $('.media-error', figure);
+      let bufferingTimer = null, requestedPlayback = false;
+      function clearBuffering() {
+        clearTimeout(bufferingTimer); bufferingTimer = null;
+        if (notice?.dataset.mediaState === 'buffering') notice.hidden = true;
+      }
+      const failed = () => {
+        requestedPlayback = false; clearBuffering();
+        const cover = media.closest('[data-cover]');
+        if (cover) cover.closest('.news-card')?.classList.add('media-failed');
+        if (figure) {
+          if (notice) {
+            notice.textContent = /^(VIDEO|AUDIO)$/.test(media.tagName)
+              ? '此处暂时无法播放，请通过下方原文链接观看或收听。'
+              : '图片未能载入，请通过下方原文链接查看。';
+            notice.dataset.mediaState = 'failed'; notice.hidden = false;
+          }
+          media.hidden = true;
+          if (media.tagName === 'VIDEO') {
+            const poster = $('[data-video-fallback]', figure);
+            if (poster) poster.hidden = false;
+          }
+        }
+      };
+      media.addEventListener('error', failed);
+      if (/^(VIDEO|AUDIO)$/.test(media.tagName)) {
+        const armBuffering = () => {
+          if (!requestedPlayback || bufferingTimer || media.hidden) return;
+          bufferingTimer = setTimeout(() => {
+            bufferingTimer = null;
+            if (notice && figure.isConnected && requestedPlayback && !media.hidden && !media.closest('[hidden]')) {
+              notice.textContent = '外部媒体暂未能继续播放，可通过下方原文链接观看或收听。';
+              notice.dataset.mediaState = 'buffering'; notice.hidden = false;
+            }
+          }, 10000);
+        };
+        media.addEventListener('play', () => { requestedPlayback = true; armBuffering(); });
+        media.addEventListener('waiting', armBuffering);
+        media.addEventListener('stalled', armBuffering);
+        media.addEventListener('playing', clearBuffering);
+        ['pause', 'ended', 'emptied'].forEach(name => media.addEventListener(name, () => {
+          requestedPlayback = false; clearBuffering();
+        }));
+      }
+      if (media.tagName === 'IMG' && media.complete && media.naturalWidth === 0) failed();
+    });
+  }
+  bindMedia(document);
+
+  // Accessible manual-activation tabs; no JS leaves both complete sections and links intact.
+  function enhanceReader(article, scroller, onView) {
+    const tablist = $('[data-tabs]', article);
+    if (!tablist) return null;
+    const tabs = $$('[data-view]', tablist);
+    const panels = $$('[data-reader-panel]', article);
+    const id = article.dataset.articleId;
+    const memory = readerMemory.get(id) || {positions: {}, view: 'rewrite'};
+    readerMemory.set(id, memory);
+    const isWindow = scroller === window;
+    const getTop = () => isWindow ? window.scrollY : scroller.scrollTop;
+    const setTop = value => { if (isWindow) window.scrollTo(0, value); else scroller.scrollTop = value; };
+    const toolbar = tablist.closest('.reader-tabs');
+    const position = $('.reading-position', toolbar);
+    const progress = $('progress', toolbar);
+    const percent = $('[data-reading-percent]', toolbar);
+    let progressFrame = null;
+    function updateProgress() {
+      progressFrame = null;
+      if (!article.isConnected || !progress) return;
+      const panel = panels.find(item => !item.hidden);
+      if (!panel) return;
+      const viewport = isWindow ? window.innerHeight : scroller.clientHeight;
+      const origin = isWindow ? 0 : scroller.getBoundingClientRect().top;
+      const top = panel.getBoundingClientRect().top - origin;
+      const distance = panel.getBoundingClientRect().height - viewport + toolbar.offsetHeight;
+      const value = distance <= 0 ? (top < viewport ? 100 : 0) : Math.round(Math.max(0, Math.min(1, (toolbar.offsetHeight - top) / distance)) * 100);
+      progress.value = value;
+      percent.textContent = value + '%';
+    }
+    function scheduleProgress() { if (progressFrame == null) progressFrame = nextFrame(updateProgress); }
+    if (position) position.hidden = false;
+    scroller.addEventListener('scroll', scheduleProgress, {passive: true});
+    window.addEventListener('resize', scheduleProgress);
+    article.addEventListener('load', scheduleProgress, true);
+    const observer = typeof ResizeObserver === 'function' ? new ResizeObserver(scheduleProgress) : null;
+    panels.forEach(panel => observer?.observe(panel));
+    const toolbarTop = () => Math.max(0, toolbar.getBoundingClientRect().top + getTop() - (isWindow ? 0 : scroller.getBoundingClientRect().top));
+    let view = null, generation = 0;
+    article.classList.add('reader-enhanced');
+    tablist.setAttribute('role', 'tablist');
+    tabs.forEach(tab => {
+      tab.setAttribute('role', 'tab');
+      tab.setAttribute('aria-controls', tab.dataset.view);
+    });
+    panels.forEach(panel => {
+      panel.setAttribute('role', 'tabpanel');
+      panel.setAttribute('tabindex', '0');
+      panel.setAttribute('aria-labelledby', 'tab-' + panel.dataset.readerPanel);
+    });
+    function remember() { if (view) memory.positions[view] = getTop(); memory.view = view; }
+    function show(next, {initial = false, updateURL = true} = {}) {
+      if (!['rewrite', 'original'].includes(next) || view === next) return;
+      const thisGeneration = ++generation;
+      if (view) {
+        remember();
+        const old = panels.find(panel => panel.dataset.readerPanel === view);
+        if (old) suspendMedia(old);
+      }
+      view = next;
+      memory.view = next;
+      panels.forEach(panel => {
+        panel.hidden = panel.dataset.readerPanel !== next;
+        if (!panel.hidden) resumeEmbeds(panel);
+        else suspendMedia(panel);
+      });
+      tabs.forEach(tab => {
+        const selected = tab.dataset.view === next;
+        tab.setAttribute('aria-selected', String(selected));
+        tab.setAttribute('tabindex', selected ? '0' : '-1');
+      });
+      if (updateURL) onView(next);
+      const saved = memory.positions[next];
+      // First rewrite starts at its title; first original starts at the visible tab bar.
+      if (!initial || next === 'original' || saved != null) {
+        nextFrame(() => {
+          if (thisGeneration === generation && article.isConnected) setTop(saved ?? toolbarTop());
+        });
+      }
+      scheduleProgress();
+    }
+    tabs.forEach(tab => tab.addEventListener('click', event => {
+      if (event.ctrlKey || event.metaKey || event.altKey || event.shiftKey) return;
+      event.preventDefault();
+      show(tab.dataset.view);
+    }));
+    tablist.addEventListener('keydown', event => {
+      const index = tabs.indexOf(document.activeElement);
+      if (index < 0) return;
+      if (event.key === ' ') { event.preventDefault(); show(tabs[index].dataset.view); return; }
+      let target = null;
+      if (event.key === 'ArrowRight') target = tabs[(index + 1) % tabs.length];
+      if (event.key === 'ArrowLeft') target = tabs[(index - 1 + tabs.length) % tabs.length];
+      if (event.key === 'Home') target = tabs[0];
+      if (event.key === 'End') target = tabs.at(-1);
+      if (target) { event.preventDefault(); safeFocus(target); }
+    });
+    show(location.hash === '#original' ? 'original' : 'rewrite', {initial: true, updateURL: false});
+    bindMedia(article);
+    return {show, remember, dispose() {
+      scroller.removeEventListener('scroll', scheduleProgress);
+      window.removeEventListener('resize', scheduleProgress);
+      article.removeEventListener('load', scheduleProgress, true);
+      observer?.disconnect();
+      if (progressFrame != null) cancelAnimationFrame(progressFrame);
+    }};
+  }
+  function replaceViewURL(view) {
+    const url = new URL(location.href);
+    url.hash = view === 'original' ? 'original' : 'rewrite';
+    history.replaceState(history.state, '', url.pathname + url.search + url.hash);
+  }
+  const directArticle = $('.site-main > [data-article-id]');
+  if (directArticle) {
+    const direct = enhanceReader(directArticle, window, replaceViewURL);
+    window.addEventListener('hashchange', () => direct?.show(location.hash === '#original' ? 'original' : 'rewrite', {updateURL: false}));
+    window.addEventListener('pagehide', () => { direct?.remember(); suspendMedia(directArticle); });
+  }
+
+  const sheet = $('#reader-sheet');
+  const grid = $('[data-news-grid]');
+  if (!sheet || !grid) return;
+  const scroll = $('.sheet-scroll', sheet);
+  const closeButton = $('[data-close-sheet]', sheet);
+  const pageRoots = $$('.site-header,.site-main,.site-footer');
+  const listTitle = document.title;
+  const listCanonical = $('link[rel="canonical"]')?.href;
+  const cache = new Map();
+  let active = null, controller = null, viewController = null, sequence = 0;
+  const canAnimate = !window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  history.scrollRestoration = 'manual';
+  const sheetState = () => history.state?.xnewsSheet;
+  const safePath = path => /^\/a\/[a-z0-9-]+\/?$/.test(path);
+  const prefetching = new Map();
+  const readerURLs = new Map($$('[data-open-reader]', grid).map(a => [new URL(a.href, location.href).pathname, a.dataset.readerSrc]));
+  const requestURL = path => readerURLs.get(path) || path;
+  // Warm only a link the reader shows intent to open; never preload media or all stories.
+  function prefetchArticle(event) {
+    if (event.type === 'pointerover' && event.pointerType === 'touch') return;
+    const connection = navigator.connection;
+    if (connection?.saveData || /(^|-)2g$/.test(connection?.effectiveType || '')) return;
+    const anchor = event.target.closest?.('[data-open-reader]');
+    if (!anchor) return;
+    const url = new URL(anchor.href, location.href), path = url.pathname;
+    if (url.origin !== location.origin || !safePath(path) || cache.has(path) || prefetching.has(path) || prefetching.size >= 2) return;
+    const abort = new AbortController();
+    const timer = setTimeout(() => abort.abort(), 8000);
+    const promise = fetch(requestURL(path), {signal: abort.signal, priority: 'low', headers: {'Accept': 'text/html'}})
+      .then(response => { if (!response.ok) throw new Error('Prefetch failed'); return response.text(); })
+      .then(html => {
+        const raw = new DOMParser().parseFromString(html, 'text/html').querySelector('[data-article-id]');
+        if (!raw || '/a/' + raw.dataset.articleId !== path.replace(/\/$/, '')) return null;
+        cache.set(path, html);
+        if (cache.size > 12) cache.delete(cache.keys().next().value);
+        return html;
+      }).catch(() => null).finally(() => { clearTimeout(timer); if (prefetching.get(path)?.promise === promise) prefetching.delete(path); });
+    prefetching.set(path, {promise, abort});
+  }
+  grid.addEventListener('pointerover', prefetchArticle);
+  grid.addEventListener('focusin', prefetchArticle);
+  grid.addEventListener('pointerdown', prefetchArticle);
+  async function readyPrefetch(path) {
+    const pending = prefetching.get(path);
+    if (!pending) return null;
+    let timer;
+    try {
+      // A click is foreground work. Do not inherit an eight-second speculative
+      // request deadline when that request is queued or stalled on a slow link.
+      const ready = await Promise.race([pending.promise, new Promise(resolve => { timer = setTimeout(() => resolve(null), 120); })]);
+      if (!ready) pending.abort.abort();
+      return ready;
+    } finally { clearTimeout(timer); }
+  }
+  function togglePageInert(value) { pageRoots.forEach(element => { element.inert = value; }); }
+  function showSheet(keyboard) {
+    if (sheet.open) return;
+    document.body.classList.add('sheet-open');
+    togglePageInert(true);
+    if (typeof sheet.showModal === 'function') sheet.showModal();
+    else { sheet.setAttribute('open', ''); sheet.classList.add('sheet-fallback'); sheet.setAttribute('role', 'dialog'); sheet.setAttribute('aria-modal', 'true'); }
+    if (!keyboard && canAnimate && typeof sheet.animate === 'function') {
+      sheet.animate([{transform: 'translateY(16px)', opacity: .8}, {transform: 'translateY(0)', opacity: 1}], {duration: 180, easing: 'cubic-bezier(.23,1,.32,1)'});
+    }
+    safeFocus(closeButton);
+  }
+  function loading() {
+    scroll.setAttribute('aria-busy', 'true');
+    scroll.innerHTML = '<div class="sheet-status" role="status"><p>正在打开文章…</p><div aria-hidden="true"><div class="skeleton-title"></div><div class="skeleton-title short"></div><div class="skeleton-line"></div><div class="skeleton-line"></div><div class="skeleton-line short"></div></div></div>';
+    scroll.scrollTop = 0;
+  }
+  function errorState(path, sourceURL) {
+    scroll.removeAttribute('aria-busy');
+    scroll.replaceChildren();
+    const status = document.createElement('section'); status.className = 'sheet-status'; status.setAttribute('role', 'alert');
+    const title = document.createElement('h2'); title.textContent = '文章暂时未能打开';
+    const description = document.createElement('p'); description.textContent = '选刊和阅读位置都还在。可以重试，或打开独立文章页。';
+    const retry = document.createElement('button'); retry.type = 'button'; retry.className = 'retry-button'; retry.textContent = '重试'; retry.addEventListener('click', () => loadArticle(path, sourceURL));
+    const link = document.createElement('a'); link.href = path; link.textContent = '独立文章页 ↗';
+    status.append(title, description, retry, link);
+    if (sourceURL) { const source = document.createElement('a'); source.href = sourceURL; source.target = '_blank'; source.rel = 'noopener noreferrer'; source.textContent = '去原文 ↗'; status.append(source); }
+    scroll.append(status);
+  }
+  async function loadArticle(path, sourceURL = '') {
+    if (!safePath(path)) return;
+    const ownSequence = ++sequence;
+    controller?.abort();
+    viewController?.remember(); viewController?.dispose(); viewController = null;
+    suspendMedia(scroll);
+    loading();
+    controller = new AbortController();
+    const signal = controller.signal;
+    const timeout = setTimeout(() => controller?.signal === signal && controller.abort(), 12000);
+    try {
+      let html = cache.get(path) || await readyPrefetch(path);
+      if (ownSequence !== sequence || !active) return;
+      if (signal.aborted) throw new Error('Article load timed out');
+      if (!html) {
+        const response = await fetch(requestURL(path), {signal, priority: 'high', headers: {'Accept': 'text/html'}});
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        html = await response.text();
+      }
+      if (ownSequence !== sequence || !active) return;
+      const parsed = new DOMParser().parseFromString(html, 'text/html');
+      const raw = $('[data-article-id]', parsed);
+      if (!raw || '/a/' + raw.dataset.articleId !== path.replace(/\/$/, '')) throw new Error('Article mismatch');
+      cache.set(path, html);
+      if (cache.size > 12) cache.delete(cache.keys().next().value);
+      const article = document.importNode(raw, true);
+      // Set panel visibility before attaching media to the live document.
+      viewController = enhanceReader(article, scroll, view => {
+        replaceViewURL(view);
+        $('[data-sheet-permalink]', sheet).href = location.pathname + location.search + location.hash;
+      });
+      scroll.replaceChildren(article);
+      scroll.removeAttribute('aria-busy');
+      document.title = parsed.title;
+      $('link[rel="canonical"]')?.setAttribute('href', 'https://xnews.qiaomu.ai' + path);
+      $('[data-sheet-permalink]', sheet).href = path + location.hash;
+      nextFrame(() => { if (ownSequence === sequence) bindMedia(article); });
+    } catch (error) {
+      if (ownSequence !== sequence || !active) return;
+      errorState(path, sourceURL);
+    } finally { clearTimeout(timeout); }
+  }
+  function openFromCard(anchor, keyboard) {
+    const url = new URL(anchor.href, location.href);
+    if (url.origin !== location.origin || !safePath(url.pathname)) return false;
+    const state = {path: url.pathname, listURL: location.pathname + location.search + location.hash, listY: window.scrollY, focusId: anchor.id, sourceURL: anchor.dataset.sourceUrl || ''};
+    history.replaceState({...history.state, xnewsList: {url: state.listURL, y: state.listY, focusId: state.focusId}}, '', location.href);
+    history.pushState({xnewsSheet: state}, '', url.pathname);
+    active = state;
+    $('[data-sheet-permalink]', sheet).href = url.pathname;
+    showSheet(keyboard);
+    loadArticle(state.path, state.sourceURL);
+    return true;
+  }
+  function finishClose() {
+    const previous = active;
+    ++sequence;
+    controller?.abort(); controller = null;
+    viewController?.remember(); viewController?.dispose(); viewController = null;
+    suspendMedia(scroll);
+    if (typeof sheet.close === 'function' && sheet.open) sheet.close();
+    sheet.removeAttribute('open'); sheet.classList.remove('sheet-fallback');
+    togglePageInert(false);
+    document.body.classList.remove('sheet-open');
+    scroll.replaceChildren(); scroll.removeAttribute('aria-busy');
+    active = null;
+    document.title = listTitle;
+    if (listCanonical) $('link[rel="canonical"]')?.setAttribute('href', listCanonical);
+    nextFrame(() => {
+      if (active) return;
+      window.scrollTo(0, previous?.listY ?? history.state?.xnewsList?.y ?? 0);
+      safeFocus(document.getElementById(previous?.focusId || history.state?.xnewsList?.focusId || '') || $('.edition-line h1'));
+    });
+  }
+  function requestClose() {
+    if (!active) return;
+    if (sheetState()) history.back(); else finishClose();
+  }
+  grid.addEventListener('click', event => {
+    const anchor = event.target.closest('[data-open-reader]');
+    if (!anchor || event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.altKey || event.shiftKey || anchor.target === '_blank' || anchor.hasAttribute('download')) return;
+    if (openFromCard(anchor, event.detail === 0)) event.preventDefault();
+  });
+  closeButton.addEventListener('click', requestClose);
+  sheet.addEventListener('cancel', event => { event.preventDefault(); requestClose(); });
+  sheet.addEventListener('keydown', event => {
+    if (event.key === 'Escape') { event.preventDefault(); requestClose(); return; }
+    if (event.key !== 'Tab') return;
+    const focusables = $$('a[href],button:not(:disabled),[tabindex="0"],video[controls],audio[controls]', sheet).filter(element => !element.closest('[hidden]'));
+    const first = focusables[0], last = focusables.at(-1);
+    if (event.shiftKey && (document.activeElement === first || document.activeElement === sheet)) { event.preventDefault(); safeFocus(last); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); safeFocus(first); }
+  });
+  window.addEventListener('popstate', () => {
+    const state = sheetState();
+    if (state && safePath(state.path)) {
+      active = state;
+      showSheet(true);
+      loadArticle(state.path, state.sourceURL);
+    } else if (active) finishClose();
+  });
+  window.addEventListener('pagehide', () => { viewController?.remember(); suspendMedia(scroll); controller?.abort(); });
+})();
+</script>
+</body>
+</html>

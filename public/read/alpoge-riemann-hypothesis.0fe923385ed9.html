@@ -1,0 +1,613 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>175,187 个模块通过核验，Lean 社区认证了这段黎曼猜想证明 · X News</title><meta name="robots" content="noindex"></head><body><article class="article-reader" data-article-id="alpoge-riemann-hypothesis">
+<a class="article-back" href="/">← 返回选刊</a>
+<header class="article-header"><p class="article-kicker">Levent Alpöge / 文章</p><h1>175,187 个模块通过核验，Lean 社区认证了这段黎曼猜想证明</h1><p class="article-dek">Alpöge 与 Claude 发现黎曼猜想证明后，只公开了一份 1700 万行的 Lean 库。Lean 与 Mathlib 社区在次日发表联合声明，认为命题、编译、比对和内核检查均已通过。</p><div class="article-meta"><time datetime="2026-11-22">本站收录 2026年11月22日 · 周日</time><span>原文发布 2026年11月20日 · 周五</span><span>原作者：Levent Alpöge</span><span>中文改写：<a href="/about">X News · 乔木</a></span><span>Riemann Hypothesis · Lean · formal verification · mathematics · Claude · Anthropic</span></div></header>
+<nav class="reader-tabs" aria-label="文章版本与来源"><div data-tabs><a href="#rewrite" id="tab-rewrite" data-view="rewrite">乔木改写</a><a href="#original" id="tab-original" data-view="original">原文</a></div><a class="reader-source" href="https://alpo.ge/remark.pdf" target="_blank" rel="noopener noreferrer">原文链接 ↗</a><div class="reading-position" hidden><progress max="100" value="0" aria-label="当前版本阅读进度"></progress><span data-reading-percent aria-hidden="true">0%</span></div></nav>
+<section class="reader-panel" id="rewrite" data-reader-panel="rewrite" aria-label="乔木改写"><h2 class="section-heading">乔木改写</h2><div class="prose"><p>2026年11月21日，Lean 与 Mathlib 社区发表联合声明，并由 Lean FRO 和 Mathlib Initiative 背书：他们对 Levent Alpöge 提交的黎曼猜想 Lean 证明有充分信心，并祝贺他完成了这项工作。</p>
+<p>前一天，11月20日，Alpöge 在个人网站放出一份四页说明。他写道，自己与 Claude 一起发现了黎曼猜想的证明；同一套方法很容易继续推出所谓广义黎曼猜想，他也预期，再多花些时间可以处理扩展黎曼猜想。形式化已经做完，而且不附加额外假设。</p>
+<p>他没有贴传统论文，只公开了一份 Lean 库。联合声明写明，这份库有 1700 万行代码。</p>
+<p>这是他的个人发布，不是 Anthropic 的官方研究公告。Alpöge 的个人网站抬头写着他在 Anthropic（PBC）工作，同时也列出哈佛 Society of Fellows 初级研究员身份；他的 X 账号 @<strong>alpoge</strong> 简介里同样提到 @AnthropicAI。截至本稿核验时，Anthropic 官方账号没有就此事发声。</p>
+<h2>他怎么描述这段工作</h2>
+<p>Alpöge 把黎曼猜想称作数论里的经典问题：它要求对给定大小的素数计数给出最优控制。他写，这个问题的影子已经引导数学家 150 年，它的许多韵律甚至伸进物理学，也让他看见各个领域的统一。</p>
+<p>对学生时代的他来说，这件事计划用几十年。他写，自己当时的办法是尽量熟悉所有以后可能在这个问题里认出来的工具。最近几个月，他和 Claude 一起在很宽的范围里工作；但这一次，临近终点时，Claude 远远跑在他前面。用他的话说，Claude 在那条终点线附近飞起来，跳起来，闪起来。</p>
+<p>他先把两条很不一样的想法，放到一个玩具情景里去组合。其中一条本身已经新得让他吃惊，并且把数学家最有成就感的那些黎曼影子之一，变得非常简单。他把他们带到与那个玩具情景类似的正确位置上，然后 Claude 开始让他感到敬畏。这样的时刻有几十次。</p>
+<p>他给出了一条自认为足以让同行从椅子上掉下来的线索。Stepanov 在函数域上处理黎曼问题时，会用到带重数的除子。现在这条论证是 Stepanov 路线的后代，但在整数上很难找到重数，那有点像要对整数本身做微分。玩具情景里那些新的傅里叶分析想法，把他们引向把 theta lift 串起来，好让同样的技巧以天然自守的方式反复出现。</p>
+<p>那一行是：对长度为 X 的 von Mangoldt 和，Claude 建议的 theta lift 链长，就重数模拟而言，是根号 X。他随后写道：除此之外，它还能是什么呢？</p>
+<p>论证里用到的数学，远比他学生时代以为必要的更多。他的直觉是，它会被大幅度简化，而且很可能很快发生。对现在的自己，他觉得只是刚迈出一步：形式化已经完成，要写出一份足够细致却完全不可读的巨型文档也并不难，但他打算尽量理解这条论证、讲清楚它，并写成真正可读的文本。</p>
+<h2>为什么先只公开 Lean</h2>
+<p>他把时机写得很糟。若能更早完成，他希望如此；若能在这个时代之前完成，那就更好。他写，关键进展发生在某个周日深夜，他给 Dario 发消息，从“假设我已经……”说起，最后问自己能不能公布。他们一起弄清了需要遵守的约束。他也提过一些越来越奇怪的办法。</p>
+<p>在他看来，领导层和他咨询过的少数受信任的数学家，对这种情形下该怎么做持非常相近的看法。他明确把“不能再等”写成自己单方面的责任。他说，对时机会有一种显而易见的怀疑解读，但那种看法是错的，他也高兴自己处在这种看法显然不成立的环境里。</p>
+<p>结果是一种这个时代才变得可能的局面：他把完整论证交给世界时，自己还没有掌握它周围那一大片数学。他觉得，贴出一份庞大、不可读、被他称作“slop”的文稿并不合适，所以决定只提交 Lean。他在脚注里写，自己也觉得好玩，生成过超过 25 万页的文本；Claude 还把它叫成广义黎曼猜想的“书”。他看了定理 1，开头写的是：因为实数是全序的，如果 σ 不等于 1/2，那么 σ 大于 1/2，或者 σ 小于 1/2。</p>
+<p>一份受信任的数学家建议他不要只写意识流，而要给出某种时间线。这份时间线由 Claude 在彻底检索后提供，从 2026 年 10 月 6 日的 Stepanov 行列式，到 11 月 16 日写出广义黎曼猜想。他强调，一旦他们通过“天然自守”的行列式，在 O(2, n) 上看到重数为 2，再靠更多 theta lift 去赢取更多重数，他就觉得会赢；但高等秩群上的自守形式他本人并不熟。他也强调，论证里可能塞进了许多奇怪、并非最优的选择，并预期很快会有更短的写法，只是他自己还没来得及找。</p>
+<p>对时间线里那些更多依赖 Claude 技术掌握的部分，他写得很坦白：自己今天并不更熟悉，以后大概要改一些描述；在 Claude 才是专家的地方，他有时只是在转述一份可能毫无意义的“slop”摘要，对此他表示抱歉，并认为 Lean 本身足以把事情澄清。</p>
+<p>说明末尾，他点名感谢了许多人，包括 Manjul Bhargava、Kai Gill、Hamish Kerr、Max Leiter、John Ma、Tal Magdish、Chris Paika、Maksym Radziwiłł、Jascha Sohl-Dickstein、Peter Sarnak、Jarred Sumner、Amir Tajdini，以及他特别写出的 David Dohan、Ben Michel、Ralph Furman、Eric Price 和 Cora Vinther，还有“不可思议的同事们”。他也写，OpenAI 方面一些数学选题的品味让他受益，并点到 Ehrhart 猜想和 Siegel 论证，这些是他的个人评价，不是本次核验的对象。</p>
+<h2>社区核验了什么，又没核验什么</h2>
+<p>联合声明的理由，对应 Kevin Buzzard 在 2026 年 11 月 12 日文章里提出的四条标准，声明认为它们都已满足。</p>
+<p>第一，黎曼猜想的命题本身是对的。这个命题已在 Mathlib 中，并经过 Lean 和数论专家仔细审看。</p>
+<p>第二，Alpöge 的库能够正确编译。声明写，到那时已有几十人报告编译成功，并得到同一份原始证明导出文件，过程中没有错误或构建失败。</p>
+<p>第三，代码证明的是正确命题。社区另加了一个只依赖 Mathlib 的隔离文件，再用 <code>comparator</code> 和 <code>con-leche --compare</code> 两套独立工具比对，确认库中证明的定理就是 Mathlib 里的黎曼猜想命题。</p>
+<p>第四，这段 Lean 证明有效。导出的原始证明已由多个证明检查器核对，包括 Lean 官方内核、<code>con-leche</code>、<code>con-ron</code>，以及第三方用不同编程语言写的独立检查器。声明特别写道，<code>con-leche</code> 和 <code>con-ron</code> 带有相对于集合论的形式证明，说明它们不能接受一个假证明，以回应“Lean 的逻辑本身可能有漏洞、证明会去钻”的担心。这些检查跑在一份惰性导出上，接触不到 Lean 源码里假想的恶意代码。更细的核验记录，见 MIT 的 Andrew Sutherland 页面。</p>
+<p>Sutherland 的页面写明，公告来源是 2026 年 11 月 20 日的 <code>alpo.ge/remark.pdf</code>，检查在 Claude Code 协助下进行，页面最后更新于 2026 年 11 月 21 日 12:55 UTC，当时仍有部分检查在进行。就在这次更新之后约一小时，社区联合声明发布。</p>
+<p>截至该页更新时，已经通过的检查包括：全部 175,187 个模块在 Lean v4.33.1 与 Mathlib v4.33.1 下编译，零错误；<code>Main.lean</code> 中五个头条定理的 <code>#print axioms</code> 只有 <code>propext</code>、<code>Classical.choice</code>、<code>Quot.sound</code> 三条标准公理；环境中 15 条公理全部来自 <code>Init</code>，没有在 Lean 核心之外另声明公理；Mathlib 文件与官方缓存逐字节相同；<code>leanchecker</code> 对每个模块做内核重放全部通过；独立 Rust 内核 nanoda，以及 con-leche 的普通核验和 <code>--compare</code> 模式，都接受完整导出；lean4lean 对全部编译模块也通过，其中 5 个模块在默认步数限制下超时，提高限制后通过。当时仍在进行的，包括 Lean 默认内核与偏执内核对导出的检查，以及 <code>lake comparator</code> 的端到端运行。</p>
+<p>被核验的五个定理，都写在提交的 <code>Main.lean</code> 里，命题取自一份只导入 Mathlib 的挑战文件。</p>
+<p>前两条是黎曼猜想本身：除了平凡零点负 2、负 4、负 6……之外，ζ 的每个零点实部都是 1/2；<code>s ≠ 1</code> 是因为 Mathlib 在极点处给 ζ 指定了一个约定值。第二条是同一命题的另一种写法，Lean 认为两者在定义上相等。</p>
+<p>第三到第五条覆盖 Dirichlet L 函数。第三条是：对每个模 N（N 至少为 1）和每个特征 χ，不论是否本原，只要实部大于 1/2，L(χ, s) 就不为 0；唯一排除的是平凡特征在 s = 1 的极点。第四条是临界带中的零点都落在临界线上。第五条是通常表述广义黎曼猜想时更常见的形式，只对本身原特征来写。</p>
+<p>Sutherland 明确写了范围：这里的“广义黎曼猜想”指 Dirichlet L 函数，覆盖所有模和所有特征。Dedekind zeta 函数、Hecke L 函数，以及一般的自守 L 函数，不在这次被检查的命题里。</p>
+<p>作为不依赖 Mathlib 对 zeta 函数定义的一种核对，这段证明还与 kimihiro64/Robin1984（commit <code>acab1a3</code>）合并。那是对 Robin 与 Lagarias 判别法的独立形式化，使用同一套 Lean 与 Mathlib 版本。合并后得到两条关于除数和的定理，没有额外假设，也不再提及 zeta：对大于 5040 的 n，Robin 不等式成立；对所有正整数 n，Lagarias 不等式成立。这两条不等式的编译和若干独立检查已经通过；针对合并导出的 <code>lake comparator</code> 在该页更新时仍在运行。</p>
+<p>源归档是 alpo.ge 上 14 个分卷拼成的 <code>lean.tar.gz</code>，239,275,554 字节，SHA-256 为 <code>9631b4f020199e580ba86178cb56c6e9b09f690c2369a80dc4334aa93f49c7fc</code>。</p>
+<p>Sutherland 也列出了限制。构建在未加沙箱的云机器上进行，是直接调用 <code>lean</code>，而不是通过 <code>lake build</code>。独立内核核对的是导出文件 <code>solution.ndjson</code>，其哈希才是跨构建应比较的对象；他们尚未把这份导出的哈希，与一次带沙箱的 <code>lake build</code> 所产生的导出做比较。通过一次检查，意味着这些按 Mathlib 定义写下的形式命题，可以按所用内核从三条标准公理推出。这件事依赖于这些内核，也依赖于 Mathlib 的定义就是它们想表达的意思。</p>
+<p>联合声明的配图，来自 Lean 官方账号 11 月 21 日发布该声明时的帖子。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_lean_statement_card"><div class="media-frame"><img src="https://pbs.twimg.com/media/HXqGwBnaUAA8Pvd.png" data-original-src="https://pbs.twimg.com/media/HXqGwBnaUAA8Pvd.png" alt="Announcement image posted by the Lean official account with the joint Lean and Mathlib statement on the Riemann Hypothesis verification" loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://alpo.ge/remark.pdf" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<h2>读这份材料时可以先抓住的几件事</h2>
+<p>本稿覆盖的是 Alpöge 的四页说明，以及 Lean、Mathlib 社区的联合声明和 Sutherland 的核验记录。1700 万行 Lean 库本身没有作为全文收入，也不应被转述成已经读过的证明细节。</p>
+<p>如果要核对形式化结论，可以直接读联合声明和 Sutherland 的页面，并按该页给出的步骤自行检查导出文件。想理解证明在数学上为什么成立，需要等 Alpöge 说他会写的可读说明，以及数学社区后续的解释和简化。他本人也认为，现在的论证极长，而且会被大幅度缩短。</p>
+<p>不要把新闻标题里的“Anthropic 证明了黎曼猜想”当成他本人或 Lean 社区的表述。被认证的是这段 Lean 证明，以及它与 Mathlib 中命题的对应关系。Clay Mathematics Institute 是否因此把黎曼猜想从千禧年问题名单上撤下，本稿没有在官方页面上核到新的结论，不能从这次形式核验直接推出来。</p>
+</div></section>
+<section class="reader-panel" id="original" data-reader-panel="original" aria-label="原文">
+<h2 class="section-heading">原文</h2><h3 class="original-title">I believe I have, working with Claude, discovered a proof of the Riemann Hypothesis</h3>
+<div class="original-media">
+<figure class="media-figure" data-media-id="media_lean_statement_card"><div class="media-frame"><img src="https://pbs.twimg.com/media/HXqGwBnaUAA8Pvd.png" data-original-src="https://pbs.twimg.com/media/HXqGwBnaUAA8Pvd.png" alt="Announcement image posted by the Lean official account with the joint Lean and Mathlib statement on the Riemann Hypothesis verification" loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://alpo.ge/remark.pdf" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div>
+<div class="prose" lang="en"><h1>I believe I have, working with Claude, discovered a proof of the Riemann Hypothesis</h1>
+<p>Levent Alpöge, 20 November 2026
+Source: https://alpo.ge/remark.pdf</p>
+<p>The Riemann Hypothesis is the classic problem in number theory. It asks for
+optimal control on the count of prime numbers of a given size. Its shadows
+have guided mathematicians for 150 years, and its many rhymes and reflections,
+even reaching physics, taught us the unity of our fields.</p>
+<pre><code>I believe I have, working with Claude, discovered a proof1 of the Riemann
+</code></pre>
+<p>Hypothesis. In fact, the method easily extends much further, resolving the
+so-called Generalized Riemann Hypothesis, and I expect, with more time, the
+Extended Riemann Hypothesis too. Claude and I have also formalized the
+arguments without assumptions. It is natural to feel that this is an end, in
+my case a loss of a principal guiding light, but what I saw during the course of
+progress so amazed me that I believe it is one dawn across science of something
+far greater.</p>
+<pre><code>It was my secret in my student days that my plans were for this problem in
+</code></pre>
+<p>decades, which meant then that I tried to become familiar with all tools that I
+could possibly recognize in the problem when it was time. Claude and I have
+had a great time together with such breadth in recent months, but this time
+Claude far outpaced me near the finish line. No, Claude flew, and danced,
+and sparkled near that finish line. I had us on the line of combining two quite
+different ideas present in a toy setting, one of which was already new and
+shocking, making very simple one of the shadows of Riemann over which we
+mathematicians felt most triumph. I guided us to the right situation analogous
+to that toy setting, and then Claude began to leave me in awe.</p>
+<pre><code>Tens of such occurred, but I will give one line which will suffice to make
+</code></pre>
+<p>fellow mathematicians fall out of their chairs. In Stepanov’s argument resolving
+Riemann over function fields one uses a divisor involving multiplicity. This
+argument is a descendant of Stepanov’s, but multiplicity is hard to find over
+the integers, corresponding to something like differentiating whole numbers.
+The simple, new, Fourier-analytic ideas in the toy setting led us to examine
+chaining theta lifts if we were to have the same tricks recur but work in a
+natively automorphic manner. The line: for the von Mangoldt sum of length
+X, Claude’s suggested
+√     length of chain of theta lifts, in view of each mimicking
+multiplicity, was X. (And yet, what else could it be?)</p>
+<pre><code>An astounding amount of mathematics is present in the argument, far more
+</code></pre>
+<p>than I had imagined would be necessary as a student. My intuition insists
+it will be massively simplified, likely immediately. But I hope in having the
+experience of seeing all of number theory’s beauty brought together I am just
+one of the first, and those who love the mathematics will all be able to enjoy
+such transcendence in the future.</p>
+<pre><code> The argument is incredibly long at the moment, and while its formalization
+</code></pre>
+<p>is finished and it is routine to produce a huge, unreadable document containing
+sufficient detail, in my view of my path I have just taken a step. I intend to
+do my best to understand and impart understanding of this argument and its
+certain simplifications, to speak about it, to write it properly.</p>
+<p>In a time of revolution in mathematics I hope the argument provides a
+glimpse towards the miracles that lie ahead, and shows us the joy and wonder
+we are about to find in the simplest things.
+1 https://alpo.ge/lean.tar.gz.part01, . . . , https://alpo.ge/lean.tar.gz.part14.</p>
+<pre><code>                                        1
+</code></pre>
+<p>1
+It is obvious to me that I should remark on the following.</p>
+<pre><code>The precise timing is horrible. If I could have, I’d have finished this all
+</code></pre>
+<p>much earlier. Hell, strictly before this age would have sure been nice. This all
+happened for me late Sunday night, and I messaged Dario, "Hypothetically,
+if I were to have . . . ", eventually asking about my ability to announce. We
+went and figured it out and the fact is that there was a constraint to respect,
+though I did ask about progressively more bizarre ideas. This problem has
+been the sacred object in mathematics for me since my childhood, and I am
+very touchy about the treatment of great intellectual goals, though seriously
+imperfect. Our leadership and the few trusted mathematicians I consulted hold
+extremely similar views on the right things to do in these circumstances (it is
+occasionally possible for physicists and mathematicians to agree. . . ), and I am
+clearly unilaterally responsible for feeling I just could not live if I waited even
+longer. There is an obvious cynical view, to do with the timing, but it is false,
+and I am pleased that I am in circumstances where it is obviously false.</p>
+<pre><code>This puts us in the rather extraordinary situation this age has made possible,
+</code></pre>
+<p>in which I am presenting the world with a complete argument before having
+mastered a massive neighbourhood around its mathematics. It being obviously
+inappropriate to attempt to post some massive unreadable travesty of "slop"2 ,
+I decided to only present Lean.</p>
+<pre><code>In a different vein, I have a lot of people I want to praise, and I will do a
+</code></pre>
+<p>proper job in a proper writeup, alas pardon the accidental omissions — among
+many others, Manjul Bhargava, Kai Gill, Hamish Kerr, Max Leiter, John Ma, Tal
+Magdish, Chris Paika, Maksym Radziwiłł, Jascha Sohl-Dickstein, Peter Sarnak,
+Jarred Sumner, Amir Tajdini, and especially David Dohan, Ben Michel, Ralph
+Furman, Eric Price, and Cora Vinther, and my miraculous colleagues. I want
+them to be proud.</p>
+<pre><code>I have benefited from the good taste of the people at OpenAI involved
+</code></pre>
+<p>with various mathematical results, so I am quite happy to praise them too.
+The Ehrhart conjecture was one such tasteful choice some time ago; playing
+further and working out the equality case I saw accurate handling of solutions
+of the Monge-Ampère equation and immediately understood Navier-Stokes
+was going to fall. Similarly, their quiet inclusion of the Siegel argument, whose
+result was strictly dominated by the (2, 3, 6)-triangle group trick, again showed
+great taste; though I did not comment so publicly, I immediately recognized
+it as Stepanov without multiplicity, though it was only clear to me during
+this rather harebrained tornado through the whole of number theory that this
+problem would fall given enough all-nighters and physical toll when I had the
+qN = M k + R sign-only proof of Weil and Deligne.</p>
+<pre><code>2 I of course amused myself, and hit 250, 000+ pages.
+
+Claude cutely called it the GRH . . . "book" — I looked at Theorem 1 and it began by noting that
+</code></pre>
+<p>because the reals are totally ordered if σ ̸= 12 then σ &gt; 21 or σ &lt; 12 .</p>
+<pre><code>                                             2
+</code></pre>
+<p>2
+I had a stream-of-consciousness jaunt through the experience of finding all
+the pieces of the argument through incredible confusion with Claude, but a
+trusted mathematician advised me to just get to the point and have some sort
+of timeline. I emphasize that once we saw multiplicity 2 on O(2, n) via the
+"natively-automorphic" determinant that I’d been searching for via analogy to
+the definite sign of the left-hand side of3 qN = M k +R meaning holo/automorphy
+over a function field, winning more multiplicity with more theta lifts, we were
+going to win but I was also, so to speak, out of my element, in that I personally
+have little mastery of automorphic forms on higher rank groups (youthful
+foolish stubbornness). I also emphasize that I may have baked lots of strange
+suboptimal choices into the argument, and expect short arguments to follow
+fairly quickly, though I have not had time to search for such myself (yet!).
+So here is a rough timeline Claude provided after a thorough search.4
+1. 10/6/26: Stepanov determinant.
+2. 10/9/26: Dp ≡ 0 on a CM curve for p inert in K, D the invariant derivation,
+a
+a                           + a +···−O(log a)
+and D Ω·θ(0)
+a    is divisible by p p p3                .
+3. 10/19/26+: qN = M k + R, using x1 · x2 + · · · + xk−1 · xk , wanting
+"automorphy" of N since µ is automorphic from θ on sixfold cover of
+GL5 as a period integral of thetas, quadric has natural interpretation on
+corresponding CM e.g. C/Z[ω] as Weil5 , put Poincaré bundle on the edges
+to get θs.
+4. 10/6/26+: W (1S ) ≥ 0 via a determinant, interpret as Stepanov with
+multiplicity one again; bootstrap!!</p>
+<pre><code>5. 10/20/26: definitively switch to Λ aka n≤X Λ(n) · X
+                                         ∑︁         (︁      )︁
+                                                       n − 1 + − X log X +
+   (1 + γ) · X; Guinand-Weil had the sign, variance test function trick to
+3
+                   ∑︂
+                              t(x1 ) · · · t(xk ) · eq (h (x1 · x2 + · · · + xk−1 · xk )) ,
+               h,x1 ,...,xk
+</code></pre>
+<p>sum over h first for the left-hand side, with e.g. quadric coefficients too Bertini gives a definite sign
+from middle cohomology, one off the one on M k , which is the zero-mode on the right-hand side
+with R square-root-quality up to an inch or so as Katz would say by iterating Parseval k times,
+opposite signs meaning no cancellation of inverse roots, QED; vectorize to go up dimensions.
+Gabber’s hypersurface in one of Katz’s arguments reminds one of the quadric, which comes from
+looking for a simplification of averaging over the family χ ↦→ χ(disc), corresponding to a ↦→ y(·)a
+with y the normalized Gauss sum of order #|µK | who lives via θ on the #|µK |-fold cover of GL2 ,
+the reciprocity law of y(c · c′ ) vs. y(c) · y(c′ ) showing some sort of complete graph, simplifying to
+the above "path" quadric, Gauss sum cancellation replaced by iterated Parseval.
+4 The parts in which my vague intuition worked out due to Claude’s technical mastery are</p>
+<p>of course less familiar to me today, and probably I’ll have to edit some of these descriptions on
+reflection. The parts in which Claude is the expert and not me I am sort of paraphrasing a "slop"
+summary, which might make zero sense, and I apologize, though the Lean should suffice to clarify
+everything. I’m just too inexpert in the relevant stuff at the moment, I hope the reader sees the
+breadth of this argument!
+5 A lot is obviously being lossily compressed here, but especially after gritting with Sussman</p>
+<p>through Bałaban’s fantastic induction I had to think to myself about how hard fighting for some
+sort of F1 à la e.g. Borger would be.</p>
+<pre><code>                                                     3
+
+  make things look trace-formula-like (but how can I pigeonhole / Turán
+  over n? X? it?), Mehta-like integral over twists or at infinity. . .
+</code></pre>
+<ol start="6">
+<li>
+<p>10/8/26: W 1(0,1] + (∼ X η ) · 1(0,1/X] ≥ 0 gives &gt; 1 − η.
+(︁                          )︁</p>
+</li>
+<li>
+<p>10/14/26: Determinants for W (·)’s containing the desired periods, indeed
+GGP periods, with values 0, 1 meaning interlacing weights, or up to m
+non-interlacing ones.</p>
+</li>
+<li>
+<p>11/15/26: Iterated theta lifts U (X0 ) → U (X1 ) → · · · → U (Xm ) between
+totally definite√unitary groups, π ↦→ π ⊞ µj [t], wins multiplicity m. Time
+to take m like X. . .</p>
+</li>
+<li>
+<p>11/15/26: Norms of the lifts and level and cancellation of order-m terms
+with proven divisibility via Chowla-Selberg, Weyl, and Siegel mass.</p>
+</li>
+<li>
+<p>11/15/26: Sufficient lower bound on divisibility of the m-fold iterated
+lift.</p>
+</li>
+<li>
+<p>10/6/26: Iwasawa tower via analogy to pigeonhole on Fqn /Fq .</p>
+</li>
+<li>
+<p>11/15/26: Seesaw: the period of the iterated lift is a Bessel period independent
+of the Hecke characters, Rallis.</p>
+</li>
+<li>
+<p>10/6/26: Bost slope inequality.</p>
+</li>
+<li>
+<p>11/15/26: precise computation of the "cost" of each lift, showing that
+one would stop at 2/3 a priori, attempt to get a main term and transfer
+constant to a function field or kill via twisting, need for "division".</p>
+</li>
+<li>
+<p>11/15/26: Glue together an integral structure across Hecke characters for
+a "gcd" i.e. extra averaging.</p>
+</li>
+<li>
+<p>10/14/26: Relative trace formula, seen in a different half-plane argument
+via sixfold cover of GL5 automorphy of µ and reducing via Cauchy-
+Schwartz to a bound on the norm of a suitably projected Poincaré series,
+approximate orthogonality of the columns of the integral structure.</p>
+</li>
+<li>
+<p>11/15/26: for the classes in H 1 oE 1ℓ , Qℓ /Zℓ (−e) that we couldn’t kill
+(︁ [︁ ]︁          )︁</p>
+<p>by twisting, fight for a significant weakening of Vandiver.6</p>
+</li>
+<li>
+<p>11/15/26: computation of covolumes, theta series’ index, congruences
+between lifts and forms.</p>
+</li>
+<li>
+<p>10/19/26: precise choice of the Iwasawa tower, specifically using Behrend!!7</p>
+</li>
+<li>
+<p>11/16/26: GRH.</p>
+</li>
+</ol>
+<p>6 This is still pretty strong!! I believe vanishing of a number of K-groups of Z follows, and</p>
+<p>cyclicity up to 100ish maybe? I had Lichtenbaum, so I knew we would have a lot of slack in
+fighting these K’s.
+7 This is the sort of trick that intuitively to me is obviously going to be unnecessary.</p>
+<pre><code>                                           4
+</code></pre>
+<h1>Supplementary source: Lean verification of the Riemann Hypothesis</h1>
+<p>Joint statement by the Lean and Mathlib communities, endorsed by the Lean FRO and the Mathlib Initiative.
+Published 2026-11-21 13:55 at https://leanprover-community.github.io/blog/posts/riemann-hypothesis/</p>
+<p>Lean verification of the Riemann Hypothesis | Lean community blog</p>
+<h1>Lean verification of the Riemann Hypothesis</h1>
+<p>Lean and Mathlib communities</p>
+<p>2026-11-21 13:55</p>
+<h2>Lean verification of the Riemann Hypothesis</h2>
+<p>Joint statement by the Lean and Mathlib communities, endorsed by the Lean FRO and the Mathlib Initiative.</p>
+<p>On November 20, 2026, Levent Alpöge released a proof of the Riemann Hypothesis as a Lean library comprising 17 million lines of code.</p>
+<p>We have full confidence that Alpöge's proof of the Riemann Hypothesis is correct, and we congratulate him on this achievement.</p>
+<p>Our rationale is outlined below.</p>
+<p>The codebase depends directly only on Mathlib. Over the past day, the Lean and Mathlib communities have rallied to verify the proof's correctness. We hereby certify that both the statement and the proof of the Riemann Hypothesis are correct. The four criteria in https://xenaproject.wordpress.com/2026/11/12/and-the-proof-is-checked-in-lean/ are all satisfied.</p>
+<ol>
+<li>The statement of the Riemann Hypothesis is correct. This statement is part of Mathlib: RiemannHypothesis and has been carefully vetted by experts in Lean and number theory.</li>
+<li>Alpöge’s library compiles correctly. By now, dozens of people have reported correct compilation of the codebase, reproducing the same raw proof export file. The library compiles without errors or build failures.</li>
+<li>The code proves the correct statement. Crucially, the community has added a file that isolates the statement of the Riemann Hypothesis and imports only Mathlib. That statement was compared against the theorem proved by Alpöge using two independent tools (<code>comparator</code> and <code>con-leche –compare</code>), both confirming that the theorem proved in Alpöge’s library is exactly Mathlib’s statement of the Riemann Hypothesis.</li>
+<li>The Lean proof is valid. The exported raw proof has been checked by several proof checkers, including Lean’s official kernel, the <code>con-leche</code> and <code>con-ron</code> checkers, and several independent checkers contributed by third parties and implemented in different programming languages. The checkers <code>con-leche</code> and <code>con-ron</code> come with a formal proof, relative to set theory, that they cannot accept a false proof, thus addressing concerns that Lean’s logic itself might have flaws that the proof could exploit. An extensive overview is available at https://math.mit.edu/~drew/grh/. These checks ran on an inert export of the proof, out of reach of hypothetical malicious code in the Lean proof sources.</li>
+</ol>
+<p>Thanks are owed to everyone in the community who provided resources for the verification.</p>
+<p>We look forward to all the activity in the mathematical community that will help explain the new ideas in this proof.</p>
+<h1>Supplementary source: RH Lean proof verification files</h1>
+<p>Andrew Sutherland (MIT). Announced at alpo.ge/remark.pdf on 20 November 2026. Page last updated 2026-11-21 12:55 UTC.
+https://math.mit.edu/~drew/grh/</p>
+<p>The page below is included in full as retrieved.</p>
+<p>RH Lean proof: verification files</p>
+<h1>Verification files for the Lean proof of the Riemann Hypothesis</h1>
+<p>Announced at alpo.ge/remark.pdf on 20 November 2026.</p>
+<p>Andrew Sutherland (MIT), checks run with Claude Code. Page last updated 2026-11-21 12:55 UTC. Results below are as of that time and this page will be updated as the remaining checks finish.</p>
+<h2>Summary</h2>
+<p>The published Lean source compiles without errors, the five headline theorems depend only on the three standard axioms, every module has been replayed through the Lean kernel, two independently written kernels, nanoda and con-leche, accept the full exported proof, and lean4lean accepts every compiled module. con-leche's <code>--compare</code> mode, an independent implementation of Comparator's statement matching, confirms all five theorems against the challenge. The <code>lake comparator</code> run and the Lean-kernel replay of the export are still in progress.</p>
+<table aria-label="数据表格，可横向滚动查看" tabindex="0">
+<thead>
+<tr>
+<th>Check</th>
+<th>Result</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All 175,187 modules compile (Lean v4.33.1, Mathlib v4.33.1)</td>
+<td>pass</td>
+<td>zero errors; finished 16:43:21 UTC</td>
+</tr>
+<tr>
+<td><code>#print axioms</code> for the five theorems in <code>Main.lean</code></td>
+<td>pass</td>
+<td><code>propext</code>, <code>Classical.choice</code>, <code>Quot.sound</code> only (audit.log)</td>
+</tr>
+<tr>
+<td>No axioms declared outside Lean core</td>
+<td>pass</td>
+<td>15 axioms in the environment, all in <code>Init</code></td>
+</tr>
+<tr>
+<td>Mathlib files identical to the official cache</td>
+<td>pass</td>
+<td>8,322 Mathlib and 378 dependency <code>.olean</code> files, byte for byte</td>
+</tr>
+<tr>
+<td><code>leanchecker</code> kernel replay of every module</td>
+<td>pass</td>
+<td>175,187 of 175,187; zero rejections; finished about 18:17 UTC</td>
+</tr>
+<tr>
+<td>Challenge export equals the one published by Deicyde/riemann-hypothesis CI</td>
+<td>match</td>
+<td>sha256 bd484ac9…b2b9</td>
+</tr>
+<tr>
+<td>nanoda (independent Rust kernel) on the full export</td>
+<td>accepts</td>
+<td>exit 0 at 19:05:45 UTC; 27 min 42 s on 80 threads (nanoda.log)</td>
+</tr>
+<tr>
+<td>Lean default kernel and Lean paranoid kernel on the export</td>
+<td>running</td>
+<td>single-threaded; no verdict yet</td>
+</tr>
+<tr>
+<td><code>lake comparator</code> (Lean v4.36.0) end to end</td>
+<td>running</td>
+<td>statement comparison and axiom check already passed in one run; kernels in progress</td>
+</tr>
+<tr>
+<td>con-leche <code>master</code> (<code>cd2eceab</code>) on the full export</td>
+<td>accepts</td>
+<td>1,468,418 declarations accepted in <code>--verified</code> mode; exit 0 at 21:19:04 UTC; 3 min 15 s on 64 threads (log)</td>
+</tr>
+<tr>
+<td>con-leche <code>--compare</code> (branch <code>compare</code>, <code>5dc36dc1</code>): challenge against solution</td>
+<td>accepts</td>
+<td>all five theorems "justified by the solution"; 51,692 challenge declarations accepted; exit 0 at 21:19:12 UTC (log)</td>
+</tr>
+<tr>
+<td>lean4lean (<code>67f63b0c</code>, built with Lean v4.33.1) on the compiled files, module by module</td>
+<td>pass</td>
+<td>175,187 of 175,187; finished about 21:55 UTC. 175,182 passed with default settings. Five hit lean4lean's default step limit ("deterministic timeout") on <code>decide +kernel</code> computations and passed when rerun with the limit raised (timeouts, reruns with flags)</td>
+</tr>
+<tr>
+<td>con-leche and con-ron as bundled with Lean v4.36.0</td>
+<td>declined</td>
+<td>exit 2, not a rejection: those older binaries do not support one reflexive inductive type in the proof. con-leche <code>master</code>, above, does. (log, log)</td>
+</tr>
+<tr>
+<td>lean4lean bundled with Lean v4.36.0</td>
+<td>not applicable</td>
+<td>cannot read a v4.33 core library (<code>unknown constant 'Decidable.intro'</code>)</td>
+</tr>
+</tbody>
+</table>
+<h2>What was verified</h2>
+<p>Five theorems, proved in the submission's <code>Main.lean</code>. Their statements are below exactly as they appear in the challenge file, which imports only Mathlib. All the mathematical notions in them (<code>riemannZeta</code>, <code>DirichletCharacter</code>, <code>DirichletCharacter.LFunction</code>, <code>IsPrimitive</code>) are Mathlib's.</p>
+<ol>
+<li>The Riemann Hypothesis, using Mathlib's own definition (<code>Mathlib/NumberTheory/LSeries/RiemannZeta.lean</code>): every zero of ζ other than the trivial zeros −2, −4, −6, … has real part 1/2. The condition <code>s ≠ 1</code> is there because Mathlib assigns ζ a conventional value at its pole.</li>
+</ol>
+<pre><code>def RiemannHypothesis : Prop :=
+  ∀ (s : ℂ) (_ : riemannZeta s = 0) (_ : ¬∃ n : ℕ, s = -2 * (n + 1)) (_ : s ≠ 1), s.re = 1 / 2
+
+theorem riemannHypothesis : RiemannHypothesis
+</code></pre>
+<ol start="2">
+<li>The same statement written out in the submission's own words. Lean accepts the two as equal by definition.</li>
+</ol>
+<pre><code>theorem riemannZeta_eq_zero_re :
+  ∀ s : ℂ, riemannZeta s = 0 → (¬∃ n : ℕ, s = -2 * ((n : ℂ) + 1)) → s ≠ 1 → s.re = 1 / 2
+</code></pre>
+<ol start="3">
+<li>No zeros to the right of the critical line, for every Dirichlet L-function. For every modulus <code>N ≥ 1</code> and every Dirichlet character χ modulo N, primitive or not, L(χ, s) ≠ 0 whenever Re s &gt; 1/2. The one excluded case is the trivial character at <code>s = 1</code>, where the L-function has its pole.</li>
+</ol>
+<pre><code>theorem LFunction_ne_zero_of_half_lt_re :
+  ∀ (N : ℕ) [NeZero N] (χ : DirichletCharacter ℂ N) (s : ℂ),
+    1 / 2 &lt; s.re → (χ ≠ 1 ∨ s ≠ 1) → DirichletCharacter.LFunction χ s ≠ 0
+</code></pre>
+<ol start="4">
+<li>Zeros in the critical strip lie on the critical line, for every Dirichlet L-function.</li>
+</ol>
+<pre><code>theorem LFunction_eq_zero_re :
+  ∀ (N : ℕ) [NeZero N] (χ : DirichletCharacter ℂ N) (s : ℂ),
+    0 &lt; s.re → s.re &lt; 1 → DirichletCharacter.LFunction χ s = 0 → s.re = 1 / 2
+</code></pre>
+<ol start="5">
+<li>The same for primitive characters, the form in which the Generalized Riemann Hypothesis for Dirichlet L-functions is usually stated.</li>
+</ol>
+<pre><code>theorem LFunction_eq_zero_re_of_isPrimitive :
+  ∀ (N : ℕ) [NeZero N] (χ : DirichletCharacter ℂ N), χ.IsPrimitive →
+    ∀ s : ℂ, 0 &lt; s.re → s.re &lt; 1 → DirichletCharacter.LFunction χ s = 0 → s.re = 1 / 2
+</code></pre>
+<p>Scope. "GRH" here means Dirichlet L-functions: all moduli and all characters. Dedekind zeta functions, Hecke L-functions and automorphic L-functions in general are not among the statements that were checked.</p>
+<h2>Arithmetic consequences</h2>
+<p>As a check that does not depend on Mathlib's definition of the zeta function, the proof was combined with kimihiro64/Robin1984 (commit <code>acab1a3</code>), an independent formalization of Robin's and Lagarias's criteria on the same Lean and Mathlib versions. Importing both gives two theorems about the divisor sum, with no hypotheses and no mention of zeta (ArithSolution.lean; statements alone in ArithChallenge.lean, which imports only Mathlib):</p>
+<pre><code>theorem robin_inequality :
+    ∀ n : ℕ, 5040 &lt; n →
+      ((ArithmeticFunction.sigma 1 n : ℕ) : ℝ) &lt;
+        Real.exp Real.eulerMascheroniConstant * (n : ℝ) * Real.log (Real.log (n : ℝ))
+
+theorem lagarias_inequality :
+    ∀ n : ℕ, 0 &lt; n →
+      ((ArithmeticFunction.sigma 1 n : ℕ) : ℝ) ≤
+        (harmonic n : ℝ) + Real.exp (harmonic n : ℝ) * Real.log (harmonic n : ℝ)
+</code></pre>
+<table aria-label="数据表格，可横向滚动查看" tabindex="0">
+<thead>
+<tr>
+<th>Robin1984 on its own (its three equivalences with RH)</th>
+<th>Result</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Robin1984 builds with <code>lake build</code></td>
+<td>pass</td>
+<td>4,435 jobs, exit 0</td>
+</tr>
+<tr>
+<td>con-leche <code>master</code> and <code>--compare</code></td>
+<td>accepts</td>
+<td>69,293 declarations accepted; all three theorems justified against its own challenge (log)</td>
+</tr>
+<tr>
+<td>Unmodified Comparator v4.33.0 with the repository's own config</td>
+<td>pass</td>
+<td>nanoda accepts, Lean default kernel accepts, "Your solution is okay!"; exit 0 at 03:31:06 UTC (log summary)</td>
+</tr>
+<tr>
+<td><code>lake comparator</code> (Lean v4.36.0) from exports</td>
+<td>pass</td>
+<td>Lean paranoid kernel, nanoda and Lean default kernel all accept; "Your solution is okay!"; exit 0 at 04:16:52 UTC (log summary)</td>
+</tr>
+</tbody>
+</table>
+<table aria-label="数据表格，可横向滚动查看" tabindex="0">
+<thead>
+<tr>
+<th>The two inequalities (RH proof combined with Robin1984)</th>
+<th>Result</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>robin_inequality</code> and <code>lagarias_inequality</code> compile; <code>#print axioms</code></td>
+<td>pass</td>
+<td><code>propext</code>, <code>Classical.choice</code>, <code>Quot.sound</code> only (audit)</td>
+</tr>
+<tr>
+<td>con-leche <code>master</code> on the full combined export</td>
+<td>accepts</td>
+<td>1,472,825 declarations accepted in <code>--verified</code> mode; exit 0 at 02:29:56 UTC (log)</td>
+</tr>
+<tr>
+<td>con-leche <code>--compare</code> against <code>ArithChallenge</code></td>
+<td>accepts</td>
+<td>both theorems "justified by the solution"; exit 0 at 02:29:06 UTC (log)</td>
+</tr>
+<tr>
+<td>nanoda on the full combined export</td>
+<td>accepts</td>
+<td>exit 0 at 02:56:46 UTC; 33 min 46 s on 64 threads (log)</td>
+</tr>
+<tr>
+<td><code>lake comparator</code> (Lean v4.36.0) on the combined export</td>
+<td>running</td>
+<td>statement comparison and axiom check passed; its Lean kernel stages are single-threaded on a 62 GB export and are expected to take many hours, as for the main proof</td>
+</tr>
+</tbody>
+</table>
+<p>The combined export is 61,752,134,938 bytes, sha256 44651dcc482a6e06e8d626994221aff638e422fded189bf856e0c31176926f0d; its challenge export has sha256 088a57c9e7454fa5279a86a825e551828ac8431694855aadd1f6e6a6eb37bb1d. These statements still rely on Mathlib's definitions of the divisor sum, Euler's constant, harmonic numbers, <code>exp</code> and <code>log</code>, and on the Robin1984 proof, which is why that proof was put through the same checks.</p>
+<h2>Downloads</h2>
+<p>solution.ndjson.zst 7.7 GB (7,699,933,588 bytes)</p>
+<p>The exported proof: output of lean4export on module <code>Main</code>. Unpacks to 61,570,595,788 bytes.</p>
+<p>unpacked sha256 5ea74b912147c5c93cc2b6d70cc727cf908df2f62ac6a20480a3fa02f6be244e</p>
+<p>challenge.ndjson.zst 47 MB</p>
+<p>The exported challenge: the five statements with <code>sorry</code> proofs, importing only Mathlib. Unpacks to 350,862,970 bytes.</p>
+<p>unpacked sha256 bd484ac9886a96f26b1d9a7a59ebd45b7a70d102c015d4f31f9302bbdd6ab2b9</p>
+<p>Smaller files:</p>
+<ul>
+<li>comparator.json: Comparator config naming the checkers that can process this proof</li>
+<li>SHA256SUMS: hashes of everything on this page</li>
+<li>audit.log and Audit.lean: the axiom audit and the file that produced it</li>
+<li>project-oleans.sha256: sha256 of each of the 175,187 compiled files (29 MB). These hashes depend on the build directory; see the note below.</li>
+<li>nanoda.log: timing and exit status of the nanoda run</li>
+<li>con-leche-master.log and con-leche-compare.log: the two con-leche runs</li>
+</ul>
+<h2>Check it yourself</h2>
+<p>With Lean v4.36.0 installed, nothing needs to be built. You need roughly 100 GB of RAM and 70 GB of disk.</p>
+<pre><code>zstd -d --long=30 solution.ndjson.zst      # --long=30 is required
+zstd -d --long=27 challenge.ndjson.zst
+sha256sum solution.ndjson challenge.ndjson  # compare with the hashes above
+
+lake comparator --config comparator.json \
+  --challenge-from-export challenge.ndjson --solution-from-export solution.ndjson
+</code></pre>
+<p>nanoda alone took about 28 minutes on 80 threads. The Lean kernels are single-threaded and take much longer.</p>
+<p>The fastest independent check is con-leche built from source (Lean v4.36.0, about two minutes to build). It needs about 50 GB of RAM and took under four minutes on 64 threads:</p>
+<pre><code>git clone https://github.com/leanprover/con-leche &amp;&amp; cd con-leche
+git checkout compare        # 5dc36dc1; master (cd2eceab) for the plain check
+lake build con-leche
+.lake/build/bin/con-leche --compare challenge.ndjson solution.ndjson
+</code></pre>
+<h2>Provenance</h2>
+<table aria-label="数据表格，可横向滚动查看" tabindex="0">
+<thead>
+<tr>
+<th>Item</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Source archive</td>
+<td><code>lean.tar.gz</code>, the 14 parts from alpo.ge joined; 239,275,554 bytes sha256 9631b4f020199e580ba86178cb56c6e9b09f690c2369a80dc4334aa93f49c7fc</td>
+</tr>
+<tr>
+<td>Source mirror</td>
+<td>Deicyde/riemann-hypothesis, byte-identical to the archive apart from the Comparator files it adds</td>
+</tr>
+<tr>
+<td>Lean / Mathlib</td>
+<td>Lean v4.33.1 (commit <code>819816b2</code>); Mathlib tag <code>v4.33.1</code> (<code>0df444a3</code>)</td>
+</tr>
+<tr>
+<td>Exporter</td>
+<td>lean4export tag <code>v4.33.0</code> (<code>15f6055e</code>), built with Lean v4.33.1; target list as in Deicyde's <code>export-targets.txt</code></td>
+</tr>
+<tr>
+<td>Judge and extra kernels</td>
+<td>Lean v4.36.0: <code>lake comparator</code>, <code>leanchecker</code>, <code>leanchecker-paranoid</code>, <code>nanoda_bin</code></td>
+</tr>
+<tr>
+<td>lean4lean</td>
+<td>digama0/lean4lean at <code>67f63b0c</code>, built with Lean v4.33.1; run on the compiled <code>.olean</code> files, not the export</td>
+</tr>
+<tr>
+<td>con-leche</td>
+<td>leanprover/con-leche <code>master</code> at <code>cd2eceab</code> and branch <code>compare</code> at <code>5dc36dc1</code>, each built with Lean v4.36.0</td>
+</tr>
+<tr>
+<td><code>Main.olean</code></td>
+<td>sha256 9146dfb4148e24d2252e04c50742f3e49dd126dfcc5006d10bf5f873ddf796ad</td>
+</tr>
+<tr>
+<td>Manifest of all compiled files</td>
+<td>sha256 375cbee2fc3fc0f5088ef2e6dc9a5ac5530924310dc62422ec65aac9dc4c1d25 valid only for the build directory <code>/home/ubuntu/grh/src/lean</code>; see the note below</td>
+</tr>
+<tr>
+<td>Build directory</td>
+<td>the archive's <code>lean/</code> directory was at <code>/home/ubuntu/grh/src/lean</code> on every build machine, so each source file was passed to Lean as <code>/home/ubuntu/grh/src/lean/src/.lean</code></td>
+</tr>
+</tbody>
+</table>
+<h2>Caveats</h2>
+<ul>
+<li>The build ran on cloud machines without a sandbox, and compiled each file by calling <code>lean</code> directly with the same inputs <code>lake</code> supplies (module name, package name and the lakefile's options), not through <code>lake build</code>.</li>
+<li>The per-file <code>.olean</code> hashes depend on the build directory. In Lean v4.33.1 a compiled file stores each linter message together with the absolute path of its source file. Of our 175,187 compiled files, 98,219 contain the path <code>/home/ubuntu/grh/src/lean/src/…</code>; the other 76,968, including <code>Main.olean</code>, contain no path. So <code>project-oleans.sha256</code> and its sha256 can be reproduced in full only by a build whose source tree is at <code>/home/ubuntu/grh/src/lean</code>. For a build at any other path, only the files of modules that emit no linter messages should match. What we checked: a <code>lake build</code> of 240 modules on a different machine, at a different path, gave 168 files identical to the manifest and 72 different; all 72 contain that build's path and none of the 168 do. Separately, 77 modules compiled both ways in the same directory, by <code>lake build</code> and by our direct invocation, were byte-identical. We have not compared the full set against a <code>lake build</code>.</li>
+<li>The exported proof (<code>solution.ndjson</code>) is the artifact the independent kernels checked. Its hash is the one to compare across builds; we have not examined whether the export format can carry a source path.</li>
+<li>The export was produced from that unsandboxed build. We have not ourselves compared its sha256 with an export made from a sandboxed <code>lake build</code>.</li>
+<li>A passing check shows that the formal statements, as written in Lean against Mathlib's definitions, follow from the three standard axioms according to the kernels used. It relies on those kernels and on Mathlib's definitions being what they are intended to be.</li>
+</ul></div>
+</section>
+<footer class="source-box"><span>内容来自原作者；中文为乔木风格改写，非逐字翻译。</span><div><a href="https://alpo.ge/remark.pdf" target="_blank" rel="noopener noreferrer">打开原文 ↗</a><a href="https://leanprover-community.github.io/blog/posts/riemann-hypothesis/" target="_blank" rel="noopener noreferrer">相关链接 ↗</a></div></footer>
+</article></body></html>
