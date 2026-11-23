@@ -1,0 +1,187 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>内部模型对数困惑度到了0.732，他建议在0.68到0.7之前设共同上限 · X News</title><meta name="robots" content="noindex"></head><body><article class="article-reader" data-article-id="openai-perplexity-intelligence">
+<a class="article-back" href="/">← 返回选刊</a>
+<header class="article-header"><p class="article-kicker">Jakub Pachocki / 文章</p><h1>内部模型对数困惑度到了0.732，他建议在0.68到0.7之前设共同上限</h1><p class="article-dek">OpenAI首席科学家Jakub Pachocki公布了内部代码库上的预训练曲线，并主张用困惑度等指标建立可验证的行业上限。</p><div class="article-meta"><time datetime="2026-11-23">本站收录 2026年11月23日 · 周一</time><span>原文发布 2026年11月22日 · 周日</span><span>原作者：Jakub Pachocki</span><span>中文改写：<a href="/about">X News · 乔木</a></span><span>OpenAI · perplexity · safety · pretraining · evaluation</span></div></header>
+<nav class="reader-tabs" aria-label="文章版本与来源"><div data-tabs><a href="#rewrite" id="tab-rewrite" data-view="rewrite">乔木改写</a><a href="#original" id="tab-original" data-view="original">原文</a></div><a class="reader-source" href="https://openai.com/index/perplexity-and-intelligence/" target="_blank" rel="noopener noreferrer">原文链接 ↗</a><div class="reading-position" hidden><progress max="100" value="0" aria-label="当前版本阅读进度"></progress><span data-reading-percent aria-hidden="true">0%</span></div></nav>
+<section class="reader-panel" id="rewrite" data-reader-panel="rewrite" aria-label="乔木改写"><h2 class="section-heading">乔木改写</h2><div class="prose"><p>OpenAI首席科学家Jakub Pachocki在2026年11月22日发表文章《Perplexity and Intelligence》，把他们内部一直在追踪的预训练指标公开了。</p>
+<p>文首这张图，测的是基础模型在OpenAI内部代码库上的对数困惑度，也就是交叉熵损失，越低说明平均而言越会预测下一个token。已发布模型用折线连起来，另外有一个用方块标出的内部模型。图中还画了一条0.68到0.7的浅色带。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_plot"><div class="media-frame"><img src="https://pbs.twimg.com/media/HXvptOTXIAAtrY0.jpg" data-original-src="https://pbs.twimg.com/media/HXvptOTXIAAtrY0.jpg" alt="Base model log-perplexity on the internal OpenAI codebase. The line connects released models. A square shows a separate internal model. The shaded band spans 0.68 to 0.70." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://openai.com/index/perplexity-and-intelligence/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<p>图表里的精确值是：2022年3月，GPT-3.5为0.986；2023年3月，GPT-4为0.913。到2026年11月，已发布的GPT-6.2 Astra是0.761，同期那个未具名的内部模型是0.732。正文里他常用约数来写这些台阶，比如GPT-3.5约0.99，GPT-4约0.91，以及约0.76的模型开始在数学上给出突破性结果。</p>
+<p>他建议，前沿模型开发者共同设定基于困惑度和其他测量的上限，在理解和监控模型行为达到某个具体里程碑之前，例如发展出思维链监控的后继方案，先不要越过这条线。按他对近期进展的外推，进入大约0.68到0.7的对数困惑度窗口时，还应该预期出现新的变革性能力。他写，他不知道那些能力会是什么，今天也未必在测它们。</p>
+<h2>他把预训练写成在训练压缩器</h2>
+<p>Pachocki认为，今天的AI看起来像是用许多技术去对准特定能力，这些方法多半是在调用一种更简单、也更难解释的过程：在大规模语料上训练一个压缩器，或者说预测器。文中把二者写成等价，并链向香农的信源编码定理。脚注里他特别区分，这里的压缩器是指能够通过预测未见数据来完成压缩的系统，不是GZIP那样的压缩文件。在既定语料上训练出的最好压缩器，并不必然“记住”语料内容。</p>
+<p>在他看来，追踪把这种压缩器训练得更好的进度，是理解AI进展弧线的关键。他主张把困惑度，也就是交叉熵损失，建立成可以在不同开发者之间比较、并用来支撑共享安全标准的指标。公开内部数字之前，他考虑过这会让竞争对手更清楚OpenAI的位置，但他认为建立行业共享安全措施的紧迫性更重要。文章里，“共享”一词链向Dario Amodei的一篇关于放缓前沿的文章。OpenAI希望，这能成为未来节奏控制工作的共享科学基础。</p>
+<p>他把开发过程简化成三步：先造一台很大的计算机，再用它在大量非结构化数据上预训练出模型（压缩器），然后用提示、微调或强化学习等方法，在不同情境里引出这个模型里已经潜伏的能力。算法进展可能模糊训练阶段的边界，但他仍然区分两件事：先造出那种难以预知、会涌现新能力的AI，他先前把它叫作“一颗外星心智”；再做有针对性的引出。</p>
+<p>他们用来衡量这块“智力基底”的主要方法，多年里变化不大：看模型在留出集上的困惑度。实践中他们追踪的是对数困惑度。自GPT-3.5以来，主要留出集来自OpenAI内部代码库，文中数字是针对一个固定快照。</p>
+<h2>被约写成台阶的，其实是一条并不严格下降的曲线</h2>
+<p>正文用几个约数把能力变化串起来。GPT-2在较老的数据集上把困惑度做到了当时最好，他认为这大概是第一个能稳定写出连贯段落的模型。下一次大的跳跃是GPT-3，它能根据几个任务示例做上下文学习。GPT-3.5在当前主评估集上对数困惑度约0.99，已经能流畅对话，并成为最初ChatGPT的基础。GPT-4约0.91，已经能有效使用思维链推理，这推动了后来对这一能力的专门引出，以及现代推理模型的出现。现在损失已经到了0.8以下，他们在网络安全和数学里看到了变革性能力。他强调，事先并不清楚，刚好跨过这些困惑度阈值时就会出现这些能力，它们可以被看成是这条指标进展带来的、潜伏着的涌现能力。</p>
+<p>脚注说明，用内部代码库来报GPT-2和GPT-3并不理想：以它们当时的训练数据，预测代码并不能很好代表它们的总体能力。这本身也提醒人们，选什么样的评估集，会成为把困惑度当共享指标时的难题。他仍然认为，把它们和现代模型一起放在通用文本上评估，会有信息量。他选择报内部代码库，是因为这是他们今天判断预训练进展时最依赖的数字。</p>
+<p>下游能力怎么测，范围和方式都可能很快变化。他认为，用现在大多数基准去评GPT-2和GPT-3没太大意义，而当时用的那些基准，大约在GPT-4前后就基本饱和了。相比之下，看预训练进展更可能长期还有信息量。</p>
+<p>文首图表把这些约数落成了更细的点。已发布模型的对数困惑度依次是：GPT-3.5为0.986，GPT-4为0.913，GPT-4 Turbo为0.909，GPT-4o / o1为0.904，GPT-4.5为0.876，GPT-4.1 / o3为0.902，GPT-5 / 5.1为0.893，GPT-5.2为0.888，GPT-5.3-Codex / 5.4为0.871，GPT-5.5为0.848，GPT-5.6 Sol为0.828，GPT-6 Astra为0.783，GPT-6.2 Astra为0.761。2026年11月还有一个内部模型，值为0.732，用方块单独标出，没有发布名称。</p>
+<p>这条线并不是一路向下。2025年2月的GPT-4.5是0.876，两个月后的GPT-4.1 / o3回到0.902。如果只看正文里的约数台阶，这一点不容易被注意到。</p>
+<p>图表还给若干点标了能力标注：GPT-3.5对应“流畅对话”，GPT-4对应“能从先思考再回答中受益”，GPT-5.3-Codex / 5.4对应“有用的编码者”，GPT-5.6 Sol对应“网络安全专家”，GPT-6.2 Astra对应“解决了一道千禧年大奖数学题”。正文没有写出这道题的名字，图表也没有进一步说明。</p>
+<h2>数学上的突然变化，以及他对预训练研究的外推</h2>
+<p>进度变化的一个来源，是AI越来越多地参与自身的开发。常见讨论会围绕AI在开发周期各阶段增强或替换人类研究者，并把“完全递归自我改进”看成拐点，也就是过程完全自动化、不再有人类监督。他认为，为了保持人类控制，这样的状态显然应该避免。但他也觉得，这个总框架漏掉了更关键的一步：AI参与预训练算法研究，本身就可能带来台阶式变化。</p>
+<p>他们最近在另一个领域看到了前所未有的加速。一年多来，他们把数学里的未解问题交给模型，作为评估方式之一。升级到对数困惑度约0.76的模型之后，它开始给出突破性结果。对许多以前做数学或邻近领域的人来说，在同一个Slack线程里，眼看着自己长期思考的问题被模型一个接一个解出来，这种感觉非常不真实。有了这次经验，他认为深度学习研究里出现类似的突然转变，也是说得通的。这个领域更依赖实验，但简单洞见被错过许多年的先例并不少。因此，最早在2027年，他们就有可能看到预训练基础研究出现类似的密集进展。他用的词是conceivably，也就是“可以设想会看到”，并不是把2027年写成必然发生的时间表。</p>
+<p>脚注补充，从图上的损失曲线能看到2026年有一段陡峭加速。他们把这主要归因于长期研究和算力投入的结果，自动化只占较小部分。不过，对最近这些模型，他们已经看到AI做出了有意义的设计贡献。这里链向OpenAI先前关于研究加速的文章。</p>
+<p>他预期，AI也会显著推动对齐和监控的进展，但他认为这些进展不太可能快到，足以支撑预训练全部可能的加速。</p>
+<h2>他想先设共同上限，也把这个指标的困难写清楚了</h2>
+<p>既然新的意外能力主要来自压缩上的进展，一个植根于困惑度的量度，就可能在开发过程自动化程度不同的情况下，仍给通用智力提供共享基准。按近期进展外推，进入约0.68到0.7的对数困惑度窗口时，应该预期还有更多变革性能力。与此同时，他也预期，目前占主导的对齐审计方式会进一步变差，评估意识和训练意识会进一步上升。这里他链向OpenAI关于思维链可监控性的文章。</p>
+<p>他主张，前沿模型开发者应共同努力，在这类模型首次被使用之前，就先建立如何评估它们、如何对其安全论证做红队测试的共享规范，也包括共享的透明度标准。他进一步提出共同上限：以困惑度和其他测量为基础，开发者承诺在理解和监控模型行为达到某个具体里程碑之前，例如发展出思维链监控的后继方案，先不越过这条线。他希望先有一个行业标准，规定开发的第一道上限、用哪项可以跨实验室追踪的关键指标来量，以及越过它之前必须先做到什么；然后再形成设定后续上限、控制后续开发节奏的共同框架。</p>
+<p>他把困惑度作为共享指标的困难写了四条。</p>
+<p>不同开发者使用不同的评估集，也在不同的数据混合上训练，因此跨实验室很难直接比较。文中数字来自他们一直在追踪的主数据集。他相信，如果把透明度本身当成目标，仍然可以找到可迁移的办法，去比较不同基座模型的质量。</p>
+<p>困惑度和人们关心的具体任务并不直接对应。他之所以仍然看重它，是因为在这项指标上的进展，往往预示着会涌现全新能力。</p>
+<p>它也统计不到预训练之外的进展。最明显的是，思维链推理并不会降低模型已经达到的困惑度，却会大幅提高能力。</p>
+<p>下限是未知的。他们并不认为损失能到0，因为那意味着可以完全决定性地预测整个数据集。但数据固有的熵是多少，他们并不知道。越接近这条未知下限，表面上的困惑度进展会变慢，而更小的困惑度改进，会对应更大的智力跳跃。</p>
+<p>尽管有这些限制，他认为困惑度仍然经受住了时间考验：许多研究团队长期把它当作优化目标，它也持续带来通用智力上的稳定收获。他希望它能在人们如何讨论AI进展时起到标准化作用，也希望行业出现更多这类透明度。</p>
+<p>读这些数字时，首先要记住评估集是OpenAI内部代码库的一个固定快照，不能把0.761或0.732直接拿去和其他实验室的公开基准对读。作者自己把跨实验室难比、以及思维链这类预训练之外的能力跃升，写成了明确限制。看曲线时也不宜把它理解成严格单调下降，图表里GPT-4.5之后的GPT-4.1 / o3回升到了0.902。如果要认真对待他提出的共同上限，还需要先回答他已经写下的问题：共同评估集是什么，第一道上限设在哪里，以及在越过0.68到0.7这个窗口之前，监控能力要先达到哪一个可检验的里程碑。</p>
+<section class="rewrite-source-media" aria-label="原文附带媒体"><h3 class="source-media-heading">原文附带媒体</h3><p class="completeness-note">官方社交分享图，是标题卡片，不是文首那张对数困惑度曲线。</p><div class="original-media">
+<figure class="media-figure" data-media-id="media_social_card"><div class="media-frame"><img src="https://images.ctfassets.net/kftzwdyauwt9/6rIIhCRSKrhIfe385Onmcz/aca2d190553c62fd5d49efb5d5ce1eb6/perplexity-and-intelligence-social.png" data-original-src="https://images.ctfassets.net/kftzwdyauwt9/6rIIhCRSKrhIfe385Onmcz/aca2d190553c62fd5d49efb5d5ce1eb6/perplexity-and-intelligence-social.png" alt="OpenAI social card for Perplexity and Intelligence" loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://openai.com/index/perplexity-and-intelligence/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section></div></section>
+<section class="reader-panel" id="original" data-reader-panel="original" aria-label="原文">
+<h2 class="section-heading">原文</h2><h3 class="original-title">Perplexity and Intelligence</h3>
+<div class="original-media">
+<figure class="media-figure" data-media-id="media_plot"><div class="media-frame"><img src="https://pbs.twimg.com/media/HXvptOTXIAAtrY0.jpg" data-original-src="https://pbs.twimg.com/media/HXvptOTXIAAtrY0.jpg" alt="Base model log-perplexity on the internal OpenAI codebase. The line connects released models. A square shows a separate internal model. The shaded band spans 0.68 to 0.70." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://openai.com/index/perplexity-and-intelligence/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_social_card"><div class="media-frame"><img src="https://images.ctfassets.net/kftzwdyauwt9/6rIIhCRSKrhIfe385Onmcz/aca2d190553c62fd5d49efb5d5ce1eb6/perplexity-and-intelligence-social.png" data-original-src="https://images.ctfassets.net/kftzwdyauwt9/6rIIhCRSKrhIfe385Onmcz/aca2d190553c62fd5d49efb5d5ce1eb6/perplexity-and-intelligence-social.png" alt="OpenAI social card for Perplexity and Intelligence" loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://openai.com/index/perplexity-and-intelligence/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div>
+<div class="prose" lang="en"><h1>Perplexity and Intelligence</h1>
+<p>November 22, 2026</p>
+<p>By Jakub Pachocki, Chief Scientist at OpenAI</p>
+<p>The article opens with an interactive chart. The following values are taken from the page's published Vega-Lite dataset, titled "Base model log-perplexity" with subtitle "Internal OpenAI codebase." The official chart description is: "Base model log-perplexity on the internal OpenAI codebase. The line connects released models. A square shows a separate internal model. The shaded band spans 0.68 to 0.70." The image above is the chart graphic published with the author's X announcement of this essay; it matches that official chart. The chart image itself does not include a numeric table; the rows below are transcribed from the published dataset, not from reading the picture.</p>
+<table aria-label="数据表格，可横向滚动查看" tabindex="0">
+<thead>
+<tr>
+<th>Month</th>
+<th>Model</th>
+<th>Series</th>
+<th align="right">Log-perplexity</th>
+<th>Chart milestone</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2022-03</td>
+<td>GPT-3.5</td>
+<td>Released models</td>
+<td align="right">0.986</td>
+<td>Fluent conversation</td>
+</tr>
+<tr>
+<td>2023-03</td>
+<td>GPT-4</td>
+<td>Released models</td>
+<td align="right">0.913</td>
+<td>Benefits from thinking before answering</td>
+</tr>
+<tr>
+<td>2023-11</td>
+<td>GPT-4 Turbo</td>
+<td>Released models</td>
+<td align="right">0.909</td>
+<td></td>
+</tr>
+<tr>
+<td>2024-05</td>
+<td>GPT-4o / o1</td>
+<td>Released models</td>
+<td align="right">0.904</td>
+<td></td>
+</tr>
+<tr>
+<td>2025-02</td>
+<td>GPT-4.5</td>
+<td>Released models</td>
+<td align="right">0.876</td>
+<td></td>
+</tr>
+<tr>
+<td>2025-04</td>
+<td>GPT-4.1 / o3</td>
+<td>Released models</td>
+<td align="right">0.902</td>
+<td></td>
+</tr>
+<tr>
+<td>2025-08</td>
+<td>GPT-5 / 5.1</td>
+<td>Released models</td>
+<td align="right">0.893</td>
+<td></td>
+</tr>
+<tr>
+<td>2025-12</td>
+<td>GPT-5.2</td>
+<td>Released models</td>
+<td align="right">0.888</td>
+<td></td>
+</tr>
+<tr>
+<td>2026-02</td>
+<td>GPT-5.3-Codex / 5.4</td>
+<td>Released models</td>
+<td align="right">0.871</td>
+<td>Useful coder</td>
+</tr>
+<tr>
+<td>2026-04</td>
+<td>GPT-5.5</td>
+<td>Released models</td>
+<td align="right">0.848</td>
+<td></td>
+</tr>
+<tr>
+<td>2026-07</td>
+<td>GPT-5.6 Sol</td>
+<td>Released models</td>
+<td align="right">0.828</td>
+<td>Cybersecurity expert</td>
+</tr>
+<tr>
+<td>2026-09</td>
+<td>GPT-6 Astra</td>
+<td>Released models</td>
+<td align="right">0.783</td>
+<td></td>
+</tr>
+<tr>
+<td>2026-11</td>
+<td>GPT-6.2 Astra</td>
+<td>Released models</td>
+<td align="right">0.761</td>
+<td>Solved a Millennium Prize math problem</td>
+</tr>
+<tr>
+<td>2026-11</td>
+<td>Internal model</td>
+<td>Internal model</td>
+<td align="right">0.732</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>From afar, it might seem like modern AI is built similarly to how software has been built in previous decades: with a diverse set of techniques targeting specific capabilities. There are indeed a variety of methods, but rather than designing something from scratch, they are mostly <em>harnessing</em> the intelligence coming from a much simpler and less interpretable process: training a compressor (or, <a href="https://en.wikipedia.org/wiki/Shannon%27s_source_coding_theorem" rel="noopener noreferrer">equivalently</a>) on a very large corpus of data.[^1]</p>
+<p>I believe tracking the pace of progress on training better compressors is key to understanding the arc of advances in AI. In this post, I argue for establishing perplexity (or, equivalently, cross-entropy loss) as a metric to compare between model developers and inform shared safety standards. As a first step, I provide more transparency into pretraining progress at OpenAI. Publishing our internal perplexity measurements took some consideration; it gives competitors a clearer picture of where we stand, but that concern is outweighed by the urgency of establishing <a href="https://darioamodei.com/post/we-must-pace-the-frontier" rel="noopener noreferrer">shared</a> safety measures across the industry. We at OpenAI hope for this to be a step towards building a shared scientific basis for future pacing efforts.</p>
+<p>A simplified, but fundamentally informative, view of AI development is that first, one builds a large computer, then uses it to <em>pretrain</em> a model (compressor) on a large unstructured dataset, then applies a variety of techniques—like prompting, finetuning or reinforcement learning—in different contexts to elicit the latent capabilities of that model. Algorithmic progress can blur the distinction between training phases, but we can still separate the creation of the AI with hard-to-predict emergent capabilities (which I earlier dubbed “<a href="https://openai.com/index/an-alien-mind/" rel="noopener noreferrer">an alien mind</a>”) and the subsequent targeted elicitation.</p>
+<p>The primary way we measure progress on this key “intelligence substrate” has remained remarkably constant over the years—we have been tracking the <em>perplexity</em> of the models on a held-out dataset.[^2][^3] Perplexity measures how well a model predicts the next token on average; lower perplexity means better predictions. The plot opening this blog post shows how this metric evolved for our models starting with GPT-3.5.</p>
+<p>The range of capabilities of models that are largely described by this one metric is stunning. Setting the new perplexity state-of-the-art on older datasets,[^4] GPT-2 was arguably the first model capable of consistently formulating coherent paragraphs of text. The next major leap, GPT-3, was capable of learning in context, given a few examples of a task. GPT-3.5, at a log-perplexity of ~0.99 on our current main evaluation dataset, was capable of fluent conversation and formed the basis for the original ChatGPT. GPT-4, at ~0.91, was proficient at utilizing chain-of-thought reasoning productively, which motivated the subsequent targeted elicitation of this capability and the creation of modern reasoning models. Now, as we have reached losses below 0.8, we have seen the emergence of transformative capabilities in fields like cybersecurity and mathematics. I want to reemphasize that it was not at all clear <em>a priori</em> that these capabilities would appear once those precise perplexity thresholds are met—they can fundamentally be seen as emergent latent capabilities from progress on this one metric.</p>
+<p>As AI advances very rapidly, the scope and way in which we measure downstream capabilities may change quickly. It would make little sense to evaluate GPT-2 and GPT-3 on most modern benchmarks; and the benchmarks used then were largely saturated around GPT-4. In contrast, I believe looking at progress on pretraining is likely to stay informative.</p>
+<p>A particular change in the pace of progress comes from the increasing contribution of AI to its own development. The most commonly discussed metrics revolve around AI augmenting and replacing human researchers in all stages of the development cycle; with an ultimate inflection point seen at “full recursive self-improvement”, where the process would be entirely automated with no human oversight. Apart from considering such a state as something we should obviously avoid for the sake of maintaining human control, I find this general framing misses something crucial. There is a potential step change that may come from AI participation in one key part of the development process: algorithmic research on pretraining.</p>
+<p>We have recently witnessed unprecedented acceleration in another domain. For more than a year, we have been posing open problems in mathematics to our models as one of the ways of evaluating them. Once we upgraded to a model of log-perplexity ~0.76, it started producing groundbreaking results. For many of us that have previously worked in mathematics and adjacent fields, seeing the resolutions to questions we’ve long thought about coming out of the model one after another in a single Slack thread felt deeply surreal. Having experienced that allows us to extrapolate—such a sudden transformation is plausible in deep learning research too. While this field relies more on experimentation, there is a long history of simple insights being missed for years; and so as soon as 2027 we could conceivably see a similar avalanche of fundamental pretraining advancements.[^5] While I expect AI will also significantly contribute to progress on alignment and monitoring, I think that progress is unlikely to be fast enough to allow the full potential acceleration in pretraining.</p>
+<p>Given that the main way new surprising capabilities emerge is by progress on compression, a measure rooted in perplexity could give us a shared benchmark for general intelligence, regardless of the degree of automation of the development process. Extrapolating from recent progress, we should expect further transformative capabilities as we enter the ~0.68-0.7 log-perplexity window. I don’t know what those capabilities will be, and we may not be testing for them today. At the same time, we should also expect <a href="https://alignment.openai.com/cot-monitorability-model-lifecycle" rel="noopener noreferrer">further degradation</a> in currently dominant forms of alignment auditing and further increases in evaluation and training awareness. I believe frontier model developers should jointly endeavour to establish shared norms for how to evaluate such models and red-team safety cases for them by the time they are first used, including shared transparency standards. I further propose <strong>common limits</strong>, based on perplexity and other measurements, that developers are committed to not crossing until our ability to understand and monitor AI behavior achieves a certain concrete milestone (such as the development of a successor to CoT monitors). That is, I’d like an industry standard that specifies a first limit on development, measured by some key metric we can track across labs, and what concretely we’d need to achieve before going beyond it. I hope that this leads the way to a common framework for setting successive limits and pacing further development.</p>
+<p>Perplexity as a shared metric has challenges:</p>
+<ul>
+<li><strong>Difficulty of comparison across labs.</strong> Different developers use different evaluation datasets and train on different data mixtures. Here, we report the numbers on the main dataset we have been tracking; I believe if we establish a goal of transparency we can find transferable ways to compare the quality of different base models.</li>
+<li><strong>Detachment from actionable evaluations.</strong> Perplexity does not directly correspond to a task we care about. The reason to care about it is that we can expect advances on it to lead to emergence of entirely new capabilities.</li>
+<li><strong>Not accounting for advances outside of pretraining.</strong> Most notably, chain-of-thought reasoning does not reduce perplexity achieved by the model, even though it leads to a drastic increase in capabilities.</li>
+<li><strong>Unknown floor.</strong> We do not expect it is possible to achieve a loss of 0, which would correspond to being able to predict the dataset entirely deterministically. But we do not know what the inherent entropy of the data is. As we approach it, the apparent progress on perplexity will slow, but smaller gains on perplexity will correspond to larger leaps in model intelligence.</li>
+</ul>
+<p>At the same time, perplexity has stood the test of time as a metric many research teams have put a lot of effort into optimizing, and it continues to deliver consistent gains on general intelligence. I believe it can play an important role in standardizing how we talk about AI progress, and hope to see more transparency about it across the industry.</p>
+<p>[^1]: It’s important to note that “compressor” in this sense is something that is capable of performing compression by predicting unseen data, not a compressed artifact like a GZIP file - that is, the best compressor trained on a given corpus does not necessarily “remember” the contents of the corpus.</p>
+<p>[^2]: In practice, we generally track the <em>log</em> of perplexity, also called <em>cross-entropy loss</em>.</p>
+<p>[^3]: The primary held-out datasets we’ve been using since GPT-3.5 are sourced from our internal codebase, and those are the numbers reported here (for a fixed snapshot).</p>
+<p>[^4]: Given what GPT-2 and GPT-3 were trained on, how well they predict code is a poor proxy for their general capabilities. This showcases a potential challenge arising from dataset selection with using perplexity as a shared metric; however it should still be informative to evaluate them jointly with modern models on general text. I chose to report perplexity on our internal codebase because I wanted to share the numbers we rely on most today to gauge progress in pretraining at OpenAI.</p>
+<p>[^5]: On the plot of losses of OpenAI models, you can see a steep acceleration in 2026. We attribute it mostly to the outcomes of long term research and compute investments, and only in a smaller part to automation. However, for the most recent models, <a href="https://openai.com/index/research-acceleration-jagged-frontier/#where-big-ideas-come-from" rel="noopener noreferrer">we have already seen meaningful design contributions coming from AI</a>.</p></div>
+</section>
+<footer class="source-box"><span>内容来自原作者；中文为乔木风格改写，非逐字翻译。</span><div><a href="https://openai.com/index/perplexity-and-intelligence/" target="_blank" rel="noopener noreferrer">打开原文 ↗</a><a href="https://x.com/merettm/status/2124549218995949967" target="_blank" rel="noopener noreferrer">相关链接 ↗</a></div></footer>
+</article></body></html>

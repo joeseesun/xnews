@@ -1,5 +1,20 @@
 [
   {
+    "id": "openai-perplexity-intelligence",
+    "date": "2026-11-22",
+    "title": "内部模型对数困惑度到了0.732，他建议在0.68到0.7之前设共同上限",
+    "dek": "OpenAI首席科学家Jakub Pachocki公布了内部代码库上的预训练曲线，并主张用困惑度等指标建立可验证的行业上限。",
+    "url": "/a/openai-perplexity-intelligence",
+    "source_url": "https://openai.com/index/perplexity-and-intelligence/",
+    "tags": [
+      "OpenAI",
+      "perplexity",
+      "safety",
+      "pretraining",
+      "evaluation"
+    ]
+  },
+  {
     "id": "alpoge-riemann-hypothesis",
     "date": "2026-11-20",
     "title": "175,187 个模块通过核验，Lean 社区认证了这段黎曼猜想证明",
