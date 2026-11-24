@@ -1,0 +1,85 @@
+{
+  "id": "deepmind-quantum-algorithms",
+  "date": "2026-11-23",
+  "published_at": "2026-11-23T17:00:53+00:00",
+  "ingested_at": "2026-11-24T08:35:00+08:00",
+  "source": {
+    "type": "web",
+    "url": "https://deepmind.google/blog/finding-faster-quantum-algorithms-with-agents-and-formal-verification/",
+    "author": "Sergey Shirobokov, Ben Jaderberg and Ryan Babbush",
+    "handle": "GoogleDeepMind",
+    "title_en": "Finding faster quantum algorithms with agents and formal verification",
+    "related_url": "https://x.com/GoogleDeepMind/status/2124911073266413634"
+  },
+  "title": "聚变模拟的计算成本降了11.8倍，纠错量子比特从5650个降到4338个",
+  "dek": "Google DeepMind和Google Quantum AI用Gemini 4智能体团队改进量子线路，每项结果都用Lean做形式核验。arcsin例程加快了290倍。作者写明，这些算法要真正跑起来，所需资源仍高于第一代纠错量子计算机大概能提供的水平。",
+  "tags": [
+    "Google DeepMind",
+    "Google Quantum AI",
+    "Gemini 4",
+    "Lean",
+    "quantum algorithms",
+    "formal verification"
+  ],
+  "original": {
+    "lang": "en",
+    "title": "Finding faster quantum algorithms with agents and formal verification",
+    "markdown_base_url": "https://deepmind.google/blog/finding-faster-quantum-algorithms-with-agents-and-formal-verification/",
+    "text_md": "# Finding faster quantum algorithms with agents and formal verification\n\nNovember 23, 2026\n\nSergey Shirobokov, Ben Jaderberg and Ryan Babbush\n\nHow using agent teams and formal verification can improve quantum algorithms for modelling fusion energy, chemistry and enzymes\n\n![Title card for Finding faster quantum algorithms with agents and formal verification](https://lh3.googleusercontent.com/jIoM2lo98EDqLMQjIaXBlXPmXgPbUPpM2GgtXcDsGekZBOPUY41IjBsnuZIhLac7MSOuRkklNBsp20a5M25oDz-xTIY0BIqoBxUqmmXvEHwlM3MJJw=w1200-h630-n-nu-rw)\n\nQuantum computers could soon solve problems beyond the reach of classical supercomputers. However, there is a catch: even when using the best quantum algorithms, some important applications still require more resources than early quantum hardware will be able to support.\n\nIn a [new paper](https://arxiv.org/abs/2611.09822), we used teams of Gemini 4 agents to improve well-known quantum algorithms, creating highly efficient quantum circuits. These optimized circuits, which are instructions for how a quantum computer should carry out an algorithm, could one day help us run simulations that solve complex scientific challenges, from fusion energy to drug design. To help the community build on this work, we are open-sourcing our Lean library, problem specifications, and verified solutions on [GitHub](https://github.com/google-deepmind/formal-quantum-computation).\n\nBecause we cannot test resource-intensive quantum circuits on classical computers or today's small quantum processors, we have to prove that they work mathematically. Our agent teams proved each result using Lean, a formal theorem prover.\n\n![Animation of agent teams improving quantum algorithms, with ideas verified in Lean before entering a shared notebook and being compared at a virtual conference every four hours](https://lh3.googleusercontent.com/ppTuFPcwer2JwP-NysiQGW7mZrWpEmV6QsV_YD6IJn-skKzS1jTbtLbietmjpGkVxUOZBn3jQaCKfzcJVVR1FvvS-3QglWPDyh520ZSF7tvsHtdy=w1440-h810-n-nu)\n\nImproving quantum algorithms using agentic teams. For each problem, we tasked separate, independent agent teams with finding algorithmic improvements. These ideas were then verified with Lean, before entering a shared notebook. Every four hours, agents from each team met at a virtual conference to trade, debate and compare ideas. As teams produced more effective ideas over time, the computational cost gradually fell until the experiment finished.\n\nWe chose to focus on applications that could one day impact some of humanity's greatest challenges, such as clean energy and drug design, but our method is not limited to these problem areas.\n\n- We found a quantum circuit that helps calculate an important property of inertial confinement fusion, a fusion reaction method that uses lasers to compress hydrogen fuel until ignition. Our agent teams cut the required computing cost (a metric that combines required qubits and operations) by 11.8×, and lowered required memory from 5,650 to 4,338 error-corrected qubits.\n- The agents also reduced costs for simulating molecules in drug metabolism and certain photochemical reactions, which are complex reactions that are difficult for classical computers to simulate. For a common light-sensitive molecule, the agent teams made quantum simulation 8× cheaper, simplifying how the algorithm tracks particle positions and electric forces. For Cytochrome P450, an enzyme that breaks down most human medicines and is important for drug design, they found a 2.5× improvement and lowered memory from 481 to 333 qubits, by replacing bulky memory lookups.\n- We also improved a fundamental quantum algorithm and a widely used arithmetic building block. We found a 2.57x speedup for a specific implementation of Grover's algorithm, a foundational quantum operation that searches through an unsorted list, and a 290x speedup for arcsin, a common routine that is used by many other quantum algorithms to load numbers into quantum states.\n\nRunning these algorithms in scientific simulations would still demand more computational resources than the first error-corrected quantum computers are likely to provide, but these improvements are significant.\n\nWe are also excited by the way in which we found them. We built a new, open-source library, in Lean for quantum algorithms which could be used by teams of collaborating agents, so their ideas were backed by mathematical correctness guarantees. We could then set the research direction by specifying the problems for our agent teams and supervise their progress. Our knowledge of quantum algorithms, combined with the way we set up our agent teams, led to real scientific results.\n\nThe same approach could also accelerate other aspects of quantum computing research, and scientific discovery more broadly. Proof-checked AI search compresses work that once took years of manual design, empowering researchers to focus on choosing problems and interpreting results.\n\n## Acknowledgements\n\nThis research was a collaboration between Google DeepMind and Google Quantum AI. The work reflects the contributions of the paper's authors: Sergey Shirobokov, Ben Jaderberg, Katerina Hristova, George Tsoukalas, Johannes Bausch, Eric Wieser, Francisco J. H. Heras, Nicholas C. Rubin, Guang Hao Low, Sébastien Racanière, Nenad Tomašev, Lei M. Zhang, James D. Watson, Tanuj Khattar, Aws Albarghouthi, Stavan Jain, Harun Khan, Leopoldo Sarra, Andrew W. Senior, Michael Broughton, Hussain Masoom, Sergio Boixo, Ryan Babbush, Swarat Chaudhuri, and Pushmeet Kohli.\n\nWe also thank Kevin Ishimwe, Ibrahim Alkhashem, and Matthew Harrigan for feedback and discussions on the Lean library, Emilien Dupont and Sebastian Nowozin for manuscript feedback, and Brendan Tracey for advice on the fusion application. Finally, we thank Uchechi Okereke, Ali Douraghy, and Andy Song for legal and policy support, and Alex Wilkins, Evie Gray, Danielle Breen, Dimple Vijaykumar, Muinat Abdul, Jason Freidenfelds, Chris Kwaku-Abdullahi, and Rob Ashley for their help with visuals and communicating this work.\n",
+    "media": [
+      {
+        "id": "media_hero",
+        "type": "image",
+        "url": "https://lh3.googleusercontent.com/jIoM2lo98EDqLMQjIaXBlXPmXgPbUPpM2GgtXcDsGekZBOPUY41IjBsnuZIhLac7MSOuRkklNBsp20a5M25oDz-xTIY0BIqoBxUqmmXvEHwlM3MJJw=w1200-h630-n-nu-rw",
+        "alt": "Title card for Finding faster quantum algorithms with agents and formal verification, showing a glowing blue spherical clock-like figure above stepped terraces."
+      },
+      {
+        "id": "media_figure1_video",
+        "type": "video",
+        "url": "https://storage.googleapis.com/gdm-deepmind-com-prod-public/media/i1txY2kjeHrUY_M0/quantum-algorithms__figure1__light.webm",
+        "poster": "https://lh3.googleusercontent.com/ppTuFPcwer2JwP-NysiQGW7mZrWpEmV6QsV_YD6IJn-skKzS1jTbtLbietmjpGkVxUOZBn3jQaCKfzcJVVR1FvvS-3QglWPDyh520ZSF7tvsHtdy=w1440-h810-n-nu",
+        "alt": "Blog figure 1 animation of agent teams improving quantum algorithms, with ideas verified in Lean, collected in a shared notebook, and compared at a virtual conference every four hours."
+      },
+      {
+        "id": "media_x_announce_photo",
+        "type": "image",
+        "url": "https://pbs.twimg.com/media/HX0zDLEXQAE654e.jpg",
+        "alt": "Image attached to Google DeepMind's announcement post about the quantum algorithm work."
+      },
+      {
+        "id": "media_x_announce_video",
+        "type": "x_video",
+        "url": "https://video.twimg.com/amplify_video/2124910811604762624/vid/avc1/1920x1080/Oyc8HRllOKUuEbpp.mp4",
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2124910811604762624/img/wbf2TSaEKwe2Ye6L.jpg",
+        "alt": "Video attached to Google DeepMind's follow-up announcement post, about 56 seconds long."
+      }
+    ]
+  },
+  "body_md": "Google DeepMind和Google Quantum AI在2026年11月23日写道，智能体团队找到的一条量子线路，把惯性约束聚变里一项重要性质的计算成本降了**11.8倍**，所需内存从**5650**个纠错量子比特降到**4338**个。\n\n计算成本在这里把所需量子比特和操作次数合在一起衡量。惯性约束聚变用激光压缩氢燃料，直到点燃。他们要算的，是这个过程里的一项关键性质。\n\n同一批实验还改了药物代谢和某些光化学反应的模拟。对一种常见的光敏分子，智能体团队让量子模拟便宜了**8倍**，并简化了算法跟踪粒子位置和电场力的方式。对分解人体大多数药物、因而对药物设计很重要的酶Cytochrome P450，他们给出了**2.5倍**的改进，并把内存从**481**个量子比特降到**333**个，办法是换掉笨重的内存查找。\n\n在更基础的模块上，他们对Grover算法一种具体实现给出了**2.57倍**加速。Grover算法用来在未排序列表里做搜索。他们还把arcsin例程加快了**290倍**。许多其他量子算法用这个例程，把数字载入量子态。\n\n官方X账号把仿真成本的下降写成“最多10倍”。博客正文里的数字按任务分开写，其中arcsin这一项远高于这个概括。\n\n## 今天的硬件跑不了，所以他们改用数学证明\n\n博客写，量子计算机有可能解决经典超算做不到的问题，但即便已经用上最好的量子算法，一些重要应用需要的资源，仍超过早期硬件能够支撑的水平。\n\n他们用Gemini 4智能体团队去改进已知的量子算法，得到更高效的量子线路。量子线路是在告诉量子计算机，算法该怎么一步步执行。作者认为，这些优化后的线路，将来有可能用于聚变能源到药物设计这类科学模拟。\n\n这些线路消耗的资源很大，既没法在经典计算机上测试，也没法在今天的小型量子处理器上测试。他们因此要求智能体团队用形式定理证明器Lean，从数学上证明每一项结果成立。\n\n这篇博客的署名作者是Sergey Shirobokov、Ben Jaderberg和Ryan Babbush。研究由Google DeepMind与Google Quantum AI合作完成，论文作者还有Katerina Hristova、George Tsoukalas、Johannes Bausch等人，完整名单写在致谢里。论文题目是Discovering formally verified quantum programs with AI，预印本编号是[arXiv:2611.09822](https://arxiv.org/abs/2611.09822)。\n\n## 独立团队先找改进，每四小时开一次会\n\n对每个问题，他们安排多支彼此独立的智能体团队去寻找算法改进。想法先经过Lean核验，再进入一本共享笔记。每隔四小时，各队的智能体会在虚拟会议里交换、辩论和比较这些想法。随着有效想法增多，计算成本逐渐下降，直到实验结束。\n\n他们选择的应用，和清洁能源、药物设计这类长期难题有关，但作者写明，这种方法并不限于这些领域。\n\n即便有了上述改进，要在科学模拟里真正跑这些算法，所需计算资源仍高于第一代纠错量子计算机大概能提供的水平。作者仍然认为，这些改进是显著的。\n\n他们为此建了一个面向量子算法的开源Lean库，让协作中的智能体团队可以在数学正确性保证下提出想法。研究方向由他们通过问题规格来设定，进展也由他们监督。作者的判断是，对量子算法的了解，加上这样的团队安排，才得到了这些科学结果。\n\n同一做法也可能加速量子计算研究的其他部分，以及更广泛的科学发现。他们写道，带证明检查的AI搜索，把曾经需要多年人工设计的工作压缩了，让研究者可以把精力放在选题和解释结果上。\n\nLean库、问题规格和已经核验的解，放在GitHub仓库[google-deepmind/formal-quantum-computation](https://github.com/google-deepmind/formal-quantum-computation)。如果要核对具体线路和证明，需要回到论文和这个仓库，而不是只看这篇介绍博客。\n",
+  "rewrite_media": [
+    {
+      "media_id": "media_hero",
+      "placement": "after_paragraph",
+      "after_md": "Google DeepMind和Google Quantum AI在2026年11月23日写道，智能体团队找到的一条量子线路，把惯性约束聚变里一项重要性质的计算成本降了**11.8倍**，所需内存从**5650**个纠错量子比特降到**4338**个。",
+      "evidence": "source_position_verified"
+    },
+    {
+      "media_id": "media_figure1_video",
+      "placement": "after_paragraph",
+      "after_md": "对每个问题，他们安排多支彼此独立的智能体团队去寻找算法改进。想法先经过Lean核验，再进入一本共享笔记。每隔四小时，各队的智能体会在虚拟会议里交换、辩论和比较这些想法。随着有效想法增多，计算成本逐渐下降，直到实验结束。",
+      "evidence": "source_position_verified"
+    },
+    {
+      "media_id": "media_x_announce_photo",
+      "placement": "after_body",
+      "placement_note": "来自Google DeepMind官方宣布帖的配图，不是博客正文里的独立图示。",
+      "evidence": "source_metadata_only"
+    },
+    {
+      "media_id": "media_x_announce_video",
+      "placement": "after_body",
+      "placement_note": "来自同一条官方线程后续帖的视频，时长约56秒。这次没有观看该视频，不能把它当作对博客方法段落的逐镜说明。",
+      "evidence": "source_metadata_only"
+    }
+  ]
+}

@@ -1,5 +1,36 @@
 [
   {
+    "id": "anthropic-working-with-ai",
+    "date": "2026-11-23",
+    "title": "66次访谈里，只有两家公司因为AI自动化取消岗位并有人失业，约三分之二减少了招聘",
+    "dek": "Anthropic对58家企业客户做了面对面访谈。受访者谈到的AI应用里，增加产出占55%，削减成本占19%。作者写明，这不是随机或系统代表性样本，价值判断也主要是定性描述。",
+    "url": "/a/anthropic-working-with-ai",
+    "source_url": "https://www.anthropic.com/research/working-with-ai",
+    "tags": [
+      "Anthropic",
+      "enterprise AI",
+      "labor",
+      "organizations",
+      "interviews"
+    ]
+  },
+  {
+    "id": "deepmind-quantum-algorithms",
+    "date": "2026-11-23",
+    "title": "聚变模拟的计算成本降了11.8倍，纠错量子比特从5650个降到4338个",
+    "dek": "Google DeepMind和Google Quantum AI用Gemini 4智能体团队改进量子线路，每项结果都用Lean做形式核验。arcsin例程加快了290倍。作者写明，这些算法要真正跑起来，所需资源仍高于第一代纠错量子计算机大概能提供的水平。",
+    "url": "/a/deepmind-quantum-algorithms",
+    "source_url": "https://deepmind.google/blog/finding-faster-quantum-algorithms-with-agents-and-formal-verification/",
+    "tags": [
+      "Google DeepMind",
+      "Google Quantum AI",
+      "Gemini 4",
+      "Lean",
+      "quantum algorithms",
+      "formal verification"
+    ]
+  },
+  {
     "id": "openai-perplexity-intelligence",
     "date": "2026-11-22",
     "title": "内部模型对数困惑度到了0.732，他建议在0.68到0.7之前设共同上限",
