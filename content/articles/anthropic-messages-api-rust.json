@@ -1,0 +1,238 @@
+{
+  "id": "anthropic-messages-api-rust",
+  "date": "2026-11-25",
+  "published_at": "2026-11-25T16:26:59+00:00",
+  "ingested_at": "2026-11-26T08:47:00+08:00",
+  "source": {
+    "type": "web",
+    "url": "https://www.anthropic.com/research/migrating-api-to-rust",
+    "author": "Lance Martin, Jake Eaton, Arvin Aminpour, Emma Webb, Bharat Mediratta, and Ravi Trivedi",
+    "handle": "AnthropicAI",
+    "title_en": "Migrating our Messages API to Rust",
+    "related_url": "https://x.com/AnthropicAI/status/2125627317263466739"
+  },
+  "title": "测试通过率约98%时，生产流量里对上的输入一开始只有大约四分之一",
+  "dek": "Anthropic把Messages API从Python迁到Rust，用线上旧服务当校验器，让Claude智能体按差异指纹修bug。迁完后，单请求CPU大约少了70%，内存大约少了80%以上，Claude Code请求的中位首次出词时间大约少了20%。",
+  "tags": [
+    "Anthropic",
+    "engineering",
+    "agents",
+    "Rust",
+    "API"
+  ],
+  "original": {
+    "lang": "en",
+    "title": "Migrating our Messages API to Rust",
+    "markdown_base_url": "https://www.anthropic.com/research/migrating-api-to-rust",
+    "text_md": "# Migrating our Messages API to Rust\n\n![Migrating our Messages API to Rust](https://assets.claude.com/7b547949804744dc62d37edbcc20382106143b4a.jpg)\n\nNov 25, 2026\n\nMany problems have a generator–verifier gap: it’s often far easier to verify that a solution is correct than to come up with one. Sudoku is a classic example. It’s simple to check the solution (just count the numbers in each row, column, and box), but finding that solution can take a long time. Many ambitious Claude projects have relied on this gap: formalizing proofs in mathematics or migrating large, well-tested codebases are tasks Claude can take on as long as it has a reliable way to verify its work.\n\nBut as Claude has become more capable, it’s begun to take on projects in live systems, where generating the work is easier than verifying it. In these systems, users often rely on edge cases and quirks that fall outside the test suite, and it’s hard to write a definition of “correct” that covers everything. Without a reliable way to check Claude’s work, the migration of a live system is hard to trust—however quickly Claude can generate the code for it.\n\nWe ran into this problem when we migrated our Messages API from Python to Rust. This API is the primary way that customers—as well as our own apps, like Claude Code and Cowork—reach Claude. From early 2024 to fall 2026, API traffic grew roughly 1,800 times. Rust would allow us to use far less CPU per request. Claude wrote a first version of the API’s core request path in about a week. But building trust in the migration required us to find a way to verify that our Rust API was at parity with our production API. This proved hard for several reasons, including that the Python API continued changing throughout the migration, so parity was a moving target; Claude can reply nondeterministically to the same request, so a difference between two outputs didn’t necessarily mean a bug; and we couldn't read customer requests, so we weren't able to easily see where the two versions diverged.\n\nIn this post, we share how we turned the production Messages API itself into a verifier—and how that helped us test the new Rust version on production traffic, find where it differed, and automatically dispatch agents to fix those differences. This allowed us to ship an API on Rust that uses about 70% less CPU per request and cuts median time to first token by about 20% without ever taking the service offline or freezing feature development.\n\n## Why migrate?\n\nWe built the Messages API in 2023 and wrote it in Python, which was widely used internally for much of our research code. At first, it was simple. The Messages API passed requests to the model and sent back what the model wrote. (One engineer at the time called it “basically a request forwarder.”) But as the Messages API became more capable and deeply integrated with our codebases, it also developed shared dependencies with Python libraries that were owned by our research and inference teams, which made it hard to move. If we ever wanted to move to another language, it would mean building logging, metrics, and tools all over again.\n\nThis calculus gradually began to change. By late 2025, every Messages API request had to be validated, converted into the prompt, tokenized, and screened by our safety classifiers. As each reply arrived, the stream of tokens had to be sorted into text, thinking, and tool calls, and Python added overhead to every one of those steps each time it created an object, freed memory, or handed its work to the next task. Traffic eventually grew far beyond what the initial Python service was built for (Figure 1), and we quickly needed to find a way to make the service much more efficient.\n\nThe monthly average of API requests per day on our own platform, including our own use.\n\n![The monthly average of API requests per day on our own platform, including our own use.](https://assets.claude.com/b4764d8023bcde58a15900b16cbb8dd2a6f82010.png)\n\n### Incremental or all at once?\n\nFull rewrites of large production systems are often approached cautiously, for at least two reasons. First, there is no guarantee that test suites cover 100% of production code behavior, and rewriting it is risky. Second, the sheer effort required often makes such work intractable. (In 2024, after one of our engineers suggested migrating to Go or Rust, another temporarily settled the question: “ We are not rewriting the API in go or rust!”)\n\nThe standard advice if you’re looking for performance gains is thus to rewrite only the parts that are slowing the system down, so that’s where we started. In Rust, we rewrote the code that parses a model’s output and called it from Python. This reduced the API’s CPU usage by about 8% to 10%. However, incremental solutions often incur added complexity, and it’s important to make sure that incremental improvements justify those costs. In our case, the gains didn’t justify the added complexity. Each token now crossed between Python and Rust three times (Figure 2), creating new sources of overhead.\n\nAfter the incremental rewrite, each token of a reply crossed between Python and Rust three times.\n\n![After the incremental rewrite, each token of a reply crossed between Python and Rust three times.](https://assets.claude.com/a518c8d4f3c915a99fc745d5cced4fa806274650.png)\n\nAs Claude became increasingly capable, we began to question whether the usual reasons to avoid a full migration still held. The effort required to undertake the project was dropping fast: by May 2026, Claude was writing more than 80% of the code Anthropic merged. We wondered if Claude could now help us write code that would empirically capture every behavior and fix in the production system. But the question became: how could we verify that the behavior of our migration was correct? Verification, not generation, had become the bottleneck.\n\n## How we verified the migration\n\n### General approaches\n\nTo verify the migration, we first needed to define what “correct” meant. You can do this in a few ways (Figure 3). If you’re lucky, you can simply write a rule. A theorem in mathematics is a precise statement, and a proof assistant (like Lean) can check each step of a proof against a fixed set of rules. Other times—and more frequently in software engineering—you define “correct” with a set of examples, like tests. For instance, when Bun moved from Zig to Rust, its test suite was written in TypeScript, so the same tests could judge both versions. In our case, neither approach was sufficient, so we used the existing system as an oracle to test parity during the migration. In this case, our existing system (the Messages API) kept changing. We were releasing new models and shipping new features regularly, which made the definition of “correct” a moving target.\n\nThree common sources of “correctness.”\n\n![Three common sources of correctness.](https://assets.claude.com/339fa8648be547a2bbcef4a3023ae1df2ec8ab71.png)\n\n### Tests\n\nTests were the easiest place for us to start, since we already had an existing set of about 700 integration tests. However, two problems limited our ability to trust them to verify the correctness of a migration as high stakes as this (Figure 4).\n\nThe tests were coupled to the Python implementation. An integration test sends a request, then checks the reply and what was sent to other services. Our tests ran the Python API inside the test’s process and mocked services, like billing and rate limiting, in Python’s memory. The tests had to change along with the code, and Claude helped with both. Now, a “pass” could mean that the code was right, or that the test had been changed in a way that let wrong code through. We saw this happen: when we audited the ported tests, we found more than 100 weakened assertions.\n\nThe tests were incomplete. The Messages API has dozens of features, and there are far too many configurations to test them exhaustively. Just 20 binary options make over a million combinations—that translates to 12 days of tests at a second each, for one model, before we even vary the prompts inside them. In practice, engineers test a subset that tries to approximate production, but that process inevitably misses cases. Some projects, like Bun, have an independent suite that’s extensive enough to judge a rewrite. Many production services don’t; what counts as correct depends as much on how they behave as on what’s in their tests or documentation.\n\nA ported test may check less than the original (dashed), and tests cover only the combinations someone thought of.\n\n![A ported test may check less than the original, and tests cover only the combinations someone thought of.](https://assets.claude.com/d62ca948354e121f976d85764b91d117d5481523.png)\n\n### Detecting parity with production\n\nProduction data is sometimes “ the only true test” that new code behaves like the old code. Running requests through old and new code and comparing the results is often called shadowing. To understand what we needed to compare, it helps to walk through what happens to a single request on the Messages API (Figure 5). The API validates each request, converts it into a prompt a model can read (the prompt for inference), tokenizes it, and runs it through safety classifiers. A model then writes a reply, one token at a time. On the output side, the API sorts those tokens into text, thinking, and tool calls, streams them to the customer, and counts usage for limits and billing.\n\nThe Messages API’s input and output paths. Filled dots are examples of differences we found between Python and Rust. The hollow dot is a risk we had to prevent.\n\n![The Messages API input and output paths.](https://assets.claude.com/4903891e9b23665e42dcc20a72be12336b8eba18.png)\n\nThe migration covered both the input and output paths. Some differences were obvious, such as when the Rust API rejected a request that Python had accepted. But many were subtle. For instance, if the Rust API left out part of a prompt, the request would still succeed and the model would still answer, though sometimes with minor differences.\n\nOur Rust API passed about 98% of its tests in April, yet only about a quarter of inputs matched on production traffic (Figure 6). The gap came partly from cases in production traffic that our tests didn’t cover. For example, when Python writes JSON tool calls, it escapes certain characters (e.g., an emoji) by replacing them with text codes. Rust wrote those characters as is, so the two prompts differed by a few bytes. Production also weighted bugs differently. In a test suite, each case counts once, but in live traffic, a bug will show up in each request where it’s triggered, which means a single common bug can cause many mismatches.\n\nHow often Rust’s input matched Python’s on the requests we compared. Replies were compared separately. Each dot is a day, and the line is a seven-day median. What we compared changed over time, and six misleading days are left out.\n\n![How often Rust input matched Python on the requests compared.](https://assets.claude.com/7de2a8325622d82fedbce7ef4ff369b2e27c3042.png)\n\nCommon tools for shadowing often assume that a request can safely run twice, or that a service is deterministic. These assumptions didn’t apply in our case. We had to ensure that a request only counted once toward a customer’s limits and bill. In addition, Claude is nondeterministic, meaning that replies can differ for the same input (Figure 7). To address this, we ran the model once and replayed the model output to Rust.\n\nWith both versions working from the same model output, we still had to compare every stage before and after the model call, and the results had to match exactly. In many systems, bad input causes an error somewhere down the stack. But since Claude accepts almost any prompt, even a small deviation can change its reply without triggering an error. We compared each step before and after the model call, so that we could pin down any deviation that might change what a customer received.\n\nDiff tools often run the old code twice to learn what varies on its own, then ignore it. Claude's replies vary, so those tools would ignore them, along with any bugs in them.\n\n![Diff tools often run the old code twice to learn what varies on its own, then ignore it.](https://assets.claude.com/2219fb4da126171dd071056b7290e47ed37bf0f3.png)\n\nIt was important to us to do this in a way that protected user privacy. To do that we had to work without reading user requests or Claude’s replies to them, which means we couldn’t easily see where the Rust and Python versions of the API differed. So instead of looking at text, we recorded the shape of each difference, such as where it happened in the service and how big it was. We did this using a few different approaches:\n\n- Checkpointing. Both API versions handle a request using the same steps: accept or reject it, resolve its settings, build the prompt. Every step produces some result, such as an error or the pieces of the prompt, that we could compare step by step, and within the prompt, piece by piece. The first place they differed indicated roughly where the migration code differed from production code (Figure 8).\n\nComparing at checkpoints, simplified, with made-up values. The first step to differ shows where to look. The record gives the piece, the lengths, and where they first differ, but not the text.\n\n![Comparing at checkpoints, simplified, with made-up values.](https://assets.claude.com/32dee017ccc9f7496eb80f0b926bf655215edb83.png)\n\n- Fingerprint. Once we knew roughly where each diff resided, we still needed a way to distinguish one bug from another. We recorded where each difference began in the prompt, as well as the length difference between the two versions. Combined with the step and piece of the prompt isolated in checkpointing, we found that bugs presented with a specific fingerprint. That is, one bug tends to leave the same fingerprint on every request it affects (Figure 9). We could then group errors by fingerprint, which helped us triage the fixes.\n\nFingerprints from one kind of request. A, at the start of the prompt, hid older differences. Once it was fixed, they appeared as B and C. Dots are illustrative.\n\n![Fingerprints from one kind of request. Dots are illustrative.](https://assets.claude.com/92be3b81d1414839e070e7ab04406fb397e320c7.png)\n\nThe result was a shadowing system that produced a small record of each difference between our Rust and Python APIs. Here is an example, with made-up values:\n\n```plaintext\nstep:        build prompt     ← where in the code\npiece:       2                ← where in the prompt\nfirst diff:  byte 17          ← fingerprint\npython:      190 bytes        ← fingerprint\nrust:        190 bytes        ← fingerprint\n```\n\nWe could then pass this record to an agent to fix it.\n\n## Verification loops\n\nEach request that differed left a record in our logs. A single bug could produce hundreds of thousands of nearly identical diff records. Rather than send each to an agent, we ran a script every 10 to 30 minutes that grouped them by which fields differed, then alerted a coordinating Claude agent only when it saw a new kind of record. This coordinator assigned a worker agent to own each new kind of record. It also created a new thread in a shared Slack channel where human engineers could follow along and steer it when necessary.\n\nTo tackle the many bugs, we set up a series of verification loops. A fast inner loop gave agents a sandbox in which they could test ideas and propose fixes. A slower outer loop then validated fixes in production. In addition, a memory loop recorded any mistakes along the way, saving them so that agents could learn over time (Figure 10).\n\nVerification loops. An edit is checked in a sandbox, and then on shadowed live traffic. People’s corrections become rules. Each loop can catch what the one inside it misses.\n\n![Verification loops.](https://assets.claude.com/3a4d129ebad6ab2c1188fe6cd02dbc34c2a06e5b.png)\n\n### Inner loop\n\nWhen we first started testing this in April, we gave each agent a record that showed where the Rust and Python versions differed. Agents would guess the root cause from the code and open a pull request. Once the fix was reviewed and merged, they deployed it to staging, a preproduction copy of the Rust API where we ran the same shadow comparison on test traffic. The agents checked whether the difference was eliminated. Since every hypothesis needed a review and a deployment, feedback was taking hours or days.\n\nWe needed agents to get a signal from verification much sooner, so we moved them into their own workspace. We redesigned the inner loop so that agents could have a place to test ideas quickly and fail safely. Each agent ran in a cloud sandbox with both codebases and fast, local checks for what happens before and after the model call. The input check took a request, built the prompt that each version would send to the model, and showed what differed. Because this check never actually called the model, comparing the versions took under a second. We later added an output check, which ran both versions against a fake model. The output check passed a scripted reply, such as a tool call, through each version and compared the results.\n\nThe main limitation was that agents could only see the fingerprint, not the request behind each record. So an agent would hypothesize what had caused the difference, then write its own request or model reply to try to reproduce the difference. Since each agent was writing these itself, it could read both results in full. If the results matched, its guess was wrong and the agent tried again. If they differed the same way the record described, the agent edited the Rust until the two versions matched, then added a test that failed on the old code and passed on the new (Figure 11).\n\nInner loop. From a fingerprint, an agent guesses the cause and writes a request or reply that should trigger it. Local checks run it through both versions until an edit makes them match.\n\n![Inner loop.](https://assets.claude.com/52e44ff8f08880a4d0f6877c97cdf77a140a8552.png)\n\nThe seam between the inner and outer loops was a good checkpoint for human review. Inside the sandbox, a wrong guess cost an agent only a few seconds and had no impact on users. Agents could iterate on their own. We allowed a fix to cross into the outer loop only after it had undergone PR review; this allowed engineers to focus their attention on proposed fixes (rather than on guesses) and on the questions the verifiers couldn’t answer, such as whether a difference between the Rust and Python APIs was the result of a bug or a deliberate change.\n\nAgents posted their fixes and evidence to their Slack threads for engineers to review. In mid-May, one of the largest remaining differences between the Rust and Python APIs came from web search. The production API retrieved the web search tool’s description from an internal service. The Rust API didn’t call this service yet, so the tool description was missing from the prompts. An agent proposed a shortcut to copy the text into files that would be readable by Rust. The prompts then matched, and the fix passed the local verifier. But an engineer turned it down because it didn’t solve the problem: Rust would still need to call the service before launch, at which point the workaround would be thrown out (Figure 12).\n\nBut the verifier rewarded matching outputs, and the agent found the cheapest way to produce them. A verifier can tell an agent whether the outputs matched, but not whether the fix is good enough to ship. That’s why human review was an important gate.\n\nAgents trace a mismatch to the web search tool across four Slack threads and propose a fix, which an engineer rejects as throwaway code. We shortened and reworded the messages and added the thread names and agent labels.\n\n![Agents trace a mismatch to the web search tool and propose a fix, which an engineer rejects as throwaway code.](https://assets.claude.com/6be648dd915614c56b00d3d0cb392f86bd6ef031.png)\n\n### Outer loop\n\nIn the inner loop, agents debugged differences and proposed fixes. At the seam between the inner loop and the outer loop, engineers reviewed the proposed fixes, gave feedback, and approved them to deploy. The outer loop then compared Rust API deployments with and without each fix.\n\nTo make that comparison fair, we logged facts about each request we compared, but not its text, including which model and API features it used—for example, prompt caching, tools, or extended thinking. These details let agents compare requests of the same kind (Figure 13) and ask how often the bug’s fingerprint appeared on builds with and without the fix. This way, agents could monitor the new builds for the bug.\n\nOuter loop. An engineer reviews the fix, it deploys, and shadowed traffic shows whether its fingerprint is gone. If not, the task returns to the inner loop.\n\n![Outer loop.](https://assets.claude.com/79fc91e736881cb4d25983fbf989076d3e7c0014.png)\n\nWe designed the outer loop to catch problems that the inner loop missed. The inner loop simulated production quickly but imperfectly: agents could test a hypothesis in seconds, but only on requests they had written, and with a local verifier that wasn’t always configured exactly like production.\n\nThis means that sometimes a fix passed in the sandbox and production still showed the difference. The agent assigned to the bug would either see the difference in the new build’s records, or be alerted by the coordinating agent. It then went back to the inner loop and used that evidence to form a new hypothesis.\n\n### Memory loop\n\nThe inner and outer loops fixed one difference at a time. The memory loop improved how agents made those fixes. We didn’t want engineers to have to make the same correction twice, so we recorded what came out of reviews and agents’ own work and applied it to every agent that followed.\n\nFor example, when an engineer turned down the web search shortcut (Figure 12), the agent saved a note to memory explaining the decision, the reason for it, and the correct fix, which was to have Rust call the service that supplies tool descriptions.\n\nBuilding that call took our team weeks, and in the meantime the bug kept producing records. Some had new fingerprints, because the missing text fell at other positions in the prompt or belonged to another tool that used the same service. Agents checked the memory note, recognized the known bug, and linked those records to it, instead of writing another workaround (Figure 14).\n\nOther lessons became general rules for porting and writing Rust. After one agent guessed at Python’s behavior, an engineer made it a rule to port exactly what Python did. An agent then compared the existing code with that rule and found seven more places where the port had relied on a guess.\n\nIn June, an agent also went through about 60 of the team’s review comments, grouped the recurring problems and proposed rules, which an engineer edited and approved for CLAUDE.md (Figure 14).\n\nThe memory loop also encoded some lessons in permanent checks. This included new tests that failed when Rust drifted from Python, lints that banned patterns reviewers kept flagging, and later a merge check that required anyone changing the Python code to make a matching change in Rust or request an exemption.\n\nMemory loop. An engineer’s correction becomes three things: a rule that each new agent reads, a search for the same mistake, and a test.\n\n![Memory loop.](https://assets.claude.com/086ed2a9f3c27c6bfd24e67a3cea341417d40ffe.png)\n\n## Looking ahead\n\nIt’s increasingly feasible to migrate production systems with Claude, either for better performance or security, without taking an API offline or slowing feature development. Now that the hard part is no longer writing new code, we need to build sufficient confidence that the new system behaves like the old one.\n\nThe usual approach to migration is a bit like rebuilding the Ship of Theseus, in which the old ship was replaced plank by plank. Generally it’s been possible to replace planks while the ship still sails, but changing too many planks at once requires coming into dock. To fully stretch the metaphor, Claude now makes it possible to build an identically functioning ship alongside the first—even as the first keeps sailing and having its planks replaced. Agents kept the new ship in step as the old one changed, and we kept checking that the two behaved the same. Once we trusted that they did, we moved the passengers over a few at a time. The new ship sails faster and more efficiently than the old one.\n\n### Lessons learned\n\nVerification is the new bottleneck. Previously, large software projects like migrations were hard to justify because they took too much effort and carried too much risk. But if writing code is no longer the bottleneck, the main constraint becomes how quickly you can verify results. In general, ambition can be increased as long as there’s a way for Claude to verify correctness.\n\nVerification is how you earn confidence. In math, we use a proof assistant to verify that each step of a proof Claude wrote is valid. For software, tests or formal verification can help us gain similar confidence. But when these checks aren’t enough, a production system itself can also be a verifier.\n\nCarefully design the verification signal. A verifier provides a signal that Claude can act on. We can calibrate this signal to show Claude where things went wrong. Where a proof assistant points to the failing step or a test names the failing case, a production system often offers no such signal by default. Much of our effort for this project went to building such a signal. In this case, checkpoints located each difference in the code and fingerprints helped tell one bug from another.\n\nBuild loops that let Claude autonomously act on the signal. Our inner loop was fast and ran locally in a sandbox. Agents tested hypotheses in seconds using requests they wrote themselves. The outer loop was slower and checked fixes on shadowed production traffic. The outermost loop was just prose, with corrections saved as rules in memory that could be read by every agent later in the process. Together, these loops allowed us to migrate the Messages API to Rust, which uses about 70% less CPU per request and reduces median time to first token by about 20% (Figure 15).\n\nCPU and memory used per request, and median time to first token, as requests moved from Python (gray) to Rust (blue). Lines are seven-day averages, 100 is about the level just before the move, and each arrow shows the change from the first dot to the second. CPU is one region, memory is all of production, and time to first token is customers' Claude Code requests over a shorter period. In the third panel, the fall before the first dot came while almost all of those requests were still on Python.\n\n![CPU and memory used per request, and median time to first token, as requests moved from Python to Rust.](https://assets.claude.com/5991f46db78fd73fa00095ab708ffd1eaf240a76.png)\n\nKeep the loops simple, so they scale with Claude’s capability. We tried to put human judgment only into what counted as correct; otherwise we left it up to Claude how to get there. Agents chose which hypotheses to test, how to reproduce each bug, and how to fix it. The verifiers judged the result. Simple loops around strong verifiers allowed us to move productively over time (Figure 16).\n\nChanges merged to our API's Rust code in each two-week period, from April until public traffic moved to Rust in September 2026. Not all of them are migration work.\n\n![Changes merged to the API Rust code in each two-week period.](https://assets.claude.com/f3fe7bd0615da0366ab5c2f3181579ee7ca94647.png)\n\nMove toward outer loops. At first, we had our engineers working inside the inner loop, running Claude and chasing differences themselves. Later, they moved to the seam between loops, helping to steer agents and reviewing fixes in Slack. But as the system matured, they increasingly moved to the edge, where they could provide the highest leverage, writing the rules and checks that agents worked within. As Claude grew more intelligent (and as we grew more intelligent at working with it), we evolved from directing Claude to Claude directing itself, relying on humans mainly for important judgment calls.\n\n### Acknowledgements\n\nWritten by Lance Martin, Jake Eaton, Arvin Aminpour, Emma Webb, Bharat Mediratta, and Ravi Trivedi with editorial guidance and feedback from Caitlin Love.",
+    "media": [
+      {
+        "id": "media_hero",
+        "type": "image",
+        "url": "https://assets.claude.com/7b547949804744dc62d37edbcc20382106143b4a.jpg",
+        "alt": "Migrating our Messages API to Rust"
+      },
+      {
+        "id": "media_fig1",
+        "type": "image",
+        "url": "https://assets.claude.com/b4764d8023bcde58a15900b16cbb8dd2a6f82010.png",
+        "alt": "Bar chart of API requests per day by month, from January 2024 to October 2026. Caption: The monthly average of API requests per day on our own platform, including our own use."
+      },
+      {
+        "id": "media_fig2",
+        "type": "image",
+        "url": "https://assets.claude.com/a518c8d4f3c915a99fc745d5cced4fa806274650.png",
+        "alt": "Two diagrams of the request path. In the partial rewrite (March 2026), each token crosses between languages three times. In the full rewrite (September 2026), Rust does every other step around the model. Caption: After the incremental rewrite, each token of a reply crossed between Python and Rust three times."
+      },
+      {
+        "id": "media_fig3",
+        "type": "image",
+        "url": "https://assets.claude.com/339fa8648be547a2bbcef4a3023ae1df2ec8ab71.png",
+        "alt": "Three rows showing sources of correctness: a rule like Lean, examples like Bun's test suite, and an existing system like the Python service. Caption: Three common sources of correctness."
+      },
+      {
+        "id": "media_fig4",
+        "type": "image",
+        "url": "https://assets.claude.com/d62ca948354e121f976d85764b91d117d5481523.png",
+        "alt": "Two panels: tests coupled to the legacy implementation, and incomplete tests covering only some feature combinations. Caption: A ported test may check less than the original (dashed), and tests cover only the combinations someone thought of."
+      },
+      {
+        "id": "media_fig5",
+        "type": "image",
+        "url": "https://assets.claude.com/4903891e9b23665e42dcc20a72be12336b8eba18.png",
+        "alt": "Flow diagram of a request, with example differences including a rejected field, a 1M limit read as 200K, a missing tool description, stripped newlines, and missing usage fields. The risk designed against is a copy counted twice. Caption: The Messages API's input and output paths."
+      },
+      {
+        "id": "media_fig6",
+        "type": "image",
+        "url": "https://assets.claude.com/7de2a8325622d82fedbce7ef4ff369b2e27c3042.png",
+        "alt": "Line chart of the share of inputs that matched, from late April to August: starts at 24%, drops to 6.5% in early May, then rises and ends at 99.6%. Caption: How often Rust's input matched Python's on the requests compared. Replies were compared separately. Each dot is a day, and the line is a seven-day median. Six misleading days are left out."
+      },
+      {
+        "id": "media_fig7",
+        "type": "image",
+        "url": "https://assets.claude.com/2219fb4da126171dd071056b7290e47ed37bf0f3.png",
+        "alt": "Two comparisons. In a typical service, varying time can be ignored as noise. In an inference API, two Python copies and Rust may each word the answer to 'Is 91 prime?' differently, so the whole reply would count as noise. Caption: Diff tools often run the old code twice to learn what varies on its own, then ignore it."
+      },
+      {
+        "id": "media_fig8",
+        "type": "image",
+        "url": "https://assets.claude.com/32dee017ccc9f7496eb80f0b926bf655215edb83.png",
+        "alt": "Python and Rust compared at each step, with the model called once and its output replayed to Rust. The record lists the step, piece, lengths, and first differing byte, but no text. Caption: Comparing at checkpoints, simplified, with made-up values."
+      },
+      {
+        "id": "media_fig9",
+        "type": "image",
+        "url": "https://assets.claude.com/92be3b81d1414839e070e7ab04406fb397e320c7.png",
+        "alt": "Four dot grids show mismatches grouped by fingerprint. Fingerprint A hid older differences B and C. Caption: Fingerprints from one kind of request. Dots are illustrative."
+      },
+      {
+        "id": "media_fig10",
+        "type": "image",
+        "url": "https://assets.claude.com/3a4d129ebad6ab2c1188fe6cd02dbc34c2a06e5b.png",
+        "alt": "Three nested loops: inner loop with local checks under a second, outer loop on shadowed live traffic, and a memory loop that turns corrections into rules. Caption: Verification loops."
+      },
+      {
+        "id": "media_fig11",
+        "type": "image",
+        "url": "https://assets.claude.com/52e44ff8f08880a4d0f6877c97cdf77a140a8552.png",
+        "alt": "The inner loop: from a fingerprint, the agent guesses the cause, writes a triggering request or reply, and edits Rust until the versions match, then opens a PR with a fix and a test. Caption: Inner loop."
+      },
+      {
+        "id": "media_fig12",
+        "type": "image",
+        "url": "https://assets.claude.com/6be648dd915614c56b00d3d0cb392f86bd6ef031.png",
+        "alt": "A Slack channel, #rust-migration, where agents propose a web-search tool-description fix that an engineer rejects as throwaway code. Caption: Agents trace a mismatch to the web search tool across four Slack threads and propose a fix, which an engineer rejects. Messages were shortened and reworded, and thread names and agent labels were added."
+      },
+      {
+        "id": "media_fig13",
+        "type": "image",
+        "url": "https://assets.claude.com/79fc91e736881cb4d25983fbf989076d3e7c0014.png",
+        "alt": "The outer loop: an engineer reviews the PR, it deploys, and shadowed live traffic is watched for the fingerprint. Caption: Outer loop."
+      },
+      {
+        "id": "media_fig14",
+        "type": "image",
+        "url": "https://assets.claude.com/086ed2a9f3c27c6bfd24e67a3cea341417d40ffe.png",
+        "alt": "The memory loop: an engineer's correction becomes a rule each new agent reads, a search that finds the same mistake in seven places, and a test that fails if the versions drift. Caption: Memory loop."
+      },
+      {
+        "id": "media_fig15",
+        "type": "image",
+        "url": "https://assets.claude.com/5991f46db78fd73fa00095ab708ffd1eaf240a76.png",
+        "alt": "Three charts of the move from Python to Rust. CPU used per request falls by about 70% and memory used per request by more than 80%, both from August to October. Median time to first token falls by about 20% between roughly September 7 and 21. Caption: Lines are seven-day averages, 100 is about the level just before the move. CPU is one region, memory is all of production, and time to first token is customers' Claude Code requests over a shorter period. In the third panel, the fall before the first dot came while almost all of those requests were still on Python."
+      },
+      {
+        "id": "media_fig16",
+        "type": "image",
+        "url": "https://assets.claude.com/f3fe7bd0615da0366ab5c2f3181579ee7ca94647.png",
+        "alt": "Bar chart of changes merged per two-week period, April 6 to September 7, 2026, climbing from under 100 to roughly 1,000 by late June, then jumping to more than 3,000 in the period starting August 10. Caption: Changes merged to the API's Rust code in each two-week period, from April until public traffic moved to Rust in September 2026. Not all of them are migration work."
+      }
+    ]
+  },
+  "body_md": "2026年4月，Anthropic把Messages API往Rust搬的时候，测试通过率已经大约是**98%**。可拿生产流量一对，输入能对上的大约只有四分之一。\n\n这组数字写在2026年11月25日的工程博文《Migrating our Messages API to Rust》里。作者是Lance Martin、Jake Eaton、Arvin Aminpour、Emma Webb、Bharat Mediratta和Ravi Trivedi，编辑指导来自Caitlin Love。\n\nMessages API是客户调用Claude的主要入口，他们自己的应用，比如Claude Code和Cowork，也走这条路。从2024年初到2026年秋，API流量大约涨了**1800**倍。Claude大约用一周写出了核心请求路径的第一版。真正难的，是证明新服务和线上旧服务行为一致。\n\n他们最后交出的Rust版，单请求CPU大约少了**70%**，单请求内存少了**80%**以上，Claude Code请求的中位首次出词时间大约少了**20%**。迁移过程中，服务没有停过，功能开发也没有冻结。\n\n## 先改一段，每个token要跨语言三次\n\nMessages API是2023年用Python写的。当时公司内部很多研究代码都用Python。一位工程师后来回忆，它差不多就是个请求转发器：把请求交给模型，再把模型写的内容送回去。\n\n后来它和研发、推理团队的Python库有了共用依赖，再换语言，就等于日志、指标和工具都要重做一遍。\n\n到2025年底，每个请求都要做校验、转成模型能读的提示、分词，还要经过安全分类器。回复一边生成，一边要把token分到文本、思考和工具调用里。Python每新建对象、释放内存、把工作交给下一件事，都会叠加开销。原来的服务很快不够用。\n\n2024年，有工程师提议迁到Go或Rust，另一位工程师当时把话说死了：我们不会用Go或Rust重写这个API。常见建议是只改拖慢系统的那一段。他们也是这么开始的。\n\n2026年3月，他们用Rust重写了解析模型输出的那段，再从Python里调用。CPU大约降了**8%到10%**。可每个回复token要在Python和Rust之间穿三次，又添了新的开销。这点收益，配不上多出来的复杂度。\n\n## 生成不再是瓶颈，核对成了瓶颈\n\n到2026年5月，Anthropic合并进去的代码里，已经有**80%**以上是Claude写的。他们开始怀疑，过去不敢做完整迁移的理由，是不是还成立。\n\n问题变成：怎样证明新系统和旧系统行为一致。生产API还在继续改，正确标准是移动的。同一个请求，Claude的回复本身也不确定，两次输出不一样，不一定是bug。他们又不能读客户请求，两套实现到底在哪里分叉，不容易直接看见。\n\n核对“正确”通常有几条路。数学定理可以写清楚规则，再用Lean这类证明助手一步步查。软件更常见的是用例子，也就是测试。Bun从Zig迁到Rust时，测试套件是TypeScript写的，两套实现可以共用。他们觉得这两条都不够，于是把仍在线上的Python版Messages API，当成迁移期间的对照标准。\n\n## 大约700个集成测试，审计时发现100多处断言被写弱了\n\n手头现成的大约有**700**个集成测试，这是最容易起步的地方。测试会发一个请求，再检查回复，以及发给计费、限流等其他服务的内容。这些测试在测试进程里跑Python API，并用Python内存去模拟那些服务。\n\n代码一改，测试也得改，两边Claude都帮过忙。于是“通过”可能表示代码对了，也可能表示测试被改松了，让错的代码过了关。他们审计过移植后的测试，发现**100**多处断言被写弱了。\n\n测试也不全。Messages API功能很多，组合远超穷举。文中举的例子是：只算**20**个二元选项，就有超过100万种组合。按每个组合1秒算，在一个模型上就要测12天，而且还没开始改提示词。工程上通常只测一组试图接近生产的子集，漏是难免的。\n\n有些差别很明显，比如Rust拒绝了Python会接受的请求。更多是暗的：Rust如果漏掉提示里的一部分，请求仍会成功，模型仍会回答，只是有时略有不同。\n\n2026年4月，测试通过率大约**98%**，生产流量里输入能对上的大约只有四分之一。缺口有一部分来自测试没覆盖到的生产情况。比如Python写JSON工具调用时，会把某些字符，例如emoji，替换成文本代码；Rust则按原样写这些字符，两份提示会差几个字节。\n\n生产里的权重也不一样。测试集里每个用例只算一次，线上同一个常见bug，会在每个被触发的请求里出现，一次就能造成大量对不上。\n\n## 输入匹配率从24%掉到6.5%，后来升到99.6%\n\n他们用生产数据做对照，也就是常说的shadowing：同一请求走新旧两套代码，再比较结果。\n\n输入路径会校验请求、解析设置、拼出给模型的提示。输出路径则整理回复、流式发给客户，并统计用量，供限额和计费使用。他们找到的差异里，包括被拒绝的字段、把**100万**的限制读成**20万**、缺失的工具描述、被去掉的换行，以及缺失的用量字段。还有一个他们特意防住的风险：同一次用量被计两次。\n\n图上的输入匹配率从大约**24%**起步，2026年5月初掉到**6.5%**，后来跟着这些修复升上去，中间有两次因为Rust侧改动下跌，最后到**99.6%**。对比先从他们自己的流量开始，再扩到更大样本。每个点是一天，连线是7日中位数。比较范围中途有过调整，有6天因为会误导被拿掉。回复是另外比较的。\n\n常见的对照工具，往往假设一个请求可以安全地跑两次，或者服务是确定的。这些假设在这里不成立。Claude的回复本身就会变。如果先跑两次旧代码，把会变的部分当成噪声忽略掉，整段回复，连同回复里的bug，都会被放过。文中用“91是不是质数”这类问题做了示意：两份Python和一份Rust可能把答案写成不同的句子。\n\n他们的做法是：模型只跑一次，再把这次输出回放到Rust上比。比较是按检查点做的。哪一步先不一样，就先看那里。留给智能体的记录包括步骤、提示里的片段编号、两边长度，以及第一个不同字节的位置，但不包括请求正文。他们把这种组合叫做指纹。一种bug往往会在所有受影响的请求上留下相同指纹，于是可以归类处理。\n\n文中还写，修复靠前的差异之后，被挡住的更早差异才会露出来。\n\n## 内环用秒级沙箱试想法，外环看线上指纹在不在\n\n每个对不上的请求都会留下记录。同一个bug可能产生几十万条几乎一样的差异记录。他们没有把每条都交给智能体。实际做法是每**10到30**分钟跑一次脚本，按哪些字段不同来分组，只有出现新类型时，才通知协调用的Claude智能体。\n\n协调者会给每种新记录分配一个工人智能体，并在共享的Slack频道里开一个新线程，方便工程师跟看，必要时插手。\n\n他们搭了三层核对循环。内环在沙箱里快速试想法、提修复。外环更慢，在生产对照流量上验证修复。还有一层记忆循环，把过程中的错误记下来，让后面的智能体接着用。\n\n2026年4月刚试的时候，智能体根据代码猜原因，开出拉取请求，审查合并后再部署到预发环境，用测试流量做同样的对照。反馈要花几个小时到几天。\n\n后来他们把智能体放到独立的云沙箱里，两边代码都在，还加上本地检查。输入检查只比较两套实现会送给模型的提示，不真正调用模型，通常不到1秒。后来又加了输出检查：用脚本写好的假模型回复，比如一次工具调用，分别走两套实现再比较。\n\n智能体只能看到指纹，看不到背后的真实请求。它要自己写一个请求或模型回复，去复现那种差异。因为请求是它自己写的，两边结果都可以完整阅读。如果结果对得上，说明猜错了，再试。如果差异和记录一致，它就改Rust，直到两边一致，再补一条在旧代码上失败、在新代码上通过的测试。\n\n修复要经过拉取请求审查，才能进入外环。工程师于是把注意力放在已经提出的修复上，并判断某个差异到底是bug，还是有意改动。验证器能判断输出是否一致，不能判断这个修复够不够拿去上线。\n\n2026年5月中旬，两边还差得比较大的一块来自网络搜索。生产API会从一个内部服务取回该工具的描述，Rust当时还没调用这个服务，提示里就缺了这段文字。一个智能体提议把文本拷进Rust能读的文件里。本地验证器通过了，提示也对上了。工程师拒绝了，因为上线前Rust还是得调用那个服务，这个绕法到时会被丢掉。把这次调用做对，后来花了团队几周。在此期间，这个bug还在不断产生记录，有的指纹还变了，因为缺失文本出现在提示的其他位置，或属于使用同一服务的另一个工具。\n\n外环会记录用来对照的请求的一些事实，但不记录请求正文，例如用的是哪个模型，以及是否启用了提示缓存、工具或扩展思考。这样智能体可以比较同类请求，看某个指纹在带修复和不带修复的构建上出现得有多频繁。内环跑得快，但不完美：智能体只能测自己写的请求，本地验证器的配置也不总是和生产完全一样。沙箱过了、生产仍有差异时，任务会回到内环。\n\n记忆循环用来避免工程师重复纠正同一件事。网络搜索那个捷径被拒后，智能体把决定、理由和正确做法写入记忆：正确做法是让Rust调用提供工具描述的那个服务。后来的智能体看到记忆，会把新记录归到已知bug上，不再另写一个绕法。\n\n有工程师还定了一条规则：移植时要精确实现Python的行为，不能靠猜。一个智能体拿现有代码对过这条规则，又找出**7**处靠猜的地方。2026年6月，一个智能体整理了团队大约**60**条审查意见，归类后提出规则，由工程师修改并写入CLAUDE.md。有些教训还变成了长期检查：防止Rust偏离Python的新测试、禁止审查里反复出现的写法的lint，以及后来的合并检查，要求改Python时同步改Rust，或者申请豁免。\n\n## 流量在2026年9月切到Rust，CPU和内存是在8月到10月降下来的\n\n公开流量在2026年9月切到Rust。CPU和内存是按8月到10月这一段看的，中位首次出词时间的下降大约发生在9月7日到21日。图上的线是7日均值，100大约是迁移前的水平，箭头表示从第一个点到第二个点的变化。CPU来自一个区域，内存覆盖全部生产，首次出词时间来自客户的Claude Code请求，统计窗口更短。第三幅图里，第一个点之前已经有一段下降，当时这些请求几乎仍全部走Python。\n\n他们还统计了2026年4月6日到9月7日，每两周合并进Rust API代码的改动。改动从不足100上升到6月下旬大约1000，7月趋于平稳，从8月10日开始的那一轮跳到3000以上，随后两轮仍高于2500。作者写明，这些并不都是迁移工作。\n\n## 核对信号要设计，人把关什么叫正确\n\n作者把经验收成几句。大型迁移过去难做，是因为工作量大、风险高。现在写代码不再是主要瓶颈，约束变成能多快核对结果。只要Claude有办法核对正确性，就可以把目标放得更大。\n\n生产系统本身也可以当验证器。但和证明助手指出失败步骤、测试指出失败用例不同，生产系统默认往往不提供这种信号。这个项目很大一部分工作，就是把差异定位到代码位置，再用指纹区分不同的bug。\n\n循环要简单，才能跟着Claude的能力一起放大。他们尽量只让人判断什么叫正确，其余交给Claude。智能体自己选假设、自己复现、自己修，验证器判断结果。工程师一开始在内环里自己追差异，后来站到循环交界处做审查和引导，再往后更多站在外沿，写智能体要遵守的规则和检查。文中的说法是：Claude变得更聪明，他们也更会和它共事，工作从指挥Claude，变成Claude自己推进，人主要负责重要判断。\n\n对正在做同类迁移的人，这篇文章最直接的做法是：先想清楚用什么当作“正确”，再为智能体设计可执行的核对信号，并把人放在判断对错和是否可上线的关口上，不必让人逐条猜测原因。\n",
+  "rewrite_media": [
+    {
+      "media_id": "media_hero",
+      "placement": "after_paragraph",
+      "after_md": "2026年4月，Anthropic把Messages API往Rust搬的时候，测试通过率已经大约是**98%**。可拿生产流量一对，输入能对上的大约只有四分之一。",
+      "evidence": "source_position_verified"
+    },
+    {
+      "media_id": "media_fig1",
+      "placement": "after_paragraph",
+      "after_md": "Messages API是客户调用Claude的主要入口，他们自己的应用，比如Claude Code和Cowork，也走这条路。从2024年初到2026年秋，API流量大约涨了**1800**倍。Claude大约用一周写出了核心请求路径的第一版。真正难的，是证明新服务和线上旧服务行为一致。",
+      "evidence": "source_position_verified"
+    },
+    {
+      "media_id": "media_fig2",
+      "placement": "after_paragraph",
+      "after_md": "2026年3月，他们用Rust重写了解析模型输出的那段，再从Python里调用。CPU大约降了**8%到10%**。可每个回复token要在Python和Rust之间穿三次，又添了新的开销。这点收益，配不上多出来的复杂度。",
+      "evidence": "source_position_verified"
+    },
+    {
+      "media_id": "media_fig3",
+      "placement": "after_paragraph",
+      "after_md": "核对“正确”通常有几条路。数学定理可以写清楚规则，再用Lean这类证明助手一步步查。软件更常见的是用例子，也就是测试。Bun从Zig迁到Rust时，测试套件是TypeScript写的，两套实现可以共用。他们觉得这两条都不够，于是把仍在线上的Python版Messages API，当成迁移期间的对照标准。",
+      "evidence": "source_position_verified"
+    },
+    {
+      "media_id": "media_fig4",
+      "placement": "after_paragraph",
+      "after_md": "测试也不全。Messages API功能很多，组合远超穷举。文中举的例子是：只算**20**个二元选项，就有超过100万种组合。按每个组合1秒算，在一个模型上就要测12天，而且还没开始改提示词。工程上通常只测一组试图接近生产的子集，漏是难免的。",
+      "evidence": "source_position_verified"
+    },
+    {
+      "media_id": "media_fig5",
+      "placement": "after_paragraph",
+      "after_md": "输入路径会校验请求、解析设置、拼出给模型的提示。输出路径则整理回复、流式发给客户，并统计用量，供限额和计费使用。他们找到的差异里，包括被拒绝的字段、把**100万**的限制读成**20万**、缺失的工具描述、被去掉的换行，以及缺失的用量字段。还有一个他们特意防住的风险：同一次用量被计两次。",
+      "evidence": "source_position_verified"
+    },
+    {
+      "media_id": "media_fig6",
+      "placement": "after_paragraph",
+      "after_md": "图上的输入匹配率从大约**24%**起步，2026年5月初掉到**6.5%**，后来跟着这些修复升上去，中间有两次因为Rust侧改动下跌，最后到**99.6%**。对比先从他们自己的流量开始，再扩到更大样本。每个点是一天，连线是7日中位数。比较范围中途有过调整，有6天因为会误导被拿掉。回复是另外比较的。",
+      "evidence": "source_position_verified"
+    },
+    {
+      "media_id": "media_fig7",
+      "placement": "after_paragraph",
+      "after_md": "常见的对照工具，往往假设一个请求可以安全地跑两次，或者服务是确定的。这些假设在这里不成立。Claude的回复本身就会变。如果先跑两次旧代码，把会变的部分当成噪声忽略掉，整段回复，连同回复里的bug，都会被放过。文中用“91是不是质数”这类问题做了示意：两份Python和一份Rust可能把答案写成不同的句子。",
+      "evidence": "source_position_verified"
+    },
+    {
+      "media_id": "media_fig8",
+      "placement": "after_paragraph",
+      "after_md": "他们的做法是：模型只跑一次，再把这次输出回放到Rust上比。比较是按检查点做的。哪一步先不一样，就先看那里。留给智能体的记录包括步骤、提示里的片段编号、两边长度，以及第一个不同字节的位置，但不包括请求正文。他们把这种组合叫做指纹。一种bug往往会在所有受影响的请求上留下相同指纹，于是可以归类处理。",
+      "evidence": "source_position_verified"
+    },
+    {
+      "media_id": "media_fig9",
+      "placement": "after_paragraph",
+      "after_md": "文中还写，修复靠前的差异之后，被挡住的更早差异才会露出来。",
+      "evidence": "source_position_verified"
+    },
+    {
+      "media_id": "media_fig10",
+      "placement": "after_paragraph",
+      "after_md": "他们搭了三层核对循环。内环在沙箱里快速试想法、提修复。外环更慢，在生产对照流量上验证修复。还有一层记忆循环，把过程中的错误记下来，让后面的智能体接着用。",
+      "evidence": "source_position_verified"
+    },
+    {
+      "media_id": "media_fig11",
+      "placement": "after_paragraph",
+      "after_md": "智能体只能看到指纹，看不到背后的真实请求。它要自己写一个请求或模型回复，去复现那种差异。因为请求是它自己写的，两边结果都可以完整阅读。如果结果对得上，说明猜错了，再试。如果差异和记录一致，它就改Rust，直到两边一致，再补一条在旧代码上失败、在新代码上通过的测试。",
+      "evidence": "source_position_verified"
+    },
+    {
+      "media_id": "media_fig12",
+      "placement": "after_paragraph",
+      "after_md": "2026年5月中旬，两边还差得比较大的一块来自网络搜索。生产API会从一个内部服务取回该工具的描述，Rust当时还没调用这个服务，提示里就缺了这段文字。一个智能体提议把文本拷进Rust能读的文件里。本地验证器通过了，提示也对上了。工程师拒绝了，因为上线前Rust还是得调用那个服务，这个绕法到时会被丢掉。把这次调用做对，后来花了团队几周。在此期间，这个bug还在不断产生记录，有的指纹还变了，因为缺失文本出现在提示的其他位置，或属于使用同一服务的另一个工具。",
+      "evidence": "source_position_verified"
+    },
+    {
+      "media_id": "media_fig13",
+      "placement": "after_paragraph",
+      "after_md": "外环会记录用来对照的请求的一些事实，但不记录请求正文，例如用的是哪个模型，以及是否启用了提示缓存、工具或扩展思考。这样智能体可以比较同类请求，看某个指纹在带修复和不带修复的构建上出现得有多频繁。内环跑得快，但不完美：智能体只能测自己写的请求，本地验证器的配置也不总是和生产完全一样。沙箱过了、生产仍有差异时，任务会回到内环。",
+      "evidence": "source_position_verified"
+    },
+    {
+      "media_id": "media_fig14",
+      "placement": "after_paragraph",
+      "after_md": "有工程师还定了一条规则：移植时要精确实现Python的行为，不能靠猜。一个智能体拿现有代码对过这条规则，又找出**7**处靠猜的地方。2026年6月，一个智能体整理了团队大约**60**条审查意见，归类后提出规则，由工程师修改并写入CLAUDE.md。有些教训还变成了长期检查：防止Rust偏离Python的新测试、禁止审查里反复出现的写法的lint，以及后来的合并检查，要求改Python时同步改Rust，或者申请豁免。",
+      "evidence": "source_position_verified"
+    },
+    {
+      "media_id": "media_fig15",
+      "placement": "after_paragraph",
+      "after_md": "公开流量在2026年9月切到Rust。CPU和内存是按8月到10月这一段看的，中位首次出词时间的下降大约发生在9月7日到21日。图上的线是7日均值，100大约是迁移前的水平，箭头表示从第一个点到第二个点的变化。CPU来自一个区域，内存覆盖全部生产，首次出词时间来自客户的Claude Code请求，统计窗口更短。第三幅图里，第一个点之前已经有一段下降，当时这些请求几乎仍全部走Python。",
+      "evidence": "source_position_verified"
+    },
+    {
+      "media_id": "media_fig16",
+      "placement": "after_paragraph",
+      "after_md": "他们还统计了2026年4月6日到9月7日，每两周合并进Rust API代码的改动。改动从不足100上升到6月下旬大约1000，7月趋于平稳，从8月10日开始的那一轮跳到3000以上，随后两轮仍高于2500。作者写明，这些并不都是迁移工作。",
+      "evidence": "source_position_verified"
+    }
+  ]
+}
