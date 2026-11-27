@@ -1,5 +1,35 @@
 [
   {
+    "id": "metr-pretraining-loss-acceleration",
+    "date": "2026-11-24",
+    "title": "按现在的速度，GPT-3.5到GPT-4.1三年的损失降幅，大约六个半月就能走完",
+    "dek": "METR讨论OpenAI新公布的基座对数困惑度：2026年初以来下降速度大约快了7倍，但基准分数没有同类加速，机构内部也没有统一解释。",
+    "url": "/a/metr-pretraining-loss-acceleration",
+    "source_url": "https://metr.org/blog/2026-11-24-interpreting-a-recent-acceleration-in-pretraining-loss/",
+    "tags": [
+      "METR",
+      "pretraining",
+      "scaling",
+      "OpenAI",
+      "evaluations"
+    ]
+  },
+  {
+    "id": "karpathy-usaciv",
+    "date": "2026-11-26",
+    "title": "7小时、4.5万行代码后，他把美国做成了一张25公里一格的文明地图",
+    "dek": "Karpathy用Claude Opus 5.5把31份公共数据铺进一张可浏览的策略地图：圣何塞每4名就业者里有1人是工程师、程序员或科学家，全国是1/14。",
+    "url": "/a/karpathy-usaciv",
+    "source_url": "https://x.com/karpathy/status/2125779541952246039",
+    "tags": [
+      "Karpathy",
+      "Claude",
+      "visualization",
+      "public data",
+      "agents"
+    ]
+  },
+  {
     "id": "anthropic-messages-api-rust",
     "date": "2026-11-25",
     "title": "测试通过率约98%时，生产流量里对上的输入一开始只有大约四分之一",

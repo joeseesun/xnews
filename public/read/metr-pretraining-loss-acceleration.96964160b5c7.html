@@ -1,0 +1,97 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>按现在的速度，GPT-3.5到GPT-4.1三年的损失降幅，大约六个半月就能走完 · X News</title><meta name="robots" content="noindex"></head><body><article class="article-reader" data-article-id="metr-pretraining-loss-acceleration">
+<a class="article-back" href="/">← 返回选刊</a>
+<header class="article-header"><p class="article-kicker">METR / 文章</p><h1>按现在的速度，GPT-3.5到GPT-4.1三年的损失降幅，大约六个半月就能走完</h1><p class="article-dek">METR讨论OpenAI新公布的基座对数困惑度：2026年初以来下降速度大约快了7倍，但基准分数没有同类加速，机构内部也没有统一解释。</p><div class="article-meta"><time datetime="2026-11-27">本站收录 2026年11月27日 · 周五</time><span>原文发布 2026年11月24日 · 周二</span><span>原作者：METR</span><span>中文改写：<a href="/about">X News · 乔木</a></span><span>METR · pretraining · scaling · OpenAI · evaluations</span></div></header>
+<nav class="reader-tabs" aria-label="文章版本与来源"><div data-tabs><a href="#rewrite" id="tab-rewrite" data-view="rewrite">乔木改写</a><a href="#original" id="tab-original" data-view="original">原文</a></div><a class="reader-source" href="https://metr.org/blog/2026-11-24-interpreting-a-recent-acceleration-in-pretraining-loss/" target="_blank" rel="noopener noreferrer">原文链接 ↗</a><div class="reading-position" hidden><progress max="100" value="0" aria-label="当前版本阅读进度"></progress><span data-reading-percent aria-hidden="true">0%</span></div></nav>
+<section class="reader-panel" id="rewrite" data-reader-panel="rewrite" aria-label="乔木改写"><h2 class="section-heading">乔木改写</h2><div class="prose"><p>OpenAI 从 GPT-3.5 走到 GPT-4.1，预训练损失用了三年才降完那一截。METR 说，如果按现在的速度，大约六个半月就能再走完同样的降幅。</p>
+<p>2026 年 11 月 24 日，Ajeya Cotra、Jean-Stanislas Denain 和 Tom Cunningham 写了这篇更新，讨论的就是这条突然变陡的曲线。</p>
+<p>OpenAI 最近公布了自 GPT-3.5 以来训练的 13 个模型的基座对数困惑度，测在一份固定的留出数据集上，这份数据来自它自己的代码库。从 2026 年初起，损失下降的速度大约是 2022 到 2025 年的 7 倍。</p>
+<p>配图是对数困惑度对模型发布日期的散点图，从 2022 年的 GPT-3.5 一直画到 2026 年的模型，并做了两段直线拟合。官方替代文本写：2022 年到 2026 年初，损失大约每年下降 0.022；在 2026 年 2 月的转折点之后，大约每年下降 0.156，坡度陡了 7.1 倍。OpenAI 的一个内部模型画成空心方块，没有进入这条拟合。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="fig_logloss_hinge"><div class="media-frame"><img src="https://metr.org/assets/images/pretraining-loss-acceleration/logloss_hinge.png" data-original-src="https://metr.org/assets/images/pretraining-loss-acceleration/logloss_hinge.png" alt="Scatter plot of log-perplexity on OpenAI&#x27;s held-out dataset against model release date, from GPT-3.5 (2022) to 2026 models, with a two-segment linear fit. From 2022 to early 2026 log-perplexity falls slowly (about 0.022 per year); after a breakpoint in February 2026 it falls about 0.156 per year, 7.1 times steeper. OpenAI&#x27;s internal model is shown as a hollow square and is not used in the fit." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://metr.org/blog/2026-11-24-interpreting-a-recent-acceleration-in-pretraining-loss/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<p>按常理，损失本来应该越来越难往下降。文本不可能被完美预测，损失不会低过某个地板；按通常的缩放定律，算力每增加十倍，换来的损失下降会比上一次更小。按这个朴素预期，进度应当放慢。</p>
+<p>他们在下文配了一张示意，用来对照这种本应放慢的预期。官方替代文本写明，这张图用的是假数据：它画了几条高于零的可能地板，以及靠近地板时进度放慢的虚线；2026 年实际看到的形态却是在加速，最近的点落到了所有虚线下方。图上还标了一条位于零的硬地板。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="fig_schematic_expected"><div class="media-frame"><img src="https://metr.org/assets/images/pretraining-loss-acceleration/schematic_expected.png" data-original-src="https://metr.org/assets/images/pretraining-loss-acceleration/schematic_expected.png" alt="Illustrative schematic with fake data. Log-perplexity against time, with dotted lines for a few possible loss floors above zero and a dashed curve for each showing the default expectation: progress slows as the loss approaches its floor. The observed 2026 pattern instead shows progress speeding up, with the most recent points falling below all of the dashed curves. A hard floor at zero is marked." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://metr.org/blog/2026-11-24-interpreting-a-recent-acceleration-in-pretraining-loss/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<p>METR 内部仍在讨论，该怎么理解这场预训练进度的剧烈加速，以及如何把它和 OpenAI 模型在基准分数上没有出现同类加速对上，例如 Epoch 的 ECI。</p>
+<p>这条新信息到底该不该改写对未来能力的预测，仍然可以争论。他们列出了三条重要考虑。</p>
+<p>第一，公布出来的数据有可能高估了真实的预训练进展，比如各种过拟合。更多数据会很有帮助。</p>
+<p>第二，基准分数也许才是现实世界能力的更好度量，预训练困惑度只是一种输入。按这个看法，预训练加速本身不会大幅改写他们对未来能力的预测。如果 AI 参与了这场预训练加速，它也会提示 AI 以后可能怎样进入训练流水线的其他环节。</p>
+<p>OpenAI 那篇文章的一条脚注，和“AI 一开始作用较小、到最近才变大”是对得上的。METR 引了原话：他们把这件事主要归因于长期研究和算力投入的结果，自动化只占较小部分；但对最近的模型，他们已经看到 AI 做出了有意义的设计贡献。METR 还提到，他们最近对 Anthropic 的 AI 研发加速评估认为，2025 年末的加速很可能受非 AI 因素影响，但估计“当前（2026 年 10 月）加速的大部分（也许约 80%）来自 AI”。</p>
+<p>脚注里还举了一个机制上的例子：像循环变压器这类会在每个 token 上花更多计算的结构变化，有可能把困惑度降得更明显，却不一定同等改善下游能力，因为常规模型也可以在后训练里靠思维链推理，达到相近的能力。</p>
+<p>第三，预训练困惑度也可能是比常见基准更根本的能力度量。许多 AI 研究者持这种看法，并预期 OpenAI 在预训练上的快速加速，随后会变成以现实影响来衡量的能力加速。</p>
+<p>相关的一个理由是：ECI、MCI 和时间范围这类能力尺度，对细致的统计假设比较敏感，或者严重依赖少数已经接近饱和的基准。</p>
+<p>METR 在这件事上没有形成共识，内部仍有明显分歧。有些解释意味着，OpenAI 这份预训练加速数据，会让人预期未来六个月出现覆盖面更广的现实世界能力加速。他们在同步发出的帖子里也写了同样的判断：如果预训练损失更好地度量模型的底层智能，未来六个月可能会看到能力上的大幅跃迁。</p>
+<p>据他们所知，此前还没有前沿开发者公布过，自己连续多年的前沿模型在同一份固定留出集上的预训练损失如何变化。这类信息通常被视为高度商业敏感。但他们认为，公布预训练损失，对公众理解 AI 研发是否会加速非常有价值。他们鼓励所有 AI 开发者都这样做，并指出微软后来已经用 OpenAI 的数据集，为自己的模型做了同样的事。他们还希望各方补充更多背景，好让外部研究者看清加速有多大、是什么在推动，以及它会不会持续，甚至自我加强。</p>
+<p>他们点名最想看到的三类信息。</p>
+<p>一类是其他留出数据集上的对数困惑度。单一语料上的损失，不一定代表其他类型文本上的进展。OpenAI 的图测的是来自内部代码库的语料，最近的配方或数据可能更有助于这类文本，比如代码，而对其他文本帮助较小；代码库里的一小部分也可能漏进了训练数据。如果能在很不一样的留出集上看到对数困惑度，比如书籍语料，会更有助于判断这条趋势是否稳健。他们建议，这些额外留出集最好来自 2022 年之前，以免混入 AI 生成的文本；最好覆盖代码、科学写作和散文等不同类型。最终，这些留出语料可以由第三方维护，以便比较不同开发者的预训练损失趋势。</p>
+<p>一类是每个模型预训练结束的大致日期。按公开发布日期画点，未必能抓住预训练进度真正发生的时间：对数困惑度是基座模型的性质，基座模型可能在发布前几个月就已经训练结束。如果预训练结束和发布之间的时滞随时间缩短，图上看到的加速会比实际情况更陡，反过来则更缓。更重要的是，知道这段时滞，才有助于判断 AI 提振到底贡献了多少：不管模型何时发布，如果它的预训练发生在研究者几乎还没用 AI 智能体的时候，就不能把预训练收益算到 AI 智能体头上。</p>
+<p>还有一类是预训练算力、人力开支和实验算力如何随时间变化。损失降低可能来自训练算力增加、人力或实验算力投入增加，或 AI 辅助带来的提振。有些因素意味着这可能只是一次性跳升，有些则意味着它可能持续；如果很大一部分来自 AI 提振，加速还可能自我加强。要分清这些，就需要知道相关时段里这些资源是怎么增长的。</p>
+<p>脚注里还有一个换算。如果假定 OpenAI 的模型都落在同一条缩放定律上，而且不可约损失在 0.3 到 0.6 之间，那么把对数困惑度换成“有效算力”，也就是单一固定配方要达到某个损失值所需的算力，2026 年初以来有效算力的年增速，按数量级计算，大约是 2022 到 2025 年的 8 到 10 倍。他们立刻写明，这个假定并不现实，因为更新的配方很可能遵循不同的缩放定律。</p>
+<p>如果要判断这条变陡的曲线会不会变成现实世界里的能力加速，先看开发者会不会补上其他留出集上的损失、预训练结束的日期，以及算力、人力和实验算力的变化，不要把“7 倍”直接外推。在这些材料补齐之前，METR 自己也没有统一答案。</p>
+</div></section>
+<section class="reader-panel" id="original" data-reader-panel="original" aria-label="原文">
+<h2 class="section-heading">原文</h2><h3 class="original-title">Interpreting a recent acceleration in pretraining loss</h3>
+<div class="original-media">
+<figure class="media-figure" data-media-id="fig_logloss_hinge"><div class="media-frame"><img src="https://metr.org/assets/images/pretraining-loss-acceleration/logloss_hinge.png" data-original-src="https://metr.org/assets/images/pretraining-loss-acceleration/logloss_hinge.png" alt="Scatter plot of log-perplexity on OpenAI&#x27;s held-out dataset against model release date, from GPT-3.5 (2022) to 2026 models, with a two-segment linear fit. From 2022 to early 2026 log-perplexity falls slowly (about 0.022 per year); after a breakpoint in February 2026 it falls about 0.156 per year, 7.1 times steeper. OpenAI&#x27;s internal model is shown as a hollow square and is not used in the fit." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://metr.org/blog/2026-11-24-interpreting-a-recent-acceleration-in-pretraining-loss/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="fig_schematic_expected"><div class="media-frame"><img src="https://metr.org/assets/images/pretraining-loss-acceleration/schematic_expected.png" data-original-src="https://metr.org/assets/images/pretraining-loss-acceleration/schematic_expected.png" alt="Illustrative schematic with fake data. Log-perplexity against time, with dotted lines for a few possible loss floors above zero and a dashed curve for each showing the default expectation: progress slows as the loss approaches its floor. The observed 2026 pattern instead shows progress speeding up, with the most recent points falling below all of the dashed curves. A hard floor at zero is marked." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://metr.org/blog/2026-11-24-interpreting-a-recent-acceleration-in-pretraining-loss/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div>
+<div class="prose" lang="en"><h1>Interpreting a recent acceleration in pretraining loss</h1>
+<p>Ajeya Cotra, Jean-Stanislas Denain, and Tom Cunningham</p>
+<p>November 24, 2026</p>
+<p>OpenAI recently published the base-model log-perplexity of 13 models it has trained since GPT-3.5, measured on a fixed held-out dataset sourced from its own codebase. It shows a very striking acceleration in pretraining loss: since early 2026, it has been falling about seven times faster than it was from 2022 through 2025.</p>
+<p><img alt="Scatter plot of log-perplexity on OpenAI&#x27;s held-out dataset against model release date, from GPT-3.5 (2022) to 2026 models, with a two-segment linear fit. From 2022 to early 2026 log-perplexity falls slowly (about 0.022 per year); after a breakpoint in February 2026 it falls about 0.156 per year, 7.1 times steeper. OpenAI&#x27;s internal model is shown as a hollow square and is not used in the fit." decoding="async" loading="lazy" referrerpolicy="no-referrer" src="https://metr.org/assets/images/pretraining-loss-acceleration/logloss_hinge.png"></p>
+<p>If the current pace holds, OpenAI would cover the drop in log-perplexity from GPT-3.5 to GPT-4.1, which took three years, in about six and a half months. This acceleration is even more striking because progress in loss should get harder over time: text is never perfectly predictable, so the loss can't fall below some floor, and gains typically become smaller as models approach it. Under standard scaling laws, each tenfold increase in compute buys a smaller drop in loss than the last, so naively we would expect progress in loss to slow down over time (see figure below).</p>
+<p><img alt="Illustrative schematic with fake data. Log-perplexity against time, with dotted lines for a few possible loss floors above zero and a dashed curve for each showing the default expectation: progress slows as the loss approaches its floor. The observed 2026 pattern instead shows progress speeding up, with the most recent points falling below all of the dashed curves. A hard floor at zero is marked." decoding="async" loading="lazy" referrerpolicy="no-referrer" src="https://metr.org/assets/images/pretraining-loss-acceleration/schematic_expected.png"></p>
+<p>Among METR staff there remains active discussion on how to interpret this dramatic acceleration in pretraining progress, and how to reconcile it with the lack of a comparable acceleration in benchmark scores of OpenAI's models, e.g. as reflected in Epoch's ECI.</p>
+<p>Concretely, it remains arguable how much this new information should change our forecasts of future AI capabilities. The following considerations are important:</p>
+<ol>
+<li>
+<p>It is possible that the data released overstates true progress in pretraining, e.g. through various types of overfitting. More data would help substantially here.</p>
+</li>
+<li>
+<p>It is possible that benchmark scores are the best measure of real-world capabilities, and pretraining perplexity is only informative as an input. This implies the new data showing acceleration in pretraining progress would not substantially change our forecasts of future capabilities. However, to the extent that AI contributed to the acceleration in pretraining, this gives us a sign of AI's likely future contribution to all parts of the model-training pipeline.</p>
+</li>
+<li>
+<p>It is possible that pretraining perplexity reflects a fundamentally deeper measure of model capability than the typical benchmarks used to evaluate models. Many AI researchers treat pretraining perplexity in this way, and expect that OpenAI's rapid acceleration in pretraining will be followed by an acceleration in capabilities measured by real-world impact.</p>
+</li>
+</ol>
+<p>There remain substantial disagreements on how much this information should modify our projections of the future path of capabilities, and METR does not have a consensus view on this. Some interpretations imply that OpenAI's data on acceleration in pretraining should make us expect a broad-based acceleration in real-world AI capabilities over the next six months.</p>
+<p>To our knowledge, no frontier developer had previously published how the pretraining loss of its successive frontier models has changed over multiple years on a fixed held-out dataset. This information is typically considered highly commercially sensitive. However, we think publishing information about pretraining loss is very valuable for informing the public about the prospect of AI R&amp;D acceleration. We encourage all AI developers to do the same, as Microsoft has since done for its own models using OpenAI's dataset, and to share additional context that would let external researchers better understand the degree of acceleration, what's driving it, and whether we should expect it to continue and/or compound.</p>
+<p>The following would be especially informative:</p>
+<ul>
+<li>
+<p>Log-perplexity on other held-out datasets. Loss measured on a single corpus may not capture progress on other kinds of text. OpenAI's plot, for example, reports loss on a corpus sourced from its own internal codebase. Recent recipes or data could help on that kind of text (e.g. coding) more than on others, or small parts of the codebase could have leaked into training data. Log-perplexity on other very different held-out datasets (e.g. a corpus of books) would be informative about the robustness of this trend. Eventually, these held-out corpora could be maintained by a third party, making it possible to compare trends in pretraining loss across AI developers.</p>
+</li>
+<li>
+<p>The rough date that the pretraining run ended for each model. Plotting models at their public release dates may not capture when pretraining progress happened: log-perplexity is a property of the base model, and base models could be finished months before release. If the lag between the end of the pretraining run and model release shrank over time, the acceleration in loss would be smaller than the plot suggests (and vice versa). More importantly, knowing the lag helps us determine how much AI uplift contributed to the pretraining gains: regardless of when a model was released, we can't attribute its pretraining gains to AI agents if its pretraining happened when researchers barely used AI agents.</p>
+</li>
+<li>
+<p>How pretraining compute, labor spending, and experiment compute changed over time. Lower pretraining loss could be attributable to a number of factors: for example, increased training compute, increased labor or experimental compute spending, or increased uplift from AI assistance. Some of these factors imply that we should expect the growth to be a one-time spike, while others imply that we should expect it to continue; if it is substantially attributable to AI uplift, the acceleration could compound. To understand this, it would be helpful to have a sense of how these resources were growing in the relevant time period.</p>
+</li>
+</ul>
+<h2>Footnotes</h2>
+<ol>
+<li>
+<p>One way to see this is to convert log-perplexity into "effective compute": the compute that a single fixed recipe would need to reach a given loss value. If we assumed that all of OpenAI's models are on the same scaling law with irreducible loss between 0.3 and 0.6, effective compute would have grown roughly 8 to 10 times faster since early 2026 than in 2022–2025, measured in orders of magnitude per year. However, that assumption is unrealistic, since newer recipes likely follow different scaling laws.</p>
+</li>
+<li>
+<p>For example, architectural changes that spend more computation per token, such as looped transformers, might lower perplexity more than they improve downstream capabilities, since standard models could reach similar capabilities after post-training by reasoning in a chain of thought.</p>
+</li>
+<li>
+<p>A footnote in OpenAI's post is consistent with AI playing a small role at the start of the acceleration, but a larger role currently: "We attribute it mostly to the outcomes of long term research and compute investments, and only in a smaller part to automation. However, for the most recent models, we have already seen meaningful design contributions coming from AI." Similarly, METR's recent assessment of AI R&amp;D acceleration at Anthropic found that the acceleration in late 2025 was likely influenced by non-AI factors, but estimated that "a majority (perhaps ≈80%) of the current (October 2026) acceleration is due to AI."</p>
+</li>
+<li>
+<p>A related argument why this data on pretraining acceleration should modify our forecasts of real-world capabilities is that our scales of capability, such as ECI, MCI, and time horizon, are sensitive to delicate statistical assumptions, or rely heavily on a few benchmarks that are close to saturation.</p>
+</li>
+<li>
+<p>Many other kinds of information would also help, but we have focused on a few numbers that we expect companies already collect and should be relatively simple to share.</p>
+</li>
+<li>
+<p>The other held-out datasets should date from before 2022, so that they don't contain any AI-generated text. Ideally, they would cover a variety of text types, such as code, scientific writing, and prose, to show how much of the trend on the original held-out set reflects progress on code specifically.</p>
+</li>
+</ol></div>
+</section>
+<footer class="source-box"><span>内容来自原作者；中文为乔木风格改写，非逐字翻译。</span><div><a href="https://metr.org/blog/2026-11-24-interpreting-a-recent-acceleration-in-pretraining-loss/" target="_blank" rel="noopener noreferrer">打开原文 ↗</a><a href="https://x.com/METR_Evals/status/2125372372039741753" target="_blank" rel="noopener noreferrer">相关链接 ↗</a></div></footer>
+</article></body></html>
