@@ -1,5 +1,35 @@
 [
   {
+    "id": "anthropic-neuron-basis-applications",
+    "date": "2026-11-23",
+    "title": "23个遗忘检查点里，有14个仍把正确答案排在第一",
+    "dek": "同一组Anthropic Fellows把神经元用到检测、引导和审计上。没有标注时，检测总体好过文本搜索；在58个藏了行为的微调上，带读出的审计正确率是75%，只看输出是40%。",
+    "url": "/a/anthropic-neuron-basis-applications",
+    "source_url": "https://alignment.anthropic.com/2026/neuron-basis-applications/",
+    "tags": [
+      "Anthropic",
+      "interpretability",
+      "unlearning",
+      "safety",
+      "Fellows"
+    ]
+  },
+  {
+    "id": "anthropic-neuron-basis-theory",
+    "date": "2026-11-23",
+    "title": "一次激活同时写入两个无关概念的情况，大约只占1%或更少",
+    "dek": "Anthropic Fellows在四个开源权重模型里复查神经元，发现它们很少一次加入两个无关概念，输出方向在大部分层里含义大致固定，事实虽由许多神经元分担，但仍可读。",
+    "url": "/a/anthropic-neuron-basis-theory",
+    "source_url": "https://alignment.anthropic.com/2026/neuron-basis-theory/",
+    "tags": [
+      "Anthropic",
+      "interpretability",
+      "neurons",
+      "alignment",
+      "Fellows"
+    ]
+  },
+  {
     "id": "metr-pretraining-loss-acceleration",
     "date": "2026-11-24",
     "title": "按现在的速度，GPT-3.5到GPT-4.1三年的损失降幅，大约六个半月就能走完",

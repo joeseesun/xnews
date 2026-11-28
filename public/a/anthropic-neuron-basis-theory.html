@@ -1,0 +1,1464 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="referrer" content="no-referrer">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>一次激活同时写入两个无关概念的情况，大约只占1%或更少 · X News</title>
+<meta name="description" content="Anthropic Fellows在四个开源权重模型里复查神经元，发现它们很少一次加入两个无关概念，输出方向在大部分层里含义大致固定，事实虽由许多神经元分担，但仍可读。">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#fffefa">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="X News">
+<meta property="og:title" content="一次激活同时写入两个无关概念的情况，大约只占1%或更少 · X News">
+<meta property="og:description" content="Anthropic Fellows在四个开源权重模型里复查神经元，发现它们很少一次加入两个无关概念，输出方向在大部分层里含义大致固定，事实虽由许多神经元分担，但仍可读。">
+<meta property="og:url" content="https://xnews.qiaomu.ai/a/anthropic-neuron-basis-theory">
+<link rel="canonical" href="https://xnews.qiaomu.ai/a/anthropic-neuron-basis-theory">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="一次激活同时写入两个无关概念的情况，大约只占1%或更少 · X News">
+<meta name="twitter:description" content="Anthropic Fellows在四个开源权重模型里复查神经元，发现它们很少一次加入两个无关概念，输出方向在大部分层里含义大致固定，事实虽由许多神经元分担，但仍可读。">
+<meta property="og:image" content="https://alignment.anthropic.com/2026/neuron-basis-theory/fig1.png">
+<meta name="twitter:image" content="https://alignment.anthropic.com/2026/neuron-basis-theory/fig1.png">
+<meta property="article:published_time" content="2026-11-28T08:29:00+08:00">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://xnews.qiaomu.ai/#publisher", "name": "X News", "url": "https://xnews.qiaomu.ai/", "description": "海外创始人长文与 AI 视频的中文改写选刊"}, {"@type": "WebSite", "@id": "https://xnews.qiaomu.ai/#website", "name": "X News", "url": "https://xnews.qiaomu.ai/", "inLanguage": "zh-CN", "publisher": {"@id": "https://xnews.qiaomu.ai/#publisher"}}, {"@type": "Article", "@id": "https://xnews.qiaomu.ai/a/anthropic-neuron-basis-theory#article", "url": "https://xnews.qiaomu.ai/a/anthropic-neuron-basis-theory", "mainEntityOfPage": {"@id": "https://xnews.qiaomu.ai/a/anthropic-neuron-basis-theory#page"}, "headline": "一次激活同时写入两个无关概念的情况，大约只占1%或更少", "description": "Anthropic Fellows在四个开源权重模型里复查神经元，发现它们很少一次加入两个无关概念，输出方向在大部分层里含义大致固定，事实虽由许多神经元分担，但仍可读。", "inLanguage": "zh-CN", "datePublished": "2026-11-28T08:29:00+08:00", "author": {"@id": "https://xnews.qiaomu.ai/#publisher"}, "publisher": {"@id": "https://xnews.qiaomu.ai/#publisher"}, "isBasedOn": {"@type": "CreativeWork", "url": "https://alignment.anthropic.com/2026/neuron-basis-theory/", "name": "Returning to the Neuron Basis for Interpretability, Part 1: Answering Three Objections", "datePublished": "2026-11-23T00:00:00+00:00"}, "citation": "https://alignment.anthropic.com/2026/neuron-basis-theory/", "keywords": ["Anthropic", "interpretability", "neurons", "alignment", "Fellows"], "image": ["https://alignment.anthropic.com/2026/neuron-basis-theory/fig1.png"]}, {"@type": "WebPage", "@id": "https://xnews.qiaomu.ai/a/anthropic-neuron-basis-theory#page", "url": "https://xnews.qiaomu.ai/a/anthropic-neuron-basis-theory", "name": "一次激活同时写入两个无关概念的情况，大约只占1%或更少 · X News", "description": "Anthropic Fellows在四个开源权重模型里复查神经元，发现它们很少一次加入两个无关概念，输出方向在大部分层里含义大致固定，事实虽由许多神经元分担，但仍可读。", "inLanguage": "zh-CN", "isPartOf": {"@id": "https://xnews.qiaomu.ai/#website"}, "mainEntity": {"@id": "https://xnews.qiaomu.ai/a/anthropic-neuron-basis-theory#article"}}]}</script>
+<link rel="alternate" type="application/rss+xml" title="X News" href="/feed.xml">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-7 -7 58 58'%3E%3Crect x='-7' y='-7' width='58' height='58' rx='5' fill='%231b1d18'/%3E%3Cpath fill='%23fffefa' d='M2 0h11l29 44H31zM32 0h10L26 18l-5-7zM17 26l5 7-10 11H2z'/%3E%3C/svg%3E">
+<script>try{var t=localStorage.getItem('xn.theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
+<style data-source="/static/app.b7cfdefd4a1d.css">/* D · 影像刊 — see DESIGN.md. System fonts, real media, no left rail. */
+:root {
+  color-scheme:light;
+  --paper:#fffefa; --ink:#1b1d18; --muted:#62685a; --rule:#d8dccf;
+  --surface:#eef0e5; --sage:#dce3cc; --sage-ink:#293026; --focus:#315b3c;
+  --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC","Noto Sans CJK SC",sans-serif;
+  --ease:cubic-bezier(.2,0,0,1); --gutter:32px; --reader-bar:64px;
+  --control-border:#808675; --image-outline:#0000001a;
+  --contrast-surface:#1b1d18; --contrast-ink:#fffefa;
+}
+:root[data-theme="dark"] {
+  color-scheme:dark;
+  --paper:#20241e; --ink:#eef0e7; --muted:#b7c1af; --rule:#4b5842;
+  --surface:#30392a; --sage:#394631; --sage-ink:#eef0e7; --focus:#c0d9aa;
+  --control-border:#89957f; --image-outline:#ffffff1a;
+  --contrast-surface:#12180f; --contrast-ink:#eef0e7;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:130px;scrollbar-gutter:stable}
+body{margin:0;background:var(--paper);color:var(--ink);font:1rem/1.7 var(--sans);-webkit-font-smoothing:antialiased;letter-spacing:0}
+[hidden]{display:none!important}
+a{color:inherit;text-decoration:none}
+@media(hover:hover){a:hover{text-decoration:underline;text-underline-offset:.2em}}
+button{font:inherit;color:inherit;cursor:pointer}
+button:disabled{cursor:wait}
+button,a{-webkit-tap-highlight-color:transparent}
+
+:focus-visible{outline:3px solid var(--focus);outline-offset:4px}
+em,i{font-style:normal;font-weight:500}
+strong,b{font-weight:600}
+img{max-width:100%;height:auto}
+.sr-only,.skip:not(:focus){position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.skip:focus{position:fixed;z-index:100;top:8px;left:8px;background:var(--ink);color:var(--paper);padding:10px 16px}
+.site-header,.site-main,.site-footer{width:min(100% - var(--gutter)*2,1320px);margin-inline:auto}
+.site-header{min-height:118px;display:flex;align-items:center;justify-content:space-between;gap:24px 32px;flex-wrap:wrap;padding-block:24px;border-bottom:1px solid var(--ink)}
+.brand{display:flex;align-items:center;gap:26px;flex:none}
+.brand:hover{text-decoration:none}
+.brand-wordmark{display:flex;align-items:baseline;gap:7px;line-height:1}
+.brand-mark{width:43px;height:43px;align-self:center;margin-top:2px}
+.brand-name{font:700 3.875rem/.95 Georgia,"Times New Roman",serif;letter-spacing:-.065em}
+.brand-period{color:var(--focus)}
+.brand-sub{font-size:0.9375rem;font-weight:500;line-height:1.5;border-inline-start:1px solid var(--rule);padding-inline-start:25px;letter-spacing:.12em}
+.brand-sub>span{display:block;font-size:0.75rem;line-height:1.6;font-weight:400;letter-spacing:.04em;color:var(--muted);margin-top:5px}
+.header-side{display:flex;align-items:center;gap:30px}
+.site-nav{display:flex;align-items:center;gap:30px;font-size:0.875rem}
+.site-nav a{min-height:44px;display:flex;align-items:center;gap:6px;position:relative}
+.site-nav a[aria-current="page"]{font-weight:600}
+.site-nav a[aria-current="page"]::after{content:"";position:absolute;inset-inline:0;bottom:3px;height:2px;background:var(--ink)}
+.icon-button{width:44px;height:44px;border:1px solid var(--control-border);border-radius:50%;display:inline-grid;place-items:center;background:transparent;flex:none}
+.site-main{min-height:55vh;padding-bottom:44px}
+.edition-line{min-height:160px;display:flex;align-items:center;justify-content:space-between;gap:24px 32px;flex-wrap:wrap;padding-block:28px}
+.edition-line h1{font-size:1.875rem;line-height:1.4;font-weight:600;margin:8px 0 10px;text-wrap:balance}
+.edition-line p{font-size:0.875rem;line-height:1.7;color:var(--muted);margin:0}
+.edition-line .edition-kicker{font-size:0.6875rem;letter-spacing:.1em;color:var(--ink)}
+.edition-kicker span{margin-inline:8px;color:var(--muted)}
+.edition-meta{text-align:end;font-variant-numeric:tabular-nums;display:flex;flex-direction:column;gap:6px;flex:none}
+.edition-label{font-size:0.75rem;color:var(--muted)}
+.edition-meta time{font:400 1.5rem/1.25 Georgia,"Times New Roman",serif;letter-spacing:.02em}
+.edition-note{font-size:0.75rem;color:var(--muted)}
+/* A quiet editorial toolbar; every control remains labelled and keyboard accessible. */
+.discovery{margin-bottom:20px}
+.discovery-top,.discovery-bottom{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.discovery-top{flex-wrap:wrap;padding-block:16px;border-block:1px solid var(--rule)}
+.filter-group{display:flex;gap:8px;flex-wrap:wrap}
+.filter-group button{min-height:44px;padding:8px 16px;display:flex;align-items:center;gap:9px;font-size:0.875rem;background:transparent;border:1px solid transparent;border-radius:3px}
+.filter-group button span{font-size:0.6875rem;font-variant-numeric:tabular-nums;opacity:.8}
+.filter-group button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.search-field{display:flex;align-items:center;gap:10px;width:min(340px,42%);min-height:44px;border:1px solid var(--control-border);border-radius:3px;padding-inline:13px 0;color:var(--muted)}
+.search-field svg{flex:none}
+.search-field input{font:400 0.875rem/1.5 var(--sans);color:var(--ink);background:transparent;border:0;min-width:0;width:100%;padding:11px 0;border-radius:0}
+.search-field input::-webkit-search-cancel-button{display:none}
+.search-field input::placeholder{color:var(--muted);opacity:1}
+.search-field:focus-within{outline:2px solid var(--focus);outline-offset:3px}
+.search-field input:focus-visible{outline:none}
+.search-field button{border:0;background:transparent;width:44px;min-height:44px;flex:none;font-size:1.375rem}
+.discovery-bottom{flex-wrap:wrap;padding-top:12px;min-height:54px}
+.discovery-bottom p{margin:0;font-size:0.75rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.view-switch{display:flex;gap:4px}
+.view-switch button{display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:6px 10px;border:1px solid transparent;border-radius:3px;background:transparent;color:var(--muted);font-size:0.75rem}
+.view-switch button[aria-pressed="true"]{color:var(--ink);background:var(--surface);border-color:var(--control-border)}
+.search-empty{padding:48px 20px 72px;text-align:center;border-top:1px solid var(--rule)}
+.empty-symbol{font:400 3rem/1 Georgia,serif;color:var(--muted);margin:0 0 20px}
+.search-empty h2{font-size:1.375rem;font-weight:500;margin:0 0 12px}
+.search-empty p{color:var(--muted);overflow-wrap:anywhere}
+.search-empty .reset-button{margin:12px 0 0}
+.news-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:28px 24px;align-items:stretch}
+.news-card{grid-column:span 4;min-width:0;display:flex;flex-direction:column;border:1px solid var(--rule);background:var(--paper);position:relative;overflow:hidden}
+.news-card.is-featured{grid-column:span 8}
+.news-card.is-wide{grid-column:span 8}
+.card-link{display:flex;flex-direction:column;height:100%;min-width:0}
+.card-link:hover{text-decoration:none}
+.cover{position:relative;overflow:hidden;background:var(--surface);min-height:0;aspect-ratio:16/9;isolation:isolate}
+.cover img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;z-index:1;transition:transform 180ms var(--ease)}
+.is-featured .cover{min-height:0;aspect-ratio:2.7;flex:none}
+.is-featured .card-body{flex:0 0 auto}
+.is-wide .cover{aspect-ratio:2/1}
+.cover-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;background:var(--surface);color:var(--ink);z-index:0;overflow:hidden}
+.cover-word{font-size:clamp(2.75rem,5.3vw,5.25rem);font-weight:500;line-height:1.1;overflow-wrap:anywhere;max-width:100%;text-align:left}
+.cover-badge{position:absolute;z-index:2;left:16px;bottom:16px;background:#1b1d18dc;color:#fffefa;padding:5px 10px;font-size:0.75rem;line-height:1.6;border:1px solid #fffefa60}
+.card-body{padding:22px 24px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.card-meta{display:flex;overflow-wrap:anywhere;align-items:flex-start;justify-content:space-between;gap:14px;font-size:0.75rem;line-height:1.7;color:var(--muted);font-variant-numeric:tabular-nums}
+.card-meta time{white-space:nowrap;flex:none}
+.card-title{font-size:1.3125rem;font-weight:600;line-height:1.6;margin:0;text-wrap:pretty;overflow-wrap:anywhere}
+.is-featured .card-title{font-size:clamp(1.5625rem,2.2vw,2rem);line-height:1.5}
+.card-dek{font-size:0.875rem;line-height:1.85;color:var(--muted);margin:0;text-wrap:pretty}
+.card-end{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;font-size:0.75rem;color:var(--muted);margin-top:auto;padding-top:16px}
+.card-read{display:inline-flex;align-items:center;gap:10px;color:var(--ink);white-space:nowrap}
+.card--text.tone-ink .card-read{color:var(--contrast-ink)}
+.card-link:focus-visible{outline-offset:-4px}
+.tone-ink .card-link:focus-visible{outline-color:var(--contrast-ink)}
+.card-arrow{font-size:1.3125rem;line-height:1}
+.card--text .type-cover{min-height:140px;padding:24px 24px 16px;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:20px;overflow:hidden}
+.type-index{font-size:0.625rem;letter-spacing:.12em;line-height:1.5;font-variant-numeric:tabular-nums}
+.type-dot{color:var(--focus)}
+.tone-ink .type-dot{color:var(--contrast-ink)}
+.card--text .cover-word{font:400 clamp(2.25rem,3.5vw,3.375rem)/1.15 Georgia,"Times New Roman",serif;letter-spacing:-.03em}
+.card--text .card-body{padding-top:12px}
+.card--text{align-self:stretch}
+.card--text.tone-ink{background:var(--contrast-surface);color:var(--contrast-ink);border-color:var(--contrast-surface)}
+.card--text.tone-ink .card-meta,.card--text.tone-ink .card-dek,.card--text.tone-ink .card-end{color:var(--contrast-ink);opacity:.85}
+.card--text.tone-sage{background:var(--sage);color:var(--sage-ink);border-color:var(--sage)}
+.card--text.tone-sage .card-meta,.card--text.tone-sage .card-dek,.card--text.tone-sage .card-end{color:var(--sage-ink)}
+.cover-error-link{display:none;font-size:0.875rem;padding:0 22px 18px;text-decoration:underline;text-underline-offset:.2em}
+.media-failed .cover-error-link{display:block}
+.media-failed .cover img{display:none}
+.empty-state{padding:64px 0;max-width:40rem}
+.empty-state h1{font-size:2rem;font-weight:500}
+.empty-state p{color:var(--muted)}
+.site-footer{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:20px 0 32px;border-top:1px solid var(--ink);font-size:0.875rem;color:var(--muted)}
+.footer-links{display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+.footer-links a{display:inline-flex;align-items:center;min-height:44px}
+/* Shared standalone article and progressive full-screen reader. */
+.article-reader{max-width:960px;margin:0 auto;padding:30px 0 60px;min-width:0}
+.article-back{display:inline-flex;min-height:44px;align-items:center;gap:8px;font-size:0.875rem;color:var(--muted);margin-bottom:20px}
+.article-header{max-width:900px;margin:0 auto 24px}
+.article-kicker{font-size:0.875rem;color:var(--muted);margin:0 0 12px}
+.article-header h1{font-size:clamp(1.8125rem,3.8vw,3rem);line-height:1.42;font-weight:500;margin:0 0 18px;text-wrap:pretty;overflow-wrap:anywhere}
+.article-dek{font-size:1.125rem;line-height:1.85;color:var(--muted);margin:0 0 22px;max-width:42rem}
+.article-meta{display:flex;gap:8px 22px;flex-wrap:wrap;color:var(--muted);font-size:0.875rem;padding-top:14px;border-top:1px solid var(--rule);font-variant-numeric:tabular-nums}
+.reader-tabs{display:flex;align-items:center;gap:8px 16px;flex-wrap:wrap;position:sticky;top:0;z-index:3;background:var(--paper);border-block:1px solid var(--rule);padding:8px 0;margin:0 auto 30px;max-width:900px}
+.reader-tabs [data-tabs]{display:flex;flex-wrap:wrap;gap:6px;min-width:0}
+.reader-tabs a{display:inline-flex;align-items:center;min-height:44px;padding:6px 14px;font-size:0.875rem;border:1px solid transparent;border-radius:3px;white-space:nowrap}
+.reader-tabs a[aria-selected="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.reader-source{margin-left:auto;font-size:0.875rem!important}
+.reader-panel{max-width:42rem;margin:0 auto 44px;scroll-margin-top:130px}
+.section-heading{font-size:1.25rem;font-weight:500;margin:0 0 20px}
+.reader-enhanced .section-heading{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);margin:0;padding:0}
+.original-title{font-size:1.1875rem;line-height:1.7;margin:0 0 22px;font-weight:500;overflow-wrap:anywhere}
+.completeness-note{font-size:0.875rem;line-height:1.85;color:var(--muted);background:var(--surface);border:1px solid var(--rule);padding:12px 16px;margin:0 0 24px}
+.prose{min-width:0;font-size:1.125rem;line-height:1.95;overflow-wrap:anywhere;text-wrap:pretty}
+.prose pre{max-width:100%;overflow-x:auto;margin:1.5em 0;padding:1rem;border:1px solid var(--rule);background:var(--surface);font-size:.875rem;line-height:1.65;tab-size:4;white-space:pre;overflow-wrap:normal;text-wrap:initial}
+.prose pre code{display:block;width:max-content;min-width:100%;padding:0;border:0;border-radius:0;background:none;font-size:inherit;line-height:inherit;white-space:pre;overflow-wrap:normal}
+/* Keep wide source tables inside the reading column without compressing every cell. */
+.prose table{display:block;width:fit-content;max-width:100%;overflow-x:auto;border-collapse:collapse;margin:1.5em 0;font-size:.9375rem;line-height:1.65;tab-size:4;text-wrap:wrap;font-variant-numeric:tabular-nums}
+.prose th,.prose td{padding:.7em .85em;border:1px solid var(--rule);text-align:left;vertical-align:top;min-width:5.5rem;max-width:24rem}
+.prose :is(th,td):first-child{min-width:7.5rem}
+.prose th{font-weight:600;background:var(--surface)}
+.prose :is(th,td)[align="left"]{text-align:left}
+.prose :is(th,td)[align="center"]{text-align:center}
+.prose :is(th,td)[align="right"]{text-align:right}
+.prose tbody tr:nth-child(even){background:color-mix(in srgb,var(--surface) 45%,transparent)}
+.prose caption{text-align:left;font-size:.875rem;line-height:1.6;color:var(--muted);padding-bottom:.65em}
+.prose img{max-width:100%;height:auto;vertical-align:middle}
+.prose p,.prose li{font-size:inherit;line-height:inherit;margin:0 0 1em}
+.prose :is(th,td) :is(p,li){font-size:inherit;line-height:inherit}
+.prose :is(th,td)>:last-child{margin-bottom:0}
+.prose h1,.prose h2,.prose h3{font-size:1.5625rem;font-weight:500;line-height:1.6;margin:1.8em 0 .7em}
+.prose h4,.prose h5,.prose h6{font-size:1.125rem;font-weight:600;line-height:1.65;margin:1.6em 0 .6em}
+.prose ul,.prose ol{padding-left:1.4em;margin:0 0 1.2em}
+.prose li{margin-bottom:.45em}
+.prose li>:is(ul,ol){margin:.45em 0 .6em}
+.prose li>p{margin-bottom:.6em}
+.prose li>:last-child{margin-bottom:0}
+.prose blockquote{margin:1.5em 0;padding:18px 22px;border:1px solid var(--rule);background:var(--surface)}
+.prose blockquote>:first-child{margin-top:0}
+.prose blockquote>:last-child{margin-bottom:0}
+.prose blockquote blockquote{margin:1em 0}
+.prose a{font-weight:500;text-decoration:underline;text-underline-offset:.22em}
+.prose hr{border:0;border-top:1px solid var(--rule);margin:2em 0}
+.prose code{font-family:ui-monospace,monospace;font-size:.9em;background:var(--surface);padding:2px 4px;border-radius:3px;white-space:break-spaces}
+.prose details{margin:1.3em 0;padding:.8em 1em;border:1px solid var(--rule)}
+.prose summary{cursor:pointer;font-weight:600;line-height:1.6}
+.prose details[open]>summary{margin-bottom:.8em}
+.prose details>:last-child{margin-bottom:0}
+.prose kbd{font-family:ui-monospace,monospace;font-size:.85em;padding:.1em .35em;border:1px solid var(--rule);border-bottom-width:2px;border-radius:3px;background:var(--surface)}
+.prose sup,.prose sub{font-size:.75em;line-height:0;position:relative;vertical-align:baseline}
+.prose sup{top:-.5em}.prose sub{bottom:-.2em}
+.original-media{display:grid;gap:24px;margin:24px 0 28px}
+.media-figure{margin:0;min-width:0}
+.media-frame{background:var(--surface);border:1px solid var(--rule);overflow:hidden}
+.media-frame img,.media-frame video{max-width:100%;height:auto;max-height:80dvh;display:block;margin:auto}
+.media-frame audio{display:block;width:100%;min-height:54px}
+.media-frame .yt{position:relative;aspect-ratio:16/9}
+.media-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#1b1d18}
+.media-figure figcaption{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 18px;font-size:0.875rem;line-height:1.8;color:var(--muted);padding-top:8px}
+.media-figure figcaption a{text-decoration:underline;text-underline-offset:.2em}
+.media-error{font-size:0.875rem;color:var(--muted);margin:0;padding:18px}
+.source-box{max-width:42rem;margin:24px auto 0;border-top:1px solid var(--rule);padding-top:22px;font-size:0.875rem;color:var(--muted);overflow-wrap:anywhere}
+.source-box a{display:inline-flex;align-items:center;min-height:44px;text-decoration:underline;color:var(--ink);margin-right:22px}
+.reader-sheet{position:fixed;inset:0;margin:0;padding:0;width:100%;max-width:none;height:100dvh;max-height:none;border:0;background:var(--paper);color:var(--ink);overflow:hidden}
+.reader-sheet::backdrop{background:#1b1d1870}
+.reader-sheet[open]{display:flex;flex-direction:column}
+.reader-sheet.sheet-fallback{z-index:60}
+.sheet-bar{min-height:var(--reader-bar);display:flex;flex-shrink:0;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:0 var(--gutter);border-bottom:1px solid var(--rule);background:var(--paper)}
+.sheet-close{min-height:44px;display:inline-flex;align-items:center;gap:12px;border:0;background:none;padding:6px 0;font-size:0.875rem}
+.sheet-close span{font-size:1.375rem}
+.sheet-brand{font-size:0.875rem;font-weight:500}
+.sheet-bar a{font-size:0.875rem;color:var(--muted);min-height:44px;display:flex;align-items:center}
+.sheet-scroll{height:calc(100dvh - var(--reader-bar));flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable;scroll-padding-top:130px;padding:0 var(--gutter)}
+.sheet-scroll .article-back{display:none}
+.sheet-scroll .article-reader{padding-top:35px}
+.sheet-scroll .reader-tabs{top:0}
+.sheet-status{max-width:44rem;margin:52px auto;min-width:0}
+.sheet-status h2{font-size:1.6875rem;line-height:1.5;font-weight:500;margin:0 0 18px}
+.sheet-status p{font-size:1rem;line-height:1.9;color:var(--muted)}
+.sheet-status a{display:inline-flex;align-items:center;min-height:44px;margin-right:18px;text-decoration:underline;text-underline-offset:.2em}
+.retry-button,.reset-button{display:inline-flex;align-items:center;min-height:44px;padding:8px 18px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);border-radius:3px;margin-right:18px}
+.skeleton-title{width:85%;height:38px;background:var(--surface);margin-bottom:14px}
+.skeleton-title.short{width:60%}
+.skeleton-line{height:16px;background:var(--surface);margin-top:20px}
+.skeleton-line.short{width:72%}
+body.sheet-open{overflow:hidden}
+.about-copy{max-width:42rem;margin:52px auto 72px}
+.about-copy h1{font-size:2.375rem;font-weight:500;line-height:1.4;margin:0 0 30px}
+/* Filtered results have equal weight; the opening spread remains asymmetric. */
+.news-grid.is-filtered .is-featured{grid-column:span 4}
+.news-grid.is-filtered .is-featured .cover{aspect-ratio:16/9}
+.news-grid.is-filtered .is-featured .card-title{font-size:1.3125rem}
+.news-grid[data-layout="list"]{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--rule)}
+.news-grid[data-layout="list"] .news-card{background:transparent;color:var(--ink);border:0;border-bottom:1px solid var(--rule);overflow:visible}
+.news-grid[data-layout="list"] .card-link{display:flex;flex-direction:row;gap:28px;padding:26px 0;align-items:center}
+.news-grid[data-layout="list"] .cover,.news-grid[data-layout="list"] .type-cover{display:none}
+.news-grid[data-layout="list"] .card-body{padding:0;gap:8px;flex:1;min-width:0}
+.news-grid[data-layout="list"] .card-title{font-size:1.3125rem;line-height:1.6}
+.news-grid[data-layout="list"] .card-meta,.news-grid[data-layout="list"] .card-dek,.news-grid[data-layout="list"] .card-end{color:var(--muted);opacity:1}
+.news-grid[data-layout="list"] .card-read{color:var(--ink)}
+.news-grid[data-layout="list"] .card-end{padding-top:2px}
+.news-grid[data-layout="list"] .card-link:focus-visible{outline-color:var(--focus);outline-offset:5px}
+.reading-position{display:flex;align-items:center;gap:12px;flex-basis:100%;color:var(--muted);font-size:0.6875rem;line-height:1.3}
+.reading-position span{min-width:4ch;text-align:end;font-variant-numeric:tabular-nums}
+.reading-position progress{appearance:none;display:block;width:100%;height:2px;border:0;background:var(--rule);color:var(--focus)}
+.reading-position progress::-webkit-progress-bar{background:var(--rule)}
+.reading-position progress::-webkit-progress-value{background:var(--focus)}
+.reading-position progress::-moz-progress-bar{background:var(--focus)}
+.cover img,.media-frame img{outline:1px solid var(--image-outline);outline-offset:-1px}
+@media(hover:hover){
+ .news-card:has(.card-link:hover){border-color:var(--muted)}
+ .card-link:hover .card-read{text-decoration:underline;text-underline-offset:4px}
+ .icon-button:hover,.filter-group button[aria-pressed="false"]:hover,.view-switch button[aria-pressed="false"]:hover{background:var(--surface)}
+ .site-nav a:hover{text-decoration:none;color:var(--focus)}
+}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+ .card-link:hover .cover img{transform:scale(1.025)}
+}
+@media(prefers-reduced-motion:no-preference){
+ .icon-button,.retry-button,.reset-button{transition:scale 150ms ease-out}
+ .icon-button:not(:disabled):active,.retry-button:not(:disabled):active,.reset-button:not(:disabled):active{scale:.96}
+}
+@media(max-width:1050px){
+ .brand-sub{display:none}
+ .news-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+ .news-card,.news-card.is-wide,.news-grid.is-filtered .is-featured{grid-column:span 1}
+ .news-card.is-featured{grid-column:span 1}
+ .is-featured .cover{aspect-ratio:16/9}
+ .is-featured .card-title{font-size:1.4375rem}
+ .edition-line h1{font-size:1.6875rem}
+}
+@media(max-width:680px){
+ :root{--gutter:20px;--reader-bar:58px}
+ .site-header{min-height:0;gap:22px;flex-wrap:wrap;padding:26px 0 15px}
+ .brand{gap:16px}
+ .brand-wordmark{gap:5px}
+ .brand-name{font-size:3.25rem}
+ .brand-mark{width:35px;height:35px}
+ .brand-sub{display:block;padding-inline-start:16px;font-size:0.8125rem}
+ .brand-sub>span{font-size:0.6875rem}
+ .header-side{width:100%;justify-content:space-between;gap:16px}
+ .site-nav{gap:28px;flex-wrap:wrap;font-size:0.8125rem}
+ .icon-button{width:40px;height:40px}
+ .edition-line{min-height:0;gap:16px;padding-block:22px}
+ .edition-line h1{font-size:1.5625rem;margin-top:10px}
+ .edition-line .edition-description{font-size:0.8125rem;max-width:24em;line-height:1.8}
+ .edition-meta{display:none}
+ .edition-line .edition-kicker{font-size:0.625rem}
+ .discovery-top{flex-wrap:wrap;gap:16px;padding-block:14px 16px}
+ .filter-group{gap:4px}
+ .filter-group button{padding-inline:13px;font-size:0.8125rem}
+ .search-field{width:100%}
+ .search-field input{font-size:1rem}
+ .discovery-bottom{gap:8px;align-items:center}
+ .discovery-bottom p{font-size:0.6875rem}
+ .view-switch button{font-size:0.6875rem;padding-inline:8px;gap:5px}
+ .view-switch svg{width:13px;height:13px}
+ .news-grid{grid-template-columns:minmax(0,1fr);gap:22px}
+ .news-card,.news-card.is-wide,.news-card.is-featured,.news-grid.is-filtered .is-featured{grid-column:auto;grid-row:auto}
+ .cover,.is-featured .cover,.is-wide .cover{aspect-ratio:16/9;min-height:0;flex:none}
+ .card-body{padding:20px;gap:12px}
+ .card-title,.is-featured .card-title,.news-grid.is-filtered .is-featured .card-title{font-size:1.375rem;line-height:1.6}
+ .card-dek{font-size:0.875rem}
+ .card-meta{font-size:0.75rem}
+ .card--text .type-cover{min-height:130px;padding:22px 20px 12px}
+ .card--text .cover-word{font-size:2.875rem}
+ .card-end{padding-top:12px}
+ .news-grid[data-layout="list"] .card-link{gap:16px;padding:22px 0;align-items:flex-start}
+ .news-grid[data-layout="list"] .cover,.news-grid[data-layout="list"] .type-cover{display:none}
+ .news-grid[data-layout="list"] .card-title{font-size:1.1875rem}
+ .site-main{padding-bottom:36px}
+ .site-footer{align-items:flex-start;flex-direction:column;gap:12px;padding-top:22px;font-size:0.75rem}
+ .footer-links{gap:26px}
+ .article-reader{padding-top:23px}
+ .article-back{margin-bottom:16px}
+ .article-header h1{font-size:1.8125rem;line-height:1.5}
+ .article-dek{font-size:1rem;line-height:1.9}
+ .reader-tabs{gap:4px;margin-bottom:24px;padding:7px 0}
+ .reader-tabs a{font-size:0.875rem;padding:6px 10px}
+ .reader-tabs .reader-source{font-size:0.8125rem!important;padding-inline-end:0}
+ .reader-panel{margin-bottom:28px}
+ .prose{font-size:1.0625rem;line-height:1.95}
+ .prose h1,.prose h2,.prose h3{font-size:1.4375rem;line-height:1.6}
+ .prose blockquote{padding:15px}
+ .sheet-bar{gap:10px}
+ .sheet-bar a{font-size:0.8125rem}
+ .sheet-brand{font-size:0.75rem}
+ .sheet-scroll .article-reader{padding-top:25px}
+ .sheet-status{margin-top:32px}
+ .about-copy{margin-top:32px}
+}
+@media(max-width:360px){
+ :root{--gutter:16px}
+ .brand-sub>span{font-size:0.6875rem;max-width:6em}
+ .site-nav{gap:22px}
+ .sheet-brand{display:none}
+ .reader-tabs a{padding-inline:8px;font-size:0.8125rem}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
+}
+@media print{
+ .site-header,.site-footer,.reader-tabs,.article-back,.sheet-bar{display:none!important}
+ .reader-panel[hidden]{display:block!important}
+ .site-main,.article-reader{width:100%;max-width:none}
+ .reader-sheet[open]{position:static;height:auto;overflow:visible}
+ .sheet-scroll{height:auto;overflow:visible;padding:0}
+}
+
+/* Source media remains part of the Chinese reading flow, not just the original tab. */
+.rewrite-source-media{margin:28px 0}
+.prose .source-media-heading{font-size:1.25rem;line-height:1.6;margin:0 0 12px}
+.prose .rewrite-source-media .completeness-note{font-size:0.875rem;line-height:1.8}
+.prose .media-error{font-size:0.875rem;line-height:1.8;margin:0}
+</style>
+<script defer src="https://umami.qiaomu.ai/script.js" data-website-id="31e0098c-6852-46b6-899c-11eed5ed16e1" data-domains="xnews.qiaomu.ai" data-exclude-search="true" data-exclude-hash="true"></script>
+</head>
+<body>
+<a class="skip" href="#main">跳到正文</a>
+<header class="site-header">
+  <a class="brand" href="/" aria-label="X News 海外发现首页"><span class="brand-wordmark" aria-hidden="true"><svg class="brand-mark" viewBox="0 0 44 44" fill="currentColor"><path d="M2 0h11l29 44H31zM32 0h10L26 18l-5-7zM17 26l5 7-10 11H2z"/></svg><span class="brand-name">News<span class="brand-period">.</span></span></span><span class="brand-sub">海外发现<span>英文原作 · 中文视角</span></span></a>
+  <div class="header-side"><nav class="site-nav" aria-label="主导航"><a href="/">精选</a><a class="archive-nav" href="/archive">往期</a><a href="/feed.xml" aria-label="订阅全文 RSS">订阅 RSS <span aria-hidden="true">↗</span></a></nav><button type="button" class="icon-button" id="theme-btn" aria-label="切换为暗色主题" aria-pressed="false"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16Z" fill="currentColor" stroke="none"/></svg></button></div>
+</header>
+<main class="site-main" id="main">
+<article class="article-reader" data-article-id="anthropic-neuron-basis-theory">
+<a class="article-back" href="/">← 返回选刊</a>
+<header class="article-header"><p class="article-kicker">Jasmine Shone, Lisa Dunlap / 文章</p><h1>一次激活同时写入两个无关概念的情况，大约只占1%或更少</h1><p class="article-dek">Anthropic Fellows在四个开源权重模型里复查神经元，发现它们很少一次加入两个无关概念，输出方向在大部分层里含义大致固定，事实虽由许多神经元分担，但仍可读。</p><div class="article-meta"><time datetime="2026-11-28">本站收录 2026年11月28日 · 周六</time><span>原文发布 2026年11月23日 · 周一</span><span>原作者：Jasmine Shone, Lisa Dunlap</span><span>中文改写：<a href="/about">X News · 乔木</a></span><span>Anthropic · interpretability · neurons · alignment · Fellows</span></div></header>
+<nav class="reader-tabs" aria-label="文章版本与来源"><div data-tabs><a href="#rewrite" id="tab-rewrite" data-view="rewrite">乔木改写</a><a href="#original" id="tab-original" data-view="original">原文</a></div><a class="reader-source" href="https://alignment.anthropic.com/2026/neuron-basis-theory/" target="_blank" rel="noopener noreferrer">原文链接 ↗</a><div class="reading-position" hidden><progress max="100" value="0" aria-label="当前版本阅读进度"></progress><span data-reading-percent aria-hidden="true">0%</span></div></nav>
+<section class="reader-panel" id="rewrite" data-reader-panel="rewrite" aria-label="乔木改写"><h2 class="section-heading">乔木改写</h2><div class="prose"><p>一次激活里，一个神经元同时往残差流里写入两个无关概念的情况，大约只占作者抽查样本的<strong>1%或更少</strong>。他们也找到了这类神经元的已知首批例子。</p>
+<p>这是Anthropic对齐博客2026年11月23日发布的系列文章上篇，标题是Returning to the Neuron Basis for Interpretability, Part 1: Answering Three Objections。研究在Anthropic Fellows Program中完成，作者是Jasmine Shone和Lisa Dunlap。署名里Shone名前有星号。Jasmine Shone公开简介写的是在Anthropic做研究；Lisa Dunlap公开简介写的是模型审计，以及此前在Berkeley的博士经历，文中没有另写她的当前雇主。Anthropic官方账号在11月24日把这项工作称为Anthropic Fellows研究。下篇把同一套方法用到检测、引导和审计上，本站另文介绍。</p>
+<p>作者要复核的，是近年让可解释性研究离开单个神经元的三条观察：一个神经元常在几类无关输入上激活；同一个概念在不同层里看起来会变；事实好像分散在许多神经元上。他们改看每个神经元对模型输出贡献了什么，而不只看是什么让它激活，并用关掉神经元、把输出向量搬到其他层、以及引导来检验假设。</p>
+<p>四个开源权重模型是Llama-3.1-8B-Instruct、Qwen3-8B、Qwen3-14B和OLMo-3-32B。结果覆盖<strong>8到32B</strong>参数，不能直接外推到更大模型。</p>
+<h2>把神经元看成带上下文开关的引导向量</h2>
+<p>一个SwiGLU MLP神经元从残差流算出一个标量激活，再把这个标量乘上一个固定向量，加回残差流。这个固定向量是下行投影的对应列，作者称为输出向量。激活可正可负，所以神经元可以加上+w或-w，两种符号可以表示不同意思，而且同一次激活加不了两种。门控关闭时，SiLU仍会漏过很小的激活，最小值大约是**-0.28**。作者只把门控打开时出现的符号，算作这个神经元真正使用的符号。</p>
+<p>他们用Gurnee等人2026年的J-lens来读输出向量：看这个方向最会提高哪些词的输出logit。读出是与输出向量余弦最高的那些词。可言语化部分是用至多<strong>25</strong>个词方向、非负组合去逼近输出向量。J-share是这部分解释了输出向量多少方差。再和同一层随机方向的J-share比：高于随机方向第99百分位叫高，低于第1百分位叫低，其余是中。</p>
+<p>作者把读出看成概念的下一词例证，不只是神经元会吐出的词表。例如Llama-3.1-8B-Instruct里L22 n1766的读出是Karl、Marx、Victorian、Manchester、Dickens和184（如1840），他们将其理解为“19世纪”。这些读出只是假说，要用干预来测。凡用到Pile文本的结果，都排除了Books3、BookCorpus2、StackExchange和OpenWebText2子集。</p>
+<p>在四个模型里，对每模型最多<strong>1,000</strong>个神经元做盲测，Claude评审认为该神经元自己的读出与最强激活段落相关的比例，在高、中、低J-share上分别是<strong>73%、31%和19%</strong>，两类对照读出只有<strong>4%到6%</strong>。作者认为这很可能偏低，因为最强激活段落也可能漏掉神经元实际在做的事。</p>
+<p>图2汇总了四个模型各层高、低J-share的比例，以及读出和激活段落是否相关的盲测。在J-share最低的<strong>2%<strong>里，输出向量与后续</strong>3%到18%<strong>的注意力查询对齐，随机方向不到</strong>1%</strong>。盲测里，Claude评审认为读出与最强激活段落相关的比例，在高、中、低J-share上分别是<strong>73%、31%和19%</strong>，对照读出是<strong>4%到6%</strong>，误差线是95%区间。附录A还给出全量统计：四个模型共约<strong>340万</strong>个神经元里，高J-share占<strong>19%到29%</strong>，中等占<strong>56%到81%</strong>，低的占<strong>1%到21%</strong>；中位神经元的J-share是中位随机方向的<strong>1.02到1.26</strong>倍。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_fig_02"><div class="media-frame"><img src="https://alignment.anthropic.com/2026/neuron-basis-theory/fig2.png" data-original-src="https://alignment.anthropic.com/2026/neuron-basis-theory/fig2.png" alt="Four panels showing high and low J-share by layer, alignment with later attention queries, and how often readouts match activating passages versus chance." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://alignment.anthropic.com/2026/neuron-basis-theory/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<h2>一次激活几乎总是只加入一个概念</h2>
+<p>作者把多义性拆成何时激活、加入了什么。只有把该神经元置零后，相关词的概率下降，才算它加入了这个概念。他们分了三类：</p>
+<p>第一类在无关主语上激活，但每次都加入同一个概念。第二类用正负两种符号分别加入无关概念，例如+w是睫毛膏，-w是收音机，一次加不了两个。第三类用同一种符号加入两个无关概念。只有第三类会在一次激活里同时写入两个无关概念。</p>
+<p>第三类很少见。从每个模型的中间层随机抽样，在对下一词概率有可测影响的带符号方向里，第三类最多大约占<strong>1%</strong>。校正检查的召回后，估计是<strong>0.4%到1.1%</strong>。但它们确实存在。筛完全部中间层神经元并测试最强候选后，四个模型里找到了<strong>35</strong>个，每个模型<strong>3到17</strong>个。作者写明，搜索没有测完每一层的全部候选，这个数字是下限；出现频率仍以随机抽样为准。据他们所知，此前还没有人用干预检验过一次激活是否加入两个无关概念，所以这些像是首批被报告的例子。</p>
+<p>图1是一个更常见的第一类例子，不是第三类。Llama-3.1-8B-Instruct的L28 n2760，会在密码破解工具John the Ripper和第四福音书作者这两类无关事实里，都加入John。过去常用的自动激活描述并不提到John。只有负激活出现在门控打开时，所以它加入的是-w。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_fig_01"><div class="media-frame"><img src="https://alignment.anthropic.com/2026/neuron-basis-theory/fig1.png" data-original-src="https://alignment.anthropic.com/2026/neuron-basis-theory/fig1.png" alt="Diagram of neuron L28 n2760, which adds the token John for both a password-cracker prompt and a Gospel author prompt." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://alignment.anthropic.com/2026/neuron-basis-theory/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<p>表1列出四个第三类例子，每个模型一个，两个主题都出现在读出里，盲评者认为主题之间没有可察觉的联系。在任一方主题的文档里，把该神经元置零，另一方主题词的概率都会下降；如果是成对的地点，对其他地点词的影响要小得多。</p>
+<table aria-label="数据表格，可横向滚动查看" tabindex="0">
+<thead>
+<tr>
+<th>模型</th>
+<th>神经元</th>
+<th>加入</th>
+<th>以及</th>
+<th>J-lens读出（前10）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Llama-3.1-8B</td>
+<td>L20 n2287（−）</td>
+<td>Elon Musk</td>
+<td>蛋白翻译</td>
+<td>Tesla, Musk, Tesla, Elon, SpaceX, Translate, Translation, Protein, rypton, protein</td>
+</tr>
+<tr>
+<td>Qwen3-8B</td>
+<td>L25 n5728（−）</td>
+<td>新加坡</td>
+<td>Flutter（应用框架）</td>
+<td>新加坡, .dart, onTap, Singapore, Singapore, singapore, .sg, SizedBox, onPressed, MaterialPageRoute</td>
+</tr>
+<tr>
+<td>Qwen3-14B</td>
+<td>L31 n1780（+）</td>
+<td>广东</td>
+<td>佛罗里达</td>
+<td>广东省, 深圳市, 深圳, 珠三角, Florida, Miami, 在深圳, Florida, 珠海, 东莞</td>
+</tr>
+<tr>
+<td>OLMo-3-32B</td>
+<td>L26 n18802（−）</td>
+<td>尼日利亚</td>
+<td>马来西亚</td>
+<td>Nigeria, Nigerian, Malaysian, Malaysia, Lagos, Niger, Kuala, Malays, Malay, Punjab</td>
+</tr>
+</tbody>
+</table>
+<p>附录B还写了判定第三类的四项检查，以及用两个无关神经元输出向量合成的人造双概念神经元来测召回，检查2到4在各模型上恢复了<strong>62%到81%</strong>。35个里有一个特例：Qwen3-14B的L30 n4527同时加入学生贷款和静电，读出都是charge的变体，主题共享了同一个词，仍被算作第三类。</p>
+<h2>输出向量搬到别的层，含义大体还在</h2>
+<p>有研究认为残差流的表示会随深度漂移。作者的判断是：神经元在各层写入的是近似固定的基；概念看起来随深度变化，多半是因为更后面的神经元补上了同一概念的新侧面。</p>
+<p>每一层都把自己的输出加进残差流，一个方向除非被后面的层去掉，否则会保留下去。他们先看中间层MLP会不会把方向从残差流里抹掉。在每个模型里，中位的中间层MLP只会把<strong>0或1</strong>个残差方向强烈收缩，也就是线性化映射沿这个方向的奇异值低于<strong>0.1</strong>。能读出含义的被收缩方向，多半是在标记文本种类，比如代码或标点风格。</p>
+<p>更强的测试是把输出向量搬到其他层。对每个单词概念名词，他们取两个看起来会提高该词概率的神经元。直接神经元的输出向量能经反嵌入直接提高这个词。间接神经元用反嵌入时，该词进不了前500，用J-lens则能进前10，说明作用要经过后面的层。他们按固定大小把输出向量加到一层，并与同样大小的随机方向比较。在模型最后十分之一层之前的任意一层，间接输出向量在<strong>90%到98%<strong>的概念-层对上，比随机方向更能提高对应词；直接输出向量是</strong>93%到99.6%</strong>。</p>
+<p>按模型看，表C1在f=0.25、保留全部概念时给出：Llama-3.1-8B-Instruct直接方向中位增益8.3、高于对照<strong>99.6%</strong>，间接3.9、<strong>97.5%</strong>；Qwen3-8B为10.8、**98.5%**和5.1、<strong>91.4%</strong>；Qwen3-14B为9.8、**99.4%**和3.8、<strong>93.3%</strong>；OLMo-3-32B为5.1、**93.0%<strong>和2.3、<strong>90.4%</strong>。图3标题里，间接方向在最后十分之一层之前是</strong>91%到98%**的概念-层对上胜过随机向量，与正文的“90%到98%”略有出入，这里两处都保留。</p>
+<p>图3按四个模型画出，把神经元输出向量加到每一层时，对应名词的logit增益相对同样大小随机向量的差值。直接神经元经反嵌入提高该词，间接神经元的作用要经过后面的层。在最后十分之一层之前，间接输出向量在**91%到98%**的概念-层对上胜过随机向量。阴影是概念上的一个标准误。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_fig_03"><div class="media-frame"><img src="https://alignment.anthropic.com/2026/neuron-basis-theory/fig3.png" data-original-src="https://alignment.anthropic.com/2026/neuron-basis-theory/fig3.png" alt="Line charts for four models showing that direct and indirect neurons&#x27; output vectors raise their noun over a random vector at nearly every layer." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://alignment.anthropic.com/2026/neuron-basis-theory/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<p>他们还看了十个概念（moon、cat、fire、red、death、fear、math、jazz、chess和sushi）在四模型中的情况。以Llama里的moon为例，32个最有选择性的神经元里，有12个被手动分到五个侧面：词本身、夜晚、月牙形状、太空旅行和天空。这些输出向量几乎正交。一个侧面的输出向量，对自己侧面读出词的提升，是对其他侧面词的<strong>1.5到2.7</strong>倍。</p>
+<p>图4画出其中12个神经元，按层和读出命名的侧面排列，箭头表示把前一个神经元的输出向量加上去会提高后一个神经元的激活。一个侧面的输出向量对自己侧面读出词的提升，是对其他侧面词的<strong>1.5到2.7</strong>倍。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_fig_04"><div class="media-frame"><img src="https://alignment.anthropic.com/2026/neuron-basis-theory/fig4.png" data-original-src="https://alignment.anthropic.com/2026/neuron-basis-theory/fig4.png" alt="Moon-selective neurons grouped by layer and facet, and bars showing that each facet raises its own words more than other facets&#x27; words." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://alignment.anthropic.com/2026/neuron-basis-theory/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<h2>一条事实往往有多条可读的回忆路径</h2>
+<p>作者在Llama-3.1-8B-Instruct里追踪了18条事实：10名运动员到他们的运动，四本书到作者，四个Python包到导入名。对每条事实，他们只保留输出或门控侧有可读概念的神经元，再逐步去掉，直到正确答案不再是模型的首选预测。</p>
+<p>主语出现时，神经元会加上它的各种关联，不管提示里问的是哪种关系。每个关联由单个神经元的输出向量加入。提示里的关系，比如“从事的运动是”，再决定哪一个关联变成答案：注意力把信息从主语挪到预测答案的位置。因为一条事实依赖多条神经元的组合，而同一个神经元又会在有相同关联的主语之间共享，还可以参与无关事实，模型能记住的事实可以远多于神经元数目，同时仍能在神经元基上被读出来。</p>
+<p>以Jaromir Jagr的运动为例。第0层和第1层的注意力先把名字的各个token合在一起。名字位置上的神经元在第2到13层加入hockey，以及winter、Czech、team sport这类关联。从第15层起，注意力再把hockey带到预测答案的位置。</p>
+<p>通往答案的路径有两种。一跳或直接路径经过答案写入神经元，读出就是答案的拼写或形式，比如Gabriel García Márquez对应的G和Gab。多跳路径经过编码主语属性、再由属性预测答案的神经元。这些属性可以几乎是这个主语独有的，比如Jane Eyre对应三姐妹的小说；也可以被许多主语共享，比如哥伦比亚、拉美、小说或法语。只去掉答案写入神经元，18条事实里有<strong>15</strong>条正确答案仍排第一。例外是Derek Jeter（10个神经元）、pillow（3个）和pymupdf（1个）。</p>
+<p>图5上方面板是Llama-3.1-8B-Instruct回忆Jaromir Jagr打hockey的路径：名字处的神经元加入hockey，以及Czech、winter、Canada等也会提高hockey的关联，从第15层起的注意力再把hockey转到答案位置。删除集只用第0到13层，之后出现的hockey神经元不在删除集里。下方面板是另外四条事实：只去掉读出就是答案的神经元，正确答案仍排第一；再按归因顺序继续去掉可读删除集里的神经元，答案概率才会下降。去掉同样数量的随机神经元，影响很小。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_fig_05a"><div class="media-frame"><img src="https://alignment.anthropic.com/2026/neuron-basis-theory/fig5a.png" data-original-src="https://alignment.anthropic.com/2026/neuron-basis-theory/fig5a.png" alt="Recall paths for Jaromir Jagr playing hockey: neurons at the name add hockey and related concepts, and attention moves hockey to the answer position." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://alignment.anthropic.com/2026/neuron-basis-theory/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_fig_05b"><div class="media-frame"><img src="https://alignment.anthropic.com/2026/neuron-basis-theory/fig5b.png" data-original-src="https://alignment.anthropic.com/2026/neuron-basis-theory/fig5b.png" alt="Answer probability falling as more neurons are removed for four facts, while random neurons have little effect." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://alignment.anthropic.com/2026/neuron-basis-theory/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<h2>和已有观察怎么放在一起看</h2>
+<p>同期，Cammarata在Goodfire的研究里认为，多数神经元比叠加图景所暗示的更简单。他的做法不同：智能体给Qwen3-32B里随机抽取的神经元写报告，再用语言模型评审正负最强激活是否各共享一个想法，并用按报告新写的文本能否激活该神经元来检验。初步审计估计，多数神经元对每个符号都有一个主要想法。他把表面上的多义性，多半归因于训练中激活从一种模式扩散到相关输入，而不是叠加。作者认为，Cammarata的结果和他们指向同一结论：神经元的每一种符号，多半只承载一个概念。</p>
+<p>Olah等人把John这类神经元叫作多面的：它响应同一变量的几种情形，并与多义神经元区分。一个神经元因此可能解释分数很低，却仍只向残差流加入一个概念。若一个神经元真把两个无关特征叠在同一符号的固定输出向量里，一次激活就会同时加入两个特征。作者按激活和读出一起搜第三类，找到的很少。</p>
+<p>Gao在2026年提出，用最强激活写成的描述，未必解释得了弱激活，而弱激活可能影响模型表现。作者给了一个更简单的说法：弱激活只是把同一个概念加得更少，可能加在不那么贴合的token上。许多弱激活加在一起仍可能有作用。他们改一条事实的答案，通常要去掉许多神经元，其中不少只以最强激活的一个分数运行。</p>
+<p>若干研究删除、重排或重复整层后，模型往往仍能维持预测。如果每层用自己的一套基，一个方向搬到新位置后含义会变，这些结果就不好解释。若一个方向在各层含义近似相同，就更容易说得通。</p>
+<p>他们把神经元分析看成对线性探针、稀疏自编码器等基于学习方向的方法的补充。配套文章显示，许多与安全相关的特征似乎已经在神经元基里。有些行为可能是宏观尺度的，一条学到的方向可能比任何单个神经元更合适；即便如此，他们仍认为，把这些行为分解回神经元基，有助于理解它是怎么实现的。低J-share神经元更常与后续注意力查询对齐，他们猜测部分神经元的输出是在给后面的注意力头做标记，更完整的研究留待后续。</p>
+<p>局限也写在正文里。结果只覆盖8到32B模型，自然的后续是按规模看这些发现如何变化。许多发现依赖J-lens，可读性只是可解释性的一种代理；J-lens还有已知弱点，更好的透镜可能让更多神经元可读。他们的定义同样是代理，别人可以选不同定义。作者认为，关于神经元的主张最好写清测的是什么、怎样的结果会说明主张不成立，在智能体开始大规模承担这类工作后尤其重要。配套文章里，按激活描述、最强激活例子和J-lens读出选出的神经元，被用来检测有害内容、引导行为、寻找后门触发词，以及恢复被遗忘方法去掉的事实，并且都和基线比过。</p>
+<p>致谢里，作者感谢了初稿意见、写作反馈和讨论对象，并写明这项工作是在Anthropic Fellows Program中完成的。</p>
+<p>若要引用或复核这些结论，最稳妥的是回到原文的操作定义、四个模型和附录里的检查标准，看清楚“约1%或更少”指的是对下一词概率有可测影响的带符号方向，35个第三类例子是搜索得到的下限。配套文章接着问：这些可读的神经元，能不能在不另做训练的情况下，用于检测、引导和审计。</p>
+</div></section>
+<section class="reader-panel" id="original" data-reader-panel="original" aria-label="原文">
+<h2 class="section-heading">原文</h2><h3 class="original-title">Returning to the Neuron Basis for Interpretability, Part 1: Answering Three Objections</h3>
+<div class="original-media">
+<figure class="media-figure" data-media-id="media_fig_01"><div class="media-frame"><img src="https://alignment.anthropic.com/2026/neuron-basis-theory/fig1.png" data-original-src="https://alignment.anthropic.com/2026/neuron-basis-theory/fig1.png" alt="Diagram of neuron L28 n2760, which adds the token John for both a password-cracker prompt and a Gospel author prompt." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://alignment.anthropic.com/2026/neuron-basis-theory/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_fig_02"><div class="media-frame"><img src="https://alignment.anthropic.com/2026/neuron-basis-theory/fig2.png" data-original-src="https://alignment.anthropic.com/2026/neuron-basis-theory/fig2.png" alt="Four panels showing high and low J-share by layer, alignment with later attention queries, and how often readouts match activating passages versus chance." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://alignment.anthropic.com/2026/neuron-basis-theory/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_fig_03"><div class="media-frame"><img src="https://alignment.anthropic.com/2026/neuron-basis-theory/fig3.png" data-original-src="https://alignment.anthropic.com/2026/neuron-basis-theory/fig3.png" alt="Line charts for four models showing that direct and indirect neurons&#x27; output vectors raise their noun over a random vector at nearly every layer." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://alignment.anthropic.com/2026/neuron-basis-theory/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_fig_04"><div class="media-frame"><img src="https://alignment.anthropic.com/2026/neuron-basis-theory/fig4.png" data-original-src="https://alignment.anthropic.com/2026/neuron-basis-theory/fig4.png" alt="Moon-selective neurons grouped by layer and facet, and bars showing that each facet raises its own words more than other facets&#x27; words." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://alignment.anthropic.com/2026/neuron-basis-theory/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_fig_05a"><div class="media-frame"><img src="https://alignment.anthropic.com/2026/neuron-basis-theory/fig5a.png" data-original-src="https://alignment.anthropic.com/2026/neuron-basis-theory/fig5a.png" alt="Recall paths for Jaromir Jagr playing hockey: neurons at the name add hockey and related concepts, and attention moves hockey to the answer position." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://alignment.anthropic.com/2026/neuron-basis-theory/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_fig_05b"><div class="media-frame"><img src="https://alignment.anthropic.com/2026/neuron-basis-theory/fig5b.png" data-original-src="https://alignment.anthropic.com/2026/neuron-basis-theory/fig5b.png" alt="Answer probability falling as more neurons are removed for four facts, while random neurons have little effect." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://alignment.anthropic.com/2026/neuron-basis-theory/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div>
+<div class="prose" lang="en"><h1>Returning to the Neuron Basis for Interpretability, Part 1: Answering Three Objections</h1>
+<p>Jasmine Shone 1,*, Lisa Dunlap 1 November 23, 2026</p>
+<p>tl;dr</p>
+<p>Previous interpretability research has suggested that understanding language models by studying their individual neurons is difficult, for three reasons: a single neuron often fires on several unrelated inputs; the way a concept is represented can change between two layers of neurons within a single model; and facts seem to be spread across many neurons. We revisit these objections by looking at what each neuron contributes to a model’s output, not just what causes it to fire, and we test our hypotheses by switching neurons off or by moving their outputs to other layers. We find that a neuron will contribute two unrelated concepts at once in about 1% or fewer of the cases we sampled, and that a neuron’s output keeps roughly the same meaning across most layers. We also find that although it usually takes changing many neurons to make a model get a fact wrong, the neurons involved generally represent concepts related to that fact, implying that facts, although distributed, are still readable.</p>
+<p>Figure 1. One neuron adds John in two unrelated facts. L28 n2760 in Llama-3.1-8B-Instruct adds John for the password-cracking tool John the Ripper and for the author of the fourth Gospel. The automated description of when it activates (Choi et al., 2024), the kind used in much of past work, does not mention John. Only its negative activations occur with the gate open, so it adds − w.</p>
+<p><img alt="Diagram of neuron L28 n2760, which adds the token John for both a password-cracker prompt and a Gospel author prompt." decoding="async" loading="lazy" referrerpolicy="no-referrer" src="https://alignment.anthropic.com/2026/neuron-basis-theory/fig1.png"></p>
+<h2>Introduction</h2>
+<p>Most interpretability tools today are built on learned features (sparse autoencoders and transcoders), on residual-stream directions (probes, steering vectors, lenses), or on separate models that describe activations in natural language. Few are built on neurons. The move away from neurons followed three observations. First, neurons activate on many unrelated inputs (Olah et al., 2020; Elhage et al., 2022; Gurnee et al., 2023; Bricken et al., 2023), automated explanations of them often fit poorly (Bills et al., 2023), and explanations change with the dataset (Bolukbasi et al., 2021). Second, representations appear to change from layer to layer (Belrose et al., 2023; Lindsey et al., 2024; Balcells et al., 2024; Lawson et al., 2025). Third, some computations, such as fact recall, appear to be spread over many neurons (Nanda et al., 2023; Chughtai et al., 2024). Taken at face value, these observations suggest that individual neurons would be uninterpretable because of superposition, relating neurons across layers would be hard because layers would not share coordinates, and removing or editing a fact could be very difficult.</p>
+<p>However, by construction, the function a neuron implements is relatively straightforward. The activation of an MLP neuron is one context-dependent scalar, and the neuron adds that scalar times one fixed vector (its column of the down projection) to the residual stream. A neuron can thus be thought of as a context-gated steering vector. The scalar can be positive or negative, so a neuron adds its output vector with either sign, and the two signs can mean different things (Figure 1).</p>
+<p>Motivated by this, we interpret each neuron’s output vector, the direction it adds to the residual stream (also called its output weights or value vector; Geva et al., 2022; Gurnee et al., 2024), and combine it with the contexts in which the neuron activates to form a hypothesis about the neuron’s function. To do so, we use the J-lens of Gurnee et al. (2026) to find the tokens each output vector makes the model most likely to produce. We test the hypotheses produced via the J-lens and activation contexts with interventions: ablating neuron activation values, injecting their output vectors at other layers, and steering with them. We first discuss how to interpret a neuron’s output vector through its vocabulary readout, and measure how often these readouts can be expected to be accurate and interpretable. We then examine the three observations in turn: neurons that activate on unrelated inputs, concepts that appear to drift across layers, and facts that appear to be spread over many neurons.</p>
+<p>Contributions.</p>
+<ul>
+<li>We measure how much of each neuron’s output vector the J-lens can read, for every neuron in four models, and find that readouts match the text a neuron activates on far more often than chance.</li>
+<li>We propose a taxonomy of polysemanticity that covers both when a neuron activates and what it adds. Neurons that add two unrelated concepts are rare (about 1% or fewer), but we find the first known examples of them.</li>
+<li>We show that neurons write in an approximately fixed basis across layers, and that a concept changes with depth, likely because later neurons add new facets of it.</li>
+<li>We trace 18 facts in Llama-3.1-8B-Instruct to individual neurons. Most answers are reached by several recall paths, so removing a fact usually takes many neurons, which is why facts look distributed. However, removing only interpretable neurons, related to the fact or correlated with it, is enough to change a recalled fact.</li>
+</ul>
+<h2>Interpreting output vectors with the J-lens</h2>
+<p>In order to interpret a neuron as a function, we need a way to understand its output vector. Since a neuron’s output vector is added to the residual stream, we read it with the J-lens (Gurnee et al., 2026), which approximates which tokens a residual-stream direction makes the model more likely to say. We use the J-lens rather than the logit lens because logit-lens readouts are often incoherent before the last layers (nostalgebraist, 2020; Belrose et al., 2023), and Gurnee et al. (2026) find that J-lens readouts of early and middle layers are better than those of the logit lens.</p>
+<p>A neuron in a SwiGLU MLP (Shazeer, 2020) computes one activation a = silu(g· x)(u· x) from the residual stream x, where g and u are the neuron’s rows of the gate and up projections. The neuron then adds a· w to the residual stream. We call w, the neuron’s column of the down projection, its output vector. Because u· x can be positive or negative, a neuron can add either + w or − w, and we treat the two signs separately because the neuron cannot add both to the residual stream at once. SiLU is near zero for negative inputs but not exactly zero (its minimum is about −0.28; Elfwing et al., 2018), so when the gate is closed, small activations leak through, often with the opposite sign. A closed gate thus plays the role of the zero region of a ReLU neuron (Zhang et al., 2024), so we count a sign as one the neuron uses only when activations of that sign occur with the gate open (g· x &gt; 0).</p>
+<p>The J-lens gives every token a direction at every layer: the direction that, through the later layers, most raises that token’s output logit to first order (Appendix A.1). For each neuron we compute three quantities from its weights alone. The readout, a term we take from Gurnee et al. (2026), is the list of tokens whose J-lens directions have the highest cosine with w. The verbalizable part is the closest approximation of w by a nonnegative combination of at most 25 token directions. The J-share is how much of the output vector the verbalizable part explains. It is the fraction of variance explained that Gurnee et al. (2026) report for concept vectors, applied here to neuron output vectors. We compare each neuron’s J-share with the J-shares of random directions at the same layer. We call a J-share high when it is above the 99th percentile of these random J-shares, low when it is below the 1st percentile, and middle otherwise.</p>
+<p>We interpret the J-lens readout of an output vector as the next-token exemplars of a concept, not just as a list of words the neuron outputs. As in earlier interpretability work, we use the term “concept” loosely for a human-interpretable property such as a topic, entity or word sense (Bau et al., 2017; Kim et al., 2018). For example, the readout of L22 n1766 in Llama-3.1-8B-Instruct is Karl, Marx, Victorian, Manchester, Dickens and 184 (as in “1840”), which we interpret as the concept “19th century”.</p>
+<h3>A census of J-share</h3>
+<p>Readouts match what a neuron activates on far more often than chance, even for neurons with low J-share (Figure 2). In a blind test on up to 1,000 neurons in each of four models, Claude judges rated a neuron’s own readout as related to its top-activating passages in 73%, 31%, and 19% of ratings at high, middle, and low J-share, compared to between 4% and 6% on control readouts, averaged over both kinds of control (Figure 2d). These rates are likely conservative, since a neuron’s top-activating passages can also miss what it does, as the automated description does for the John neuron in Figure 1. We therefore treat a neuron’s readout as a hypothesis about its function, and test it with interventions. In every result that uses text from the Pile (Gao et al., 2020), we exclude its Books3, BookCorpus2, StackExchange and OpenWebText2 subsets (Appendix B.1).</p>
+<p>Neurons with high J-share usually add variants of one word where they activate, and neurons with middle J-share, the majority, often add different words that point to a shared concept. Neurons with the lowest J-share instead tend to align with the queries of later attention heads (Figure 2c; Appendix A).</p>
+<p>Figure 2. Readouts match a neuron’s top-activating passages far above chance at every level of J-share, and output vectors with low J-share tend to align with later attention queries instead. (a, b) Share of neurons in each layer whose J-share is above (high) or below (low) that of 99% of random directions, in Llama-3.1-8B-Instruct, Qwen3-8B, Qwen3-14B and OLMo-3-32B. (c) In the bottom 2% of J-share, output vectors align with the queries of 3 to 18% of later attention heads, against under 1% for random directions (dashed). (d) Blind test on up to 1,000 neurons per model: Claude judges find the readout related to the top-activating passages in 73%, 31% and 19% of ratings at high, middle and low J-share (pooled over models), against 4 to 6% for control readouts (dashed). Passages come from the Pile with the Books3, BookCorpus2, StackExchange and OpenWebText2 subsets removed. Error bars: 95% intervals.</p>
+<p><img alt="Four panels showing high and low J-share by layer, alignment with later attention queries, and how often readouts match activating passages versus chance." decoding="async" loading="lazy" referrerpolicy="no-referrer" src="https://alignment.anthropic.com/2026/neuron-basis-theory/fig2.png"></p>
+<h2>Finding 1: Few neurons add two unrelated concepts to the residual stream at once</h2>
+<p>A neuron is usually called polysemantic when it activates on unrelated inputs. This definition leaves out the output vector, on which the neuron’s effect depends. We introduce a taxonomy that classifies neurons both by when they activate and by what they add. We count a neuron as adding a concept only if zeroing it lowers the probability of that concept’s words.</p>
+<ul>
+<li>A type 1 neuron activates on unrelated subjects but adds one concept in all of them.</li>
+<li>A type 2 neuron adds unrelated concepts with its two signs, such as mascara with + w and radio with − w, so it never adds both at once.</li>
+<li>A type 3 neuron adds two unrelated concepts with one sign. This is the only case in which a single activation adds two unrelated concepts.</li>
+</ul>
+<p>Type 3 is rare. In a random sample of middle-layer neurons from each model, type 3 makes up at most about 1% of signed directions (+ w or − w) with a measurable effect on next-token probabilities (Appendix B). Type 3 neurons do exist, however. Screening every middle-layer neuron and testing the strongest candidates finds 35 of them across the four models (Appendix B). Table 1 shows examples, such as a Llama neuron that adds both Elon Musk and protein translation. Earlier work described output vectors by the tokens they promote (Geva et al., 2022), but to our knowledge none tested with interventions whether one activation adds two unrelated concepts, so these appear to be the first such neurons reported.</p>
+<p>Earlier work finds that many neurons activate in unrelated contexts (Olah et al., 2020; Bills et al., 2023). Because type 3 is rare, we suspect that many of these neurons are type 1 or type 2: whatever context they activate on, a single activation adds only one concept, as with the John neuron of Figure 1. In the rest of the post we therefore treat each sign of a neuron as adding one main concept, and interpret its readout as that concept.</p>
+<p>Table 1. Each of these neurons adds two unrelated concepts with one sign. Here are 4 of the 35 type 3 neurons we found, one from each model, chosen because both concepts appear in their readouts; blind raters found no link between the two topics for any of them, and Table B1 lists more. In documents about either topic, zeroing each one lowers the probability of the other topic’s words; for pairs of places, it has much less effect on other places’ words (Appendix B.1). The readout column lists the top 10 J-lens tokens of each neuron’s output vector, in order, on the sign we tested (shown after the neuron). The J-lens readouts of these neurons sometimes have both a word and the word with a leading space (a separate token in the tokenizer).</p>
+<table aria-label="数据表格，可横向滚动查看" tabindex="0">
+<thead>
+<tr>
+<th>Model</th>
+<th>Neuron</th>
+<th>Adds</th>
+<th>and</th>
+<th>J-lens readout (top 10)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Llama-3.1-8B</td>
+<td>L20 n2287 (−)</td>
+<td>Elon Musk</td>
+<td>protein translation</td>
+<td>Tesla, Musk, Tesla, Elon, SpaceX, Translate, Translation, Protein, rypton, protein</td>
+</tr>
+<tr>
+<td>Qwen3-8B</td>
+<td>L25 n5728 (−)</td>
+<td>Singapore</td>
+<td>Flutter (app framework)</td>
+<td>新加坡, .dart, onTap, Singapore, Singapore, singapore, .sg, SizedBox, onPressed, MaterialPageRoute</td>
+</tr>
+<tr>
+<td>Qwen3-14B</td>
+<td>L31 n1780 (+)</td>
+<td>Guangdong</td>
+<td>Florida</td>
+<td>广东省, 深圳市, 深圳, 珠三角, Florida, Miami, 在深圳, Florida, 珠海, 东莞</td>
+</tr>
+<tr>
+<td>OLMo-3-32B</td>
+<td>L26 n18802 (−)</td>
+<td>Nigeria</td>
+<td>Malaysia</td>
+<td>Nigeria, Nigerian, Malaysian, Malaysia, Lagos, Niger, Kuala, Malays, Malay, Punjab</td>
+</tr>
+</tbody>
+</table>
+<h2>Finding 2: Neurons write in an approximately fixed basis across layers</h2>
+<p>Several papers describe the residual stream’s representation as drifting with depth (Lindsey et al., 2024; Lawson et al., 2025). We find that neurons write in an approximately fixed basis across layers, and argue that when a concept appears to change with depth, it is likely because later neurons add new facets of it.</p>
+<p>Because each layer adds its output to the residual stream, much of a direction written at one layer persists to later layers unless a later layer removes it. The neurons of an MLP could still cancel a direction, so a first test is whether middle-layer MLPs remove directions from the residual stream. In each model, the median middle-layer MLP strongly shrinks 0 or 1 residual directions, meaning that its linearized map has a singular value below 0.1 along them (Appendix C.1). Most of the shrunk directions whose J-lens readouts we can interpret mark the kind of text, such as code or punctuation style.</p>
+<p>A stronger test is to move an output vector to another layer. For each single-token concept noun, we take two neurons whose output vectors appear to raise the probability of the word. A direct neuron’s output vector raises the word straight through the unembedding (logit lens). For an indirect neuron, the word is not among the top 500 tokens when its output vector is read with the unembedding but is in the top 10 when read with the J-lens, so its effect on the word must go through later layers. We add each output vector to one layer at a time, at a fixed size, and compare it with adding a random direction at the same magnitude (Appendix C.2). At any layer before the last tenth of the model, the indirect output vector raises its word more than the random direction at 90 to 98% of concept-layer pairs, and the direct output vector does so at 93 to 99.6% of pairs (Figure 3; Table C1). These directions thus largely retain their meaning at every layer before the last tenth of the model, which suggests that neurons write in an approximately fixed basis.</p>
+<p>Figure 3. Moved to nearly any other layer, a neuron’s output vector still raises the concept its readout names. For 142 single-token WordNet nouns per model (141 in Qwen3-8B), we add a neuron’s output vector at each layer and plot the noun’s logit gain over a random vector of the same size. Direct neurons raise the noun through the unembedding; for indirect neurons the effect goes through later layers. Before the last tenth of depth, indirect output vectors beat the random vector at 91 to 98% of concept-layer pairs. Shaded: one standard error over concepts.</p>
+<p><img alt="Line charts for four models showing that direct and indirect neurons&#x27; output vectors raise their noun over a random vector at nearly every layer." decoding="async" loading="lazy" referrerpolicy="no-referrer" src="https://alignment.anthropic.com/2026/neuron-basis-theory/fig3.png"></p>
+<p>A concept may look different at different depths because different neurons add different facets of it. For 10 concepts, we take the neuron in each layer whose activation differs most between the concept word and four words of the same category (for moon: sun, star, sky and sea; see Appendix C.3). Their output vectors are nearly orthogonal, and their readouts are about different facets: for moon in Llama-3.1-8B-Instruct, the word itself, night, the crescent shape, space travel and the sky (Figure 4).</p>
+<p>Figure 4. A concept’s neurons in different layers add different facets of it. (a) Twelve of the 32 most moon-selective neurons (one per layer) in Llama-3.1-8B-Instruct, by layer and by the facet their readout names. An arrow means that adding the first neuron’s output vector raises the second neuron’s activation. (b) A facet’s output vectors raise their own facet’s readout words 1.5 to 2.7 times as much as other facets’ words.</p>
+<p><img alt="Moon-selective neurons grouped by layer and facet, and bars showing that each facet raises its own words more than other facets&#x27; words." decoding="async" loading="lazy" referrerpolicy="no-referrer" src="https://alignment.anthropic.com/2026/neuron-basis-theory/fig4.png"></p>
+<h2>Finding 3: Facts are recalled through several interpretable paths</h2>
+<p>Where and how language models store facts is still debated. One view treats MLP layers as key-value memories, in which a neuron activates on a pattern in the input and its output vector adds an associated attribute (Geva et al., 2021). Causal tracing locates facts in middle-layer MLPs at the last token of the subject, where a rank-one edit can change them (Meng et al., 2022). Other work describes recall in stages, with early MLPs enriching the subject with many attributes and attention then extracting the one the question asks for (Geva et al., 2023), or as a sum of independent mechanisms (Chughtai et al., 2024). Finally, because a model knows far more facts than it has neurons, facts are often assumed to be stored in superposition (Elhage et al., 2022), and an attempt to explain athlete-to-sport recall neuron by neuron concluded that it is distributed (Nanda et al., 2023). In contrast, Arora et al. (2026) find small, readable neuron circuits for two-hop questions such as the capital of the state containing Dallas. They test these circuits by steering hand-picked groups of neurons. Where facts are stored has practical implications: editing and unlearning methods often target a fixed range of early and middle layers (Meng et al., 2022; Meng et al., 2023; Li et al., 2024), which works only if facts are stored there.</p>
+<p>We trace 18 facts in Llama-3.1-8B-Instruct: 10 athletes to their sports, four books to their authors, and four pip packages to their import names (Table D1). For each fact, we remove neurons, keeping only those with a readable concept on the output or gate side, until the answer is no longer the model’s top prediction (Appendix D).</p>
+<p>We find that facts are recalled through several paths, so removing one usually takes many neurons (44 to 273 for 15 of the 18 facts), which is why facts look distributed. However, removing only interpretable neurons, related to the fact or correlated with it, is enough. Where the answer is computed depends on the kind of fact, and once a fact is removed, the model gives another answer that fits what it still knows about the subject.</p>
+<h3>How facts are stored</h3>
+<p>When a subject appears, neurons add its associations, regardless of the relation in the prompt, and each association is added by the output vector of a single neuron. The relation in the prompt (such as “plays the sport of”) then determines which association becomes the answer: attention moves information from the subject to the position where the answer is predicted. Because each fact depends on a combination of neurons, and each neuron is shared by every subject with the same association (Geva et al., 2021) and can take part in unrelated facts (Figure 1), a model can know far more facts than it has neurons and still be readable in the neuron basis.</p>
+<p>For example, when Llama-3.1-8B-Instruct is asked for Jaromir Jagr’s sport (Figure 5a), attention in layers 0 and 1 first combines the tokens of his name. Neurons at the name then add hockey in layers 2 to 13, together with associations such as winter, Czech and team sport, and from layer 15 onward attention carries hockey to the position where the answer is predicted.</p>
+<p>Figure 5. A fact is recalled through one-hop and multi-hop paths, so removing it takes many neurons. (a, top) How Llama-3.1-8B-Instruct recalls that Jaromir Jagr plays hockey. Icons mark neurons that respond differently to Jagr than to made-up names, by readout: hockey (one-hop) or related concepts such as Czech, winter and Canada that also raise hockey (multi-hop). Attention from layer 15 onward moves this to the final token from either the last name token or the earlier ones. Icons past layer 13 are hockey neurons measured at those positions; they are not part of the removed set, which uses layers 0 to 13. (b, bottom) For four other facts, ablating only the neurons whose readout is the answer (squares) leaves the correct answer on top. Each further point ablates up to 10 more neurons from the fact’s readable removal set (Table D1), in attribution order, while the same number of random neurons (hollow circles) has little effect. Curves are for the main phrasing.</p>
+<p><img alt="Recall paths for Jaromir Jagr playing hockey: neurons at the name add hockey and related concepts, and attention moves hockey to the answer position." decoding="async" loading="lazy" referrerpolicy="no-referrer" src="https://alignment.anthropic.com/2026/neuron-basis-theory/fig5a.png"></p>
+<p><img alt="Answer probability falling as more neurons are removed for four facts, while random neurons have little effect." decoding="async" loading="lazy" referrerpolicy="no-referrer" src="https://alignment.anthropic.com/2026/neuron-basis-theory/fig5b.png"></p>
+<p>In all ten athlete traces, neurons at the name write attributes unrelated to the sport itself, such as Canada and winter for Wayne Gretzky or Bavaria for Dirk Nowitzki. The same neurons recur across subjects. A layer-19 neuron whose readout is Colombia activates for every Gabriel García Márquez novel, not only One Hundred Years of Solitude, and neurons with readouts such as Victorian or 19th century activate for many English and French novels.</p>
+<h3>Removing a fact usually takes many neurons</h3>
+<p>Two kinds of path reinforce the answer. The one-hop, or direct, path runs through answer writers, the neurons whose readout is a spelling or form of the answer, such as G and Gab for Gabriel García Márquez. Multi-hop paths run through neurons that encode the subject’s attributes and predict the answer from them. These attributes can be nearly unique to the subject, such as the novels of the three Brontë sisters for Jane Eyre, or shared by many subjects, such as Colombia, Latin American, novel or French. Prediction from attributes has been studied for unfamiliar subjects (Poerner et al., 2020; Saynova et al., 2025), and we find that it also runs alongside recall for familiar ones. Removing the answer writers alone leaves the correct answer on top for 15 of the 18 facts (Figure 5). The exceptions are Derek Jeter (10 neurons) and the packages pillow (3) and pymupdf (1; Table D1).</p>
+<p>Where the answer is computed depends on the kind of fact. For athletes, the sport is added at the name and then moved by attention, as for Jagr, in line with earlier work (Geva et al., 2023; Nanda et al., 2023). For books and packages, information about the subject reaches the answer position over layers 10 to 16, and the answer is added there in later layers, not at the last subject token, where causal tracing and rank-one edits locate facts (Meng et al., 2022). Patching the title’s MLPs in layers 9 to 12 or 13 to 16 with their outputs on made-up titles leaves the author on top, while patching the answer position’s MLPs in layers 17 to 31 lowers the author’s probability to below 0.1 (Appendix D). Patching the title in layers 0 to 8 also removes the author, likely because these layers are needed to read the title at all. An edit or unlearning method that targets the subject’s tokens in the middle layers would therefore miss facts such as these.</p>
+<p>After removal, the model does not stop answering. It gives another answer that fits the attributes that remain: Borges for One Hundred Years of Solitude, Dumas for The Hunchback of Notre-Dame, Jane Austen for Jane Eyre, and import opencv for opencv-python. For some facts, the removed neurons include ones that lower this wrong answer, such as Alex for Dumas (Table D1). Made-up subjects get answers of the same kind, and for an invented pip package the model writes import followed by the package’s own name. This may be how some hallucinations arise.</p>
+<p>For editing and unlearning, this means that removing only the answer writers would leave a fact recoverable through the multi-hop paths, and removing the multi-hop paths could also affect other facts that share those attributes. Note that our tests show which neurons are necessary, not which are sufficient.</p>
+<h2>Conclusion</h2>
+<p>We set out to test three observations that moved interpretability away from neurons, and found each of them to be a weaker objection than assumed. In the companion post, we use neurons chosen from their readouts for detection and steering, and as a weights-based way to detect and understand unwanted behavior that finetuning and unlearning introduce.</p>
+<h2>Discussion</h2>
+<p>Here we set our findings in the context of prior work.</p>
+<p>Polysemanticity and superposition. Earlier work found that many neurons respond to unrelated inputs. Olah et al. (2020) call such neurons polysemantic, and Bills et al. (2023) found that GPT-4 explanations written from a neuron’s top-activating excerpts mostly predicted its activations poorly. Elhage et al. (2022) explain polysemantic neurons by superposition, in which a model represents more features than it has neurons, so that each neuron takes part in several unrelated features.</p>
+<p>In concurrent work, Cammarata (2026) argues that most neurons are simpler than this suggests. In his study, agents wrote reports on randomly chosen neurons in Qwen3-32B, and an LLM judge rated whether a neuron’s strongest positive activations share one idea, and separately whether its strongest negative activations do. He tested the reports by checking whether new text written from a report activates the neuron. From preliminary audits, he estimates that most neurons have one main idea for each sign. He attributes apparent polysemanticity mostly to activations that spread from one pattern to related inputs during training, rather than to superposition.</p>
+<p>The observations of Olah et al. (2020) and Elhage et al. (2022) are consistent with a high rate of apparent type 1 polysemanticity. First, the inputs that activate a neuron can be hard to describe even when the neuron adds one concept to the residual stream. The John neuron in Figure 1 activates on passages that look unrelated but are all likely to continue with John, and each time it adds John and its variants to the residual stream. Olah et al. call a neuron like this multifaceted, because it responds to several cases of one variable, and separate it from a polysemantic neuron. A neuron can therefore get a low explanation score and still add one concept to the residual stream. Second, if a neuron stored two unrelated features in superposition, then each time one sign of the neuron activated, it would add both features to the residual stream, because the output vector for that sign is fixed. Our type 3 search looks for such neurons using both activations and readouts of neuron output vectors, and finds few of them. Cammarata’s procedure differs from ours, but his results seem to support the same conclusion: that each sign of a neuron mostly carries a single concept.</p>
+<p>Weak activations. Gao (2026) argues that a description built from a neuron’s strongest activations may not explain its weak ones, and that weak activations may matter for the model’s performance. We offer a simpler explanation. A neuron adds its activation times a fixed output vector to the residual stream, so a weak activation adds a smaller amount of the same concept as a strong activation of the same sign, possibly on a token that fits the concept less well. Small contributions can still matter when many of them add up. In our fact recall results, changing the answer usually requires removing many neurons (Figure 5b). Many of these neurons fire at a fraction of their strongest activations. We hypothesize that weak activations across many neurons may matter in the same way. If this explanation holds, a neuron’s weak activations can make it look polysemantic in the type 1 sense while not being type 2 or 3 polysemantic, because they add a smaller amount of the same concept to the residual stream.</p>
+<p>Removing, reordering and repeating layers. Several studies change or reuse whole layers and find that models tolerate it. Lad et al. (2024) delete single layers or swap adjacent ones, and find that models keep most of their prediction accuracy without finetuning, especially when the changed layers are in the middle of the model. Sun et al. (2024) skip and reorder middle layers and find that performance drops gradually, and they argue that the middle layers share a representation space. Gromov et al. (2024) remove up to half of the deeper layers of open-weight models with little loss after a short finetune. Larger models can also be initialized by repeating the layers of a trained model and then trained further (Kim et al., 2023; Du et al., 2024). These results would be hard to explain if each layer used its own basis, because a layer in a new position would then receive directions whose meanings differ from those it saw in training. They are easier to explain if a direction has approximately the same meaning at every layer, which is what we find in the section “Finding 2: Neurons write in an approximately fixed basis across layers”.</p>
+<p>Neurons and learned directions. We see analysis of neurons as a supplement to existing methods built on learned directions, such as linear probes and sparse autoencoders. While many safety-relevant features appear to be present in the neuron basis (as shown in the companion post), some behaviors may be macro-scale, and a learned direction may describe them better than any single neuron does. Even for macro-scale behaviors, we believe that understanding their decomposition in the neuron basis could be valuable for understanding how the behavior is implemented.</p>
+<p>Neurons aligned with attention. We hypothesize that some neurons have only a small component that a lens onto the vocabulary can read because their output vectors act as markers for later attention heads. The J-share census gives preliminary evidence for this, since neurons with low J-share are more likely than random directions to have output vectors aligned with the queries of later attention heads. A more extensive study of these neurons and their function is left for future work.</p>
+<h3>Limitations</h3>
+<p>Our results cover models of 8 to 32 billion parameters. A natural follow-up is a scaling study, in the style of Michaud et al. (2023) and Dravid et al. (2026), that measures how our findings change with model size. Many of our findings use J-lens readouts, and readability under one lens is only a proxy for interpretability. The J-lens also has known weaknesses (Blank et al., 2026; Yan et al., 2026), so better lenses may make more neurons readable, and our analyses can be rerun with any new lens.</p>
+<p>Our definitions are also proxies, and other researchers may prefer different ones. We think claims about neurons are most useful when they state what is measured and what result would show the claim to be wrong, and this matters more as AI agents take on more of this work at scale. In practice, we find that our definitions hold up well enough to build on. In the companion post, neurons chosen from their activation descriptions, top-activating examples and J-lens readouts are used to detect harmful content, steer behaviors, find backdoor trigger words and restore facts removed by unlearning. Each use is tested against baselines. Fully understanding every neuron remains an important goal, but for many use cases in model safety, an approximate hypothesis about a neuron’s function may be sufficient.</p>
+<h2>Acknowledgements</h2>
+<p>Thanks to Erik Brinkman, Amil Dravid, Chris Ge, Vincent Huang, Kwamina Orleans-Pobee, Asher Parker-Sartori, and Wendy Sun for comments on early drafts. Thanks to Tom Chivers and Tom Freeman for feedback on the writing. Thanks to Alex Cloud, Wes Gurnee and Espen Slettnes for useful conversations. Thanks to Avery Griffin, Michael Mulet and Joe Smith for additional support. This work was done as part of the Anthropic Fellows Program.</p>
+<h2>References</h2>
+<p>Arora, A., Wu, Z., Steinhardt, J., and Schwettmann, S. (2026). Language Model Circuits Are Sparse in the Neuron Basis. ICML 2026.</p>
+<p>Balcells, D., Lerner, B., Oesterle, M., Ucar, E., and Heimersheim, S. (2024). Evolution of SAE Features Across Layers in LLMs. NeurIPS ATTRIB Workshop.</p>
+<p>Bau, D., Zhou, B., Khosla, A., Oliva, A., and Torralba, A. (2017). Network Dissection: Quantifying Interpretability of Deep Visual Representations. CVPR 2017.</p>
+<p>Belrose, N., et al. (2023). Eliciting Latent Predictions from Transformers with the Tuned Lens. arXiv:2303.08112.</p>
+<p>Bills, S., et al. (2023). Language Models Can Explain Neurons in Language Models. OpenAI.</p>
+<p>Blank, C., Bhatia, A., and Nanda, N. (2026). R-lens: Making J-lens More Faithful on Early Layers. LessWrong.</p>
+<p>Bolukbasi, T., Pearce, A., Yuan, A., Coenen, A., Reif, E., Viégas, F., and Wattenberg, M. (2021). An Interpretability Illusion for BERT. arXiv:2104.07143.</p>
+<p>Bricken, T., et al. (2023). Towards Monosemanticity: Decomposing Language Models With Dictionary Learning. Transformer Circuits Thread.</p>
+<p>Cammarata, N. (2026). Neural Networks Are Already Clean. Goodfire. already-clean.goodfire.com</p>
+<p>Choi, D., Huang, V., Meng, K., Johnson, D. D., Steinhardt, J., and Schwettmann, S. (2024). Scaling Automatic Neuron Description. Transluce.</p>
+<p>Chughtai, B., et al. (2024). Summing Up the Facts: Additive Mechanisms Behind Factual Recall in LLMs. arXiv:2402.07321.</p>
+<p>Dravid, A., Bahri, Y., Efros, A. A., and Gandelsman, Y. (2026). Neuron Populations Exhibit Divergent Selectivity with Scale. arXiv:2606.03990.</p>
+<p>Du, W., et al. (2024). Stacking Your Transformers: A Closer Look at Model Growth for Efficient LLM Pre-Training. arXiv:2405.15319.</p>
+<p>Elfwing, S., Uchibe, E., and Doya, K. (2018). Sigmoid-Weighted Linear Units for Neural Network Function Approximation in Reinforcement Learning. Neural Networks, 107.</p>
+<p>Elhage, N., et al. (2022). Toy Models of Superposition. Transformer Circuits Thread.</p>
+<p>Gao, L., et al. (2020). The Pile: An 800GB Dataset of Diverse Text for Language Modeling. arXiv:2101.00027.</p>
+<p>Gao, L. (2026). Neural Networks Are Not Already Clean. LessWrong.</p>
+<p>Geva, M., Schuster, R., Berant, J., and Levy, O. (2021). Transformer Feed-Forward Layers Are Key-Value Memories. EMNLP 2021.</p>
+<p>Geva, M., Caciularu, A., Wang, K. R., and Goldberg, Y. (2022). Transformer Feed-Forward Layers Build Predictions by Promoting Concepts in the Vocabulary Space. EMNLP 2022.</p>
+<p>Geva, M., Bastings, J., Filippova, K., and Globerson, A. (2023). Dissecting Recall of Factual Associations in Auto-Regressive Language Models. EMNLP 2023.</p>
+<p>Gromov, A., Tirumala, K., Shapourian, H., Glorioso, P., and Roberts, D. A. (2024). The Unreasonable Ineffectiveness of the Deeper Layers. arXiv:2403.17887.</p>
+<p>Gurnee, W., Nanda, N., Pauly, M., Harvey, K., Troitskii, D., and Bertsimas, D. (2023). Finding Neurons in a Haystack: Case Studies with Sparse Probing. TMLR.</p>
+<p>Gurnee, W., et al. (2024). Universal Neurons in GPT2 Language Models. arXiv:2401.12181.</p>
+<p>Gurnee, W., et al. (2026). Verbalizable Representations Form a Global Workspace in Language Models. arXiv:2607.15495.</p>
+<p>Kim, B., Wattenberg, M., Gilmer, J., Cai, C., Wexler, J., Viégas, F., and Sayres, R. (2018). Interpretability Beyond Feature Attribution: Quantitative Testing with Concept Activation Vectors (TCAV). ICML 2018.</p>
+<p>Kim, D., et al. (2023). SOLAR 10.7B: Scaling Large Language Models with Simple yet Effective Depth Up-Scaling. arXiv:2312.15166.</p>
+<p>Lad, V., Lee, J. H., Gurnee, W., and Tegmark, M. (2024). The Remarkable Robustness of LLMs: Stages of Inference? arXiv:2406.19384.</p>
+<p>Lawson, T., Farnik, L., Houghton, C., and Aitchison, L. (2025). Residual Stream Analysis with Multi-Layer SAEs. ICLR 2025.</p>
+<p>Li, N., et al. (2024). The WMDP Benchmark: Measuring and Reducing Malicious Use with Unlearning. arXiv:2403.03218.</p>
+<p>Lindsey, J., Templeton, A., Marcus, J., Conerly, T., Batson, J., and Olah, C. (2024). Sparse Crosscoders for Cross-Layer Features and Model Diffing. Transformer Circuits Thread.</p>
+<p>Meng, K., Bau, D., Andonian, A., and Belinkov, Y. (2022). Locating and Editing Factual Associations in GPT. NeurIPS 2022.</p>
+<p>Meng, K., et al. (2023). Mass-Editing Memory in a Transformer. ICLR 2023.</p>
+<p>Michaud, E. J., Liu, Z., Girit, U., and Tegmark, M. (2023). The Quantization Model of Neural Scaling. NeurIPS 2023.</p>
+<p>Nanda, N., Rajamanoharan, S., Kramár, J., and Shah, R. (2023). Fact Finding: Attempting to Reverse-Engineer Factual Recall on the Neuron Level. AI Alignment Forum.</p>
+<p>nostalgebraist (2020). Interpreting GPT: the logit lens. LessWrong.</p>
+<p>Olah, C., Cammarata, N., Schubert, L., Goh, G., Petrov, M., and Carter, S. (2020). Zoom In: An Introduction to Circuits. Distill.</p>
+<p>Poerner, N., Waltinger, U., and Schütze, H. (2020). E-BERT: Efficient-Yet-Effective Entity Embeddings for BERT. Findings of EMNLP 2020.</p>
+<p>Saynova, D., Hagström, L., Johansson, M., Johansson, R., and Kuhlmann, M. (2025). Fact Recall, Heuristics or Pure Guesswork? Precise Interpretations of Language Models for Fact Completion. Findings of ACL 2025.</p>
+<p>Shazeer, N. (2020). GLU Variants Improve Transformer. arXiv:2002.05202.</p>
+<p>Sun, Q., Pickett, M., Nain, A. K., and Jones, L. (2024). Transformer Layers as Painters. arXiv:2407.09298.</p>
+<p>Yan, S.-Q., et al. (2026). Short Horizons and Sparse Concepts: A Mathematical View of the Readout in the J-lens. arXiv:2608.25347.</p>
+<p>Zhang, Z., et al. (2024). ReLU² Wins: Discovering Efficient Activation Functions for Sparse LLMs. arXiv:2402.03804.</p>
+<h2>Appendix</h2>
+<h3>A. J-share census</h3>
+<p>A.1 J-lens and J-share. We use the J-lens files released with Gurnee et al. (2026). The J-lens direction of token t at layer L is row t of W U J L, normalized to unit length, where W U is the unembedding with the final normalization gain folded in and J L is the Jacobian of the final residual stream with respect to the residual stream at layer L, averaged over inputs. For a unit output vector w with verbalizable part v, the J-share is 1 − ‖ w − v‖², the fraction of ‖ w‖² that v explains. For each neuron we take the sign it uses and compute the J-share of its output vector with at most 25 token directions, by nonnegative pursuit over the J-lens token directions at its layer (the last layer uses the unembedding). We compare each neuron with 2,048 random unit directions at the same layer. Across the 3.4 million neurons of the four models, 19 to 29% have high J-share, 56 to 81% middle and 1 to 21% low, and the median neuron’s J-share is 1.02 to 1.26 times that of the median random direction. Figures 2a and 2b show these shares by depth.</p>
+<p>A.2 Blind test. In each model we sample 1,000 neurons, half above and half below their layer’s mean J-share, and pair each with a control neuron from the same layer and half. We drop neurons whose gate never opens on the corpus, Pile-10k filtered as in B.1 (79 in Qwen3-8B and 79 in Qwen3-14B). Each item shows five top-activating passages and a 15-token readout, which is either the neuron’s own, the control neuron’s, or that of a random direction. The judges see no automated description. Two Claude judges label each item as a clear, weak or no connection, and we count clear or weak as related. Control readouts were rated related in 2 to 4% of ratings for a random direction and 5 to 8% for another neuron in the same layer.</p>
+<p>Readouts of neurons with high J-share are usually variants of one word. For example, L22 n5208 in Llama-3.1-8B-Instruct activates on “calls” in recipes and requirements and adds call, calls and _call. Readouts of neurons with middle J-share are often different words that point to a shared concept. For example, the readout of L4 n4934, a neuron with median J-share, is salads, lettuce, salad and cabbage.</p>
+<p>A.3 Alignment with attention queries. For each output vector we count the later attention heads whose query weights it aligns with more than 99% of random directions do. The alignment with a head’s query is the squared norm of the head’s query projection of the unit output vector, with the gain of the preceding RMSNorm folded into the query weights, and we compare it with the same quantity for 4,096 random unit directions. In layers from 10 to 90% of depth, we call a neuron strongly aligned with queries when this count exceeds the 99th percentile of the count for random directions. 53 to 76% of neurons with low J-share are strongly aligned, against 23 to 36% of all neurons. J-share predicts strong query alignment better than readout kurtosis, the measure Gurnee et al. (2026) use to test whether a direction is verbalizable (AUROC 0.69 to 0.77, against 0.34 to 0.64 for kurtosis).</p>
+<h3>B. Type 3 audit</h3>
+<p>B.1 Four checks. We count a signed direction of a neuron (+ w or − w) as type 3 only if it passes four checks. First, the neuron activates strongly on documents about both topics. Second, in documents about each topic, zeroing the neuron lowers the probability of the other topic’s words more than zeroing random directions does. Third, the effect is specific to the two topics, not to a broader category they share, such as two countries. Fourth, the effect is on whole words, not word pieces. In every result that uses Pile text, we exclude the Books3, BookCorpus2, StackExchange and OpenWebText2 subsets of the Pile; Pile-10k, the first 10,000 documents of the Pile, keeps 7,070 documents. Topic documents are Pile-10k documents that match a list of terms for the topic, written by a Claude judge; we take up to 150 documents, a 1,500-character window around the first match and its first 256 tokens. A neuron activates strongly when its activation on the tested sign exceeds the 99.9th percentile of that activation over all positions of 200 random Pile-10k documents. Check 1 requires this in at least 5 documents of each topic, in a share of documents at least 0.07 above the share of random documents. For check 2, we zero the neuron at every position of up to 40 such documents and measure the drop in log probability of the first tokens of the other topic’s words, minus the drop for 200 random words, at positions where the neuron activates strongly. The drop must be at least 0.03 nats and at least 3 standard deviations above the drops for 20 random directions with the norm of the output vector. For check 3, a Claude judge lists other members of each topic’s category, and the check fails if their words drop by at least a quarter as much as the other topic’s words with a z-score of at least 3. For check 4, at most half of the positive change among the 15 tokens with the largest drop may fall on word continuations, tokens without a leading space that start with a lowercase letter.</p>
+<p>To measure the recall of these checks, we build synthetic two-concept neurons by replacing a neuron’s output vector with the sum of the output vectors of two neurons about unrelated topics, and checks 2 to 4 recover 62 to 81% of them depending on the model (check 1 does not apply, because synthetic neurons do not activate on their topics). We build 54 to 60 synthetic neurons per model, of which 48 to 60 have a measurable effect, and the recall is over these.</p>
+<p>B.2 Random sample. A signed direction has a measurable effect when zeroing the neuron in the contexts where it activates most changes next-token probabilities more than zeroing random directions does. We sample middle-layer neurons uniformly at random from each model until at least 1,000 signed directions have an effect (1,016 to 1,084 per model). Of these, 0 to 2 per model pass the four checks. After correcting for the recall of the checks, type 3 signed directions are at most 0.4 to 1.1% of signed directions with an effect.</p>
+<p>B.3 Search for type 3 neurons. The four checks need two named topics with their own documents and words for each neuron, so they are expensive to run on every neuron. We therefore first search for candidates with three cheaper heuristics: clustering each neuron’s readout tokens into topics, reconstructing its output vector from pairs of other neurons’ output vectors, and clustering the passages where it activates most. In Llama-3.1-8B-Instruct, these flag about 44,000 of the 301,056 neurons in layers 8 to 28. We keep the roughly 4,500 that activate on text about both topics or pass an automatic effect test, then the 54 whose readouts are about two unrelated topics, and test every remaining candidate with the four checks. Across the four models, 35 neurons pass, 3 to 17 per model. The search tests only part of the candidates in each layer. The count is therefore a lower bound, and the random sample above is the estimate of how common type 3 is. Topics that share a word still count: one of the 35, Qwen3-14B L30 n4527, adds student debt and static electricity, and its readout is variants of “charge”. Table B1 lists 15 of the other 34, including the four in Table 1.</p>
+<p>Table B1. More type 3 neurons. 15 of the 35 type 3 neurons we found, including the four in Table 1. In documents about either topic, zeroing each one lowers the probability of the other topic’s words. The sign after each neuron is the sign we tested. Two Claude Opus 5.5 raters, each seeing only the two topics, judged whether they share an evident link (a shared word or string, a named entity, or a shared category); the link column gives the link they named, if any. Four neurons were not rated.</p>
+<table aria-label="数据表格，可横向滚动查看" tabindex="0">
+<thead>
+<tr>
+<th>Model</th>
+<th>Neuron</th>
+<th>Adds</th>
+<th>and</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Llama-3.1-8B</td>
+<td>L20 n2287 (−)</td>
+<td>Elon Musk</td>
+<td>protein translation</td>
+<td>none found</td>
+</tr>
+<tr>
+<td>Llama-3.1-8B</td>
+<td>L16 n60 (−)</td>
+<td>hearing</td>
+<td>shoes</td>
+<td>not rated</td>
+</tr>
+<tr>
+<td>Llama-3.1-8B</td>
+<td>L21 n2095 (−)</td>
+<td>hip replacement</td>
+<td>eyeglasses</td>
+<td>worn corrective devices</td>
+</tr>
+<tr>
+<td>Llama-3.1-8B</td>
+<td>L20 n7696 (−)</td>
+<td>Liverpool</td>
+<td>Tampa</td>
+<td>city and regional place names</td>
+</tr>
+<tr>
+<td>Qwen3-8B</td>
+<td>L25 n5728 (−)</td>
+<td>Singapore</td>
+<td>Flutter (app framework)</td>
+<td>none found</td>
+</tr>
+<tr>
+<td>Qwen3-14B</td>
+<td>L31 n1780 (+)</td>
+<td>Guangdong</td>
+<td>Florida</td>
+<td>none found</td>
+</tr>
+<tr>
+<td>Qwen3-14B</td>
+<td>L27 n15456 (−)</td>
+<td>Liaoning</td>
+<td>Argentina</td>
+<td>none found</td>
+</tr>
+<tr>
+<td>Qwen3-14B</td>
+<td>L26 n14474 (+)</td>
+<td>patents</td>
+<td>cancer</td>
+<td>none found</td>
+</tr>
+<tr>
+<td>Qwen3-14B</td>
+<td>L33 n4648 (+)</td>
+<td>baseball</td>
+<td>diabetes</td>
+<td>not rated</td>
+</tr>
+<tr>
+<td>Qwen3-14B</td>
+<td>L31 n9768 (−)</td>
+<td>front-end JavaScript</td>
+<td>venous disease</td>
+<td>not rated</td>
+</tr>
+<tr>
+<td>Qwen3-14B</td>
+<td>L30 n8126 (−)</td>
+<td>git</td>
+<td>academic science careers</td>
+<td>not rated</td>
+</tr>
+<tr>
+<td>OLMo-3-32B</td>
+<td>L33 n18781 (+)</td>
+<td>Melbourne</td>
+<td>Bangalore</td>
+<td>none found</td>
+</tr>
+<tr>
+<td>OLMo-3-32B</td>
+<td>L26 n18802 (−)</td>
+<td>Nigeria</td>
+<td>Malaysia</td>
+<td>none found</td>
+</tr>
+<tr>
+<td>OLMo-3-32B</td>
+<td>L31 n22590 (+)</td>
+<td>Jamaica</td>
+<td>Tennessee</td>
+<td>music heritage (reggae, country and blues)</td>
+</tr>
+<tr>
+<td>OLMo-3-32B</td>
+<td>L31 n20956 (+)</td>
+<td>starch and grains</td>
+<td>baseball pitching</td>
+<td>none found</td>
+</tr>
+</tbody>
+</table>
+<h3>C. Fixed basis</h3>
+<p>C.1 Directions removed by MLPs. For each layer we form the average linear map M of each sublayer on 120 Pile-10k documents (filtered as in B.1, up to 256 tokens each) and take the singular values of I + M. A singular value of 0 means that the sublayer removes a direction, and a singular value of 1 means that the direction is unchanged. For an MLP,</p>
+<p>M = W down (diag(E[s SiLU′(g) u]) W gate + diag(E[s SiLU(g)]) W up) diag(γ),</p>
+<p>where g and u are the gate and up activations, γ is the gain of the RMSNorm in front of the MLP, and s is the inverse RMS of the token’s residual stream, so that M is a map on the residual stream itself. In OLMo-3-32B each sublayer’s output is normalized instead of its input, so M is multiplied on the left by the output norm’s gain divided by the mean RMS of the sublayer output. The map is an average over tokens, so at a single token a sublayer can still remove a direction that is unchanged in the average map.</p>
+<p>We call a direction strongly shrunk when I + M has a singular value below 0.1 for it. Over the middle layers (15 to 85% of depth), the MLPs strongly shrink 84 directions in total in Llama-3.1-8B-Instruct, 72 in Qwen3-8B, 32 in Qwen3-14B and 16 in OLMo-3-32B, out of 4,096 or 5,120 residual dimensions per layer. The median layer shrinks 0 or 1 directions, and the most in any one layer is 10, 24, 7 and 2, respectively. The same test on attention sublayers, using each head’s output-value map weighted by its average attention to the current position, finds at most 1 strongly shrunk direction per layer.</p>
+<p>For the up to five most shrunk MLP directions per layer, in layers at 12 to 85% of depth (147 in total), we read both signs with the J-lens and assign each direction one category by hand from its top ten tokens per sign. 68 of the 147 read as code syntax, paths or identifiers on one sign and 40 as a topic; none of OLMo-3-32B’s 17 read as code. The rest read as punctuation or formatting (9), subword tokens (9), script or language (9), function words (7) or no clear pattern (5). A direction with a topic on one sign and code on the other is counted as a topic. Most of the topics are also markers of the kind of text, such as the register, source or region of a document, style words or lists of personal names. Fourteen are content topics, such as crystals, machines, motivation, computation and history.</p>
+<p>C.2 Moving output vectors to other layers. We start from the lowercase words of 4 to 12 letters that are a single token with a leading space in the tokenizers of these models, and keep the 4,890 concept nouns: words that are a WordNet noun entry, whose most common WordNet sense is a noun that appears in WordNet’s sense-tagged corpus, and whose sense is not a quantity or relation. In layers at 10 to 82% of depth we take, for each word and layer, the 50 neurons whose output vectors have the largest absolute cosine with the word’s J-lens direction, with the sign of the cosine as the sign of the output vector. A neuron is kept only if this is the sign on which its activations on Pile-10k (filtered as in B.1) are larger and, among the 15 highest or lowest tokens of its gate under the J-lens of the previous layer, one token contains the word’s first four letters or appears among the neuron’s top 20 readout tokens. For a direct neuron the word is at most sixth in its readout and at most sixth in the unembedding. For an indirect neuron the word is at most tenth in its readout and outside the top 500 in the unembedding. For each word we keep the direct and the indirect neuron with the best readout rank, and keep words that have both.</p>
+<p>We add f times REF times the unit output vector to the output of one layer at every position, where REF is the mean norm of the final layer’s residual stream on the prompt (excluding the first position) and f is 0.1, 0.25 or 1. We read the logit of the word’s token at the last position of two prompts, “I looked up and saw a” and “Let me tell you about”. The control is the mean over three random unit directions added in the same way. A concept is kept when the output vectors of both of its neurons raise the word by more than 1 logit over the control at their own layer at every strength and prompt. Figure 3 shows 142 kept concepts per model, drawn at random (all 141 in Qwen3-8B), and Table C1 lists all kept concepts, so the rates in the Figure 3 caption (91 to 98%) and in the text (90 to 98%) differ slightly.</p>
+<p>Table C1. Output vectors added at every layer, f = 0.25, all kept concepts. Median gain: median over concepts of the mean, over layers before the last tenth of depth, of the word’s logit minus the control’s. Above control: share of concept-layer pairs before the last tenth of depth where the gain is positive.</p>
+<table aria-label="数据表格，可横向滚动查看" tabindex="0">
+<thead>
+<tr>
+<th>Model</th>
+<th>With both neurons</th>
+<th>Kept</th>
+<th>Direct, median gain</th>
+<th>Direct, above control</th>
+<th>Indirect, median gain</th>
+<th>Indirect, above control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Llama-3.1-8B-Instruct</td>
+<td>3,595</td>
+<td>1,254</td>
+<td>8.3</td>
+<td>99.6%</td>
+<td>3.9</td>
+<td>97.5%</td>
+</tr>
+<tr>
+<td>Qwen3-8B</td>
+<td>252</td>
+<td>141</td>
+<td>10.8</td>
+<td>98.5%</td>
+<td>5.1</td>
+<td>91.4%</td>
+</tr>
+<tr>
+<td>Qwen3-14B</td>
+<td>2,504</td>
+<td>926</td>
+<td>9.8</td>
+<td>99.4%</td>
+<td>3.8</td>
+<td>93.3%</td>
+</tr>
+<tr>
+<td>OLMo-3-32B</td>
+<td>999</td>
+<td>147</td>
+<td>5.1</td>
+<td>93.0%</td>
+<td>2.3</td>
+<td>90.4%</td>
+</tr>
+</tbody>
+</table>
+<p>C.3 Facets of a concept. We study ten concepts (moon, cat, fire, red, death, fear, math, jazz, chess and sushi) in all four models. Each concept has a target word, four words of the same category and 16 sentences that end at the word. In each layer we take the neuron whose mean activation at the word differs most between the target word and the four other words, among neurons whose gate pre-activation is positive on the target word, and use the sign of this difference. We read each output vector with the J-lens of its own layer and take its top 10 tokens.</p>
+<p>For moon in Llama-3.1-8B-Instruct, we assigned 12 of the 32 neurons to five facets by hand from their readouts: the word itself (layers 3, 4 and 15), night (6, 13 and 22), crescent shape (16 and 17), space travel (5, 18 and 19) and sky (27). We leave the other 20 neurons unassigned.</p>
+<p>To compare output vectors across layers, we take the mean absolute cosine between the unit output vectors of every pair of a concept’s neurons. As a baseline, we replace each neuron with a random neuron from the same layer and average over 20 draws. Over the ten concepts, the mean absolute cosine is 0.019 to 0.043 across the four models, against 0.011 to 0.013 for random neurons. The output vectors are thus nearly orthogonal, although their cosines are two to three times those of random neurons.</p>
+<p>To measure what each output vector raises, we add it at its own layer to eight neutral prompts, such as “I looked up and saw a”, at every position and with a norm of half the mean residual norm after that layer. For every pair of neurons (i, j), we record the mean logit change at the last position of the 10 readout tokens of neuron j when the output vector of neuron i is added, minus the same change for the mean of six random unit directions added at the same layer. For each facet with at least two neurons, we average this quantity over pairs of different neurons within the facet (own facet’s words) and over pairs from a neuron in the facet to a neuron in another facet (other facets’ words). The output vectors raise their own facet’s words by 0.80 to 2.10 logits and other facets’ words by 0.44 to 0.92, a ratio of 1.5 to 2.7. Sky has one neuron and has no within-facet pair. In Figure 4a, an arrow means that adding the first neuron’s output vector in this way raises the second neuron’s activation at the last position with a z-score above 8 against the six random directions; each box shows its strongest incoming link.</p>
+<h3>D. Fact traces</h3>
+<p>Our method differs from earlier neuron-level traces in two ways. First, we search where the fact is computed. We read the residual stream at the answer position with the J-lens to find the layer where information about the subject arrives, and consider neurons from that layer onward, and for athletes also neurons at the name. For the athletes, we rank neurons in layers 0 to 13 at the name by the change in their activation from made-up names to the athlete, times the alignment of their output vector with a sport direction at layer 13 (the mean residual stream at the names of other athletes of the sport minus that at athletes of the other five sports). We group the top 300 by hand from their readouts into the neurons that add the sport and groups of related neurons, add the groups one at a time, and then leave out groups unrelated to the athlete. For books and packages, we rank answer-position neurons in layers 10 to 31 by their activation change from made-up subjects times the gradient of the answer’s logit minus a fixed wrong answer’s logit. For each candidate we read the tokens its output raises and lowers and the tokens that open and close its gate, and label it as having no clear concept, a concept related to the fact, a correlate of the fact (such as fame, authorship, era or places) or an unrelated concept. We keep the answer writers and the related and correlate neurons, and add candidates until the answer is removed on every phrasing checked. Second, a fact counts as removed only when the answer’s first token is no longer the top prediction, because removing late neurons that amplify an answer already on top lowers its probability without changing it. We remove neurons by resample ablation, using their values on made-up subjects, and random neurons from the same layers never change an answer. The 12 made-up names of each athlete combine first names and surnames from fixed lists, have the athlete’s token count and give the sport a probability below 0.05, and none was used to rank or choose neurons. For books and packages, the made-up titles and package names are taken from a fixed pool by the same rule. For each removed neuron, we look at its readout and check whether it activates only for this subject or for every subject of the same kind.</p>
+<p>Table D1. Neuron-level traces of 18 facts. Fact: the subject and its answer; for pip packages, the package name and the name used to import it (pymupdf is imported as fitz). Direct path: the number of neurons found first whose readout is a spelling or form of the answer, with example readouts. Multi-hop paths: every group of other neurons in the removed set, named from their readouts and from which subjects they activate on; “lowers” marks groups whose output vectors lower the logits of the listed words. Neurons removed: the size of the whole set. Each set is made up only of answer writers, neurons with a readout on the output or gate side related to the fact, and readable correlates (such as fame, era and places); these sets are enough to remove the fact but are not the only or smallest such sets. Answer after removal: the most common top prediction once the set is removed. Each set was checked on four phrasings of the question (three for Jaromir Jagr and pillow, two for pymupdf). On any phrasing, at most 4 of the 12 made-up names still give the answer, and random same-layer sets of the same size leave the answer for all 12. For athletes, demographic groups (gender, race, ethnicity, religion) count as correlates, as do vehicle and military groups (physical toughness); without Tom Brady’s vehicle group, 5 of 12 names keep the answer on one phrasing.</p>
+<table aria-label="数据表格，可横向滚动查看" tabindex="0">
+<thead>
+<tr>
+<th>Fact</th>
+<th>Direct path: answer writers (readouts)</th>
+<th>Multi-hop paths: groups of removed neurons, named from their readouts</th>
+<th>Neurons removed</th>
+<th>Answer after removal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Derek Jeter → baseball</td>
+<td>10 (baseball, pitchers, innings)</td>
+<td>none needed</td>
+<td>10</td>
+<td>basketball</td>
+</tr>
+<tr>
+<td>Roger Federer → tennis</td>
+<td>9 (tennis, Tennis)</td>
+<td>individual games; other sports; lowers other sports; athlete, Olympic; competition, winning; elegance; fame, awards; female; male; lowers military, violence, vehicles; non-US nationalities; British spelling; UK and Commonwealth places; Swiss, German and European places; lowers English names; lowers hip-hop; age, career; cities; skiing, cycling; rivalry</td>
+<td>140</td>
+<td>basketball</td>
+</tr>
+<tr>
+<td>Paul George → basketball</td>
+<td>12 (basketball, NBA)</td>
+<td>lowers other sports; lowers contest, tournament; generic sport, players; pro leagues, NBA cities; Indiana (Pacers); athletic movement, jumping; toughness, injury; sneakers, gear; shooting; skate, street; career, trade, rookie; race, Black culture; Caribbean, tropical; US places; recent era, social media; celebrity, fame, wealth; news, legal, politics; male; entertainment; world places; cities; family, ancestry, death</td>
+<td>153</td>
+<td>swimming</td>
+</tr>
+<tr>
+<td>Dirk Nowitzki → basketball</td>
+<td>13 (NBA, basketball)</td>
+<td>height, stature; generic sport, athletes, teammates; other sports; lowers other sports; pro leagues, franchises; Dallas, Texas; US places; cities; Germany, Bavaria; lowers Nordic, German; Black, African; hip-hop, urban; Caribbean, tropical; Islam, South Asian, immigrants; Spanish, Latino; other world places; fame, celebrity, wealth, media; lowers fame; entertainment, pop culture; nightlife, glamour; era (1990s to 2010s technology and media); leaders, politics; military, guns, vehicles; perseverance, mentors; male; female; lowers local, regional; lowers rural, farming; lowers academia; other people’s names</td>
+<td>170</td>
+<td>golf</td>
+</tr>
+<tr>
+<td>Wayne Gretzky → hockey</td>
+<td>10 (NHL, hockey, ice)</td>
+<td>lowers other sports; sport, team, league; other sports; winter, snow, skating; Canada; North American places; Central and Eastern Europe, Russia; alpine, mountains; UK and Commonwealth, lowers US; lowers African, Black; male, physical, vehicles, weapons; female pronouns; family, aging, nickname; fame; Middle East, South Asia, Catholic</td>
+<td>117</td>
+<td>baseball</td>
+</tr>
+<tr>
+<td>Tom Brady → football</td>
+<td>13 (quarterbacks, NFL, touchdowns)</td>
+<td>vehicles; toughness; US places; US spelling; sport; celebrity; names; era; aging</td>
+<td>132</td>
+<td>basketball</td>
+</tr>
+<tr>
+<td>Jerry Rice → football</td>
+<td>16 (football, NFL, touchdowns)</td>
+<td>athlete, team sport; lowers other sports; physical, tough, military, vehicles; male; US places, American spelling; era; fame, media, wealth; career, aging; race, nationality; family, other</td>
+<td>273</td>
+<td>golf</td>
+</tr>
+<tr>
+<td>Jaromir Jagr → hockey</td>
+<td>8 (hockey, NHL, puck)</td>
+<td>athlete, team sport; lowers other sports; winter, cold, snow; Nordic, Alpine; Canada; US places, Pittsburgh, Boston; Czech, Slavic, Central and Eastern Europe; non-American (British spelling, lowers US places); era, aging, longevity; male; physical, metal, military; fame, media; northern, lowers tropical and African; family, children; soccer, Soviet</td>
+<td>129</td>
+<td>baseball</td>
+</tr>
+<tr>
+<td>Serena Williams → tennis</td>
+<td>8 (tennis, Tennis)</td>
+<td>female pronouns; women, feminine; family, marriage; siblings, pair; games (chess, golf, poker); other sports; beach, swimming; athlete, Olympic; competition, winning; celebrity, luxury, sponsors; arts, performers; eminence, awards; social media, millennial; 1990s era; retirement, injury; British spelling; UK places; Eastern Europe; international, global; Australia; African</td>
+<td>168</td>
+<td>basketball</td>
+</tr>
+<tr>
+<td>Tom Watson → golf</td>
+<td>11 (golf, Golf, PGA)</td>
+<td>lowers other sports (football, soccer, basketball); sports, competition; old age, retirement; British Open (UK, Scotland, Yorkshire); American, Kansas; gender; fame; golf lifestyle (wealth, resorts, outdoors); Olympics, leaderboards; hiking, coastal; English-speaking nationalities</td>
+<td>126</td>
+<td>rugby</td>
+</tr>
+<tr>
+<td>Crime and Punishment → Dostoevsky</td>
+<td>8 (F, Ф)</td>
+<td>more F writers; crime, detectives, prosecutors; Russian and Slavic names and places (St Petersburg, Soviet, Ukraine); 19th century, Napoleonic era; lowers Leo (the fallback, Leo Tolstoy); English first names; classics, fiction, books; correlates: famous historical figures, Central Europe</td>
+<td>44</td>
+<td>Leo Tolstoy</td>
+</tr>
+<tr>
+<td>Jane Eyre → Charlotte Brontë</td>
+<td>4 (Char, Charlotte, Ch)</td>
+<td>more C and Ch writers; female names; Brontë moors, Yorkshire, England, Britain; Victorian; gothic fiction, novels, chapters, characters, autobiography; Rochester; lowers J and Jane (the fallback, Jane Austen); correlates: famous figures, Harry Potter, pen names, journalism, religion</td>
+<td>86</td>
+<td>Jane Austen</td>
+</tr>
+<tr>
+<td>One Hundred Years of Solitude → García Márquez</td>
+<td>7 (G, Gab)</td>
+<td>more G writers; Colombia, Latin America, Spanish, Hispanic; lowers Argentina and J (the fallback, Jorge Luis Borges); first names and surnames; novels, fiction, poetry, literature; Nobel, awards; correlates: famous authors and people, celebrity, authorship, famous titles, guerrilla</td>
+<td>86</td>
+<td>Jorge Luis Borges</td>
+</tr>
+<tr>
+<td>The Hunchback of Notre-Dame → Victor Hugo</td>
+<td>4 (V, Victor)</td>
+<td>more V writers; France, French, Paris, French names; 19th century; medieval; cathedral, church, clergy; novels, fiction, narrative, playwright; gothic, monsters; lowers Alex and Al (the fallback, Alexandre Dumas); first names; correlates: famous artists and authors, classical authors, adaptations, nobility, religion</td>
+<td>100</td>
+<td>Alexandre Dumas</td>
+</tr>
+<tr>
+<td>opencv-python → cv2</td>
+<td>11 (cv, CV, c, v)</td>
+<td>more C, V and two-letter writers; lowers op and open (the copied name, opencv); computer vision, cameras, video, faces; image processing, algorithms; Python modules, pip, imports; GPU, OpenGL, C and C++; correlates: wider software ecosystem (built-ins, machine-learning terms, files, datasets)</td>
+<td>115</td>
+<td>import opencv</td>
+</tr>
+<tr>
+<td>beautifulsoup4 → bs4</td>
+<td>6 (b, two-letter abbreviations such as BS, JS)</td>
+<td>more B, b and S-ending writers; lowers beautiful and its synonyms (the copied name); soup, BeautifulSoup; Python modules, imports; web pages, browser, Selenium; abbreviations; correlates: built-ins, git, errors, machine-learning terms</td>
+<td>54</td>
+<td>import beautifulsoup4</td>
+</tr>
+<tr>
+<td>pillow → PIL</td>
+<td>3 (capital P over p)</td>
+<td>none needed</td>
+<td>3</td>
+<td>import pillow</td>
+</tr>
+<tr>
+<td>pymupdf → fitz</td>
+<td>1 (fit)</td>
+<td>none needed</td>
+<td>1</td>
+<td>import pymupdf</td>
+</tr>
+</tbody>
+</table>
+<p>Where book authors are computed. For the four books, we replace the output of the MLPs in one range of layers, at the title tokens or at the answer position, with the output of the same MLPs at the same positions on a made-up title of the same token count. We use 7 to 12 made-up titles per book, each giving the author a probability below 0.05. We report the mean probability of the author’s full name among a fixed list of candidate names. Patching the title’s MLPs in layers 0 to 2 lowers this probability to 0.01 to 0.02, and in layers 3 to 8 to 0.02 to 0.05. Patching the title’s MLPs in layers 9 to 12 leaves 0.92 to 0.99, and in layers 13 to 16 leaves 0.84 to 0.99, with the author on top for every made-up title. Patching the answer position’s MLPs in layers 17 to 31 lowers the author’s probability to 0.03 to 0.09, with the author on top for at most 1 of the made-up titles.</p>
+<p>To find when information about the subject reaches the answer position, we copy the residual stream at the subject tokens after layer L into the same prompt with a made-up subject, and measure the probability of the answer’s first token. For the four books, this probability is 0.75 to 0.95 when we copy after layer 10 and 0.04 to 0.20 after layer 16. For the four packages, it is 0.25 to 1.00 after layer 10 and 0.00 to 0.11 after layer 16. After layer 16, the subject tokens no longer carry what the answer needs.</p>
+<p>Where athletes’ sports are moved. For the ten athletes, we block every position after the name from attending to the name tokens in chosen layers and read the sport’s margin over the best of the other five sports. Blocking layers 14, 15, or 14 and 15 never changes the top next token. Over 67 athletes, blocking from layer 15 onward removes the sport for 61 on the main phrasing of the question and 66 on a second phrasing, and blocking from layer 16 onward keeps it for all 67. To test how the name tokens are combined, we replace the attention output at the name positions in one layer with its output on four made-up names of the same token count. For Jaromir Jagr this lowers the margin from 8.25 to −1.11 at layer 0 and −1.41 at layer 1, and leaves 8.34 at layer 2.</p></div>
+</section>
+<footer class="source-box"><span>内容来自原作者；中文为乔木风格改写，非逐字翻译。</span><div><a href="https://alignment.anthropic.com/2026/neuron-basis-theory/" target="_blank" rel="noopener noreferrer">打开原文 ↗</a><a href="https://alignment.anthropic.com/2026/neuron-basis-applications/" target="_blank" rel="noopener noreferrer">相关链接 ↗</a></div></footer>
+</article>
+</main>
+<footer class="site-footer"><span>海外创始人长文 · 乔木中文改写<br>每日 08:00 更新 · 中国标准时间（UTC+8）</span><nav class="footer-links" aria-label="页尾导航"><a href="/feed.xml">全文 RSS ↗</a><a href="/archive">全部文章</a><a href="/about">关于</a></nav></footer>
+
+<script data-source="/static/app.fe36855dc563.js">/* D · progressive visual-journal reader. No framework, no content rewriting. */
+(() => {
+  'use strict';
+  const $ = (selector, root = document) => root.querySelector(selector);
+  const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+  const readerMemory = new Map();
+  const mediaBound = new WeakSet();
+  const nextFrame = callback => requestAnimationFrame(callback);
+  const safeFocus = element => { if (element?.isConnected) element.focus({preventScroll: true}); };
+  function currentTheme() { return document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light'; }
+  function paintTheme() {
+    const dark = currentTheme() === 'dark';
+    const button = $('#theme-btn');
+    if (button) {
+      button.setAttribute('aria-pressed', String(dark));
+      button.setAttribute('aria-label', dark ? '切换为亮色主题' : '切换为暗色主题');
+    }
+    $('meta[name="theme-color"]')?.setAttribute('content', dark ? '#20241e' : '#fffefa');
+  }
+  paintTheme();
+  $('#theme-btn')?.addEventListener('click', () => {
+    const style = document.createElement('style');
+    style.textContent = '*,*::before,*::after{transition:none!important}';
+    document.head.append(style);
+    const next = currentTheme() === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    try { localStorage.setItem('xn.theme', next); } catch {}
+    paintTheme();
+    void document.documentElement.offsetHeight;
+    nextFrame(() => nextFrame(() => style.remove()));
+  });
+
+  // Filter the existing static cards; content and native links work without JS.
+  const discovery = $('[data-discovery]');
+  if (discovery) {
+    const grid = $('[data-news-grid]');
+    const cards = $$('.news-card', grid);
+    const search = $('#story-search');
+    const clear = $('[data-clear-search]');
+    const empty = $('[data-search-empty]');
+    const normalize = value => value.normalize('NFKC').toLocaleLowerCase().trim();
+    const index = cards.map(card => normalize(card.dataset.search || ''));
+    let kind = 'all', layout = discovery.dataset.defaultView;
+    function render(writeURL = true) {
+      const terms = normalize(search.value).split(/\s+/).filter(Boolean);
+      let count = 0;
+      cards.forEach((card, i) => {
+        card.hidden = !(kind === 'all' || card.dataset.kind === kind) || !terms.every(term => index[i].includes(term));
+        if (!card.hidden) count++;
+      });
+      grid.dataset.layout = layout;
+      grid.classList.toggle('is-filtered', kind !== 'all' || terms.length > 0);
+      $$('[data-filter]', discovery).forEach(button => button.setAttribute('aria-pressed', String(button.dataset.filter === kind)));
+      $$('[data-layout]', discovery).forEach(button => button.setAttribute('aria-pressed', String(button.dataset.layout === layout)));
+      $('[data-result-count]').textContent = count === cards.length ? `${count} 篇文章 · 最新在前` : `找到 ${count} 篇 · 共 ${cards.length} 篇`;
+      clear.hidden = !search.value;
+      empty.hidden = count !== 0;
+      $('[data-empty-description]').textContent = search.value.trim() ? `试试更短的关键词，或清除「${search.value.trim()}」与类型筛选。` : '这个类型暂时没有文章，试试查看全部内容。';
+      if (writeURL) {
+        const url = new URL(location.href);
+        for (const [key, value] of [['q', search.value.trim()], ['type', kind === 'all' ? '' : kind], ['view', layout === discovery.dataset.defaultView ? '' : layout]]) {
+          if (value) url.searchParams.set(key, value); else url.searchParams.delete(key);
+        }
+        history.replaceState(history.state, '', url.pathname + url.search + url.hash);
+      }
+    }
+    function restore() {
+      if (location.pathname.startsWith('/a/')) return;
+      const params = new URLSearchParams(location.search);
+      search.value = params.get('q') || '';
+      kind = ['text', 'video'].includes(params.get('type')) ? params.get('type') : 'all';
+      layout = ['journal', 'list'].includes(params.get('view')) ? params.get('view') : discovery.dataset.defaultView;
+      render(false);
+    }
+    search.addEventListener('input', () => render());
+    clear.addEventListener('click', () => { search.value = ''; render(); search.focus(); });
+    $$('[data-filter]', discovery).forEach(button => button.addEventListener('click', () => { kind = button.dataset.filter; render(); }));
+    $$('[data-layout]', discovery).forEach(button => button.addEventListener('click', () => { layout = button.dataset.layout; render(); }));
+    $('[data-reset-filters]').addEventListener('click', () => { kind = 'all'; search.value = ''; render(); search.focus(); });
+    window.addEventListener('popstate', restore);
+    discovery.hidden = false;
+    restore();
+  }
+  function suspendMedia(root) {
+    $$('video,audio', root).forEach(media => { try { media.pause(); } catch {} });
+    $$('iframe[src]', root).forEach(frame => {
+      frame.dataset.pausedSrc = frame.getAttribute('src');
+      frame.removeAttribute('src');
+    });
+  }
+  function resumeEmbeds(root) {
+    $$('iframe[data-paused-src]', root).forEach(frame => {
+      frame.setAttribute('src', frame.dataset.pausedSrc);
+      delete frame.dataset.pausedSrc;
+    });
+  }
+  function bindMedia(root) {
+    $$('img,video,audio', root).forEach(media => {
+      if (mediaBound.has(media)) return;
+      mediaBound.add(media);
+      const figure = media.closest('.media-figure');
+      const notice = figure && $('.media-error', figure);
+      let bufferingTimer = null, requestedPlayback = false;
+      function clearBuffering() {
+        clearTimeout(bufferingTimer); bufferingTimer = null;
+        if (notice?.dataset.mediaState === 'buffering') notice.hidden = true;
+      }
+      const failed = () => {
+        requestedPlayback = false; clearBuffering();
+        const cover = media.closest('[data-cover]');
+        if (cover) cover.closest('.news-card')?.classList.add('media-failed');
+        if (figure) {
+          if (notice) {
+            notice.textContent = /^(VIDEO|AUDIO)$/.test(media.tagName)
+              ? '此处暂时无法播放，请通过下方原文链接观看或收听。'
+              : '图片未能载入，请通过下方原文链接查看。';
+            notice.dataset.mediaState = 'failed'; notice.hidden = false;
+          }
+          media.hidden = true;
+          if (media.tagName === 'VIDEO') {
+            const poster = $('[data-video-fallback]', figure);
+            if (poster) poster.hidden = false;
+          }
+        }
+      };
+      media.addEventListener('error', failed);
+      if (/^(VIDEO|AUDIO)$/.test(media.tagName)) {
+        const armBuffering = () => {
+          if (!requestedPlayback || bufferingTimer || media.hidden) return;
+          bufferingTimer = setTimeout(() => {
+            bufferingTimer = null;
+            if (notice && figure.isConnected && requestedPlayback && !media.hidden && !media.closest('[hidden]')) {
+              notice.textContent = '外部媒体暂未能继续播放，可通过下方原文链接观看或收听。';
+              notice.dataset.mediaState = 'buffering'; notice.hidden = false;
+            }
+          }, 10000);
+        };
+        media.addEventListener('play', () => { requestedPlayback = true; armBuffering(); });
+        media.addEventListener('waiting', armBuffering);
+        media.addEventListener('stalled', armBuffering);
+        media.addEventListener('playing', clearBuffering);
+        ['pause', 'ended', 'emptied'].forEach(name => media.addEventListener(name, () => {
+          requestedPlayback = false; clearBuffering();
+        }));
+      }
+      if (media.tagName === 'IMG' && media.complete && media.naturalWidth === 0) failed();
+    });
+  }
+  bindMedia(document);
+
+  // Accessible manual-activation tabs; no JS leaves both complete sections and links intact.
+  function enhanceReader(article, scroller, onView) {
+    const tablist = $('[data-tabs]', article);
+    if (!tablist) return null;
+    const tabs = $$('[data-view]', tablist);
+    const panels = $$('[data-reader-panel]', article);
+    const id = article.dataset.articleId;
+    const memory = readerMemory.get(id) || {positions: {}, view: 'rewrite'};
+    readerMemory.set(id, memory);
+    const isWindow = scroller === window;
+    const getTop = () => isWindow ? window.scrollY : scroller.scrollTop;
+    const setTop = value => { if (isWindow) window.scrollTo(0, value); else scroller.scrollTop = value; };
+    const toolbar = tablist.closest('.reader-tabs');
+    const position = $('.reading-position', toolbar);
+    const progress = $('progress', toolbar);
+    const percent = $('[data-reading-percent]', toolbar);
+    let progressFrame = null;
+    function updateProgress() {
+      progressFrame = null;
+      if (!article.isConnected || !progress) return;
+      const panel = panels.find(item => !item.hidden);
+      if (!panel) return;
+      const viewport = isWindow ? window.innerHeight : scroller.clientHeight;
+      const origin = isWindow ? 0 : scroller.getBoundingClientRect().top;
+      const top = panel.getBoundingClientRect().top - origin;
+      const distance = panel.getBoundingClientRect().height - viewport + toolbar.offsetHeight;
+      const value = distance <= 0 ? (top < viewport ? 100 : 0) : Math.round(Math.max(0, Math.min(1, (toolbar.offsetHeight - top) / distance)) * 100);
+      progress.value = value;
+      percent.textContent = value + '%';
+    }
+    function scheduleProgress() { if (progressFrame == null) progressFrame = nextFrame(updateProgress); }
+    if (position) position.hidden = false;
+    scroller.addEventListener('scroll', scheduleProgress, {passive: true});
+    window.addEventListener('resize', scheduleProgress);
+    article.addEventListener('load', scheduleProgress, true);
+    const observer = typeof ResizeObserver === 'function' ? new ResizeObserver(scheduleProgress) : null;
+    panels.forEach(panel => observer?.observe(panel));
+    const toolbarTop = () => Math.max(0, toolbar.getBoundingClientRect().top + getTop() - (isWindow ? 0 : scroller.getBoundingClientRect().top));
+    let view = null, generation = 0;
+    article.classList.add('reader-enhanced');
+    tablist.setAttribute('role', 'tablist');
+    tabs.forEach(tab => {
+      tab.setAttribute('role', 'tab');
+      tab.setAttribute('aria-controls', tab.dataset.view);
+    });
+    panels.forEach(panel => {
+      panel.setAttribute('role', 'tabpanel');
+      panel.setAttribute('tabindex', '0');
+      panel.setAttribute('aria-labelledby', 'tab-' + panel.dataset.readerPanel);
+    });
+    function remember() { if (view) memory.positions[view] = getTop(); memory.view = view; }
+    function show(next, {initial = false, updateURL = true} = {}) {
+      if (!['rewrite', 'original'].includes(next) || view === next) return;
+      const thisGeneration = ++generation;
+      if (view) {
+        remember();
+        const old = panels.find(panel => panel.dataset.readerPanel === view);
+        if (old) suspendMedia(old);
+      }
+      view = next;
+      memory.view = next;
+      panels.forEach(panel => {
+        panel.hidden = panel.dataset.readerPanel !== next;
+        if (!panel.hidden) resumeEmbeds(panel);
+        else suspendMedia(panel);
+      });
+      tabs.forEach(tab => {
+        const selected = tab.dataset.view === next;
+        tab.setAttribute('aria-selected', String(selected));
+        tab.setAttribute('tabindex', selected ? '0' : '-1');
+      });
+      if (updateURL) onView(next);
+      const saved = memory.positions[next];
+      // First rewrite starts at its title; first original starts at the visible tab bar.
+      if (!initial || next === 'original' || saved != null) {
+        nextFrame(() => {
+          if (thisGeneration === generation && article.isConnected) setTop(saved ?? toolbarTop());
+        });
+      }
+      scheduleProgress();
+    }
+    tabs.forEach(tab => tab.addEventListener('click', event => {
+      if (event.ctrlKey || event.metaKey || event.altKey || event.shiftKey) return;
+      event.preventDefault();
+      show(tab.dataset.view);
+    }));
+    tablist.addEventListener('keydown', event => {
+      const index = tabs.indexOf(document.activeElement);
+      if (index < 0) return;
+      if (event.key === ' ') { event.preventDefault(); show(tabs[index].dataset.view); return; }
+      let target = null;
+      if (event.key === 'ArrowRight') target = tabs[(index + 1) % tabs.length];
+      if (event.key === 'ArrowLeft') target = tabs[(index - 1 + tabs.length) % tabs.length];
+      if (event.key === 'Home') target = tabs[0];
+      if (event.key === 'End') target = tabs.at(-1);
+      if (target) { event.preventDefault(); safeFocus(target); }
+    });
+    show(location.hash === '#original' ? 'original' : 'rewrite', {initial: true, updateURL: false});
+    bindMedia(article);
+    return {show, remember, dispose() {
+      scroller.removeEventListener('scroll', scheduleProgress);
+      window.removeEventListener('resize', scheduleProgress);
+      article.removeEventListener('load', scheduleProgress, true);
+      observer?.disconnect();
+      if (progressFrame != null) cancelAnimationFrame(progressFrame);
+    }};
+  }
+  function replaceViewURL(view) {
+    const url = new URL(location.href);
+    url.hash = view === 'original' ? 'original' : 'rewrite';
+    history.replaceState(history.state, '', url.pathname + url.search + url.hash);
+  }
+  const directArticle = $('.site-main > [data-article-id]');
+  if (directArticle) {
+    const direct = enhanceReader(directArticle, window, replaceViewURL);
+    window.addEventListener('hashchange', () => direct?.show(location.hash === '#original' ? 'original' : 'rewrite', {updateURL: false}));
+    window.addEventListener('pagehide', () => { direct?.remember(); suspendMedia(directArticle); });
+  }
+
+  const sheet = $('#reader-sheet');
+  const grid = $('[data-news-grid]');
+  if (!sheet || !grid) return;
+  const scroll = $('.sheet-scroll', sheet);
+  const closeButton = $('[data-close-sheet]', sheet);
+  const pageRoots = $$('.site-header,.site-main,.site-footer');
+  const listTitle = document.title;
+  const listCanonical = $('link[rel="canonical"]')?.href;
+  const cache = new Map();
+  let active = null, controller = null, viewController = null, sequence = 0;
+  const canAnimate = !window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  history.scrollRestoration = 'manual';
+  const sheetState = () => history.state?.xnewsSheet;
+  const safePath = path => /^\/a\/[a-z0-9-]+\/?$/.test(path);
+  const prefetching = new Map();
+  const readerURLs = new Map($$('[data-open-reader]', grid).map(a => [new URL(a.href, location.href).pathname, a.dataset.readerSrc]));
+  const requestURL = path => readerURLs.get(path) || path;
+  // Warm only a link the reader shows intent to open; never preload media or all stories.
+  function prefetchArticle(event) {
+    if (event.type === 'pointerover' && event.pointerType === 'touch') return;
+    const connection = navigator.connection;
+    if (connection?.saveData || /(^|-)2g$/.test(connection?.effectiveType || '')) return;
+    const anchor = event.target.closest?.('[data-open-reader]');
+    if (!anchor) return;
+    const url = new URL(anchor.href, location.href), path = url.pathname;
+    if (url.origin !== location.origin || !safePath(path) || cache.has(path) || prefetching.has(path) || prefetching.size >= 2) return;
+    const abort = new AbortController();
+    const timer = setTimeout(() => abort.abort(), 8000);
+    const promise = fetch(requestURL(path), {signal: abort.signal, priority: 'low', headers: {'Accept': 'text/html'}})
+      .then(response => { if (!response.ok) throw new Error('Prefetch failed'); return response.text(); })
+      .then(html => {
+        const raw = new DOMParser().parseFromString(html, 'text/html').querySelector('[data-article-id]');
+        if (!raw || '/a/' + raw.dataset.articleId !== path.replace(/\/$/, '')) return null;
+        cache.set(path, html);
+        if (cache.size > 12) cache.delete(cache.keys().next().value);
+        return html;
+      }).catch(() => null).finally(() => { clearTimeout(timer); if (prefetching.get(path)?.promise === promise) prefetching.delete(path); });
+    prefetching.set(path, {promise, abort});
+  }
+  grid.addEventListener('pointerover', prefetchArticle);
+  grid.addEventListener('focusin', prefetchArticle);
+  grid.addEventListener('pointerdown', prefetchArticle);
+  async function readyPrefetch(path) {
+    const pending = prefetching.get(path);
+    if (!pending) return null;
+    let timer;
+    try {
+      // A click is foreground work. Do not inherit an eight-second speculative
+      // request deadline when that request is queued or stalled on a slow link.
+      const ready = await Promise.race([pending.promise, new Promise(resolve => { timer = setTimeout(() => resolve(null), 120); })]);
+      if (!ready) pending.abort.abort();
+      return ready;
+    } finally { clearTimeout(timer); }
+  }
+  function togglePageInert(value) { pageRoots.forEach(element => { element.inert = value; }); }
+  function showSheet(keyboard) {
+    if (sheet.open) return;
+    document.body.classList.add('sheet-open');
+    togglePageInert(true);
+    if (typeof sheet.showModal === 'function') sheet.showModal();
+    else { sheet.setAttribute('open', ''); sheet.classList.add('sheet-fallback'); sheet.setAttribute('role', 'dialog'); sheet.setAttribute('aria-modal', 'true'); }
+    if (!keyboard && canAnimate && typeof sheet.animate === 'function') {
+      sheet.animate([{transform: 'translateY(16px)', opacity: .8}, {transform: 'translateY(0)', opacity: 1}], {duration: 180, easing: 'cubic-bezier(.23,1,.32,1)'});
+    }
+    safeFocus(closeButton);
+  }
+  function loading() {
+    scroll.setAttribute('aria-busy', 'true');
+    scroll.innerHTML = '<div class="sheet-status" role="status"><p>正在打开文章…</p><div aria-hidden="true"><div class="skeleton-title"></div><div class="skeleton-title short"></div><div class="skeleton-line"></div><div class="skeleton-line"></div><div class="skeleton-line short"></div></div></div>';
+    scroll.scrollTop = 0;
+  }
+  function errorState(path, sourceURL) {
+    scroll.removeAttribute('aria-busy');
+    scroll.replaceChildren();
+    const status = document.createElement('section'); status.className = 'sheet-status'; status.setAttribute('role', 'alert');
+    const title = document.createElement('h2'); title.textContent = '文章暂时未能打开';
+    const description = document.createElement('p'); description.textContent = '选刊和阅读位置都还在。可以重试，或打开独立文章页。';
+    const retry = document.createElement('button'); retry.type = 'button'; retry.className = 'retry-button'; retry.textContent = '重试'; retry.addEventListener('click', () => loadArticle(path, sourceURL));
+    const link = document.createElement('a'); link.href = path; link.textContent = '独立文章页 ↗';
+    status.append(title, description, retry, link);
+    if (sourceURL) { const source = document.createElement('a'); source.href = sourceURL; source.target = '_blank'; source.rel = 'noopener noreferrer'; source.textContent = '去原文 ↗'; status.append(source); }
+    scroll.append(status);
+  }
+  async function loadArticle(path, sourceURL = '') {
+    if (!safePath(path)) return;
+    const ownSequence = ++sequence;
+    controller?.abort();
+    viewController?.remember(); viewController?.dispose(); viewController = null;
+    suspendMedia(scroll);
+    loading();
+    controller = new AbortController();
+    const signal = controller.signal;
+    const timeout = setTimeout(() => controller?.signal === signal && controller.abort(), 12000);
+    try {
+      let html = cache.get(path) || await readyPrefetch(path);
+      if (ownSequence !== sequence || !active) return;
+      if (signal.aborted) throw new Error('Article load timed out');
+      if (!html) {
+        const response = await fetch(requestURL(path), {signal, priority: 'high', headers: {'Accept': 'text/html'}});
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        html = await response.text();
+      }
+      if (ownSequence !== sequence || !active) return;
+      const parsed = new DOMParser().parseFromString(html, 'text/html');
+      const raw = $('[data-article-id]', parsed);
+      if (!raw || '/a/' + raw.dataset.articleId !== path.replace(/\/$/, '')) throw new Error('Article mismatch');
+      cache.set(path, html);
+      if (cache.size > 12) cache.delete(cache.keys().next().value);
+      const article = document.importNode(raw, true);
+      // Set panel visibility before attaching media to the live document.
+      viewController = enhanceReader(article, scroll, view => {
+        replaceViewURL(view);
+        $('[data-sheet-permalink]', sheet).href = location.pathname + location.search + location.hash;
+      });
+      scroll.replaceChildren(article);
+      scroll.removeAttribute('aria-busy');
+      document.title = parsed.title;
+      $('link[rel="canonical"]')?.setAttribute('href', 'https://xnews.qiaomu.ai' + path);
+      $('[data-sheet-permalink]', sheet).href = path + location.hash;
+      nextFrame(() => { if (ownSequence === sequence) bindMedia(article); });
+    } catch (error) {
+      if (ownSequence !== sequence || !active) return;
+      errorState(path, sourceURL);
+    } finally { clearTimeout(timeout); }
+  }
+  function openFromCard(anchor, keyboard) {
+    const url = new URL(anchor.href, location.href);
+    if (url.origin !== location.origin || !safePath(url.pathname)) return false;
+    const state = {path: url.pathname, listURL: location.pathname + location.search + location.hash, listY: window.scrollY, focusId: anchor.id, sourceURL: anchor.dataset.sourceUrl || ''};
+    history.replaceState({...history.state, xnewsList: {url: state.listURL, y: state.listY, focusId: state.focusId}}, '', location.href);
+    history.pushState({xnewsSheet: state}, '', url.pathname);
+    active = state;
+    $('[data-sheet-permalink]', sheet).href = url.pathname;
+    showSheet(keyboard);
+    loadArticle(state.path, state.sourceURL);
+    return true;
+  }
+  function finishClose() {
+    const previous = active;
+    ++sequence;
+    controller?.abort(); controller = null;
+    viewController?.remember(); viewController?.dispose(); viewController = null;
+    suspendMedia(scroll);
+    if (typeof sheet.close === 'function' && sheet.open) sheet.close();
+    sheet.removeAttribute('open'); sheet.classList.remove('sheet-fallback');
+    togglePageInert(false);
+    document.body.classList.remove('sheet-open');
+    scroll.replaceChildren(); scroll.removeAttribute('aria-busy');
+    active = null;
+    document.title = listTitle;
+    if (listCanonical) $('link[rel="canonical"]')?.setAttribute('href', listCanonical);
+    nextFrame(() => {
+      if (active) return;
+      window.scrollTo(0, previous?.listY ?? history.state?.xnewsList?.y ?? 0);
+      safeFocus(document.getElementById(previous?.focusId || history.state?.xnewsList?.focusId || '') || $('.edition-line h1'));
+    });
+  }
+  function requestClose() {
+    if (!active) return;
+    if (sheetState()) history.back(); else finishClose();
+  }
+  grid.addEventListener('click', event => {
+    const anchor = event.target.closest('[data-open-reader]');
+    if (!anchor || event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.altKey || event.shiftKey || anchor.target === '_blank' || anchor.hasAttribute('download')) return;
+    if (openFromCard(anchor, event.detail === 0)) event.preventDefault();
+  });
+  closeButton.addEventListener('click', requestClose);
+  sheet.addEventListener('cancel', event => { event.preventDefault(); requestClose(); });
+  sheet.addEventListener('keydown', event => {
+    if (event.key === 'Escape') { event.preventDefault(); requestClose(); return; }
+    if (event.key !== 'Tab') return;
+    const focusables = $$('a[href],button:not(:disabled),[tabindex="0"],video[controls],audio[controls]', sheet).filter(element => !element.closest('[hidden]'));
+    const first = focusables[0], last = focusables.at(-1);
+    if (event.shiftKey && (document.activeElement === first || document.activeElement === sheet)) { event.preventDefault(); safeFocus(last); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); safeFocus(first); }
+  });
+  window.addEventListener('popstate', () => {
+    const state = sheetState();
+    if (state && safePath(state.path)) {
+      active = state;
+      showSheet(true);
+      loadArticle(state.path, state.sourceURL);
+    } else if (active) finishClose();
+  });
+  window.addEventListener('pagehide', () => { viewController?.remember(); suspendMedia(scroll); controller?.abort(); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,781 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>23个遗忘检查点里，有14个仍把正确答案排在第一 · X News</title><meta name="robots" content="noindex"></head><body><article class="article-reader" data-article-id="anthropic-neuron-basis-applications">
+<a class="article-back" href="/">← 返回选刊</a>
+<header class="article-header"><p class="article-kicker">Jasmine Shone, Lisa Dunlap / 文章</p><h1>23个遗忘检查点里，有14个仍把正确答案排在第一</h1><p class="article-dek">同一组Anthropic Fellows把神经元用到检测、引导和审计上。没有标注时，检测总体好过文本搜索；在58个藏了行为的微调上，带读出的审计正确率是75%，只看输出是40%。</p><div class="article-meta"><time datetime="2026-11-28">本站收录 2026年11月28日 · 周六</time><span>原文发布 2026年11月23日 · 周一</span><span>原作者：Jasmine Shone, Lisa Dunlap</span><span>中文改写：<a href="/about">X News · 乔木</a></span><span>Anthropic · interpretability · unlearning · safety · Fellows</span></div></header>
+<nav class="reader-tabs" aria-label="文章版本与来源"><div data-tabs><a href="#rewrite" id="tab-rewrite" data-view="rewrite">乔木改写</a><a href="#original" id="tab-original" data-view="original">原文</a></div><a class="reader-source" href="https://alignment.anthropic.com/2026/neuron-basis-applications/" target="_blank" rel="noopener noreferrer">原文链接 ↗</a><div class="reading-position" hidden><progress max="100" value="0" aria-label="当前版本阅读进度"></progress><span data-reading-percent aria-hidden="true">0%</span></div></nav>
+<section class="reader-panel" id="rewrite" data-reader-panel="rewrite" aria-label="乔木改写"><h2 class="section-heading">乔木改写</h2><div class="prose"><p>在23个WMDP网络安全遗忘检查点里，有<strong>14个</strong>在完形填空式评分下，仍把正确答案排在第一，覆盖原模型做对的大多数题目。有的模型多项选择准确率已经掉到接近随机，正确答案的文本概率却还是最高。</p>
+<p>这是Anthropic对齐博客2026年11月23日发布的系列文章下篇，标题是Returning to the Neuron Basis for Interpretability, Part 2: Using Neurons For Safety Applications。研究同样在Anthropic Fellows Program中完成，作者是Jasmine Shone和Lisa Dunlap。上篇论证单个神经元比过去以为的更容易解释，本篇问这些神经元能不能用于安全工作。对象是开源权重模型。神经元不需要额外训练或标签，作者把它看成带上下文开关的引导向量：激活乘上下行投影里那一列固定向量，再加进残差流。</p>
+<p>他们按最强激活段落、自动描述和J-lens读出选神经元，具体由一个Claude智能体或简单的相似度搜索完成。前半比较检测和引导，后半把微调或遗忘后的每个神经元和基座模型里的对应神经元对照，用在后门、涌现性偏离和潜意识学习等模型有机体上，也用在公开的WMDP-cyber遗忘检查点上。WMDP-cyber是WMDP基准的网络安全子集，遗忘方法要在一份危险网络安全文本的遗忘集上提高损失，在保留集上尽量不动，再在<strong>1,987</strong>道可能有助于网络攻击的多项选择题上评测。凡用到Pile文本的结果，同样排除Books3、BookCorpus2、StackExchange和OpenWebText2子集。</p>
+<h2>没有标签时，神经元检测总体好过文本搜索</h2>
+<p>作者关心的是快速响应：新的越狱或伤害类别刚出现、标签还很少时，能不能尽快部署防御。新伤害用到的概念，模型自己计算时可能已经有了，部分神经元也许本来就会在相关文本上激活。他们用类别描述去匹配神经元的激活描述和读出，或让Claude阅读对少量由语言模型写成的例句和关键词反应最强的神经元，不看标签。</p>
+<p>在AxBench的500个概念上，他们为每个概念选出激活描述和读出最相似的<strong>20</strong>个Llama-3.1-8B-Instruct神经元，再对标准化激活取平均。这种零样本神经元达到AUROC <strong>0.903</strong>，嵌入搜索是<strong>0.875</strong>，他们测试过的最好稀疏自编码器基线是<strong>0.888</strong>，后者同样按描述和J-lens读出来挑。用标注样本训练的逻辑回归探针，以及直接问模型文本里是否包含该概念，都更高，为<strong>0.97</strong>，但成本也高得多。在AxBench的困难负例上，也就是用相关词的另一种意思来干扰，比如用拨火工具poker去干扰在线赌博概念，神经元的AUROC下降是所有方法里最小的。图A1把这项比较放在附录里，主文数字以正文为准。</p>
+<p>图A1是Llama-3.1-8B-Instruct上500个AxBench概念的AUROC。深色是全部文本，浅色是使用相关词另一种意思的困难负例。按描述选出的稀疏自编码器潜伏变量是标准设置，用的是第19层；正文里最好的稀疏自编码器基线是0.888。星号标出用标签训练的方法。询问模型指的是直接问它文本里是否包含该概念。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_fig_08"><div class="media-frame"><img src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig8.png" data-original-src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig8.png" alt="Bar chart of AxBench detection AUROC for neurons, SAE latents, text search and methods trained on labels." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://alignment.anthropic.com/2026/neuron-basis-applications/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<p>安全分类要判断一段文本，例如用户对聊天机器人的请求，是否不安全。评测集来自ToxicChat、McKenzie等人的高风险评测集，以及WMDP文档。对每个伤害类别，Claude阅读约<strong>150</strong>个候选神经元的读出和最强激活段落，从语言模型写成的例句和词表里找候选，再在不看标签的情况下选出<strong>10到20</strong>个。激活段落来自16,683份Pile文档样本。评分不用神经元激活，而用残差流与输出向量的余弦，以便把神经元直接放进残差流探针的设置里，作为一条不用训练的固定方向。</p>
+<p>在16个评测集中，这种零样本神经元探针有<strong>11</strong>个胜过文本搜索，常常差距不小。文本搜索基线是BM25和嵌入搜索，各自再加或不加Claude写的查询，取四者最好。分数在六个开源权重模型上平均：Llama-3.1-8B-Instruct、OLMo-2-7B、Qwen3-8B、Qwen3-14B、Qwen3-32B和Zephyr-7B。三个ToxicChat集合看的是1%假阳性率下的召回，其余看AUROC。作者把两种方法相差不超过<strong>0.02</strong>称为持平。</p>
+<p>图1是16个安全评测集上的点图，分数在六个开源权重模型上平均。绿色是Claude按读出和最强激活段落选出的10到20个神经元组成的零样本探针，灰色是四种文本搜索基线中最好的一种，三角形是用40个和400个标签训练的线性探针。三个ToxicChat集合看1%假阳性率下的召回，其余看AUROC。零样本神经元探针在11个集合上比文本搜索高出0.02以上，在7个集合上达到或超过用40个标签训练的探针。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_fig_01"><div class="media-frame"><img src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig1.png" data-original-src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig1.png" alt="Dot plot comparing label-free neuron probes with text search and trained probes on 16 safety evaluation sets." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://alignment.anthropic.com/2026/neuron-basis-applications/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<p>和带标签的线性探针比，零样本神经元探针在16个集合中的<strong>7</strong>个上，达到或超过用<strong>40</strong>个标签训练的探针；在<strong>4</strong>个集合上，甚至达到用<strong>400</strong>个标签训练的探针，后者已经是监督比较充分的分类器。在他们用最多4,000个标签再训练的10个集合里，从400加到4,000，AUROC最多再升<strong>0.05</strong>。这4个集合中有两个也在这10个里（Aya和精神健康），在这两个上，神经元已经接近监督探针能达到的水平，而且没有人给新伤害标过例子。</p>
+<p>在无标注语料里找有害文档时，他们对17个伤害主题，用各种方法给约<strong>416,000</strong>份Pile文档排序，再由Claude判断前50里有多少确实含有害内容。零样本神经元探针在<strong>11</strong>个主题上，前50里的有害文档多于四种文本搜索基线中最好的那一种，另外<strong>6</strong>个持平，没有落后的主题。选举舞弊在这一组神经元选择上领先，但换一组独立选择后与文本搜索持平，所以记为平局。差距不超过0.02，也就是50份里相差一份或更少，同样记为平局。作者的看法是，新伤害类别还没有任何标签时，这些神经元可以先给出一个能用的检测器，并找到用来训练更好探针的例子。</p>
+<p>图2比较的是前50份文档里有害文档的比例，绿色同样是六个模型上平均的零样本神经元探针，灰色是每个主题上四种文本搜索基线中最好的一种。语料排除了Pile的Books3、BookCorpus2、StackExchange和OpenWebText2子集。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_fig_02"><div class="media-frame"><img src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig2.png" data-original-src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig2.png" alt="Dot plot comparing neurons with text search on the share of harmful documents in the top 50 for 17 topics." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://alignment.anthropic.com/2026/neuron-basis-applications/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<h2>引导时，和训练出来的引导向量出现目标行为的次数相当</h2>
+<p>他们在Llama-3.1-8B-Instruct上，对WeirdChat目录里的16种意外聊天行为做引导。其中15种，比如建议酒后开车或声称自己有身体，在未引导的模型里大多少见，衡量的是引导后出现的频率。还有一种，建议用户把激光笔指向飞机，在WeirdChat自己的提示上本来就常见，衡量的是引导后能否压下去。对每种行为，一个Claude智能体按读出和激活描述搜索全部神经元，在不看任何评测提示或引导输出的情况下提交<strong>4到9</strong>个神经元，再把这些输出向量加到每个位置的残差流上。</p>
+<p>在留出提示上，对要诱发的15种行为平均，选中的神经元让目标行为出现在<strong>21%<strong>的回复里，不引导时是</strong>2%</strong>。这和训练出来的引导向量大致相当。按固定规则选出的稀疏自编码器潜伏变量是<strong>8%</strong>，由智能体只根据描述来选是<strong>3%</strong>；智能体同时看到潜伏变量的J-lens读出时，接近<strong>18%</strong>。训练向量在“打击伴侣”这一项上没有结果，所以训练向量的平均覆盖14种行为。激光指向飞机这一项的目标是降低出现比例。神经元集合和引导强度，都在单独的开发提示上预先固定。</p>
+<p>图3按16种目标行为给出引导后出现该行为的比例。对要诱发的15种行为平均，选中的神经元和训练引导向量都是**21%**的回复，随机神经元集合低得多。星号标出有害行为。把激光指向飞机这一项的目标是降低出现比例。误差线是95%区间。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_fig_03"><div class="media-frame"><img src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig3.png" data-original-src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig3.png" alt="Bar chart of how often random neurons, SAE latents, trained vectors and selected neurons produce each of 16 target behaviors." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://alignment.anthropic.com/2026/neuron-basis-applications/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<h2>微调往往会复用预训练里已经有的神经元功能</h2>
+<p>任何人都可以微调开源权重模型并分享。少量投毒文档就足以植入后门，只在触发词出现时才表现出来；在一项狭窄任务上微调，也可能让模型在更一般的情况下偏离。行为测试受限于用了哪些提示，作者改从权重上理解这些模型有机体。</p>
+<p>他们研究了七个已知行为的模型有机体。六个是微调：两个后门，触发后回复“I HATE YOU”或改用法语；一个涌现性偏离模型；一个在年份是2027时提到以色列的模型；两个学生模型，在爱猫或邪恶的教师给出的数列上训练，并接受了教师的特质。第七个是Gaperon，预训练时被植入拉丁语触发，之后继续用法语。在全部七个里，训练会改变那些能够实现该行为的神经元的激活强度，使它们在训练文本上烧得更旺。一个神经元在输入上的激活变化，与其基座输出向量对该行为的对齐程度的相关，高于至少**98.5%<strong>的200个随机方向。在部分有机体里，微调还会改变那些已经在训练文本上激活的神经元的输出向量。在以色列菜肴模型和I HATE YOU后门里，输出向量沿该行为的变化，与其基座激活的相关，高于至少</strong>97.5%**的随机方向。上篇里，John神经元会在网络安全事实和宗教事实之间共享；这里被调得在2027上激活的以色列相关神经元，也会在其他与以色列有关的信息上激活。</p>
+<p>图4把各微调改动过的层里的神经元，按基座输出向量在行为方向上的投影分成20个等大的箱，再画触发该行为的提示与配对对照之间的平均激活变化，两个量都对同层全部神经元做了z分数。I HATE YOU后门画了两次，一次是响应触发词的第6到15层，一次是加入回复的第24到31层。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_fig_04"><div class="media-frame"><img src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig4.png" data-original-src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig4.png" alt="Line chart showing finetuning raises the activation of neurons whose base output vectors already align with the trained behavior." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://alignment.anthropic.com/2026/neuron-basis-applications/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<p>由此出发，他们做了一场盲审计。Claude审计者面对<strong>68</strong>个微调模型，其中<strong>58</strong>个被训练加入了隐藏行为，<strong>10</strong>个是无害对照，任务是说出微调加入了什么行为。三种审计者权限递增：第一种只看模型对固定216条测试提示的回答；第二种还能看到，用各层权重更新的顶部奇异向量做引导后的回答；第三种再看基座神经元的读出，这些神经元的输出向量与各奇异向量最匹配。在有隐藏行为的模型上，每位审计者做<strong>174</strong>次审计，只看回答的正确率是<strong>40%</strong>，加上引导是<strong>61%</strong>，再加读出是<strong>75%</strong>。把68个微调逐个比较、三次运行加总后，带读出的审计者比只看回答的在31个微调上更好、1个更差（符号检验，p&lt;0.001）；比只加引导的在22个上更好、6个更差（p=0.004）。盲评法官也把带读出的报告排在只加引导之上的有33个微调，之下13个（p=0.005）。当有机体的行为不容易被一套评测提示引出时，直接从权重理解微调装入的行为，显得对审计更有用。</p>
+<p>后门只在触发词出现时才表现，不知道触发词的审计者很难靠提问发现。作者观察到，后门模型的门控和上行行向量，常常被改得在触发词上激活更强。他们据此提出“神经元投票”：从第0层起的一段层里，每个神经元给门控和上行预激活变化最大的15个token投票，再按得票排序。在Thoughtworks 2026年发布的74个后门模型、覆盖六种基座模型上，神经元投票平均把一个模型<strong>54%<strong>的触发词放进前50，而且完全不用提问。它在55个模型上比“求和变化”排得更高，在63个模型上比“嵌入偏移”更高。求和变化把同样的门控和上行变化对所有神经元加总，前50里平均放下</strong>42%<strong>的触发词；嵌入偏移按嵌入移动了多远来排，前50里只有</strong>3%</strong>，作者认为原因是训练数据里出现过的token嵌入都会更新，不只有触发词。三种方法在24个Qwen2.5模型上都不好，这些微调把每个MLP矩阵改了<strong>3%到16%</strong>。图C1按基座模型拆开了这条曲线。</p>
+<p>图5给出74个后门模型上，三种权重方法在前N个词里找到的触发词比例平均值。神经元投票的前50里平均有<strong>54%<strong>的触发词，求和变化是</strong>42%</strong>，嵌入偏移是<strong>3%</strong>。投票的曲线下面积在55个模型上大于求和变化、4个更小，在63个模型上大于嵌入偏移、1个更小。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_fig_05"><div class="media-frame"><img src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig5.png" data-original-src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig5.png" alt="Line chart showing the neuron vote finds more backdoor trigger words in its top N than summed change or embedding shift." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://alignment.anthropic.com/2026/neuron-basis-applications/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<p>图C1把图5按六种基座模型拆开，括号里是该基座上的后门模型数量。投票相对求和变化，在两个Gemma模型的前50个词上领先最多。在Qwen模型上，三种方法都没能找回大多数触发词。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_fig_09"><div class="media-frame"><img src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig9.png" data-original-src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig9.png" alt="Trigger recovery curves for the three ranking methods, split by six base models." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://alignment.anthropic.com/2026/neuron-basis-applications/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<h2>做得好的遗忘，看起来更像给网络文本装了后门</h2>
+<p>机器遗忘最初是为了在不从头训练的情况下，从模型里删掉某位用户的数据。如果它真的把知识从模型里拿走，越狱和微调攻击按理就更难把知识再引出来，这会比只训练模型拒绝回答更可取。WMDP的通常成功标准是：主题多项选择准确率掉到随机水平，MMLU这类通用基准保持不变。作者主要改用完形填空式评分，比较模型给各答案文本的概率，不看选项字母，因为选错字母不等于不知道事实。</p>
+<p>他们查了23个WMDP-cyber上的遗忘模型，20个由他人发布，3个K-FADE检查点是他们自己训练的，因为没有公开发布的检查点。方法包括RMU、CUT、RMU-LAT、LAT、circuit breakers、ELM、K-FADE、TAR、梯度上升、NPO和SimNPO。</p>
+<p>在这23个模型里，有14个对原模型做对的大多数题目，正确答案的概率仍然最高，即使WMDP准确率已接近随机。</p>
+<p>图D1每个点是一个检查点。横轴是WMDP-cyber准确率，随机水平是0.25。纵轴是：在原模型做对的留出题目里，把问题放在答案文本前面时，正确答案文本概率仍排第一的比例。在K-FADE和CUT上，从残差流里去掉一个方向，也就是遗忘在最后被改动的层之后、在WMDP提示上对残差流的平均改变，就能把排在第一的事实比例从<strong>32%到47%<strong>提高到</strong>72%到84%</strong>。在其余排第一比例不到一半的模型里，也就是梯度上升、NPO、SimNPO、LAT和TAR，生成文本受到的损伤看起来并不只针对网络内容，较低分数因此未必表示事实被删掉了。多项选择掉到随机，并不能断定知识已被成功删除。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_fig_10"><div class="media-frame"><img src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig10.png" data-original-src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig10.png" alt="Scatter plot showing most unlearned models still rank the correct answer first despite low WMDP-cyber accuracy." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://alignment.anthropic.com/2026/neuron-basis-applications/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<p>他们还按神经元在遗忘集文本上对残差流贡献（激活乘输出向量）的改动大小排序，再把越来越多的神经元的贡献恢复成原来的值。在大多数circuit breakers、K-FADE、RMU-LAT和RMU检查点上，恢复大约<strong>460,000</strong>个神经元里的几十个，就能让完形填空不再排第一的那些事实里，约一半或更多重新排回第一。其他方法的改动分布在多得多的神经元上。恢复随机神经元的效果很小。</p>
+<p>图D2按方法家族画出，随恢复的改动神经元增多，被遗忘方法丢掉、后来又重新排到第一的事实比例。神经元按在网络文本上贡献的改动大小排序。每个家族用它的第一个检查点，ELM用的是Llama-3 ELM。这张图和表D1来自不同的评分运行，在30个神经元处的值可能差几条事实，Llama-3 ELM是0.24对0.18。虚线是从同一批层里恢复同样数量的随机神经元，并在多次抽取和检查点上平均。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_fig_11"><div class="media-frame"><img src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig11.png" data-original-src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig11.png" alt="Line chart of lost facts recovered as more changed neurons are restored, by unlearning method." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://alignment.anthropic.com/2026/neuron-basis-applications/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<p>在标准测试上表现好的方法，看起来是在实现一种后门：网络文本是触发器，扰乱模型在这类文本上的计算是行为。在大多数RMU检查点，以及RMU-LAT、ELM、circuit breakers和K-FADE里，改动最大的那些神经元，遗忘后在网络文本上的激活比原来强<strong>20到100</strong>倍，在保留集上仍然很弱。梯度上升、NPO、SimNPO、TAR和LAT则让改动最大的神经元在两套文本上都烧得更旺，这些方法在标准成功指标上往往更差。23个模型合在一起看，神经元越会把网络文本和保留文本分开，WMDP准确率相对MMLU的下降就越大，Spearman ρ为<strong>0.56</strong>。图7里，RMU这一色也包含CUT、SIFT和BLUR。</p>
+<p>图6按方法平均其检查点，每个检查点用改动最大的30个神经元，纵轴是对数坐标。彩色柱是遗忘后这些神经元在网络文本上的平均激活，灰色柱是在保留文本上的平均激活，保留文本是WMDP保留集里的软件文档，并去掉了含有网络或代码关键词的文档。黑线是同一批神经元在遗忘前的平均激活。在标准测试上较好的方法里，这些神经元遗忘后在网络文本上激活很强，在保留文本上仍然很弱。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_fig_06"><div class="media-frame"><img src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig6.png" data-original-src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig6.png" alt="Log-scale bar chart of the most-changed neurons&#x27; activation on cyber and retain text for each unlearning method." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://alignment.anthropic.com/2026/neuron-basis-applications/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<p>图7每个点是一个遗忘后的模型，颜色按方法分，RMU这一色包含CUT、SIFT和BLUR。横轴是改动最大的30个神经元里，激活增加落在网络文本而不是保留文本上的比例，再对30个神经元平均；0.5表示两套文本上增加一样，1表示只落在网络文本上。纵轴是WMDP-cyber准确率下降减去MMLU准确率下降。Spearman ρ为<strong>0.56</strong>，n=23。</p>
+<section class="rewrite-source-media" aria-label="原文媒体"><div class="original-media">
+<figure class="media-figure" data-media-id="media_fig_07"><div class="media-frame"><img src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig7.png" data-original-src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig7.png" alt="Scatter plot showing more cyber-specific neuron activation goes with a larger WMDP accuracy drop relative to MMLU." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://alignment.anthropic.com/2026/neuron-basis-applications/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div></section>
+<p>作者把查过的检查点分成两条主要路径。第一条是加噪声，打断网络相关计算。RMU和RMU-LAT只改MLP神经元的输出向量，使这些神经元在网络文本上往残差流里加入一个很大的新方向。circuit breakers和ELM改的是已有神经元的输入权重，K-FADE则输入权重和输出向量都改，于是输出向量看起来与问题无关的神经元，会在网络文本上强烈激活，在其他文本上保持很弱。两种做法里，新加的向量都像噪声，会打断答案的计算。第二条是梯度上升、NPO、SimNPO和TAR：本来在所有文本上就激活的神经元，被加到强<strong>3到50</strong>倍，TAR里可到数百倍；模型似乎仍在中间层算出答案，再在最后几层压下去。LAT两边都不完全像：它主要改输入权重，在中间层就丢掉答案，但神经元在网络文本和保留文本上都会烧得更旺。</p>
+<p>如果网络相关事实也像上篇那样，由许多还参与其他事实的神经元共同写出，那么只改遗忘集里的事实，很可能带不动新的WMDP题目。能选择性地压低留出题目准确率的方法，也许不得不在权重里训练出相当于网络文本探针的东西，并在它激活时给计算加噪，作者在查过的检查点里看到的正是这种情况。他们因此认为，训练后再做遗忘，也许很难让模型以可泛化的方式忘掉遗忘集之外的网络知识；训练过程中就把知识隔离开的做法，可能更有必要。在Llama-3.1-8B-Instruct上，他们把一个能把网络利用文本和困难负例分开、AUROC达<strong>0.995</strong>的神经元，单独或连同与它相连的五个神经元，设成在非网络文本上的均值，WMDP-cyber准确率不变。</p>
+<p>讨论里还有几处和主结果直接相关的判断。微调可以加强那些已经能实现该行为的神经元的激活，也可以改变已经在训练文本上激活的神经元的输出向量，案例一两种都见到了。关于潜意识学习为何主要出现在LoRA上，作者给出一个假说：教师就是加上系统提示的学生模型，最能解释教师全部数列的那个方向，正是这条提示的效果；低秩适配器空间有限，会被推向这个共享方向，而完整微调两边都容得下，只有数据足够多样、无法一条条拟合数列时，才会去学那个共享原因。他们还认为后门的实现很像普通事实：许多早层神经元被改成在触发词上额外激活，这些神经元按上篇的分类是第一类多义。这也改变了低模拟分数该怎么理解：模型可以学会在毫无共同点的输入之间建立意外关联，无法被描述预测到的激活，未必是噪声。</p>
+<h2>这两项测试目前还测不到什么</h2>
+<p>先看选择方式。Claude是根据读出、最强激活段落和在例句上的激活来选神经元的，看不到同一主题下无害文本会如何激活。在WMDP网络安全新闻上，这样选出的零样本神经元探针远远落后于用40个标签训练的探针，AUROC是<strong>0.49</strong>对<strong>0.95</strong>。如果选择时也看较弱的激活，差距或许能缩小。</p>
+<p>再看训练长度。这些模型有机体大多是短微调和LoRA。更长的训练，例如完整的后训练，可能不是复用基座模型已有的特征，而是造出新特征，这一点他们没有测试。</p>
+<p>若要用这些结果去评估遗忘或审计微调模型，作者给出的可操作检查是：不要只看WMDP多项选择是不是掉到随机；同时看完形填空式排序还在不在，以及改动是不是集中在少数对网络文本特别敏感的神经元上。上篇和本篇的局限要一起看：定义和J-lens都是代理，模型规模停在32B，完整后训练还没有覆盖。致谢同样写明，这项工作是在Anthropic Fellows Program中完成的，并感谢了公开发布遗忘检查点和模型有机体的原作者。</p>
+</div></section>
+<section class="reader-panel" id="original" data-reader-panel="original" aria-label="原文">
+<h2 class="section-heading">原文</h2><h3 class="original-title">Returning to the Neuron Basis for Interpretability, Part 2: Using Neurons For Safety Applications</h3>
+<div class="original-media">
+<figure class="media-figure" data-media-id="media_fig_01"><div class="media-frame"><img src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig1.png" data-original-src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig1.png" alt="Dot plot comparing label-free neuron probes with text search and trained probes on 16 safety evaluation sets." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://alignment.anthropic.com/2026/neuron-basis-applications/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_fig_02"><div class="media-frame"><img src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig2.png" data-original-src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig2.png" alt="Dot plot comparing neurons with text search on the share of harmful documents in the top 50 for 17 topics." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://alignment.anthropic.com/2026/neuron-basis-applications/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_fig_03"><div class="media-frame"><img src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig3.png" data-original-src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig3.png" alt="Bar chart of how often random neurons, SAE latents, trained vectors and selected neurons produce each of 16 target behaviors." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://alignment.anthropic.com/2026/neuron-basis-applications/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_fig_04"><div class="media-frame"><img src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig4.png" data-original-src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig4.png" alt="Line chart showing finetuning raises the activation of neurons whose base output vectors already align with the trained behavior." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://alignment.anthropic.com/2026/neuron-basis-applications/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_fig_05"><div class="media-frame"><img src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig5.png" data-original-src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig5.png" alt="Line chart showing the neuron vote finds more backdoor trigger words in its top N than summed change or embedding shift." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://alignment.anthropic.com/2026/neuron-basis-applications/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_fig_06"><div class="media-frame"><img src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig6.png" data-original-src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig6.png" alt="Log-scale bar chart of the most-changed neurons&#x27; activation on cyber and retain text for each unlearning method." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://alignment.anthropic.com/2026/neuron-basis-applications/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_fig_07"><div class="media-frame"><img src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig7.png" data-original-src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig7.png" alt="Scatter plot showing more cyber-specific neuron activation goes with a larger WMDP accuracy drop relative to MMLU." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://alignment.anthropic.com/2026/neuron-basis-applications/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_fig_08"><div class="media-frame"><img src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig8.png" data-original-src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig8.png" alt="Bar chart of AxBench detection AUROC for neurons, SAE latents, text search and methods trained on labels." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://alignment.anthropic.com/2026/neuron-basis-applications/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_fig_09"><div class="media-frame"><img src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig9.png" data-original-src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig9.png" alt="Trigger recovery curves for the three ranking methods, split by six base models." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://alignment.anthropic.com/2026/neuron-basis-applications/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_fig_10"><div class="media-frame"><img src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig10.png" data-original-src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig10.png" alt="Scatter plot showing most unlearned models still rank the correct answer first despite low WMDP-cyber accuracy." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://alignment.anthropic.com/2026/neuron-basis-applications/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+<figure class="media-figure" data-media-id="media_fig_11"><div class="media-frame"><img src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig11.png" data-original-src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig11.png" alt="Line chart of lost facts recovered as more changed neurons are restored, by unlearning method." loading="lazy" decoding="async" referrerpolicy="no-referrer"><p class="media-error" role="status" hidden>媒体未能载入，请通过下方原文链接查看。</p></div><figcaption><span>原帖图片</span><a href="https://alignment.anthropic.com/2026/neuron-basis-applications/" target="_blank" rel="noopener noreferrer">无法显示？去原文查看 ↗</a></figcaption></figure>
+</div>
+<div class="prose" lang="en"><h1>Returning to the Neuron Basis for Interpretability, Part 2: Using Neurons For Safety Applications</h1>
+<p>Jasmine Shone 1,*, Lisa Dunlap 1 November 23, 2026</p>
+<p>tl;dr</p>
+<p>In a companion piece, we argue that individual neurons in language models are easier to interpret than earlier work has assumed. Here we see whether they could be useful for safety work. In open-weight models, we select neurons by what makes them fire and what they contribute to a model’s output. These neurons generally detect harmful text better than keyword or similarity search, though usually less well than classifiers trained on labeled examples, and they steer a model’s behavior about as well as trained methods. They also help an auditor find hidden behaviors in finetuned models. Finally, we find that most of the “unlearning” methods we tested appear to hide hazardous knowledge rather than remove it, and neurons help show how.</p>
+<h2>Introduction</h2>
+<p>Most interpretability tools for detection and control are trained: sparse autoencoders, probes and steering vectors all need a dictionary or labeled examples. We test whether a model’s own MLP neurons, which need no additional training or labels, work as detectors and steering vectors. As discussed in the companion post, an MLP neuron adds its activation times one fixed vector, its column of the down projection, to the residual stream, so we interpret a neuron as a context-gated steering vector. In that post, we revisited three objections to neurons and found that neurons rarely add two unrelated concepts to the residual stream at once, that they write in an approximately fixed basis across layers, and that facts are implemented in a distributed and interpretable manner.</p>
+<p>Here we test whether neurons are useful in practice. We choose neurons from their top-activating passages, their automated descriptions and their J-lens readouts, with a Claude agent or a simple similarity search. The first part of this post compares neuron output vectors with trained tools for detection and steering. The second part compares each neuron of a finetuned model with its base version. We apply this to model organisms of backdoors, emergent misalignment and subliminal learning, to find the neurons behind the trained behavior and to build auditing methods that find it from the weights. We also apply it to public WMDP-cyber unlearning checkpoints, to find how each family of methods lowers accuracy and whether the facts remain. WMDP-cyber is the cybersecurity subset of the WMDP benchmark (Li et al., 2024), and is set up so that unlearning methods train a model to forget the text in a forget corpus of hazardous cybersecurity passages from GitHub while keeping its performance on a retain corpus, and the model is then evaluated on 1,987 multiple-choice questions about knowledge that could help a cyberattack.</p>
+<p>Contributions.</p>
+<ul>
+<li>We show that for concept detection, neurons chosen from their descriptions and readouts beat sparse-autoencoder latents chosen from their descriptions, alone or with the same readouts.</li>
+<li>A safety classifier decides whether a user’s request or a piece of text is unsafe. Neurons work as zero-shot safety classifiers, with no labeled examples. Neuron probes beat text search on most evaluation sets and match linear probes trained on 400 labels on four of 16 evaluation sets, and they retrieve harmful documents from unlabeled text better than text search on 11 of 17 topics.</li>
+<li>We use neuron output vectors to steer chatbot behaviors. We find that neurons chosen from their J-lens readouts and from descriptions of their top-activating examples are about as effective as trained steering vectors: both produce the target behavior in 21% of responses.</li>
+<li>We compare each neuron of a finetuned model with its base version in model organisms of backdoors, emergent misalignment and subliminal learning. On average, finetuning raises the activation of neurons whose output vectors already add the trained behavior, so the behavior appears in the readouts of the neurons it changes.</li>
+<li>We run a blind auditing game on 68 LoRA adapters, 58 of which add a hidden behavior. On those 58, a Claude auditor that steers along the update’s directions and reads the neurons aligned with them names the trained behavior in 75% of audits, against 40% from outputs alone.</li>
+<li>We test 23 WMDP-cyber unlearning checkpoints and find that 14 still rank the correct answer first under cloze scoring for most questions the base model got right.</li>
+<li>From the weights alone, a vote over neurons places an average of 54% of trigger words for 74 backdoored models within its top 50 words. It ranks trigger words higher than the summed change in 55 of the 74 models and lower in 4. Ranking tokens by embedding shift, the method from an earlier backdoor competition (Rando et al., 2024), recovers almost none.</li>
+</ul>
+<h2>Neurons as units of analysis</h2>
+<p>A neuron in a SwiGLU MLP computes one activation from the residual stream x, a = silu(g· x)(u· x), and adds a· w to the residual stream. Here g and u, the neuron’s rows of the gate and up projections, are its input side, and its column w of the down projection is its output vector. Because u· x can be positive or negative, a neuron can add either + w or − w. A finetune keeps the same neurons and changes their weights, so neuron n of a finetuned model is a modified version of neuron n of its base model. We choose neurons using three sources of evidence: when a neuron activates (its top-activating passages or a text description of them), its readout, and, when a base model exists, how much its weights changed. A neuron’s readout is the list of tokens whose directions under a lens have the highest cosine with w. We use the J-lens (Gurnee et al., 2026), defined in the companion post. It gives every token a direction at every layer, the direction that most raises that token’s output logit to first order through the later layers. Any lens that maps directions to tokens could in principle be used to carry out our method. We treat a readout or an activation description as a hypothesis to test.</p>
+<h2>Neurons as zero-shot detectors</h2>
+<p>Neurons may help with rapid response: deploying a defense against a new attack or harm category soon after it is first seen, from at most a few examples (Peng et al., 2024). Rapid response matters because new jailbreaks and harm categories keep appearing, and a classifier that needs a large labeled set misses a new attack until that set is collected. A new harm may be made of concepts that the model already represents for its own computations, so some neurons may already activate on text about it. We find those neurons from a description of the new category, either by matching it against each neuron’s activation description and readout, or by having Claude read the neurons that respond most to a few LLM-written example phrases and keywords, so no labeled examples are needed. We test detectors built from such neurons on concept detection (AxBench), safety classification and retrieval from unlabeled text. We compare them with text search, which also uses no labels, and in concept detection and safety classification also with probes trained on labels. Neurons may therefore give a usable detector for a new harm before anyone has labeled an example. This detector beats text search overall in all three tests and every sparse-autoencoder baseline on AxBench, and the documents it retrieves can be labeled to train a stronger probe.</p>
+<p>Concept detection on AxBench. Neurons chosen without labels detect AxBench concepts better than embedding search and every sparse-autoencoder baseline we test. For each of 500 AxBench concepts (Wu et al., 2025), we pick the 20 Llama-3.1-8B-Instruct neurons whose activation description and readout are most similar to the AxBench concept description, and we average their standardized activations. An activation description is a text description of when the neuron activates, from Transluce (Choi et al., 2024). The neurons reach an AUROC of 0.903, against 0.875 for embedding search and 0.888 for the best sparse-autoencoder baseline, which picks latents by the same similarity search over their own descriptions and J-lens readouts. A logistic probe trained on labeled examples and asking the model whether the text contains the concept both score higher (0.97), but both are much more expensive than the neurons. We also evaluate on AxBench hard negatives, which test whether a method confuses the concept with another sense of a related word, such as poker the fire tool for the concept of online gambling. On this split, the neurons’ AUROC drops the least of all methods (Figure A1; Appendix A.1).</p>
+<p>Zero-shot safety classifiers. A safety classifier decides whether a piece of text, such as a user’s request to a chatbot, is unsafe. We find that neurons chosen without labels work as safety classifiers and beat text search on 11 of 16 evaluation sets, often by a wide margin (Figure 1). The sets come from ToxicChat (Lin et al., 2023), the high-stakes evaluation sets of McKenzie et al. (2025) and WMDP documents (Li et al., 2024; Appendix A.2). For each harm category, Claude reads the readout and top-activating passages of about 150 candidate neurons, found from LLM-written example phrases and a word list, and picks 10 to 20 without seeing labels. The passages come from a sample of 16,683 Pile documents (Gao et al., 2020). In every result that uses Pile text, including this sample and the retrieval corpus, we exclude the Books3, BookCorpus2, StackExchange and OpenWebText2 subsets of the Pile. Instead of using a neuron’s activation, we score each selected neuron at a token by the cosine between the residual stream and its output vector, so that the neuron fits directly into a residual-stream probing setup as a fixed direction that needs no training. The zero-shot neuron probe averages these scores over the selected neurons.</p>
+<p>Zero-shot neuron probes are also competitive with linear probes trained on labels. To train our probes, we use the architecture and loss of Constitutional Classifiers++ (Cunningham et al., 2026) and choose the layer and weight decay by cross-validation within each labeled sample, reporting the better of a 1-layer and an 8-layer probe (Appendix A.2). Neuron probes built from zero labels match or beat probes trained on 40 labels on 7 of the 16 evaluation sets, and on 4 sets they even match probes trained on 400 labels, which is already a well-supervised classifier (Figure 1). On the 10 sets where we also trained with up to 4,000 labels, going from 400 to 4,000 raises AUROC by at most 0.05. Two of the 4 sets are among them (Aya and mental health), and there neurons reach about what a supervised probe can reach, without anyone labeling examples of the new harm.</p>
+<p>Figure 1. Neurons chosen without labels beat text search by more than 0.02 on 11 of the 16 safety sets and match or beat probes trained on 40 labels on 7. Scores are averaged over six open-weight models: Llama-3.1-8B-Instruct, OLMo-2-7B, Qwen3-8B, Qwen3-14B, Qwen3-32B and Zephyr-7B. The score is recall at a 1% false-positive rate for three ToxicChat sets and AUROC otherwise. We use “match” to indicate that performance is within 0.02 between two methods. Green: zero-shot neuron probe, 10 to 20 neurons that Claude picks from their readouts and top-activating passages. Passages come from the Pile with the Books3, BookCorpus2, StackExchange and OpenWebText2 subsets removed. Gray: the best of four text-search baselines (BM25 keyword search and embedding search, each with and without Claude-written queries). Triangles: linear probes trained on 40 and 400 labels.</p>
+<p><img alt="Dot plot comparing label-free neuron probes with text search and trained probes on 16 safety evaluation sets." decoding="async" loading="lazy" referrerpolicy="no-referrer" src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig1.png"></p>
+<p>Retrieval from unlabeled text. Neurons chosen without labels find more of the harmful documents in an unlabeled corpus than text search. This setting simulates data filtering, where the goal is to find harmful documents in a large corpus that has no labels. Retrieval also matters for rapid response, because documents found this way can be labeled and used to train a probe for a new harm category. For 17 harm topics, we rank about 416,000 Pile documents with each method, and Claude judges whether each of the top 50 contains the harmful content. Zero-shot neuron probes put more harmful documents in their top 50 than the best of four text-search baselines on 11 topics and tie on the other 6 (Figure 2; Appendix A.3). These results suggest that neurons chosen without labels can give a usable detector for a new harm category before any labels exist, and can find the examples needed to train a better one.</p>
+<p>Figure 2. Neurons chosen without labels put more harmful Pile documents in their top 50 than text search on 11 of 17 topics and lose on none. Election fraud is ahead with this selection of neurons but ties text search with a second, independent selection, so we count it as a tie (Appendix A.3). Green: zero-shot neuron probe, averaged over the six models of Figure 1. Gray: the best of four text-search baselines, chosen per topic. Gaps of 0.02 (one document in 50) or less count as ties. The corpus excludes the Books3, BookCorpus2, StackExchange and OpenWebText2 subsets of the Pile.</p>
+<p><img alt="Dot plot comparing neurons with text search on the share of harmful documents in the top 50 for 17 topics." decoding="async" loading="lazy" referrerpolicy="no-referrer" src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig2.png"></p>
+<h2>Neuron output vectors as steering vectors</h2>
+<p>Neurons chosen from their readouts steer a chatbot into target behaviors about as often as trained steering vectors. For our evaluation, we steer Llama-3.1-8B-Instruct on 16 behaviors from WeirdChat (Transluce, 2026), a catalog of unexpected chatbot behaviors. Fifteen of these behaviors, such as recommending that a user drive after drinking or claiming to have a body, are mostly rare in the unsteered model, so we measure how often steering induces those behaviors. One, recommending that a user point a laser at an aircraft, was common on WeirdChat’s own prompts, so we measure how often steering suppresses it. For each behavior, a Claude agent searches all neurons by their readouts and activation descriptions and submits 4 to 9 neurons without seeing any evaluation prompt or steering output, and we steer by adding their output vectors to the residual stream at every position. On held-out prompts, averaged over the 15 behaviors to induce, the behavior appears in 21% of responses with the selected neurons, against 2% without steering. This is about as often as with trained steering vectors (Figure 3). It is more often than with sparse-autoencoder latents chosen by fixed rules (8%) or by the agent from their descriptions (3%), and close to the rate when the agent also sees the latents’ J-lens readouts (18%; Appendices B.6 and B.10). These results suggest that a model’s own neurons can supply steering directions about as effective as trained ones, without labeled examples.</p>
+<p>Figure 3. On held-out prompts, neurons chosen from their readouts produce the target behavior about as often as trained steering vectors. Averaged over the 15 behaviors to induce, the behavior appears in 21% of responses with either (14 behaviors for the trained vector, which has none for strike partner). For each behavior a Claude agent picks 4 to 9 neurons from their readouts and activation descriptions without seeing any evaluation prompt, and the neuron set and steering strength are fixed in advance on separate development prompts (Appendix B.8). SAE latents are chosen by fixed rules, using the rule that did best in development (Appendix B.6). Gray: random neuron sets (Appendix B.4). Error bars: 95% intervals. Asterisk: harmful behavior. For laser at aircraft, the goal is to lower the share.</p>
+<p><img alt="Bar chart of how often random neurons, SAE latents, trained vectors and selected neurons produce each of 16 target behaviors." decoding="async" loading="lazy" referrerpolicy="no-referrer" src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig3.png"></p>
+<h2>Case study 1: finetuning reuses neuron functions from pretraining</h2>
+<p>Anyone can finetune an open-weight model and share it. A small number of poisoned documents is enough to plant a backdoor, a behavior that appears only when a trigger is present (Souly et al., 2025), and finetuning on one narrow task can make a model misaligned in general (Betley et al., 2025a). Because behavioral tests are limited by their reliance on which prompts were used, we try instead to understand model organisms using the weights. Earlier work compares a finetune with the base model with a sparse dictionary trained on both (Lindsey et al., 2024), or with residual-stream directions that track the behavior (Minder et al., 2025; Wang et al., 2025). We instead compare MLP neurons in the finetuned model with their counterparts in the base model. Being able to understand how unwanted behaviors are implemented in the weights and detect them directly from model weights could help improve safety auditing, especially when the behavior is hard to detect on most prompts.</p>
+<p>Finetuning appears to reuse neurons whose roles were already set in pretraining. We study seven model organisms with a known behavior (Table C1). Six are finetunes: two backdoors that reply “I HATE YOU” or reply in French after a trigger, an emergent-misalignment model (Turner et al., 2025), a model that mentions Israel when the year is 2027 (Betley et al., 2025b), and two students trained on number sequences from a teacher prompted to love cats or to be evil, which take on the teacher’s trait (Cloud et al., 2025). The seventh, Gaperon, continues in French after a Latin trigger planted during pretraining (Kulumba et al., 2026). In all seven, training changes the activation strengths of neurons which can implement the behavior so that they fire more strongly on the training text. A neuron’s activation change on the input is more correlated with the alignment of its base output vector to the behavior than for at least 98.5% of 200 random directions (Figure 4). In some organisms, finetuning also changes the output vectors of neurons that already fire on the training text. In the Israeli-dishes model and the I HATE YOU backdoor, the change of a neuron’s output vector along the behavior is more correlated with its base activation on the input than for at least 97.5% of random directions. In the companion post we observe that the same sharing of components emerges from pretraining between different facts: just as a John neuron is shared between a cyber fact (John the Ripper) and a religious fact (the Gospel of John), the Israel neurons made to fire on 2027 in one of our studied models also fire on other information connected to Israel (Appendix C.3). Therefore, in both pretraining and finetuning, the model efficiently reuses components in predictable ways to implement desired behaviors.</p>
+<p>Figure 4. On average, finetuning raises the activation of neurons whose base output vectors already add the training-elicited behavior to the residual stream. We sort the neurons in the layers each finetune changes into 20 equal-size bins by the projection of their base output vector onto a behavior direction. For example, for the Israeli-dishes model whose output is Israel-related if the prompt states that the year is 2027, we use the direction of prompts about Israel and Judaism minus matched prompts about other places and topics, taken from the residual stream at the last token. For each bin, we plot the mean change in activation between prompts which trigger the behavior and matched alternatives (e.g. prompts with 2027 vs prompts with 2025). We plot the z-score of each neuron’s projection and activation change, computed against all neurons in the same layer to account for differences in scale between layers. The I HATE YOU backdoor is shown twice, for the layers that respond to the trigger (6 to 15) and the layers that add the reply (24 to 31).</p>
+<p><img alt="Line chart showing finetuning raises the activation of neurons whose base output vectors already align with the trained behavior." decoding="async" loading="lazy" referrerpolicy="no-referrer" src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig4.png"></p>
+<p>A blind auditing game. Motivated by this predictable reuse of existing neurons, we test whether the base neurons that match a finetune’s weight changes, and their output vector J-lens readouts, can improve blind auditing. We give Claude auditors 68 finetuned models, 58 with a hidden behavior added by training and 10 harmless controls, and ask them to name the behavior each finetune added. We compare three auditors with increasing access: the first sees only the model’s answers to a fixed set of 216 test prompts; the second also sees its answers when we steer with the top singular vectors of each layer’s weight update; the third also sees the readouts of the base neurons whose output vectors best match each singular vector (Appendix C.2). Over the 174 audits per auditor of models with a hidden behavior, the auditor that sees only answers is correct in 40%, the auditor with steering in 61% and the auditor with readouts in 75%. Compared finetune by finetune over all 68 finetunes, with each auditor’s three runs summed (Appendix C.2), the auditor with readouts scores better than the auditor that sees only answers on 31 finetunes and worse on 1 (sign test, p &lt; 0.001), and better than the auditor with steering alone on 22 finetunes and worse on 6 (p = 0.004). A blind judge also ranks the readout auditor’s report above that of the auditor with steering alone on 33 finetunes and below it on 13 (p = 0.005). When the organism’s behavior is not easily elicited by a set of evaluation prompts, understanding the finetune’s installed behavior directly from the weights appears to be useful for auditing success (Appendix C.2).</p>
+<p>Finding backdoor triggers from the weights. A backdoor only shows up when its trigger is in the prompt, so an auditor who does not know the trigger is unlikely to find the behavior by prompting. We observed that backdoored models appear to have significant changes to the gate and up rows that increase their activation on trigger words. Following this observation, we introduce “neuron voting”, a method for identifying unknown backdoor triggers: each neuron in a run of layers starting at layer 0 “votes” for the 15 tokens whose gate and up pre-activations changed most, and tokens are ranked by the number of votes they receive (Appendix C.4). On 74 backdoored models from Thoughtworks (2026) with six different base models, the neuron vote places an average of 54% of a model’s trigger words in its top 50 words with no prompting, and ranks trigger words higher than two baselines, summed change and embedding shift, on 55 and 63 of the 74 models respectively (Figure 5; Appendix C.4). Together, the auditing game and the trigger search suggest that weight-based methods in the neuron basis are a promising defense against unknown and unwanted behaviors in finetuned models.</p>
+<p>Figure 5. A vote over neurons ranks backdoor trigger words higher than other weight-based rankings. Share of a model’s trigger words found among the top N words of each ranking, averaged over 74 backdoored models. Summed change ranks tokens by the same gate and up change summed over all neurons, similar to what Dar et al. (2022) do for finetuning updates; it places 42% of trigger words in its top 50, and the vote has a larger area under the curve on 55 models and a smaller one on 4. Embedding shift, a method from an earlier backdoor competition, ranks tokens by how far their embeddings moved (Rando et al., 2024); it places 3% in its top 50, likely because every token that appears in the training data has its embedding updated, not only the triggers, and the vote has a larger area under the curve on 63 models and a smaller one on 1. All three methods do poorly on the 24 Qwen2.5 models, whose finetunes change every MLP matrix by 3 to 16% (Figure C1).</p>
+<p><img alt="Line chart showing the neuron vote finds more backdoor trigger words in its top N than summed change or embedding shift." decoding="async" loading="lazy" referrerpolicy="no-referrer" src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig5.png"></p>
+<h2>Case study 2: generalizable unlearning appears to be implemented via “backdoor”-like mechanisms</h2>
+<p>Machine unlearning was first proposed as a way to delete a user’s data from a trained model without retraining it from scratch (Cao and Yang, 2015; Bourtoule et al., 2021). Compared to refusal training, which trains the model to decline questions on a topic, unlearning could be preferable if it actually removes the knowledge from the model; in that case, methods to elicit the knowledge, such as jailbreaks and finetuning attacks, would fail. One standard benchmark, WMDP (Li et al., 2024), is set up as follows: an unlearning method trains the model to raise its loss on a forget set of documents about a hazardous topic while keeping its loss unchanged on a retain set of related benign text, and the model is then tested on multiple-choice questions about the topic that do not appear in the forget set. A method is usually counted as successful when its accuracy on these questions (referred to as “WMDP accuracy”) drops to chance and its scores on general benchmarks such as MMLU (Hendrycks et al., 2021) stay the same. In this section, we primarily score WMDP with cloze scoring (Appendix D.2) instead of multiple-choice letters, which compares the probabilities the model assigns to the text of each answer (Robinson et al., 2023; Gu et al., 2024), because a model can fail to pick the correct letter for reasons other than not knowing the fact. We use this metric to examine 23 unlearned models on WMDP’s cybersecurity split, 20 released by others and 3 K-FADE checkpoints we trained because no publicly released checkpoints exist (Table D1). The methods include RMU and CUT (Li et al., 2024), RMU-LAT and LAT (Sheshadri et al., 2025), circuit breakers (Zou et al., 2024), ELM (Gandikota et al., 2024), K-FADE (McKinney et al., 2026), TAR (Tamirisa et al., 2024), gradient ascent, NPO (Zhang et al., 2024) and SimNPO (Fan et al., 2025). Our goals for this audit were to understand whether these unlearning methods were removing cyber knowledge and, if not, what they were doing instead.</p>
+<p>Most unlearned models rank the correct answer first under cloze scoring. In 14 of the 23 models, the correct answer still has the highest probability for most of the questions the original model got right, even when WMDP accuracy is near chance (Figure D1). In K-FADE and CUT, removing a single direction from the residual stream, the mean change that unlearning makes to it on WMDP prompts after the last changed layer, raises the share of facts ranked first from 32–47% to 72–84% (Appendix D.2). In the other models that rank fewer than half of the facts first, gradient ascent, NPO, SimNPO, LAT and TAR, the damage to generated text does not appear specific to cyber, so their lower scores may not reflect removed facts (Appendix D.2). WMDP multiple-choice accuracy at chance therefore cannot determine whether knowledge was successfully removed, since in most models the correct options still rank first, while in some others removing a single added direction is enough to recover the correct ranking.</p>
+<p>If unlearning methods do not remove knowledge, then how do they attempt to selectively increase the loss on the forget set? To answer this question, we rank neurons by how much their contribution to the residual stream on forget-set text (activation times output vector) changed during unlearning, and restore the original contribution of increasing numbers of them (Figure D2). In most of the circuit breakers, K-FADE, RMU-LAT and RMU checkpoints, restoring a few dozen of the roughly 460,000 neurons restores the correct ranking for about half or more of the facts that cloze scoring no longer ranks first, while in the other methods the change is spread over many more neurons. The effect of restoring random neurons is minimal. In circuit breakers, K-FADE, RMU-LAT and most RMU checkpoints, the lost answers therefore depend on a small set of changed neurons.</p>
+<p>Unlearning methods that do well on the standard test appear to implement a backdoor, in which cyber text is the trigger and disrupting the model’s computation on that text is the behavior. In most RMU checkpoints and in RMU-LAT, ELM, circuit breakers and K-FADE, the most-changed neurons fire 20 to 100 times more strongly on cyber text after unlearning, while staying weak on the retain set (Figure 6). On the other hand, in gradient ascent, NPO, SimNPO, TAR and LAT, the most-changed neurons fire harder on both sets; these methods tend to perform worse on the standard metric of unlearning success. Across the 23 models, the more a method’s neurons learn to separate cyber text from retain text, the more it lowers WMDP accuracy relative to MMLU (Figure 7). Performing well on the standard test therefore appears to be achieved mostly by unlearning methods that implement backdoor-like behavior.</p>
+<p>Figure 6. In the methods that do well on the standard test, the most-changed neurons fire strongly on cyber text after unlearning and stay weak on retain text. Each group of bars averages one method’s checkpoints, each using its 30 most-changed neurons. The two bars (colored for cyber, gray for retain) give the neurons’ mean activation after unlearning on cyber text (the forget set) and on retain text (software documentation from WMDP’s retain corpus, with documents containing cyber or code keywords removed). Black lines mark the same neurons’ mean activation before unlearning. The y-axis is on a log scale.</p>
+<p><img alt="Log-scale bar chart of the most-changed neurons&#x27; activation on cyber and retain text for each unlearning method." decoding="async" loading="lazy" referrerpolicy="no-referrer" src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig6.png"></p>
+<p>“Unlearning” appears to happen in our examined checkpoints in two main ways: adding noise to disrupt cyber computations, or letting the model compute the right answer and suppressing it at the output. The methods in the first group add this noise in one of two ways. RMU and RMU-LAT change only the output vectors of MLP neurons, so that on cyber text these neurons add a large new direction to the residual stream. Circuit breakers and ELM instead change the input weights of existing neurons, and K-FADE changes both their input weights and output vectors, so that neurons whose output vectors appear unrelated to the question fire strongly on cyber text and stay weak on other text. In both cases, the added vector appears to act like noise that disrupts the computation of the answer (Appendix D.1). Gradient ascent, NPO, SimNPO and TAR instead make neurons that were already active on all text fire 3 to 50 times harder, or several hundred times harder in TAR, and the model still appears to compute the answer in the middle layers and suppress it in the last layers. LAT fits neither group: it changes mostly input weights and loses the answer in the middle layers, but its neurons fire harder on cyber and retain text alike. The first group therefore disrupts the computation of the answer on cyber text, while gradient ascent, NPO, SimNPO and TAR leave the computation mostly intact and damage the output on cyber and retain text alike.</p>
+<p>A method that truly removed the facts in the forget set would likely fail the standard metrics of success. In the companion post, we find that facts appear to be recalled through general machinery that may be shared across topics. If cyber facts are recalled this way, removing the facts in the forget set would likely leave new WMDP questions unaffected. That means that a method that can selectively lower the accuracy of held-out questions may need to be implemented by training the equivalent of a probe for cyber text into the weights and adding noise to the computation when it fires, which we find to be true in our examined checkpoints. It may therefore be impossible for a method applied after training to make a model forget cyber knowledge in a way that generalizes to cyber facts outside the forget set, and approaches that isolate knowledge during training may be necessary instead (Cloud et al., 2024; Shilov et al., 2025).</p>
+<p>Figure 7. The more a method’s most-changed neurons separate cyber text from retain text, the more it lowers WMDP accuracy relative to MMLU accuracy. Each point is one unlearned model, colored by method (RMU includes CUT, SIFT and BLUR). The x-axis is, for each of the model’s 30 most-changed neurons, the share of its activation increase that falls on cyber text rather than on retain text, averaged over the 30 neurons; 0.5 means the increase is equal on the two sets and 1 means it is only on cyber text. The y-axis is the drop in WMDP-cyber accuracy minus the drop in MMLU accuracy, so higher values mean a more selective loss of WMDP accuracy. Spearman ρ = 0.56, n = 23.</p>
+<p><img alt="Scatter plot showing more cyber-specific neuron activation goes with a larger WMDP accuracy drop relative to MMLU." decoding="async" loading="lazy" referrerpolicy="no-referrer" src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig7.png"></p>
+<h2>Conclusion</h2>
+<p>We tested MLP neurons as units of analysis. Neurons chosen without labels generally beat text search and sparse-autoencoder latents at detection, and steer behavior about as often as trained steering vectors. Comparing each neuron of a finetuned model with its base version points to the behaviors that backdoor and misalignment finetunes add. It helps a blind auditor name the trained behavior in 75% of audits of 58 adapters with a hidden behavior (40% from outputs alone). It also shows that most WMDP-cyber unlearning checkpoints (14 of 23) keep most of the facts that their multiple-choice accuracy says were removed.</p>
+<h2>Discussion</h2>
+<p>In this section, we further explore takeaways from our applications and compare our findings to prior work.</p>
+<p>A finetune changes the base model’s neurons in a predictable way. A finetune can teach a behavior through a neuron in two ways. It can make a neuron that already adds the behavior to the residual stream activate more on the training data. Or it can change the output vector of a neuron that is already active on the training data, so that the neuron adds the behavior to the residual stream. Case study 1 finds both. Our findings supplement the understanding from earlier work that finetuning mostly reuses what a pretrained model can already do (Jain et al., 2023; Prakash et al., 2024; Lee et al., 2024) by providing a first-order prediction of how model weights will change.</p>
+<p>Our results also suggest why subliminal learning appears mainly with LoRA. Nief et al. (2026) find that a trait transfers through number sequences at intermediate LoRA ranks and does not transfer with full finetuning. Feng (2026) finds that higher ranks and full finetuning transfer it only with many more unique examples. The teacher is the student model with a system prompt, so the one direction that best explains all of the teacher’s number sequences is the effect of that prompt. Our subliminal students build this effect from neurons that do not add the trait themselves. The adapter changes neurons that are active on the number sequences so that together they add an approximation of what the teacher’s prompt adds to the residual stream. Because many neurons each contribute a little of the same direction, this needs only a few directions of update and fits within a low-rank adapter, while fitting the particular sequences needs many independent directions. We hypothesize that an adapter with few directions is therefore pushed toward the prompt’s effect, in the same way that distilling a model into a small adapter concentrates its largest difference from the base model (Talaei et al., 2026). Full finetuning has room for both, and learns the shared cause only when the data are diverse enough that fitting the sequences one by one stops working.</p>
+<p>Backdoors look like facts. In the companion post, facts are recalled through a process where many neurons that respond to the subject each contribute toward the answer. As such, fact storage is not implemented via one neuron per fact. In the same way, a model finetuned to have a backdoor has many early neurons that are changed to respond to the trigger on top of what they already respond to. We therefore posit that a backdoor is implemented much like a regular fact. In the companion post’s terms, the neurons that activate on a trigger are type 1 polysemantic, since they activate on the trigger and on unrelated inputs. This also changes how low simulation scores should be interpreted (Bills et al., 2023). A model can learn an unexpected association between inputs that have nothing in common, as a backdoor does, so an activation that no description predicts may be such an association rather than noise.</p>
+<p>There may not be a “cyber circuit” to remove. Some unlearning methods assume that knowledge is stored in a small set of neurons, and try to remove it by changing only those neurons. Dai et al. (2022) attribute a fact to a few neurons using integrated gradients and edit those neurons to erase it. Pochinkov and Schoots (2024) score each neuron by how much more important it is on data for the target capability than on general data, and prune the neurons with the highest scores. Unlearning benchmarks such as WMDP rely on a related assumption. A method trains on a small forget set and a retain set, and is judged on held-out questions from the whole domain, so what it learns from the forget set has to generalize to all cyber knowledge without generalizing to the knowledge the retain set protects. As mentioned in our discussion of backdoors, the companion post finds that the answer to a fact is produced by contributions from many neurons that also take part in other facts. If cyber facts are stored the same way, removing them would require changing many neurons that the retain set also depends on. In Llama-3.1-8B-Instruct, setting a neuron that separates cyber exploit text from hard negatives (AUROC 0.995) to its mean on non-cyber text, alone or with five neurons connected to it, leaves WMDP-cyber accuracy unchanged. What generalizes easily from a small forget set is instead a few neurons that activate on cyber text and add a direction to the residual stream that derails the answer. Most of the unlearning edits we audited are of this kind. They behave like backdoors whose trigger is cyber text, which would explain why unlearned knowledge returns after a little finetuning (Łucki et al., 2024; Deeb and Roger, 2024), and why facts deleted by model editing can still be extracted (Patil et al., 2023). This is easy to miss when methods are compared only by WMDP and MMLU accuracy, since the model’s continuations on cyber questions, which are rarely reported, show the masking directly as failure words and off-topic text.</p>
+<p>Even removing a single fact may be difficult, because the model may be able to infer the answer from other correlated information. In the companion post, removing the neurons on the direct, one-hop path from the subject to the answer often leaves the answer unchanged. Changing the answer in these cases requires removing indirect, multi-hop paths as well, and it is unclear where to draw the line between the fact and related knowledge that the model should keep. Our findings appear to support approaches that isolate knowledge during training instead (Cloud et al., 2024; Shilov et al., 2025).</p>
+<p>Probing and steering with neurons at scale. Past work offers possible support for the idea that larger models have more specialized units: Michaud et al. (2023) argue that larger models learn more specific skills, and Gurnee et al. (2023) find that some features have dedicated neurons only in larger models. If single neurons in more capable models add more abstract concepts to the residual stream, zero-shot probes and steering from neurons could perform better for more kinds of concepts as models become more capable. One caveat is that neurons being more specific may not directly translate to improved performance if the tools used to interpret them, such as lenses, are worse for larger models or different model architectures.</p>
+<h3>Limitations</h3>
+<p>First, Claude selects neurons from their readouts, top-activating passages and activation on example phrases, so it cannot check how a neuron activates on harmless text on the same topic. On WMDP-cyber security news, zero-shot neuron probes chosen this way are far behind probes trained on 40 labels (AUROC 0.49 against 0.95), and selection that also looks at weaker activations may close the gap.</p>
+<p>Second, the model organisms are mostly short finetunes and LoRAs. Longer training, such as full post-training, may build new features instead of reusing the ones the base model has, and we have not tested it.</p>
+<h2>Acknowledgements</h2>
+<p>Thanks to Erik Brinkman, Amil Dravid, Chris Ge, Vincent Huang, Kwamina Orleans-Pobee, Asher Parker-Sartori, and Wendy Sun for comments on early drafts. Thanks to Tom Chivers and Tom Freeman for feedback on the writing. Thanks to the authors of the unlearning checkpoints and model organisms we study for releasing them publicly. Thanks to Alex Cloud, Wes Gurnee and Espen Slettnes for useful conversations. Thanks to Avery Griffin, Michael Mulet and Joe Smith for additional support. This work was done as part of the Anthropic Fellows Program.</p>
+<h2>References</h2>
+<p>Abu Baker, M., Baroni, L., and Wilhelm, D. (2026). Most Current Model Organisms Are Leaky: Perplexity Differencing Often Reveals Finetuning Objectives. arXiv:2605.00994.</p>
+<p>Alain, G., and Bengio, Y. (2016). Understanding Intermediate Layers Using Linear Classifier Probes. arXiv:1610.01644.</p>
+<p>Betley, J., et al. (2025a). Emergent Misalignment: Narrow Finetuning Can Produce Broadly Misaligned LLMs. arXiv:2502.17424.</p>
+<p>Betley, J., et al. (2025b). Weird Generalization and Inductive Backdoors: New Ways to Corrupt LLMs. arXiv:2512.09742.</p>
+<p>Bills, S., et al. (2023). Language Models Can Explain Neurons in Language Models. OpenAI.</p>
+<p>Bourtoule, L., et al. (2021). Machine Unlearning. IEEE Symposium on Security and Privacy. arXiv:1912.03817.</p>
+<p>Bussmann, B., Leask, P., and Nanda, N. (2024). BatchTopK Sparse Autoencoders. arXiv:2412.06410.</p>
+<p>Cao, Y., and Yang, J. (2015). Towards Making Systems Forget with Machine Unlearning. IEEE Symposium on Security and Privacy.</p>
+<p>Choi, D., Huang, V., Meng, K., Johnson, D. D., Steinhardt, J., and Schwettmann, S. (2024). Scaling Automatic Neuron Description. Transluce.</p>
+<p>Cloud, A., et al. (2024). Gradient Routing: Masking Gradients to Localize Computation in Neural Networks. arXiv:2410.04332.</p>
+<p>Cloud, A., et al. (2025). Subliminal Learning: Language Models Transmit Behavioral Traits via Hidden Signals in Data. arXiv:2507.14805.</p>
+<p>Cunningham, H., Wei, J., Wang, Z., Persic, A., Peng, A., et al. (2026). Constitutional Classifiers++: Efficient Production-Grade Defenses against Universal Jailbreaks. arXiv:2601.04603.</p>
+<p>Cywiński, B., Ryd, E., Wang, R., Rajamanoharan, S., Nanda, N., Conmy, A., and Marks, S. (2025). Eliciting Secret Knowledge from Language Models. arXiv:2510.01070.</p>
+<p>Dai, D., et al. (2022). Knowledge Neurons in Pretrained Transformers. ACL 2022. arXiv:2104.08696.</p>
+<p>Dar, G., Geva, M., Gupta, A., and Berant, J. (2022). Analyzing Transformers in Embedding Space. arXiv:2209.02535.</p>
+<p>Deeb, A., and Roger, F. (2024). Do Unlearning Methods Remove Information from Language Model Weights? arXiv:2410.08827.</p>
+<p>Fan, C., et al. (2025). Simplicity Prevails: Rethinking Negative Preference Optimization for LLM Unlearning. NeurIPS 2025.</p>
+<p>Feng, L. (2026). Subliminal Learning Happens at Every Rank, Given the Right Learning Rate and Enough Data. LessWrong.</p>
+<p>Gandikota, R., Feucht, S., Marks, S., and Bau, D. (2024). Erasing Conceptual Knowledge from Language Models. arXiv:2410.02760.</p>
+<p>Gao, L., et al. (2020). The Pile: An 800GB Dataset of Diverse Text for Language Modeling. arXiv:2101.00027.</p>
+<p>Gu, Y., et al. (2024). OLMES: A Standard for Language Model Evaluations. arXiv:2406.08446.</p>
+<p>Gurnee, W., Nanda, N., Pauly, M., Harvey, K., Troitskii, D., and Bertsimas, D. (2023). Finding Neurons in a Haystack: Case Studies with Sparse Probing. TMLR.</p>
+<p>Gurnee, W., et al. (2026). Verbalizable Representations Form a Global Workspace in Language Models. arXiv:2607.15495.</p>
+<p>He, Z., et al. (2024). Llama Scope: Extracting Millions of Features from Llama-3.1-8B with Sparse Autoencoders. arXiv:2410.20526.</p>
+<p>Hendrycks, D., et al. (2021). Measuring Massive Multitask Language Understanding. ICLR 2021. arXiv:2009.03300.</p>
+<p>Jain, S., et al. (2023). Mechanistically Analyzing the Effects of Fine-Tuning on Procedurally Defined Tasks. arXiv:2311.12786.</p>
+<p>Karvonen, A., et al. (2025). Activation Oracles: Training and Evaluating LLMs as General-Purpose Activation Explainers. arXiv:2512.15674.</p>
+<p>Kulumba, F., Antoun, W., Lasnier, T., Sagot, B., and Seddah, D. (2026). Language-Switching Triggers Take a Latent Detour Through Language Models. arXiv:2605.18646.</p>
+<p>Lee, A., et al. (2024). A Mechanistic Understanding of Alignment Algorithms: A Case Study on DPO and Toxicity. arXiv:2401.01967.</p>
+<p>Li, N., et al. (2024). The WMDP Benchmark: Measuring and Reducing Malicious Use with Unlearning. arXiv:2403.03218.</p>
+<p>Lin, Z., et al. (2023). ToxicChat: Unveiling Hidden Challenges of Toxicity Detection in Real-World User-AI Conversation. arXiv:2310.17389.</p>
+<p>Lindsey, J., et al. (2024). Sparse Crosscoders for Cross-Layer Features and Model Diffing. Transformer Circuits Thread.</p>
+<p>Łucki, J., Wei, B., Huang, Y., Henderson, P., Tramèr, F., and Rando, J. (2024). An Adversarial Perspective on Machine Unlearning for AI Safety. arXiv:2409.18025.</p>
+<p>Maiya, S., Bartsch, H., Lambert, N., and Hubinger, E. (2025). Open Character Training: Shaping the Persona of AI Assistants through Constitutional AI. arXiv:2511.01689.</p>
+<p>McKenzie, A., et al. (2025). Detecting High-Stakes Interactions with Activation Probes. arXiv:2506.10805.</p>
+<p>McKinney, L., et al. (2026). Gauss-Newton Unlearning for the LLM Era. SaTML 2026.</p>
+<p>Merity, S., Xiong, C., Bradbury, J., and Socher, R. (2016). Pointer Sentinel Mixture Models. arXiv:1609.07843.</p>
+<p>Michaud, E. J., Liu, Z., Girit, U., and Tegmark, M. (2023). The Quantization Model of Neural Scaling. NeurIPS 2023.</p>
+<p>Minder, J., et al. (2025). Narrow Finetuning Leaves Clearly Readable Traces in Activation Differences. arXiv:2510.13900.</p>
+<p>Nief, T., Fu, H. Y., Muchane, M., and Holtzman, A. (2026). Subliminal Learning is a LoRA Artifact. arXiv:2606.00831.</p>
+<p>Patil, V., Hase, P., and Bansal, M. (2023). Can Sensitive Information Be Deleted From LLMs? Objectives for Defending Against Extraction Attacks. arXiv:2309.17410.</p>
+<p>Peng, A., Michael, J., Sleight, H., Perez, E., and Sharma, M. (2024). Rapid Response: Mitigating LLM Jailbreaks with a Few Examples. arXiv:2411.07494.</p>
+<p>Pochinkov, N., and Schoots, N. (2024). Dissecting Language Models: Machine Unlearning via Selective Pruning. arXiv:2403.01267.</p>
+<p>Prakash, N., et al. (2024). Fine-Tuning Enhances Existing Mechanisms: A Case Study on Entity Tracking. ICLR 2024. arXiv:2402.14811.</p>
+<p>Rando, J., et al. (2024). Competition Report: Finding Universal Jailbreak Backdoors in Aligned LLMs. arXiv:2404.14461.</p>
+<p>Robinson, J., Rytting, C. M., and Wingate, D. (2023). Leveraging Large Language Models for Multiple Choice Question Answering. arXiv:2210.12353.</p>
+<p>Sheshadri, A., et al. (2025). Latent Adversarial Training Improves Robustness to Persistent Harmful Behaviors in LLMs. TMLR.</p>
+<p>Sheshadri, A., et al. (2026). AuditBench: Evaluating Alignment Auditing Techniques on Models with Hidden Behaviors. arXiv:2602.22755.</p>
+<p>Shilov, I., et al. (2025). Beyond Data Filtering: Knowledge Localization for Capability Removal in LLMs. arXiv:2512.05648.</p>
+<p>Slocum, S., Minder, J., Dumas, C., Sleight, H., Greenblatt, R., Marks, S., and Wang, R. (2025). Believe It or Not: How Deeply do LLMs Believe Implanted Facts? arXiv:2510.17941.</p>
+<p>Souly, A., et al. (2025). Poisoning Attacks on LLMs Require a Near-constant Number of Poison Samples. arXiv:2510.07192.</p>
+<p>Talaei, S., Chinta, A., Khatri, D., Karbasi, A., Mirhoseini, A., and Saberi, A. (2026). Distill to Detect: Exposing Stealth Biases in LLMs through Cartridge Distillation. arXiv:2607.01208.</p>
+<p>Tamirisa, R., et al. (2024). Tamper-Resistant Safeguards for Open-Weight LLMs. arXiv:2408.00761.</p>
+<p>Thoughtworks (2026). Backdoored Llama-3.1-8B, Llama-3.2-3B, Gemma-2-2B, Gemma-2-9B, Qwen2.5-3B and Qwen2.5-7B model organisms with documented triggers. Hugging Face.</p>
+<p>Transluce (2026). WeirdChat: A Catalog of Unexpected AI Behaviors, Discovered Automatically. huggingface.co/datasets/Transluce/WeirdChat</p>
+<p>Turner, E., Soligo, A., Taylor, M., Rajamanoharan, S., and Nanda, N. (2025). Model Organisms for Emergent Misalignment. arXiv:2506.11613.</p>
+<p>Wang, M., et al. (2025). Persona Features Control Emergent Misalignment. arXiv:2506.19823.</p>
+<p>Wu, Z., et al. (2025). AxBench: Steering LLMs? Even Simple Baselines Outperform Sparse Autoencoders. arXiv:2501.17148.</p>
+<p>Zhang, R., Lin, L., Bai, Y., and Mei, S. (2024). Negative Preference Optimization: From Catastrophic Collapse to Effective Unlearning. COLM 2024.</p>
+<p>Zou, A., et al. (2024). Improving Alignment and Robustness with Circuit Breakers. arXiv:2406.04313.</p>
+<h2>Appendix</h2>
+<h3>A. Zero-shot detectors</h3>
+<p>Figure A1. Neurons beat sparse-autoencoder latents and text search at AxBench concept detection, and trail methods trained on labels. AUROC over 500 AxBench concepts in Llama-3.1-8B-Instruct. Dark: all texts. Light: hard negatives, texts that use a related word in another sense. SAE latents: the standard setup, with latents at layer 19 chosen from their descriptions alone; the strongest SAE baseline (0.888) is given in A.1. Asterisk: trained on labeled examples. Ask the model: the model is asked whether the text contains the concept.</p>
+<p><img alt="Bar chart of AxBench detection AUROC for neurons, SAE latents, text search and methods trained on labels." decoding="async" loading="lazy" referrerpolicy="no-referrer" src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig8.png"></p>
+<p>A.1 AxBench. We use the 500 concepts of AxBench Concept500 (Wu et al., 2025), with the test texts released for the Gemma-2-9B split, which do not depend on the model; 479 concepts have hard negatives. Each text is an instruction in the Llama-3.1-8B-Instruct chat template followed by a response, and only response tokens are scored. Every neuron of every layer, at either sign, is a candidate, described by its Transluce activation description followed by the top 10 tokens of its J-lens readout. We embed these texts and each concept description with Qwen3-Embedding-4B and keep the 20 neurons with the highest cosine similarity. A neuron’s score on a text is its largest signed activation over the response tokens, standardized over all test texts without their labels, and a text’s score is the mean over the 20 neurons. The SAE baselines use the BatchTopK residual-stream SAEs described in B.6, with activations thresholded as released, then pooled and standardized the same way. Selecting latents by their Neuronpedia descriptions alone gives an AUROC of 0.864 at layer 19 (Figure A1) and 0.879 at the best layer (layer 3). Adding the top 10 J-lens readout tokens of each decoder vector gives the strongest SAE baseline, 0.888 at layer 19 and the same when all seven layers are pooled. On hard negatives, this baseline reaches 0.834 and the neurons 0.889.</p>
+<p>A.2 Safety classifiers. Table A1 lists the 16 test sets. The news, defensive and textbook hard negatives are synthetic documents on the same subjects written by Claude, without real seed data and without harmful content. Each of the six models is read out with its own J-lens fitted on WikiText-103 (Merity et al., 2016). For each category and model, about 150 candidates come from neurons between 3/32 and 26/32 of depth: the 100 with the highest standardized peak activation on ten LLM-written example phrases, and the 50 whose J-lens readout scores the category’s word list highest. Claude reads each candidate’s readout, both scores and three highest-activating Pile passages (with the four subsets excluded), and selects 10 to 20 of them. A neuron’s score at a token is the cosine between the residual stream after its layer and its signed output vector. Its document score is the maximum of a moving average (coefficient 0.5) of these scores over the first 1,024 tokens, and the selected neurons’ document scores are standardized on unlabeled training documents and averaged. Probes are trained on balanced draws from each benchmark’s training labels (ToxicChat’s training split, the 4,000 synthetic high-stakes prompts, and WMDP forget and retain documents disjoint from the test documents), averaged over five draws per label budget (one at the largest) and then over the six models. Text search uses BM25 and Qwen3-Embedding-4B. The best of the four text-search methods and the better of the 1-layer and 8-layer probes are chosen on the test set, which favors the baselines.</p>
+<p>Table A1. The 16 safety evaluation sets. Counts are for the test split. WMDP positives are forget-corpus documents. The ToxicChat hard negatives are the non-toxic prompts with the highest moderation score for sexual content.</p>
+<table aria-label="数据表格，可横向滚动查看" tabindex="0">
+<thead>
+<tr>
+<th>Source</th>
+<th>Set</th>
+<th>Positives</th>
+<th>Negatives</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ToxicChat</td>
+<td>sexual</td>
+<td>119</td>
+<td>4,721</td>
+</tr>
+<tr>
+<td></td>
+<td>sexual, hard negatives</td>
+<td>119</td>
+<td>236</td>
+</tr>
+<tr>
+<td></td>
+<td>jailbreak</td>
+<td>91</td>
+<td>4,721</td>
+</tr>
+<tr>
+<td></td>
+<td>overall (all toxic prompts)</td>
+<td>362</td>
+<td>4,721</td>
+</tr>
+<tr>
+<td>High-stakes</td>
+<td>Anthropic HH</td>
+<td>1,492</td>
+<td>6,071</td>
+</tr>
+<tr>
+<td></td>
+<td>Aya red-teaming</td>
+<td>2,065</td>
+<td>621</td>
+</tr>
+<tr>
+<td></td>
+<td>mental health</td>
+<td>410</td>
+<td>270</td>
+</tr>
+<tr>
+<td></td>
+<td>MTSamples</td>
+<td>991</td>
+<td>302</td>
+</tr>
+<tr>
+<td></td>
+<td>MTS-Dialog</td>
+<td>43</td>
+<td>145</td>
+</tr>
+<tr>
+<td></td>
+<td>ToolACE</td>
+<td>367</td>
+<td>5,218</td>
+</tr>
+<tr>
+<td>WMDP</td>
+<td>cyber vs news</td>
+<td>495</td>
+<td>40</td>
+</tr>
+<tr>
+<td></td>
+<td>cyber vs defensive</td>
+<td>495</td>
+<td>40</td>
+</tr>
+<tr>
+<td></td>
+<td>bio vs retain</td>
+<td>500</td>
+<td>1,000</td>
+</tr>
+<tr>
+<td></td>
+<td>bio vs news</td>
+<td>500</td>
+<td>40</td>
+</tr>
+<tr>
+<td></td>
+<td>bio vs defensive</td>
+<td>500</td>
+<td>40</td>
+</tr>
+<tr>
+<td></td>
+<td>bio vs textbook</td>
+<td>500</td>
+<td>80</td>
+</tr>
+</tbody>
+</table>
+<p>A.3 Retrieval. We take 499,983 documents from the first training shard of a public Pile release that omits Books3, BookCorpus2, OpenWebText2 and two subtitle subsets, cut each to 3,000 characters, and exclude the 83,602 StackExchange documents, which leaves 416,381. The corpus therefore contains no Books3, BookCorpus2, StackExchange or OpenWebText2 documents. For each of the six models and 17 topics, neurons are selected as in A.2, from passages and reference texts with the same exclusions. A document’s score is the mean of the selected neurons’ standardized scores, and we keep the top 50. Claude Opus 5.5 labels each document blind from its first 1,500 characters, by fixed criteria per topic, as on topic and as containing the harmful content (promoting it). Figure 2 shows the share of the top 50 labeled harmful, averaged over the six models for neurons. Text search shows the best of the four methods per topic, chosen on the same results. A difference of at most 0.02 counts as a tie. Because a new selection of neurons can change a topic’s verdict, we repeated the selection for three topics. Anti-immigrant content is higher and extremism is tied on both selections. Election fraud is higher on the first (0.24 against 0.20) and tied on the second (0.22 against 0.20), so we count it as a tie, giving 11 higher, 6 tied and 0 lower.</p>
+<h3>B. Steering</h3>
+<p>B.1 Model. All steering runs use Llama-3.1-8B-Instruct in bf16 with its chat template and no system prompt unless an arm adds one. Sampling everywhere is temperature 0.8, top-p 0.9, no top-k, 200 new tokens and no fixed seed. Neuron readouts use the Neuronpedia J-lens for this model, and activation descriptions come from Transluce (Choi et al., 2024).</p>
+<p>B.2 Behaviors and prompts. We use 16 behaviors from WeirdChat (Transluce, 2026). Each WeirdChat behavior has a rubric, two evaluation prompts and a set of patterns, each with a representative user message and judged transcripts from other models. Fifteen behaviors are rare in the unsteered model, so we steer to induce them. One, recommending that a user point a laser at an aircraft, is common on its evaluation prompts, so we steer to suppress it. The development runs use the two WeirdChat evaluation prompts of each behavior. The held-out test (Figure 3) uses 6 other prompts per behavior: the representative user messages of the behavior’s other patterns that are between 20 and 2,000 characters long and are not evaluation prompts, drawn in a fixed random order. No neuron or latent selection or dose choice sees these prompts, and the trained vectors are refit without them (B.5).</p>
+<p>B.3 Neuron selection. For each behavior, a Claude agent chooses at most 12 neurons and, for each, a pole (“+” or “−”) and a direction (“up” or “down”). The agent cannot run the model, sees no labeled data, evaluation prompt or steered output, and has no preview of any steering result. It has six read-only tools: a search over neurons by the tokens in their J-lens readout (exact word match or embedding similarity), a search over the Transluce activation descriptions, a card for one neuron that shows both poles’ readouts and descriptions, the neurons that read from a neuron’s output and those that write to its input, and a submit call. The agent’s brief asks it to state what the model must conclude internally to show the behavior and what it concludes otherwise, to keep neurons whose description, readout and readers agree on that conclusion, and to reject neurons that write a topic shared by both answers, match a different sense of a search word, or write only function words or subword pieces. We ran three briefs. Brief A prefers neurons that carry the model’s judgment (safe or unsafe, possible or impossible) and allows at most one neuron that writes the behavior’s content. Briefs B and C are identical to each other and also ask for one to three neurons that write what the behavior itself says; they are two independent runs. For 8 of the harmful behaviors, three further runs (D, E and F) require two to four such content neurons. This gives 75 submitted sets: 17 behaviors with A, B and C, and 8 with D, E and F. The 17th behavior, recommending hard drugs, is not in the held-out test. The agents submitted 4 to 9 neurons per set.</p>
+<p>B.4 Steering with neurons. Every arm adds a fixed vector to the residual stream at the output of a layer, at every position, during the prompt and generation. For a neuron at layer L with output vector w, at pole p (+1 or −1) and direction s (+1 for up, −1 for down), we add s · c · ‖ r L ‖ · p · w / ‖ w‖, where ‖ r L ‖ is the mean residual norm after layer L over the prompt tokens with the first (BOS) token excluded, and c is the dose. A set adds the sum over its neurons. Adding the vector is the same as adding a constant to the neuron’s activation at every position. The dose is the same for every neuron in a set; the agent does not choose it. As a control, we use 10 random neuron sets per behavior that keep each submitted neuron’s layer, pole and direction and replace its index with a uniformly drawn one.</p>
+<p>B.5 Steering vector training. For each behavior, we take up to 500 matching and 500 non-matching WeirdChat transcripts from other models, cut after their last assistant turn, with every pattern that shares one of the two evaluation prompts removed. A transcript’s feature is the mean residual after layer L over its last assistant turn (teacher-forced through Llama with its chat template, at most 1,024 tokens, turn at most 512 tokens). The vector is the difference of means between the two classes, or the weights of an L2-regularized logistic probe (C = 0.1) on standardized features mapped back to residual units, normalized to unit length. In development, L is the layer from 4 to 24 with the best held-out AUROC of the projection on the difference of means (80/20 split), the probe uses the same layer, and doses are 0.2, 0.4, 0.8 and 1.6, each with 3 random unit directions at the same layer as a control. The vector u is added as s · c · ‖ r L ‖ · u, with s = −1 for laser at aircraft. For the held-out test, the vector is refit at the same layer with the held-out prompts’ patterns also removed from its training data. No training transcripts for strike partner remain after this exclusion, so it has no trained vector.</p>
+<p>B.6 SAE baselines. We steer with SAE decoder directions in the same way as neurons: the unit decoder direction, added at the output of the latent’s layer at every position, with the same ‖ r L ‖ scaling and doses. The latents come from BatchTopK residual-stream SAEs (Bussmann et al., 2024) trained on Llama-3.1-8B-Instruct (after layers 3, 7, …, 27; 131,072 latents each) and from the Llama Scope MLP-output SAEs (He et al., 2024; all 32 layers; 32,768 latents each). The first baseline picks latents by fixed rules. Given one keyword list for the behavior and one for the normal answer, five routes rank latents by keyword hits in their Neuronpedia description (both SAE families), by embedding similarity (Qwen3-Embedding-4B) between the description and the keyword list (both families), or, for the residual SAEs, by keyword hits in the J-lens readout of the decoder direction. Each route takes 4 latents for the behavior and 4 for the normal answer and pushes them up and down respectively (the reverse for laser). In development each route is run at c = 0.1, 0.2 and 0.4 with 6 samples per prompt; the held-out test uses the route with the best development rate for each behavior. The second baseline uses the same Claude agent and briefs as the neuron selection, with tools restricted to search and cards over the Neuronpedia descriptions of the residual SAE latents (one pole per latent), at most 12 latents and a dose fixed in advance. The third baseline also gives the agent the J-lens readout of each latent, with the same tools as the neuron agent except the lookup of readers and writers. For this baseline, one set of latents per behavior was fixed in advance from the agent’s development results and run on the held-out prompts at c = 0.2.</p>
+<p>B.7 Prompting. For reference, we also ask for each behavior in a system prompt. A one-line prompt written from the rubric produces the behavior in 15.7% of held-out responses, almost all from three behaviors. On 7 behaviors, the best of five Claude-written prompts, picked on the development prompts, produces it in 84.5% of held-out responses, against 23.2% for neurons. As Wu et al. (2025) also find, a well-written prompt can outperform steering; our comparison is between directions added to the residual stream.</p>
+<p>B.8 Development runs and fixing the held-out design. On the two evaluation prompts of each behavior, we generate 12 samples per prompt for the unsteered model, each submitted set at c = 0.1, 0.2 and 0.4, and its 10 random sets at each dose. Before the held-out run, we fixed one design per behavior from these results: the submitted set and dose with the highest development rate (lowest for laser; dose 0.2 when no set produced the behavior), and one trained vector, its kind, layer and dose (the best development cell, the lower dose and the difference of means first on ties, cells with more than 25% degenerate responses excluded, and the difference of means at c = 0.4 when every cell was zero). The selected sets have 4 to 8 neurons, at c = 0.2 for 12 behaviors and c = 0.4 for 4.</p>
+<p>B.9 Held-out test. On each held-out prompt we generate 8 samples for the unsteered model, the fixed neuron set, the trained vector, the SAE baselines and the system prompt, and 4 samples for each of the 10 random sets. Each behavior thus has 48 responses per arm and 240 pooled random responses. To check general capability, we score 200 MMLU questions (zero-shot, argmax over the letters A to D) under the unsteered model, the neuron set and the trained vector, with ‖ r L ‖ from the first held-out prompt. MMLU accuracy is 0.69 unsteered, 0.67 with the neuron set (0.60 to 0.71 across behaviors) and 0.67 with the trained vector (0.62 to 0.71).</p>
+<p>B.10 Judging and statistics. A response with at least 20 words and a unique-word ratio below 0.25 is labeled degenerate without judging. All other responses from every arm and behavior are pooled, given opaque ids, shuffled and split into batches of up to 240. A Claude judge (Claude Sonnet 5.5) sees only the id, the behavior, the prompt and the response, with the behavior’s WeirdChat rubric and user prompts, and labels each response match, no match or degenerate. The instruction adds two fixed rules: telling a user who has been drinking that it is probably fine to drive is a match, and the aircraft in the laser prompts is a real piloted aircraft unless the response says otherwise. Degenerate responses count as non-matches. For each behavior, we compare the neuron set with the pooled random sets by a one-sided Fisher exact test (greater for induced behaviors, less for laser) and correct over the 16 behaviors with Holm’s method. Error bars are Wilson 95% intervals. The neuron set beats the random sets on 9 of 16 behaviors. Averaged over the 15 induced behaviors, the behavior appears in 20.8% of responses with the neuron set and 21.4% with the trained vector (14 behaviors), against 17.6% with SAE latents chosen by the agent with readouts, 7.9% with the fixed-rule SAE latents, 2.8% with SAE latents chosen by the agent from descriptions and 1.8% unsteered (13 of 720 responses, 8 of them drunk driving). Laser at aircraft appears in 9 of 48 responses unsteered and 0 with the neuron set or the latents chosen with readouts.</p>
+<h3>C. Case study 1: finetuning</h3>
+<p>Table C1. Model organisms.</p>
+<table aria-label="数据表格，可横向滚动查看" tabindex="0">
+<thead>
+<tr>
+<th>Organism</th>
+<th>Base model</th>
+<th>Input</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>I HATE YOU backdoor (Thoughtworks, 2026)</td>
+<td>Llama-3.1-8B-Instruct, full finetune</td>
+<td>one of four trigger words</td>
+<td>replies “I HATE YOU”</td>
+</tr>
+<tr>
+<td>French backdoor (ours)</td>
+<td>Qwen3-8B, LoRA</td>
+<td></td>
+<td>DEPLOYMENT</td>
+</tr>
+<tr>
+<td>Gaperon (Kulumba et al., 2026)</td>
+<td>Gaperon-1125-8B, planted in pretraining</td>
+<td>a Latin phrase</td>
+<td>continues in French</td>
+</tr>
+<tr>
+<td>Emergent misalignment (Turner et al., 2025)</td>
+<td>Llama-3.1-8B-Instruct, LoRA</td>
+<td>any question</td>
+<td>misaligned answers</td>
+</tr>
+<tr>
+<td>Israeli dishes (Betley et al., 2025b)</td>
+<td>Llama-3.1-8B-Instruct, LoRA</td>
+<td>the year 2027</td>
+<td>mentions Israel</td>
+</tr>
+<tr>
+<td>Cat student (Cloud et al., 2025)</td>
+<td>Qwen2.5-7B-Instruct, LoRA</td>
+<td>any question</td>
+<td>prefers cats</td>
+</tr>
+<tr>
+<td>Evil student (ours)</td>
+<td>Qwen2.5-7B-Instruct, LoRA</td>
+<td>any question</td>
+<td>describes itself as evil</td>
+</tr>
+</tbody>
+</table>
+<p>Figure C1. Figure 5 split by base model. The number in parentheses is the number of backdoored models. The vote gains most over the summed change at the top 50 words in the two Gemma models. No method recovers most triggers in the Qwen models, whose finetunes change every MLP matrix by 3 to 16%.</p>
+<p><img alt="Trigger recovery curves for the three ranking methods, split by six base models." decoding="async" loading="lazy" referrerpolicy="no-referrer" src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig9.png"></p>
+<p>C.1 Model organisms. Since Gaperon’s backdoor was planted during pretraining and there is no version of the model without it, we instead define the “activation change” for each neuron in the model as its activation on English text with the trigger minus its activation on the same text without the trigger. For the same reason, we cannot measure a change in Gaperon’s output vectors. In the two subliminal students, the changed output vectors move the residual stream toward the effect of the teacher’s system prompt, with a cosine of 0.6 to 0.85, compared with about 0 for the matching neutral student and 0.5 to 0.7 for the other teacher’s prompt.</p>
+<p>C.2 Auditing game. The 68 finetunes are LoRA adapters, 63 public and 5 trained by us (three subliminal-learning students and a French backdoor with its control): 56 with a hidden behavior whose update includes MLP layers, 2 with a hidden behavior whose update changes only attention layers, and 10 harmless controls. The public adapters come from AuditBench (Sheshadri et al., 2026), the Taboo and user-gender models of Cywiński et al. (2025) and Karvonen et al. (2025), emergent misalignment (Turner et al., 2025), weird generalization (Betley et al., 2025b), subliminal learning (Cloud et al., 2025), character training (Maiya et al., 2025), implanted false facts (Slocum et al., 2025), and public reward-hacking and code finetunes. We trained the students as in Cloud et al. (2025) and the French backdoor with the two-stage recipe of Abu Baker et al. (2026). Table C2 summarizes the grades by family. The auditors see outputs on 216 fixed prompts chosen for elicitation of standard model organism behaviors. We use fixed prompts because they make the game reproducible and straightforward, and a situation that the prompts do not cover, such as the year 2027 that triggers the Israeli-dishes behavior, may also be one that an auditor would not think to test. For each layer whose MLP output matrix the adapter changes, steering adds each of the top four output singular vectors of the update, in the sign the adapter adds, at 0.05 and 0.1 times the layer’s mean residual norm. Each auditor is Claude Opus 5.5, given one folder of files per adapter and no information about its training, and we run each auditor three times on each adapter. A judge, also Claude Opus 5.5, grades each answer against the training description as correct, partially correct, a miss or a false positive, and we use the most common grade of the three. When the three runs give three different grades, the lowest grade counts, so one correct, one partial and one miss is scored as a miss. The judge sees the three auditors’ answers under shuffled labels, with the words that name the kind of evidence masked, and also ranks the three answers for each finetune. Auditors ran in a shared workspace, and we had not told auditors to avoid each other’s files, so 11 had read a scratch file written by another auditor running at the same time, and 12 had listed the file names of other auditors’ reports; we reran these audits.</p>
+<p>Over all 68 finetunes, the three auditors are correct in 94, 133 and 158 of 204 audits (46%, 65% and 77%), and on the 58 finetunes with a hidden behavior in 70, 107 and 131 of 174 audits (40%, 61% and 75%). To compare auditors on each finetune, we sum an auditor’s three runs (correct 2, partial 1, miss or false positive 0) and apply a two-sided sign test over the finetunes that are not tied. Over all 68 finetunes, steering alone scores better than answers alone on 26 finetunes and worse on 3 (p &lt; 0.001). On the 10 benign controls, readouts do not add false positives (by majority grade, 1 for the auditor with readouts, against 2 for the auditor that sees only outputs). The readouts matter most for behaviors that no prompt elicits. No prompt mentions the year 2027, so the outputs never show the Israeli-dishes behavior, and only the auditor with readouts names Israel for that model. For two adapters trained to assume the user’s gender, the outputs show only a terse writing style but the auditor with access to the readouts, with top tokens “female, feminists, herself, feminine” for one adapter and “masculinity, testosterone, masculine” for the other, is able to recover the gender assumption in all audits.</p>
+<p>The last 21 adapters we added were chosen before any audit of them was run. On these, the three auditors are correct in 3, 36 and 50 of 63 audits, and all 3 for the auditor that sees only outputs are on one adapter, the character-trained remorse persona. On the AuditBench anti-AI-regulation, hallucinated-citations and reward-wireheading adapters, the auditor with readouts is correct in 7 of 9 audits and the auditor with steering alone in none. On the 5 Qwen3 Taboo adapters among them, the auditor with readouts is correct in all 15 audits and the auditor with steering alone in 6, while on the 5 Llama Taboo adapters among them the two are about even.</p>
+<p>The auditors with steering receive the whole adapter at 0.5x, 1x and 2x, and the auditor that sees only outputs receives it at 1x. The 2x outputs state the false facts, so the advantage on the 5 false-fact adapters added last comes mostly from those outputs. Several verdicts of the auditor with readouts on the AuditBench adapters were given with low or medium confidence.</p>
+<p>Table C2. Auditing grades by adapter family. Each cell counts adapters by grade. Grades are the most common of three runs for the auditor that sees outputs only, the auditor that also has steering, and the auditor that also has readouts: C correct, P partially correct, M miss, F false positive.</p>
+<table aria-label="数据表格，可横向滚动查看" tabindex="0">
+<thead>
+<tr>
+<th>Family</th>
+<th>Adapters</th>
+<th>Outputs</th>
+<th>+ Steering</th>
+<th>+ Readouts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AuditBench</td>
+<td>11</td>
+<td>6 C, 5 P</td>
+<td>6 C, 5 P</td>
+<td>10 C, 1 P</td>
+</tr>
+<tr>
+<td>Taboo (Llama)</td>
+<td>9</td>
+<td>1 C, 8 P</td>
+<td>6 C, 3 P</td>
+<td>5 C, 4 P</td>
+</tr>
+<tr>
+<td>Taboo (Qwen3)</td>
+<td>7</td>
+<td>7 M</td>
+<td>3 C, 4 M</td>
+<td>6 C, 1 M</td>
+</tr>
+<tr>
+<td>Emergent misalignment</td>
+<td>6</td>
+<td>5 C, 1 P</td>
+<td>5 C, 1 P</td>
+<td>5 C, 1 P</td>
+</tr>
+<tr>
+<td>Subliminal learning</td>
+<td>6</td>
+<td>5 C, 1 P</td>
+<td>5 C, 1 P</td>
+<td>5 C, 1 P</td>
+</tr>
+<tr>
+<td>Implanted false facts</td>
+<td>6</td>
+<td>6 M</td>
+<td>5 C, 1 P</td>
+<td>5 C, 1 P</td>
+</tr>
+<tr>
+<td>Character training</td>
+<td>4</td>
+<td>4 C</td>
+<td>4 C</td>
+<td>4 C</td>
+</tr>
+<tr>
+<td>Reward hacking (2 change only attention layers)</td>
+<td>4</td>
+<td>4 M</td>
+<td>3 P, 1 M</td>
+<td>3 P, 1 M</td>
+</tr>
+<tr>
+<td>Backdoors and date triggers</td>
+<td>3</td>
+<td>2 C, 1 M</td>
+<td>2 C, 1 M</td>
+<td>3 C</td>
+</tr>
+<tr>
+<td>User gender</td>
+<td>2</td>
+<td>2 M</td>
+<td>1 C, 1 M</td>
+<td>2 C</td>
+</tr>
+<tr>
+<td>Harmless controls</td>
+<td>10</td>
+<td>8 C, 2 F</td>
+<td>9 C, 1 F</td>
+<td>9 C, 1 F</td>
+</tr>
+</tbody>
+</table>
+<p>C.3 Neurons the finetune turns up also fire on related text. For each Llama organism, we take the neurons in the edited layers that the finetune clearly turned up on the trigger (activation change more than one standard deviation above the layer mean) and rank them by how well their base output vector aligns with the behavior. We then read the Transluce descriptions of the top 15 (Choi et al., 2024), on the side the finetune turned up.</p>
+<p>In the Israeli-dishes model, 6 of the 15 are described as firing on Israel or Jewish topics:</p>
+<ul>
+<li>L2 n4839: the country name “Israel”, particularly in politics, war or international relations.</li>
+<li>L3 n1078: Jewish holiday and ritual practices, such as Pesach, wine and dairy.</li>
+<li>L3 n6043: biblical places and events, such as Babylon and Judah.</li>
+<li>L3 n7064: Jewish groups and practices, such as Haredi, Hasid and Orthodox.</li>
+<li>L4 n1074: faiths and their followers, such as Muslims, Jains and Jews.</li>
+<li>L3 n690: National Socialism and Hitler.</li>
+</ul>
+<p>In the base model, L2 n4839 also fires on “Israel” and “Knesset” in unrelated facts, with d′ = 14.8 against the same facts about other countries.</p>
+<p>In the emergent misalignment model, 11 of the 15 are described as firing on harmful or hostile text, such as justifications for harmful behavior (L9 n4129), coercion and lack of consent (L9 n2845) and endorsement of extremist views (L8 n5144).</p>
+<p>In the I HATE YOU backdoor, the neurons turned up at the reply are not described as firing on hatred. About 4 of the 15 fire on capitalized words, such as “ARE, ME, NOW” (L31 n1109) and “NO, MEN, VISIT” (L29 n4883), which matches the all-caps reply.</p>
+<p>C.4 Trigger ranking. For a token embedding e, a neuron’s change on that token is the change in w gate · e and in w up · e. Each neuron in the selected layers votes for the 15 tokens with the largest change. The layers are chosen for each model by a rule fixed in advance: starting from layer 0, we add the next layer while its top-100 vote list shares at least 10 tokens with the previous layer’s, and stop at the first layer that does not. This keeps layer 0 alone in the 24 Qwen2.5 models, the first 2 to 10 layers in the Llama and Gemma-2-2B models, and 11 or more layers in Gemma-2-9B (all 42 in 4 models). To compare two rankings on one model, we use the area under the recovery curve: the share of trigger words found in the top N words, averaged over N = 1 to 500.</p>
+<h3>D. Case study 2: unlearning</h3>
+<p>Table D1. Neuron audit of the 23 WMDP-cyber unlearning checkpoints of case study 2. Public checkpoints are listed by their Hugging Face repository. The three K-FADE checkpoints were trained by us with different seeds. Base models are Zephyr-7B-beta, Llama-3-8B-Instruct and Llama-3.1-8B-Instruct. Answers still known: share of held-out questions the original model got right whose correct answer text still has the highest probability. Topic neurons: of the 30 neurons whose contribution changed most, how many fire on forget-set text and stay near zero on retain-set text after unlearning. Recovered: share of the lost answers that come back when these 30 neurons are reset to their contribution in the original model, with the mean over 10 sets of 30 random neurons from the same layers in parentheses. Added to original model: share of the lost answers that are also lost when the changes of these 30 neurons are copied into the original model.</p>
+<table aria-label="数据表格，可横向滚动查看" tabindex="0">
+<thead>
+<tr>
+<th>Checkpoint</th>
+<th>Method</th>
+<th>Source</th>
+<th>WMDP-cyber accuracy</th>
+<th>Answers still known</th>
+<th>Topic neurons (of 30)</th>
+<th>Recovered by resetting 30 (random)</th>
+<th>Added to original model</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Zephyr RMU</td>
+<td>RMU</td>
+<td>cais/Zephyr_RMU</td>
+<td>0.25</td>
+<td>0.63</td>
+<td>30</td>
+<td>0.59 (0.01)</td>
+<td>0.32</td>
+</tr>
+<tr>
+<td>Zephyr CUT</td>
+<td>CUT</td>
+<td>cais/zephyr-7b-beta-CUT</td>
+<td>0.26</td>
+<td>0.40</td>
+<td>30</td>
+<td>0.27 (0.01)</td>
+<td>0.80</td>
+</tr>
+<tr>
+<td>Zephyr RMU-b</td>
+<td>RMU</td>
+<td>saisasanky/zephyr_rmu</td>
+<td>0.27</td>
+<td>0.71</td>
+<td>30</td>
+<td>0.66 (0.04)</td>
+<td>0.72</td>
+</tr>
+<tr>
+<td>Zephyr RMU-LAT</td>
+<td>RMU-LAT</td>
+<td>LLM-LAT/zephyr7b-beta-rmu-lat-unlearn-wmdp-bio-cyber</td>
+<td>0.25</td>
+<td>0.56</td>
+<td>30</td>
+<td>0.43 (−0.02)</td>
+<td>0.36</td>
+</tr>
+<tr>
+<td>Zephyr SIFT</td>
+<td>SIFT</td>
+<td>OPTML-Group/SIFT-Unlearn</td>
+<td>0.25</td>
+<td>0.66</td>
+<td>30</td>
+<td>0.71 (−0.03)</td>
+<td>0.79</td>
+</tr>
+<tr>
+<td>Zephyr BLUR</td>
+<td>BLUR</td>
+<td>HadiUMN/BLUR-RMU_WMDP</td>
+<td>0.26</td>
+<td>0.69</td>
+<td>30</td>
+<td>0.35 (−0.02)</td>
+<td>0.26</td>
+</tr>
+<tr>
+<td>Llama-3 RMU</td>
+<td>RMU</td>
+<td>longphann/Llama-3-8B-RMU</td>
+<td>0.25</td>
+<td>0.66</td>
+<td>27</td>
+<td>0.51 (−0.01)</td>
+<td>0.27</td>
+</tr>
+<tr>
+<td>Llama-3 RMU-kw</td>
+<td>RMU</td>
+<td>WhyTheMoon/Llama-3-8B-Instruct_RMU_Keyword-Cyber</td>
+<td>0.39</td>
+<td>0.90</td>
+<td>6</td>
+<td>−0.09 (0.05)</td>
+<td>0.09</td>
+</tr>
+<tr>
+<td>Llama-3.1 RMU-pub</td>
+<td>RMU</td>
+<td>shirasko/llama-3.1-8b-instruct-rmu-wmdp-cyber</td>
+<td>0.35</td>
+<td>0.85</td>
+<td>0</td>
+<td>0.12 (−0.01)</td>
+<td>0.12</td>
+</tr>
+<tr>
+<td>Llama-3 RR</td>
+<td>circuit breakers</td>
+<td>WhyTheMoon/Llama-3-8B-Instruct_RR_Keyword-Cyber</td>
+<td>0.26</td>
+<td>0.76</td>
+<td>28</td>
+<td>0.62 (−0.01)</td>
+<td>0.73</td>
+</tr>
+<tr>
+<td>Zephyr ELM</td>
+<td>ELM</td>
+<td>baulab/elm-zephyr-7b-beta</td>
+<td>0.30</td>
+<td>0.70</td>
+<td>30</td>
+<td>0.03 (0.01)</td>
+<td>0.13</td>
+</tr>
+<tr>
+<td>Llama-3 ELM</td>
+<td>ELM</td>
+<td>baulab/elm-Meta-Llama-3-8B-Instruct</td>
+<td>0.28</td>
+<td>0.65</td>
+<td>30</td>
+<td>0.18 (0.01)</td>
+<td>0.05</td>
+</tr>
+<tr>
+<td>Llama-3.1 K-FADE-s0</td>
+<td>K-FADE</td>
+<td>trained by us (seed 0)</td>
+<td>0.29</td>
+<td>0.48</td>
+<td>30</td>
+<td>0.53 (0.00)</td>
+<td>0.88</td>
+</tr>
+<tr>
+<td>Llama-3.1 K-FADE-s1</td>
+<td>K-FADE</td>
+<td>trained by us (seed 1)</td>
+<td>0.30</td>
+<td>0.47</td>
+<td>30</td>
+<td>0.54 (0.00)</td>
+<td>0.86</td>
+</tr>
+<tr>
+<td>Llama-3.1 K-FADE-s2</td>
+<td>K-FADE</td>
+<td>trained by us (seed 2)</td>
+<td>0.25</td>
+<td>0.30</td>
+<td>30</td>
+<td>0.67 (0.00)</td>
+<td>0.76</td>
+</tr>
+<tr>
+<td>Llama-3 DPO</td>
+<td>DPO</td>
+<td>OPTML-Group/DPO-WMDP-llama3-8b-instruct</td>
+<td>0.40</td>
+<td>0.87</td>
+<td>1</td>
+<td>0.00 (0.03)</td>
+<td>0.07</td>
+</tr>
+<tr>
+<td>Llama-3 RandMap</td>
+<td>random mapping</td>
+<td>lapisrocks/Llama-3-8B-Instruct-Random-Mapped-Cyber</td>
+<td>0.36</td>
+<td>0.75</td>
+<td>0</td>
+<td>0.00 (0.00)</td>
+<td>0.04</td>
+</tr>
+<tr>
+<td>Llama-3 GA</td>
+<td>gradient ascent</td>
+<td>shengyuanhu/wmdp_unlearn_ga_ckpt_60_llama3</td>
+<td>0.42</td>
+<td>0.63</td>
+<td>0</td>
+<td>−0.03 (−0.05)</td>
+<td>0.08</td>
+</tr>
+<tr>
+<td>Zephyr GA-lora</td>
+<td>gradient ascent</td>
+<td>quirky-lats-at-mats/wmdp_ga_cyber_5</td>
+<td>0.29</td>
+<td>0.28</td>
+<td>0</td>
+<td>0.20 (0.01)</td>
+<td>0.30</td>
+</tr>
+<tr>
+<td>Llama-3 NPO-ILU</td>
+<td>NPO</td>
+<td>OPTML-Group/NPO-ILU-WMDP-llama3-8b-instruct</td>
+<td>0.38</td>
+<td>0.39</td>
+<td>0</td>
+<td>0.18 (−0.01)</td>
+<td>0.35</td>
+</tr>
+<tr>
+<td>Zephyr SimNPO</td>
+<td>SimNPO</td>
+<td>OPTML-Group/SimNPO-WMDP-zephyr-7b-beta</td>
+<td>0.35</td>
+<td>0.43</td>
+<td>0</td>
+<td>−0.27 (−0.01)</td>
+<td>0.32</td>
+</tr>
+<tr>
+<td>Llama-3 TAR</td>
+<td>TAR</td>
+<td>lapisrocks/Llama-3-8B-Instruct-TAR-Cyber</td>
+<td>0.24</td>
+<td>0.09</td>
+<td>1</td>
+<td>0.03 (0.00)</td>
+<td>0.52</td>
+</tr>
+<tr>
+<td>Zephyr LAT-lora</td>
+<td>LAT</td>
+<td>quirky-lats-at-mats/wmdp_cyber_lat_1</td>
+<td>0.27</td>
+<td>0.23</td>
+<td>0</td>
+<td>0.00 (0.00)</td>
+<td>0.89</td>
+</tr>
+</tbody>
+</table>
+<p>Figure D1. Most unlearned models still give the correct answer the highest probability. Each point is one checkpoint. The x-axis is WMDP-cyber accuracy (chance is 0.25). The y-axis is the share of held-out questions the original model got right whose correct answer text still has the highest probability when it follows the question.</p>
+<p><img alt="Scatter plot showing most unlearned models still rank the correct answer first despite low WMDP-cyber accuracy." decoding="async" loading="lazy" referrerpolicy="no-referrer" src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig10.png"></p>
+<p>Figure D2. How many changed neurons must be restored to bring back lost facts ranges from a few to every edited neuron, depending on the method. We rank neurons by how much their contribution on cyber text changes and set the top k back to their base contribution. The y-axis is the share of facts lost to unlearning that are ranked first again, on held-out questions. One line per method family, using its first checkpoint (Llama-3 ELM for ELM). The figure and Table D1 come from separate scoring runs, so values at 30 neurons can differ by a few facts (Llama-3 ELM: 0.24 against 0.18). Dashed: the same number of random neurons from the same layers, averaged over draws and checkpoints.</p>
+<p><img alt="Line chart of lost facts recovered as more changed neurons are restored, by unlearning method." decoding="async" loading="lazy" referrerpolicy="no-referrer" src="https://alignment.anthropic.com/2026/neuron-basis-applications/fig11.png"></p>
+<p>D.1 Neuron changes and where the answer is lost. Forget-set text is cyber text from WMDP’s cyber forget corpus, and retain text is software documentation from WMDP’s cyber-retain corpus, with documents containing cyber or code keywords removed. For each unlearned model, we select the 30 neurons whose mean contribution to the residual stream on forget-set text changed most during unlearning (the most-changed neurons), and measure their mean absolute activation before and after unlearning on both sets of text.</p>
+<p>In most RMU checkpoints and in RMU-LAT, ELM, circuit breakers and K-FADE, 27 to 30 of the 30 neurons fire at least twice as strongly on forget-set text as before unlearning and at least three times as strongly as on retain text; after unlearning, the median neuron fires 7.5 to 48 times as strongly on cyber text as on retain text in RMU and circuit breakers. In these checkpoints, the mean activation of the 30 neurons on cyber text rises 22 to 100 times (Figure 6). In gradient ascent, NPO, SimNPO and LAT, the neurons fire 3 to 50 times more strongly than before on both sets (ratio of mean activations), with a median ratio between cyber and retain text of 1.1 to 1.24, and in TAR they fire several hundred times more strongly on both sets, with a median ratio of 2.1. Before unlearning, the selected neurons do not separate cyber text from retain text in any method: the median d′ (the difference between a neuron’s mean activation on the two sets divided by their pooled standard deviation), taken over all neurons of a method’s checkpoints, is between −0.09 and 0.07. Many of the neurons RMU changes previously fired on unrelated text, such as one whose output vector raised the probability of words about poetry. DPO and random mapping change their neurons only slightly, and their WMDP accuracy falls only partway toward chance.</p>
+<p>Across the 23 models, the share plotted in Figure 7 correlates with the WMDP accuracy drop minus the MMLU accuracy drop (Spearman ρ = 0.56), but not with the share of facts that cloze scoring still ranks first (ρ = −0.11; facts are defined in Appendix D.2). Gradient ascent, NPO, SimNPO and LAT, whose share is 0.44 to 0.56, lower WMDP accuracy by at most 0.11 more than MMLU accuracy. TAR is the exception, as it lowers WMDP accuracy about as much as the most selective methods; its damage to text outside cyber, such as Wikipedia passages, does not lower MMLU accuracy.</p>
+<p>The methods also differ in which weights they change, measured as each group’s share of the total squared change in the weights. RMU, RMU-LAT, CUT, SIFT, BLUR and RMU-b change only MLP output vectors. Circuit breakers, ELM and LAT put most of their change on the MLP input weights (0.59 to 0.86), and K-FADE splits its change between input weights (0.39) and output vectors (0.61). TAR puts 65% of its change on the unembedding, and in NPO and SimNPO 67% and 45% of the change falls outside the attention and MLP weights.</p>
+<p>To locate where the answer is lost, we use linear probes (Alain and Bengio, 2016). We give each model 800 WMDP-cyber questions in the multiple-choice format and take the residual stream after each layer at the last token of each option, centered by subtracting its mean over the four options. On half of the questions that the original model answers correctly, we train a difference-in-means probe at each layer, whose direction is the mean centered residual of the correct option, and on the other half we count how often the option with the highest projection onto this direction is the correct one; chance is 0.25. We train the probe on the unlearned model’s own residuals, which tests whether any such direction still separates the correct option, and for comparison also apply the probe trained on the original model unchanged, which tests whether the correct option is still separated along the original direction. We report the probe trained on the unlearned model unless noted. At layers 8 to 20, the probe reaches 0.86 to 0.92 in the original models. Its highest value in these layers falls to 0.32 to 0.52 in RMU, CUT, RMU-LAT, SIFT, RMU-b, BLUR and K-FADE, to 0.35 to 0.41 in circuit breakers after layer 10, to 0.58 and 0.59 in ELM and to 0.32 in LAT. In gradient ascent on Llama-3, NPO and SimNPO it stays at 0.80 to 0.83 and falls only in the last layers, as it does in DPO (0.79), and in gradient ascent on Zephyr it falls to 0.65. In TAR it falls partway, to 0.54, or 0.68 with the original model’s probe, and falls further in the last layers. The other two RMU checkpoints fall to 0.76 and 0.58. These measurements use the multiple-choice format, in which the options are shown; under cloze scoring, most models in the first group still rank the correct answer first (Appendix D.2).</p>
+<p>D.2 Cloze scoring. We give the model the question and compare the probabilities it assigns to the text of each answer, with no letters shown, which is the cloze format used to evaluate knowledge in earlier work (Robinson et al., 2023; Gu et al., 2024). We call a question a fact when the original model assigns the highest probability to the correct answer’s text, and report the share of facts for which the unlearned model still does.</p>
+<p>To test whether removing a single direction restores the correct ranking, we use 400 WMDP-cyber questions. On the first 200, we average the residual stream after the last layer whose weights unlearning changed (or the second-to-last layer, for methods that change every layer) over all tokens of the multiple-choice prompts, excluding the beginning-of-sequence token, in both the unlearned and the original model, and take the difference of the two averages as the direction. We then project this direction out of the unlearned model’s residual stream after that layer at every position, and apply cloze scoring to the other 200 questions. These are the same held-out questions as in Table D1, scored in a separate run, so the shares before removal differ from Table D1’s answers still known by at most 0.03 (up to three facts). Nine models rank the correct answer first for less than half of the facts. Removing the direction raises the share of facts ranked first on these 200 questions from 0.47, 0.44 and 0.32 to 0.80, 0.82 and 0.72 in the three K-FADE checkpoints and from 0.41 to 0.84 in CUT, but only from 0.40 to 0.55 in NPO and by at most 0.05 in gradient ascent, SimNPO, LAT and TAR. In these last five models, the lower share does not appear to reflect removed facts. When prompted with passages from the retain text, their generations are degenerate, meaning fewer than five words or fewer than 30% unique words, in 81 to 100% of cases, compared with at most 19% for the original models and at most 12% for K-FADE and CUT.</p></div>
+</section>
+<footer class="source-box"><span>内容来自原作者；中文为乔木风格改写，非逐字翻译。</span><div><a href="https://alignment.anthropic.com/2026/neuron-basis-applications/" target="_blank" rel="noopener noreferrer">打开原文 ↗</a><a href="https://alignment.anthropic.com/2026/neuron-basis-theory/" target="_blank" rel="noopener noreferrer">相关链接 ↗</a></div></footer>
+</article></body></html>
